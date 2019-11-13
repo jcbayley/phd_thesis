@@ -515,3 +515,6 @@ This then means Eq.~\ref{viterbi:multidet:vitsum} is modified to,
 where $\hat{V}$ refers to a log-odds ratio.
 The maximised statistic now has three tuneable parameters: the width, $w_S$ in Eq.~\ref{las:prior}, on the prior for a signal \ac{SNR} squared, $p_{\rm S}(\lambda)$, the width, $w_L$ of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \ac{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \ac{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
 
+\section{Line aware statistic with unequal noise floors}
+
+In this section we modify the line aware statistic above to account for differences in sensitivity and duty cycle of the detectors.
