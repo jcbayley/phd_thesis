@@ -3,29 +3,190 @@
 
 \section{Gravitational Waves}
 
-\subsection{Sources}
+\subsection{Derivation}
 
-\subsection{Continuous wave searches}
-\begin{itemize}
-    \item what are GW
-    \item what are we searching for?
-    \item how do we search for them (detectors)
-    \item Sources
-    \begin{itemize}
-        \item CBC
-        \item Burst
-        \item Stochastic
-        \item Continuous waves
-    \end{itemize}
-    \item continuous waves 
-    \begin{itemize}
-        \item search methods 
-        \item limitations why new one
-    \end{itemize}
-\end{itemize}
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%
+\subsection{\label{sources}Sources}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+
+Gravitational wave sources are typically split into 4 general categories: \ac{CBC}, Burst, Stochastic and \acp{CW}. 
+
+%%%%%%%%%%%%%%%
+\subsubsection{\label{sources:cbc}CBC}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+\subsubsection{Burst}
+%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\subsubsection{Stochastic}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+\subsubsection{Continuous waves}
+%%%%%%%%%%%%%%%%%%%%
 
 
+One of the main targets for \ac{LIGO} and Virgo are continuous gravitational waves, these are long duration sinusoidal signals, a primary source is thought to be rapidly rotating neutron stars (pulsars). 
+
+Neutron stars are thought to originate when the remnanat of a massive star collapses, they are objects with incredibly high density and are highly magnetised.
+Pulsars can be detected electromagnetically as they emit beamed radiation from the magnetic poles.
+If the magnetic axis is not aligned with the rotation axis the radiation sweeps the detector at each rotation, this is detected as a pulsing signal which gave them their name \cite{lyne_graham-smith_2012}.
+From electromagnetic observations, the rotation frequency of some pulsars can be observed to decrease with time, this is known as spin-down.
+This spin-down means that the pulsar is losing energy somewhere, a fraction of this is thought to be due to gravitational waves. 
+
+Pulsars are thought to be able to emit gravitational waves through a number of mechanisms. The three leading mechanisms are: non-axisymmetric physical distortions in the star, vibrational modes and free precession \cite{Becker2009}.
+
+\paragraph{Triaxial non-axisymmetry}
+
+Triaxial non-axisymmetry is some deformation of the pulsar which is not symmetric around the rotation axis, this is often described as a `mountain' on its surface.
+This assymmetry can be quantified by its ellipticity $\epsilon$,
+\begin{equation}
+\label{ellipticity}
+\epsilon = \frac{I_{xx}-I_{yy}}{I_{zz}},
+\end{equation}
+where $I_{zz},I_{xx},I_{yy}$ are the principal moment of interia, where $I_{zz}$ is along the rotation axis. 
+The ellipticity of a neutron star is expected to be $ \epsilon<10^{-5}$ \cite{Becker2009}. 
+There are a number of theories which describe the origin of this axisymmetry.
+If the pulsar is in a binary system and accreting material from its companion star, the material can be funnelled towards the magnetic poles by the magnetic field, thereby causing a hot spot.
+This `hot spot' could cause a deformation on the surface of the star which is not axi-symmetric. 
+The magnetic stresses from strong magnetic fields within the star, could potentially also cause non axi-symmetric deformations to the star.
+Finally the spin down of the pulsar itself could cause stresses in the crust of the star until the point of breaking, its then after this break which could leave a distortion in the crust \cite{Becker2009}.
+
+The gravitational waves are expected to be emitted at a frequency which is twice the rotation frequency of the neutron star.
+ 
+ \paragraph{Vibrational modes}
+There are a number of modes within a star such as fundamental (f-modes), pressure (p-modes) and r-modes. 
+The most promising of these for gravitational wave emission is the r-mode \cite{Becker2009}, these are oscillations in the fluid part of the star. 
+These are thought to emit gravitational waves at $4/3$ the frequency of rotation \cite{Becker2009}.
+
+
+\paragraph{Free precession}
+Free precession is when the rotation axis is misaligned with the symmetry axis of the star so that the start `wobbles'. 
+Free precession is expected to produce gravitational waves at a frequency the same as the rotation frequency and twice the rotation frequency \cite{Becker2009}. 
+
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
 \section{Detectors}
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
 
-\section{Bayes Theorem}
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\section{Probability and Bayes Theorem}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%
+\subsection{Basic probability}
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%
+\subsection{Bayes Theorem}
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\subsection{Bayesian Inference}
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\section{Searching for Gravitational waves}
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+%%%%%
+\subsection{Signals in data}
+%%%%%
+
+The data recoded from a detector, $x(t)$, will include the signal model described in Eq.~\ref{sigmod} above, but it will be buried in the noise of the detector. 
+If we assume the noise is Gaussian distributed and the noise and signal add linearly, then,  
+\begin{equation}
+\label{signalinnoise}
+x(t) = n(t) + h(t; \mathcal{A},{\boldsymbol \lambda}) ,
+\end{equation}
+where $n(t)$ is the noise, $h(t)$ is the signal and $\mathcal{A}$ and ${\boldsymbol \lambda}$ refer to the amplitude and Doppler parameters respectively. 
+The optimal signal to noise ratio (SNR) squared of this signal is defined as the scalar product of the signal with itself,
+\begin{equation}
+\rho^2(0) = ({\bf h} \mid {\bf h}) = \sum_X(h^X \mid h^X),
+\end{equation}
+where if there is more than one detector the SNR squared for each detector $X$ can be summed \cite{Prix2007}. 
+The scalar product of two time series, $x(t)$ and $y(t)$, is defined by,
+\begin{equation}
+\label{snr:eq}
+(x \mid y) = 4 \Re \int_{0}^{\infty} \frac{\tilde{x}(f)\tilde{y}^{*}(f)}{S_n(f)}df,
+\end{equation}
+where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \cite{Prix2007}.
+
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+\subsection{CBC}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+\subsection{Stochastic}
+
+\subsection{Burst}
+
+\subsection{CW}
+
+\subsubsection{Continuous signal model}
+
+The mode of a\ac{GW} signal from a pulsar is relatively simple, it is a sinusoid at a fixed frequency with a parameter which accounts for the loss of energy to gravitational waves and other mechanisms (spin down). 
+Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
+The parameters of each pulsar can be split into two sections: the Doppler components ($\alpha,\delta,f,\dot{f}$) and its amplitude components ($\psi,\phi_0, \iota, h_0, \theta$); this ignores any orbital parameters which would be present if the star was in a binary systems.
+In the reference frame of the source, the gravitational wave can be written as,
+\begin{equation}
+h_{+}(t) = A_{+}\cos{(\Phi(t))} \quad \rm{and} \quad h_{\times}(t) = A_{\times}\cos{(\Phi(t))},
+\end{equation}
+where $h_{+}(t)$ and $h_{\times}(t)$ refer to the two polarisations and $\Phi(t) = \phi_0 + \phi(t)$ is the phase evolution of the source. $A_+$ and $A_{\times}$ are defined as,
+\begin{equation}
+A_+ = \frac{1}{2}h_0(1+\cos^2{\iota}), \quad A_{\times} = h_0 \cos{\iota},
+\end{equation}
+where $\iota$ is the inclination angle of the source and $h_0$ is the gravitational wave amplitude. The amplitude $h_0$ is defined as,
+\begin{equation}
+h_0 = \frac{16\pi^2 G}{c^4} \frac{\epsilon I_{zz} \nu^2}{d},
+\end{equation}
+where $c$ is the speed of light, $G$ is the gravitational constant, $\epsilon $ is the ellipticity defined in Eq.~\ref{ellipticity}, $\nu$ is the rotation frequency of the star and $d$ is its distance. 
+
+To find the signal model in the detector frame one has to include the effects of the detector and its Doppler modulation as it moves through space. 
+The Doppler modulation is included in the phase model such that now the phase follows, $\Phi(t) = \phi_0 + \phi(t, {\boldsymbol \lambda})$, where ${\boldsymbol \lambda}$ are the Doppler parameters. 
+The amplitude of the signal is also modulated due to the orientation of the detectors relative to the source as the detector moves around the earth. These components are accounted for in the antenna patterns of the detector, defined in \cite{JKS1998} as,
+\begin{equation}
+\begin{split}
+F_{+}(t) &= \sin{\zeta}[a(t)\cos{(2\psi)} + b(t)\sin{(2\psi)}], \\
+F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
+\end{split}
+\end{equation}
+where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle and $a(t)$ and $b(t)$ are defined in \cite{JKS1998}. 
+
+The signal at the detector can then be written as a combination of the antenna patterns and the two polarisations of the gravitational wave,
+\begin{equation}
+h(t) = F_+(t)A_+\cos{[\phi_0 + \phi(t,{\boldsymbol \lambda})]} +F_{\times}(t)A_{\times}\sin{[\phi_0 + \phi(t,{\boldsymbol \lambda})]},
+\end{equation}
+The full signal model defined in \cite{JKS1998} actually includes all other parameters such as inclination angle, and has the form,
+\begin{equation}
+\label{sigmod}
+%h(t) = F_{+}(t)[h_{1+}(t; h_0, \iota, \theta) + h_{2+}(t; h_0, \iota, \theta)] + F_{\times}(t)[h_{1\times}(t; h_0, \iota, \theta) + h_{2\times}(t; h_0, \iota, \theta)],
+h(t) = F_{+}(t)[h_{1+}(t) + h_{2+}(t)] + F_{\times}(t)[h_{1\times}(t) + h_{2\times}(t)],
+\end{equation}
+where all parameters can be found in Eqs.~(21-22) of \cite{JKS1998}. 
+
 

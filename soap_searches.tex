@@ -1,7 +1,95 @@
-\chapter{SOAP searches}
+\chapter{SOAP search}
 
+%%%%%%%%%%%
+%%%%%%%%%%
+\section{Pipeline}
+%%%%%%%%%%%
+%%%%%%%%%%
+
+The \ac{SOAP} pipeline itself contains two key elements: the Viterbi search described in Sec.~\ref{viterbi} and the \ac{CNN} part of the search described in Sec.~\ref{cnn}. However, there are many other steps within the search which have to take place to allow the key search components, these are summarised in Fig.~\ref{pipeline:flow} and are described below.
+
+\begin{description}
+    \item[1. \acp{SFT}] Generate 1800s long \acp{SFT} from detector time-series data. 
+
+    \item[2. Narrowbanding] To improve the efficiency of the search the
+    narroband \acp{SFT} are split into $2.1$ Hz wide bands every $2$ Hz,
+    i.e. 100.0-102.1, 102.0-104.1 etc.
+    
+    \item[3. Normalising] The spectrogram are then normalised to their running median such that they have a mean of 1. Each spectrogram is then multiplied by 2 such that they are approximately $\chi^{2}$ distributed.
+    
+    \item[4a. Search data] For search data the bands are split up into 0.1 Hz wide sub-bands overlapping by 0.05 Hz.
+
+    \item[4b. Training data generation] To generate training data the
+    process is the same as in Sec.~\ref{data}. Where the
+    data is split into 0.1 Hz wide bands which are not
+    overlapping. Each of these sub-bands is the `augmented' as in Sec.~\ref{data:augmentation}. Injections are then made into each of these bands with \acp{SNR} in the range 50-150. The bands are then split into `odd' and `even' categories.
+
+    \item[4c. Test data generation] Here the narrow-banded
+    spectrogram are further split into 0.1 Hz wide sub-bands which
+    are overlapping by 0.05 Hz. The overlapping sub-bands mean that an
+    astrophysical signal should be fully contained within one
+    sub-band. Then signals following parameters in Tab.~\ref{data:injections:table} are injected in to 50\% of the sub-bands with \acp{SNR} in the range 20-200.
+
+    \item[5. Summing spectrogram] As in \cite{Bayley2019GeneralizedSignals} the spectrogram are summed over one day, i.e. every 48 time segments of the spectrogram.
+     
+    \item[6. Generate lookup tables and Run Viterbi search] Before the Viterbi search is run, the line-aware statistic lookup tables need to be generated as in \cite{Bayley2019GeneralizedSignals}. Then for each of the 3 data sets the Viterbi search is run. 
+     
+    \item[7. Down-sample data] At this stage there are four elements which are saved separately for each data-set. The two time-frequency maps, the Viterbi maps and the Viterbi statistic. The time-frequency maps and the Viterbi maps are down-sampled to a size of (156x89) using interpolation from scikit-image's resize \cite{vanderWalt2014Scikit-image:Python}. This size was chosen based on the S6 \ac{MDC} data-set, where this is 1/3 the length in time and 1/2 the width in frequency of the summed spectrograms.
+
+
+    \item[8. Train Networks] The down-sampled training data is then used to train 12 separate \acp{CNN}. Half of these networks are trained on the `odd' bands and the other half are trained on the `even' bands. 
+
+    \item[9a. Run search on real data] The trained network from 7. is then used to classify each sub-band in the search data, this returns a statistic in $[0,1]$ where 1 represents the probability of a signal. 
+    
+    \item[9c. Run search on test data] The trained network from 7. is then used to classify each sub-band in the test injected data, this returns a statistic in $[0,1]$ where 1 represents the probability of a signal. 
+    
+    \item[10a. Signal candidates] The signals which have a statistic in the top 1\% are taken for a followup investigation. This can be another search, or just a look `by-eye'.
+    
+    \item[10c. Efficiency curves] The statistics can be plotted against \ac{SNR} to see how the network classified signals with the \ac{SNR} of the injection. Then the efficiency curves can be generated, this is described in further detail in Sec.~\ref{sensitivity}.
+    
+
+  
+\end{description}
+
+
+
+%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\section{Injections}
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+In this section I outline how we inject a \ac{CW} signal into data. This can generally be done in two different ways: simulating a signal in the time domain and injecting into time domain noise or simulating the power spectrum of a signal and injecting the signal into a \ac{PSD}.
+%%%%%%%%%%%
+\subsection{CW Signal}
+%%%%%%%%%%%
+This section has been covered in Sec.~\ref{intro:cw:signal}.
+
+%%%%%%%%%%%%
+\subsection{Time series and complex \ac{FFT} injections}
+%%%%%%%%%%%%
+Injections into timeseries data is relatively simple. Given a set of parameters for the source the signal can be generated in the timeseries, this is then just summed with the timeseries which it is injected into. 
+Similarly with the \ac{FFT}, the timeseries of the signal at the correct time and for the correct duration is generated, the complex \acp{FFT} are then summed.
+
+%%%%%%%%%%%%%%%
+\subsection{Spectrogram injections}
+%%%%%%%%%%%%%
+
+To inject into a spectrogram the power spectrum of the signal will need to be simulated. In our injection we do not have access to a timeseries, therefore, we do not simulate the signal in the same way, rather we use the signals estimated \ac{SNR}
+
+It can be shown that the \ac{PSD} of Gaussian noise with zero mean and unit variance is a $\chi^2$ distribution with 2 degrees of freedom. Therefore, if we want to generate a spectrogram for Gaussian noise, we just generate a two dimensional array of values distributed as $\chi^2$ with two degrees of freedom.
+Assuming that there is some sinusiodal signal with a given \ac{SNR} within a Gaussian noise timeseries with zero mean and unit variance, the \ac{FFT} power in a particular frequency bin can be estimated using a non-central $\chi^2$ distribution with 2 degrees of freedom, where the non centrality parameter is the square of the \ac{SNR}. 
+
+\section{Viterbi lookup tables}
+
+
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
 \section{Gaussian Noise}
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%
 
+%%%%%%%%%%%
+%%%%%%%%%%%%
 \section{S6}
 
 \subsection{S6 MDC}

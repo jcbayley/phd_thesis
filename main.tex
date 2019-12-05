@@ -33,6 +33,7 @@
 \usepackage{cancel}
 \usepackage{subcaption}
 \graphicspath{{./figures/}}
+\usepackage{hyperref}
 
 \DeclareFloatingEnvironment[
     fileext=loa,
@@ -40,6 +41,8 @@
     name=ALGORITHM,
     placement=tbhp,
 ]{algorithm}
+
+\newcommand{\joe}[1]{\textbf{\textcolor{red}{JOE: #1}}}
 
 \begin{document}
 \begin{titlepage}
@@ -74,25 +77,29 @@ February 2017
 
 \acrodef{GW}[GW]{gravitational-wave}
 \acrodef{CW}[CW]{continuous wave}
+\acrodef{CBC}[CBC]{compact binary coalescence}
 \acrodef{NS}[NS]{neutron star}
 \acrodef{EM}[EM]{electromagnetic}
 \acrodef{SNR}[SNR]{signal-to-noise-ratio}
 \acrodef{LIGO}[LIGO]{Laser Interferometer Gravitational-wave Observatory}
 \acrodef{SFT}[SFT]{short Fourier transform}
+\acrodef{FFT}[FFT]{fast Fourier transform}
 \acrodef{UCD}[UCD]{up, centre or down}
 \acrodef{MDC}[MDC]{mock data challenge}
 \acrodef{PSD}[PSD]{power spectral density}
 \acrodef{ROC}[ROC]{receiver operating characteristic}
 \acrodef{RMS}[RMS]{root median square}
 \acrodef{MCMC}[MCMC]{Markov-Chain Monte Carlo}
+\acrodef{SOAP}[SOAP]{snakes on a plane}
+\acrodef{CNN}[CNN]{convolutional neural networks}
 
 \mainmatter % Turn on chapter numbering, reset page numbers, use arabic
 \include{introduction}
 % and the other chapters
 
-\include{soap}
+\include{viterbi}
 
-\include{soap_cnn}
+\include{cnn}
 
 \include{soap_searches}
 
