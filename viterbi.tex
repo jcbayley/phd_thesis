@@ -1,5 +1,8 @@
 \chapter{\label{viterbi}Viterbi Search}
 
+To search for \ac{CW} signals, an adaptation of the Viterbi algorithm, which is well known in telecommunications, is used to search through spectrograms of \ac{LIGO} data. The basic idea of the search is simple, if we looked at a spectrogram frequency band as in Fig.~\ref{} we could find every possible track from a starting frequency bin to an end frequency bin (of which there are many). For each of these tracks the sum of the sprectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{} shows a histogram of these values. If there is a signal present in this band then it could be  assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track.
+Therefore, it can be assumed that if the frequency track with the highest sum of spectrogram power is found, then the corresponding track is most likely for follow a signal. 
+Now as calculating all possible tracks is time consuming and the majority of tracks will not follow the signal track, it woudl be useful to have an algorithm which could find the maximum track more efficiently. This is where the Viterbi algorithm \cite{Viterbi} does this exact task. This is explained in the following sections.
 
 \section{Viterbi algorithm}
 %
