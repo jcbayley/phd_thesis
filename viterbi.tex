@@ -484,7 +484,6 @@ where we assume that $M_{\rm{G}}$ and $M_{\rm{L}}$ are mutually exclusive.
 
 %
 We can now find the posterior odds ratio for the presence of a signal over noise or a line,
-\begin{widetext}
 \begin{equation}
 \label{viterbi:odds}
 \begin{split}
@@ -494,7 +493,6 @@ O_{\rm{SGL}}(F^{(1)}_{j},F^{(2)}_{j}\mid\nu_j) &=  \frac{p(M_{\rm{S}} \mid F^{(1
 &= \frac{p(F^{(1)}_{j},F^{(2)}_{j} \mid M_{\rm{S}},\nu_j)p(M_{\rm{S}})/p(M_{\rm{G}})}{p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{G}},\nu_j) + p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{L}},\nu_j)p(M_{\rm{L}})/p(M_{\rm{N}}) }
 \end{split}
 \end{equation}
-\end{widetext}
 In practice it is convenient to use the log odds ratio,
 \begin{equation}
 \begin{split}
@@ -543,7 +541,7 @@ In Fig.~\ref{viterbi:lineaware:example} an example of how the `line aware' stati
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Line aware statistic for consistent amplitude}
+\section{\label{viterbi:lineaware}Line aware statistic for consistent amplitude}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

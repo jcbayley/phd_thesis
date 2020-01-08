@@ -80,8 +80,13 @@ To inject into a spectrogram the power spectrum of the signal will need to be si
 It can be shown that the \ac{PSD} of Gaussian noise with zero mean and unit variance is a $\chi^2$ distribution with 2 degrees of freedom. Therefore, if we want to generate a spectrogram for Gaussian noise, we just generate a two dimensional array of values distributed as $\chi^2$ with two degrees of freedom.
 Assuming that there is some sinusiodal signal with a given \ac{SNR} within a Gaussian noise timeseries with zero mean and unit variance, the \ac{FFT} power in a particular frequency bin can be estimated using a non-central $\chi^2$ distribution with 2 degrees of freedom, where the non centrality parameter is the square of the \ac{SNR}. 
 
+%%%%%%%%%
+%%%%%%%%
 \section{Viterbi lookup tables}
+%%%%%%%%%%
+%%%%%%%%%
 
+In Sec.~\ref{viterbi:lineaware} the line aware statistic to be used with the \ac{SOAP} search was described. This part of the search is pre-calculated into lookup tables in an effort to decrease the total computational time of the search. 
 
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
