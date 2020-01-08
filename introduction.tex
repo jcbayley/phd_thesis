@@ -1,7 +1,10 @@
 \chapter{Introduction}
 
+Gravitational wave astronomy is a relatively new field which has the potential to offer a lot of new information on the behaviour and origins of the universe. 
 
 \section{Gravitational Waves}
+
+Gravitational waves were first theorised by Einstein in 1916 as a consequence of his theory of relativity \cite{}. 
 
 \subsection{Derivation}
 
@@ -11,24 +14,34 @@
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
 
-Gravitational wave sources are typically split into 4 general categories based on their signal type: \ac{CBC}, Burst, Stochastic and \acp{CW}. 
+Gravitational wave sources are typically split into 4 general categories based on their signal type: \ac{CBC}, Burst, Stochastic and \acp{CW}. Their basic wave-forms are shown in Fig.~\ref{intro:sources:waveforms} and are explained in more detail in the following sections. Whilst these are the general categories, there are some signal types which overlap these groups.
 
+\begin{figure}
+\centering
+\includegraphics[width=0.8\columnwidth]{place.pdf}
+\caption{This figure shows the simplified wave-forms for the 4 general categories of gravitational wave signals.}
+\label{intro:sources:waveforms}
+\end{figure}
 %%%%%%%%%%%%%%%
-\subsubsection{\label{sources:cbc}CBC}
+\subsubsection{\label{sources:cbc} Compact binary coalescence}
 %%%%%%%%%%%%%%%
 
-\ac{CBC} signals are when two compact objects are caught within eachothers gravitational fields such that then begin to inspiral and collide with eachother to form a larger compact object. 
-There are different types of \ac{CBC} sources, which are combinations of neutron stars and black holes. To date only binary black holes and neutron star-neutron star signals have been observed. 
+\ac{CBC} are some of the strongest expected signals which have a chirp like waveform. They consist of two compact objects are caught within each others gravitational fields such that then begin to inspiral and collide with each other to form a larger compact object. 
+There are different types of \ac{CBC} sources, which are combinations of neutron stars and black holes.
+There are the sources which have to date been detected: binary black holes and binary neutron stars. 
+
 
 %%%%%%%%%%%%%%
 \subsubsection{Burst}
 %%%%%%%%%%%%%%%%%
 
+Burst sources are any short duration high power signal which is seen in the detector. 
+
 %%%%%%%%%%%%%%%
 \subsubsection{Stochastic}
 %%%%%%%%%%%%%%%
 
-Stochastic sources of graviational waves originate from the combination of many \ac{CBC} which are far away. What should be observed at the detector is the sum of many collisions. 
+Stochastic sources of gravitational waves originate from the combination of many \ac{CBC} which are far away. What should be observed at the detector is the sum of many collisions. 
 
 %%%%%%%%%%%%%%%%%%
 \subsubsection{Continuous waves}
@@ -37,7 +50,7 @@ Stochastic sources of graviational waves originate from the combination of many 
 
 One of the main targets for \ac{LIGO} and Virgo are continuous gravitational waves, these are long duration sinusoidal signals, a primary source is thought to be rapidly rotating neutron stars (pulsars). 
 
-Neutron stars are thought to originate when the remnanat of a massive star collapses, they are objects with incredibly high density and are highly magnetised.
+Neutron stars are thought to originate when the remnant of a massive star collapses, they are objects with incredibly high density and are highly magnetised.
 Pulsars can be detected electromagnetically as they emit beamed radiation from the magnetic poles.
 If the magnetic axis is not aligned with the rotation axis the radiation sweeps the detector at each rotation, this is detected as a pulsing signal which gave them their name \cite{lyne_graham-smith_2012}.
 From electromagnetic observations, the rotation frequency of some pulsars can be observed to decrease with time, this is known as spin-down.
@@ -77,50 +90,111 @@ Free precession is expected to produce gravitational waves at a frequency the sa
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
-\section{Detectors}
+\section{\label{intro:detector}Detectors}
 %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%
-\section{Probability and Bayes Theorem}
+\section{\label{intro:prob}Probability and Bayes Theorem}
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
+A key part in data analysis is understanding probability and statistics. This involves using basic probability along with the two general approaches to statistics: Bayesian and frequentist. 
+
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%
-\subsection{Basic probability}
+\subsection{\label{intro:prob:basic}Basic probability}
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%
-\subsection{Bayes Theorem}
-%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%
+We can define the probability of some event $A$ as $p(A)$ where probabilities follow $0 \leq p(A) \leq 1$ and some other event $B$ which has a probability $p(B)$ and follows $0 \leq p(B) \leq 1$.
+
+\begin{description}
+\item [Union]
+A union is the probability of either and event $A$ happening or event $B$ happening, this is written as, $p(A \cup B)$.
+
+\item [Intersection]
+An intersection is then the probability of both and event $A$ and an event $B$ happens, this is written as $p(A \cap B)$.
+
+\item [Independent and dependent Events]
+If the events $A$ and $B$ are independent, i.e. the event $A$ does not affect the outcome of event $B$, then,
+\begin{equation}
+p(A \cap B) = p(A)p(B).
+\end{equation}
+However, if the event $A$ effects event $B$ then the joint probability of both events is,
+\begin{equation}
+\label{dependentevent}
+p(A \cap B) = p(A)p(B \mid A) = p(B)p(A \mid B),
+\end{equation}
+where $p(B \mid A)$ means the probability of event $B$ happening given that event $A$ has happened.
+
+\item [Conditional probability]
+Conditional probability arises from situations where the outcome of one event will affect the outcome of future events.
+The definition of this arises from the the dependent events defined above in Eq.~\ref{dependentevent},
+\begin{equation}
+p(A \mid B) = \frac{p(A \cap B)}{p(B)}.
+\end{equation}
+
+\item [Bayes Theorem]
+Bayes theorem can then be defined using conditional probabilities. i.e we can use
+\begin{equation}
+p(A \mid B) = \frac{p(A \cap B)}{p(B)} \quad \rm{and} \quad p(B \mid A) = \frac{p(A \cap B)}{p(A)}
+\end{equation}
+such that then,
+\begin{equation}
+p(B)p(A \mid B) = p(A)p(B \mid A)
+\end{equation}
+and this is rearranged to Bayes theorem,
+\begin{equation}
+p(A \mid B) = \frac{p(A)p(B \mid A)}{p(B)}
+\end{equation}
+
+\end{description}
 
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
-\subsection{Bayesian Inference}
+\subsection{\label{intro:prob:bayes}Bayesian Inference}
 %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%
-\section{Searching for Gravitational waves}
-%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%
+We can take Bayes theorem from Sec.~\ref{intro:prob:basic} and apply it to a problem which involves infering some parameters from some model. Here we can relabel the events $A$ and $B$ with the data $d$ and the parameters $\theta$ of some model $I$.
 
-%%%%%
-\subsection{Signals in data}
-%%%%%
+\begin{equation}
+p({\bm \theta} \mid {\bm d}, {\bm I}) = \frac{p({\bm \theta}, {\bm I})p({\bm d} \mid {\bm \theta}, {\bm I})}{p({\bm I})}
+\end{equation}
+where $p({\bm \theta} \mid {\bm d})$ is the posterior distribution, $p({\bm \theta})$ is the prior distribution,  $p({\bm d} \mid {\bm \theta})$ is the likelihood and $p({\bm d})$ is the evidence.
 
-The data recoded from a detector, $x(t)$, will include the signal model described in Eq.~\ref{sigmod} above, but it will be buried in the noise of the detector. 
+\begin{description}
+\item [Posterior]
+The posterior distribution describes the probability of getting certain values of parameters within a model given some data. 
+\item [Prior]
+The Prior is the element which can be left open to the users interpretation. This describes what you know about the model or the parameters of the model before you have seen any data. 
+\item [Likelihood]
+The likelihood contains information about how well the data matches the model with particular parameters. 
+\item [Evidence]
+The evidence is the probability of the data itself, i.e. it explains how likely this data is given and parameters within this model. 
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{\label{intro:search}Searching for Continuous gravitational waves}
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%
+%%%%%%
+\subsection{\label{intro:search:signals} Signals in data}
+%%%%%%%
+%%%%%%
+
+The data recorded from a detector, $x(t)$, will include the signal model described in Eq.~\ref{sigmod} above, but it will be buried in the noise of the detector. 
 If we assume the noise is Gaussian distributed and the noise and signal add linearly, then,  
 \begin{equation}
 \label{signalinnoise}
@@ -133,28 +207,17 @@ The optimal signal to noise ratio (SNR) squared of this signal is defined as the
 \end{equation}
 where if there is more than one detector the SNR squared for each detector $X$ can be summed \cite{Prix2007}. 
 The scalar product of two time series, $x(t)$ and $y(t)$, is defined by,
+
 \begin{equation}
-\label{snr:eq}
+\label{intro:search:signals:scalarproduct}
 (x \mid y) = 4 \Re \int_{0}^{\infty} \frac{\tilde{x}(f)\tilde{y}^{*}(f)}{S_n(f)}df,
 \end{equation}
 where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \cite{Prix2007}.
 
-%%%%%%%%%%%%
-%%%%%%%%%%%%
-\subsection{CBC}
-%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%
-\subsection{Stochastic}
+\subsection{\label{intro:search:model}Continuous signal model}
 
-\subsection{Burst}
-
-\subsection{CW}
-
-\subsubsection{Continuous signal model}
-
-The mode of a\ac{GW} signal from a pulsar is relatively simple, it is a sinusoid at a fixed frequency with a parameter which accounts for the loss of energy to gravitational waves and other mechanisms (spin down). 
+The mode of a \ac{GW} signal from a pulsar is relatively simple, it is a sinusoid at a fixed frequency with a parameter which accounts for the loss of energy to gravitational waves and other mechanisms (spin down). 
 Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
 The parameters of each pulsar can be split into two sections: the Doppler components ($\alpha,\delta,f,\dot{f}$) and its amplitude components ($\psi,\phi_0, \iota, h_0, \theta$); this ignores any orbital parameters which would be present if the star was in a binary systems.
 In the reference frame of the source, the gravitational wave can be written as,
@@ -194,4 +257,32 @@ h(t) = F_{+}(t)[h_{1+}(t) + h_{2+}(t)] + F_{\times}(t)[h_{1\times}(t) + h_{2\tim
 \end{equation}
 where all parameters can be found in Eqs.~(21-22) of \cite{JKS1998}. 
 
+
+%%%%%%
+%%%%%%
+\subsection{\label{intro:search:coherent}Fully-coherent searches}
+%%%%%%
+%%%%%%
+
+Fully coherent searches are currently the most sensitive searches for continuous sources of gravitational waves. These searches are based on matched filtering which coherently correlate pre-generated waveforms with the data, this is used in \cite{Dupuis2005,Jaranowski1998,}.
+In a simple form the matched filter filters the data $h$ with a template $w$ using the inner product defined in Eq.~\ref{intro:search:signals:scalarproduct}. 
+
+Continuous wave signals need a large amount of integration time, $\mathcal{O}(\rm{years})$, for the signal to become clear within the data, therefore, given that the \ac{LIGO} detectors sample at 16 kHz, the amount of data to search over is large. 
+Performing the coherent matched filter on this data can take a large amount of time, therefore, as the majority of sources which are searched for have a narrow bandwidth, many searches use techniques to reduce the amount of data. 
+For example, in \cite{Dupuis2005} the data is heterodyned (mixed with some local oscillator), low passed filtered and then down-sampled. This reduced the amount of data to be searched over while not losing any source information. 
+
+Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all sky searches no parameters of the source are known, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
+This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
+
+%%%%%%
+%%%%%%
+\subsection{\label{intro:search:semicoherent}Semi-coherent searches}
+%%%%%%
+%%%%%%
+
+Semi-coherent searches offered a solution to searching over large parameters spaces and large amounts of data. 
+The data is split into smaller segments and the analysis is run separately on each of those segments, then each result is combined incoherently. 
+This can greatly reduce the time taken for the analysis depending on the segment length, however, will always come with some loss in sensitivity. 
+
+There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. Many of these use 1800s (30 mins) \acp{SFT} as the input to their search as they can be calculated efficiently. 
 
