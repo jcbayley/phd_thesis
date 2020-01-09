@@ -569,7 +569,7 @@ In Fig.~\ref{viterbi:lineaware:example} an example of how the `line aware' stati
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\label{viterbi:lineaware}Line aware statistic for consistent amplitude}
+\section{\label{viterbi:lineawareamp}Line aware statistic for consistent amplitude}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -624,7 +624,7 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\linewidth]{lookup_noline.pdf}
+\includegraphics[width=1.\linewidth]{lookup_3d_2.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
@@ -634,7 +634,7 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\columnwidth]{lookup_linesmall.pdf}
+\includegraphics[width=1.\columnwidth]{lookup_3d_1.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 2$ and $p(M_L)/p(M_G) = 1$. Here the line part of the statistic has the same \ac{SNR} and the signal part, i.e. we expect the \ac{SNR} of a signal to be similar to that of a line.}
@@ -644,14 +644,14 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\columnwidth]{lookup_linebig.pdf}
+\includegraphics[width=1.\columnwidth]{lookup_3d_0.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 10$ and $p(M_L)/p(M_G) = 1$. Here we expect the \ac{SNR} of a line to be larger than a signal.}
 \label{viterbi:plot:data}
 \end{minipage}
 \end{subfigure}
-\caption{Lookup tables using the line aware statistic in Eq.~\ref{viterbi:las:logodds}.}
+\caption{Lookup tables using the line aware statistic for consistent amplitude as in Sec.~\ref{viterbi:lineawareamp}.}
 \label{viterbi:plots}
 \end{figure}
 
