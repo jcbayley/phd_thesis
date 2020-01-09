@@ -496,7 +496,7 @@ O_{\rm{SGL}}(F^{(1)}_{j},F^{(2)}_{j}\mid\nu_j) &=  \frac{p(M_{\rm{S}} \mid F^{(1
 In practice it is convenient to use the log odds ratio,
 \begin{equation}
 \begin{split}
-\label{viterbi:logodds}
+\label{viterbi:las:logodds}
 \log\left[ O_{\rm{SGL}}(F^{(1)}_{j},F^{(2)}_{j})\right] &=  \log\left[ p(F^{(1)}_{j},F^{(2)}_{j} \mid M_{\rm{S}}) \right] \\
 &- \left[ \log\left( p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{G}}) \right. \right. \\
 &\left.\left.+  p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{L}})p(M_{\rm{L}})/p(M_{\rm{G}})\right) \right]
@@ -506,7 +506,7 @@ As we are only interested in the maximum of $\log\left[ O_{\rm{SGL}}(F^{(1)}_{j}
 
 
 In this version of the Viterbi algorithm, rather than storing a value proportional to the log-probabilities as in Sec.~\ref{viterbi:multidet}, here we store a value proportional to the log-odds ratio.
-Here we take the log-odds ratio defined in Eq.~\ref{viterbi:logodds}, which is the log-odds of a signal having a similar power in each detector, and add the log-prior odds $p(\bm{\nu} \mid M_S)/(p(\bm{\nu} \mid M_N) + p(\bm{\nu} \mid M_L))$ which is the log-prior or any particular track. By assuming that the track transitions for the line and noise model are equally probable for any jump, we set the denominator of the prior-odds is a constant $b$.
+Here we take the log-odds ratio defined in Eq.~\ref{viterbi:las:logodds}, which is the log-odds of a signal having a similar power in each detector, and add the log-prior odds $p(\bm{\nu} \mid M_S)/(p(\bm{\nu} \mid M_N) + p(\bm{\nu} \mid M_L))$ which is the log-prior or any particular track. By assuming that the track transitions for the line and noise model are equally probable for any jump, we set the denominator of the prior-odds is a constant $b$.
 This then means Eq.~\ref{viterbi:multidet:vitsum} is modified to,
 \begin{equation}
 \begin{split}
@@ -519,31 +519,59 @@ This then means Eq.~\ref{viterbi:multidet:vitsum} is modified to,
 where $\hat{V}$ refers to a log-odds ratio.
 The maximised statistic now has three tuneable parameters: the width, $w_S$ in Eq.~\ref{las:prior}, on the prior for a signal \ac{SNR} squared, $p_{\rm S}(\lambda)$, the width, $w_L$ of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \ac{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \ac{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
 
-The values in Eq.~\ref{viterbi:logodds} can be calculated prior to the run for a range of \ac{SFT} powers. Given that 48 \acp{SFT} are summed over one day for the majority of the analysis, the normalised powers will have a mean of 96. 
-Therefore, Fig.~\ref{viterbi:osgl_plots} shows the output of Eq.~\ref{viterbi:logodds} for a range of \ac{SFT} powers in each detector. 
+The values in Eq.~\ref{viterbi:las:logodds} can be calculated prior to the run for a range of \ac{SFT} powers. Given that 48 \acp{SFT} are summed over one day for the majority of the analysis, the normalised powers will have a mean of 96. 
+Therefore, Fig.~\ref{viterbi:las:osgl_plots} shows the output of Eq.~\ref{viterbi:las:logodds} for a range of \ac{SFT} powers in each detector for 3 examples of input parameters. 
 In Fig.~\ref{viterbi:lineaware:example} an example of how the `line aware' statistic improves the robustness of the algorithm against non astrophysical signals. 
 
 \begin{figure}
-\centering
-\includegraphics[width=0.8\columnwidth]{vit_prob.pdf}
-\caption{The log-probabilities, jumps, and most probable path}
-\caption{ This plot shows an example of Eq.~\ref{viterbi:logodds} for various \ac{SFT} powers and fixed parameters, $w_S$, $w_L$ and $p({M_{\rm L}})/p({M_{\rm G}})$. }
-\label{viterbi:osgl_plots}
+    \centering
+    \includegraphics[width=\linewidth]{lookup_noline.pdf}
+    \caption{This figure shows an example of when the line aware statistic is used compared to a version when it is not.}
+    \label{fig:my_label}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.8\columnwidth]{vit_prob.pdf}
-\caption{The log-probabilities, jumps, and most probable path}
-\caption{ This plot shows an example of Eq.~\ref{viterbi:logodds} for various \ac{SFT} powers and fixed parameters, $w_S$, $w_L$ and $p({M_{\rm L}})/p({M_{\rm G}})$. }
-\label{viterbi:lineaware:example}
+
+\begin{subfigure}[h]{\linewidth}
+\begin{minipage}{0.65\linewidth}
+\includegraphics[width=1.\linewidth]{lookup_noline.pdf}
+\end{minipage}\hfill
+\begin{minipage}{0.35\linewidth}
+\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
+\label{viterbi:plot:data}
+\end{minipage}
+\end{subfigure}
+
+\begin{subfigure}[h]{\linewidth}
+\begin{minipage}{0.65\linewidth}
+\includegraphics[width=1.\columnwidth]{lookup_linesmall.pdf}
+\end{minipage}\hfill
+\begin{minipage}{0.35\linewidth}
+\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 2$ and $p(M_L)/p(M_G) = 1$. Here the line part of the statistic has the same \ac{SNR} and the signal part, i.e. we expect the \ac{SNR} of a signal to be similar to that of a line.}
+\label{viterbi:plot:data}
+\end{minipage}
+\end{subfigure}
+
+\begin{subfigure}[h]{\linewidth}
+\begin{minipage}{0.65\linewidth}
+\includegraphics[width=1.\columnwidth]{lookup_linebig.pdf}
+\end{minipage}\hfill
+\begin{minipage}{0.35\linewidth}
+\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 10$ and $p(M_L)/p(M_G) = 1$. Here we expect the \ac{SNR} of a line to be larger than a signal.}
+\label{viterbi:plot:data}
+\end{minipage}
+\end{subfigure}
+\caption{Lookup tables using the line aware statistic in Eq.~\ref{viterbi:las:logodds}.}
+\label{viterbi:las:osgl_plots}
 \end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\label{viterbi:lineaware}Line aware statistic for consistent amplitude}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 Above the `line aware' statistic was designed to penalise high \ac{SFT} powers in a single detector and reward powers which have a similar \ac{SNR}. This is often a useful statistic to use when the detectors have similar sensitivities, however, this is not always the case. During an observing run of a gravitational wave detector, their sensitivity will vary with time due fluctuating or new noise sources or potentially upgrades which can increase the sensitivity. A change in the sensitivity, or noise floor, affects the \ac{SNR} of a possible signal in in the data, i.e. a lower noise floor results in a higher \ac{SNR}. 
@@ -591,19 +619,39 @@ Fig.~\ref{viterbi:lineawareamp:power} shows an example of the values of the stat
 
 In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors with large differences in sensitivity, and how the statistic which takes this into account can improve the search sensitivity in this case.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.8\columnwidth]{vit_prob.pdf}
-\caption{The log-probabilities, jumps, and most probable path}
-\caption{ This plot shows an example of Eq.~\ref{viterbi:logodds} for various \ac{SFT} powers and fixed parameters, $w_S$, $w_L$ and $p({M_{\rm L}})/p({M_{\rm G}})$. }
-\label{viterbi:lineawareamp:power}
-\end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.8\columnwidth]{vit_prob.pdf}
-\caption{The log-probabilities, jumps, and most probable path}
-\caption{ This plot shows an example of Eq.~\ref{viterbi:logodds} for various \ac{SFT} powers and fixed parameters, $w_S$, $w_L$ and $p({M_{\rm L}})/p({M_{\rm G}})$. }
-\label{viterbi:lineawareamp:example}
+\begin{subfigure}[h]{\linewidth}
+\begin{minipage}{0.65\linewidth}
+\includegraphics[width=1.\linewidth]{lookup_noline.pdf}
+\end{minipage}\hfill
+\begin{minipage}{0.35\linewidth}
+\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
+\label{viterbi:plot:data}
+\end{minipage}
+\end{subfigure}
+
+\begin{subfigure}[h]{\linewidth}
+\begin{minipage}{0.65\linewidth}
+\includegraphics[width=1.\columnwidth]{lookup_linesmall.pdf}
+\end{minipage}\hfill
+\begin{minipage}{0.35\linewidth}
+\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 2$ and $p(M_L)/p(M_G) = 1$. Here the line part of the statistic has the same \ac{SNR} and the signal part, i.e. we expect the \ac{SNR} of a signal to be similar to that of a line.}
+\label{viterbi:plot:data}
+\end{minipage}
+\end{subfigure}
+
+\begin{subfigure}[h]{\linewidth}
+\begin{minipage}{0.65\linewidth}
+\includegraphics[width=1.\columnwidth]{lookup_linebig.pdf}
+\end{minipage}\hfill
+\begin{minipage}{0.35\linewidth}
+\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 10$ and $p(M_L)/p(M_G) = 1$. Here we expect the \ac{SNR} of a line to be larger than a signal.}
+\label{viterbi:plot:data}
+\end{minipage}
+\end{subfigure}
+\caption{Lookup tables using the line aware statistic in Eq.~\ref{viterbi:las:logodds}.}
+\label{viterbi:plots}
 \end{figure}
 
