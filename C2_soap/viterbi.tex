@@ -2,9 +2,9 @@
 
 The SOAP search is another semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
 The algorithm looks though narrow-banded spectrograms of data to find the most probable track in frequency through it.
-The basic idea of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track.
+The basic idea of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track.
 Therefore, it can be assumed that if the frequency track with the highest sum of spectrogram power is found, then the corresponding track is most likely for follow a signal. 
-Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is 180 bins wide $M$ and 400 segments long $N$ and after each segment the track has $T$ possible options to jump to, The total number of possible tracks is $T^{M*N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possible calculate. This is where the Viterbi algorithm \cite{Viterbi1967} is useful as it can efficiently find the track which gives the maximum sum of power. This is explained in the following sections.
+Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is 180 bins wide $M$ and 400 segments long $N$ and after each segment the track has $T$ possible options to jump to, The total number of possible tracks is $T^{M*N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possibly calculate. This is where the Viterbi algorithm \cite{Viterbi1967} is useful as it can efficiently find the track which gives the maximum sum of power. This is explained in the following sections.
 
 The majority of this chapter that follows has been reviewed and published as in \cite{Bayley2019}, excluding Sec.~\ref{viterbi:las:optimisation} and Sec.~\ref{viterbi:lineawareamp} which is supplementary material.
 
@@ -222,13 +222,13 @@ The Viterbi algorithm records two quantities for each frequency and time bin: Th
 \begin{figure}
 \centering
 \begin{subfigure}[h]{0.8\columnwidth}
-\includegraphics[width=0.8\columnwidth]{vit_data.pdf}
+\includegraphics[width=0.8\columnwidth]{C2_soap/vit_data.pdf}
 \caption{The input data}
 \label{viterbi:plot:data}
 \end{subfigure}
 
 \begin{subfigure}[h]{0.8\columnwidth}
-\includegraphics[width=0.8\columnwidth]{vit_prob.pdf}
+\includegraphics[width=0.8\columnwidth]{C2_soap/vit_prob.pdf}
 \caption{The log-probabilities, jumps, and most probable path}
 \label{viterbi:plot:likelihood}
 \end{subfigure}
@@ -629,7 +629,7 @@ Fig.~\ref{viterbi:las:osgl_plots} shows an example of the output of the statisti
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\linewidth]{lookup_noline.pdf}
+\includegraphics[width=1.\linewidth]{C2_soap/lookup_noline.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
@@ -639,7 +639,7 @@ Fig.~\ref{viterbi:las:osgl_plots} shows an example of the output of the statisti
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\columnwidth]{lookup_linesmall.pdf}
+\includegraphics[width=1.\columnwidth]{C2_soap/lookup_linesmall.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. Here we include the line part of the statistic.}
@@ -649,7 +649,7 @@ Fig.~\ref{viterbi:las:osgl_plots} shows an example of the output of the statisti
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\columnwidth]{lookup_linebig.pdf}
+\includegraphics[width=1.\columnwidth]{C2_soap/lookup_linebig.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 1$. Here the effect of lines is expected to be larger than the previous panel on the search. Therefore, the statistic forces the two detectors to have more similar power.}
@@ -668,23 +668,26 @@ Fig.~\ref{viterbi:las:osgl_plots} shows an example of the output of the statisti
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Above the `line aware' statistic was designed to penalise high \ac{SFT} powers in a single detector and reward powers which have a similar \ac{SNR}. This is often a useful statistic to use when the detectors have similar sensitivities, however, this is not always the case. During an observing run of a gravitational wave detector, their sensitivity will vary with time due fluctuating or new noise sources or potentially upgrades which can increase the sensitivity. A change in the sensitivity, or noise floor, affects the \ac{SNR} of a possible signal in in the data, i.e. a lower noise floor results in a higher \ac{SNR}. 
+In Sec.~\ref{viterbi:las} the `line aware' statistic was designed to penalise high \ac{SFT} powers in a single detector and reward powers which have a similar \ac{SNR}. This is often a useful statistic to use when the detectors have similar sensitivities, however, this is not always the case. During an observing run of a gravitational wave detector, their sensitivity will vary with time due fluctuating or new noise sources or potentially upgrades which can increase the sensitivity. A change in the sensitivity, or noise floor, affects the \ac{SNR} of a possible signal in in the data, i.e. a lower noise floor results in a higher \ac{SNR}. 
 In this section the above `line aware' statistic is modified to account for the difference in sensitivities of the detectors, and therefore search for a consistent amplitude between detectors as opposed to \ac{SNR}.
 
-There are two main factors which are taken into account when determining how sensitive a detector is in a particular time interval: the \ac{PSD} of detector and the duty cycle. A decrease in the duty cycle and an increase in the \ac{PSD} will decrease the \ac{SNR}. To search for consistent amplitude Eq.\ref{lineaware:stat} is modified by weighting each detector by its \ac{PSD} and duty cycle.
+There are two main factors which are taken into account when determining how sensitive a detector is in a particular time interval: the \ac{PSD} of detector and the duty cycle. The \ac{PSD} of the detector is essentially how sensitive the detector is at that time and the duty cycle is the fraction of time in a given interval that the detector was collecting data. A decrease in the duty cycle and an increase in the \ac{PSD} will decrease the \ac{SNR} and vice-versa. To search for consistent amplitude Eq.\ref{lineaware:stat} is modified by weighting each detector by its \ac{PSD} and duty cycle.
 
 The definition of \ac{SNR} is taken from \cite{} as, 
 \begin{equation}
     \rho_0^2 = \frac{h_0^2 T}{S}(\alpha_1A + \alpha_2B + \alpha_3C),
 \end{equation}
-where $\rho_0$ is the \ac{SNR}, $h_0$ is the signal amplitude, $T$ is the time of observation, $S$ is the noise \ac{PSD} and the term in brackets include the antenna pattern of the detector. 
+where $\rho_0$ is the optimal \ac{SNR}, $h_0$ is the signal amplitude, $T$ is the time of observation, $S$ is the noise \ac{PSD} and the term in brackets include the antenna pattern of the detector. 
 The signal with amplitude $h_0$ will be the same amplitude at both detectors (H and L), therefore we can relate the \ac{SNR} in each detector by,
 \begin{equation}
 \label{lineawareamp:snrequate}
     \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_L} \frac{(\alpha_1A_L + \alpha_2B_L + \alpha_3C_L)}{(\alpha_1A_H + \alpha_2B_H + \alpha_3C_H)} .
 \end{equation}
 
-For the majority of the analysis that follows the \acp{SFT} are summed over one day, this will be explained in greater detail in Sec.~\ref{}. The components in the above equation which have the form $(\alpha_1A + \alpha_2B + \alpha_3C)$, account for the antenna pattern of the earth as it rotates. These can be approximated to be the same for the two detectors H1 and L1, therefore we can simplify the above Eq.~\ref{lineawareamp:snrequate} to, 
+For the majority of the analysis that follows the \acp{SFT} are summed over one day, this will be explained in greater detail in Sec.~\ref{viterbi:sumdata}. 
+The components in the above equation which have the form $(\alpha_1A + \alpha_2B + \alpha_3C)$, account for the antenna pattern of the earth as it rotates.
+These can be approximated to be the same for the two detectors H1 and L1 as we will essentially be averaging out the daily modulation by summing \acp{SFT}.
+Therefore we can simplify the above Eq.~\ref{lineawareamp:snrequate} to, 
 \begin{equation}
 \label{lineawareamp:snrratio}
     \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_L} = l \rho_H^2 .
@@ -718,7 +721,7 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=0.9\linewidth]{lookup_3d_2.pdf}
+\includegraphics[width=0.9\linewidth]{C2_soap/lookup_3d_2.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
@@ -727,7 +730,7 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 \end{subfigure}
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=0.9\columnwidth]{lookup_3d_1.pdf}
+\includegraphics[width=0.9\columnwidth]{C2_soap/lookup_3d_1.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 2$ and $p(M_L)/p(M_G) = 1$. Here the line part of the statistic has the same \ac{SNR} and the signal part, i.e. we expect the \ac{SNR} of a signal to be similar to that of a line.}
@@ -737,7 +740,7 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=0.9\columnwidth]{lookup_3d_0.pdf}
+\includegraphics[width=0.9\columnwidth]{C2_soap/lookup_3d_0.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 10$ and $p(M_L)/p(M_G) = 1$. Here we expect the \ac{SNR} of a line to be larger than a signal.}
@@ -841,7 +844,7 @@ frequency bin, i.e., all the elements in Eq.~\ref{lineaware:stat}.  In this figu
 
 \begin{figure*}
 %\centering
-\includegraphics[scale=0.5]{viterbi_tracks.pdf}
+\includegraphics[scale=0.5]{C2_soap/viterbi_tracks.pdf}
 %
 \caption{\label{viterbi:tracks} The results that the SOAP algorithm returns from an injection with an optimal
 \ac{SNR} of 90, i.e., the \ac{SNR} in H1 is 64 and the \ac{SNR} in L1 is 62.
@@ -1015,23 +1018,23 @@ In Fig.~\ref{gausss6:res_snr} and ~\ref{gausss6:res_depth} show the \ac{RMS} of 
 \centering
 \begin{subfigure}[h]{0.49\columnwidth}
 \centering
-\includegraphics[scale=0.3]{s6_efficiency_snr.pdf}
+\includegraphics[scale=0.3]{C2_soap/s6_efficiency_snr.pdf}
 \subcaption{}
 \label{gausss6:eff_snr}
 \end{subfigure}
 \begin{subfigure}[h]{0.49\columnwidth}
-\includegraphics[scale=0.3]{gauss_s6_frac_snr.pdf}
+\includegraphics[scale=0.3]{C2_soap/gauss_s6_frac_snr.pdf}
 \subcaption{}
 \label{gausss6:res_snr}
 \end{subfigure}
 
 \begin{subfigure}[h]{0.49\columnwidth}
-\includegraphics[scale=0.3]{s6_efficiency_depth.pdf}
+\includegraphics[scale=0.3]{C2_soap/s6_efficiency_depth.pdf}
 \subcaption{}
 \label{gausss6:eff_depth}
 \end{subfigure}
 \begin{subfigure}[h]{0.49\columnwidth}
-\includegraphics[scale=0.3]{gauss_s6_frac_depth.pdf}
+\includegraphics[scale=0.3]{C2_soap/gauss_s6_frac_depth.pdf}
 \subcaption{}
 \label{gausss6:res_depth}
 \end{subfigure}
@@ -1142,7 +1145,7 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{lookup_noline.pdf}
+    \includegraphics[width=\linewidth]{C2_soap/lookup_noline.pdf}
     \caption{This figure shows an example of when the line aware statistic is used compared to a version when it is not.}
     \label{viterbi:optimisation:vitexample}
 \end{figure}
