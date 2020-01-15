@@ -1,10 +1,35 @@
 \chapter{\label{soap}SOAP Search}
 
-As described in Sec.~\ref{} many pipelines for \acp{CW} use a set of \acp{SFT} to search through.
-This SOAP search uses the spectrograms in narrow bands to search through.
-The basic idea of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{}, we could find every possible track from a starting frequency bin to an end frequency bin (of which there are many). For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{} shows a histogram of these values. If there is a signal present in this band then it could be  assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track.
+The SOAP search is another semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
+The algorithm looks though narrow-banded spectrograms of data to find the most probable track in frequency through it.
+The basic idea of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track.
 Therefore, it can be assumed that if the frequency track with the highest sum of spectrogram power is found, then the corresponding track is most likely for follow a signal. 
-Now as calculating all possible tracks is time consuming and the majority of tracks will not follow the signal track, it would be useful to have an algorithm which could find the maximum track more efficiently. This is where the Viterbi algorithm \cite{Viterbi1967} does this exact task. This is explained in the following sections.
+Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is 180 bins wide $M$ and 400 segments long $N$ and after each segment the track has $T$ possible options to jump to, The total number of possible tracks is $T^{M*N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possible calculate. This is where the Viterbi algorithm \cite{Viterbi1967} is useful as it can efficiently find the track which gives the maximum sum of power. This is explained in the following sections.
+
+The majority of this chapter that follows has been reviewed and published as in \cite{Bayley2019}, excluding Sec.~\ref{viterbi:las:optimisation} and Sec.~\ref{viterbi:lineawareamp} which is supplementary material.
+
+
+\begin{figure}
+
+\centering
+\includegraphics[width=\linewidth]{viterbi_tracks.pdf}
+\caption{}
+\label{soap:motivation:plot}
+
+\end{figure}
+
+\section{Introduction}
+
+%
+% introduce the signal
+%
+One of the main targets for current ground based \ac{GW} detectors, including \ac{LIGO}~\cite{LIGO, LIGO2015} and Virgo~\cite{VIRGO, Acernese_2014}, are sources of continuous gravitational waves. These are long-duration, quasi-monochromatic  sinusoidal signals that are well-modelled by a Taylor series expansion in the signal phase. A likely source of such signals are rapidly spinning non axisymmetric neutron stars.  A number of possible emission mechanisms are outlined in~\cite{Prix2009,Owen:2009fg}.
+
+%
+% introduce semi-coherent search algorithms
+%
+These types of \acp{GW} are expected to give strain amplitudes that are significantly below the detector's noise spectral density, and need sensitive search algorithms for detection. The most sensitive method is to use a coherent matched filter which requires knowledge of the waveform beforehand such that it can be coherently correlated with the data. This approach is used in searches for gravitational signals from known pulsars such as~\cite{Dupuis2005,Astone_2010,PhysRevD.58.063001,O1knownpulsar2017,O2knownpulsar:2019}. For broad parameter space searches, where the parameters of the signal are unknown, a large number of template waveforms must be used to sufficiently cover the parameter space.  This approach rapidly becomes computationally impractical as the search space grows, so semi-coherent search methods have been developed to deliver the maximum overall sensitivity for a given computational cost. Semi-coherent searches break the data up into sections of either time or frequency and perform a coherent analysis on these sections separately. These intermediate results can then be recombined incoherently in a number of different ways to form the final search result outlined in ~\cite{PhysRevD.61.082001,Pisarski:2019vxw} and references therein.
+
 
 %
 % introduce SOAP
@@ -16,7 +41,6 @@ The analysis that we present here is known as SOAP \cite{soap} and is based on t
 %
 In the next section we will describe the Viterbi algorithm and the basic SOAP implementation to \ac{GW} time-frequency data. We then describe additional features to the algorithm, including the use of data from multiple detectors. As well as this we describe methods used to ignore instrumental effects in the data, such as incoherently summing data and a `line aware' statistic. In the final section as well as a test of the computational cost of the search, we show results of a search performed on datasets of increasing complexity: Gaussian noise with no gaps (i.e., contiguous in time), Gaussian noise with gaps simulating real data more accurately, and finally real \ac{LIGO} data taken during the sixth science run. 
 
-The majority of this chapter that follows has been reviewed and published as in \cite{Bayley2019}, excluding Sec.~\ref{viterbi:las:optimisation} which is supplementary material.
 
 \section{Viterbi algorithm}
 %
