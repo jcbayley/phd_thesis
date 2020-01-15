@@ -681,7 +681,7 @@ where $\rho_0$ is the optimal \ac{SNR}, $h_0$ is the signal amplitude, $T$ is th
 The signal with amplitude $h_0$ will be the same amplitude at both detectors (H and L), therefore we can relate the \ac{SNR} in each detector by,
 \begin{equation}
 \label{lineawareamp:snrequate}
-    \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_L} \frac{(\alpha_1A_L + \alpha_2B_L + \alpha_3C_L)}{(\alpha_1A_H + \alpha_2B_H + \alpha_3C_H)} .
+    \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_H} \frac{(\alpha_1A_L + \alpha_2B_L + \alpha_3C_L)}{(\alpha_1A_H + \alpha_2B_H + \alpha_3C_H)} .
 \end{equation}
 
 For the majority of the analysis that follows the \acp{SFT} are summed over one day, this will be explained in greater detail in Sec.~\ref{viterbi:sumdata}. 
@@ -690,9 +690,9 @@ These can be approximated to be the same for the two detectors H1 and L1 as we w
 Therefore we can simplify the above Eq.~\ref{lineawareamp:snrequate} to, 
 \begin{equation}
 \label{lineawareamp:snrratio}
-    \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_L} = l \rho_H^2 .
+    \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_H} = l \rho_H^2 .
 \end{equation}
-This then gives a factor which relates the \ac{SNR} of each detector, where $S$ and $T$ are values that are known for a given data-set prior to running the search.
+This then gives a factor $l = S_H T_L/S_L T_H$ which relates the \ac{SNR} of each detector, where $S$ and $T$ are values that are known for a given data-set prior to running the search.
 
 This ratio of \acp{SNR} can be included in the integral over \ac{SNR} for the signal model in Eq.~\ref{las:signal} as follows,
 \begin{equation}
@@ -701,7 +701,7 @@ p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,
 p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I)p(F^{(2)}_{j}|\nu_j,l\lambda,M_{\text{S}},I) d\lambda.
 \end{equation}
 
-Similarly the line model in Eq.~\ref{las:line} can be modified as,
+Similarly, the line model in Eq.~\ref{las:line} can be modified as,
 
 \begin{equation}
 \label{lineawareamp:line}
@@ -712,7 +712,7 @@ p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda,
 \end{split}
 \end{equation}
 
-Fig.~\ref{viterbi:lineawareamp:power} shows an example of the values of the statistic described in Eq.~\ref{lineawareamp:line} plotted against a range of \ac{FFT} powers from each detector. This demonstrated how the statistic accounts for a difference in sensitivity on detectors by allowing the \ac{FFT} power or effectively \ac{SNR} to vary more.
+Fig.~\ref{viterbi:lineawareamp:example} shows an example of the values of the statistic described in Eq.~\ref{lineawareamp:line} plotted against a range of \ac{FFT} powers from each detector. This demonstrated how the statistic accounts for a difference in sensitivity on detectors by allowing the \ac{FFT} power or effectively \ac{SNR} to vary more.
 
 In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors with large differences in sensitivity, and how the statistic which takes this into account can improve the search sensitivity in this case.
 
@@ -748,7 +748,7 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 \end{minipage}
 \end{subfigure}
 \caption{Lookup tables using the line aware statistic for consistent amplitude as in Sec.~\ref{viterbi:lineawareamp}. Each of these use the parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. }
-\label{viterbi:plots}
+\label{viterbi:lineawareamp:example}
 \end{figure}
 
 \section{\label{results} Testing the algorithm}
