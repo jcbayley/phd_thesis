@@ -1,51 +1,154 @@
 \chapter{Introduction}
 
-Gravitational wave astronomy is a relatively new field which has the potential to offer a lot of new information on the behaviour and origins of the universe. Up until their discovery, the only way to view the universe was through the electromagnetic spectrum and neutrinos. 
+Gravitational waves were first predicted by Einstein in 1915, as a consequence of his theory of \ac{GR} \cite{}. He then later theorised the gravitational waves in \cite{}.
+The first observational evidence that \ac{GW} exist came from observations of the Hulse-Taylor binary \cite{}. 
+This observations showed the binary pulsar system was in-spiraling and therefore losing energy.
+This loss in energy matched the \ac{GR} prediction which assumed the energy was lost to \ac{GW}.
+The in 2015 the first direct detection of gravitational waves was made by the \ac{LIGO} detectors in the US \cite{}.
+This has then been followed my many more detection's involving \ac{LIGO} and Virgo \cite{}.
 
-\section{Gravitational Waves}
+The field of gravitational wave astronomy is relatively new, it has the potential to offer a lot of new information on the behaviour and origins of the universe and the objects within. 
+Up until their discovery in 2015 \cite{}, the only way to view the universe was through the electromagnetic spectrum or neutrinos. 
+Gravitational waves offer a method to directly observe compact objects such as black holes and neutron stars. 
+\ac{EM} radiation from any object is obscured by dust clouds and many other objects within the universe.
+Due to gravity being a much weaker force, \acp{GW} do no react with these objects or dust, therefore, objects can be viewed without any obstruction. 
 
-Gravitational waves were first theorised by Einstein in 1916 as a consequence of his theory of relativity \cite{}. 
+In this chapter I will indroduce gravitational wave, their sources and how they are detected. 
+
+
+
+\begin{enumerate} 
+    \item new field
+    \item Useful for understanding BH NS universe origin Hubble cont etc
+    \item gives unobstructed view of universe
+    \item theorised by einstein in X
+    \item ripples through spacetime anagolus to EM but for masses 
+    \item need heavy dense objects to emit detectable waves
+    \item how they effect objects (tidal)
+    
+\end{enumerate}
+
+%%%%%%%%%%%
+%%%%%%%%%
+\section{Gravitational waves}
+%%%%%%%%%%%
+%%%%%%%%%
+
+In general relativity, gravity is caused by distortions in space-time, these distortions are cause by mass or energy. 
+The larger the mass the more it will distort space-time, and the larger effect it will have on masses around it.
+Gravitational waves are ripples in this space-time which propagate at the speed of light. 
+By assuming that these ripples are small perturbations of the metric, Einstein's field equations can be solved such that the solution is a plane wave. 
+The derivation of \ac{GW} has been summarised many times before, e.g. \cite{}, therefore, I will not repeat this here.. 
 
 
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%
-\subsection{\label{sources}Sources}
+\section{\label{sources}Sources and signals}
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
 
-Gravitational wave sources are typically split into 4 general categories based on their signal type: \ac{CBC}, Burst, Stochastic and \acp{CW}. Their basic wave-forms are shown in Fig.~\ref{intro:sources:waveforms} and are explained in more detail in the following sections. Whilst these are the general categories, there are some signal types which overlap these groups.
+There are many potential sources for \ac{GW}, they can be split into 3 general categories based on their signal type: Transient, Stochastic and \acp{CW}. 
+In the sections that follow, I will give an overview of the potential sources of each of these categories and their waveforms.
+
+
+%%%%%%%%%%%%%%%
+\subsection{\label{sources:transient} Transient}
+%%%%%%%%%%%%%%%
+
+Transient sources of gravitational waves give short duration, $\mathcal{O}(1)$ seconds, signals.
+These signals can be well modelled as in \acp{CBC} or unmodelled as in Burst signals.
+
+\subsubsection{\label{sources:transient:cbc} Compact Binary Coalescence}
+
+\acp{CBC} are well modelled signals which originate from the in-spiral and coalescence of compact objects. 
+This includes \acp{BBH}, \acp{BNS}, \acp{NSBH} and \acp{EMRI}. 
+The wave-forms of these sources vary in length from less than a second to tens of seconds depending on the objects that make them.
+However, they all have a similar form which is a `chirp' as shown in Fig.~\ref{sources:transient:cbc:wave}.
 
 \begin{figure}
-\centering
-\includegraphics[width=0.8\columnwidth]{place.pdf}
-\caption{This figure shows the simplified wave-forms for the 4 general categories of gravitational wave signals.}
-\label{intro:sources:waveforms}
+    \centering
+    \includegraphics{}
+    \caption{CBC waveform}
+    \label{sources:transient:cbc:wave}
 \end{figure}
-%%%%%%%%%%%%%%%
-\subsubsection{\label{sources:cbc} Compact binary coalescence}
-%%%%%%%%%%%%%%%
 
-\ac{CBC} are some of the strongest expected signals which have a chirp like waveform. They consist of two compact objects are caught within each others gravitational fields such that then begin to inspiral and collide with each other to form a larger compact object. 
-There are different types of \ac{CBC} sources, which are combinations of neutron stars and black holes.
-There are the sources which have to date been detected: binary black holes and binary neutron stars. 
+
+\ac{CBC} signals are generally split into three separate components: the inspiral, the merger and ring-down. 
+The inspiral is when the objects are orbiting each other and as they lose energy to gravitational waves, the radius of the orbit decreases.
+This continues until the objects begin to merge, which is when it reaches the merger phase.
+After the objects have merged the remnant compact object 'rings down'. This means that the object still emits some gravitational waves as it settles into its final state.
+
+In systems which have a neutron star, during the inspiral when the objects are close, the neutron star will begin to deform due to the strong gravity. 
+This becomes useful as it will affect the generated waveform and can help determine the \ac{EOS} for the dense matter in a neutron star.
+\ac{BNS} systems also offer a way do observe objects in multiple different channels, or what is known as multi-messenger astronomy. 
+This is where the object can be viewed in the \ac{EM} spectrum as well as in gravitational waves.
+This offers much in the field of astronomy as it can aid in the calculation of the Hubble constant. 
+
+
+Black hole binaries have various formation channels, i.e. there are different way in which a compact binary system can form. 
+These formation channels include: two high mass binary stars which collapse, two separate objects capture eachother in their gravitational fields and begin to orbit etc..
+However, exactly how common these are or if there are dominant ways in which they form is unknown. 
+With many observations of \ac{CBC} it should be possible to discover which of these, if any, is dominant.
+
+\begin{enumerate}
+    \item BBH, BNS, BH-NS, EMRIs 
+    \item can learn EOS from and neutron star interaction
+    \item direct observation of black holes
+    \item find their formation channels
+    \item 
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%
-\subsubsection{Burst}
+\subsubsection{\label{sources:transient:burst}Burst}
 %%%%%%%%%%%%%%%%%
 
-Burst sources are any short duration high power signal which is seen in the detector. 
+Burst sources are un-modelled and therefore have an unknown waveform.
+This is because the sources could be unknown, or sources where the underlying physics of the system is not understood. 
+Rather than generating wave-forms as in \ac{CBC} searches and using matched filtering, bursts usually look for short bursts in power which is coherent between detectors.
+
+There are certain systems which could potentially emit a short duration burst like \ac{GW}.
+These include core collapse supernovae \cite{}, \acp{GRB} \cite{}, .
+Supernovae are when a massive star collapses and ejects its outer layers. 
+If there is some asymmetry in the collapse then the system will emit some \ac{GW}.
+
+\ac{GRB} are systems .........
+
+In each of the example systems above, observing \ac{GW} gives a new insight into the processes happening inside hostile environments by giving an unobstructed view of them.
+
+Ultimately burst searches are looking for signals which are unexpected, and are often flexible enough to look for any signal which appears consistently between detectors.
+
+\begin{enumerate}
+    \item High power which is consistent between detectors
+    \item searches for uknown signal types
+    \item these include: superova, GRB, etc
+    \item can potentially probe what is happening is extreme environments
+    \item but ultimately aim is to find something new
+\end{enumerate}
+
 
 %%%%%%%%%%%%%%%
-\subsubsection{Stochastic}
+\subsection{Stochastic}
 %%%%%%%%%%%%%%%
 
+\begin{enumerate}
+    \item looks for unknown signal waveforms
+    \item random fluctuations which are from many distant BBH overlapping
+\end{enumerate}
 Stochastic sources of gravitational waves originate from the combination of many \ac{CBC} which are far away. What should be observed at the detector is the sum of many collisions. 
 
 %%%%%%%%%%%%%%%%%%
-\subsubsection{Continuous waves}
+\subsection{Continuous waves}
 %%%%%%%%%%%%%%%%%%%%
 
+\begin{enumerate}
+    \item rapidly roating neutron stars main source
+    \item long duration continuously emitted
+    \item can learn about EOS of dense neutron matter
+    \item various emission possiblities
+    \item have been observed in EM
+    \item 
+\end{enumerate}
 
 One of the main targets for \ac{LIGO} and Virgo are continuous gravitational waves, these are long duration sinusoidal signals, a primary source is thought to be rapidly rotating neutron stars (pulsars). 
 
@@ -86,6 +189,12 @@ Free precession is when the rotation axis is misaligned with the symmetry axis o
 Free precession is expected to produce gravitational waves at a frequency the same as the rotation frequency and twice the rotation frequency \cite{Becker2009}. 
 
 
+\subsubsection{Exotic sources}
+
+\begin{enumerate}
+    \item other unknown sources consistent between detectors
+\end{enumerate}
+
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
@@ -94,6 +203,24 @@ Free precession is expected to produce gravitational waves at a frequency the sa
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 
+There have been many ideas and designs for methods to detect gravitational waves, the majority of working designs use interferometry to do this.
+
+\subsection{Laser Interfereometry}
+
+\subsection{Detector response}
+
+\subsection{Noise sources}
+
+\begin{enumerate}
+    \item Laser interferometers
+    \item located US (LIGOs) Virgo
+    \item detect the tidal deformations 
+    \item mention instrumental lines for later section
+    \item sensitivity curves
+    \item future detectors
+    \item antenna response
+    \item 
+\end{enumerate}
 
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
@@ -256,6 +383,35 @@ h(t) = F_{+}(t)[h_{1+}(t) + h_{2+}(t)] + F_{\times}(t)[h_{1\times}(t) + h_{2\tim
 \end{equation}
 where all parameters can be found in Eqs.~(21-22) of \cite{JKS1998}. 
 
+%%%%%%
+%%%%%%
+\subsection{\label{intro:search:coherent}Fully-coherent searches}
+%%%%%%
+%%%%%%
+
+Fully coherent searches are currently the most sensitive searches for continuous sources of gravitational waves. These searches are based on matched filtering which coherently correlate pre-generated waveforms with the data, this is used in \cite{Dupuis2005,Jaranowski1998,}.
+In a simple form the matched filter filters the data $h$ with a template $w$ using the inner product defined in Eq.~\ref{intro:search:signals:scalarproduct}. 
+
+Continuous wave signals need a large amount of integration time, $\mathcal{O}(\rm{years})$, for the signal to become clear within the data, therefore, given that the \ac{LIGO} detectors sample at 16 kHz, the amount of data to search over is large. 
+Performing the coherent matched filter on this data can take a large amount of time, therefore, as the majority of sources which are searched for have a narrow bandwidth, many searches use techniques to reduce the amount of data. 
+For example, in \cite{Dupuis2005} the data is heterodyned (mixed with some local oscillator), low passed filtered and then down-sampled. This reduced the amount of data to be searched over while not losing any source information. 
+
+Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all sky searches no parameters of the source are known, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
+This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
+
+%%%%%%
+%%%%%%
+\subsection{\label{intro:search:semicoherent}Semi-coherent searches}
+%%%%%%
+%%%%%%
+
+Semi-coherent searches offered a solution to searching over large parameters spaces and large amounts of data. 
+The data is split into smaller segments and the analysis is run separately on each of those segments, then each result is combined incoherently. 
+This can greatly reduce the time taken for the analysis depending on the segment length, however, will always come with some loss in sensitivity. 
+
+There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. Many of these use 1800s (30 mins) \acp{SFT} as the input to their search as they can be calculated efficiently. 
+
+
 
 %%%%%%%%%%%%
 %%%%%%%%%%%%%%
@@ -308,31 +464,7 @@ The signals frequency varies with time and will not always be located at the cen
 In our injections into the power spectrum we need to account for this effect. 
 For a given frequency bin width 
 
-%%%%%%
-%%%%%%
-\subsection{\label{intro:search:coherent}Fully-coherent searches}
-%%%%%%
-%%%%%%
+\section{Outline of Thesis}
 
-Fully coherent searches are currently the most sensitive searches for continuous sources of gravitational waves. These searches are based on matched filtering which coherently correlate pre-generated waveforms with the data, this is used in \cite{Dupuis2005,Jaranowski1998,}.
-In a simple form the matched filter filters the data $h$ with a template $w$ using the inner product defined in Eq.~\ref{intro:search:signals:scalarproduct}. 
 
-Continuous wave signals need a large amount of integration time, $\mathcal{O}(\rm{years})$, for the signal to become clear within the data, therefore, given that the \ac{LIGO} detectors sample at 16 kHz, the amount of data to search over is large. 
-Performing the coherent matched filter on this data can take a large amount of time, therefore, as the majority of sources which are searched for have a narrow bandwidth, many searches use techniques to reduce the amount of data. 
-For example, in \cite{Dupuis2005} the data is heterodyned (mixed with some local oscillator), low passed filtered and then down-sampled. This reduced the amount of data to be searched over while not losing any source information. 
-
-Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all sky searches no parameters of the source are known, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
-This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
-
-%%%%%%
-%%%%%%
-\subsection{\label{intro:search:semicoherent}Semi-coherent searches}
-%%%%%%
-%%%%%%
-
-Semi-coherent searches offered a solution to searching over large parameters spaces and large amounts of data. 
-The data is split into smaller segments and the analysis is run separately on each of those segments, then each result is combined incoherently. 
-This can greatly reduce the time taken for the analysis depending on the segment length, however, will always come with some loss in sensitivity. 
-
-There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. Many of these use 1800s (30 mins) \acp{SFT} as the input to their search as they can be calculated efficiently. 
 

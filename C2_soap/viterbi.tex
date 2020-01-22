@@ -2,7 +2,9 @@
 
 The SOAP search is another semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
 The algorithm looks though narrow-banded spectrograms of data to find the most probable track in frequency through it.
-The basic idea of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track.
+The basic idea of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track. 
+In Fig.~\ref{soap:motivation:plot} the optimum track in red shows gives a statistic value of $\sim 1700$ which is far outside the main distribution of summed powers. 
+This follows an injected signal track which demonstrates the idea. 
 Therefore, it can be assumed that if the frequency track with the highest sum of spectrogram power is found, then the corresponding track is most likely for follow a signal. 
 Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is 180 bins wide $M$ and 400 segments long $N$ and after each segment the track has $T$ possible options to jump to, The total number of possible tracks is $T^{M*N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possibly calculate. This is where the Viterbi algorithm \cite{Viterbi1967} is useful as it can efficiently find the track which gives the maximum sum of power. This is explained in the following sections.
 
@@ -12,8 +14,8 @@ The majority of this chapter that follows has been reviewed and published as in 
 \begin{figure}
 
 \centering
-\includegraphics[width=\linewidth]{viterbi_tracks.pdf}
-\caption{}
+\includegraphics[width=\linewidth]{C2_soap/soap_spect_motivation.pdf}
+\caption{This figure shows an example of a spectrogram which is typical of LIGO data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
 \label{soap:motivation:plot}
 
 \end{figure}
@@ -844,7 +846,7 @@ frequency bin, i.e., all the elements in Eq.~\ref{lineaware:stat}.  In this figu
 
 \begin{figure*}
 %\centering
-\includegraphics[scale=0.5]{C2_soap/viterbi_tracks.pdf}
+\includegraphics[scale=0.45]{C2_soap/viterbi_tracks.pdf}
 %
 \caption{\label{viterbi:tracks} The results that the SOAP algorithm returns from an injection with an optimal
 \ac{SNR} of 90, i.e., the \ac{SNR} in H1 is 64 and the \ac{SNR} in L1 is 62.
