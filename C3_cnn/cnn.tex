@@ -1,20 +1,204 @@
-\chapter{\label{cnn}Convolutional neural networks}
+\chapter{\label{cnn} Machine learning for continuous wave searches}
+%%%%%%%%%%
+%%%%%%%%%%
 
-\section{Layers}
+%--------------------------
+% Introduce machine learning
+%----------------------------
 
-\subsection{Neurons}
+Machine learning is a term which was used by Arthur Samuel in 1959. 
+He described it as a "Field of study that gives computers the ability to learn without being explicitly programmed" \cite{}.
+This can be though of as a subset of artificial intelligence. 
 
+With the development in computing in recent years, including GPUs and the languages used to program with them, machine learning has become more accessible. 
+
+%%%%%%%%%%%
+%%%%%%%%%%%
+\section{\label{machine:nn}Neural networks}
+%%%%%%%%%%%
+%%%%%%%%%%%
+
+
+Throughout this section I will summarise one machine learning technique which are known as Neural networks. 
+Neural networks, as the name may suggest, was developed as a way for a computer to mimic the neurons in the brain.
+To understand why this would be useful, I will give short example which will be followed through this section.
+A good example used extensively in explanations of neural networks is the ability to identify hand written digits.
+This is a simple task which the brain can complete with ease. 
+However, writing a traditional algorithm to perform this same task is very difficult. 
+The algorithm would have to identify a particular shape, which has a huge amount of variation.
+For example, any number could be written at a slightly different angle or the number 9 could have a much longer tail etc.
+This is where a neural network can help. 
+These can be trained in a similar way to a human brain. 
+This is where in a lifetime many examples of different symbols are seen and each time a new one is seen the brain `updates' itself based on what is observed. 
+This process is essentially replicated for a neural network, where the algorithm can be updated such that it can correctly identify each digit.
+
+To explain how a neural network can be updated, we need to start with the operation of a single neuron.
+
+
+\begin{itemize}
+    \item introduce machine learning as a technique with previous examples
+    \item general idea, train a NN on lots of data
+    \item GPU development allowed these to train fast and be useful
+    \item General intended application to CW searches
+    \item redue affect of instrumental artefacts
+\end{itemize}
+
+%%%%%%%%%
+%%%%%%%%%
+\section{\label{machine:nn:neuron}Neurons}
+%%%%%%%%%
+%%%%%%%%%
+Neurons are the building blocks of any neural network.
+They perform simple operations on any number of input values and then output a single value.
+They are defined by the equation,
+
+\begin{equation}
+    o = f\left(b + \sum_{i=1}^{N} w_i x_i  \right),
+    \label{machine:nn:neuron:equation}
+\end{equation}
+
+where $b$ is the bias, $x$ is the input, $w$ is the weights, $f$ is the activation function and $o$ is the output.
+Here the input $x$ represents either the data which is input, i.e the pixels of the image which contains the digit in the example above, or the output of another neuron.
+The weights $w$ then represents how important each of those data points are to this problem, or specifically this neuron. 
+The bias $b$ is then just an extra factor which can shift the data by a fixed value.
+The activation function $f$ is then a function which can have many forms, in the simplest case in a neuron known as a `perceptron', it provides a cut where any value above a given threshold is 1 and any below is 0. 
+However, there are many different types of activation functions which can be applied to different situations.
+This will be explained in more detail in Sec.~\ref{machine:nn:activation}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{}
+    \caption{Basic neuron}
+    \label{machine:nn:neuron:plot}
+\end{figure}
+
+In the example in Fig.~\ref{machine:neuron:plot} I have shows a neuron which has 4 input variables, or 4 input data points. 
+When a network is trained, or when it learns, the weights applied to each of the inputs and the bias are updated to better represent the input data.
+This training procedure is explained in more detail in Sec.~\ref{machine:nn:training}
+Many neurons are then used in combination with each other to develop a neural network which can be applied to more complex problems.
+
+%%%%%%%%%%%%%%%%%%%%
+\subsection{\label{machine:nn:structure}Network structure}
+%%%%%%%%%%%%%%%%%%%%
+
+The structure of the network is defined by the user and there is not set way to design the network.
+However, in general the complexity of the network reflect the complexity and size of the input data.
+If there is a small number of training examples and a large and complex network, it may be able to learn the input data set as opposed the the general information that they represent.
+
+Neural networks are structured in features called layers, sometimes known as fully connected layers. 
+These are rows of $N$ neurons which all take the same input such that there is $N$ output values.
+An example of a simple neural network is shown in Fig.~\ref{machine:nn:structure:plot}.
+The first layer is the input layer, this is just the input data.
+In the example of hand drawn digits, this would be the pixels from the image of the digit.
+The final layer represents the information that you intend the network to extract from the input data. 
+In the hand drawn digit example, this could have 10 output values corresponding to each digit 0-9. 
+Each of these outputs is then a value which is related to the probability of that digit being present in the image.  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{}
+    \caption{Simple neural network}
+    \label{machine:nn:structure:plot}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%
+\subsection{\label{machine:nn:activation}Activation functions}
+%%%%%%%%%%%%%%%%%
+
+The activation function is
+
+
+%%%%%%%%%%%%%%%%%
+\subsection{\label{machine:nn:loss}loss functions}
+%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%
+\subsection{\label{machine:nn:training}Training}
+%%%%%%%%%%%%%%%%%
+
+For example, imagine you are playing darts and have the aim of trying to hit bullseye.
+After each dart that misses you would adjust where you aim the dart based on how far away from the bullseye it landed.
+
+%%%%%%%%%%%
+%%%%%%%%%%
+\section{Convolutional Neural Networks}
+%%%%%%%%%
+%%%%%%%%%%
+
+Convolutional neural networks are based on the same principles as the neural networks described above. 
+The difference being that \acp{CNN} use additional types of layers which help to contain information of pixels relative to each other.
+In a standard neural network, it does not have any information on the location of any input value.
+For example, in an input image every pixel is flattened into a single dimensional array before being input to the network.
+\acp{CNN} try to retain some location information for each of the pixels.
+Whilst \acp{CNN} can be used for single dimensional inputs, they were generally developed for images.
+As well as retaining some location information, they reduce the size of the networks parameters.
+
+
+%%%%%%
+%%%%%%
 \subsection{Convolutional layers}
+%%%%%%
 
+Convolutional layers have some similarities to standard fully connected layers as described in Sec.~\ref{machine:nn:structure}. 
+The main difference being how the weights are applied to the inputs.
+To show the difference I have an example of a simple input image which has 9 pixels, this is shows in Fig.~\ref{}.
+
+A fully connected neural network would flatten this image and apply Eq.~\ref{machine:nn:neuron:equation} to the inputs, such that the output is,
+
+\begin{equation}
+\begin{split}
+    O_{k} &= f\left(\sum^N_{i=1} I_i w_{i,k} + b_k \right) \\
+    O_1 &= f\left(I_1 w_{1,1} + I_2 w_{2,1} + I_3 w_{3,1} + I_4 w_{4,1} + I_5 w_{5,1} + I_6 w_{6,1} + I_7 w_{7,1} + I_8 w_{8,1} + I_9 w_{9,1} + b_1\right) \\
+     \dots
+\end{split}
+\end{equation}
+
+If the size of the convolutional filter was $2\times 2$, then the convolutional layer only has 5 parameters to vary as opposed to 10 in this case.
+This would then use the equation,
+\begin{equation}
+\begin{split}
+    O_1 &= f\left(I_1 w_1 + I_2 w_2 + I_4 w_3 + I_5 w_4 + b\right) \\
+    O_2 &=  f\left( I_2 w_1 + I_3 w_2 + I_5 w_3 + I_5 w_4 + b\right)\\
+    O_3 &=  f\left(I_4 w_1 + I_5 w_2 + I_7 w_3 + I_8 w_4 + b\right)\\
+    O_4 &=  f\left(I_5 w_1 + I_6 w_2 + I_8 w_3 + I_9 w_4 + b\right)
+\end{split}
+\end{equation}
+
+\begin{figure}[h]
+\begin{subfigure}
+    \includegraphics{}
+    \caption{Simple neural network}
+    \label{machine:cnn:convlayer:input}
+\end{subfigure}   
+
+\begin{subfigure}
+    \includegraphics{}
+    \caption{Simple neural network}
+    \label{machine:cnn:convlayer:nn}
+\end{subfigure} 
+
+\begin{subfigure}
+    \includegraphics{}
+    \caption{Simple neural network}
+    \label{machine:nn:convlayer:cnn}
+\end{subfigure} 
+
+\end{figure}
+
+%%%%%%%%%
+%%%%%%%%
 \subsection{Max pooling layers}
+%%%%%%%%%%%%
+%%%%%%%%%%%
 
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
 \subsection{Fully connected layers}
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
 
-\subsection{Activation functions}
-
-\subsection{loss functions}
-
-\section{Training}
 
 \section{CW search}
 
