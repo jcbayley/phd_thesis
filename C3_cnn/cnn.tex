@@ -50,7 +50,7 @@ To explain how a neural network can be updated, we need to start with the operat
 %%%%%%%%%
 Neurons are the building blocks of any neural network.
 They perform simple operations on any number of input values and then output a single value.
-They are defined by the equation,
+The output $o$ of a neuron is defined by the equation,
 
 \begin{equation}
     o = f\left(b + \sum_{i=1}^{N} w_i x_i  \right),
@@ -67,12 +67,12 @@ This will be explained in more detail in Sec.~\ref{machine:nn:activation}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics{}
+    \includegraphics[width=0.6\columnwidth]{C3_cnn/neuron.pdf}
     \caption{Basic neuron}
     \label{machine:nn:neuron:plot}
 \end{figure}
 
-In the example in Fig.~\ref{machine:neuron:plot} I have shows a neuron which has 4 input variables, or 4 input data points. 
+In the example in Fig.~\ref{machine:nn:neuron:plot} I have shows a neuron which has 4 input variables, or 4 input data points. 
 When a network is trained, or when it learns, the weights applied to each of the inputs and the bias are updated to better represent the input data.
 This training procedure is explained in more detail in Sec.~\ref{machine:nn:training}
 Many neurons are then used in combination with each other to develop a neural network which can be applied to more complex problems.
@@ -96,7 +96,7 @@ Each of these outputs is then a value which is related to the probability of tha
 
 \begin{figure}[h]
     \centering
-    \includegraphics{}
+    \includegraphics[width=\columnwidth]{C3_cnn/neuron.pdf}
     \caption{Simple neural network}
     \label{machine:nn:structure:plot}
 \end{figure}
@@ -162,30 +162,53 @@ This would then use the equation,
     O_1 &= f\left(I_1 w_1 + I_2 w_2 + I_4 w_3 + I_5 w_4 + b\right) \\
     O_2 &=  f\left( I_2 w_1 + I_3 w_2 + I_5 w_3 + I_5 w_4 + b\right)\\
     O_3 &=  f\left(I_4 w_1 + I_5 w_2 + I_7 w_3 + I_8 w_4 + b\right)\\
-    O_4 &=  f\left(I_5 w_1 + I_6 w_2 + I_8 w_3 + I_9 w_4 + b\right)
+    O_4 &=  f\left(I_5 w_1 + I_6 w_2 + I_8 w_3 + I_9 w_4 + b\right).
 \end{split}
 \end{equation}
 
+Whilst this is hard to picture mathematically, it can be easier seen as a 2x2 filter which is convolved with the input image. 
+Fig.~\ref{} shows how the convolutional filter is applied.
+The output of a convolutional layer is then an image which is half the filter length less length in each dimension. 
+In practice, the input images are often padded with zeros such that the output image is the same size as the input image. 
+
 \begin{figure}[h]
-\begin{subfigure}
-    \includegraphics{}
+\begin{subfigure}[h]{\columnwidth}
+    \centering
+    \includegraphics[width=0.5\columnwidth]{C3_cnn/neuron.pdf}
     \caption{Simple neural network}
     \label{machine:cnn:convlayer:input}
 \end{subfigure}   
 
-\begin{subfigure}
-    \includegraphics{}
+\begin{subfigure}[h]{\columnwidth}
+    \includegraphics[width=0.5\columnwidth]{C3_cnn/neuron.pdf}
     \caption{Simple neural network}
     \label{machine:cnn:convlayer:nn}
 \end{subfigure} 
 
-\begin{subfigure}
-    \includegraphics{}
+\begin{subfigure}[h]{\columnwidth}
+    \includegraphics[width=0.5\columnwidth]{C3_cnn/neuron.pdf}
     \caption{Simple neural network}
     \label{machine:nn:convlayer:cnn}
 \end{subfigure} 
 
 \end{figure}
+
+A convolutional layer has a number of different parameters which can be varied when setting up a model.
+Below I list each of the adaptable parameters and what they do.
+
+\begin{description}
+\item[Filter size] The filter size is the size and shape of the convolutional filter. The filter does not have to be square, however must be less than the dimensions of the image.
+
+\item[Number of filters] The number of filters can be any value. If you have $K$ filter kernels, then the convolutional layer will output $K$ filtered images.
+
+\item[Activation function] The activation function is generally kept the same for each of the layers, however this can be set here. The different types have been explaine in Sec.~\ref{machine:nn:activation}.
+
+\item[Stride] The stride is when the convolution is applied to every other pixel. This method reduces the size of the output by the same factor. This is not used in the rest of this work.
+\end{description}
+
+The convolutional layers with reduce the number of parameters used in each network or model, which can speed up the training procedure.
+In a normal neural network the image is flattened, therefore, any information which related the location of a pixel to another is lost. 
+Convolutions can keep hold of this information and look for similar patters within an image.
 
 %%%%%%%%%
 %%%%%%%%
@@ -193,11 +216,28 @@ This would then use the equation,
 %%%%%%%%%%%%
 %%%%%%%%%%%
 
+Max pooling layers are designed to reduce the size of the problem whilst holding on to as much important information as possible.
+the idea of this layer is relatively simple, it reduces the image size by taking the maximum value in a reigon of a given size.
+For example, in Fig.~\ref{maxpool}, the image is reduced by a 2x2 max pooling layer.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\columnwidth]{C3_cnn/neuron.pdf}
+    \caption{Max pooling layer}
+    \label{fig:my_label}
+\end{figure}
+
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%%
-\subsection{Fully connected layers}
+\subsection{CNN structure}
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
+
+\acp{CNN} are usually structured such that they can extract larger features from an input image, then the outputs from this are passed on to be classified.
+To extract the larger features any number of different convolutional layers and max-pooling layers used.
+Once this then outputs $K$ images, the values are flattened into a one dimensional array an passed to a set of fully connected layers. 
+This is essentially the same type of network described in Sec.~\ref{machine:nn}.
+This can then classify the network into the chosen output.
 
 
 \section{CW search}
