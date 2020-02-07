@@ -45,9 +45,10 @@ To explain how a neural network can be updated, we need to start with the operat
 
 %%%%%%%%%
 %%%%%%%%%
-\section{\label{machine:nn:neuron}Neurons}
+\subsection{\label{machine:nn:neuron}Neurons}
 %%%%%%%%%
 %%%%%%%%%
+
 Neurons are the building blocks of any neural network.
 They perform simple operations on any number of input values and then output a single value.
 The output $o$ of a neuron is defined by the equation,
@@ -96,7 +97,7 @@ Each of these outputs is then a value which is related to the probability of tha
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\columnwidth]{C3_cnn/neuron.pdf}
+    \includegraphics[width=\columnwidth]{C3_cnn/simple_network.pdf}
     \caption{Simple neural network}
     \label{machine:nn:structure:plot}
 \end{figure}
@@ -106,11 +107,14 @@ Each of these outputs is then a value which is related to the probability of tha
 \subsection{\label{machine:nn:activation}Activation functions}
 %%%%%%%%%%%%%%%%%
 
-The activation function is
+The activation function is how the output of a neuron is transformed. 
+The most simple activation function is a cut as described in Sec.~\ref{machine:nn:neuron}, however, this type of activation does not perform well.
+The activation function has been shown to be effective when it is a non-linear function. 
+
 
 
 %%%%%%%%%%%%%%%%%
-\subsection{\label{machine:nn:loss}loss functions}
+\subsection{\label{machine:nn:loss}Loss functions}
 %%%%%%%%%%%%%%%%%
 
 
@@ -122,10 +126,10 @@ For example, imagine you are playing darts and have the aim of trying to hit bul
 After each dart that misses you would adjust where you aim the dart based on how far away from the bullseye it landed.
 
 %%%%%%%%%%%
-%%%%%%%%%%
+%%%%%%%%%%%
 \section{Convolutional Neural Networks}
-%%%%%%%%%
-%%%%%%%%%%
+%%%%%%%%%%%
+%%%%%%%%%%%
 
 Convolutional neural networks are based on the same principles as the neural networks described above. 
 The difference being that \acp{CNN} use additional types of layers which help to contain information of pixels relative to each other.
@@ -136,10 +140,11 @@ Whilst \acp{CNN} can be used for single dimensional inputs, they were generally 
 As well as retaining some location information, they reduce the size of the networks parameters.
 
 
-%%%%%%
-%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
 \subsection{Convolutional layers}
-%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
 
 Convolutional layers have some similarities to standard fully connected layers as described in Sec.~\ref{machine:nn:structure}. 
 The main difference being how the weights are applied to the inputs.
@@ -149,7 +154,7 @@ A fully connected neural network would flatten this image and apply Eq.~\ref{mac
 
 \begin{equation}
 \begin{split}
-    O_{k} &= f\left(\sum^N_{i=1} I_i w_{i,k} + b_k \right) \\
+    O_{k} &= f\left(\sum_{i} \sum_{j} I_{i,j} w_{i,j,k} + b_k \right) \\
     O_1 &= f\left(I_1 w_{1,1} + I_2 w_{2,1} + I_3 w_{3,1} + I_4 w_{4,1} + I_5 w_{5,1} + I_6 w_{6,1} + I_7 w_{7,1} + I_8 w_{8,1} + I_9 w_{9,1} + b_1\right) \\
      \dots
 \end{split}
@@ -157,6 +162,9 @@ A fully connected neural network would flatten this image and apply Eq.~\ref{mac
 
 If the size of the convolutional filter was $2\times 2$, then the convolutional layer only has 5 parameters to vary as opposed to 10 in this case.
 This would then use the equation,
+\begin{equation}
+    O_{i,j} = \sum_{m} \sum_{n} K_{m,n}I_{i-m,j-n}
+\end{equation}
 \begin{equation}
 \begin{split}
     O_1 &= f\left(I_1 w_1 + I_2 w_2 + I_4 w_3 + I_5 w_4 + b\right) \\
@@ -239,11 +247,40 @@ Once this then outputs $K$ images, the values are flattened into a one dimension
 This is essentially the same type of network described in Sec.~\ref{machine:nn}.
 This can then classify the network into the chosen output.
 
+\acp{CNN} are then trained in the same way as neural networks as described in Sec.~\ref{machine:nn:training}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{CW search}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Viterbi Maps}
 
-\subsection{SFTs}
 
-\subsection{Viterbi map and SFTs}
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%5%%
+\subsection{Network structure}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+
+\subsubsection{Viterbi statistic}
+
+\subsubsection{Viterbi Maps}
+
+\subsubsection{Spectrograms}
+
+\subsubsection{Viterbi map and spectrograms}
+
+\subsubsection{Viterbi map and Viterbi statistic}
+
+\subsubsection{Viterbi map, Viterbi statistic and spectrograms}
+
+%%%%%%%%%%%
+%%%%%%%%%%%
+\subsection{Network Visualisation}
+%%%%%%%%%%%
+%%%%%%%%%%%
+
+
+\section{Data and simulations}

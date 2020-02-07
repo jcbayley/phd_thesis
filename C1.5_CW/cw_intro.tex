@@ -1,0 +1,160 @@
+\chapter{Continuous gravitational waves}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{\label{intro:search}Searching for Continuous gravitational waves}
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%
+%%%%%%
+\subsection{\label{intro:search:signals} Signals in data}
+%%%%%%%
+%%%%%%
+
+The data recorded from a detector, $x(t)$, will include the signal model described in Eq.~\ref{sigmod} above, but it will be buried in the noise of the detector. 
+If we assume the noise is Gaussian distributed and the noise and signal add linearly, then,  
+\begin{equation}
+\label{signalinnoise}
+x(t) = n(t) + h(t; \mathcal{A},{\boldsymbol \lambda}) ,
+\end{equation}
+where $n(t)$ is the noise, $h(t)$ is the signal and $\mathcal{A}$ and ${\boldsymbol \lambda}$ refer to the amplitude and Doppler parameters respectively. 
+The optimal signal to noise ratio (SNR) squared of this signal is defined as the scalar product of the signal with itself,
+\begin{equation}
+\rho^2(0) = ({\bf h} \mid {\bf h}) = \sum_X(h^X \mid h^X),
+\end{equation}
+where if there is more than one detector the SNR squared for each detector $X$ can be summed \cite{Prix2007}. 
+The scalar product of two time series, $x(t)$ and $y(t)$, is defined by,
+
+\begin{equation}
+\label{intro:search:signals:scalarproduct}
+(x \mid y) = 4 \Re \int_{0}^{\infty} \frac{\tilde{x}(f)\tilde{y}^{*}(f)}{S_n(f)}df,
+\end{equation}
+where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \cite{Prix2007}.
+
+
+\subsection{\label{intro:search:model}Continuous signal model}
+
+The mode of a \ac{GW} signal from a pulsar is relatively simple, it is a sinusoid at a fixed frequency with a parameter which accounts for the loss of energy to gravitational waves and other mechanisms (spin down). 
+Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
+The parameters of each pulsar can be split into two sections: the Doppler components ($\alpha,\delta,f,\dot{f}$) and its amplitude components ($\psi,\phi_0, \iota, h_0, \theta$); this ignores any orbital parameters which would be present if the star was in a binary systems.
+In the reference frame of the source, the gravitational wave can be written as,
+\begin{equation}
+h_{+}(t) = A_{+}\cos{(\Phi(t))} \quad \rm{and} \quad h_{\times}(t) = A_{\times}\cos{(\Phi(t))},
+\end{equation}
+where $h_{+}(t)$ and $h_{\times}(t)$ refer to the two polarisations and $\Phi(t) = \phi_0 + \phi(t)$ is the phase evolution of the source. $A_+$ and $A_{\times}$ are defined as,
+\begin{equation}
+A_+ = \frac{1}{2}h_0(1+\cos^2{\iota}), \quad A_{\times} = h_0 \cos{\iota},
+\end{equation}
+where $\iota$ is the inclination angle of the source and $h_0$ is the gravitational wave amplitude. The amplitude $h_0$ is defined as,
+\begin{equation}
+h_0 = \frac{16\pi^2 G}{c^4} \frac{\epsilon I_{zz} \nu^2}{d},
+\end{equation}
+where $c$ is the speed of light, $G$ is the gravitational constant, $\epsilon $ is the ellipticity defined in Eq.~\ref{ellipticity}, $\nu$ is the rotation frequency of the star and $d$ is its distance. 
+
+To find the signal model in the detector frame one has to include the effects of the detector and its Doppler modulation as it moves through space. 
+The Doppler modulation is included in the phase model such that now the phase follows, $\Phi(t) = \phi_0 + \phi(t, {\boldsymbol \lambda})$, where ${\boldsymbol \lambda}$ are the Doppler parameters. 
+The amplitude of the signal is also modulated due to the orientation of the detectors relative to the source as the detector moves around the earth. These components are accounted for in the antenna patterns of the detector, defined in \cite{JKS1998} as,
+\begin{equation}
+\begin{split}
+F_{+}(t) &= \sin{\zeta}[a(t)\cos{(2\psi)} + b(t)\sin{(2\psi)}], \\
+F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
+\end{split}
+\end{equation}
+where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle and $a(t)$ and $b(t)$ are defined in \cite{JKS1998}. 
+
+The signal at the detector can then be written as a combination of the antenna patterns and the two polarisations of the gravitational wave,
+\begin{equation}
+h(t) = F_+(t)A_+\cos{[\phi_0 + \phi(t,{\boldsymbol \lambda})]} +F_{\times}(t)A_{\times}\sin{[\phi_0 + \phi(t,{\boldsymbol \lambda})]},
+\end{equation}
+The full signal model defined in \cite{JKS1998} actually includes all other parameters such as inclination angle, and has the form,
+\begin{equation}
+\label{sigmod}
+%h(t) = F_{+}(t)[h_{1+}(t; h_0, \iota, \theta) + h_{2+}(t; h_0, \iota, \theta)] + F_{\times}(t)[h_{1\times}(t; h_0, \iota, \theta) + h_{2\times}(t; h_0, \iota, \theta)],
+h(t) = F_{+}(t)[h_{1+}(t) + h_{2+}(t)] + F_{\times}(t)[h_{1\times}(t) + h_{2\times}(t)],
+\end{equation}
+where all parameters can be found in Eqs.~(21-22) of \cite{JKS1998}. 
+
+%%%%%%
+%%%%%%
+\subsection{\label{intro:search:coherent}Fully-coherent searches}
+%%%%%%
+%%%%%%
+
+Fully coherent searches are currently the most sensitive searches for continuous sources of gravitational waves. These searches are based on matched filtering which coherently correlate pre-generated waveforms with the data, this is used in \cite{Dupuis2005,Jaranowski1998,}.
+In a simple form the matched filter filters the data $h$ with a template $w$ using the inner product defined in Eq.~\ref{intro:search:signals:scalarproduct}. 
+
+Continuous wave signals need a large amount of integration time, $\mathcal{O}(\rm{years})$, for the signal to become clear within the data, therefore, given that the \ac{LIGO} detectors sample at 16 kHz, the amount of data to search over is large. 
+Performing the coherent matched filter on this data can take a large amount of time, therefore, as the majority of sources which are searched for have a narrow bandwidth, many searches use techniques to reduce the amount of data. 
+For example, in \cite{Dupuis2005} the data is heterodyned (mixed with some local oscillator), low passed filtered and then down-sampled. This reduced the amount of data to be searched over while not losing any source information. 
+
+Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all sky searches no parameters of the source are known, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
+This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
+
+%%%%%%
+%%%%%%
+\subsection{\label{intro:search:semicoherent}Semi-coherent searches}
+%%%%%%
+%%%%%%
+
+Semi-coherent searches offered a solution to searching over large parameters spaces and large amounts of data. 
+The data is split into smaller segments and the analysis is run separately on each of those segments, then each result is combined incoherently. 
+This can greatly reduce the time taken for the analysis depending on the segment length, however, will always come with some loss in sensitivity. 
+
+There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. Many of these use 1800s (30 mins) \acp{SFT} as the input to their search as they can be calculated efficiently. 
+
+
+
+%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\section{Injections}
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+In this section I outline how we inject a \ac{CW} signal into data. This can generally be done in two different ways: simulating a signal in the time domain and injecting into time domain noise or simulating the power spectrum of a signal and injecting the signal into a \ac{PSD}.
+%%%%%%%%%%%
+\subsection{CW Signal}
+%%%%%%%%%%%
+This section has been covered in Sec.~\ref{intro:cw:signal}, The CW signal in generated by using a lalsuite package where ....
+
+%%%%%%%%%%%%
+\subsection{Time series and complex \ac{FFT} injections}
+%%%%%%%%%%%%
+Injections into time-series data is relatively simple. Given a set of parameters for the source the signal can be generated in the time-series, this is then just summed with the time-series which it is injected into. Similarly with the \ac{FFT}, the time-series of the signal at the correct time and for the correct duration is generated, the complex \acp{FFT} are then summed.
+
+%%%%%%%%%%%%%%%
+\subsection{Spectrogram injections}
+%%%%%%%%%%%%%
+
+To inject into a spectrogram the power spectrum of the signal will need to be simulated. In our injection we do not have access to a time-series, therefore, we do not simulate the signal in the same way, rather we use the signals estimated \ac{SNR}
+
+It can be shown that the \ac{PSD} of Gaussian noise with zero mean and unit variance is a $\chi^2$ distribution with 2 degrees of freedom. Therefore, if we want to generate a spectrogram for Gaussian noise, we just generate a two dimensional array of values distributed as $\chi^2$ with two degrees of freedom.
+Assuming that there is some sinusoidal signal with a given \ac{SNR} within a Gaussian noise time-series with zero mean and unit variance, the \ac{FFT} power in a particular frequency bin can be estimated using a non-central $\chi^2$ distribution with 2 degrees of freedom, where the non centrality parameter is the square of the \ac{SNR}. 
+
+To calculate the \ac{SNR} in a given frequency bin the equation in \cite{Prix2007} for optimal \ac{SNR} was used,
+\begin{equation}
+    \rho(0)^2 = \frac{1}{2}h_0^2 T S^{-1} \left[ \alpha_1 A + \alpha_2 B + \alpha_3 C \right],
+\end{equation}
+where $h_0$ is the \ac{GW} amplitude, $T$ is the total observing time is seconds, $S^{-1}$ is the mean \ac{PSD} noise floor. The values of $\alpha$ are then defined by,
+\begin{equation}
+\begin{split}
+\alpha_1 &= (\mathcal{A}^1)^2 + (\mathcal{A}^3)^2\\
+\alpha_2 &= (\mathcal{A}^2)^2 + (\mathcal{A}^4)^2 \\
+\alpha_3 &= \mathcal{A}^1\mathcal{A}^2 + \mathcal{A}^3\mathcal{A}^4 \\
+\end{split}
+\end{equation}
+<br/>
+where,
+\begin{equation}
+\begin{split}
+\mathcal{A}^1 &= A_{+}\cos(2\psi_0)\cos(2\phi) - A_{\times}\sin(2\psi_0)\sin(2\phi) \\
+\mathcal{A}^2 &= A_{+}\cos(2\psi_0)\sin(2\phi) + A_{\times}\sin(2\psi_0)\cos(2\phi) \\
+\mathcal{A}^3 &= A_{+}\sin(2\psi_0)\cos(2\phi) - A_{\times}\cos(2\psi_0)\sin(2\phi) \\
+\mathcal{A}^4 &= A_{+}\sin(2\psi_0)\sin(2\phi) + A_{\times}\cos(2\psi_0)\cos(2\phi) 
+\end{split}
+\end{equation}
+The signals frequency varies with time and will not always be located at the center of a frequency bin, therefore, when taking the \ac{FFT} some of the power is spread over multiple frequency bins. 
+In our injections into the power spectrum we need to account for this effect. 
+For a given frequency bin width 
