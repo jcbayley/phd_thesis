@@ -31,31 +31,40 @@ Gravitational waves are ripples in this space-time which propagate at the speed 
 \begin{equation}
     R_{\mu \nu} - \frac{1}{2}R g_{\mu \nu} = \frac{8 \pi G}{c^4}T_{\mu \nu}.
 \end{equation}
-where $R_{\mu \nu}$ is the Reimann tensor which describes the .............., $R$ is the Ricci scalar which is the trace of the Reimann tensor, $T_{\mu \nu}$ is the stress-energy tensor which desscribes the distribution of mass and energy in the universe and $g_\mu \nu$ us the metric tensor which describes the geometry of space-time.
-I will not go into any detail on Einsteins field equations as they are a complicated set of equations.
-However, I will mention that in a linearised theory, when pertubations to the metric tensor are assumed to be small, Einstein's field equations can be solved such that the solution is a plane wave. 
+where $R_{\mu \nu}$ is the Reimann tensor which describes the .............., $R$ is the Ricci scalar which is the trace of the Reimann tensor, $T_{\mu \nu}$ is the stress-energy tensor which desscribes the distribution of mass and energy in the universe and $g_{\mu \nu}$ is the metric tensor which describes the geometry of space-time.
+I will not go into any detail on Einsteins field equations.
+However, I will mention that in a linearised theory, when perturbations to the metric tensor are assumed to be small, Einstein's field equations can be solved such that the solution is a plane wave. 
 These pertubations to the metric tensor $g_{\mu \nu}$ are defined as,
 \begin{equation}
     g_{\mu \nu} = \eta_{\mu \nu} + h_{\mu \nu},
 \end{equation}
 where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some small perturbation. 
 The metric describes the geometry of space-time and is in general expected to be a flat space-time, i.e. $\eta_{\mu \nu} = \rm{diag}(-1,1,1,1)$.
-The derivation of \ac{GW} has been summarised many times before, e.g. \cite{}, therefore, I will not repeat this here.
-In empty space where $T_{\mu \nu} = 0$, the Einstein field equations give, 
+In empty space where $T_{\mu \nu} = 0$, the Einstein field equations can be found to give, 
 \begin{equation}
     \Box h_{\mu \nu} = 0,
 \end{equation}
 which is a wave equation. 
-This then has the solutions,
+This then has the general solutions,
 \begin{equation}
-    h_{\plus} = \
-    h_{\cross}
+    h_{\mu\nu} = A_{\mu\nu}e^{ik_\alpha x^{\alpha}},
 \end{equation}
-Gives two polarisarions........
+where each component of $h_{\mu \nu}$ is a sinusiod travelling along vector $h^{\alpha}$ with amplitude $A_{\mu\nu}$.
+This can be greatly simplified by choosing a different gauge (coordinate system) where the metric perturbation is both transverse and traceless (TT).
+A traceless metric is one where the sum of the diagonal elements are 0 and a transverse metric is when the oscillations are perpendicular to the direction of travel. 
+This gauge means that only the `real' part of the wave, i.e. the observable part is shown \joe{di this explanation better}.
+For a wave travelling in the $z$ direction the TT gauge there are only two unique components to the metric, these are defined as,
+\begin{equation}
+    \begin{split}
+        h_{xx}^{TT} &= -h_{yy}^{TT} = h_{+} \cos{\left( w (t - z) + \phi_0\right)} \\
+        h_{xy}^{TT} &= h_{yx}^{TT} = h_{\times} \cos{\left( w (t - z) + \phi_0\right)}.
+    \end{split}
+\end{equation}
+The affect of these two polarisation's on a ring of test particles can be seen in Fig.~\ref{gw:polarisations}.
 \joe{bits missing here}
 \begin{figure}[h]
     \centering
-    \includegraphics{}
+    \includegraphics[width=\textwidth]{}
     \caption{Shows how the polarisations affect free test masses}
     \label{gw:polarisations}
 \end{figure}
@@ -96,8 +105,8 @@ Fig.~\ref{sources:signaltypes} shows an example of each of the signals as what c
 
 \begin{figure}[h]
     \centering
-    \includegraphics{}
-    \caption{Each \ac{GW} signal type can be categorised based on its signal length and how well the signal is modelled.}
+    \includegraphics[width=\columnwidth]{C1_Introduction/sources_types.pdf}
+    \caption{Each \ac{GW} signal type can be categorised based on its signal length and how well the signal is modelled. Transient signals which are short duration, include both well modelled \ac{CBC} signals and unknown Burst signals. Long duration signals include well modelled \ac{CW} signals and unknown Stochastic signals.}
     \label{sources:signaltypes}
 \end{figure}
 In the sections that follow, I will give an overview of the potential sources of each of these signal categories and their waveforms.
@@ -109,29 +118,21 @@ In the sections that follow, I will give an overview of the potential sources of
 
 Transient sources of gravitational waves give short duration signal which is observable from milliseconds to tens of seconds depending on the source. 
 Some of these sources will emit signals for a much longer time, however these are at a lower frequency and lower amplitude and not observable by current ground based detectors detectors.
-Tranisent signals can be well modelled as in \acp{CBC} or unmodelled as in Burst signals.
+Transient signals can be well modelled as in \acp{CBC} or can have an unknown signal type such as burst signals.
 
 \subsubsection{\label{sources:transient:cbc} Compact Binary Coalescence}
 
-\acp{CBC} are well modelled signals which originate from the in-spiral and coalescence of compact objects. 
-Compact objects include \acp{BBH}, \acp{BNS}, \acp{NSBH} and \acp{EMRI}.
-\ac{BBH} and \ac{BNS} signals are currently the only sources which have been observed by the \ac{LIGO} and Virgo detectors \cite{}. 
-The wave-forms of these sources which are observable by ground based detectors vary in length from less than a second to tens of seconds depending on the objects that make them.
-In general higher mass systems such as \ac{BBH} inspiral faster and therefore have shorter signals.
-However, they all have a similar form which is a `chirp' as shown in Fig.~\ref{sources:transient:cbc:wave}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics{}
-    \caption{CBC waveform}
-    \label{sources:transient:cbc:wave}
-\end{figure}
-
+\acp{CBC} originate from the in-spiral and coalescence of compact objects. 
+This compact objects generally refer to either black holes of neutron stars.
+\ac{BBH} and \ac{BNS} signals are currently the only sources which have been observed by the \ac{LIGO} and Virgo detectors \cite{Abbott2017a,Abbott2017b,Abbott2016}. 
+The general structure of the waveform follows a `chirp' which is shown in Fig.~\ref{sources:signaltypes}.
+The lengths of the observed signal is generally dictated by the masses of the components of the system. 
+Higher mass systems such as \ac{BBH} will be observed for less time in ground based detectors. This is because they are close to merger when they enter the detectors sensitive band.
 
 \ac{CBC} signals are generally split into three separate components: the inspiral, the merger and ring-down. 
-The inspiral is when the objects are orbiting each other and as they lose energy to gravitational waves, the radius of the orbit decreases.
-This continues until the objects begin to merge, which is when it reaches the merger phase.
-After the objects have merged the remnant compact object 'rings down'. This means that the object still emits some gravitational waves as it settles into its final state.
+The inspiral part of the signal is when the objects are orbiting each other. As they lose energy to gravitational waves, the radius of the orbit decreases and therefore the frequency increases.
+This continues until the objects begin to merge. This is when the 
+After the objects have merged the remnant compact object can 'ring down'. This means that the object still emits some gravitational waves as it settles into its final state.
 
 In systems which have a neutron star, during the inspiral when the objects are close, the neutron star will begin to deform due to the strong gravity. 
 This becomes useful as it will affect the generated waveform and can help determine the \ac{EOS} for the dense matter in a neutron star.
