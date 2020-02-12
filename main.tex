@@ -37,6 +37,18 @@
 \usepackage{sidecap}
 
 
+\usepackage[
+    backend=biber,
+    style=numeric,
+    natbib=true,
+    url=false, 
+    doi=true,
+    eprint=false
+]{biblatex}
+
+\addbibresource{references.bib}
+
+
 \sidecaptionvpos{figure}{c}
 
 \DeclareFloatingEnvironment[
@@ -102,7 +114,8 @@ February 2017
 \acrodef{RMS}[RMS]{root median square}
 \acrodef{MCMC}[MCMC]{Markov-Chain Monte Carlo}
 \acrodef{SOAP}[SOAP]{snakes on a plane}
-\acrodef{CNN}[CNN]{convolutional neural networks}
+\acrodef{CNN}[CNN]{convolutional neural network}
+\acrodef{CMB}[CMB]{cosmic microwave background}
 
 \mainmatter % Turn on chapter numbering, reset page numbers, use arabic
 \include{C1_Introduction/introduction}
@@ -122,7 +135,9 @@ February 2017
 %\backmatter  % Turn off chapter numbering
 % I assume that the bibliography is assembled by hand.
 % Change the file if you use bibtex or something like that.
-\bibliographystyle{plain}
-\bibliography{references}
+%\bibliographystyle{plain}
+%\bibliography{references}
+
+\printbibliography 
 
 \end{document}
