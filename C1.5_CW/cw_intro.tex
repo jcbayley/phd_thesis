@@ -26,14 +26,14 @@ The optimal signal to noise ratio (SNR) squared of this signal is defined as the
 \begin{equation}
 \rho^2(0) = ({\bf h} \mid {\bf h}) = \sum_X(h^X \mid h^X),
 \end{equation}
-where if there is more than one detector the SNR squared for each detector $X$ can be summed \cite{Prix2007}. 
+where if there is more than one detector the SNR squared for each detector $X$ can be summed \citep{Prix2007}. 
 The scalar product of two time series, $x(t)$ and $y(t)$, is defined by,
 
 \begin{equation}
 \label{intro:search:signals:scalarproduct}
 (x \mid y) = 4 \Re \int_{0}^{\infty} \frac{\tilde{x}(f)\tilde{y}^{*}(f)}{S_n(f)}df,
 \end{equation}
-where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \cite{Prix2007}.
+where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \citep{Prix2007}.
 
 
 \subsection{\label{intro:search:model}Continuous signal model}
@@ -57,26 +57,26 @@ where $c$ is the speed of light, $G$ is the gravitational constant, $\epsilon $ 
 
 To find the signal model in the detector frame one has to include the effects of the detector and its Doppler modulation as it moves through space. 
 The Doppler modulation is included in the phase model such that now the phase follows, $\Phi(t) = \phi_0 + \phi(t, {\boldsymbol \lambda})$, where ${\boldsymbol \lambda}$ are the Doppler parameters. 
-The amplitude of the signal is also modulated due to the orientation of the detectors relative to the source as the detector moves around the earth. These components are accounted for in the antenna patterns of the detector, defined in \cite{JKS1998} as,
+The amplitude of the signal is also modulated due to the orientation of the detectors relative to the source as the detector moves around the earth. These components are accounted for in the antenna patterns of the detector, defined in \citep{JKS1998} as,
 \begin{equation}
 \begin{split}
 F_{+}(t) &= \sin{\zeta}[a(t)\cos{(2\psi)} + b(t)\sin{(2\psi)}], \\
 F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
 \end{split}
 \end{equation}
-where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle and $a(t)$ and $b(t)$ are defined in \cite{JKS1998}. 
+where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle and $a(t)$ and $b(t)$ are defined in \citep{JKS1998}. 
 
 The signal at the detector can then be written as a combination of the antenna patterns and the two polarisations of the gravitational wave,
 \begin{equation}
 h(t) = F_+(t)A_+\cos{[\phi_0 + \phi(t,{\boldsymbol \lambda})]} +F_{\times}(t)A_{\times}\sin{[\phi_0 + \phi(t,{\boldsymbol \lambda})]},
 \end{equation}
-The full signal model defined in \cite{JKS1998} actually includes all other parameters such as inclination angle, and has the form,
+The full signal model defined in \citep{JKS1998} actually includes all other parameters such as inclination angle, and has the form,
 \begin{equation}
 \label{sigmod}
 %h(t) = F_{+}(t)[h_{1+}(t; h_0, \iota, \theta) + h_{2+}(t; h_0, \iota, \theta)] + F_{\times}(t)[h_{1\times}(t; h_0, \iota, \theta) + h_{2\times}(t; h_0, \iota, \theta)],
 h(t) = F_{+}(t)[h_{1+}(t) + h_{2+}(t)] + F_{\times}(t)[h_{1\times}(t) + h_{2\times}(t)],
 \end{equation}
-where all parameters can be found in Eqs.~(21-22) of \cite{JKS1998}. 
+where all parameters can be found in Eqs.~(21-22) of \citep{JKS1998}. 
 
 %%%%%%
 %%%%%%
@@ -84,12 +84,12 @@ where all parameters can be found in Eqs.~(21-22) of \cite{JKS1998}.
 %%%%%%
 %%%%%%
 
-Fully coherent searches are currently the most sensitive searches for continuous sources of gravitational waves. These searches are based on matched filtering which coherently correlate pre-generated waveforms with the data, this is used in \cite{Dupuis2005,Jaranowski1998,}.
+Fully coherent searches are currently the most sensitive searches for continuous sources of gravitational waves. These searches are based on matched filtering which coherently correlate pre-generated waveforms with the data, this is used in \citep{Dupuis2005,Jaranowski1998,}.
 In a simple form the matched filter filters the data $h$ with a template $w$ using the inner product defined in Eq.~\ref{intro:search:signals:scalarproduct}. 
 
 Continuous wave signals need a large amount of integration time, $\mathcal{O}(\rm{years})$, for the signal to become clear within the data, therefore, given that the \ac{LIGO} detectors sample at 16 kHz, the amount of data to search over is large. 
 Performing the coherent matched filter on this data can take a large amount of time, therefore, as the majority of sources which are searched for have a narrow bandwidth, many searches use techniques to reduce the amount of data. 
-For example, in \cite{Dupuis2005} the data is heterodyned (mixed with some local oscillator), low passed filtered and then down-sampled. This reduced the amount of data to be searched over while not losing any source information. 
+For example, in \citep{Dupuis2005} the data is heterodyned (mixed with some local oscillator), low passed filtered and then down-sampled. This reduced the amount of data to be searched over while not losing any source information. 
 
 Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all sky searches no parameters of the source are known, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
 This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
@@ -133,7 +133,7 @@ To inject into a spectrogram the power spectrum of the signal will need to be si
 It can be shown that the \ac{PSD} of Gaussian noise with zero mean and unit variance is a $\chi^2$ distribution with 2 degrees of freedom. Therefore, if we want to generate a spectrogram for Gaussian noise, we just generate a two dimensional array of values distributed as $\chi^2$ with two degrees of freedom.
 Assuming that there is some sinusoidal signal with a given \ac{SNR} within a Gaussian noise time-series with zero mean and unit variance, the \ac{FFT} power in a particular frequency bin can be estimated using a non-central $\chi^2$ distribution with 2 degrees of freedom, where the non centrality parameter is the square of the \ac{SNR}. 
 
-To calculate the \ac{SNR} in a given frequency bin the equation in \cite{Prix2007} for optimal \ac{SNR} was used,
+To calculate the \ac{SNR} in a given frequency bin the equation in \citep{Prix2007} for optimal \ac{SNR} was used,
 \begin{equation}
     \rho(0)^2 = \frac{1}{2}h_0^2 T S^{-1} \left[ \alpha_1 A + \alpha_2 B + \alpha_3 C \right],
 \end{equation}
