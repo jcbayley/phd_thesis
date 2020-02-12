@@ -300,9 +300,9 @@ There were a number of different methods for the design of the instrument which 
 Resonant bar detectors were initially designed and built by Joseph Weber \citep{}.
 These are large cylinders of metal which should resonate as a gravitational wave passes by. 
 These detectors did not make a direct detection therefore, the majority of these are no longer operational excluding some alternate designs such as \joe{put the spherical one etc}\citep{}.
-Pulsar timing arrays aimed to use the accurate timing of pulsars to measure distortions in space time as a gravitational wave passed between the detector and the pulsar. 
+Pulsar timing arrays aimed to use the accurate timing of pulsars to measure distortions in space time as a gravitational wave passed between the detector and the pulsar \citep{}. 
 Whilst a detection has not been made with this method, these methods are still in use.
-Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisations of the CMB. 
+Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisations of the CMB \citep{}. 
 Despite the announcement of a detection in ..., these are yet to find any evidence.
 The most commonly known design of a \ac{GW} detector is the ground based interferometer, these made the first detection of \ac{GW} in 2015 \citep{}.
 These are the focus of this section as the analysis that will follow uses data from the \ac{LIGO} detectors in the US.
@@ -315,23 +315,25 @@ These are the focus of this section as the analysis that will follow uses data f
 
 Laser interferometers use the interference of light to measure a length with high precision.
 A simple design is shown in Fig.~\ref{detectors:interferometer}. 
-Here it shows how the laser is split into two, each of these beams is reflected from a mirror and then it returns to the beam splitter where the two beams are combined.
-At the output, there is an inteference pattern between the two beams.
-If the length of one of the arms is changed then the inteference pattern will change as the phase of one beam changes with respect to the other.
-
-This can be used in gravitational wave detection as the mirrors at the end of each arm of the interfereometer can be treated as `free' test masses.
-This is what is shown in Fig.~\ref{detectors:interfereometer}, where a gravitational wave passing the masses will stretch and squeeze them, essentially changing the relative lengths of the two arms.
-The intensity of the inteference pattern at a given point is then proportional to the gravitational wave itself.
-
-\begin{figure}
+Here it shows how the laser is equally split into two, each of these beams is sent down perpendicular arms of the detector where then enter a Fabry-Perot cavity \citep{}. 
+The light then returns to the beam splitter where the two beams are combined and sent to a photo-detector.
+At the output, there is an interference pattern between the two beams.
+If the length of one of the arms is changed then the interference pattern will change as the phase of one beam changes with respect to the other.
+The Fabry-perot cavity increases the amount of time light stays within the arms and therefore increases the detectors effective arm length. This helps to increase the sensitivity of the detector.
+\begin{figure}[h]
     \centering
-    \includegraphics{}
-    \caption{This figure shows a basic interferometer.}
-    \label{detectors:interfereometer}
+    \includegraphics[width=\textwidth]{C1_Introduction/interferometer.pdf}
+    \caption{This figure shows a basic interferometer.ETMY and ETMX refer to the external test masses, which are just mirrors at the end of the interferometer arms. ITMY and ITMX refer to the internal test masses, these create a cavity in the interferometers arms which can build up laser power. BS is the beam splitter which splits the Laser beam equally to each arm, this them recombines the beams back to the detector.}
+    \label{detectors:interferometer}
 \end{figure}
 
-The actual gravitational wave detectors such as the \ac{LIGO} \citep{} and Virgo \citep{} detectors are much more complicated.
-They use many techniques to reduce the noise from earth based sources and to increase the sensitivity to \ac{GW} signals.
+This can be used in gravitational wave detection as the mirrors at the end of each arm of the interfereometer can be treated as `free' test masses.
+Fig.~\ref{detectors:interferometer} shows the effect of a \ac{GW} in free test masses.
+In the interferometer, this affect essentially changes the relative lengths of the two arms.
+The change in the interference pattern with time is then related to the \ac{GW}.
+Actual ground based \ac{GW} detectors such as \ac{LIGO} \citep{} and Virgo \citep{} are much more complicated than described above.
+They use many techniques to reduce affects on the detector which are not astrophysical.
+Some of these effects are listed in Sec.~\ref{intro:detector:noise}
 
 
 %%%%%%%%%%%
@@ -348,14 +350,14 @@ As the affect is transverse to the propagation of the wave, when the detector is
 
 \begin{figure}
     \centering
-    \includegraphics{}
+    \includegraphics[width=\textwidth]{}
     \caption{This figure shows the antenna response of one of the \ac{LIGO} detectors to sky position.}
     \label{detectors:response}
 \end{figure}
 
 %%%%%%%%%%%
 %%%%%%%%%%
-\subsubsection{Noise sources}
+\subsubsection{\label{intro:detector:noise}Noise sources}
 %%%%%%%%%%
 %%%%%%%%%%
 \begin{enumerate}
