@@ -20,7 +20,6 @@ To inject into a spectrogram the power spectrum of the signal will need to be si
 
 It can be shown that the \ac{PSD} of Gaussian noise with zero mean and unit variance is a $\chi^2$ distribution with 2 degrees of freedom. Therefore, if we want to generate a spectrogram for Gaussian noise, we just generate a two dimensional array of values distributed as $\chi^2$ with two degrees of freedom.
 Assuming that there is some sinusoidal signal with a given \ac{SNR} within a Gaussian noise time-series with zero mean and unit variance, the \ac{FFT} power in a particular frequency bin can be estimated using a non-central $\chi^2$ distribution with 2 degrees of freedom, where the non centrality parameter is the square of the \ac{SNR}. 
-
 To calculate the \ac{SNR} in a given frequency bin the equation in \citep{Prix2007} for optimal \ac{SNR} was used,
 \begin{equation}
     \rho(0)^2 = \frac{1}{2}h_0^2 T S^{-1} \left[ \alpha_1 A + \alpha_2 B + \alpha_3 C \right],

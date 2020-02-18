@@ -2,29 +2,34 @@
 %%%%%
 
 
-Gravitational waves were first predicted by Einstein in 1915, as a consequence of his theory of \ac{GR} \citep{}. He then later theorised the gravitational waves in \citep{}.
-The first observational evidence that \ac{GW} exist came from observations of the Hulse-Taylor binary \citep{}. 
+Gravitational waves were first predicted in 1915 as a consequence of Einstein's theory of general relativity \citep{}.
+They were theorised as ripples in the fabric of space-time.
+The first observational evidence that \ac{GW} exist came from observations of the Hulse-Taylor binary \citep{Weisberg1981GravitationalPulsar,Weisberg2004RelativisticAnalysis}. 
 This observation showed the binary pulsar system was in-spiraling and therefore losing energy.
 This loss in energy matched the \ac{GR} prediction which assumed the energy was lost to \ac{GW}.
-The in 2015 the first direct detection of gravitational waves was made by the \ac{LIGO} detectors in the US \citep{}.
-This has then been followed my many more detection's involving \ac{LIGO} and Virgo \citep{}.
+The first direct detection of gravitational waves was not made until 2015 when the two \ac{LIGO} detectors in the US \citep{Abbott2016e} identified a signal from a \ac{BBH} system.
+This was not only the first observation of \ac{GW} but gave information on a yet unobserved astrophysical system.
+This has since been followed my many more detection's of \ac{BBH} signals involving \ac{LIGO} and Virgo including \citep{Abbott2017b,Abbott2019}.
+In 2017 the \ac{LIGO} detectors observed the first \ac{BNS} system \citep{Abbott2017a} which had a corresponding electromagnetic counterpart.
+These detections opened up the field of gravitational wave astronomy, where many more detections are expected.
+As well as searching for \ac{BBH} and \ac{BNS} signals, there are many efforts to detector other types of \ac{GW} signals. 
 
-The field of gravitational wave astronomy is relatively new, it has the potential to offer a lot of new information on the behaviour and origins of the universe and the objects within. 
-Up until their discovery in 2015 \citep{}, the only way to view the universe was through the electromagnetic spectrum or neutrinos. 
-Gravitational waves offer a method to directly observe compact objects such as black holes and neutron stars. 
-\ac{EM} radiation from any object is obscured by dust clouds and many other objects within the universe.
-Due to gravity being a much weaker force, \acp{GW} do no react with these objects or dust, therefore, objects can be viewed without any obstruction. 
-
-In this chapter I will introduce gravitational wave, their sources and how they are detected. 
+This thesis focuses on efforts to search for a particular type of \ac{GW} which are thought to originate from rapidly rotating neutron stars.
+In this chapter, I will review introductory material for the following chapters. 
+This includes a general introduction to the generation of gravitational waves in Sec.~\ref{intro:gravwaves} and their sources in Sec.~\ref{intro:sources}.
+I will then introduce instruments used to detect \ac{GW} in Sec.~\ref{intro:detector}.
+In Chapter \ref{searchcw} I will introduce the general model for \acp{CW} and current methods used to detect them.
+Chapters \ref{soap}, \cite{cnn} and \ref{detchar} will go into detail about techniques developed by the author to search for \ac{CW} signals. 
+Finally I will summarise this work and dicuss future developments in chapter \ref{summary}.
 
 
 %%%%%%%%%%%
 %%%%%%%%%
-\section{Gravitational waves}
+\section{\label{intro:gravwaves}Gravitational waves}
 %%%%%%%%%%%
 %%%%%%%%%
 
-In general relativity, gravity is thought of as the curvature of space-time and it is this curvature that tells matter how to move. 
+In general relativity, gravity is thought of as the curvature of space-time and it is this curvature that instructs matter how to move. 
 The matter in the universe also has an effect on the curvature of the space-time.
 The larger the mass of the matter the more the space-time is distorted.
 Space-time can generally be described by Einstein's field equations,
@@ -34,7 +39,7 @@ Space-time can generally be described by Einstein's field equations,
 where $R_{\mu \nu}$ is the Reimann tensor which describes the .............., $R$ is the Ricci scalar which is the trace of the Reimann tensor, $T_{\mu \nu}$ is the stress-energy tensor which describes the distribution of mass and energy in the universe and $g_{\mu \nu}$ is the metric tensor which describes the geometry of space-time.
 Space-time is expected to be flat in empty space, therefore the metric tensor for this can be defined,
 \begin{equation}
-\eta_{\mu \nu} = \left(
+g_{\mu 'nu} = \eta_{\mu \nu} = \left(
 \begin{matrix}
 -1 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 \\
@@ -63,13 +68,14 @@ In linearised theory of gravity \citep{}, the space-time metric $g_{\mu \nu}$ ca
 \end{equation}
 where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some small perturbation, i.e. $|h_{\mu \nu}| \ll 1$. 
 In this linearised theory the perturbations to the metric tensor are assumed to be small, therefore, Einstein's field equations can be solved such that the solution is a plane wave. 
-Mor information on this derivation can be found in \citep{Flanagan2005TheTheory,}
+More information on this derivation can be found in \citep{Flanagan2005TheTheory,}
 The linearised Einstein equation can be written as,
 \begin{equation}
-\ref{intro:lineinstein}
-    \Box h_{\mu \nu} = -16 \pi T_{\mu\nu},
+\label{intro:lineinstein}
+    \Box h_{\mu \nu} = -16 \pi T_{\mu\nu}.
 \end{equation}
-where in empty space where $T_{\mu \nu} = 0$, this can be reduced to, 
+In empty space there is no matter, therefore the stress energy tensor $T_{\mu \nu} = 0$.
+This allows Eq.~\ref{intro:lineinstein} to be reduced to, 
 \begin{equation}
     \Box h_{\mu \nu} = 0.
 \end{equation}
@@ -77,7 +83,7 @@ This is a wave equation which has the general solutions,
 \begin{equation}
     h_{\mu\nu} = A_{\mu\nu}e^{ik_{\alpha} x^{\alpha}},
 \end{equation}
-where each component of $h_{\mu \nu}$ is a sinusiod travelling along vector $h^{\alpha}$ with amplitude $A_{\mu\nu}$.
+where each component of $h_{\mu \nu}$ is a sinusiod travelling along vector $k^{\alpha}$ with amplitude $A_{\mu\nu}$ \citep{Capano2011SearchingData}.
 This can be greatly simplified by choosing a different gauge (coordinate system) where the metric perturbation is both transverse and traceless (TT) \citep{}.
 A traceless metric is one where the sum of the diagonal elements are 0 and a transverse metric is when the oscillations are perpendicular to the direction of travel. 
 This gauge means that only the `real' part of the wave, i.e. the observable part is shown \joe{di this explanation better}.
@@ -120,25 +126,25 @@ A mass quadrupole moment only exists when the mass distribution is not spherical
 Therefore, a mass which is asymmetric and accelerating will produce a \ac{GW}.
 
 Systems which will produce detectable \acp{GW} are generally rapidly rotating high mass systems which have some asymmetry around their rotation axis.
-The sources of these \ac{GW} will be described in the next section.
+The sources of these \ac{GW} will be described in the following section.
 
 
 
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%
-\section{\label{sources}Sources and signals}
+\section{\label{intro:sources}Sources and signals}
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
 
 There are many potential sources for \ac{GW}. The expected sources can be split into 3 general categories based on their signal type: Transient, Stochastic and \acp{CW}.
 These categories are chosen based on the length of the signal and how well modelled the signal is.
-Fig.~\ref{sources:signaltypes} shows an example of each of the signals as what category they are a part of.
+Fig.~\ref{intro:sources:signaltypes} shows an example of each of the signals as what category they are a part of.
 %
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{C1_Introduction/sources_types.pdf}
     \caption{Each \ac{GW} signal type can be categorised based on its signal length and how well the signal is modelled. Transient signals which are short duration, include both well modelled \ac{CBC} signals and unknown Burst signals. Long duration signals include well modelled \ac{CW} signals and unknown Stochastic signals.}
-    \label{sources:signaltypes}
+    \label{intro:sources:signaltypes}
 \end{figure}
 In the sections that follow, I will give an overview of the potential sources of each of these signal categories and their wave-forms.
 
@@ -217,8 +223,10 @@ When detected, these signals may be able to offer insights into the early univer
 \subsection{Continuous waves}
 %%%%%%%%%%%%%%%%%%%%
 
+\joe{General overview, different potential sources}
+
 \begin{itemize}
-    \item rapidly roating neutron stars main source
+    \item rapidly roating neutron stars main source, also early CBC for LISA
     \item long duration continuously emitted
     \item can learn about EOS of dense neutron matter
     \item various emission possiblities
@@ -297,15 +305,16 @@ Free precession is expected to produce gravitational waves at a frequency the sa
 The theory mentioned above and the indirect detection of gravitational waves from the Hulse-Taylor binary pulsar system left little doubt as to whether \ac{GW} existed. 
 The real challenge was to design an instrument which could directly detect gravitational waves.
 There were a number of different methods for the design of the instrument which includes: resonant bar detectors, both ground based and space based interferometers, pulsar timing arrays and Cosmic microwave background detectors. 
-Resonant bar detectors were initially designed and built by Joseph Weber \citep{}.
+Resonant bar detectors were initially designed and built by Joseph Weber \citep{Weber1966ObservationDetector}.
 These are large cylinders of metal which should resonate as a gravitational wave passes by. 
-These detectors did not make a direct detection therefore, the majority of these are no longer operational excluding some alternate designs such as \joe{put the spherical one etc}\citep{}.
-Pulsar timing arrays aimed to use the accurate timing of pulsars to measure distortions in space time as a gravitational wave passed between the detector and the pulsar \citep{}. 
+There are a few different designs of this type of detector, including an omni-directional design \citep{DeWaard2003MiniGRAILDetector}.
+The majority of these detectors are no longer operational.
+Pulsar timing arrays aim to use the accurate arrival time of pulses from millisecond pulsars to measure \ac{GW} \citep{Hobbs2017GravitationalArrays}. As a \ac{GW} passes between the pulsar and the observer, the arrival time of the pulses should change. 
 Whilst a detection has not been made with this method, these methods are still in use.
-Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisations of the CMB \citep{}. 
-Despite the announcement of a detection in ..., these are yet to find any evidence.
-The most commonly known design of a \ac{GW} detector is the ground based interferometer, these made the first detection of \ac{GW} in 2015 \citep{}.
-These are the focus of this section as the analysis that will follow uses data from the \ac{LIGO} detectors in the US.
+Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisation's of the CMB \citep{Ade2018ConstraintsSeason}. 
+These use the a range of detectors to look at the CMB however, are yet to confirm a detection of a \ac{GW} signal.
+The most commonly known design of a \ac{GW} detector is the ground based interferometer, these made the first detection of \ac{GW} in 2015 \citep{Abbott2016}.
+These are the focus of this section as the analysis that will follow uses data from the \ac{LIGO} detectors in the USA \citep{Abbott2009,Aasi2015} and Virgo detector in Italy \citep{Acernese2015,Acernese2008}.
 
 %%%%%%%%
 %%%%%%%%%
@@ -314,13 +323,13 @@ These are the focus of this section as the analysis that will follow uses data f
 %%%%%%%%%
 
 Laser interferometers use the interference of light to measure a length with high precision.
-The majority of this section will focus on ground based inerferometers such as \ac{LIGO} and Virgo \citep{}.
+The majority of this section will focus on ground based interferometers such as \ac{LIGO} and Virgo \citep{Aasi2015,Acernese2015}.
 A simple design of an interferometer is shown in Fig.~\ref{detectors:interferometer}. 
-Here it shows how the laser is equally split into two, each of these beams is sent down perpendicular arms of the detector where then enter a Fabry-Perot cavity \citep{}. 
+Here it shows how the laser is equally split into two, each of these beams is sent down perpendicular arms of the detector which are Fabry-Perot cavities \citep{}. 
 The light then returns to the beam splitter where the two beams are combined and sent to a photo-detector.
 At the output, there is an interference pattern between the two beams.
 If the length of one of the arms is changed then the interference pattern will change as the phase of one beam changes with respect to the other.
-The Fabry-perot cavity increases the amount of time light stays within the arms and therefore increases the detectors effective arm length. This helps to increase the sensitivity of the detector.
+The Fabry-Perot cavity increases the amount of time light stays within the arms and therefore increases the detectors effective arm length. This helps to increase the sensitivity of the detector.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{C1_Introduction/interferometer.pdf}
@@ -328,11 +337,11 @@ The Fabry-perot cavity increases the amount of time light stays within the arms 
     \label{detectors:interferometer}
 \end{figure}
 
-This can be used in gravitational wave detection as the mirrors at the end of each arm of the interfereometer can be treated as `free' test masses.
+This can be used in gravitational wave detection as the mirrors at the end of each arm of the interferometer can be treated as `free' test masses.
 Fig.~\ref{detectors:interferometer} shows the effect of a \ac{GW} in free test masses.
 In the interferometer, this affect essentially changes the relative lengths of the two arms.
 The change in the interference pattern with time is then related to the \ac{GW}.
-Actual ground based \ac{GW} detectors such as \ac{LIGO} \citep{} and Virgo \citep{} are much more complicated than described above.
+Actual ground based \ac{GW} detectors such as \ac{LIGO} \citep{Abbott2009} and Virgo \citep{Acernese2015} are much more complicated than described above.
 They use many techniques to reduce affects on the detector which are not astrophysical.
 Some of these effects are listed in Sec.~\ref{intro:detector:noise}
 
@@ -345,7 +354,7 @@ Some of these effects are listed in Sec.~\ref{intro:detector:noise}
 
 An important factor to know when using detector data to search for astrophysical signals is the detectors response.
 This measures how sensitive the detector is to different locations on the sky.
-An example of the antenna response for \ac{LIGO} is in Fig.~\ref{detectors:response} where the detectors arms lie on the x and y axis of the image.
+An example of the antenna response for \ac{LIGO} is in Fig.~\ref{intro:detectors:response} where the detectors arms lie on the x and y axis of the image.
 This is clear when thinking about how a gravitational wave affects the test masses. 
 As the \ac{GW} is transverse to its propagation, when the detector is face on to the source, there will be a maximum change in the arm lengths and therefore a maximum sensitivity. 
 In the same way the sensitivity will be at a minimum when edge to the source.
@@ -354,7 +363,7 @@ In the same way the sensitivity will be at a minimum when edge to the source.
     \centering
     \includegraphics[width=\textwidth]{C1_Introduction/LIGO_beam_patterns.png}
     \caption{The antenna response is shown as in \citep{Romano2019SearchesBackgrounds} for the plus, cross and average polarisation's. The detectors arms lie on the x and y axis in the above plots. }
-    \label{detectors:response}
+    \label{intro:detectors:response}
 \end{figure}
 
 %%%%%%%%%%%
@@ -366,16 +375,23 @@ In the same way the sensitivity will be at a minimum when edge to the source.
 To increase the sensitivity of the \ac{LIGO} detectors, a good understanding of the noise is needed. 
 This involves understanding what causes certain features in the detector, and how to reduce the affect of those. 
 There are many sources of noise in the detector which need to be reduced to be able to detect \ac{GW}.
-Here I will summarise some of these as they are useful to understand for later sections.
+Some of these noise sources and their affect on the detectors sensitivity are all shown in Fig.~\ref{detectors:noisesensitivity} from \citep{Aasi2015AdvancedLIGO}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{C1_Introduction/noise_sensitivity.jpg}
+    \caption{The different noise sources affect the sensitivity of the \ac{LIGO} detectors at different frequencies. This shows the various sources how the affect the noise curve \citep{Aasi2015AdvancedLIGO}.}
+    \label{detectors:noisesensitivity}
+\end{figure}
+Here I will summarise some of the limiting sources and also sources which become useful for understanding later sections.
 
 \begin{description}
 \item[Seismic noise] This originates from the seismic activity of the earth and effects the lower frequencies. This can be earthquakes or ocean waves. Seismic waves cause the mirrors to oscillate and induce a change in the length of the arm. This is reduced by having multi stage suspensions in the detectors.
 
-\item[Thermal noise] Thermal noise is due to the thermal oscillations of the mirrors themselves. This is reduced by using different coatings on the mirrors.
+\item[Coating noise] This is in general due to two main factors, the thermal noise of the coating and brownian noise. The Brownian noise is from the mechanical dissipation in the coating and the thermal noise is due to thermal dissipation. The Brownian noise is the dominant factor as shown in Fig.~\ref{detectors:noisesensitivity}. This is reduced by using different coatings on the mirrors.
 
-\item[Quantum noise] This is caused by the statistical uncertainty of counting photons. Methods to reduce this include squeezing of the light \citep{}. 
+\item[Quantum noise] Quantum noise is a fundamental limit due to the statistical uncertainty of counting photons. This limits the sensitivity at many frequencies.There are methods to reduce this include squeezing of the light \citep{}. 
 
-\item[Electronics noise] This is generated by the digital and analog electronics that are used to measure the signal. 
+\item[Electronics noise] Whilst this is not shown in Fig.~\ref{detectors:noisesensitivity} as it does not affect the noise \ac{PSD}. These have a different effect on the detector. This is generated by the digital and analog electronics that are used to measure the signal. 
 \end{description}
 
 There are also many other sources of noise in the detector which I have not listed. 
@@ -399,10 +415,9 @@ There are also many other sources of noise in the detector which I have not list
 %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
-A key part in any data analysis is understanding probability and statistics. 
+A key part in understanding the different methods to search for \ac{GW} or any data analysis, is understanding probability and statistics. 
 This gives understanding of the random processes underlying all measured quantities. 
-There are generally two fields of thought in statistics: Bayesian and Frequentist. 
-The majority of work which follows will be using Bayesian statistics.
+Whilst there are generally two approaches to statistics: Frequentist and Bayesian, here I will focus on the Bayesian approach.  
 
 %%%%%%%%%%%%%
 %%%%%%%%%%%%%
@@ -410,26 +425,27 @@ The majority of work which follows will be using Bayesian statistics.
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 
+Initially I will define some basic concepts of probability.
 We can define the probability of some event $A$ as $p(A)$ where probabilities follow $0 \leq p(A) \leq 1$ and some other event $B$ which has a probability $p(B)$ and follows $0 \leq p(B) \leq 1$.
 
 \begin{description}
 \item [Union]
-A union is the probability of either and event $A$ happening or event $B$ happening, this is written as, $p(A \cup B)$.
+A union is the probability of either and event $A$ happening or event $B$ happening. This is written as, $p(A \cup B)$.
 
 \item [Intersection]
-An intersection is then the probability of both and event $A$ and an event $B$ happens, this is written as $p(A \cap B)$.
+An intersection is then the probability that both and event $A$ and an event $B$ happens. This is written as $p(A \cap B)$.
 
 \item [Independent and dependent Events]
 If the events $A$ and $B$ are independent, i.e. the event $A$ does not affect the outcome of event $B$, then,
 \begin{equation}
 p(A \cap B) = p(A)p(B).
 \end{equation}
-However, if the event $A$ effects event $B$ then the joint probability of both events is,
+However, if the event $A$ is dependent on event $B$, i.e. the event $A$ affects event $B$ or vice versa, then the joint probability of both events is,
 \begin{equation}
 \label{dependentevent}
-p(A \cap B) = p(A)p(B \mid A) = p(B)p(A \mid B),
+p(A \cap B) = p(A)p(B \mid A) = p(B)p(A \mid B).
 \end{equation}
-where $p(B \mid A)$ means the probability of event $B$ happening given that event $A$ has happened.
+Here $p(B \mid A)$ means the probability of event $B$ happening given that event $A$ has happened.
 
 \item [Conditional probability]
 Conditional probability arises from situations where the outcome of one event will affect the outcome of future events.
@@ -461,39 +477,60 @@ p(A \mid B) = \frac{p(A)p(B \mid A)}{p(B)}
 %%%%%%%%%%%%%%%
 
 We can take Bayes theorem from Sec.~\ref{intro:prob:basic} and apply it to a problem which involves infering some parameters from some model. Here we can relabel the events $A$ and $B$ with the data ${\bm d}$ and the parameters ${\bm \theta}$ of some model $I$.
-
+Eq.~\ref{intro:prob:bayes} then becomes,
 \begin{equation}
-p({\bm \theta} \mid {\bm d}, I) = \frac{p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I)}{p(I)}
+\label{intro:bayes:bayes}
+p({\bm \theta} \mid {\bm d}, I) = \frac{p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I)}{p({\bm d} \mid I)}
 \end{equation}
-where $p({\bm \theta} \mid {\bm d})$ is the posterior distribution, $p({\bm \theta})$ is the prior distribution,  $p({\bm d} \mid {\bm \theta})$ is the likelihood and $p({\bm d})$ is the evidence.
+where each of the components are assigned names: $p({\bm \theta} \mid {\bm d})$ is the posterior distribution, $p({\bm \theta})$ is the prior distribution,  $p({\bm d} \mid {\bm \theta})$ is the likelihood and $p({\bm d})$ is the evidence.
 
 \begin{description}
 \item [Posterior]
-The posterior distribution describes the probability of getting certain values of parameters within a model given some data. 
+The posterior distribution describes the probability of a parameter ${\bf \theta}$ in some model $I$ given some data $d$. For many problems this is the distribution which is most useful as it informs you the most likely set of parameters of you model given some observation.
 \item [Prior]
-The Prior is the element which can be left open to the users interpretation. This describes what you know about the model or the parameters of the model before you have seen any data. 
+The Prior distribution is a key part of Bayesian statistics. This distribution describes any information which you have prior to the observation. This is a distribution defined by the user, where you define a distribution of the parameters based on what you expect to be true.
 \item [Likelihood]
-The likelihood contains information about how well the data matches the model with particular parameters. 
+The likelihood is where the observation is included in the calculation. This tells you how probable it is to get the observed data $d$ given the model $I$ with the set of parameters $\theta$. 
 \item [Evidence]
-The evidence is the probability of the data itself, i.e. it explains how likely this data is given and parameters within this model. 
+The evidence is the probability of the data itself given the choice of model. This is found by integrating over all possible values of ${\bm \theta}$ weighting them by our prior belief of that value of ${\bm \theta}$.
+\begin{equation}
+\label{intro:bayes:evidence}
+    p({\bm d} \mid I) = \int p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I) d{\bm \theta}
+\end{equation}
 \end{description}
 
 Bayes theorem then gives a description of the probability distribution of some parameters given some observation.
-The aim when using Bayesian statistics is usually to find the posterior distribution of parameters. 
-However, this cannot always be found analytically, therefore, has to be found numerically.
-When models contain many parameters, this can be difficult to calculate.
-Therefore, there are techniques such as \ac{MCMC} which sample the parameter space to build up an estimate of the posterior distribution \citep{}. 
-This technique picks a random point in parameter space and calculates the posterior value for that point. 
-It then randomly jumps in a direction and calculates the next value. 
-If that net value is greater than the previous point then it is accepted as a point.
-Otherwise, there is a probability that the point is accepted or that is jumps to another random location. 
-Once a certain number of these points have been accepted, the process can stop and the accepted points are an approximation of a distribution proportional to the posterior.
-This process avoids having to calculate the evidence as it will be the same for all values of the parameters. This saves time as it is the most computationally intensive.
+Often when using Bayesian statistics the aim is to find posterior distribution of parameters.
+There are very few cases where this can be calculated analytically, therefore, numerical methods are almost always used to find the posterior.
+This can be difficult to calculate numerically as in many problems the parameters space has many dimensions.
+Calculating the evidence in Eq.~\ref{intro:bayes:evidence} is especially difficult as it is an integral over all possible parameters.
+There is however, a way around having to calculate this. For any given mode $I$, the evidence $p({\bm d}\mid I)$ is the same for any set of parameters ${\bm \theta}$ in Eq.~\ref{intro:bayes:bayes}. 
+The evidence is then just a normalisation factor for the posterior distribution. 
+When different models are not being compared, and we assume the model $I$ to be true, we no longer need to calculate the evidence.
+The posterior distribution can then be found by sampling,
+\begin{equation}
+    p({\bm \theta} \mid {\bm d}, I) \propto p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I).
+\end{equation}
+To find this posterior you could then calculate the value for every point in parameter space. This however, is very computationally expensive and often the posterior distribution is located in a small area in parameter space. 
+Therefore, the majority of the time is sampling a space where the posterior is close to zero, and this is not particularly useful. 
+A different method titled \ac{MCMC} was then proposed \citep{Metropolis1953EquationMachines}, more information on this can be found in \citep{vanRavenzwaaij2018ASampling,Sharma2017MarkovAstronomy}.
+This randomly jumps around the parameter space and accepts jumps which have a higher posterior value. 
+If the posterior value is lower than the previous step then the jump is accepted with some probability. This means that there is a random chance that a value lower than the current is accepted.
+This does not waste time calculating areas in parameter space of low posterior values and therefore, efficiently builds an estimate of the posterior distribution.
 
-However, in certain situations the evidence is useful to calculate. 
-For example if there are two different models which could represent the data, to compare the models the evidence is needed. 
-Other methods such as Nested sampling \citep{} are often used for this task.
-Thay provide an estimate of the evidence and the posterior distribution.
+In certain situations it can be useful to calculate the evidence in Eq.\ref{intro:bayes:evidence}. 
+For example, if there are two different models which could represent the data, the evidence can be used to determine which of the two models is more likely.
+This is known as a bayes factor where two models $I_1$ and $I_2$ are compares and is defined as,
+\begin{equation}
+    B = \frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)}
+\end{equation}
+This then requires the calculation of the evidence.
+To estimate the evidence efficiently a method known as Nested sampling \citep{Skilling2006NestedComputation,Speagle2019Dynesty:Evidences} is used.
+
+The methods described above then provide a way to estimate parameters of a model given some data. 
+Also this provides a way to compare different models given some observation.
+In following sections the methods described above are used to estimate various parameters.
+
 
 
 

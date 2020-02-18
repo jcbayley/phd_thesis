@@ -1,37 +1,101 @@
-%!TEX root = main.tex
-\chapter{Detector Characterisation}
+\chapter{\label{detchar}Detector Characterisation with SOAP}
+%%%%%%%%%%%%
+
+When searching for \ac{GW} signals, it is important to understand the origins of noise in the the detectors data which does not originate from an astrophysical source.
+A large fraction of \ac{GW} search algorithms, including SOAP above, assume that the detectors noise follows a Gaussian distribution.
+However, the detectors contain artefacts which are not distributed as a Gaussian. 
+These artefacts can negatively affect many searches for \ac{GW} as they can be easily mistaken for a real \ac{GW} signal.
+Some of the potential sources of these artefacts have been mentioned in Sec.~\ref{intro:detector:noise}. 
+There are many different classes of artefact such as: glitches, \joe{fill}, instrumental lines and .
+To conduct a reliable search there are two main tasks which are necessary for detector characterisation.
+The first is identifying the artefact such that any search knows that part of data is contaminated.
+The search can then remove that section of data, or use more sophisticated techniques to deal with the artefact \citep{}.
+The second task is to find the source of the artefact. 
+If the source of the artefact is found, it can potentially be removed or limited for future data runs.
+The majority of this section will focus on a particular class of artefact called instrumental lines and how the affect \ac{CW} searches.
 
 
-\begin{itemize}
-    \item understanding how the detector affects the data is important when searching for a signal
-    \item many ways which detector is affected, some noise sources mention in Seec into detectors
-    \item the most contaminating for CW searches is instrumental lines which we will mention in sec ...
-    \item 
-    
-\end{itemize}
 
-%%%%%%%%%%%
-%%%%%%%%%%%%%
+
+
+%%%%%%%%%
+%%%%%%%%%%
 \section{Instrumental lines}
-%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%
+%%%%%%%%%
+%%%%%%%%%
+
+Instrumental lines have the general structure that they are persistent noise artefacts.
+There are many classes of instrumental line including: narrow, fixed frequency spectral artefacts or broad features which wander in frequency.
+A few example of these features are shown in Fig.~\ref{}. 
+
+\begin{figure}
+\begin{subfigure}
+    \centering
+    \includegraphics{}
+    \label{fig:my_label}
+\end{subfigure}
+\begin{subfigure}
+    \centering
+    \includegraphics{}
+    \label{fig:my_label}
+\end{subfigure}
+\begin{subfigure}
+    \centering
+    \includegraphics{}
+    \label{fig:my_label}
+\end{subfigure}
+\begin{subfigure}
+    \centering
+    \includegraphics{}
+    \label{fig:my_label}
+\end{subfigure}
+    \caption{Examples of instrumental lines}
+    \label{detchar:lines:examples}
+\end{figure}
+
+As described in Sec.~\ref{}, \ac{CW} are long duration signals with a slowly varying frequency.
+In the case of an isolated neutron star, the signal which is searched for is narrow-band and a fixed frequency which is Doppler modulated by the earths rotation and orbit.
+For certain areas of parameter space, the astrophysical signal of an isolated neutron star can appear very similar to an instrumental line. 
+Many of these lines can be ignored if they appear in a single detector, or a statistic such as in Sec.~\ref{viterbi:las} can be used to limit their effect.
+However, there are many examples of instrumental line which appear at the same or similar frequencies in multiple detectors.
+These pose a real challenge to some \ac{CW} searches, and require a lot of investigation to limit their affect.
+
+
+
+The origin of many instrumental lines have been identified.
+Many of these can and have been removed, however, some cannot be removed. 
+An example of a line which cannot be removed is the violin modes of the suspensions of the detectors mirrors. 
+These 
+
+
+
+
 \begin{itemize}
-    \item instumentla lines are long or short duration detector artifacts
+    \item instumental lines are long or short duration detector artifacts
     \item can be narrow and short or broad and long duration
     \item many examples from known sources
     \item many searches currently exist which look through data
     \item . wandering lines are a large problem as hard to track especially when weak
-    \item SOAP can identify weak lines when they are wandering or fixed frequency
 \end{itemize}
+
+%%%%%%%%%%
+%%%%%%%%%%
+\section{Identifying and monitoring instrumental lines}
+%%%%%%%%%%
+%%%%%%%%%%
+
+
 
 %%%%%%%%%%%
 %%%%%%%%%%%
-\section{SOAP search}
+\section{Identifying and cleaning lines with SOAP}
 %%%%%%%%%%%
 %%%%%%%%%%%%
+
 \begin{itemize}
     \item overview of soap search and what type is used for line searches
     \item how this is applied and how to interpret the output for lines searches
+    \item SOAP can identify weak lines when they are wandering or fixed frequency
     \item 
 \end{itemize}
 
@@ -41,6 +105,7 @@
 \section{Summary pages}
 %%%%%%%%%%%
 %%%%%%%%%%%%%
+
 \begin{itemize}
     \item why summary pages are useful 
     \item how to read them and what they mean

@@ -1,13 +1,70 @@
-\chapter{Continuous gravitational waves}
+\chapter{\label{searchcw}Searching for continuous gravitational waves}
+
+Continuous gravitational waves have particular challenges when it comes to their detection.
+Whilst I have described the potential sources of the signal and its signal type in Sec.~\ref{intro:signals:cw}, I will go into more detail on the signal and search algorithms here.
 
 
-%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%
-\section{\label{intro:search}Searching for Continuous gravitational waves}
-%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%
+
+\subsection{\label{intro:search:model}Continuous signal model}
+
+The model of a \ac{GW} signal from a pulsar is relatively simple, it is a quasi-sinusoidal signal. This means that the signal is a sinusoid with a slowly varying frequency. One reason for the slow variance in the frequency is due to the energy loss to \ac{GW} as the pulsar spins down.
+Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
+The parameters of each pulsar can be split into two sections: the Doppler components ($\alpha,\delta,{\bm f}$) and its amplitude components ($\psi,\phi_0, \iota, h_0, \theta$). This ignores any orbital parameters which would be present if the star was in a binary systems and higher order frequency derivatives.
+They are defined as follows: the sky positions $\alpha$ and $delta$ refer to the right ascension and declination. 
+${\bm f}$ refers to the source frequency and its derivatives. 
+$\psi$ and $\phi_0$ and $h_0 $ are the \ac{GW} polarisation, initial phase and amplitude respectively. 
+$\iota$ is the inclination angle which is how much the source is tilted relative to the observer. 
+$\theta$ is the `wobble angle' or the angle between the rotation axis and the symmetry axis of the neutron star.
+
+The definition of the \ac{GW} from a neutron star here follows that in \citep{Schutz1998DataDetection}. The amplitude of the \ac{GW} can be defined as,
+\begin{equation}
+\label{intro:cw:ht}
+h(t) = F_+(t)(h_{1+}(t) + h_{2+}(t)) +F_{\times}(t)(h_{1\times}(t) + h_{2\times}(t)),
+\end{equation}
+where $h_{1+}$ and $h_{2+}$ are the two components of the plus polarisation and $h_{1\times}$ and $h_{2\times}$ are the two components of the cross polarisation functions.
+These are defined by,
+\begin{equation}
+\label{intro:cw:amplitudes}
+    \begin{split}
+        h_{1+}(t) &= \frac{1}{8} h_0 \sin{2\theta} \sin{2\iota}\cos{\Phi(t)} \\
+        h_{2+}(t) &= \frac{1}{2} h_0 \sin^2{\theta} \left( 1 + \cos^2{\iota}\right) \cos{2\Phi(t)} \\
+        h_{1\times}(t) &= \frac{1}{4} h_0 \sin{2\theta} \sin{\iota} \sin{\Phi(t)} \\
+        h_{2\times}(t) &= h_0 \sin^2{\theta} \cos{\iota} \sin{2\Phi(t)}.
+    \end{split}
+\end{equation}
+The plus and cross polarised components then depend on the \ac{GW} amplitude $h_0$, the wobble angle $\theta$ and the inclination angle of the source $\iota$. The phase of the wave $\Phi(t)$ can be defined as,
+\begin{equation}
+    \Phi(t) = \phi_0 + \phi_{f}(t,f) + \phi_{{\rm sky}}(t,\alpha,\delta).
+\end{equation}
+This consists of an initial phase $\phi_0$, a component of the phase which describes how the frequency of the source changes with time $\phi_f(t)$ and a component which accounts for the Doppler shift of the detectors as the earth rotates and orbits the sun $\phi_{{\rm sky}}(t,\alpha,\delta)$.
+A full derivation of this can be found in \citep{Schutz1998DataDetection} where each of these terms are expanded.
+The amplitudes $h_0$ in Eq.~\ref{intro:cw:amplitudes} are defined by,
+\begin{equation}
+    h_0 = \frac{16 \pi^2 G}{c^4} \frac{\epsilon I f^2}{r},
+\end{equation}
+where $G$ is the gravitational constant, $c$ is the speed of light, $\epsilon$ is the ellipticity of the star, $f$ is the sum of the frequency of rotation of the star and the frequency of precession, $r$ is the distance to the star and $I_{zz}$ is the moment of inertia with respect to the rotation axis $z$.
+The ellipticity of the star $\epsilon$ is a measure of the distortion of the star around its rotation axis and is defined by,
+\begin{equation}
+    \epsilon = \frac{I_{xx} - I_{yy}}{I_{zz}},
+\end{equation}
+where $I_{xx}, I_{yy}$ and $I_{zz}$ are the moments of inertia for each axis.
+
+In Eq.~\ref{intro:cw:ht}, $F_+(t)$ and $F_{\times}(t)$ are the antenna pattern functions of the detector. 
+These describe how sensitive a detector is to a particular location on the sky at any given time. 
+The amplitude of the signal will vary dependent on the orientation and location of the detector relative to the source.
+This is described in Sec.~\ref{intro:detector} and the response to sky location is shown in Fig.~\ref{intro:detectors:response}.
+These components are defined in \citep{Schutz1998DataDetection} as,
+\begin{equation}
+\label{intro:cw:antenna}
+\begin{split}
+F_{+}(t) &= \sin{\zeta}[a(t)\cos{(2\psi)} + b(t)\sin{(2\psi)}], \\
+F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
+\end{split}
+\end{equation}
+where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle of the \ac{GW} and $a(t)$ and $b(t)$ are defined in \citep{Schutz1998DataDetection} and relate the sky location to the orientation of the detector at a given time. 
+
+Eqs.~\ref{intro:cw:ht} - \ref{intro:cw:antenna} then describe the amplitude and phase evolution of a signal at a given detector location and orientation.
+
 
 %%%%%%%
 %%%%%%
@@ -34,49 +91,6 @@ The scalar product of two time series, $x(t)$ and $y(t)$, is defined by,
 (x \mid y) = 4 \Re \int_{0}^{\infty} \frac{\tilde{x}(f)\tilde{y}^{*}(f)}{S_n(f)}df,
 \end{equation}
 where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \citep{Prix2007}.
-
-
-\subsection{\label{intro:search:model}Continuous signal model}
-
-The mode of a \ac{GW} signal from a pulsar is relatively simple, it is a sinusoid at a fixed frequency with a parameter which accounts for the loss of energy to gravitational waves and other mechanisms (spin down). 
-Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
-The parameters of each pulsar can be split into two sections: the Doppler components ($\alpha,\delta,f,\dot{f}$) and its amplitude components ($\psi,\phi_0, \iota, h_0, \theta$); this ignores any orbital parameters which would be present if the star was in a binary systems.
-In the reference frame of the source, the gravitational wave can be written as,
-\begin{equation}
-h_{+}(t) = A_{+}\cos{(\Phi(t))} \quad \rm{and} \quad h_{\times}(t) = A_{\times}\cos{(\Phi(t))},
-\end{equation}
-where $h_{+}(t)$ and $h_{\times}(t)$ refer to the two polarisations and $\Phi(t) = \phi_0 + \phi(t)$ is the phase evolution of the source. $A_+$ and $A_{\times}$ are defined as,
-\begin{equation}
-A_+ = \frac{1}{2}h_0(1+\cos^2{\iota}), \quad A_{\times} = h_0 \cos{\iota},
-\end{equation}
-where $\iota$ is the inclination angle of the source and $h_0$ is the gravitational wave amplitude. The amplitude $h_0$ is defined as,
-\begin{equation}
-h_0 = \frac{16\pi^2 G}{c^4} \frac{\epsilon I_{zz} \nu^2}{d},
-\end{equation}
-where $c$ is the speed of light, $G$ is the gravitational constant, $\epsilon $ is the ellipticity defined in Eq.~\ref{ellipticity}, $\nu$ is the rotation frequency of the star and $d$ is its distance. 
-
-To find the signal model in the detector frame one has to include the effects of the detector and its Doppler modulation as it moves through space. 
-The Doppler modulation is included in the phase model such that now the phase follows, $\Phi(t) = \phi_0 + \phi(t, {\boldsymbol \lambda})$, where ${\boldsymbol \lambda}$ are the Doppler parameters. 
-The amplitude of the signal is also modulated due to the orientation of the detectors relative to the source as the detector moves around the earth. These components are accounted for in the antenna patterns of the detector, defined in \citep{JKS1998} as,
-\begin{equation}
-\begin{split}
-F_{+}(t) &= \sin{\zeta}[a(t)\cos{(2\psi)} + b(t)\sin{(2\psi)}], \\
-F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
-\end{split}
-\end{equation}
-where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle and $a(t)$ and $b(t)$ are defined in \citep{JKS1998}. 
-
-The signal at the detector can then be written as a combination of the antenna patterns and the two polarisations of the gravitational wave,
-\begin{equation}
-h(t) = F_+(t)A_+\cos{[\phi_0 + \phi(t,{\boldsymbol \lambda})]} +F_{\times}(t)A_{\times}\sin{[\phi_0 + \phi(t,{\boldsymbol \lambda})]},
-\end{equation}
-The full signal model defined in \citep{JKS1998} actually includes all other parameters such as inclination angle, and has the form,
-\begin{equation}
-\label{sigmod}
-%h(t) = F_{+}(t)[h_{1+}(t; h_0, \iota, \theta) + h_{2+}(t; h_0, \iota, \theta)] + F_{\times}(t)[h_{1\times}(t; h_0, \iota, \theta) + h_{2\times}(t; h_0, \iota, \theta)],
-h(t) = F_{+}(t)[h_{1+}(t) + h_{2+}(t)] + F_{\times}(t)[h_{1\times}(t) + h_{2\times}(t)],
-\end{equation}
-where all parameters can be found in Eqs.~(21-22) of \citep{JKS1998}. 
 
 %%%%%%
 %%%%%%
