@@ -14,15 +14,15 @@ In 2017 the \ac{LIGO} detectors observed the first \ac{BNS} system \citep{Abbott
 These detections opened up the field of gravitational wave astronomy, where many more detections are expected.
 As well as searching for \ac{BBH} and \ac{BNS} signals, there are many efforts to detector other types of \ac{GW} signals. 
 
-\if
+
 This thesis focuses on efforts to search for a particular type of \ac{GW} which are thought to originate from rapidly rotating neutron stars.
 In this chapter, I will review introductory material for the following chapters. 
 This includes a general introduction to the generation of gravitational waves in Sec.~\ref{intro:gravwaves} and their sources in Sec.~\ref{intro:sources}.
 I will then introduce instruments used to detect \ac{GW} in Sec.~\ref{intro:detector}.
 In Chapter \ref{searchcw} I will introduce the general model for \acp{CW} and current methods used to detect them.
-Chapters \ref{soap}, \cite{cnn} and \ref{detchar} will go into detail about techniques developed by the author to search for \ac{CW} signals. 
+Chapters \ref{soap}, \ref{cnn} and \ref{detchar} will go into detail about techniques developed by the author to search for \ac{CW} signals. 
 Finally I will summarise this work and discuss future developments in chapter \ref{summary}.
-\fi
+
 
 %%%%%%%%%%%
 %%%%%%%%%
@@ -35,12 +35,16 @@ The matter in the universe also has an effect on the curvature of the space-time
 The larger the mass of the matter the more the space-time is distorted.
 Space-time can generally be described by Einstein's field equations,
 \begin{equation}
-    R_{\mu \nu} - \frac{1}{2}R g_{\mu \nu} = \frac{8 \pi G}{c^4}T_{\mu \nu}.
+\label{intro:gravwaves:efe}
+    G_{\mu \nu} = \frac{8 \pi G}{c^4}T_{\mu \nu}.
 \end{equation}
-where $R_{\mu \nu}$ is the Reimann tensor which describes the .............., $R$ is the Ricci scalar which is the trace of the Reimann tensor, $T_{\mu \nu}$ is the stress-energy tensor which describes the distribution of mass and energy in the universe and $g_{\mu \nu}$ is the metric tensor which describes the geometry of space-time.
-Space-time is expected to be flat in empty space, therefore the metric tensor for this can be defined,
+where $G_{\mu \nu}$ is the Einstein tensor and $T_{\mu \nu}$ is the stress-energy tensor.
+The stress energy tensor describes the distribution of mass and energy in the universe. 
+The Einstein tensor contains information on the curvature of the universe. 
+This can be derived directly from the metric tensor $g_{\mu \nu}$ which describes the geometry of the universe.
+In empty space one can assume that space-time is flat, i.e. there is no curvature to space-time. The metric tensor for this can then be defined as,
 \begin{equation}
-g_{\mu 'nu} = \eta_{\mu \nu} = \left(
+g_{\mu \nu} = \eta_{\mu \nu} = \left(
 \begin{matrix}
 -1 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 \\
@@ -49,28 +53,33 @@ g_{\mu 'nu} = \eta_{\mu \nu} = \left(
 \end{matrix}
 \right).
 \end{equation}
-The line element between two events can then be defined as,
+Each index of this matrix refers to a space-time dimension, i.e. $x^0 = t$, $x^1=x$, $x^2=y$ and $x^3=z$. 
+Measuring a distance $dx$ in space-time can be different for different observers, therefore, one needs a measure which is invariant for every observer. 
+This is the space-time interval $ds$, also known as the line element, between two events. 
+This is defined as,
 \begin{equation}
 \label{intro:lineelement}
     ds^2 = g_{\mu \nu} dx^{\mu}dx^{\nu}.
 \end{equation}
-As in Einsteins notation this is a sum over the indicies $\mu$ and $\nu$. Each index refers to a dimension, i.e. $x^0 = t$, $x^1=x$, $x^2=y$ and $x^3=z$. 
-Eq.~\ref{intro:lineelement} is essentially Pythagoras's theorem, therefore, can be though to describe the `distance' between the two events in space-time.
+As in Einstein's notation this is a sum over the indices $\mu$ and $\nu$.  
+Eq.~\ref{intro:lineelement} is essentially Pythagoras's theorem, therefore, can be though to describe the space-time `distance' between the two events.
 For flat space-time, $\eta_{\mu\nu}$, this can then be written as,
 \begin{equation}
-    ds^2 = -dt^2 + dx^2 + dy^2 + dz^2.
+    ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2.
 \end{equation}
+The Einstein equations Eq.~\ref{intro:gravwaves:efe} then demonstrate how the curvature of space-time $G_{\mu\nu}$ depends on the matter and energy distribution $T_{\mu \nu}$ within it.
 
 A gravitational wave can be described as a ripple in this space time.
-This is just a time dependent change to the metric $\eta_{\mu\nu}$, or a small perturbation.
-In linearised theory of gravity \citep{}, the space-time metric $g_{\mu \nu}$ can then be defined as,
+The simplest way to visualise this is just a small time dependent change to the flat space-time metric $\eta_{\mu\nu}$.
+In linearised theory of gravity, the space-time metric $g_{\mu \nu}$ can then be defined as,
 \begin{equation}
+\label{intro:gravwave:metric}
     g_{\mu \nu} = \eta_{\mu \nu} + h_{\mu \nu},
 \end{equation}
-where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some small perturbation, i.e. $|h_{\mu \nu}| \ll 1$. 
+where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some perturbation, where $|h_{\mu \nu}| \ll 1$ \citep{Flanagan2005TheTheory}. 
 In this linearised theory the perturbations to the metric tensor are assumed to be small, therefore, Einstein's field equations can be solved such that the solution is a plane wave. 
-More information on this derivation can be found in \citep{Flanagan2005TheTheory,}
-The linearised Einstein equation can be written as,
+Whilst I skip over lots of the calculation here, more information on this derivation can be found in \citep{Flanagan2005TheTheory,}
+By using $g_{\mu \nu}$ from Eq.~\ref{intro:gravwave:metric}, we can write the linearised Einstein equations as,
 \begin{equation}
 \label{intro:lineinstein}
     \Box h_{\mu \nu} = -16 \pi T_{\mu\nu}.
@@ -80,22 +89,31 @@ This allows Eq.~\ref{intro:lineinstein} to be reduced to,
 \begin{equation}
     \Box h_{\mu \nu} = 0.
 \end{equation}
-This is a wave equation which has the general solutions,
+This is a wave equation which follows the same form as in electrodynamics, therefore, the general solutions can be written down as,
 \begin{equation}
     h_{\mu\nu} = A_{\mu\nu}e^{ik_{\alpha} x^{\alpha}},
 \end{equation}
-where each component of $h_{\mu \nu}$ is a sinusiod travelling along vector $k^{\alpha}$ with amplitude $A_{\mu\nu}$ \citep{Capano2011SearchingData}.
-This can be greatly simplified by choosing a different gauge (coordinate system) where the metric perturbation is both transverse and traceless (TT) \citep{}.
-A traceless metric is one where the sum of the diagonal elements are 0 and a transverse metric is when the oscillations are perpendicular to the direction of travel. 
-This gauge means that only the `real' part of the wave, i.e. the observable part is shown \joe{di this explanation better}.
-For a wave travelling in the $z$ direction the TT gauge there are only two unique components to the metric, these are defined as,
+where each component of $h_{\mu \nu}$ is a sinusoid travelling along vector $k^{\alpha}$ with amplitude $A_{\mu\nu}$ \citep{Capano2011SearchingData}.
+At this point the set of equations are not simple, the symmetric tensor $A_{\mu \mu}$ has 10 independent components.
+This can be greatly simplified by choosing a different gauge (coordinate system) where the metric perturbation is both transverse and traceless (TT) \citep{Flanagan2005TheTheory}.
+This is just a choice of coordinate system which does not change any current assumptions. A traceless metric is one where the sum of the diagonal elements are 0 and a transverse metric is when the oscillations are perpendicular to the direction of travel. 
+This gauge imposes two conditions: one is that $h_{\mu \nu}$ is traceless, i.e. that the sum of the diagonal elements are 0 and the other is that $h_{\mu \nu}$ is transverse. 
+The transverse element means that the oscillations of the wave happen perpendicular to the direction of travel.
+At this point we can choose that the wave is travelling in the $z$ direction which means that $k = (\omega,0,0,k)$.
+By then adopting the TT gauge there are only two unique components to the metric which is defined as,
 \begin{equation}
-    \begin{split}
-        h_{xx}^{TT} &= -h_{yy}^{TT} = h_{+} \cos{\left( w (t - z) + \phi_0\right)} \\
-        h_{xy}^{TT} &= h_{yx}^{TT} = h_{\times} \cos{\left( w (t - z) + \phi_0\right)}.
-    \end{split}
+h_{\mu \nu} = \left( 
+\begin{matrix}
+0 & 0 & 0 & 0 \\
+0 & h_{+} & h_{\times} & 0 \\
+0 & h_{\times} & -h_{+} & 0 \\
+0 & 0 & 0 & 1 \\
+\end{matrix}
+\right) 
+e^{i(kt - wt)}.
 \end{equation}
-The affect of these two polarisation's on a ring of test particles can be seen in Fig.~\ref{gw:polarisations} where teh gravitational wave is travelling out of the page.
+This shows the two polarisations of gravitational waves, $h_{+}$ and $h_{\times}$.
+The affect of each of the polarisations on a ring of test particles can be seen in Fig.~\ref{gw:polarisations} where the gravitational wave is travelling out of the page.
 
 \begin{figure}[h]
     \centering
@@ -108,7 +126,7 @@ The affect of these two polarisation's on a ring of test particles can be seen i
 
 \subsubsection{Generating gravitational waves}
 
-To generate gravitational waves we go back to Eq.~\ref{intro:lineinstein} where we include the matter term on the right hand side.
+To generate gravitational waves we go back to Eq.~\ref{intro:lineinstein} where we include the stress-energy term on the right hand side.
 Following the derivation in \citep{Flanagan2005TheTheory}, one can find that the gravitational wave amplitude is related to the second moment of the mass distribution.
 The second moment of the mass distribution $I_{\mu\nu}$is defined as,
 \begin{equation}
@@ -118,7 +136,7 @@ where $\rho$ is the mass density, and $x_i$ and $x_j$ are the coordinates \citep
 This is the quadrupole moment tensor without the trace subtracted.
 The gravitational wave amplitude is then defined as,
 \begin{equation}
-\label{intro:gwamp}
+\label{intro:gravwave:amp}
     h_{\mu \nu} = \frac{2}{r}  \frac{d^2 I_{\mu \nu}(t-r)}{dt^2}.
 \end{equation}
 This has a slight modification in the TT gauge, see \citep{Flanagan2005TheTheory}, however, has the same relationship between the mass quarupole and the \ac{GW} amplitude.
@@ -226,6 +244,16 @@ When detected, these signals may be able to offer insights into the early univer
 
 \joe{General overview, different potential sources}
 
+\acp{CW} are long duration signals which which can be well modelled.
+The signals last for times greater than the observation runs of the detector and in general have a fixed or slowly varying frequency.
+The primary source of \acp{CW} are thought to originate from rapidly rotating neutron stars. 
+However, in the future, early times in a \ac{CBC} signal when two objects are in-spiralling, the signal is essentially continuous.
+These are at a lower frequency for ground based detectors so are expected to be detected by \ac{LISA} \citep{}.
+
+Neutron stars are in general thought to be spherically symmetric.
+Due to Eq.~\ref{intro:gravwave:amp} this would not emit a gravitational wave, as some asymmetry is needed. 
+
+
 \begin{itemize}
     \item rapidly roating neutron stars main source, also early CBC for LISA
     \item long duration continuously emitted
@@ -245,7 +273,7 @@ These signals are expected to last for much longer than observing runs of any de
 
 A primary source for continuous signals is expected to be rapidly rotation neutron stars.
 Neutron stars are thought to originate when the remnant of a massive star collapses, they are objects with incredibly high density and are highly magnetised.
-The strong magnetic fields can funnel material along the field lines towards the magnetic poles and cause the emmission on X-rays or gamma rays.
+The strong magnetic fields can funnel material along the field lines towards the magnetic poles and cause the emission on X-rays or gamma rays.
 
 
 From electromagnetic observations, the rotation frequency of some pulsars can be observed to decrease with time, this is known as spin-down.

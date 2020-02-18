@@ -50,15 +50,20 @@
 ]{biblatex}
 \addbibresource{references.bib}
 
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+
+\DeclareFloatingEnvironment[
+fileext=loa,
+listname=List of Algorithms,
+name=ALGORITHM,
+placement=tbhp,
+]{algorithm}
+
 
 \sidecaptionvpos{figure}{c}
 
-\DeclareFloatingEnvironment[
-    fileext=loa,
-    listname=List of Algorithms,
-    name=ALGORITHM,
-    placement=tbhp,
-]{algorithm}
+
 
 \newcommand{\joe}[1]{\textbf{\textcolor{red}{JOE: #1}}}
 
@@ -118,6 +123,7 @@ February 2017
 \acrodef{SOAP}[SOAP]{snakes on a plane}
 \acrodef{CNN}[CNN]{convolutional neural network}
 \acrodef{CMB}[CMB]{cosmic microwave background}
+\acrodef{LISA}[LISA]{laser interferometer space antenna}
 
 \mainmatter % Turn on chapter numbering, reset page numbers, use arabic
 \include{C1_Introduction/introduction}
@@ -131,6 +137,7 @@ February 2017
 
 \include{C4_detchar/det_char}
 
+\include{C5_summary/summary}
 
 \appendix
 
