@@ -6,9 +6,9 @@ The basic idea of the search is simple, if we looked at a frequency band in a sp
 In Fig.~\ref{soap:motivation:plot} the optimum track in red shows gives a statistic value of $\sim 1700$ which is far outside the main distribution of summed powers. 
 This follows an injected signal track which demonstrates the idea. 
 Therefore, it can be assumed that if the frequency track with the highest sum of spectrogram power is found, then the corresponding track is most likely for follow a signal. 
-Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is 180 bins wide $M$ and 400 segments long $N$ and after each segment the track has $T$ possible options to jump to, The total number of possible tracks is $T^{M*N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possibly calculate. This is where the Viterbi algorithm \citep{Viterbi1967} is useful as it can efficiently find the track which gives the maximum sum of power. This is explained in the following sections.
+Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is 180 bins wide $M$ and 400 segments long $N$ and after each segment the track has $T$ possible options to jump to, The total number of possible tracks is $T^{M*N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possibly calculate. This is where the Viterbi algorithm \citep{viterbi1967ErrorBounds} is useful as it can efficiently find the track which gives the maximum sum of power. This is explained in the following sections.
 
-The majority of this chapter that follows has been reviewed and published as in \citep{Bayley2019}, excluding Sec.~\ref{viterbi:las:optimisation} and Sec.~\ref{viterbi:lineawareamp} which is supplementary material.
+The majority of this chapter that follows has been reviewed and published as in \citep{bayley2019GeneralizedApplication}, excluding Sec.~\ref{viterbi:las:optimisation} and Sec.~\ref{viterbi:lineawareamp} which is supplementary material.
 
 
 \begin{figure}
@@ -25,18 +25,18 @@ The majority of this chapter that follows has been reviewed and published as in 
 %
 % introduce the signal
 %
-One of the main targets for current ground based \ac{GW} detectors, including \ac{LIGO}~\citep{LIGO, LIGO2015} and Virgo~\citep{VIRGO, Acernese_2014}, are sources of continuous gravitational waves. These are long-duration, quasi-monochromatic  sinusoidal signals that are well-modelled by a Taylor series expansion in the signal phase. A likely source of such signals are rapidly spinning non axisymmetric neutron stars.  A number of possible emission mechanisms are outlined in~\citep{Prix2009,Owen:2009fg}.
+One of the main targets for current ground based \ac{GW} detectors, including \ac{LIGO}~\citep{abbott2009LIGOLaser, aasi2015AdvancedLIGO} and Virgo~\citep{acernese2008StatusVirgo, acernese2015AdvancedVirgo}, are sources of continuous gravitational waves. These are long-duration, quasi-monochromatic  sinusoidal signals that are well-modelled by a Taylor series expansion in the signal phase. A likely source of such signals are rapidly spinning non axisymmetric neutron stars.  A number of possible emission mechanisms are outlined in~\citep{prix2009GravitationalWaves,owen2009ProbingNeutron}.
 
 %
 % introduce semi-coherent search algorithms
 %
-These types of \acp{GW} are expected to give strain amplitudes that are significantly below the detector's noise spectral density, and need sensitive search algorithms for detection. The most sensitive method is to use a coherent matched filter which requires knowledge of the waveform beforehand such that it can be coherently correlated with the data. This approach is used in searches for gravitational signals from known pulsars such as~\citep{Dupuis2005,Astone_2010,PhysRevD.58.063001,O1knownpulsar2017,O2knownpulsar:2019}. For broad parameter space searches, where the parameters of the signal are unknown, a large number of template waveforms must be used to sufficiently cover the parameter space.  This approach rapidly becomes computationally impractical as the search space grows, so semi-coherent search methods have been developed to deliver the maximum overall sensitivity for a given computational cost. Semi-coherent searches break the data up into sections of either time or frequency and perform a coherent analysis on these sections separately. These intermediate results can then be recombined incoherently in a number of different ways to form the final search result outlined in ~\citep{PhysRevD.61.082001,Pisarski:2019vxw} and references therein.
+These types of \acp{GW} are expected to give strain amplitudes that are significantly below the detector's noise spectral density, and need sensitive search algorithms for detection. The most sensitive method is to use a coherent matched filter which requires knowledge of the waveform beforehand such that it can be coherently correlated with the data. This approach is used in searches for gravitational signals from known pulsars such as~\citep{dupuis2005BayesianEstimation,astone2010MethodDetection,schutz1998DataAnalysis,collaboration2017FirstSearch,abbott2019SearchesGravitational}. For broad parameter space searches, where the parameters of the signal are unknown, a large number of template waveforms must be used to sufficiently cover the parameter space.  This approach rapidly becomes computationally impractical as the search space grows, so semi-coherent search methods have been developed to deliver the maximum overall sensitivity for a given computational cost. Semi-coherent searches break the data up into sections of either time or frequency and perform a coherent analysis on these sections separately. These intermediate results can then be recombined incoherently in a number of different ways to form the final search result outlined in ~\citep{creighton2000SearchingPeriodic,abbott2019AllskySearch} and references therein.
 
 
 %
 % introduce SOAP
 %
-The analysis that we present here is known as SOAP \citep{soap} and is based on the Viterbi algorithm~\citep{Viterbi1967}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \ac{GW} data. Another variant of the algorithm \citep{Suvorova2016} has recently been used, amongst other applications, as part of a \ac{CW} search to track a pulsar with randomly wandering spin frequency~\citep{PhysRevD.97.043013, PhysRevD.96.102006,PhysRevD.95.122003, Abbott:2018hgk, 2018arXiv181003577S}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \acp{SFT}.
+The analysis that we present here is known as SOAP \citep{ellis2006SnakesPlanea} and is based on the Viterbi algorithm~\citep{viterbi1967ErrorBounds}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \ac{GW} data. Another variant of the algorithm \citep{suvorova2016HiddenMarkova} has recently been used, amongst other applications, as part of a \ac{CW} search to track a pulsar with randomly wandering spin frequency~\citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, Abbott:2018hgk, sun2018ApplicationHidden}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \acp{SFT}.
 
 %
 % describe the paper structure
@@ -160,7 +160,7 @@ We will first consider the simple case of a single dataset $D$, generated by a s
 
  The Viterbi algorithm determines the most probable track on the time-frequency plane by calculating the value of Eq.~\ref{viterbi:maxtracklog} for every discrete Fourier frequency, incrementally in time. In other words, at each time segment it finds the most probable earlier track which ends at each particular frequency. On reaching the final segment it can look back to identify the most probable track connecting segment 1 to segment $N$.
 
-There are two main components to Eq.~\ref{viterbi:maxtracklog}: the transition probabilities $p(\nu_j \mid \nu_{j-1})$ and the likelihoods $p({\bm x_j} \mid \nu_j)$. The transition probabilities are pre-calculated and stored in a transition matrix according to Sec.~\ref{viterbi:transition} above. To calculate the likelihood we follow the approach of~\citep{Bretthorst1988} which gives, under the assumption of a single sinusoidal signal in additive Gaussian noise in data segment ${\bm x_j}$, 
+There are two main components to Eq.~\ref{viterbi:maxtracklog}: the transition probabilities $p(\nu_j \mid \nu_{j-1})$ and the likelihoods $p({\bm x_j} \mid \nu_j)$. The transition probabilities are pre-calculated and stored in a transition matrix according to Sec.~\ref{viterbi:transition} above. To calculate the likelihood we follow the approach of~\citep{bretthorst1988BayesianSpectruma} which gives, under the assumption of a single sinusoidal signal in additive Gaussian noise in data segment ${\bm x_j}$, 
 
 \joe{look at this is more detail, write more derivation, derive for log-odds as well as likelihood} 
 %
@@ -562,7 +562,7 @@ The maximised statistic now has three tuneable parameters: the width, $w_S$ in E
 %
 % Two detector line aware statistic
 %
-This line-aware statistic can be applied in a more powerful way when we use multiple detectors and is similar to the approach in \citep{PhysRevD.89.064023}. The multiple-detector algorithm described in Sec.~\ref{viterbi:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \ac{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
+This line-aware statistic can be applied in a more powerful way when we use multiple detectors and is similar to the approach in \citep{keitel2014SearchContinuousa}. The multiple-detector algorithm described in Sec.~\ref{viterbi:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \ac{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
 
 %
 % More detail on what this is applied to
@@ -761,7 +761,7 @@ In Fig.~\ref{viterbi:lineawareamp:example} we show an example of two detectors w
 The sensitivity of the algorithm was tested by searching for artificial
 signals from isolated pulsars added to three types of noise-like data:
 continuous Gaussian noise, Gaussian noise but with periods of missing data,
-and real detector data (the S6 \ac{MDC}~\citep{Walsh2016}). The S6 \ac{MDC} refers to a standardised set of simulated signals which are injected into real data, this set is also what is used for the injections into the two Gaussian noise cases. We describe each
+and real detector data (the S6 \ac{MDC}~\citep{walsh2016ComparisonMethods}). The S6 \ac{MDC} refers to a standardised set of simulated signals which are injected into real data, this set is also what is used for the injections into the two Gaussian noise cases. We describe each
 of the tests in more detail in Sec.~\ref{gaplessgauss},\ref{gausss6} and
 \ref{results:s6}, but several common pre-processing steps are performed
 before running these datasets through the Viterbi algorithm:
@@ -777,7 +777,7 @@ before running these datasets through the Viterbi algorithm:
 %
 \item We estimate the noise \ac{PSD} for each \ac{SFT} by calculating a
     running median over frequency using LALSuite
-    code {\tt XLALSFTtoRnmed} \citep{lalsuite}, this includes a bias factor to
+    code {\tt XLALSFTtoRnmed} \citep{ligoscientificcollaboration2018LIGOAlgorithm}, this includes a bias factor to
     convert this to the mean and has a width of 100 bins. We then normalise the \ac{SFT} by dividing it
     by its running median, giving the noise-like parts of the spectrum a
     mean power of approximately one.
@@ -863,7 +863,7 @@ all the odds ratios in every time bin are equal to 1. The bottom panel shows the
 In the following tests there are two main quantities which we use to determine
 the sensitivity. These are sensitivity depth $\mathcal{D}$ and the optimal
 \ac{SNR} $\rho$.  The sensitivity depth, $\mathcal{D}$, is defined in
-\citep{Behnke2015} as,
+\citep{behnke2015PostprocessingMethods} as,
 %
 \begin{equation}
 \label{sigmoid}
@@ -879,7 +879,7 @@ where $S_h(f)$ is the single-sided noise \ac{PSD} and $h_0$ is the \ac{GW} ampli
 %
  where $X$ indexes the
 detectors and $\tilde{h}(f)$ is the Fourier transform of the time
-series of the signal $h(t)$. This expression is defined in~\citep{Prix2007} for
+series of the signal $h(t)$. This expression is defined in~\citep{prix2007SearchContinuous} for
 a double-sided \ac{PSD} and we have defined it for the more common single-sided
 case.
 
@@ -895,7 +895,7 @@ The first test involves injecting signals into Gaussian noise. The power spectru
 These spectrograms are 0.1\,Hz wide and are set at 0.05\,Hz intervals between 100\,Hz and 200\,Hz. The bins are $1./1800$\,Hz wide and 1800s long, where the total length of data is the same as S6, i.e., $\sim 1.3$ years.
 We then generate the signals, where the pulsars parameters are
 fixed to the same values as the injections in the S6 \ac{MDC} in this band, 
-these values are outlined in \citep{Walsh2016}.
+these values are outlined in \citep{walsh2016ComparisonMethods}.
 
 %
 % describe the pre-pruning of signals
@@ -993,10 +993,10 @@ show the \ac{RMS} of the difference between the injected signal track and the tr
 %
 % Intro to what data was used
 %
-In the second test, we attempt to more closely mirror the S6 \ac{MDC}~\citep{Walsh2016} in two stages. The first uses the same injection method as Sec.~\ref{gaplessgauss} however, removes the \acp{SFT} where there are gaps in S6. 
+In the second test, we attempt to more closely mirror the S6 \ac{MDC}~\citep{walsh2016ComparisonMethods} in two stages. The first uses the same injection method as Sec.~\ref{gaplessgauss} however, removes the \acp{SFT} where there are gaps in S6. 
 The second uses the same injection method again including gaps, however, uses a different value for the noise floor for each \ac{SFT}, this is calculated for each band and \ac{SFT} from S6 data.
 
-Both detectors in S6 had a duty cycle of $\sim$50\%~\citep{DetCharS6}, which means that there are sections of time where there is no data in either one or both detectors. In the sections where one detector is observing but the other is not, the multi detector statistic will not behave correctly as it only has access to data from a single detector.
+Both detectors in S6 had a duty cycle of $\sim$50\%~\citep{aasi2015CharacterizationLIGO}, which means that there are sections of time where there is no data in either one or both detectors. In the sections where one detector is observing but the other is not, the multi detector statistic will not behave correctly as it only has access to data from a single detector.
 In these sections we switch from using the multi-detector statistic to the single-detector statistic using the same parameters, these are both defined in defined in Sec.~\ref{viterbi:las}.
 
 %
@@ -1069,7 +1069,7 @@ Out of the 2000 sub-bands, 238 were removed due the sub-band only containing par
 The main difference between the analysis for Gaussian noise and real data is that
 the real data is contaminated with instrumental lines. This means that whilst the techniques described in Sec.~\ref{viterbi:las} reduce the number of contaminated bands with a high statistic value, there are still
 instrumental lines which are coincident between the detectors and which could not be removed
-with these techniques. Within the data there are large number of lines at integer Hertz, which are seen in coincidence between the two detectors, these are thought to originate from digital electronics \citep{Coughlin2010}. Therefore the frequency bins $\pm1$ bin of each integer frequency in
+with these techniques. Within the data there are large number of lines at integer Hertz, which are seen in coincidence between the two detectors, these are thought to originate from digital electronics \citep{coughlin2010NoiseLine}. Therefore the frequency bins $\pm1$ bin of each integer frequency in
 Hertz were removed and filled with the expectation value of the noise. To remove instrumental effects at other frequencies,
 the sub-bands which gave values of our
 statistic above a chosen threshold were investigated by eye. In this case 344 sub-bands were
@@ -1089,7 +1089,7 @@ in Sec.~\ref{gausss6} and \ref{gaplessgauss}.
 Fig.~\ref{gausss6:eff_depth} and Fig.~\ref{gausss6:eff_snr} show the efficiency curves
 for \ac{SNR} and depth respectively.  These show that we can detect and
 \ac{SNR} of $\sim 74$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$ with
-an efficiency of 95\% at a false alarm of 1\%. These results can then be compared to other searches in the S6 MDC comparison paper~\citep{Walsh2016}. Whilst we only search in the 100 - 200 Hz range, the closest comparison in \citep{Walsh2016} is the test in the 40 - 500 Hz range, such as in Fig.~4 in \citep{Walsh2016}. Here our algorithm sits roughly in the middle of all other searches in terms of sensitivity.
+an efficiency of 95\% at a false alarm of 1\%. These results can then be compared to other searches in the S6 MDC comparison paper~\citep{walsh2016ComparisonMethods}. Whilst we only search in the 100 - 200 Hz range, the closest comparison in \citep{walsh2016ComparisonMethods} is the test in the 40 - 500 Hz range, such as in Fig.~4 in \citep{walsh2016ComparisonMethods}. Here our algorithm sits roughly in the middle of all other searches in terms of sensitivity.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1192,7 +1192,7 @@ The same search now including the line aware statistic, which is implemented usi
 T = 25.7 \rm{s}\left( \frac{N}{22538}\right) \left( \frac{M}{180}\right) \left( \frac{N_{\rm{bands}}}{1}\right).
 \end{equation}
 
-Other searches, excluding Einstein@home which takes on the order of months to run ( $>100$ million core-hours \citep{Walsh2016}), take $1-10$ million core-hours \citep{Walsh2016}. This search should take $\mathcal{O}(10^3)$ core-hours.
+Other searches, excluding Einstein@home which takes on the order of months to run ( $>100$ million core-hours \citep{walsh2016ComparisonMethods}), take $1-10$ million core-hours \citep{walsh2016ComparisonMethods}. This search should take $\mathcal{O}(10^3)$ core-hours.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1219,7 +1219,7 @@ When gaps were introduced into the data to simulate S6 we could detect a signal 
 detect a signal with an \ac{SNR} $\sim 74$ and a depth of $\sim
 13$\,Hz$^{-1/2}$.
 These real data contain non-Gaussian artefacts such as instrumental lines and this causes a further drop in sensitivity.
-Whilst not a full comparison to other searches in the S6 \ac{MDC} \citep{Walsh2016}, as we only tested on a subset
+Whilst not a full comparison to other searches in the S6 \ac{MDC} \citep{walsh2016ComparisonMethods}, as we only tested on a subset
 of the bands, this search has a sensitivity which is comparable to some other \ac{CW} searches, however offers a massive increase in speed.
 
 We chose the specific frequency band to search over as the data which we used, i.e., the summed data, becomes less effective at frequencies much higher than 200\,Hz, and using the parameters of our simulations, signals can spread over many frequency bins in a day, reducing sensitivity further, however this can be mitigated by using shorter \acp{SFT} or performing their summation over 12 (rather than 24) hours.

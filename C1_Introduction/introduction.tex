@@ -4,13 +4,13 @@
 
 Gravitational waves were first predicted in 1915 as a consequence of Einstein's theory of general relativity \citep{}.
 They were theorised as ripples in the fabric of space-time.
-The first observational evidence that \ac{GW} exist came from observations of the Hulse-Taylor binary \citep{Weisberg1981GravitationalPulsar,Weisberg2004RelativisticAnalysis}. 
+The first observational evidence that \ac{GW} exist came from observations of the Hulse-Taylor binary \citep{weisberg1981GravitationalWaves,weisberg2004RelativisticBinary}. 
 This observation showed the binary pulsar system was in-spiraling and therefore losing energy.
 This loss in energy matched the \ac{GR} prediction which assumed the energy was lost to \ac{GW}.
-The first direct detection of gravitational waves was not made until 2015 when the two \ac{LIGO} detectors in the US \citep{Abbott2016e} identified a signal from a \ac{BBH} system.
+The first direct detection of gravitational waves was not made until 2015 when the two \ac{LIGO} detectors in the US \citep{abbott2016ObservationGravitational} identified a signal from a \ac{BBH} system.
 This was not only the first observation of \ac{GW} but gave information on a yet unobserved astrophysical system.
-This has since been followed my many more detection's of \ac{BBH} signals involving \ac{LIGO} and Virgo including \citep{Abbott2017b,Abbott2019}.
-In 2017 the \ac{LIGO} detectors observed the first \ac{BNS} system \citep{Abbott2017a} which had a corresponding electromagnetic counterpart.
+This has since been followed my many more detection's of \ac{BBH} signals involving \ac{LIGO} and Virgo including \citep{abbott2017GW170814ThreeDetector,theligoscientificcollaboration2020GW190425Observation}.
+In 2017 the \ac{LIGO} detectors observed the first \ac{BNS} system \citep{abbott2017GW170817Observation} which had a corresponding electromagnetic counterpart.
 These detections opened up the field of gravitational wave astronomy, where many more detections are expected.
 As well as searching for \ac{BBH} and \ac{BNS} signals, there are many efforts to detector other types of \ac{GW} signals. 
 
@@ -76,9 +76,9 @@ In linearised theory of gravity, the space-time metric $g_{\mu \nu}$ can then be
 \label{intro:gravwave:metric}
     g_{\mu \nu} = \eta_{\mu \nu} + h_{\mu \nu},
 \end{equation}
-where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some perturbation, where $|h_{\mu \nu}| \ll 1$ \citep{Flanagan2005TheTheory}. 
+where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some perturbation, where $|h_{\mu \nu}| \ll 1$ \citep{flanagan2005BasicsGravitational}. 
 In this linearised theory the perturbations to the metric tensor are assumed to be small, therefore, Einstein's field equations can be solved such that the solution is a plane wave. 
-Whilst I skip over lots of the calculation here, more information on this derivation can be found in \citep{Flanagan2005TheTheory,}
+Whilst I skip over lots of the calculation here, more information on this derivation can be found in \citep{flanagan2005BasicsGravitational,}
 By using $g_{\mu \nu}$ from Eq.~\ref{intro:gravwave:metric}, we can write the linearised Einstein equations as,
 \begin{equation}
 \label{intro:lineinstein}
@@ -93,9 +93,9 @@ This is a wave equation which follows the same form as in electrodynamics, there
 \begin{equation}
     h_{\mu\nu} = A_{\mu\nu}e^{ik_{\alpha} x^{\alpha}},
 \end{equation}
-where each component of $h_{\mu \nu}$ is a sinusoid travelling along vector $k^{\alpha}$ with amplitude $A_{\mu\nu}$ \citep{Capano2011SearchingData}.
+where each component of $h_{\mu \nu}$ is a sinusoid travelling along vector $k^{\alpha}$ with amplitude $A_{\mu\nu}$ \citep{capano2011SearchingGravitational}.
 At this point the set of equations are not simple, the symmetric tensor $A_{\mu \mu}$ has 10 independent components.
-This can be greatly simplified by choosing a different gauge (coordinate system) where the metric perturbation is both transverse and traceless (TT) \citep{Flanagan2005TheTheory}.
+This can be greatly simplified by choosing a different gauge (coordinate system) where the metric perturbation is both transverse and traceless (TT) \citep{flanagan2005BasicsGravitational}.
 This is just a choice of coordinate system which does not change any current assumptions. A traceless metric is one where the sum of the diagonal elements are 0 and a transverse metric is when the oscillations are perpendicular to the direction of travel. 
 This gauge imposes two conditions: one is that $h_{\mu \nu}$ is traceless, i.e. that the sum of the diagonal elements are 0 and the other is that $h_{\mu \nu}$ is transverse. 
 The transverse element means that the oscillations of the wave happen perpendicular to the direction of travel.
@@ -127,19 +127,19 @@ The affect of each of the polarisations on a ring of test particles can be seen 
 \subsubsection{Generating gravitational waves}
 
 To generate gravitational waves we go back to Eq.~\ref{intro:lineinstein} where we include the stress-energy term on the right hand side.
-Following the derivation in \citep{Flanagan2005TheTheory}, one can find that the gravitational wave amplitude is related to the second moment of the mass distribution.
+Following the derivation in \citep{flanagan2005BasicsGravitational}, one can find that the gravitational wave amplitude is related to the second moment of the mass distribution.
 The second moment of the mass distribution $I_{\mu\nu}$is defined as,
 \begin{equation}
     I_{\mu \nu}(t) = \int \rho(t,{\bf x}) x^\mu x^\nu d^3x,
 \end{equation}
-where $\rho$ is the mass density, and $x_i$ and $x_j$ are the coordinates \citep{Flanagan2005TheTheory}. 
+where $\rho$ is the mass density, and $x_i$ and $x_j$ are the coordinates \citep{flanagan2005BasicsGravitational}. 
 This is the quadrupole moment tensor without the trace subtracted.
 The gravitational wave amplitude is then defined as,
 \begin{equation}
 \label{intro:gravwave:amp}
     h_{\mu \nu} = \frac{2}{r}  \frac{d^2 I_{\mu \nu}(t-r)}{dt^2}.
 \end{equation}
-This has a slight modification in the TT gauge, see \citep{Flanagan2005TheTheory}, however, has the same relationship between the mass quarupole and the \ac{GW} amplitude.
+This has a slight modification in the TT gauge, see \citep{flanagan2005BasicsGravitational}, however, has the same relationship between the mass quarupole and the \ac{GW} amplitude.
 This shows that for a \ac{GW} to be generated, the second derivative of the mass quadrupole moment is needed.
 A mass quadrupole moment only exists when the mass distribution is not spherically symmetric.
 Therefore, a mass which is asymmetric and accelerating will produce a \ac{GW}.
@@ -172,15 +172,15 @@ In the sections that follow, I will give an overview of the potential sources of
 \subsection{\label{sources:transient} Transient}
 %%%%%%%%%%%%%%%
 
-Transient sources of gravitational waves give short duration signal which is observable from milliseconds to tens of seconds depending on the source. 
+Transient sources of gravitational waves give short duration signals which are observable from milliseconds to tens of seconds depending on the source. 
 Some of these sources will emit signals for a much longer time, however these are at a lower frequency and lower amplitude and not observable by current ground based detectors detectors.
 Transient signals can be well modelled as in \acp{CBC} or can have an unknown signal type such as burst signals.
 
 \subsubsection{\label{sources:transient:cbc} Compact Binary Coalescence}
 
 \acp{CBC} originate from two compact objects which are gravitationally bound and eventually collide.
-Dependent on the masses of the two objects, the gravitational waves generated by the system can be detected by ground based detector such as LIGO \citep{} and Virgo \citep{}. 
-In fact, the only detections to date have been of these signals \citep{}.
+Dependent on the masses of the two objects, the gravitational waves generated by the system can be detected by ground based detector such as LIGO \citep{aasi2015AdvancedLIGO} and Virgo \citep{acernese2015AdvancedVirgo}. 
+In fact, the only detections to date have been originated from this source which include \citep{abbott2016ObservationGravitational,abbott2017GW170814ThreeDetector,abbott2017GW170817Observation}.
 
 The compact objects refered to here refer to either black holes of neutron stars.
 There are generally 3 types of \ac{CBC} source: \ac{BBH}, \ac{BNS} and \ac{NSBH}.
@@ -188,18 +188,19 @@ The general structure of the waveform follows a `chirp' where the \ac{GW} freque
 For higher mass systems such as \ac{BBH} these signals are detectable by ground based detectors for $< 1$s. 
 For lower mass systems such as \ac{BNS} they can be detected for longer periods $\mathcal{O}(10)$s. 
 
-The wave-form of a \ac{CBC} signal is generally split into three separate components: the inspiral, the merger and ring-down. 
-The inspiral part of the signal is when the objects are orbiting each other. As they lose energy to gravitational waves, the radius of the orbit decreases and therefore the frequency increases.
+The wave-form of a \ac{CBC} signal is generally split into three separate components: the inspiral, the merger and ring-down \citep{}. 
+\joe{rewrite this paragraph}
+The inspiral is when the ttwo compact objects are orbiting each other. As they lose energy to gravitational waves, the radius of the orbit decreases and therefore the frequency increases.
 The merger is the period when the two objects begin to join to become a single object.
 The ring-down is the \ac{GW} emitted of the merged object. The joint object can oscillate whilst it settles into its final state. 
 
-In systems which have a neutron star, during the inspiral when the objects are close, the neutron star will begin to deform due to the strong gravity. 
-This becomes useful as it will affect the generated waveform and can help determine the \ac{EOS} for the dense matter in a neutron star.
+In systems which have a neutron star, during the inspiral when the objects are close, the neutron star will begin to deform due to the strong gravity \citep{}. 
+This becomes useful as it will affect the generated waveform and can help determine the \ac{EOS} for the dense matter in a neutron star \citep{}.
 \ac{BNS} systems also offer a way do observe objects in multiple different channels, or what is known as multi-messenger astronomy. 
 This is where the object can be viewed in the \ac{EM} spectrum as well as in gravitational waves.
-This offers much in the field of astronomy as it can aid in the calculation of the Hubble constant. 
+This offers much in the field of astronomy as it can aid in the calculation of the Hubble constant \citep{}. 
 
-Black hole binaries have various formation channels, i.e. there are different way in which a compact binary system can form. 
+Black hole binaries have various formation channels, i.e. there are different way in which a compact binary system can form \citep{}. 
 These formation channels include: two high mass binary stars which collapse, two separate objects capture each other in their gravitational fields and begin to orbit etc..
 However, exactly how common these are or if there are dominant ways in which they form is unknown. 
 With many observations of \ac{CBC} it should be possible to discover which of these, if any, is dominant.
@@ -213,10 +214,10 @@ Burst sources are also short duration however, are un-modelled or difficult to m
 This mean that the exact wave-form of the signal is unknown.
 There are a few possible reasons for the lack in knowledge of the waveform: the physics of the system is too complicated to model in a reasonable amount of time or there is no model of the source.
 As there is no model to generate wave-forms, burst searches cannot use matched filtering as in \ac{CBC} searches.
-Rather burst searches look for short bursts in power which is coherent between multiple detectors \citep{Cornish2015Bayeswave:Glitches,Klimenko2008ABursts}.
+Rather burst searches look for short bursts in power which is coherent between multiple detectors \citep{cornish2015BayeswaveBayesian,klimenko2008CoherentMethods}.
 
 There are a number of systems which could potentially emit a short duration burst signals.
-These include core collapse supernovae \citep{Ott2008TheSupernovae}, \acp{GRB} \citep{Aasi2014SearchNetwork}, cosmic strings \citep{Damour2005GravitationalWindows} and other unknown sources.
+These include core collapse supernovae \citep{ott2008GravitationalWave}, \acp{GRB} \citep{aasi2014SearchGravitational}, cosmic strings \citep{damour2005GravitationalRadiation} and other unknown sources.
 Detecting \ac{GW} from one of these sources could offer more insight into the processes inside hostile environments.
 Burst searches are sensitive to almost any signal which is coherent between detectors. 
 This allows them to be used for searches for \ac{CBC} also.
@@ -231,9 +232,9 @@ The stochastic background has no model for any source, however, is expected to b
 The stochastic background is the incoherent sum of many unresolved \ac{GW} signals.
 The source of these signals can be anything from cosmological sources such as cosmic strings to \ac{CBC} signals.
 These signals can be thought of as the \ac{GW} analog of the \ac{CMB}.
-Where the signal is assumed to be isotropic such that it can be observed at any point on the sky \citep{Christensen2018StochasticBackgrounds}. 
-As the stochastic background is essentially just noise, it is not possible to detect with a single detector \citep{Christensen2018StochasticBackgrounds}.
-Rather, searches for the stochastic background correlate signals between multiple detectors \citep{Romano2019SearchesBackgrounds,Christensen2018StochasticBackgrounds}. 
+Where the signal is assumed to be isotropic such that it can be observed at any point on the sky \citep{christensen2018StochasticGravitational}. 
+As the stochastic background is essentially just noise, it is not possible to detect with a single detector \citep{christensen2018StochasticGravitational}.
+Rather, searches for the stochastic background correlate signals between multiple detectors \citep{romano2019SearchesStochastic,christensen2018StochasticGravitational}. 
 When detected, these signals may be able to offer insights into the early universe and its formation.
 
 
@@ -242,85 +243,88 @@ When detected, these signals may be able to offer insights into the early univer
 \subsection{Continuous waves}
 %%%%%%%%%%%%%%%%%%%%
 
-\joe{General overview, different potential sources}
-
 \acp{CW} are long duration signals which which can be well modelled.
 The signals last for times greater than the observation runs of the detector and in general have a fixed or slowly varying frequency.
-The primary source of \acp{CW} are thought to originate from rapidly rotating neutron stars. 
-However, in the future, early times in a \ac{CBC} signal when two objects are in-spiralling, the signal is essentially continuous.
-These are at a lower frequency for ground based detectors so are expected to be detected by \ac{LISA} \citep{}.
+There are a number or potential sources of \acp{CW} including \ac{CBC} long before their merger.
+Long before a \ac{CBC} merger, the two compact objects are orbiting each other whilst slowly in-spiralling.
+This will emit a long duration, almost fixed frequency sinusoid as its signal.
+This signal however, is at lower frequency than ground based detectors can detect, therefore space based detectors such as \ac{LISA} \citep{} are expected to observe this type of \ac{CW}.
 
-Neutron stars are in general thought to be spherically symmetric.
-Due to Eq.~\ref{intro:gravwave:amp} this would not emit a gravitational wave, as some asymmetry is needed. 
+The primary source for many \acp{CW} searches is for rapidly rotating neutron stars.
+Neutron stars originate when the remnant of a massive star collapses, they are objects with incredibly high density and are highly magnetised.
+They have masses around $1.4-2 \; M_{\odot}$ contained in a star with radius of $\sim 10$ km with magnetic fields ranging from $10^8 - 10^{15}$ G \citep{konar2017MagneticFields}.
+Despite many observations in the electromagnetic spectrum and a large amount of research, these objects are not well understood.
+A key part or neutron stars which is not understood is the \ac{EOS} where a review of the current understanding can be found in \cite{lattimer2016EquationState}.
+The \ac{EOS} relates quantities such as the pressure, temperature and volume of a neutron star and dictates how the neutron star matter behaves.
+Observations of \ac{GW} from neutron stars can place limits on the \ac{EOS} of this matter. 
+These observations have already been made in the form of \ac{BNS} mergers \citep{abbott2017GW170817Observation}.
+However, independent observations of rapidly rotating neutron stars can add to this understanding.
 
+For a neutron star to emit a gravitational wave it needs to have some asymmetry in its mass distribution around its rotation axis, this follows from Eq.~\ref{intro:gravwave:amp}. 
+There are a number of different mechanisms which could cause this and emit \ac{GW}, some of these are reviewed in \citep{glampedakis2017GravitationalWaves,riles2017RecentSearches,haskell2015DetectingGravitational,lasky2015GravitationalWaves}.
+Here I will summarise two main theories: Neutron star mountains and r-mode instabilities.
 
-\begin{itemize}
-    \item rapidly roating neutron stars main source, also early CBC for LISA
-    \item long duration continuously emitted
-    \item can learn about EOS of dense neutron matter
-    \item various emission possiblities
-    \begin{itemize}
-        \item "mountains" -> magnetic distortions -> crust distortions
-        \item fundemental modes inside the neutron star -> fmode -> rmode
-        \item precession
-    \end{itemize}
-    \item have been observed in EM
-    \item 
-\end{itemize}
-
-Continuous \ac{GW} differ from the above categories as the signals are long duration and are well modelled.
-These signals are expected to last for much longer than observing runs of any detector. 
-
-A primary source for continuous signals is expected to be rapidly rotation neutron stars.
-Neutron stars are thought to originate when the remnant of a massive star collapses, they are objects with incredibly high density and are highly magnetised.
-The strong magnetic fields can funnel material along the field lines towards the magnetic poles and cause the emission on X-rays or gamma rays.
-
-
-From electromagnetic observations, the rotation frequency of some pulsars can be observed to decrease with time, this is known as spin-down.
-This spin-down means that the pulsar is losing energy somewhere, a fraction of this is thought to be due to gravitational waves. 
-
-To emit gravitational waves the Pulsar has to have some asymmetry in its mass distribution around the rotation axis as spherically symmetric object do not emit gravitational waves.
-There are a number of mechanisms which pulsars are thought to be able to emit gravitational waves by. The three leading mechanisms are: non-axisymmetric physical distortions in the star, vibrational modes and free precession \citep{Becker2009}.
 
 %%%%%%
-\subsubsection{Triaxial non-axisymmetry}
+\subsubsection{Mountains}
 %%%%%%%%%
 
-Triaxial non-axisymmetry is some deformation of the pulsar which is not symmetric around the rotation axis, this is often described as a `mountain' on its surface.
+One of more likely mechanisms for detectable \ac{GW} emission from neutron stars is from `mountains' on the surface of the star.
+These are permanent deformations on the surface which are non axisymmetric, i.e. the deformation is not symmetric around the rotation axis.
+Fig.~\ref{intro:source:cw:mountain} shows an example of a deformation.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{testimg.png}
+	\caption{star mountain}
+	\label{intro:source:cw:mountain}
+\end{figure}
 
-This assymmetry can be quantified by its ellipticity $\epsilon$,
+This deformation or asymmetry can be quantified by the ellipticity $\epsilon$ of the neutron star.
+This is defined using the principal moments of inertial,
 \begin{equation}
 \label{ellipticity}
 \epsilon = \frac{I_{xx}-I_{yy}}{I_{zz}},
 \end{equation}
-where $I_{zz},I_{xx},I_{yy}$ are the principal moment of interia, where $I_{zz}$ is along the rotation axis. 
-The ellipticity of a neutron star is expected to be $ \epsilon<10^{-5}$ \citep{Becker2009}. 
+where $I_{zz},I_{xx},I_{yy}$ are the principal moment of inertia.
+This is when the star is rotating around the $z$ axis so $I_{zz}$ is along the rotation axis. 
+
 There are a number of theories which describe the origin of this axisymmetry.
-If the pulsar is in a binary system and accreting material from its companion star, the material can be funnelled towards the magnetic poles by the magnetic field, thereby causing a hot spot.
+If the pulsar is in a binary system and accreting material from its companion star, the material can be funnelled towards the magnetic poles by the magnetic field, thereby causing a hot spot \citep{haskell2015DetectingGravitational}.
 This `hot spot' could cause a deformation on the surface of the star which is not axi-symmetric. 
 The magnetic stresses from strong magnetic fields within the star, could potentially also cause non axi-symmetric deformations to the star.
-Finally the spin down of the pulsar itself could cause stresses in the crust of the star until the point of breaking, its then after this break which could leave a distortion in the crust \citep{Becker2009}.
-
-The gravitational waves are expected to be emitted at a frequency which is twice the rotation frequency of the neutron star.
+Finally the spin down of the pulsar itself could cause stresses in the crust of the star until the point of breaking, its then after this break which could leave a distortion in the crust \citep{becker2009NeutronStars}.
+More details on the signal waveform of this type of \ac{GW} and methods to search for it will be explained in Sec.~\ref{searchcw}.
  
  %%%%%%%%%%%%%%
- \subsubsection{Vibrational modes}
+ \subsubsection{Neutron star oscillations}
  %%%%%%%%%%%%%%%
-There are a number of modes within a star such as fundamental (f-modes) and r-modes. 
-Each of these waves are oscillation i the star similar to oscillations in the earth which are used for seismology.
+There are a number of oscillation modes within a star such as f-modes, p-modes and r-modes \citep{becker2009NeutronStars}.
+Each of these waves are oscillation in the star similar to oscillations in the earth which are used for seismology.
 The difference between the different modes are the restoring force bringing the perturbed state back to equilibrium.
-the f-modes use gravity as the restoring force where the oscillations happen in the crust of the star.
-The more promising of these for gravitational wave emission and detection is the r-mode \citep{Becker2009}.
-These are oscillations in the superfluid neutron part of the star,
-where the restoring force for the oscillations is the Coriolis effect from the rotation of the star.
-These are thought to emit gravitational waves at $4/3$ the frequency of rotation \citep{Becker2009}.
-
-%%%%%%%%%%%%%%%
-\subsubsection{Free precession}
-%%%%%%%%%%%%%%
-
-Free precession is when the rotation axis is misaligned with the symmetry axis of the star so that the start `wobbles'. 
-Free precession is expected to produce gravitational waves at a frequency the same as the rotation frequency and twice the rotation frequency \citep{Becker2009}. 
+For example, f-modes use gravity as the restoring force where the oscillations happen in the crust of the star.
+The more promising of these for gravitational wave emission and detection is the r-mode \citep{lasky2015GravitationalWaves}.
+These are oscillations in the superfluid neutron part of the star, where the restoring force is the Coriolis effect from the rotation of the star.
+Fig.~\ref{} shows an highly exaggerated view of a neutron star with an oscillation mode travelling in each direction.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{testimg.png}
+	\caption{Neutron star rotation CFS}
+	\label{intro:source:cw:rmode}
+\end{figure}
+If these modes are excited, then they will emit gravitational radiation which the carries angular momentum \citep{}. 
+For the mode travelling in a clockwise direction, this angular momentum is positive and the mode travelling anti-clockwise the angular momentum is negative. 
+This damps the modes and the magnitude of the perturbation decreases making them extremely difficult to detect.
+Now if the neutron star is rotating, this can lead to an effect called the \ac{CFS} instability \citep{chanrasakar,Freidmann}. 
+As the rotation speed of the neutron star increases, there are two different effects on the modes travelling in opposite directions. 
+For the mode travelling clockwise with the stars rotation, the mode will appear to be travelling faster, therefore, will emit more \ac{GW} taking away angular momentum. This means that this mode will be damped more rapidly.
+The interesting affect is for the mode travelling anti-clockwise, opposite to the stars rotation. 
+At a certain rotation rate, the mode will be `frozen' from the observers perspective and not \ac{GW} will be emitted.
+As the rotation rate increases further, the mode will appear to travel clockwise. 
+Here it is key to remember that this mode had negative angular momentum.
+As the mode rotates its emits positive angular momentum, which is then subtracted from the modes negative angular momentum.
+This effect causes the amplitude of the oscillation to grow and therefore become unstable.
+Therefore, a neutron star is unstable to \ac{GW} emission if it is rotating sufficiently fast \citep{lasky2015GravitationalWaves}.
+For a more detailed view on how r-modes generate \ac{GW} see \citep{owen1998GravitationalWaves}
 
 
 %%%%%%%%%%%%%%%
@@ -334,16 +338,16 @@ Free precession is expected to produce gravitational waves at a frequency the sa
 The theory mentioned above and the indirect detection of gravitational waves from the Hulse-Taylor binary pulsar system left little doubt as to whether \ac{GW} existed. 
 The real challenge was to design an instrument which could directly detect gravitational waves.
 There were a number of different methods for the design of the instrument which includes: resonant bar detectors, both ground based and space based interferometers, pulsar timing arrays and Cosmic microwave background detectors. 
-Resonant bar detectors were initially designed and built by Joseph Weber \citep{Weber1966ObservationDetector}.
+Resonant bar detectors were initially designed and built by Joseph Weber \citep{weber1966ObservationThermal}.
 These are large cylinders of metal which should resonate as a gravitational wave passes by. 
-There are a few different designs of this type of detector, including an omni-directional design \citep{DeWaard2003MiniGRAILDetector}.
+There are a few different designs of this type of detector, including an omni-directional design \citep{dewaard2003MiniGRAILFirst}.
 The majority of these detectors are no longer operational.
-Pulsar timing arrays aim to use the accurate arrival time of pulses from millisecond pulsars to measure \ac{GW} \citep{Hobbs2017GravitationalArrays}. As a \ac{GW} passes between the pulsar and the observer, the arrival time of the pulses should change. 
+Pulsar timing arrays aim to use the accurate arrival time of pulses from millisecond pulsars to measure \ac{GW} \citep{hobbs2017GravitationalWave}. As a \ac{GW} passes between the pulsar and the observer, the arrival time of the pulses should change. 
 Whilst a detection has not been made with this method, these methods are still in use.
-Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisation's of the CMB \citep{Ade2018ConstraintsSeason}. 
+Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisation's of the CMB \citep{ade2018ConstraintsPrimordial}. 
 These use the a range of detectors to look at the CMB however, are yet to confirm a detection of a \ac{GW} signal.
-The most commonly known design of a \ac{GW} detector is the ground based interferometer, these made the first detection of \ac{GW} in 2015 \citep{Abbott2016}.
-These are the focus of this section as the analysis that will follow uses data from the \ac{LIGO} detectors in the USA \citep{Abbott2009,Aasi2015} and Virgo detector in Italy \citep{Acernese2015,Acernese2008}.
+The most commonly known design of a \ac{GW} detector is the ground based interferometer, these made the first detection of \ac{GW} in 2015 \citep{abbott2016ObservationGravitational}.
+These are the focus of this section as the analysis that will follow uses data from the \ac{LIGO} detectors in the USA \citep{abbott2009LIGOLaser,aasi2015AdvancedLIGO} and Virgo detector in Italy \citep{acernese2015AdvancedVirgo,acernese2008StatusVirgo}.
 
 %%%%%%%%
 %%%%%%%%%
@@ -352,7 +356,7 @@ These are the focus of this section as the analysis that will follow uses data f
 %%%%%%%%%
 
 Laser interferometers use the interference of light to measure a length with high precision.
-The majority of this section will focus on ground based interferometers such as \ac{LIGO} and Virgo \citep{Aasi2015,Acernese2015}.
+The majority of this section will focus on ground based interferometers such as \ac{LIGO} and Virgo \citep{aasi2015AdvancedLIGO,acernese2015AdvancedVirgo}.
 A simple design of an interferometer is shown in Fig.~\ref{detectors:interferometer}. 
 Here it shows how the laser is equally split into two, each of these beams is sent down perpendicular arms of the detector which are Fabry-Perot cavities \citep{}. 
 The light then returns to the beam splitter where the two beams are combined and sent to a photo-detector.
@@ -370,7 +374,7 @@ This can be used in gravitational wave detection as the mirrors at the end of ea
 Fig.~\ref{detectors:interferometer} shows the effect of a \ac{GW} in free test masses.
 In the interferometer, this affect essentially changes the relative lengths of the two arms.
 The change in the interference pattern with time is then related to the \ac{GW}.
-Actual ground based \ac{GW} detectors such as \ac{LIGO} \citep{Abbott2009} and Virgo \citep{Acernese2015} are much more complicated than described above.
+Actual ground based \ac{GW} detectors such as \ac{LIGO} \citep{abbott2009LIGOLaser} and Virgo \citep{acernese2015AdvancedVirgo} are much more complicated than described above.
 They use many techniques to reduce affects on the detector which are not astrophysical.
 Some of these effects are listed in Sec.~\ref{intro:detector:noise}
 
@@ -391,7 +395,7 @@ In the same way the sensitivity will be at a minimum when edge to the source.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{C1_Introduction/LIGO_beam_patterns.png}
-    \caption{The antenna response is shown as in \citep{Romano2019SearchesBackgrounds} for the plus, cross and average polarisation's. The detectors arms lie on the x and y axis in the above plots. }
+    \caption{The antenna response is shown as in \citep{romano2019SearchesStochastic} for the plus, cross and average polarisation's. The detectors arms lie on the x and y axis in the above plots. }
     \label{intro:detectors:response}
 \end{figure}
 
@@ -404,11 +408,11 @@ In the same way the sensitivity will be at a minimum when edge to the source.
 To increase the sensitivity of the \ac{LIGO} detectors, a good understanding of the noise is needed. 
 This involves understanding what causes certain features in the detector, and how to reduce the affect of those. 
 There are many sources of noise in the detector which need to be reduced to be able to detect \ac{GW}.
-Some of these noise sources and their affect on the detectors sensitivity are all shown in Fig.~\ref{detectors:noisesensitivity} from \citep{Aasi2015AdvancedLIGO}.
+Some of these noise sources and their affect on the detectors sensitivity are all shown in Fig.~\ref{detectors:noisesensitivity} from \citep{aasi2015AdvancedLIGO}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{C1_Introduction/noise_sensitivity.jpg}
-    \caption{The different noise sources affect the sensitivity of the \ac{LIGO} detectors at different frequencies. This shows the various sources how the affect the noise curve \citep{Aasi2015AdvancedLIGO}.}
+    \caption{The different noise sources affect the sensitivity of the \ac{LIGO} detectors at different frequencies. This shows the various sources how the affect the noise curve \citep{aasi2015AdvancedLIGO}.}
     \label{detectors:noisesensitivity}
 \end{figure}
 Here I will summarise some of the limiting sources and also sources which become useful for understanding later sections.
@@ -542,7 +546,7 @@ The posterior distribution can then be found by sampling,
 \end{equation}
 To find this posterior you could then calculate the value for every point in parameter space. This however, is very computationally expensive and often the posterior distribution is located in a small area in parameter space. 
 Therefore, the majority of the time is sampling a space where the posterior is close to zero, and this is not particularly useful. 
-A different method titled \ac{MCMC} was then proposed \citep{Metropolis1953EquationMachines}, more information on this can be found in \citep{vanRavenzwaaij2018ASampling,Sharma2017MarkovAstronomy}.
+A different method titled \ac{MCMC} was then proposed \citep{metropolis1953EquationState}, more information on this can be found in \citep{vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
 This randomly jumps around the parameter space and accepts jumps which have a higher posterior value. 
 If the posterior value is lower than the previous step then the jump is accepted with some probability. This means that there is a random chance that a value lower than the current is accepted.
 This does not waste time calculating areas in parameter space of low posterior values and therefore, efficiently builds an estimate of the posterior distribution.
@@ -554,7 +558,7 @@ This is known as a bayes factor where two models $I_1$ and $I_2$ are compares an
     B = \frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)}
 \end{equation}
 This then requires the calculation of the evidence.
-To estimate the evidence efficiently a method known as Nested sampling \citep{Skilling2006NestedComputation,Speagle2019Dynesty:Evidences} is used.
+To estimate the evidence efficiently a method known as Nested sampling \citep{skilling2006NestedSampling,speagle2019DynestyDynamic} is used.
 
 The methods described above then provide a way to estimate parameters of a model given some data. 
 Also this provides a way to compare different models given some observation.

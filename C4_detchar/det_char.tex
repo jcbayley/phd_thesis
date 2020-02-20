@@ -26,7 +26,7 @@ The majority of this section will focus on a particular class of artefact called
 
 Instrumental lines have the general structure that they are persistent noise artefacts.
 There are many classes of instrumental line including: narrow, fixed frequency spectral artefacts or broad features which wander in frequency.
-A few example of these features are shown in Fig.~\ref{}. 
+A few examples of these are shown in Fig.~\ref{}. 
 
 \begin{figure}
     \centering
@@ -35,7 +35,7 @@ A few example of these features are shown in Fig.~\ref{}.
     \label{fig:my_label}
 \end{figure}
 
-As described in Sec.~\ref{}, \ac{CW} are long duration signals with a slowly varying frequency.
+As described in Sec.~\ref{searchcw}, \ac{CW} are long duration signals with a slowly varying frequency.
 In the case of an isolated neutron star, the signal which is searched for is narrow-band and a fixed frequency which is Doppler modulated by the earths rotation and orbit.
 For certain areas of parameter space, the astrophysical signal of an isolated neutron star can appear very similar to an instrumental line. 
 Many of these lines can be ignored if they appear in a single detector, or a statistic such as in Sec.~\ref{viterbi:las} can be used to limit their effect.
@@ -43,11 +43,10 @@ However, there are many examples of instrumental line which appear at the same o
 These pose a real challenge to some \ac{CW} searches, and require a lot of investigation to limit their affect.
 
 
-
 The origin of many instrumental lines have been identified.
 Many of these can and have been removed, however, some cannot be removed. 
 An example of a line which cannot be removed is the violin modes of the suspensions of the detectors mirrors. 
-These 
+These areas of the frequency spectrum are generally assumed to be contaminated and are ignored in any search.
 
 
 
@@ -66,6 +65,20 @@ These
 %%%%%%%%%%
 %%%%%%%%%%
 
+When a detector is running, it is very important to identify instrumental lines and monitor them.
+This can then lead to either locating the origin of the line such that it can be removed, or allowing it to be flagged for other search algorithms.
+The lines are generally identified in the \ac{GW} channel, this is the output of the detector which \ac{GW} are observed and is the data using is previous chapters.
+
+As well and the \ac{GW} channel the detector records many different channels known as auxillary channels. 
+These channels monitor many components of the detector and anything which may affect the \ac{GW} channel.
+For example, the seismomenter which are located near the corner stations and end stations are all channels which are monitered. 
+
+Some of the channels which are useful for monitoring and locating lines include: \ac{PEM} , .......
+\ac{PEM} channels include instrumental such as magnetometers and ........
+These are useful to investigate alongside the main \ac{GW} channel.
+The main goal is to reduce the number of artefacts in the \ac{GW} such that it is as close to Gaussian noise as possible.
+If an artefact shows up in the \ac{GW} channel in coincidence with one of the \ac{PEM} or other channels, then this is an indicator that the artefact originates from something related to that \ac{PEM}.
+For example, 
 
 
 %%%%%%%%%%%

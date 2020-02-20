@@ -1,0 +1,10 @@
+*.aux
+*.out
+*.log
+*.blg
+*.lot
+*.lof
+*.toc
+*.DS_Store
+
+*.ipynb_checkpoints
