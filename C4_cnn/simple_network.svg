@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="simple_network.svg"
+   inkscape:version="1.0beta1 (32d4812, 2019-09-19)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 287 238"
+   height="238mm"
+   width="287mm">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="23"
+     inkscape:window-x="0"
+     inkscape:window-height="907"
+     inkscape:window-width="1680"
+     inkscape:guide-bbox="true"
+     showguides="true"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="332.72029"
+     inkscape:cx="291.14141"
+     inkscape:zoom="0.98994949"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base">
+    <sodipodi:guide
+       id="guide896"
+       orientation="0,-1"
+       position="-49.136905,69.422619" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       id="g881">
+      <circle
+         style="opacity:0.592949;fill:none;stroke:#000000;stroke-width:0.9;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.461538;paint-order:markers stroke fill"
+         id="path849"
+         cx="28.537201"
+         cy="48.569939"
+         r="8.1264877"
+         inkscape:tile-cx="28.537202"
+         inkscape:tile-cy="48.569941"
+         inkscape:tile-w="17.152976"
+         inkscape:tile-h="17.152976"
+         inkscape:tile-x0="19.960714"
+         inkscape:tile-y0="39.993453" />
+      <use
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#path849"
+         xlink:href="#path849"
+         transform="translate(0,25.746617)"
+         id="use853" />
+      <use
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#path849"
+         xlink:href="#path849"
+         transform="translate(0,51.493234)"
+         id="use855" />
+      <use
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#path849"
+         xlink:href="#path849"
+         transform="translate(0,77.239852)"
+         id="use857" />
+    </g>
+    <g
+       transform="translate(21.922619,2.6458333)"
+       id="g888">
+      <use
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#path849"
+         xlink:href="#path849"
+         id="use851"
+         transform="translate(42.71131,-14.741071)"
+         width="100%"
+         height="100%"
+         inkscape:tile-cx="71.248514"
+         inkscape:tile-cy="33.828869"
+         inkscape:tile-w="17.152976"
+         inkscape:tile-h="17.152976"
+         inkscape:tile-x0="62.672026"
+         inkscape:tile-y0="25.252381" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use851"
+         xlink:href="#use851"
+         transform="translate(0,25.746617)"
+         id="use861" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use851"
+         xlink:href="#use851"
+         transform="translate(0,51.493234)"
+         id="use863" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use851"
+         xlink:href="#use851"
+         transform="translate(0,77.239852)"
+         id="use865" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use851"
+         xlink:href="#use851"
+         transform="translate(0,102.98647)"
+         id="use867" />
+    </g>
+    <use
+       height="100%"
+       width="100%"
+       transform="translate(100.54167,42.711309)"
+       id="use869"
+       xlink:href="#use859"
+       inkscape:tiled-clone-of="#use859"
+       y="0"
+       x="0" />
+    <g
+       transform="translate(37.419643,4.5357143)"
+       id="g894">
+      <use
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use851"
+         xlink:href="#use851"
+         id="use859"
+         transform="translate(49.892857,10.96131)"
+         width="100%"
+         height="100%"
+         inkscape:tile-cx="121.14137"
+         inkscape:tile-cy="44.790179"
+         inkscape:tile-w="17.152976"
+         inkscape:tile-h="17.152976"
+         inkscape:tile-x0="112.56488"
+         inkscape:tile-y0="36.213691" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use859"
+         xlink:href="#use859"
+         transform="translate(0,25.746617)"
+         id="use871" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use859"
+         xlink:href="#use859"
+         transform="translate(0,51.493234)"
+         id="use873" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#use859"
+         xlink:href="#use859"
+         transform="translate(0,77.239852)"
+         id="use875" />
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path898"
+       d="M 84.72444,36.348656 36.883194,48.108515 84.991709,61.739261 37.150463,74.568197 84.457169,87.129865 37.150463,100.49334 84.72444,112.52047 36.883194,126.41848 84.72444,138.17835"
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>
