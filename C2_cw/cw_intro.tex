@@ -147,15 +147,17 @@ This method can greatly reduce the time taken for the analysis depending on the 
 
 There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. 
 I will summarise some of these searches below, some of these searches were summarised and compared in \citep{walsh2016ComparisonMethods}.
+Many of these searches use a set of 1800s long Fourier transforms as the input data, known as \acp{SFT}. This is a default for many all-sky \ac{CW} searches, where it assumes that the signal remains within one frequency bin during that 1800s.
 
 \begin{description}
 	
-	\item[Stack-slide] Stack uses a set of Fourier transforms of the data known as \acp{SFT}, specifically it uses the power spectrum of these. Each of the separate Fourier transforms (segments) is shifted up or down relative to the others to account for the doppler modulation of the source. The power from each can then be stacked. More explanation of this can be found in \citep{}  
+	\item[Stack-slide] Stack uses a set of Fourier transforms of the data known as \acp{SFT}, specifically it uses the power spectrum of these. Each of the separate Fourier transforms (segments) is shifted up or down relative to the others to account for the doppler modulation of the source. The power from each can then be stacked. More explanation of this can be found in \citep{brady2000SearchingPeriodic, cutler2005ImprovedStackslide}  
 	
-	\item[Hough] The Hough transform is based on the stack-slide algorithm. The main difference is that the detectionn statistic for each segment is assigned a weight of 0 or 1 depending if it crossed a detection threshold. The Hough transform can the create a `Hough map' which gives a view of the data in parameter space. This approach is explained in greated detail in \citep{}. 
-	This method has been applied in two main ways known as Sky Hough and Frequency Hough
+	\item[Hough] The Hough transform is based on the stack-slide algorithm. The main difference is that the detectionn statistic for each segment is assigned a weight of 0 or 1 depending if it crossed a detection threshold. The Hough transform can the create a `Hough map' which gives a view of the data in parameter space. This approach is explained in greated detail in \citep{krishnan2004HoughTransform,antonucci2008DetectionPeriodic}. 
+	This method has been applied in two main ways known as Sky Hough \citep{krishnan2004HoughTransform}and Frequency Hough \citep{antonucci2008DetectionPeriodic,astone2014MethodAllsky}.
 	
-	\item[Einstein@Home] Einstein at 
+	\item[Einstein@Home] Einstein at home uses the $\mathcal{F}$-statistic mentioned above in various stages. It has a heiarachial structure where it starts with shorted coherence lengths and searches for stronger candidates over a longer coherence time with a reduced size of parameter space. 
+	This provides the most sensitive all-sky \ac{CW} search and uses a distributed computing project. 
 	
 	\item[Time domain $\mathcal{F}$-statistic]
 	
@@ -165,4 +167,35 @@ I will summarise some of these searches below, some of these searches were summa
 \end{description}
 
 
+Each of these searches uses a large computational cost. In \citep{walsh2016ComparisonMethods} a \ac{MDC} was conducted to compare the senstivity of some of the searches, where an expected runtime for and O1 search was presented. 
+The results of this are shown in Tab.\ref{searchcw:search:semi:cost}.
+\begin{table}
+	\centering
+	%
+	\caption{From \citep{walsh2016ComparisonMethods}, shows the computational cost for the first 4 months of advanced \ac{LIGO} for each search. One MSU is a million standard units, where one standard unit is one core-hour on a standard core. ` Expected computational costs of searches using the first four months of advanced LIGO data with each search pipeline. These estimates are for a different data observing time from that of the MDC, and do not cover the same parameter space as each other or the MDC. The Einstein@Home searches uses the computing resources of the Einstein@Home project and is designed to run for 6 - 10 months in the Einstein@Home grid.'  \label{searchcw:search:semi:cost}}
+	
+	%
+	\bgroup
+	\def\arraystretch{1.5}
+	\centering
+	\begin{tabular}{|c c|}
+		\hline
+		Pipeline & Expected runtume of O1 search \\
+		\hline
+		Powerflux & 6.8 MSU \\
+
+		Time domain $\mathcal{F}$-statistic & 1.6 MSU\\
+
+		Frequency Hough & 0.9 MSU \\
+
+		Sky Hough & 0.9 MSU\\
+		\hline
+		Einstein@Home & 100-170 MSU\\
+		\hline
+
+	\end{tabular}
+	\egroup
+\end{table}
+Even the fastest of these searches takes close to 1 million core-hours to search through four months of data.
+Running computing clusters can be costly, therefore, the focus of much of this thesis is to develop techniques to reduce the computational cost of an all-sky search for \ac{CW}.
 
