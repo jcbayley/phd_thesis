@@ -20,7 +20,7 @@ To inject into a spectrogram the power spectrum of the signal will need to be si
 
 It can be shown that the \ac{PSD} of Gaussian noise with zero mean and unit variance is a $\chi^2$ distribution with 2 degrees of freedom. Therefore, if we want to generate a spectrogram for Gaussian noise, we just generate a two dimensional array of values distributed as $\chi^2$ with two degrees of freedom.
 Assuming that there is some sinusoidal signal with a given \ac{SNR} within a Gaussian noise time-series with zero mean and unit variance, the \ac{FFT} power in a particular frequency bin can be estimated using a non-central $\chi^2$ distribution with 2 degrees of freedom, where the non centrality parameter is the square of the \ac{SNR}. 
-To calculate the \ac{SNR} in a given frequency bin the equation in \citep{Prix2007} for optimal \ac{SNR} was used,
+To calculate the \ac{SNR} in a given frequency bin the equation in \citep{prix2007SearchContinuous} for optimal \ac{SNR} was used,
 \begin{equation}
     \rho(0)^2 = \frac{1}{2}h_0^2 T S^{-1} \left[ \alpha_1 A + \alpha_2 B + \alpha_3 C \right],
 \end{equation}
@@ -45,3 +45,30 @@ where,
 The signals frequency varies with time and will not always be located at the center of a frequency bin, therefore, when taking the \ac{FFT} some of the power is spread over multiple frequency bins. 
 In our injections into the power spectrum we need to account for this effect. 
 For a given frequency bin width 
+
+
+%%%%%%%
+%%%%%%
+\subsection{\label{intro:search:signals} Signals in data}
+%%%%%%%
+%%%%%%
+
+The data recorded from a detector, $x(t)$, will include the signal model described in Eq.~\ref{sigmod} above, but it will be buried in the noise of the detector. 
+If we assume the noise is Gaussian distributed and the noise and signal add linearly, then,  
+\begin{equation}
+\label{signalinnoise}
+x(t) = n(t) + h(t; \mathcal{A},{\boldsymbol \lambda}) ,
+\end{equation}
+where $n(t)$ is the noise, $h(t)$ is the signal and $\mathcal{A}$ and ${\boldsymbol \lambda}$ refer to the amplitude and Doppler parameters respectively. 
+The optimal signal to noise ratio (SNR) squared of this signal is defined as the scalar product of the signal with itself,
+\begin{equation}
+\rho^2(0) = ({\bf h} \mid {\bf h}) = \sum_X(h^X \mid h^X),
+\end{equation}
+where if there is more than one detector the SNR squared for each detector $X$ can be summed \citep{prix2007SearchContinuous}. 
+The scalar product of two time series, $x(t)$ and $y(t)$, is defined by,
+
+\begin{equation}
+\label{intro:search:signals:scalarproduct}
+(x \mid y) = 4 \Re \int_{0}^{\infty} \frac{\tilde{x}(f)\tilde{y}^{*}(f)}{S_n(f)}df,
+\end{equation}
+where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \citep{prix2007SearchContinuous}.

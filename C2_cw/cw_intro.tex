@@ -5,7 +5,7 @@ Whilst I have described the potential sources of the signal and its signal type 
 
 
 
-\subsection{\label{intro:search:model}Continuous signal model}
+\section{\label{searchcw:model}Continuous signal model}
 
 The model of a \ac{GW} signal from a pulsar is relatively simple, it is a quasi-sinusoidal signal. This means that the signal is a sinusoid with a slowly varying frequency. One reason for the slow variance in the frequency is due to the energy loss to \ac{GW} as the pulsar spins down.
 Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
@@ -16,28 +16,31 @@ $\psi$ and $\phi_0$ and $h_0 $ are the \ac{GW} polarisation, initial phase and a
 $\iota$ is the inclination angle which is how much the source is tilted relative to the observer. 
 $\theta$ is the `wobble angle' or the angle between the rotation axis and the symmetry axis of the neutron star.
 
-The definition of the \ac{GW} from a neutron star here follows that in \citep{Schutz1998DataDetection}. The amplitude of the \ac{GW} can be defined as,
+The definition of the \ac{GW} from a neutron star here follows that in \citep{schutz1998DataAnalysis,riles2017RecentSearches,dupuis2005BayesianEstimation}. The amplitude of the \ac{GW} can be defined as,
 \begin{equation}
 \label{intro:cw:ht}
-h(t) = F_+(t)(h_{1+}(t) + h_{2+}(t)) +F_{\times}(t)(h_{1\times}(t) + h_{2\times}(t)),
+h(t) = F_+(t)h_{+}(t) +F_{\times}(t)h_{\times}(t),
 \end{equation}
-where $h_{1+}$ and $h_{2+}$ are the two components of the plus polarisation and $h_{1\times}$ and $h_{2\times}$ are the two components of the cross polarisation functions.
+where $h_{+},h_{\times}$ are the plus and cross polarisations functions as in Eq.\ref{intro:gravwave:amp} \joe{check reference} and $F_{+},F_{\times}$ are the antenna pattern functions to the two polarisations.
 These are defined by,
 \begin{equation}
 \label{intro:cw:amplitudes}
     \begin{split}
-        h_{1+}(t) &= \frac{1}{8} h_0 \sin{2\theta} \sin{2\iota}\cos{\Phi(t)} \\
-        h_{2+}(t) &= \frac{1}{2} h_0 \sin^2{\theta} \left( 1 + \cos^2{\iota}\right) \cos{2\Phi(t)} \\
-        h_{1\times}(t) &= \frac{1}{4} h_0 \sin{2\theta} \sin{\iota} \sin{\Phi(t)} \\
-        h_{2\times}(t) &= h_0 \sin^2{\theta} \cos{\iota} \sin{2\Phi(t)}.
+        h_{+}(t) &=  h_0 \frac{1 + \cos^2{(\iota)}}{2}\cos{\left(\Phi(t)\right)} \\
+        h_{\times}(t) &= h_0  \cos{(\iota)} \sin{\left( \Phi(t)\right) } \\
     \end{split}
 \end{equation}
-The plus and cross polarised components then depend on the \ac{GW} amplitude $h_0$, the wobble angle $\theta$ and the inclination angle of the source $\iota$. The phase of the wave $\Phi(t)$ can be defined as,
+The plus and cross polarised components then depend on the \ac{GW} amplitude $h_0$, the inclination angle of the source $\iota$ and the phase evolution of the \ac{GW}. Here I have chosen to assume a small wobble angle $\theta$, however, this is included in \citep{schutz1998DataAnalysis}. The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \ac{SSB} can be defined as,
 \begin{equation}
-    \Phi(t) = \phi_0 + \phi_{f}(t,f) + \phi_{{\rm sky}}(t,\alpha,\delta).
+\label{searchcw:model:phase}
+    \Phi(t_{{\rm SSB}}) = \phi_0 + 2\pi\left[ f(t_{{\rm SSB}} - t_0) + \frac{1}{2} \dot{f} (t_{{\rm SSB}} - t_0)^2 + .....\right] .
 \end{equation}
-This consists of an initial phase $\phi_0$, a component of the phase which describes how the frequency of the source changes with time $\phi_f(t)$ and a component which accounts for the Doppler shift of the detectors as the earth rotates and orbits the sun $\phi_{{\rm sky}}(t,\alpha,\delta)$.
-A full derivation of this can be found in \citep{Schutz1998DataDetection} where each of these terms are expanded.
+This consists of an initial phase $\phi_0$ which is the phase at time $t_0$, the frequency of the signal $f$ and its derivative ${\dot{f}}$ at time $t_0$. Here we show the phase to second order, however, this can be easily extended if necessary. 
+The time at the \ac{SSB} $t_{{\rm SSB}}$ can be transformed to the time $t$ at the detector by,
+\begin{equation}
+t_{{\rm SSB}} = t - \frac{\mathbf{r}_d \cdot \mathbf{k}}{c} + \delta_t.
+\end{equation}
+Here $\mathbf{r}_d$ is the position of the detector with reference to the \ac{SSB}, $\mathbf{k}$ is a unit vector in the direction of the source. This essentially takes into account the Doppler shift of the signal due to the movement of the detector, i.e. as the earth rotates and orbits the sun. $c$ is the speed of light and $\delta t$ is extra corrections from the Einstein, Binary and Shapiro delay \citep{}.
 The amplitudes $h_0$ in Eq.~\ref{intro:cw:amplitudes} are defined by,
 \begin{equation}
     h_0 = \frac{16 \pi^2 G}{c^4} \frac{\epsilon I f^2}{r},
@@ -53,7 +56,7 @@ In Eq.~\ref{intro:cw:ht}, $F_+(t)$ and $F_{\times}(t)$ are the antenna pattern f
 These describe how sensitive a detector is to a particular location on the sky at any given time. 
 The amplitude of the signal will vary dependent on the orientation and location of the detector relative to the source.
 This is described in Sec.~\ref{intro:detector} and the response to sky location is shown in Fig.~\ref{intro:detectors:response}.
-These components are defined in \citep{Schutz1998DataDetection} as,
+These components are defined in \citep{schutz1998DataAnalysis} as,
 \begin{equation}
 \label{intro:cw:antenna}
 \begin{split}
@@ -61,63 +64,105 @@ F_{+}(t) &= \sin{\zeta}[a(t)\cos{(2\psi)} + b(t)\sin{(2\psi)}], \\
 F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
 \end{split}
 \end{equation}
-where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle of the \ac{GW} and $a(t)$ and $b(t)$ are defined in \citep{Schutz1998DataDetection} and relate the sky location to the orientation of the detector at a given time. 
+where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle of the \ac{GW} and $a(t)$ and $b(t)$ are defined in \citep{schutz1998DataAnalysis} and relate the sky location to the orientation of the detector at a given time. 
+A full derivation of this can be found in \citep{schutz1998DataAnalysis} where each of these terms are expanded.
 
 Eqs.~\ref{intro:cw:ht} - \ref{intro:cw:antenna} then describe the amplitude and phase evolution of a signal at a given detector location and orientation.
 
 
-%%%%%%%
+%%%%%%%%%%%55
+%%%%%%%%%%%%%
+\section{\label{searchcw:search} Continuous wave searches}
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+There are many different methods to search for continuous gravitational waves.
+They can be split into three general categories: Targeted searches, Directed searches and All-sky searches.
+The main difference between these different categories is the amount which is known about the source prior to the search.
+For targeted searches the sky position $(\alpha,\delta)$ and rotation frequency are known from electromagnetic observations, i.e. X-ray, radio or $\gamma$-ray.
+Directed searches have information on the sky position $(\alpha,\delta)$ but not the rotation frequency.
+For all-sky searches, there is no prior knowledge of the pulsar, therefore, is a search for unknown pulsars.
+In general the searches in each of these categories use two distict techniques: Fully coherent searches and Semi-coherent searches
+
 %%%%%%
-\subsection{\label{intro:search:signals} Signals in data}
-%%%%%%%
+%%%%%%
+\subsection{\label{searchcw:search:coherent}Fully coherent}
+%%%%%%
 %%%%%%
 
-The data recorded from a detector, $x(t)$, will include the signal model described in Eq.~\ref{sigmod} above, but it will be buried in the noise of the detector. 
-If we assume the noise is Gaussian distributed and the noise and signal add linearly, then,  
+A Fully coherent search generaly uses a pre generated waveform which follows the model described in Sec.~\ref{searchcw:model}. 
+This contains all the phase information of the signal.
+The set of parameters which genereated the waveform which `matches' the best can then be considered as the optimum set of parameters given the data.
+This is known as a matched filter \citep{} and is used in \ac{CW} searces in \citep{dupuis2005BayesianEstimation,}.
+
+The matched filter maximises the signal to noise ratio for a given filter, in this case the filter is our \ac{CW} model. 
+The matched filter used for \ac{CW} models is defined in \citep{prix2007SearchContinuous} and it titled the $\mathcal{F}$-statistic. 
+This essentially maximises a likelihood with respect to the parameters.
+If one assumes that the noise $n$ is Gaussian and zero mean, the data $x$ can be written as,
 \begin{equation}
-\label{signalinnoise}
-x(t) = n(t) + h(t; \mathcal{A},{\boldsymbol \lambda}) ,
+		x(t) = n(t) + h(t).
 \end{equation}
-where $n(t)$ is the noise, $h(t)$ is the signal and $\mathcal{A}$ and ${\boldsymbol \lambda}$ refer to the amplitude and Doppler parameters respectively. 
-The optimal signal to noise ratio (SNR) squared of this signal is defined as the scalar product of the signal with itself,
+The likelihood can then be written as,
 \begin{equation}
-\rho^2(0) = ({\bf h} \mid {\bf h}) = \sum_X(h^X \mid h^X),
+		\log \Lambda = \left( x \mid h \right) - \frac{1}{2} \left( h \mid h\right) 
 \end{equation}
-where if there is more than one detector the SNR squared for each detector $X$ can be summed \citep{Prix2007}. 
-The scalar product of two time series, $x(t)$ and $y(t)$, is defined by,
-
+where the product $(g \mid g)$ is defined as,
 \begin{equation}
-\label{intro:search:signals:scalarproduct}
-(x \mid y) = 4 \Re \int_{0}^{\infty} \frac{\tilde{x}(f)\tilde{y}^{*}(f)}{S_n(f)}df,
+		\left( x \mid y \right) = 4 \mathcal{R} \int^{\infty}_{-\infty}  \frac{\tilde{x}^{{\rm X}}(f) \tilde{y}^{{\rm X *}}(f)  }{S^{X}(f)} \mathrm{d}f.
 \end{equation}
-where $\tilde{x}(f)$ is the Fourier transform of $x(t)$, $\tilde{y}^{*}(f)$ is the complex conjugate of the Fourier transform of $y(t)$ and $S_n(f)$ is the single sided noise power spectral density \citep{Prix2007}.
+This is fulle expanded into the $\mathcal{F}$-statistic in \citep{schutz1998DataAnalysis}, however, it is essentially this likelihood function which is maximised. 
 
-%%%%%%
-%%%%%%
-\subsection{\label{intro:search:coherent}Fully-coherent searches}
-%%%%%%
-%%%%%%
 
-Fully coherent searches are currently the most sensitive searches for continuous sources of gravitational waves. These searches are based on matched filtering which coherently correlate pre-generated waveforms with the data, this is used in \citep{Dupuis2005,Jaranowski1998,}.
-In a simple form the matched filter filters the data $h$ with a template $w$ using the inner product defined in Eq.~\ref{intro:search:signals:scalarproduct}. 
+Targeted searches look for a specific pulsar which has been observed in the electromagnetic spectrum.
+These observations give information such as the sky position and the frequency evolution of the source.
+Using knowledge of the earths position around the sun, which is well known, one can use the accurate sky position and frequency of a known source to find its phase evolution in Eq.~\ref{searchcw:model:phase}.
+This mean that for this type of search one can maximise the likelihood with respect to the parameters  $h_0, \phi_0, \iota$ and $\psi$.
+Another method which uses templates is described in \citep{dupuis2005BayesianEstimation}, this uses a Bayesian approach.
 
-Continuous wave signals need a large amount of integration time, $\mathcal{O}(\rm{years})$, for the signal to become clear within the data, therefore, given that the \ac{LIGO} detectors sample at 16 kHz, the amount of data to search over is large. 
-Performing the coherent matched filter on this data can take a large amount of time, therefore, as the majority of sources which are searched for have a narrow bandwidth, many searches use techniques to reduce the amount of data. 
-For example, in \citep{Dupuis2005} the data is heterodyned (mixed with some local oscillator), low passed filtered and then down-sampled. This reduced the amount of data to be searched over while not losing any source information. 
+This type of search can take long periods of time. 
+This is due both to the size of the parameter space and the amount of data which needs to be searched.
+\ac{CW} searches need long observation times in order to accumulate the required \ac{SNR} for detection.
+Therefore, most searches use data from an entire \ac{LIGO} observing run which can last for $\mathcal{O}(1)$ years.
+Given that the sampling rate for the \ac{GW} channel is $16$ kHz usually downsampled to $\sim 4$ kHz, the quantity of data is large. 
 
-Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all sky searches no parameters of the source are known, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
+
+Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all-sky and directed searches, this type of search is no feasible. 
+This is becasue all-sky and directed searches have a wider parameter space, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
 This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
 
+
 %%%%%%
 %%%%%%
-\subsection{\label{intro:search:semicoherent}Semi-coherent searches}
+\subsection{\label{searchcw:search:semi}Semi coherent}
 %%%%%%
 %%%%%%
 
 Semi-coherent searches offered a solution to searching over large parameters spaces and large amounts of data. 
-The data is split into smaller segments and the analysis is run separately on each of those segments, then each result is combined incoherently. 
-This can greatly reduce the time taken for the analysis depending on the segment length, however, will always come with some loss in sensitivity. 
+As is directed and all-sky searches the phase evolution of the source is not known, one cannot use a coherent search for the entire observing run.
+It may however, be possible to approximately describe the phase for a shorter length of time known as the coherence time, $T_{coh}$.
+The general idea of a semi-coherent search is to break the data-set into smaller section which each can be analysed coherently.
+The coherent analysis can use the matched filter as described in Sec.~\ref{searchcw:search:coherent} or another method such as a Fourier transform.
+The results from each of these individual sections can the be combined incoherently using various methods which will be summarised later. 
+This method can greatly reduce the time taken for the analysis depending on the coherence length, however, will always come with some loss in sensitivity. 
 
-There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. Many of these use 1800s (30 mins) \acp{SFT} as the input to their search as they can be calculated efficiently. 
+There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. 
+I will summarise some of these searches below, some of these searches were summarised and compared in \citep{walsh2016ComparisonMethods}.
+
+\begin{description}
+	
+	\item[Stack-slide] Stack uses a set of Fourier transforms of the data known as \acp{SFT}, specifically it uses the power spectrum of these. Each of the separate Fourier transforms (segments) is shifted up or down relative to the others to account for the doppler modulation of the source. The power from each can then be stacked. More explanation of this can be found in \citep{}  
+	
+	\item[Hough] The Hough transform is based on the stack-slide algorithm. The main difference is that the detectionn statistic for each segment is assigned a weight of 0 or 1 depending if it crossed a detection threshold. The Hough transform can the create a `Hough map' which gives a view of the data in parameter space. This approach is explained in greated detail in \citep{}. 
+	This method has been applied in two main ways known as Sky Hough and Frequency Hough
+	
+	\item[Einstein@Home] Einstein at 
+	
+	\item[Time domain $\mathcal{F}$-statistic]
+	
+	\item[Powerflux]
+	
+	
+\end{description}
+
 
 

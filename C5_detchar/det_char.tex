@@ -6,34 +6,48 @@ A large fraction of \ac{GW} search algorithms, including SOAP above, assume that
 However, the detectors contain artefacts which are not distributed as a Gaussian. 
 These artefacts can negatively affect many searches for \ac{GW} as they can be easily mistaken for a real \ac{GW} signal.
 Some of the potential sources of these artefacts have been mentioned in Sec.~\ref{intro:detector:noise}. 
-There are many different classes of artefact such as: glitches, \joe{fill}, instrumental lines and .
+There are many different classes of artefact, some key types include: glitches, these are short duration signals and instrumental lines which are long duration.
 To conduct a reliable search there are two main tasks which are necessary for detector characterisation.
 The first is identifying the artefact such that any search knows that part of data is contaminated.
 The search can then remove that section of data, or use more sophisticated techniques to deal with the artefact \citep{}.
 The second task is to find the source of the artefact. 
 If the source of the artefact is found, it can potentially be removed or limited for future data runs.
-The majority of this section will focus on a particular class of artefact called instrumental lines and how the affect \ac{CW} searches.
 
-
+The focus of this chapter is on a particular class of artefact called instrumental lines and how the affect \ac{CW} searches.
+Sec.~\ref{detchar:lines} will introduce different classes of instrumental line and how it affects a \ac{CW} search.
+Sec.~\ref{detchar:monitor} will outline how these artefacts are detected and monitored, and describe current tools used for this task.
+Sec.~\ref{detchar:soap} will describe how the \ac{CW} search algorithm introduces in Sec.~\ref{soap} can be used to search for instrumental lines.
+Finally Sec.~\ref{detchar:summary} will show the outputs of the search and this is displayed for ease of use.
 
 
 
 %%%%%%%%%
 %%%%%%%%%%
-\section{Instrumental lines}
+\section{\label{detchar:lines}Instrumental lines}
 %%%%%%%%%
 %%%%%%%%%
 
 Instrumental lines have the general structure that they are persistent noise artefacts.
-There are many classes of instrumental line including: narrow, fixed frequency spectral artefacts or broad features which wander in frequency.
-A few examples of these are shown in Fig.~\ref{}. 
+There are many classes of instrumental line including: narrow, fixed frequency spectral artefacts or broad features which have a time varying frequency known as wandering lines.
+Many of these lines can make it difficult to distinguish them from an astrohysical signal.
+Therefore, it is crucial to understand the structure and origin of these lines when performing a \ac{CW} search.
 
+The affect of the instrumental lines on the detectors frequency spectrum becomes obvious in Fig.~\ref{detchar:line:psd}. 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{testimg.png}
-    \caption{Caption}
-    \label{fig:my_label}
+    \caption{Examples of different types of instrumental lines}
+    \label{detchar:line:psd}
 \end{figure}
+There are many narrow artefacts in the frequency spectrum, many of the larger peaks are known instrumental effects.
+These include:
+\begin{description}
+	\item[Power line] The power line harmonics are fundemental to the detector and originate from the US mains supply. These lines exist at 60 Hz which is the frequency of the mains alternating current oscillates at \citep{aasi2015CharacterizationLIGO}.
+	
+	\item[violin modes] The violin modes are associated with the suspensions of the mirrors and the beam splitter in the detector. 
+	
+	\item[calibration lines]
+\end{description}
 
 As described in Sec.~\ref{searchcw}, \ac{CW} are long duration signals with a slowly varying frequency.
 In the case of an isolated neutron star, the signal which is searched for is narrow-band and a fixed frequency which is Doppler modulated by the earths rotation and orbit.
@@ -57,11 +71,12 @@ These areas of the frequency spectrum are generally assumed to be contaminated a
     \item many examples from known sources
     \item many searches currently exist which look through data
     \item . wandering lines are a large problem as hard to track especially when weak
+    \item how to these affect cw searches
 \end{itemize}
 
 %%%%%%%%%%
 %%%%%%%%%%
-\section{Identifying and monitoring instrumental lines}
+\section{\label{detchar:monitor}Identifying and monitoring instrumental lines}
 %%%%%%%%%%
 %%%%%%%%%%
 
@@ -83,7 +98,7 @@ For example,
 
 %%%%%%%%%%%
 %%%%%%%%%%%
-\section{Identifying and cleaning lines with SOAP}
+\section{\label{detchar:soap}Identifying and cleaning lines with SOAP}
 %%%%%%%%%%%
 %%%%%%%%%%%%
 
@@ -97,7 +112,7 @@ For example,
 
 %%%%%%%%%%%
 %%%%%%%%%%%%
-\section{Summary pages}
+\section{\label{detchar:summary}Summary pages}
 %%%%%%%%%%%
 %%%%%%%%%%%%%
 

@@ -36,7 +36,7 @@ These types of \acp{GW} are expected to give strain amplitudes that are signific
 %
 % introduce SOAP
 %
-The analysis that we present here is known as SOAP \citep{ellis2006SnakesPlanea} and is based on the Viterbi algorithm~\citep{viterbi1967ErrorBounds}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \ac{GW} data. Another variant of the algorithm \citep{suvorova2016HiddenMarkova} has recently been used, amongst other applications, as part of a \ac{CW} search to track a pulsar with randomly wandering spin frequency~\citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, Abbott:2018hgk, sun2018ApplicationHidden}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \acp{SFT}.
+The analysis that we present here is known as SOAP \citep{ellis2006SnakesPlanea} and is based on the Viterbi algorithm~\citep{viterbi1967ErrorBounds}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \ac{GW} data. Another variant of the algorithm \citep{suvorova2016HiddenMarkova} has recently been used, amongst other applications, as part of a \ac{CW} search to track a pulsar with randomly wandering spin frequency~\citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \acp{SFT}.
 
 %
 % describe the paper structure
@@ -114,7 +114,7 @@ Using Eqs.~\ref{viterbi:bayes},\ref{viterbi:prior} and
 \end{equation}
 %
 where in the denominator we must sum over all possible tracks
-$S$~\citep{Slade2014}. We require the specific track, or set of frequencies, $\hat{\bm
+$S$. We require the specific track, or set of frequencies, $\hat{\bm
 \nu}$ that  maximises the posterior probability. Therefore, as the denominator in Eq.~\ref{viterbi:posterior} is a sum over all possible tracks, the track which maximises the posterior is the same track which
 maximises the numerator  on the right-hand side of  Eq.~\ref{viterbi:posterior}, i.e.,
 %
@@ -1151,6 +1151,19 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
     \caption{This figure shows an example of when the line aware statistic is used compared to a version when it is not.}
     \label{viterbi:optimisation:vitexample}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%
+\subsection{\label{viterbi:sens:freq}Sensitivity with frequency}
+%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\subsection{\label{viterbi:sens:other} Searching for non CW sources}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
 
 
 
