@@ -82,7 +82,7 @@ The main difference between these different categories is the amount which is kn
 For targeted searches the sky position $(\alpha,\delta)$ and rotation frequency are known from electromagnetic observations, i.e. X-ray, radio or $\gamma$-ray.
 Directed searches have information on the sky position $(\alpha,\delta)$ but not the rotation frequency.
 For all-sky searches, there is no prior knowledge of the pulsar, therefore, is a search for unknown pulsars.
-In general the searches in each of these categories use two distict techniques: Fully coherent searches and Semi-coherent searches
+In general the searches in each of these categories use two distinct techniques: Fully coherent searches and Semi-coherent searches
 
 %%%%%%
 %%%%%%
@@ -90,10 +90,10 @@ In general the searches in each of these categories use two distict techniques: 
 %%%%%%
 %%%%%%
 
-A Fully coherent search generaly uses a pre generated waveform which follows the model described in Sec.~\ref{searchcw:model}. 
+A Fully coherent search generally uses a pre generated waveform which follows the model described in Sec.~\ref{searchcw:model}. 
 This contains all the phase information of the signal.
-The set of parameters which genereated the waveform which `matches' the best can then be considered as the optimum set of parameters given the data.
-This is known as a matched filter \citep{} and is used in \ac{CW} searces in \citep{dupuis2005BayesianEstimation,}.
+The set of parameters which generated the waveform which `matches' the best can then be considered as the optimum set of parameters given the data.
+This is known as a matched filter \citep{} and is used in \ac{CW} searches in \citep{dupuis2005BayesianEstimation,}.
 
 The matched filter maximises the signal to noise ratio for a given filter, in this case the filter is our \ac{CW} model. 
 The matched filter used for \ac{CW} models is defined in \citep{prix2007SearchContinuous} and it titled the $\mathcal{F}$-statistic. 
@@ -127,7 +127,7 @@ Given that the sampling rate for the \ac{GW} channel is $16$ kHz usually downsam
 
 
 Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all-sky and directed searches, this type of search is no feasible. 
-This is becasue all-sky and directed searches have a wider parameter space, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
+This is because all-sky and directed searches have a wider parameter space, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
 This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
 
 
@@ -151,28 +151,29 @@ Many of these searches use a set of 1800s long Fourier transforms as the input d
 
 \begin{description}
 	
-	\item[Stack-slide] Stack uses a set of Fourier transforms of the data known as \acp{SFT}, specifically it uses the power spectrum of these. Each of the separate Fourier transforms (segments) is shifted up or down relative to the others to account for the doppler modulation of the source. The power from each can then be stacked. More explanation of this can be found in \citep{brady2000SearchingPeriodic, cutler2005ImprovedStackslide}  
+	\item[Stack-slide] Stack uses a set of Fourier transforms of the data known as \acp{SFT}, specifically it uses the power spectrum of these. Each of the separate Fourier transforms (segments) is shifted up or down relative to the others to account for the Doppler modulation of the source. The power from each can then be stacked. More explanation of this can be found in \citep{brady2000SearchingPeriodic, cutler2005ImprovedStackslide}  
 	
-	\item[Hough] The Hough transform is based on the stack-slide algorithm. The main difference is that the detectionn statistic for each segment is assigned a weight of 0 or 1 depending if it crossed a detection threshold. The Hough transform can the create a `Hough map' which gives a view of the data in parameter space. This approach is explained in greated detail in \citep{krishnan2004HoughTransform,antonucci2008DetectionPeriodic}. 
+	\item[Hough] The Hough transform is based on the stack-slide algorithm. The main difference is that the detection statistic for each segment is assigned a weight of 0 or 1 depending if it crossed a detection threshold. The Hough transform can the create a `Hough map' which gives a view of the data in parameter space. This approach is explained in greater detail in \citep{krishnan2004HoughTransform,antonucci2008DetectionPeriodic}. 
 	This method has been applied in two main ways known as Sky Hough \citep{krishnan2004HoughTransform}and Frequency Hough \citep{antonucci2008DetectionPeriodic,astone2014MethodAllsky}.
 	
-	\item[Einstein@Home] Einstein at home uses the $\mathcal{F}$-statistic mentioned above in various stages. It has a heiarachial structure where it starts with shorted coherence lengths and searches for stronger candidates over a longer coherence time with a reduced size of parameter space. 
-	This provides the most sensitive all-sky \ac{CW} search and uses a distributed computing project. 
+	\item[Einstein@Home] Einstein at home uses the $\mathcal{F}$-statistic mentioned above in various stages. It has a hierarchical structure where it starts with a coarse parameter space with shorter coherence times. This search then provides a list of candidates from this run in coarse parameter space. The parameter space is then more finely sampled around the parameters of the candidates and this process is repeated. The search can also increases the coherence length when searching around given candidates to improve the sensitivity of the search. This algorithm has many additions which are explained in more detail in \citep{singh2016ResultsAllsky,papa2016HierarchicalFollowup,walsh2016ComparisonMethods}
+	This provides the most sensitive all-sky \ac{CW} search, however, uses a large amount of computing power. This is achieved by using a distributed computing projects, more details can be found at \citep{EinsteinHome}. 
 	
-	\item[Time domain $\mathcal{F}$-statistic]
+	\item[Time domain $\mathcal{F}$-statistic] The time domain $\mathcal{F}$-statistic splits the data into narrowband segments of length $\sim$ 2 days \citep{walsh2016ComparisonMethods}. Then a coherent search using the $\mathcal{F}$-statistic is applied to each of these segments. Values of this statistic above a threshold are stored. Coincidences are then found in each segment, where candidates are selected best on a given threshold. This is explained in greater detail in \citep{aasi2014ImplementationTextdollar,walsh2016ComparisonMethods}.
 	
-	\item[Powerflux]
+	
+	\item[Powerflux] Powerflux uses a standard set of 1800s \acp{SFT}. For each point in parameter space, the power in this set of \acp{SFT} along the frequency track is recorded. This power is then weighted depending on the antenna pattern and noise of the detector. In longer stretches of $\sim$ 1 month, the weighted power is summed. Any point in parameter space which produces high power in each of these stretches is identified as a potential signal. This search can then be repeated around each candidate with a finer resolution in parameter space. This is explained in more detail and tested in \citep{abadie2012AllskySearch,walsh2016ComparisonMethods,ligoscientificcollaborationandvirgocollaboration2016ComprehensiveAllsky}
 	
 	
 \end{description}
 
 
-Each of these searches uses a large computational cost. In \citep{walsh2016ComparisonMethods} a \ac{MDC} was conducted to compare the senstivity of some of the searches, where an expected runtime for and O1 search was presented. 
+Each of these searches uses a large computational cost. In \citep{walsh2016ComparisonMethods} a \ac{MDC} was conducted to compare the sensitivity of some of the searches, where an expected runtime for and O1 search was presented. 
 The results of this are shown in Tab.\ref{searchcw:search:semi:cost}.
 \begin{table}
 	\centering
 	%
-	\caption{From \citep{walsh2016ComparisonMethods}, shows the computational cost for the first 4 months of advanced \ac{LIGO} for each search. One MSU is a million standard units, where one standard unit is one core-hour on a standard core. ` Expected computational costs of searches using the first four months of advanced LIGO data with each search pipeline. These estimates are for a different data observing time from that of the MDC, and do not cover the same parameter space as each other or the MDC. The Einstein@Home searches uses the computing resources of the Einstein@Home project and is designed to run for 6 - 10 months in the Einstein@Home grid.'  \label{searchcw:search:semi:cost}}
+	\caption{From \citep{walsh2016ComparisonMethods}, shows the computational cost for the first 4 months of advanced \ac{LIGO} for each search. One \ac{MSU}, where one standard unit is one core-hour on a standard core. ` Expected computational costs of searches using the first four months of advanced \ac{LIGO} data with each search pipeline. These estimates are for a different data observing time from that of the \ac{MDC}, and do not cover the same parameter space as each other or the \ac{MDC}. The Einstein@Home searches uses the computing resources of the Einstein@Home project and is designed to run for 6 - 10 months in the Einstein@Home grid.'  \label{searchcw:search:semi:cost}}
 	
 	%
 	\bgroup

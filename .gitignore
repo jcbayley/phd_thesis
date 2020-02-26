@@ -8,3 +8,8 @@
 *.DS_Store
 
 *.ipynb_checkpoints
+
+*.bbl
+*.bcf
+*.xml
+*.synctex.*

@@ -811,6 +811,7 @@ This is $\sim 4$ times smaller than the frequency bin width of 1800\,s \acp{SFT}
 To investigate the doppler shift, we can look at a signal at 200\,Hz, using Eq.~\ref{results:doppler} we can calculate the maximum shift in frequency due to the earths orbit as,
 %
 \begin{equation}
+\label{viterbi:results:dforbit}
 \Delta f_{\rm orbit} = \frac{2 \pi R_o}{T_o} \frac{1}{c} f_0 \approx 9.9 \times 10^{-5} f_0,
 \end{equation}
 %
@@ -1158,16 +1159,38 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
 %%%%%%%%%%%%%%%%%%%5
 %%%%%%%%%%%%%%%%%%%%
 
-All of the above tests, test the search in the range from 100-200 Hz which is within \acp{LIGO} most sensitive band. 
-To see how this search performs at other frequencies, we tested the same parameters and search at 100,250,500,750,1000,1500,2000 Hz.
-Fig.\ref{viterbi:sens:results} shows how the sensitivity of the search drop as the frequency increases.
-This is perhaps unfair to the algorithm as we used the same setup of the search for each of the different frequencies.
-Each sub-band which was search over was 0.1 Hz wide, however, at frequencies above 500 Hz, the doppler shift of the signal means that the entire signal is not contained within a single frequency band.
-This means that for each signal a large amount of the signal is not visible to the search.
+All of the above tests, the search was conducted in the range from 100-200 Hz.
+This was chosen to be within the most sensitive band of \ac{LIGO} as this is where a signal is most likely to be discovered.
+However, signals can appear at much higher frequencies also.
+Therefore, it is important to see how the sensitivity of the search varies with the frequency.
+ 
+For this test we simulated \ac{CW} signals in Gaussian noise with no gaps in data. 
+The injections used the same source parameters as in the a6 \ac{MDC} \citep{walsh2016ComparisonMethods} and the tests above. 
+This has the exception that the integrated recovered \ac{SNR} of the signal is sampled uniformly between 50 and 500. 
+These injections were then made at frequencies of 100,250,500,750,1000,1500 and 2000 Hz, where the band width is 2 Hz. i.e. the simulations were in frequency bands 100-102 Hz, 250-252 Hz etc.
+The setup of the search was the same as in the above sections. 
+Here each sub-band is 0.1 Hz wide, and the parameters of the SOAP search were as in Tab.~\ref{parameters}.
+
+Fig.\ref{viterbi:sens:results} the resulting efficiency curves from each of these tests.
+This is for a 1\% false alarm rate, which means that 1\% of sub-bands which contained no injection crossed the detection threshold. 
+This plot shows how the sensitivity of the search drops as the frequency increases.
+This is perhaps unfair to the algorithm as we used the setup of the search which has been optimised for the range 100-200 Hz.
+Optimising the search means, choosing the parameters of SOAP, the key parameter which will affect this is the transition matrix. 
+As the simulated signals frequency is increased, the scale of the Doppler modulation will also increase.
+This means that at higher frequencies the signal is more likely to jump more than a single frequency bin. 
+The current setup of the search does not allow this size of jump, therefore, would struggle to identify this type of track.
+The other main factor which will decrease this sensitivity is the sub-band width of 0.1 Hz. 
+Similarly to before, as the frequency increases the scale of the Doppler modulation will increase as in Eq.~\ref{viterbi:results:dforbit}.
+For example at 1000 Hz, the Doppler shift is $\sim 0.1$ Hz, the signal is then more likely to not be fully contained within a frequency band. 
+Therefore, the search can not accumulate all of the injected \ac{SNR}
+
+Whilst these parameters of the search can be changed to depend on frequency, this was meant as a small test to see how sensitivity varies with frequency.
+
+
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{C3_soap/snr_with_freq.pdf}
-	\caption{The sensitivty of the SOAP search in this configuration decreases as the frequency of the pulsar increases. This setup of data for the search was optimised for the 100-200 frequency band.}
+	\caption{The sensitivity of the SOAP search in this configuration decreases as the frequency of the pulsar increases. This setup of data for the search however, was optimised for the 100-200 frequency band and can be changed for different frequencies.}
 	\label{viterbi:sens:results}
 \end{figure}
 
