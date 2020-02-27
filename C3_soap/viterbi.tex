@@ -1,21 +1,24 @@
 \chapter{\label{soap}SOAP: A generalised application of the Viterbi algorithm to search for continuous gravitational wave sources.}
 
 The SOAP search is a semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
-The algorithm looks though narrow-banded time-frequency spectrograms of data to find the most probable track in frequency through it.
-The motivation of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track. 
+The algorithm looks though narrow-banded time-frequency spectrograms of data to find the `most probable track' in frequency through it.
+This `most probable track' is then the most likely track which a pulsars frequency would follow.
+The motivation of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value. Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track. 
 In Fig.~\ref{soap:motivation:plot} the optimum track in red shows gives a statistic value of $\sim 1700$ which is far outside the main distribution of summed powers. 
-This follows an injected signal track which demonstrates the idea. 
+The red track follows that an injected signal.
+This demonstrates that the sum of the spectrogram power along a track which follows a signal is outside the distribution of tracks randomly walk through noise. 
 Therefore, it can be assumed that if the frequency track with the highest sum of spectrogram power is found, then the corresponding track is most likely for follow a signal. 
-Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is 180 bins wide $M$ and 400 segments long $N$ and after each segment the track has $T$ possible options to jump to, The total number of possible tracks is $T^{M*N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possibly calculate. This is where the Viterbi algorithm \citep{viterbi1967ErrorBounds} is useful as it can efficiently find the track which gives the maximum sum of power. This is explained in the following sections.
+Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is frequency 180 bins wide $M$ and 400 time segments long $N$ and after each segment the track has $T$ possible options to jump to (in this case it is 180 options), The total number of possible tracks is $T^{M \times N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possibly calculate. This is where the Viterbi algorithm \citep{viterbi1967ErrorBounds} is useful as it can efficiently find the track which gives the maximum sum of power. For an equivalent search the Viterbi algorithm would have to do $T*M*N$ calculations for find the optimum track. The method of how this is done is explained in the following sections.
 
-The majority of this chapter that follows has been reviewed and published as in \citep{bayley2019GeneralizedApplication}, excluding Sec.~\ref{viterbi:las:optimisation} and Sec.~\ref{viterbi:lineawareamp} which is supplementary material.
+The majority of this chapter that follows has been reviewed and published as in \citep{bayley2019GeneralizedApplication}. This was work done by the author under the supervision of Prof. Graham Woan and Dr. Chris Messenger.
+The work in Sec.~\ref{viterbi:lineawareamp}, Sec.~\ref{viterbi:las:optimisation}, Sec.~\ref{viterbi:sensfreq} and Sec.~\ref{viterbi:sens:other} which is supplementary material.
 
 
 \begin{figure}
 
 \centering
 \includegraphics[width=\linewidth]{C3_soap/soap_spect_motivation.pdf}
-\caption{This figure shows an example of a spectrogram which is typical of LIGO data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
+\caption{This figure shows an example of a time-frequency spectrogram which is typical of \ac{LIGO} data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
 \label{soap:motivation:plot}
 
 \end{figure}
@@ -952,19 +955,19 @@ The parameters of the search and their optimised values are shown in Tab.~\ref{p
 \hline
  & $\tau$ & $w_S$ & $w_L$ & $p(M_L)/p(M_N)$ \\
  \hline
- & \multicolumn{4}{ c }{Gapless Gaussian} \\
+ & \multicolumn{4}{ c }{\textbf{Gapless Gaussian}} \\
 \hline
 limits & [1.0,1.3]& [0.1,5.0]& None& 0.0\\
 \hline
 optimised & 1.1 & 2.06 & None & 0.0 \\
  \hline
- & \multicolumn{4}{ c }{Gaussian with gaps} \\
+ & \multicolumn{4}{ c }{\textbf{Gaussian with gaps}} \\
 \hline
 limits & [1.0,1.3]& [0.1,5.0]& None& 0.0\\
 \hline
 optimised & 1.1 & 2.06 & None & 0.0 \\
  \hline
- & \multicolumn{4}{ c }{S6 MDC} \\
+ & \multicolumn{4}{ c }{\textbf{S6 MDC}} \\
 \hline
 limits & [1.0,1.1]& [0.1,5.0]& [0.1,6.0]& [0.0,1.0]\\
 \hline
@@ -1111,14 +1114,15 @@ We measure the sensitivity by taking the value of \ac{SNR} which is at 90\% effi
 
 For injections into Gaussian noise, we know that there are no instrumental lines, therefore, we do not need to optimise over the `lines' part of the statistic and can set the parameter $p(M_L)/p(M_G)$ to zero which renders the parameter $p_L(\lambda)$ redundant. 
 This then reduces the complexity of the problem by leaving us with only two parameters to optimise over, $\tau$ and $p_S(\lambda)$. 
-Tab.~\ref{parameters} shows the ranges which the two parameters are optimised over. 
+Whilst this optimisation was partially done in Sec.~\ref{results}, with the result in Tab.~\ref{parameters}, this is repeated more completely here.
+The parameters were optimised in the range shown in Tab.~\ref{viterbi:las:optimisation:table}.
 
-Fig.~\ref{viterbi:optimisation:gauss} shows the values for the \ac{SNR} at 90\% efficiency for each of the parameter values which were tested, the optimum which is ........ \joe{run test and fill in} 
+Fig.~\ref{viterbi:optimisation:gauss} shows the values for the \ac{SNR} at 80\% efficiency for each of the parameter values which were tested, the optimum which is ........ \joe{run test and fill in} 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{testimg.png}
-    \caption{This figure shows the optimisation of the statistic for the Gaussian noise case.}
+    \includegraphics[width=\linewidth]{C3_soap/gauss_optimised.pdf}
+    \caption{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_S$ were optimised. The key part to remember when reading this plot is that the lower the value of \ac{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
     \label{viterbi:optimisation:gauss}
 \end{figure}
 
@@ -1133,8 +1137,8 @@ Fig~.\ref{viterbi:optimisation:s6mdc} shows the slices through parameters space 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{testimg.png}
-    \caption{This figure shows the optimisation of the line-aware statistic for the S6 \ac{MDC} case.}
+    \includegraphics[width=\linewidth]{C3_soap/s6_optimised.pdf}
+    \caption{When using real S6 data, all four parameters of the search were optimised over on simulations in real data. The plot above shows the \ac{SNR} at 80\% efficiency for each of the parameters where the ranges are in Tab.~\ref{viterbi:las:optimisation:table}. Lower values of \ac{SNR} mean the search is performing better. The red lines show the parameters used in the searches in this section and the sections that follow. Whilst this does not seem optimal, the search does not underperform much when a poor choice of parameters is used. }
     \label{viterbi:optimisation:s6mdc}
 \end{figure}
 
@@ -1148,14 +1152,14 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{C3_soap/lookup_noline.pdf}
+    \includegraphics[width=\linewidth]{testimg.png}
     \caption{This figure shows an example of when the line aware statistic is used compared to a version when it is not.}
     \label{viterbi:optimisation:vitexample}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%5
 %%%%%%%%%%%%%%%%%%%
-\subsection{\label{viterbi:sens:freq}Sensitivity with frequency}
+\subsection{\label{viterbi:sensfreq}Sensitivity with frequency}
 %%%%%%%%%%%%%%%%%%%5
 %%%%%%%%%%%%%%%%%%%%
 
