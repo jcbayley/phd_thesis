@@ -1,8 +1,8 @@
 \chapter{\label{soap}SOAP: A generalised application of the Viterbi algorithm to search for continuous gravitational wave sources.}
 
-The SOAP search is another semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
-The algorithm looks though narrow-banded spectrograms of data to find the most probable track in frequency through it.
-The basic idea of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track. 
+The SOAP search is a semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
+The algorithm looks though narrow-banded time-frequency spectrograms of data to find the most probable track in frequency through it.
+The motivation of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value, Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track. 
 In Fig.~\ref{soap:motivation:plot} the optimum track in red shows gives a statistic value of $\sim 1700$ which is far outside the main distribution of summed powers. 
 This follows an injected signal track which demonstrates the idea. 
 Therefore, it can be assumed that if the frequency track with the highest sum of spectrogram power is found, then the corresponding track is most likely for follow a signal. 
@@ -1188,10 +1188,23 @@ Whilst these parameters of the search can be changed to depend on frequency, thi
 
 
 \begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{C3_soap/snr_with_freq.pdf}
-	\caption{The sensitivity of the SOAP search in this configuration decreases as the frequency of the pulsar increases. This setup of data for the search however, was optimised for the 100-200 frequency band and can be changed for different frequencies.}
-	\label{viterbi:sens:results}
+	
+	\begin{subfigure}[h]{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{C3_soap/snr_freq_eff.pdf}
+			\caption{}
+			\label{viterbi:sens:eff}
+	\end{subfigure}
+
+	\begin{subfigure}[h]{0.9\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{C3_soap/snr_with_freq.pdf}
+		\caption{}
+		\label{viterbi:sens:snrfreq}
+	\end{subfigure}
+
+\caption{The sensitivity of the SOAP search in this configuration decreases as the frequency of the pulsar increases. This setup of data for the search however, was optimised for the 100-200 frequency band and can be changed for different frequencies. \ref{viterbi:sens:eff} shows the efficiency curves with 1\% false alarm rate for each frequency. \ref{viterbi:sens:snrfreq} shows the values from the efficiency curves at 90\% efficiency.}
+
 \end{figure}
 
 

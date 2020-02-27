@@ -1,9 +1,11 @@
 \chapter{\label{searchcw}Searching for continuous gravitational waves}
 
 Continuous gravitational waves have particular challenges when it comes to their detection.
-Whilst I have described the potential sources of the signal and its signal type in Sec.~\ref{intro:signals:cw}, I will go into more detail on the signal and search algorithms here.
-
-
+Whilst I have described the potential sources of the signal and its approximate signal type in Sec.~\ref{intro:sources:cw},to perform a search for this signal more detail is needed.
+In this section I will go into more detail on the `mountain' model in Sec.~\ref{intro:source:cw:mountain} and its wave-form description. 
+This models is then used in various search methods for \ac{CW} signals.
+In Sec.~\ref{searchcw:search} I will overview a subset of current searches for \ac{CW} signals.
+Sec.~\ref{searchcw:motivation} explains the motivation for the majority of the work in this thesis.
 
 \section{\label{searchcw:model}Continuous signal model}
 
@@ -16,12 +18,12 @@ $\psi$ and $\phi_0$ and $h_0 $ are the \ac{GW} polarisation, initial phase and a
 $\iota$ is the inclination angle which is how much the source is tilted relative to the observer. 
 $\theta$ is the `wobble angle' or the angle between the rotation axis and the symmetry axis of the neutron star.
 
-The definition of the \ac{GW} from a neutron star here follows that in \citep{schutz1998DataAnalysis,riles2017RecentSearches,dupuis2005BayesianEstimation}. The amplitude of the \ac{GW} can be defined as,
+The definition of the \ac{GW} from a neutron star here follows that in \citep{riles2017RecentSearches,schutz1998DataAnalysis,dupuis2005BayesianEstimation}. The amplitude of the \ac{GW} can be defined as,
 \begin{equation}
 \label{intro:cw:ht}
 h(t) = F_+(t)h_{+}(t) +F_{\times}(t)h_{\times}(t),
 \end{equation}
-where $h_{+},h_{\times}$ are the plus and cross polarisations functions as in Eq.\ref{intro:gravwave:amp} \joe{check reference} and $F_{+},F_{\times}$ are the antenna pattern functions to the two polarisations.
+where $h_{+},h_{\times}$ are the plus and cross polarisations functions as in Eq.\ref{intro:gw:gravwave} and $F_{+},F_{\times}$ are the antenna pattern functions to the two polarisations.
 These are defined by,
 \begin{equation}
 \label{intro:cw:amplitudes}
@@ -164,6 +166,8 @@ Many of these searches use a set of 1800s long Fourier transforms as the input d
 	
 	\item[Powerflux] Powerflux uses a standard set of 1800s \acp{SFT}. For each point in parameter space, the power in this set of \acp{SFT} along the frequency track is recorded. This power is then weighted depending on the antenna pattern and noise of the detector. In longer stretches of $\sim$ 1 month, the weighted power is summed. Any point in parameter space which produces high power in each of these stretches is identified as a potential signal. This search can then be repeated around each candidate with a finer resolution in parameter space. This is explained in more detail and tested in \citep{abadie2012AllskySearch,walsh2016ComparisonMethods,ligoscientificcollaborationandvirgocollaboration2016ComprehensiveAllsky}
 	
+	\item[Viterbi] \joe{should probably mention other Viterbi searches}
+	
 	
 \end{description}
 
@@ -199,4 +203,15 @@ The results of this are shown in Tab.\ref{searchcw:search:semi:cost}.
 \end{table}
 Even the fastest of these searches takes close to 1 million core-hours to search through four months of data.
 Running computing clusters can be costly, therefore, the focus of much of this thesis is to develop techniques to reduce the computational cost of an all-sky search for \ac{CW}.
+
+
+%%%%%%%%%5
+%%%%%%%%%%%
+\section{\label{searchcw:motivation}Motivation}
+%%%%%%%%%5
+%%%%%%%%%%
+
+The searches described above are computationally intensive, where the fastest takes $\sim$1 million core-hours.
+The motivation for much of the work that follows is to develop search algorithms which can reduce this computational time without a large loss in sensitivity to \ac{CW} signals.
+\joe{more}
 
