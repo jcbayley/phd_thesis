@@ -23,7 +23,7 @@ Throughout this section I will summarise one machine learning technique which ar
 Neural networks, as the name may suggest, was developed as a way for a computer to mimic the neurons in the brain.
 To understand why this would be useful, I will give short example which will be followed through this section.
 A good example used extensively in explanations of neural networks is the ability to identify hand written digits.
-This is a simple task which the brain can complete with ease. 
+This is a simple task which a brain can complete with ease. 
 However, writing a traditional algorithm to perform this same task is very difficult. 
 The algorithm would have to identify a particular shape, which has a huge amount of variation.
 For example, any number could be written at a slightly different angle or the number 9 could have a much longer tail etc.
@@ -278,9 +278,30 @@ This can then classify the network into the chosen output.
 
 %%%%%%%%%%%
 %%%%%%%%%%%
-\subsection{Network Visualisation}
+\section{\label{cnn:networkvis}Network Visualisation}
 %%%%%%%%%%%
 %%%%%%%%%%%
 
+Neural network are generally hard to visualise due to the large number or parameters in the network that have to be varied.
+However, there are methods which can be used to see how input data is affected by the network.
+This can be useful to see how the network performs when given certain types of data and gives some insight into how the networks work
 
+In the examples above we use \acp{CNN}, the first few layers of this are build using convolutional filters.
+The filters weights should ideally correspond to the shape of the feature which one wants to extract from the image. 
+Generally this is only useful to picture at the first layer as the network can make subsequent layer and representations quite abstract.
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{testimg.png}
+	\caption{different types of instrumental line which appear in SOAP spectrograms}
+	\label{detchar:line:psd}
+\end{figure}
+
+
+%%%%%%%%%
+%%%%%%%%%%%
 \section{Data and simulations}
+%%%%%%%%%%
+%%%%%%%%%%%
