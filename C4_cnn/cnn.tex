@@ -12,6 +12,90 @@ This can be though of as a subset of artificial intelligence.
 
 With the development in computing in recent years, including GPUs and the languages used to program with them, machine learning has become more accessible. 
 
+
+%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+\section{\label{machine:intro} Introduction}
+%%%%%%%%%%%%
+%%%%%%%%%%%%%
+
+% Intro to GWs and CW
+%
+Gravitational wave detectors such as \ac{LIGO}~\cite{abbott2009LIGOLaser,aasi2015AdvancedLIGO} and VIRGO
+\cite{acernese2015AdvancedVirgo,acernese2008StatusVirgo} search for a number of different targets. 
+Some targets such as \acp{CBC} have been observed ~\cite{abbott2017GW170817Observation,abbott2017GW170814ThreeDetector,abbott2016ObservationGravitational},
+however, other primary sources such as \acp{CW} are yet to be observed.
+\acp{CW} are well modelled quasi-sinusoidal signals with a
+duration much longer than observing times of detectors.
+The source of these signals is thought to be rapidly rotating neutron stars which can emit \ac{GW} if there is some asymmetry around its rotation axis. 
+This can be caused by various mechanisms as described in ~\cite{prix2009GravitationalWaves}. 
+These signals have small amplitude, which if detected will be below the noise \ac{PSD} of the detector.
+Therefore, sensitive search algorithms are needed to find the signals. 
+These algorithms generally fall into three categories: Targeted,
+directed, and all-sky searches, listed in order of how much is known a priori
+about the source from \ac{EM} observations. 
+
+% describe the different general types of CW search
+%
+In targeted searches the sky position, frequency, and its derivatives are
+assumed to be well known, in directed searches only the sky position is
+known and in all-sky searches the sky position and frequency of the source is unknown.
+The most sensitive of these are targeted searches which use coherent matched
+filtering~\cite{dupuis2005BayesianEstimation,schutz1998DataAnalysis}. These use
+template waveforms which are generated using the information already known about the
+source, then correlated this with the data. Directed and all-sky searches have
+a much broader parameter space to search, therefore, many templates are needed
+to sufficiently cover the parameter space. Using the coherent matched filter
+for broader parameter space searches becomes unfeasible due to the amount of
+computing time that is needed. This led to the development of semi-coherent
+searches where the data is divided up into smaller segments which can be analysed
+separately and then the results can be recombined incoherently using various
+methods~\cite{abbott2019AllskySearch,creighton2000SearchingPeriodic}. Semi-coherent
+searches result in a trade off between sensitivity and computing time.
+
+% Introduce SOAP and explain the line artefact problem
+%
+The analysis here is presented mainly as an addition to an existing
+semi-coherent search algorithm titled SOAP~\cite{bayley2019SOAPGeneralised}.
+This is a fast and largely un-modelled search which finds tracks of
+high \ac{FFT} power in time-frequency spectrograms. 
+When applied to multiple detectors using a line-aware statistic, SOAP looks for frequency bins which have both a high power and are similar in each detector. 
+This means that  at a given frequency at a given time, SOAP will penalise frequencies where the \ac{FFT} power is largely different in each detector.  
+The algorithmic details summarised in Sec.~\ref{soap}. 
+
+% instumental lines and how the affect SOAP
+%
+
+One effect which limits the sensitivity of SOAP and many other
+\ac{GW} searches is the effect of `instrumental lines'.  These can be anything
+from long duration fixed frequency or wandering lines to shorter duration fixed frequency transients. 
+There are certain types of instrumental line which the SOAP search can struggle to distinguish from an astrophysical signal even with the development of a
+`line aware' statistic in~\cite{bayley2019SOAPGeneralised}. Currently the
+method used to reduce the effect of these lines is to manually look at the SOAP
+output and the spectrograms for each sub-band to determine whether the sub-band
+is contaminated by instrumental effects. This process is slow, requires a
+lot of human input and is subject to human error. When the search runs over
+a larger bandwidth, it will no longer be practical to look
+through all bands. 
+
+% Convolutional neural networks
+%
+
+We aim to automate how the search deals with instrumental lines by using \acp{CNN}.
+These have been used extensively in image classification and we explain this in
+more detail in Sec.~\ref{cnn}. \acp{CNN}
+have already been shown to detect gravitational wave signals from \acp{CBC}
+in~\cite{gabbard2018MatchingMatched,george2018DeepLearning,gebhard2019ConvolutionalNeural}
+and other deep learning techniques have been used in searching for \ac{CW}
+signals in~\cite{dreissigacker2019DeeplearningContinuous}. 
+
+% structure of the paper
+%
+In Sec.\ref{soap} we will summarise the basics of how the SOAP search works. In
+Sec.~\ref{cnn} we explain how \acp{CNN} operate followed by how we generate
+data to train the \ac{CNN} in Sec.~\ref{data}. We then describe the entire search from raw data to results in Sec.~\ref{pipeline} and finally in Sec.~\ref{results} we
+show the results from this search and compare to similar analyses. 
+
 %%%%%%%%%%%
 %%%%%%%%%%%
 \section{\label{machine:nn}Neural networks}
@@ -26,22 +110,13 @@ A good example used extensively in explanations of neural networks is the abilit
 This is a simple task which a brain can complete with ease. 
 However, writing a traditional algorithm to perform this same task is very difficult. 
 The algorithm would have to identify a particular shape, which has a huge amount of variation.
-For example, any number could be written at a slightly different angle or the number 9 could have a much longer tail etc.
-This is where a neural network can help. 
-These can be trained in a similar way to a human brain. 
-This is where in a lifetime many examples of different symbols are seen and each time a new one is seen the brain `updates' itself based on what is observed. 
+Neural networks offer a way to deal with this problem as they can be trained on large datasets.
+This is similar to how a human brain is `trained'. 
+In a lifetime or a brain many examples of different symbols are seen and each time a new one is seen the brain `updates' itself based on what is observed. 
 This process is essentially replicated for a neural network, where the algorithm can be updated such that it can correctly identify each digit.
 
-To explain how a neural network can be updated, we need to start with the operation of a single neuron.
-
-
-\begin{itemize}
-    \item introduce machine learning as a technique with previous examples
-    \item general idea, train a NN on lots of data
-    \item GPU development allowed these to train fast and be useful
-    \item General intended application to CW searches
-    \item redue affect of instrumental artefacts
-\end{itemize}
+Neural networks have many parameters which can be modified or `trained'. 
+These parameters and their application are grouped into objects called neurons, many of these neurons are used to build a neural network.----
 
 %%%%%%%%%
 %%%%%%%%%
@@ -82,23 +157,25 @@ Many neurons are then used in combination with each other to develop a neural ne
 \subsection{\label{machine:nn:structure}Network structure}
 %%%%%%%%%%%%%%%%%%%%
 
-The structure of the network is defined by the user and there is not set way to design the network.
-However, in general the complexity of the network reflect the complexity and size of the input data.
-If there is a small number of training examples and a large and complex network, it may be able to learn the input data set as opposed the the general information that they represent.
-
-Neural networks are structured in features called layers, sometimes known as fully connected layers. 
+The structure of a neural network is defined by the user and there is no set way to design a network.
+However, the general layout of a neural network is defined by structures called layers, sometimes known as fully connected layers. 
 These are rows of $N$ neurons which all take the same input such that there is $N$ output values.
 An example of a simple neural network is shown in Fig.~\ref{machine:nn:structure:plot}.
-The first layer is the input layer, this is just the input data.
+The first layer is the input layer, this is just the data points from an input example.
 In the example of hand drawn digits, this would be the pixels from the image of the digit.
 The final layer represents the information that you intend the network to extract from the input data. 
 In the hand drawn digit example, this could have 10 output values corresponding to each digit 0-9. 
 Each of these outputs is then a value which is related to the probability of that digit being present in the image.  
 
+When designing a network, the user will have a defined input layer size from the data and a set number for the output layer which represents, for a classification example, the number of output classes. 
+The number of hidden layers and the number of neurons in those hidden layers can be arbitrarily changed. 
+In general if the data contains more complex information the size or complexity of the network will need to be increased for it to be able to extract the information. 
+If there is a small number of training examples and a large and complex network, it may be able to learn the input data set as opposed the the general information that they represent.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=\columnwidth]{C4_cnn/simple_network.pdf}
-    \caption{Simple neural network}
+    \caption{A neural network is structured with layers. This consists of the input layer which is the data which you would like to analyse. Then this passes to a number of `hidden' layers, in the above diagram there are two. These are just all layers between the input and the output. The output layer is then the desired output, above there is a single neuron as output, so this could perhaps classify the input to a value between 0 and 1. Every neuron in a layer is connected to the output of all neurons in the previous layer.}
     \label{machine:nn:structure:plot}
 \end{figure}
 
@@ -109,13 +186,21 @@ Each of these outputs is then a value which is related to the probability of tha
 
 The activation function is how the output of a neuron is transformed. 
 The most simple activation function is a cut as described in Sec.~\ref{machine:nn:neuron}, however, this type of activation does not perform well.
-The activation function has been shown to be effective when it is a non-linear function. 
+Activations functions a generally based on a few properties.
+The activation function is generally non-linear, this allows networks with multiple layers to be used to approximate a function. A linear activation function means that any number of layers in a network is equivalent to a single layer network.
+Another property which is desired in activation function is that it is continuously differentiable. This is to allow algorithms such as gradient descent to optimise the network. 
+The functions are found to perform better if they are monotonic and smooth.
+There are many choices when defining this in the network, some of the available options are shown in Fig.~\ref{machine:nn:activation:plot}.
+One of the more commonly used activation function is the LeakyRELU function, this is explained in more detail in \citep{maas2013RectifierNonlinearities}.
+In the work that follows we use the Leaky RELU function and the sigmoid function.
 
 
-
-%%%%%%%%%%%%%%%%%
-\subsection{\label{machine:nn:loss}Loss functions}
-%%%%%%%%%%%%%%%%%
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{C4_cnn/activations.pdf}
+	\caption{There are many different activations function which are used, and essentially any function can be defined if necessary. Above is shown a subset of the more commonly used functions. The linear function is not used, however, is there to compare to common non linear function.}
+	\label{machine:nn:activation:plot}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%
@@ -124,6 +209,15 @@ The activation function has been shown to be effective when it is a non-linear f
 
 For example, imagine you are playing darts and have the aim of trying to hit bullseye.
 After each dart that misses you would adjust where you aim the dart based on how far away from the bullseye it landed.
+
+
+%%%%%%%%%%%%%%%%%
+\subsection{\label{machine:nn:loss}Loss functions}
+%%%%%%%%%%%%%%%%%
+
+When training a network as described in Sec.~\ref{machine:nn:training} one needs to find how far from the truth the result is. 
+Depending on the problem, there are a number of ways to do this.
+
 
 %%%%%%%%%%%
 %%%%%%%%%%%
@@ -292,11 +386,11 @@ Generally this is only useful to picture at the first layer as the network can m
 
 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{testimg.png}
-	\caption{different types of instrumental line which appear in SOAP spectrograms}
-	\label{detchar:line:psd}
+	\includegraphics[width=\textwidth]{C4_cnn/vitmap_cnn_visualisation_signal.pdf}
+	\caption{This shows a visualisation of the convolution neural network used for vitebri maps above}
+	\label{cnn:vis:vitmap:signal}
 \end{figure}
 
 

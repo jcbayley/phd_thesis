@@ -72,6 +72,141 @@ A full derivation of this can be found in \citep{schutz1998DataAnalysis} where e
 Eqs.~\ref{intro:cw:ht} - \ref{intro:cw:antenna} then describe the amplitude and phase evolution of a signal at a given detector location and orientation.
 
 
+
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\section{\label{intro:prob} Bayes Theorem}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+A key part in understanding the different methods to search for \ac{GW} or any data analysis, is understanding probability and statistics. 
+This gives understanding of the random processes underlying all measured quantities. 
+Whilst there are generally two approaches to statistics: Frequentist and Bayesian, here I will focus on the Bayesian approach.  
+
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%
+\subsection{\label{intro:prob:basic}Basic probability}
+%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+
+Initially I will define some basic concepts of probability.
+We can define the probability of some event $A$ as $p(A)$ where probabilities follow $0 \leq p(A) \leq 1$ and some other event $B$ which has a probability $p(B)$ and follows $0 \leq p(B) \leq 1$.
+
+\begin{description}
+	\item [Union]
+	A union is the probability of either and event $A$ happening or event $B$ happening. This is written as, $p(A \cup B)$.
+	
+	\item [Intersection]
+	An intersection is then the probability that both and event $A$ and an event $B$ happens. This is written as $p(A \cap B)$.
+	
+	\item [Independent and dependent Events]
+	If the events $A$ and $B$ are independent, i.e. the event $A$ does not affect the outcome of event $B$, then,
+	\begin{equation}
+	p(A \cap B) = p(A)p(B).
+	\end{equation}
+	However, if the event $A$ is dependent on event $B$, i.e. the event $A$ affects event $B$ or vice versa, then the joint probability of both events is,
+	\begin{equation}
+	\label{dependentevent}
+	p(A \cap B) = p(A)p(B \mid A) = p(B)p(A \mid B).
+	\end{equation}
+	Here $p(B \mid A)$ means the probability of event $B$ happening given that event $A$ has happened.
+	
+	\item [Conditional probability]
+	Conditional probability arises from situations where the outcome of one event will affect the outcome of future events.
+	The definition of this arises from the the dependent events defined above in Eq.~\ref{dependentevent},
+	\begin{equation}
+	p(A \mid B) = \frac{p(A \cap B)}{p(B)}.
+	\end{equation}
+	
+	\item [Bayes Theorem]
+	Bayes theorem can then be defined using conditional probabilities. i.e we can use
+	\begin{equation}
+	p(A \mid B) = \frac{p(A \cap B)}{p(B)} \quad \rm{and} \quad p(B \mid A) = \frac{p(A \cap B)}{p(A)}
+	\end{equation}
+	such that then,
+	\begin{equation}
+	p(B)p(A \mid B) = p(A)p(B \mid A)
+	\end{equation}
+	and this is rearranged to Bayes theorem,
+	\begin{equation}
+	p(A \mid B) = \frac{p(A)p(B \mid A)}{p(B)}
+	\end{equation}
+	
+\end{description}
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\subsection{\label{intro:prob:bayes}Bayesian Inference}
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+
+We can take Bayes theorem from Sec.~\ref{intro:prob:basic} and apply it to a problem which involves infering some parameters from some model. Here we can relabel the events $A$ and $B$ with the data ${\bm d}$ and the parameters ${\bm \theta}$ of some model $I$.
+Eq.~\ref{intro:prob:bayes} then becomes,
+\begin{equation}
+\label{intro:bayes:bayes}
+p({\bm \theta} \mid {\bm d}, I) = \frac{p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I)}{p({\bm d} \mid I)}
+\end{equation}
+where each of the components are assigned names: $p({\bm \theta} \mid {\bm d})$ is the posterior distribution, $p({\bm \theta})$ is the prior distribution,  $p({\bm d} \mid {\bm \theta})$ is the likelihood and $p({\bm d})$ is the evidence.
+
+\begin{description}
+	\item [Posterior]
+	The posterior distribution describes the probability of a parameter ${\bf \theta}$ in some model $I$ given some data $d$. For many problems this is the distribution which is most useful as it informs you the most likely set of parameters of you model given some observation.
+	\item [Prior]
+	The Prior distribution is a key part of Bayesian statistics. This distribution describes any information which you have prior to the observation. This is a distribution defined by the user, where you define a distribution of the parameters based on what you expect to be true.
+	\item [Likelihood]
+	The likelihood is where the observation is included in the calculation. This tells you how probable it is to get the observed data $d$ given the model $I$ with the set of parameters $\theta$. 
+	\item [Evidence]
+	The evidence is the probability of the data itself given the choice of model. This is found by integrating the likelihood over all possible values of ${\bm \theta}$ weighting them by our prior belief of that value of ${\bm \theta}$. This known as a marginal distribution and is defined by,
+	\begin{equation}
+	\label{intro:bayes:evidence}
+	p({\bm d} \mid I) = \int p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I) d{\bm \theta}.
+	\end{equation}
+\end{description}
+
+
+Bayes theorem then gives a description of the probability distribution of some parameters in a model given some observation.
+Often when using Bayesian statistics the aim is to find posterior distribution of parameters.
+There are very few cases where this can be calculated analytically, therefore, numerical methods are almost always used to find the posterior.
+This can be difficult to calculate numerically especially in problems where the parameters space has many dimensions.
+The most difficult part to calculate is the evidence in Eq.~\ref{intro:bayes:evidence}, this involves calculating an integral over all possible parameters.
+There is however, a way around having to calculate this. For any given mode $I$, the evidence $p({\bm d}\mid I)$ is the same for any set of parameters ${\bm \theta}$ in Eq.~\ref{intro:bayes:bayes}. 
+The evidence is then just a normalisation factor for the posterior distribution. 
+When different models are not being compared, and we assume the model $I$ to be true, we no longer need to calculate the evidence.
+The posterior distribution can then be found by sampling,
+\begin{equation}
+p({\bm \theta} \mid {\bm d}, I) \propto p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I).
+\end{equation}
+To find this posterior you could then calculate (sample) the value for every point in parameter space. This however, is very computationally expensive and often the posterior distribution is located in a small area in parameter space. 
+Therefore, the majority of the time is sampling a area of parameter space where the posterior is close to zero, and this is not particularly useful. 
+A method titled \ac{MCMC} was proposed \citep{metropolis1953EquationState} to deal with this issue, more information on this can be found in \citep{vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
+This builds up the posterior distribution by randomly jumping around in the parameter space.
+It starts by calculating the posterior value for a particular point in parameter space. Then it will randomly jump to another parameter space point. 
+The posterior can then be calculated again, if the posterior value is higher then the jump is `accepted'. This just means that the parameter values of this point are stored.
+If the posterior value is lower than the previous step then the jump is accepted with some probability. This means that there is a random chance that a value lower than the current is accepted.
+As the accepted positions aim for areas where the posterior is higher, \ac{MCMC} does not waste time calculating areas in parameter space of low posterior values.
+The samples which were accepted then build the posterior distribution. 
+
+In certain situations it can be useful to calculate the evidence in Eq.\ref{intro:bayes:evidence}. 
+For example, if there are two different models which could represent the data, the evidence can be used to determine which of the two models is more likely.
+This is known as a Bayes factor where two models $I_1$ and $I_2$ are compares and is defined as,
+\begin{equation}
+B = \frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)}
+\end{equation}
+This then requires the calculation of the evidence.
+To estimate the evidence efficiently a method known as Nested sampling can be used, this is explained in detail in \citep{skilling2006NestedSampling,speagle2019DynestyDynamic}.
+By calculating the Bayes factor, which is similar to a likelihood ratio, one can find the posterior odds of a particular model by using,
+\begin{equation}
+\frac{p(I_1 \mid \mathbf{d})}{p(I_2 \mid \mathbf{d})} = \frac{p(I_1)}{p(I_2)} \frac{p(\mathbf{d} \mid I_1)}{p(\mathbf{d} \mid I_2)}.
+\end{equation}
+The can be written as \textit{posterior odds = prior odds $\times$ bayes factor}. This is then a comparison of how likely different models are given some observation. 
+
+The methods described above then provide a way to estimate parameters of a model given some data. 
+Also this provides a way to compare different models given some observation.
+In following sections the methods described above are used to estimate various parameters.
+
+
 %%%%%%%%%%%55
 %%%%%%%%%%%%%
 \section{\label{searchcw:search} Continuous wave searches}
@@ -108,7 +243,7 @@ The likelihood can then be written as,
 \begin{equation}
 		\log \Lambda = \left( x \mid h \right) - \frac{1}{2} \left( h \mid h\right) 
 \end{equation}
-where the product $(g \mid g)$ is defined as,
+where the product $(x \mid y)$ is defined as,
 \begin{equation}
 		\left( x \mid y \right) = 4 \mathcal{R} \int^{\infty}_{-\infty}  \frac{\tilde{x}^{{\rm X}}(f) \tilde{y}^{{\rm X *}}(f)  }{S^{X}(f)} \mathrm{d}f.
 \end{equation}
