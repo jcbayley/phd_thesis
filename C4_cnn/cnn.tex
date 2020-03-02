@@ -195,9 +195,9 @@ One of the more commonly used activation function is the LeakyRELU function, thi
 In the work that follows we use the Leaky RELU function and the sigmoid function.
 
 
-\begin{figure}[h]
+\begin{figure}[p]
 	\centering
-	\includegraphics[width=\columnwidth]{C4_cnn/activations.pdf}
+	\includegraphics[width=0.9\columnwidth]{C4_cnn/activations.pdf}
 	\caption{There are many different activations function which are used, and essentially any function can be defined if necessary. Above is shown a subset of the more commonly used functions. The linear function is not used, however, is there to compare to common non linear function.}
 	\label{machine:nn:activation:plot}
 \end{figure}
@@ -253,8 +253,12 @@ This means that the weights can be updated to minimise the loss function and the
 %%%%%%%%%%%
 
 Convolutional neural networks are based on the same principles as the neural networks described above. 
-The difference being that \acp{CNN} use additional types of layers which help to retain information of pixels relative to each other.
-In a standard neural network, it does not have any information on the location of any input value.
+The difference being that \acp{CNN} use additional types of layers which can help to reduce the size of the problem.
+For explanations that follow, I will use \acp{CNN} in the context of classifying images into one of two classes.
+
+In a standard neural network, every pixel of an image is used as an input pixel. Therefore, the ordering of these pixels does not matter (as long as they are consistent across training examples).
+Often in images, one wants to identify a feature within the image, this feature could potentially be in any part of the image. 
+ 
 For example, in an input image every pixel is flattened into a single dimensional array before being input to the network.
 \acp{CNN} try to retain some location information for each of the pixels.
 Whilst \acp{CNN} can be used for single dimensional inputs, they were generally developed for images.
@@ -271,29 +275,18 @@ Convolutional layers have some similarities to standard fully connected layers a
 The main difference being how the weights are applied to the inputs.
 To show the difference I have an example of a simple input image which has 9 pixels, this is shows in Fig.~\ref{}.
 
-A fully connected neural network would flatten this image and apply Eq.~\ref{machine:nn:neuron:equation} to the inputs, such that the output is,
+A fully connected neural network would flatten this image and apply Eq.~\ref{machine:nn:neuron:equation} to the inputs.
 
+A convolutional layer however, filters the image and output a filtered image of the same size(the image can be a different size it depends how the layer was set up).
+This convolution is defined by,
 \begin{equation}
-\begin{split}
-    O_{k} &= f\left(\sum_{i} \sum_{j} I_{i,j} w_{i,j,k} + b_k \right) \\
-    O_1 &= f\left(I_1 w_{1,1} + I_2 w_{2,1} + I_3 w_{3,1} + I_4 w_{4,1} + I_5 w_{5,1} + I_6 w_{6,1} + I_7 w_{7,1} + I_8 w_{8,1} + I_9 w_{9,1} + b_1\right) \\
-     \dots
-\end{split}
+\label{cnn:conv:equation}
+O_{i,j} = f\left( \sum_{m} \sum_{n} F_{m,n}x_{i-m,j-n}\right) ,
 \end{equation}
-
-If the size of the convolutional filter was $2\times 2$, then the convolutional layer only has 5 parameters to vary as opposed to 10 in this case.
-This would then use the equation,
-\begin{equation}
-    O_{i,j} = \sum_{m} \sum_{n} K_{m,n}I_{i-m,j-n}
-\end{equation}
-\begin{equation}
-\begin{split}
-    O_1 &= f\left(I_1 w_1 + I_2 w_2 + I_4 w_3 + I_5 w_4 + b\right) \\
-    O_2 &=  f\left( I_2 w_1 + I_3 w_2 + I_5 w_3 + I_5 w_4 + b\right)\\
-    O_3 &=  f\left(I_4 w_1 + I_5 w_2 + I_7 w_3 + I_8 w_4 + b\right)\\
-    O_4 &=  f\left(I_5 w_1 + I_6 w_2 + I_8 w_3 + I_9 w_4 + b\right).
-\end{split}
-\end{equation}
+where $O$ is the output image, $x$ is the input image, $F$ is the convolutional filter and $f$ is the activation function.
+Assuming we use the image in Fig.~\ref{} as input to this network, in the fully connected case one output neuron would have 10 parameters to vary.
+In the convolutional neural network case, assuming a filter size of 2$\times$2, one has 5 parameters to vary.  This then outputs am image of 9x9 pixels. 
+This can then reduce the size of the parameter space, and should be able to identify the important features in the image when trained.
 
 Whilst this is hard to picture mathematically, it can be easier seen as a 2x2 filter which is convolved with the input image. 
 Fig.~\ref{} shows how the convolutional filter is applied.
@@ -301,24 +294,11 @@ The output of a convolutional layer is then an image which is half the filter le
 In practice, the input images are often padded with zeros such that the output image is the same size as the input image. 
 
 \begin{figure}[h]
-\begin{subfigure}[h]{\columnwidth}
+
     \centering
-    \includegraphics[width=0.5\columnwidth]{C4_cnn/neuron.pdf}
+    \includegraphics[width=\columnwidth]{C4_cnn/conv_filters.pdf}
     \caption{Simple neural network}
     \label{machine:cnn:convlayer:input}
-\end{subfigure}   
-
-\begin{subfigure}[h]{\columnwidth}
-    \includegraphics[width=0.5\columnwidth]{C4_cnn/neuron.pdf}
-    \caption{Simple neural network}
-    \label{machine:cnn:convlayer:nn}
-\end{subfigure} 
-
-\begin{subfigure}[h]{\columnwidth}
-    \includegraphics[width=0.5\columnwidth]{C4_cnn/neuron.pdf}
-    \caption{Simple neural network}
-    \label{machine:nn:convlayer:cnn}
-\end{subfigure} 
 
 \end{figure}
 
@@ -330,7 +310,7 @@ Below I list each of the adaptable parameters and what they do.
 
 \item[Number of filters] The number of filters can be any value. If you have $K$ filter kernels, then the convolutional layer will output $K$ filtered images.
 
-\item[Activation function] The activation function is generally kept the same for each of the layers, however this can be set here. The different types have been explaine in Sec.~\ref{machine:nn:activation}.
+\item[Activation function] The activation function is generally kept the same for each of the layers, however this can be set here. The different types have been explained in Sec.~\ref{machine:nn:activation}.
 
 \item[Stride] The stride is when the convolution is applied to every other pixel. This method reduces the size of the output by the same factor. This is not used in the rest of this work.
 \end{description}
@@ -341,19 +321,19 @@ Convolutions can keep hold of this information and look for similar patters with
 
 %%%%%%%%%
 %%%%%%%%
-\subsection{Max pooling layers}
+\subsection{\label{machine:cnn:maxpool}Max pooling layers}
 %%%%%%%%%%%%
 %%%%%%%%%%%
 
 Max pooling layers are designed to reduce the size of the problem whilst holding on to as much important information as possible.
-the idea of this layer is relatively simple, it reduces the image size by taking the maximum value in a reigon of a given size.
-For example, in Fig.~\ref{maxpool}, the image is reduced by a 2x2 max pooling layer.
+the idea of this layer is relatively simple, it reduces the image size by taking the maximum value in a region of a given size.
+For example, in Fig.~\ref{machine:cnn:maxpool:image}, the image is reduced by a 2$\times$2 max pooling layer.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\columnwidth]{C4_cnn/neuron.pdf}
-    \caption{Max pooling layer}
-    \label{fig:my_label}
+    \includegraphics[width=\columnwidth]{C4_cnn/maxpool.pdf}
+    \caption{Max pooling layers aim to reduce the size of am image whilst retaining important information within the original image. Above shows an example where a 2$\times$2 maxpooling layer is used. }
+    \label{machine:cnn:maxpool:image}
 \end{figure}
 
 %%%%%%%%%%%%%
@@ -370,9 +350,12 @@ This can then classify the network into the chosen output.
 
 \acp{CNN} are then trained in the same way as neural networks as described in Sec.~\ref{machine:nn:training}.
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{CW search}
+\section{Application to CW search}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -384,6 +367,78 @@ This can then classify the network into the chosen output.
 \subsection{Network structure}
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
+
+In this section the structure of the networks which are used in this analysis
+are described. There are three main inputs of data for each \ac{CNN}: spectrograms, Viterbi maps and the Viterbi statistic. Each of these are different representations of the raw detector data. In this analysis we train a separate \ac{CNN} for each of
+these inputs and then a further three which use these combinations of inputs:
+Viterbi map + spectrogram, Viterbi map + Viterbi statistic and Viterbi map +
+Viterbi statistic + spectrogram. In all of the layers excluding the output layer of each \ac{CNN}, the activation functions in Eq.~\ref{cnn:conv:equation} and \ref{machine:nn:neuron:equation} are defined by a function titled `leakyRELU' \cite{maas2013RectifierNonlinearities}. 
+For our output neuron a sigmoid function is
+used as an activation function such that the output is limited between 0 or 1.
+For a given input a \ac{CNN} can then output a value between 0 and 1. When the output value is closer to 1, the input is more likely to contain a signal. 
+The output value can then be treated as a detection statistic. 
+The structure of the network is shown in Fig.~\ref{results:cnnlayout} and is explained below. 
+
+\begin{description}
+	\item [Viterbi statistic] This is the simplest of the networks and will
+	give the exact same result as the Viterbi statistic on its own. This is a
+	single neuron which takes in the Viterbi statistic applies a weight and bias
+	and then passes through a sigmoid function.
+	
+	\item [Viterbi map] The Viterbi map \ac{CNN} takes in a down-sampled Viterbi map of size (156,89), this is described more in Sec.~\ref{data:downsample}.
+	This \ac{CNN} consists of two convolutional layers and 3 fully connected layers. The first layer has
+	8 filters which have a size of $5\times5$ pixels, the second layer has 8
+	filters with a size of $3\times3$ pixels. After each of these layers we use a
+	max-pooling layer with a size of $8\times8$ pixels. This then passed into three
+	fully connected layers which all have 8 neurons and used leakyRELU activation
+	functions. Finally these lead to an output neuron which uses a sigmoid
+	function.
+	
+	\item [Spectrogram] The spectrogram \ac{CNN} takes in a down-sampled spectrograms of size (156,89), this is described more in Sec.~\ref{data:downsample}.
+	This \ac{CNN} has an identical structure as the Viterbi map \ac{CNN}, however, takes two channels as input. The two channels are the spectrograms of two different detectors.
+	
+\end{description}
+
+The next three networks are constructed from combinations of the previous described \acp{CNN}.
+
+\begin{description}
+	\item [Viterbi map and spectrogram] To combine the spectrogram and Viterbi map network, we remove the final output neuron and its 8 weights from each of the networks. 
+	The outputs from each network is then 8 neurons. These can be combined to a single sigmoid neuron which has 16 new weights.
+	
+	\item [Viterbi map and Viterbi statistic] In this network we combine the
+	Viterbi statistic with the Viterbi map. As before, this uses the pre-trained
+	Viterbi map and Viterbi statistic \acp{CNN}. The output sigmoid neuron and corresponding weights are removed from each network. 
+	The 8 neurons from the Viterbi map network and the single neuron from the Viterbi statistic network are then combined to a single neuron with 9 new weights.
+	
+	\item [Viterbi map, Viterbi statistic and spectrogram] This combination takes all component \acp{CNN} from above. As before the final sigmoid output and the corresponding weights from each network are removed.
+	The 8 neurons from the Viterbi map and spectrograms \acp{CNN} and the single neuron from the Viterbi statistic are then joined into a single output neuron with 17 new weights. 
+	
+\end{description}
+
+When combining \acp{CNN} we use a process called transfer
+learning~\cite{prattDiscriminabilityBasedTransfer}. This uses the pre-trained weights of the networks as a starting point to continue training. 
+In our examples we found that we could fix the weights inside the pre-trained networks and just train the final 16 output weights from the neurons as in Fig.~\ref{machine:results:cnnlayout}.
+These combinations of networks were chosen as the different representations of the data should contain slightly different information on the input.
+For example, the Viterbi statistic contains no information on the structure of the track in the data and the Viterbi maps lost some information about lines in the band.
+The addition of the spectrograms aimed to include even more information about this piece of data. 
+Where when each of these are combined, the \ac{CNN} should be able to pick to important information from each of these representations.
+
+% plot of vitmap and spretrogram structure 
+%
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{C4_cnn/networks.pdf}
+	%
+	\caption{\label{machine:results:cnnlayout} The structure of the Viterbi map and
+		spectrogram \acp{CNN} used in this analysis are the same, with the difference
+		that the spectrogram takes two images as input. They each use two convolutional
+		layers and 3 fully connected layers before they're output to a single neuron which represents the probability of belonging to the signal class. The
+		Viterbi statistic network is a single neuron that transforms the statistic into
+		a number between 0 and 1 representing the probability of belonging to
+		the signal class. For the combinations of networks, we remove the final
+		output neuron and its 8 weights, i.e. we take the part inside the red or blue box. The 8 outputs from each network are then combined to a single neuron with 16 new weights. }
+	%
+\end{figure}
 
 \subsubsection{Viterbi statistic}
 

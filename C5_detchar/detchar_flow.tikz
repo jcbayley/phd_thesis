@@ -1,0 +1,32 @@
+
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=17em, text centered, rounded corners, minimum height=4em]
+    
+\tikzstyle{line} = [draw,line width=0.35mm, -latex']
+
+
+\begin{tikzpicture}[node distance = 6em, auto]
+
+    % Place node
+    
+  	\node [block] (sft) {1.\\ SFTs from Time series};
+  
+  	\node [block, below of=sft] (norm) {2. \\ Divide \ac{SFT} by running median and get power spectrum.};
+  	\node [block, below of=norm] (narrow) {3. \\ Narrowband \ac{SFT} (0.2 Hz)};
+	
+	\node [block, below of=narrow] (soap) {4. \\ Run SOAP search and generate plots};
+  
+   \node [block, below of=soap] (summary) {5. \\ Generate summary page};
+
+  
+  % Draw edges
+  \path [line] (sft) -- (norm);
+  \path [line] (norm) -- (narrow);
+  \path [line] (narrow) -- (soap);
+  \path [line] (soap) -- (summary);
+  
+
+  
+    
+\end{tikzpicture}
