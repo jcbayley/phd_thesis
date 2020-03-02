@@ -137,7 +137,7 @@ where $b$ is the bias, $x$ is the input, $w$ is the weights, $f$ is the activati
 Here the input $x$ represents either the data which is input, i.e the pixels of the image which contains the digit in the example above, or the output of another neuron.
 The weights $w$ then represents how important each of those data points are to this problem, or specifically this neuron. 
 The bias $b$ is then just an extra factor which can shift the data by a fixed value.
-The activation function $f$ is then a function which can have many forms, in the simplest case in a neuron known as a `perceptron', it provides a cut where any value above a given threshold is 1 and any below is 0. 
+The activation function $f$ is then a function which can have many forms, in the simplest case in a neuron known as a `perceptron', it provides a cut where any value above a given threshold is 1 and any below is 0, this will be explained in more detail in Sec.~\ref{machine:nn:activation}. 
 However, there are many different types of activation functions which can be applied to different situations.
 This will be explained in more detail in Sec.~\ref{machine:nn:activation}.
 
@@ -207,16 +207,43 @@ In the work that follows we use the Leaky RELU function and the sigmoid function
 \subsection{\label{machine:nn:training}Training}
 %%%%%%%%%%%%%%%%%
 
-For example, imagine you are playing darts and have the aim of trying to hit bullseye.
-After each dart that misses you would adjust where you aim the dart based on how far away from the bullseye it landed.
+% introduce training concept
+%
+Once the structure of the network is decided, the network needs to be trained.
+This means that the weights and bias' for every neuron need to be updated such
+that the neural network gives a useful output. For this
+work we will classify the input images using a single output neuron.
+This neuron outputs a value between 0 and 1 using a sigmoid function.
+The \ac{CNN} is trained using a process called supervised
+learning. When using supervised learning, the class of each input example is know. For example, we assign a label of 1 when the
+input is a time-frequency spectrogram which includes a simulated \ac{CW}
+signal. Similarly a time-frequency spectrogram with no simulated signal is assigned a label of 0. 
+In general when training neural networks this way, the performance of the network can be improved by increasing the number of input examples which are shown to the network.
+This stops the network from over-fitting to specific examples. Instead it should generalise to the full input and learn the underlying features within the data.
 
+%Training procedure
+%
+Each of the training examples is then propagated though the network to its single output value which lies between 0 and 1. Using a loss function, this output is then be compared to
+the label of the input data which is either 0 or 1. As we are classifying
+between two classes in out networks, the loss function, $L$, is the binary
+crossentropy defined as,
+%
+\begin{equation}\label{cnn:loss} 
+L = -y\log{(p)} + (1-y)\log{(1-p)},
+\end{equation}
+%
+where $p$ is the networks predicted output which has any value in the range $[0,1]$ and $y$ is the true output which has binary labels 0 or 1. 
+The loss function is minimised when the output matches the truth. This essentially
+tells the neural network how close to the truth it is. The weights and bias' of
+the neural network can be updated based on the value of this loss function. The
+process of updating the weights and other parameters is called back-propagation,
+and typically uses a form of gradient descent
+\cite{kingma2015AdamMethod}.
+Back-propagation uses the derivative of the loss function with respect to a weight to update that weight.
+If changing that weight in a particular direction decreases the loss function, then the weight will be updated in that direction.
+The size of the change of the weight value is related to the change in the size loss function.
+This means that the weights can be updated to minimise the loss function and therefore improve the performance of the network.
 
-%%%%%%%%%%%%%%%%%
-\subsection{\label{machine:nn:loss}Loss functions}
-%%%%%%%%%%%%%%%%%
-
-When training a network as described in Sec.~\ref{machine:nn:training} one needs to find how far from the truth the result is. 
-Depending on the problem, there are a number of ways to do this.
 
 
 %%%%%%%%%%%
@@ -226,7 +253,7 @@ Depending on the problem, there are a number of ways to do this.
 %%%%%%%%%%%
 
 Convolutional neural networks are based on the same principles as the neural networks described above. 
-The difference being that \acp{CNN} use additional types of layers which help to contain information of pixels relative to each other.
+The difference being that \acp{CNN} use additional types of layers which help to retain information of pixels relative to each other.
 In a standard neural network, it does not have any information on the location of any input value.
 For example, in an input image every pixel is flattened into a single dimensional array before being input to the network.
 \acp{CNN} try to retain some location information for each of the pixels.
