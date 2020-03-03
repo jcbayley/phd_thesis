@@ -10,9 +10,9 @@
 %   (this is the default for LaTeX)
 % Make sure that your TeX installation can produce good pdf with these fonts.
 % The following three lines are a good alternative if you don't use much mathematics
-\usepackage{mathptmx}  % uses Times for text and mathematics
-\usepackage[scaled]{helvet} %  helvetica for sanserif, scaled 95% by default
-\usepackage{courier}  % courier for typewriter font, pretty ugly but available
+%\usepackage{mathptmx}  % uses Times for text and mathematics
+%\usepackage[scaled]{helvet} %  helvetica for sanserif, scaled 95% by default
+%\usepackage{courier}  % courier for typewriter font, pretty ugly but available
 % otherwise the stix package offers more options and symbols
 % \usepackage{stix}  % uses Times for text and a range of fonts for mathematics
 % End of choices for fonts
@@ -70,6 +70,11 @@ placement=tbhp,
 
 
 \newcommand{\joe}[1]{\textbf{\textcolor{red}{JOE: #1}}}
+\newcommand{\graham}[1]{\textbf{\textcolor{blue}{GRAHAM: #1}}}
+\newcommand{\chris}[1]{\textbf{\textcolor{green}{CHRIS: #1}}}
+
+\usepackage{charter}
+\usepackage[expert]{mathdesign}
 
 \begin{document}
 \begin{titlepage}

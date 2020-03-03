@@ -1,15 +1,18 @@
 \chapter{\label{detchar}Detector Characterisation with SOAP}
 %%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%
 
-When searching for \ac{GW} signals, it is important to understand the origins of noise in the the detectors data which does not originate from an astrophysical source.
+When searching for \ac{GW} signals, it is important to understand the origins of noise artefacts in the detectors data which does not originate from an astrophysical source.
 A large fraction of \ac{GW} search algorithms, including SOAP above, assume that the detectors noise follows a Gaussian distribution.
 However, the detectors contain artefacts which are not distributed as a Gaussian. 
 These artefacts can negatively affect many searches for \ac{GW} as they can be easily mistaken for a real \ac{GW} signal.
 Some of the potential sources of these artefacts have been mentioned in Sec.~\ref{intro:detector:noise}. 
-There are many different classes of artefact, some key types include: glitches, these are short duration signals and instrumental lines which are long duration.
+There are many different classes of artefact, some key types include: glitches, these are short duration broad band bursts in power and instrumental lines which are long duration narrow-band signals.
 To conduct a reliable search there are two main tasks which are necessary for detector characterisation.
-The first is identifying the artefact such that any search knows that part of data is contaminated.
-The search can then remove that section of data, or use more sophisticated techniques to deal with the artefact \citep{}.
+The first is identifying the artefact such that any search knows which areas in frequency and time are contaminated.
+The search can then address that section of data, this could mean removing that section of data or use more sophisticated techniques to deal with the artefact \citep{}.
 The second task is to find the source of the artefact. 
 If the source of the artefact is found, it can potentially be removed or limited for future data runs.
 
@@ -27,15 +30,22 @@ Finally Sec.~\ref{detchar:summary} will show the outputs of the search and this 
 %%%%%%%%%
 %%%%%%%%%
 
+%
+% Introduce instrumental lines
+
 Instrumental lines have the general structure that they are persistent noise artefacts.
 There are many classes of instrumental line including: narrow, fixed frequency spectral artefacts or broad features which have a time varying frequency known as wandering lines.
-Many of these lines can make it difficult to distinguish them from an astrophysical signal.
-For many search methods, lines affect results in two main ways. 
-They can cause the search to produce outliers which are considered as \ac{GW} candidates.
+For many of these lines, it is difficult to distinguish them from an astrophysical signal.
+This affects search methods in two main ways. 
+They can cause the search to produce outliers which are then considered as \ac{GW} candidates.
+Extra efforts then have to be made to analyse these outliers further.
 If the line is close to the \ac{GW} signal in frequency, then it can conceal the power of the \ac{GW}, or if it is overlapping, the search can be almost impossible.
-It is therefore crucial to understand the structure and origin of these lines when performing a search for \ac{GW} specifically \ac{CW} and stochastic searches.
+It is therefore crucial to understand the structure and origin of these lines when performing a search for \ac{GW}, specifically \ac{CW} and stochastic searches.
 
-Some instrumental lines are clearly visible when looking at one fo the \ac{LIGO} detectors frequency spectrum is shown in Fig.~\ref{detchar:line:psd}. This figure demonstrates some lines which have larger amplitudes. There are however, many more weaker line which become visible when spectra are averaged over longer times.
+%
+% What lines look like and how the appear in the GW channel
+
+Some instrumental lines are clearly visible when looking at one fo the \ac{LIGO} detectors frequency spectrum. Fig.~\ref{detchar:line:psd} shows the \ac{ASD} for \acp{LIGO} Hanford and Livingston detectors during their first observing run (O1) \citep{GWOpen}. This clearly shows some strong lines, some of which have been labelled. There are however, many more weaker line which become visible when spectra are averaged over longer times.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{C5_detchar/ligo_o1_asd_annot.pdf}
@@ -43,29 +53,36 @@ Some instrumental lines are clearly visible when looking at one fo the \ac{LIGO}
     \label{detchar:line:psd}
 \end{figure}
 The frequency spectrum in Fig.~\ref{detchar:line:psd} shows the time averaged spectra the \ac{GW} channel of the \ac{LIGO} detectors. 
+The \ac{GW} channel is essentially the error signal on the mirrors whilst they are being held on a resonance, i.e. how much the mirrors have to be moved to keep the same output of the interferometer.
 The lines seen in the spectrum are not from any \ac{GW} and are usually from ground based sources.
 To see the lines in the \ac{GW} channel, they must be coupled in via some mechanism. 
 There are a number of ways in which this happens which are outlined in \citep{covas2018IdentificationMitigation}.
 This includes coupling via shared power and grounds. 
-When different components share the same power supplies, if a component draws power with a given period, then the voltage will decrease at this frequency. 
+When different components share the same power supplies, if a component draws power with a given period, then the voltage will decrease repeatedly at this frequency. 
 Another component which shares this same power supply can then also see this drop in voltage and this can potentially affect a stored output. 
-Another mechanism is coupling through magnetic fields, this is common when cables are nearby and can couple the magnetic field to different systems.
-Coupling can also occur though a physical connection, known as mechanical coupling, for example the resonances of the suspension fibres which couple directly to the mirrors.
+Another mechanism is coupling through magnetic fields, this is common when cables are close to each other, the magnetic field in one can affect the other, therefore, coupling noise between different systems.
+Coupling can also occur though a physical connection, known as mechanical coupling, for example the resonances of the suspension fibres which couple directly into the mirrors.
+
+%
+% Origins of some lines and how they can be mitigated
 
 Many of the spectral lines seen in the frequency spectrum, Fig.~\ref{detchar:line:psd} are fundamental to the design of the detector. 
-These cannot be eliminated, therefore need to be understood such that their effect on searches in minimised.
-Some of these lines are listed below.
+These cannot be eliminated, therefore need to be understood such that their effect on searches is minimised.
+Some of the strongest of these lines are listed below.
 \begin{description}
-	\item[Power line] The power line harmonics are fundamental to the detector and originate from the US mains supply. These lines exist at 60 Hz which is the frequency of the mains alternating current oscillates at \citep{aasi2015CharacterizationLIGO}.
+	\item[Power line] The power line harmonics are fundamental to the detector and originate from the mains supply in the USA. These lines exist at 60 Hz which is the frequency of the mains alternating current oscillates at \citep{aasi2015CharacterizationLIGO}.
 	
 	\item[Violin modes] The violin modes are associated with the suspensions of the mirrors and the beam splitter in the detector. These are designed to have a narrow frequency spectrum such that they contaminate as smaller part of the spectrum as possible. These are the lines around 500 Hz for the mirrors and 300, 600 and 900 Hz for the beam-splitter \citep{GWOpen} in Fig.~\ref{detchar:line:psd}.
 	
 	\item[Calibration lines] The mirrors of the \ac{LIGO} detectors, are held at a resonance of the cavity in the arms of the interferometer. This then requires a feedback loop to hold them at resonance as a \ac{GW} passes the detector. Calibration lines are used to calibrate this feedback loop such that the arm length changes are accurate \citep{tuyenbayev2016ImprovingLIGO,coughlin2010NoiseLine}.
 \end{description}
-In \citep{davis2019ImprovingSensitivity}, techniques to counter the affect of power lines and calibration lines. 
+In \citep{davis2019ImprovingSensitivity}, techniques are used to counter the affect of power lines and calibration lines on searches. 
 
 Along with the fundamental lines of the detector which cannot be removed at the source, there are a large number of other lines whose source has been found and can be removed. 
-Many of these are from mechanisms described earlier such as shared power supplies or grounds, these can be removed by, for example, using a different supply for different systems.
+Many of these are from mechanisms described earlier such as shared power supplies or grounds. These can be removed by, for example, using a different power supply for different systems.
+
+%
+% How lines affect CW searches
 
 These lines have large effect on all searches for \acp{GW} both if the astrophysical signals frequencies overlap with the frequency of the line and can cause outliers. 
 Long duration searches for \acp{CW} are particularity sensitive to this type of artefact.
@@ -83,27 +100,36 @@ These pose a real challenge to some \ac{CW} searches, and require a lot of inves
 %%%%%%%%%%
 %%%%%%%%%%
 
+%
+% into to why lines are monitored
+
 When a detector is running, it is very important to identify instrumental lines and monitor them.
 This can then lead to either locating the origin of the line such that it can be removed, or allowing it to be flagged for other search algorithms.
-The lines are generally identified in the \ac{GW} channel, this is the output of the detector which \ac{GW} are observed and is the data using is previous chapters.
+The lines affect searches in the \ac{GW} channel, this is the output of the detector which \ac{GW} are observed and is the data using is previous chapters.
 This is the channel where the affect of lines is intended to be minimised.
 
+%
+% Auxilliary channels 
 As well and the \ac{GW} channel the detector records many different channels known as auxiliary channels. 
-These channels monitor many components of the detector.
-For example, the seismometers which are located near the corner stations and end stations are all channels which are monitored. 
-There are magnetometers located around the electronics on the site to measure how these may be affecting the detector. 
+These channels monitor many components of the detector, and importantly are not sensitive to \ac{GW}.
+Many of the channels useful for line searches are the \acp{PEM}.
+These include sensors such as seismometers measuring the ground motion, temperature sensors etc. 
+Magnetometers are a useful sensor in this case, they can be located around the electronics on the site to measure how these may be affecting the detector. 
 These channels can be very useful in identifying the source of an instrumental line.
-These channels which monitor the environment are known as \ac{PEM}.
 The main goal is to reduce the number of artefacts in the \ac{GW} such that it is as close to Gaussian noise as possible.
 If an artefact shows up in the \ac{GW} channel in coincidence with one of the \ac{PEM} or other channels, then this is an indicator that the artefact originates from something related to that \ac{PEM}.
 For example, say a magnetometer located near some electronics has a long duration line in its spectrum at the same frequency as the main \ac{GW} channel. 
 This indicates that the magnetic field of that piece of electronics is somehow coupling into the detector. 
+One can then investigate that piece of electronics further to see how it couples in.
+
+%
+% tools to monitor all the channels
 
 There are a number of tools which are used to monitor these spectral lines, along with a team of people which regularly look though the results, a summary of these for the first two observing runs of \ac{LIGO} can be found in \citep{covas2018IdentificationMitigation}.
 Some of the tools used are described below. 
 
 \begin{description}
-	\item[Fscan] Fscan \citep{coughlin2010NoiseLine} takes \acp{FFT} of the raw detector data, typically these are 1800s long. This is done for all of the auxiliary channels as well as the \ac{GW} channel. The \acp{FFT} are then averaged over a day and spectrograms are generated. After known lines such as Violin modes and power lines are subtracted, noise lines can be identified. A threshold can be set and anything in the spectrograms which exceed this threshold are flagged as a line. These can then be compared across multiple different channels. More detail on how the lines are identified can be found in \citep{coughlin2010NoiseLine}
+	\item[Fscan] Fscan \citep{coughlin2010NoiseLine} takes \acp{FFT} of the raw detector data, typically these are 1800s long. This is done for all of the auxiliary channels as well as the \ac{GW} channel. The \acp{FFT} are then averaged over a day and time-frequency spectrograms are generated. After known lines such as Violin modes and power lines are subtracted, noise lines can be identified. A threshold can be set and anything in the spectrograms which exceed this threshold are flagged as a line. These can then be compared across multiple different channels. More detail on how the lines are identified can be found in \citep{coughlin2010NoiseLine}
 	
 	\item[Coherence] Coherence searches for the coherence between different channels and different detectors. This is similar to searches for stochastic gravitational waves. More detail of how this works can be found in \citep{covas2018IdentificationMitigation}
 	
@@ -112,6 +138,7 @@ Some of the tools used are described below.
 	\item[NoEMi] NoEMi uses \acp{FFT} and identifies peaks within the spectrum. I can then find coincidences with auxiliary channels and label is there are overlapping peaks with the \ac{GW} channel. This can then tracks the lines with time. All of the information is stored in a database where more detail on its operation can be found in \citep{accadia2012NoEMiNoise}.
 	
 \end{description}
+
 
 These tools offer many ways for the detector characterisation team to identify instrumental lines and hunt for their source. A summary of these efforts for the advanced \ac{LIGO} data can be found in \citep{covas2018IdentificationMitigation}.
 The following sections describe how the SOAP search described in Sec.~\ref{soap} can be used as an extra tool to aid in the identification and monitoring of instrumental lines.
@@ -127,10 +154,13 @@ One of the major factors which limited the sensitivity of the search is instrume
 Whilst for the majority of this thesis I have worked on developing techniques to limit the affect instrumental lines, the search also has the ability to identify these lines well.
 In this section, I will explain the setup of the search to identify instrumental lines.
 
+Whilst it is useful to run searches on auxiliary channels when trying to identify the lines source, the aim of this search was to flag potential lines which can be then be investigated further.
+This can be done by eye or by using other tools. 
+In the future this could be modified to search multiple channels, however, in this work searches are only run on the \ac{GW} channel. 
 Sec.~\ref{soap} described how multiple detectors can be used to increase the sensitivity of a search for \acp{CW}. 
 However, when searching for instrumental lines, the aim is to have the reverse effect, therefore, a simple search is run separately on each detector. 
-This then removed any of the statistics developed in Sec.~\ref{viterbi:las} and uses the \ac{FFT} power as the statistic in the SOAP search.
-The single detector soap search then has one parameter to vary, the transition matrix parameter. 
+This then removed any of the statistics developed in Sec.~\ref{viterbi:las} and uses the `normalised' \ac{FFT} power as the statistic in the SOAP search.
+The single detector search then has one parameter to vary, the transition matrix parameter. 
 This governs how probable the frequency track is to transition up straight or down a frequency bin.
 In this search we are aiming to find any non Gaussian artefacts, therefore, we allow an equal probability for the track to jump in any direction. 
 The Fscan search described above generates \acp{FFT} every day of varying lengths, this include 1800 s long \acp{FFT}. 
@@ -150,7 +180,7 @@ These plots and the equivalent plots for other sub-bands can then allow the sub-
 \end{figure}
 %
 Fig.~\ref{detchar:soap:noiseplot} shows an example of a sub-band which does not contain any signal or spectral artefacts but is mostly Gaussian distributed noise. 
-The track in the top panel of this plots shows the power spectrum including detector gaps from 1800 s \acp]{SFT} in \ac{LIGO} Hanfords data from its second observing run (O2). 
+The track in the top panel of this plots shows the power spectrum including detector gaps from 1800 s \acp{SFT} in \ac{LIGO} Hanfords data from its second observing run (O2). 
 The Viterbi track is overlaid and the structure of the track indicates that there is no signal present, this is because the track appears to be randomly wandering and has a large spread over the entire band. 
 The Viterbi map plot does not show much structure and contains areas of low log-probability.
 Using this information along with the Viterbi statistic result, this particular sub-band can be considered to not contain an instrumental artefact. 
@@ -187,6 +217,8 @@ This line search then works by initially ranking all of the Viterbi statistics, 
 The higher values of the statistic can then be viewed for further investigation. The high values are defined rather arbitrarily, this could either be something like the top 10\% of sub-bands or could involve looking through the ranked list until signals begin to look like noise. 
 The top results which are deemed to come from an instrumental line can be compared to the known line lists from the other line tools mentioned in Sec.~\ref{detchar:monitor}.
 Any new lines can be investigated further by methods described in \citep{covas2018IdentificationMitigation} using the tools in Sec.~\ref{detchar:monitor}.
+
+When running this search SOAP identified lines which did not appear in other line lists, therefore, offers a method to search for weaker lines. \joe{actually check this}
 
 
 %%%%%%%%%%%
@@ -225,10 +257,12 @@ These stages are as follows:
 	
 	\item[4. Run SOAP and generate plots] This stage runs the SOAP search with a flat transition matrix probability and generates plots as shown in Fig.~\ref{detchar:soap:noiseplot}.
 	
-	\item[5. Generate summary page] Finally the summary pages are built which take all of the bands and puts them in a table. This table can be ordered by the value of the Viterbi statistic, or can be searched for particular frequency bands. These pages then show the plots as in Fig.~\ref{detchar:soap:noiseplot} along with their Viterbi statistic.
+	\item[5. Generate summary page] Finally the summary pages are built which take all of the bands and puts them in a table. This table can be ordered by the value of the Viterbi statistic, or can be searched for particular frequency bands. 
 \end{description}
 
-The summary pages are then hoped to be useful alongside the other tools for searching for instrumental lines. \joe{more}
+An example of a summary page is shown in Fig.~\ref{detchar:summary:plots}. This has been annotated showing how to navigate the page. 
+There are generally two separate parts to the page: selecting the observing run and frequencies, and viewing the outputs.
+
 
 \begin{sidewaysfigure}[p]
 	\centering
@@ -236,3 +270,5 @@ The summary pages are then hoped to be useful alongside the other tools for sear
 	\caption{The summary pages are made for each observing run (in this case just O2 and O3). The range of times can then be selected from a set of start and end times. This is in general the entire observing run and monthly runs of this search.}
 	\label{detchar:summary:plots}
 \end{sidewaysfigure}
+
+The summary pages are then hoped to be useful alongside the other tools for searching for instrumental lines. \joe{more}

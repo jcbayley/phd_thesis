@@ -1,0 +1,183 @@
+
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=17em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw,line width=0.35mm, -latex']
+\tikzstyle{fillnode} = [rectangle, fill=white, text centered]
+
+\tikzstyle{blocktrain} = [rectangle, draw, fill=red!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{blocktest} = [rectangle, draw, fill=green!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{blocksearch} = [rectangle, draw, fill=black!5, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{blocktestbig} = [rectangle, draw, fill=green!20, 
+    text width=17em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{blocksearchbig} = [rectangle, draw, fill=black!5, 
+    text width=17em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{back group} = [fill=blue!20,rounded corners, draw=black!70, dashed, inner xsep=15pt, inner ysep=7pt, text centered]
+\tikzstyle{back group1} = [fill=blue!20,rounded corners, draw=black!70, dashed, inner xsep=15pt, inner ysep=15pt, text centered]
+
+
+\begin{tikzpicture}[node distance = 6em, auto]
+
+    % Place node
+    
+  \node [block] (sft) {1.\\ SFTs from Time series};
+  
+  \node [block, below of=sft] (norm) {2. \\ Divide \ac{SFT} to running median and get power spectrum.};
+  \node [block, below of=norm] (narrow) {3. \\ Narrowband \ac{SFT} };
+  
+  \node [block, below right =1.5cm and -0.9cm of narrow] (odd) {4. \\ Odd.};
+  \node [block, below left =1.5cm and -0.9cm of narrow] (even) {4. \\ Even.};
+  
+  % odd blocks
+    
+  \node [blocktest,below of= odd] (testodd) {5b.\\ Test data};
+  \node [blocktest, below of= testodd] (testsumodd) {6b. \\Test data};
+  \node [blocktest, below of=testsumodd] (testlookupodd) {7b. \\ Test data};
+  \node [blocktest, below of=testlookupodd] (testdownsampodd) {8b. \\  Test data};
+  \node [below of= testdownsampodd](testblankodd) {};
+    
+  \node [blocktrain, left of= testodd] (trainodd) {5a.\\ Training data};
+  \node [blocktrain, below of= trainodd] (trainsumodd) {6a. \\Training data};
+  \node [blocktrain, below of=trainsumodd] (trainlookupodd) {7a. \\ Training data};
+  \node [blocktrain, below of=trainlookupodd] (traindownsampodd) {8a. \\  Training data};
+  \node [blocktrain, below of=traindownsampodd] (trainnetworkodd) {9. \\ Train `odd' \ \ac{CNN}};
+
+  \node [blocksearch,right of=testodd] (searchodd) {5c.\\ Search data};
+  \node [blocksearch, below of= searchodd] (searchsumodd) {6c. \\Search data};
+  \node [blocksearch, below of=searchsumodd] (searchlookupodd) {7c. \\ Search data};
+  \node [blocksearch, below of=searchlookupodd] (searchdownsampodd) {8c. \\  Search data};
+  \node [below of= searchdownsampodd](searchblankodd) {};
+  
+  \node [blocktest, below = 1.4cm of testblankodd] (testclassifyodd) {10b.\\ Test data};
+  \node [blocksearch, below = 1.4cm of searchblankodd] (searchclassifyodd) {10c.\\ Search data};
+
+   
+  % even blocks]
+  
+    \node [blocksearch,below of=even] (searcheven) {5c.\\ Search data};
+  \node [blocksearch, below of= searcheven] (searchsumeven) {6c. \\Search data};
+  \node [blocksearch, below of=searchsumeven] (searchlookupeven) {7c. \\ Search data};
+  \node [blocksearch, below of=searchlookupeven] (searchdownsampeven) {8c. \\ Search data};
+  \node [below of= searchdownsampeven](searchblankeven) {};
+  
+  \node [blocktest,left of= searcheven] (testeven) {5b.\\Test data};
+  \node [blocktest, below of= testeven] (testsumeven) {6b. \\Test data};
+  \node [blocktest, below of= testsumeven] (testlookupeven) {7b. \\Test data};
+  \node [blocktest, below of=testlookupeven] (testdownsampeven) {8b. \\ Test data};
+  \node [below of= testdownsampeven](testblankeven) {};
+  
+  \node [blocktrain, right of= searcheven] (traineven) {5a.\\ Training data};
+  \node [blocktrain, below of= traineven] (trainsumeven) {6a. Training data};
+  \node [blocktrain, below of=trainsumeven] (trainlookupeven) {7a. \\Training data};
+  \node [blocktrain, below of=trainlookupeven] (traindownsampeven) {8a. \\ Training data};
+  \node [blocktrain, below of=traindownsampeven] (trainnetworkeven) {9. \\ Train `even'  \ \ac{CNN}};
+
+  
+  \node [blocktest, below = 1.4cm of testblankeven] (testclassifyeven) {10b.\\ Test data};
+  \node [blocksearch, below = 1.4cm of searchblankeven] (searchclassifyeven) {10c.\\ Search data};
+  
+% background blocks  
+  
+\begin{scope}[on background layer]
+   
+    \node (bkgen) [back group] [fit=(trainodd) (testodd) (searchodd) (traineven) (testeven) (searcheven) ] {5.\\Injections};
+    
+    \node (bksum) [back group] [fit=(trainsumodd) (testsumodd) (searchsumodd) (trainsumeven) (testsumeven) (searchsumeven)] {6.\\Sum spectrograms over \\1 day};
+    
+    \node (bksoap) [back group] [fit=(trainlookupodd) (testlookupodd) (searchlookupodd) (trainlookupeven) (testlookupeven) (searchlookupeven)] {7.\\Generate lookup tables \\and\\ run SOAP search.};
+    
+    \node (bkdown) [back group] [fit=(traindownsampodd) (testdownsampodd) (searchdownsampodd) (traindownsampeven) (testdownsampeven) (searchdownsampeven)] {8.\\Downsample spectrograms\\ and vitmaps.};
+    
+    \node (bkclassodd) [back group1] [fit=(testclassifyodd) (searchclassifyodd)] {};
+     
+    \node (bkclasseven) [back group1] [fit=(testclassifyeven) (searchclassifyeven)] {};
+
+    
+ \end{scope}
+ 
+   % search and testing
+  
+  \node [blocktestbig, below right =1.1cm and -3.5cm of bkclasseven] (output) {11c.\\ Generate efficiency curves from test data.};
+  \node [blocksearchbig, below left= 1.1cm and -3.5cm of bkclassodd] (outputsearch) {11a.\\ Take top 1\% of search bands for followup.};
+  
+  % Draw edges
+  \path [line] (sft) -- (norm);
+  \path [line] (norm) -- (narrow);
+  
+  % even lines
+  
+   \path [line] (narrow) -- (even);
+  
+  \path [line] (even) -- (testeven);
+  \path [line] (even) -- (traineven);
+  \path [line] (even) -- (searcheven);
+  
+  \path [line,red!60] (traineven) -- (trainsumeven.north);
+  \path [line,green!60] (testeven.south) -- (testeven.south|-testsumeven.north);
+  \path [line,black!60] (searcheven.south) -- (searcheven.south|-searchsumeven.north);
+  
+  \path [line,green!60] (testeven.south|-testsumeven.south) -- (testeven.south|-testlookupeven.north);
+  \path [line,red!60] (traineven.south|-trainsumeven.south) -- (traineven.south|-trainlookupeven.north);
+  \path [line,black!60] (searcheven.south|-searchsumeven.south) -- (searcheven.south|-searchlookupeven.north);
+  
+  \path [line,green!60] (testeven.south|-testlookupeven.south) -- (testeven.south|-testdownsampeven.north);
+  \path [line,red!60] (traineven.south|-trainlookupeven.south) -- (traineven.south|-traindownsampeven.north);
+  \path [line,black!60] (searcheven.south|-searchlookupeven.south) -- (searcheven.south|-searchdownsampeven.north);
+  
+  \path [line,red!60] (traindownsampeven) -- (trainnetworkeven);
+  \path [line,green!60] (testdownsampeven) -- (testclassifyeven);
+  \path [line,black!60] (searchdownsampeven) -- (searchclassifyeven);
+  
+  %\path [line,black!60] (searcheven.south|-searchdownsampeven.south) -- (searcheven.south|-classifyeven.north);
+  %\path [line,green!60] (testeven.south|-testdownsampeven.south) -- (testeven.south|-classifyeven.north);
+  
+  \path [line,red!60] (trainnetworkeven) -- (bkclassodd);
+  
+  %% odd lines
+  
+   \path [line] (narrow) -- (odd);
+  
+  \path [line] (odd) -- (testodd);
+  \path [line] (odd) -- (trainodd);
+  \path [line] (odd) -- (searchodd);
+  
+  \path [line,red!60] (trainodd) -- (trainsumodd.north);
+  \path [line,green!60] (testodd.south) -- (testodd.south|-testsumodd.north);
+  \path [line,black!60] (searchodd.south) -- (searchodd.south|-searchsumodd.north);
+  
+  \path [line,green!60] (testodd.south|-testsumodd.south) -- (testodd.south|-testlookupodd.north);
+  \path [line,red!60] (trainodd.south|-trainsumodd.south) -- (trainodd.south|-trainlookupodd.north);
+  \path [line,black!60] (searchodd.south|-searchsumodd.south) -- (searchodd.south|-searchlookupodd.north);
+  
+  \path [line,green!60] (testodd.south|-testlookupodd.south) -- (testodd.south|-testdownsampodd.north);
+  \path [line,red!60] (trainodd.south|-trainlookupodd.south) -- (trainodd.south|-traindownsampodd.north);
+  \path [line,black!60] (searchodd.south|-searchlookupodd.south) -- (searchodd.south|-searchdownsampodd.north);
+  
+  \path [line,red!60] (traindownsampodd) -- (trainnetworkodd);
+  \path [line,green!60] (testdownsampodd) -- (testclassifyodd);
+  \path [line,black!60] (searchdownsampodd) -- (searchclassifyodd);
+  
+  %\path [line,black!60] (searchodd.south|-searchdownsampodd.south) -- (searchodd.south|-classifyodd.north);
+  \%path [line,green!60] (testodd.south|-downsampodd.south) -- (testodd.south|-classifyodd.north);
+  
+  \path [line,red!60] (trainnetworkodd) -- (bkclasseven);
+  
+  % search and test
+  
+  \path [line,green!60] (testclassifyeven) -- (output);
+  \path [line,black!60] (searchclassifyeven) -- (outputsearch);
+  
+  \path [line,green!60] (testclassifyodd) -- (output);
+  \path [line,black!60] (searchclassifyodd) -- (outputsearch);
+  
+  % final labels over lines
+  
+   \node[fillnode,below] at (bkclasseven.south) {Classify sub-bands with \ `odd' \ac{CNN}};
+   
+   \node[fillnode,below] at (bkclassodd.south) {Classify sub-bands with \ `even' \ac{CNN}};
+ 
+    
+\end{tikzpicture}
