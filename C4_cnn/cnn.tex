@@ -117,18 +117,17 @@ show the results from this search and compare to similar analyses.
 
 Throughout this section I will summarise one machine learning technique which are known as Neural networks. 
 Neural networks, as the name may suggest, was developed as a way for a computer to mimic the neurons in the brain.
-To understand why this would be useful, I will give short example which will be followed through this section.
-A good example used extensively in explanations of neural networks is the ability to identify hand written digits.
-This is a simple task which a brain can complete with ease. 
+To understand why this would be useful, a common example used is the ability for an algorithm to identify hand written digits.
+This seems like a simple task as a brain can complete with ease. 
 However, writing a traditional algorithm to perform this same task is very difficult. 
-The algorithm would have to identify a particular shape, which has a huge amount of variation.
+The algorithm would have to identify a particular shape which has a huge amount of variation.
 Neural networks offer a way to deal with this problem as they can be trained on large datasets.
 This is similar to how a human brain is `trained'. 
-In a lifetime or a brain many examples of different symbols are seen and each time a new one is seen the brain `updates' itself based on what is observed. 
+In a lifetime of a brain many examples of different symbols are seen and each time a new one is seen the brain `updates' itself based on what is observed. 
 This process is essentially replicated for a neural network, where the algorithm can be updated such that it can correctly identify each digit.
 
-Neural networks have many parameters which can be modified or `trained'. 
-These parameters and their application are grouped into objects called neurons, many of these neurons are used to build a neural network.----
+This process can be replicated in a neural network, where it has many parameters which can be modified or `trained'. 
+These parameters and their application are grouped into objects called neurons, many of these neurons are used to build a neural network.
 
 %%%%%%%%%
 %%%%%%%%%
@@ -145,7 +144,7 @@ The output $o$ of a neuron is defined by the equation,
     \label{machine:nn:neuron:equation}
 \end{equation}
 
-where $b$ is the bias, $x$ is the input, $w$ is the weights, $f$ is the activation function and $o$ is the output.
+where $b$ is the bias, $x$ is the input, $w$ is the weights, $f$ is the activation function, $o$ is the output and $N$ is the number of inputs.
 Here the input $x$ represents either the data which is input, i.e the pixels of the image which contains the digit in the example above, or the output of another neuron.
 The weights $w$ then represents how important each of those data points are to this problem, or specifically this neuron. 
 The bias $b$ is then just an extra factor which can shift the data by a fixed value.
@@ -215,46 +214,6 @@ In the work that follows we use the Leaky RELU function and the sigmoid function
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%
-\subsection{\label{machine:nn:training}Training}
-%%%%%%%%%%%%%%%%%
-
-% introduce training concept
-%
-Once the structure of the network is decided, the network needs to be trained.
-This means that the weights and bias' for every neuron need to be updated such
-that the neural network gives a useful output. For this
-work we will classify the input images using a single output neuron.
-This neuron outputs a value between 0 and 1 using a sigmoid function.
-The \ac{CNN} is trained using a process called supervised
-learning. When using supervised learning, the class of each input example is know. For example, we assign a label of 1 when the
-input is a time-frequency spectrogram which includes a simulated \ac{CW}
-signal. Similarly a time-frequency spectrogram with no simulated signal is assigned a label of 0. 
-In general when training neural networks this way, the performance of the network can be improved by increasing the number of input examples which are shown to the network.
-This stops the network from over-fitting to specific examples. Instead it should generalise to the full input and learn the underlying features within the data.
-
-%Training procedure
-%
-Each of the training examples is then propagated though the network to its single output value which lies between 0 and 1. Using a loss function, this output is then be compared to
-the label of the input data which is either 0 or 1. As we are classifying
-between two classes in out networks, the loss function, $L$, is the binary
-crossentropy defined as,
-%
-\begin{equation}\label{cnn:loss} 
-L = -y\log{(p)} + (1-y)\log{(1-p)},
-\end{equation}
-%
-where $p$ is the networks predicted output which has any value in the range $[0,1]$ and $y$ is the true output which has binary labels 0 or 1. 
-The loss function is minimised when the output matches the truth. This essentially
-tells the neural network how close to the truth it is. The weights and bias' of
-the neural network can be updated based on the value of this loss function. The
-process of updating the weights and other parameters is called back-propagation,
-and typically uses a form of gradient descent
-\cite{kingma2015AdamMethod}.
-Back-propagation uses the derivative of the loss function with respect to a weight to update that weight.
-If changing that weight in a particular direction decreases the loss function, then the weight will be updated in that direction.
-The size of the change of the weight value is related to the change in the size loss function.
-This means that the weights can be updated to minimise the loss function and therefore improve the performance of the network.
 
 
 
@@ -363,6 +322,67 @@ This can then classify the network into the chosen output.
 \acp{CNN} are then trained in the same way as neural networks as described in Sec.~\ref{machine:nn:training}.
 
 
+%%%%%%%%%%%%%%%%%
+\section{\label{machine:nn:training}Training}
+%%%%%%%%%%%%%%%%%
+
+% introduce training concept
+%
+Once the structure of the network is decided, the network needs to be trained.
+This means that the weights and bias' for every neuron need to be updated such
+that the neural network gives a useful output. For this
+work we will classify the input images using a single output neuron.
+This neuron outputs a value between 0 and 1 using a sigmoid function.
+The \ac{CNN} is trained using a process called supervised
+learning. When using supervised learning, the class of each input example is know. For example, we assign a label of 1 when the
+input is a time-frequency spectrogram which includes a simulated \ac{CW}
+signal. Similarly a time-frequency spectrogram with no simulated signal is assigned a label of 0. 
+In general when training neural networks this way, the performance of the network can be improved by increasing the number of input examples which are shown to the network.
+This stops the network from over-fitting to specific examples. Instead it should generalise to the full input and learn the underlying features within the data.
+
+\subsection{Loss function}
+
+%Training procedure
+%
+Each of the training examples is then propagated though the network to its single output value which lies between 0 and 1. Using a loss function, this output is then be compared to
+the label of the input data which is either 0 or 1. There are many types of loss function which can be used, this depends on the type of problem which one wants to solve. As we are classifying
+between two classes in out networks, the loss function, $L$, is the binary
+crossentropy defined as,
+%
+\begin{equation}\label{cnn:loss} 
+L = -y\log{(p)} + (1-y)\log{(1-p)},
+\end{equation}
+%
+where $p$ is the networks predicted output which has any value in the range $[0,1]$ and $y$ is the true output which has binary labels 0 or 1. 
+The loss function is minimised when the output matches the truth. This essentially
+tells the neural network how close to the truth it is. The weights and bias' of
+the neural network can be updated based on the value of this loss function. The
+process of updating the weights and other parameters is called back-propagation,
+and typically uses a form of gradient descent
+\cite{kingma2015AdamMethod}.
+Back-propagation uses the derivative of the loss function with respect to a weight to update that weight.
+If changing that weight in a particular direction decreases the loss function, then the weight will be updated in that direction.
+The size of the change of the weight value is related to the change in the size loss function.
+This means that the weights can be updated to minimise the loss function and therefore improve the performance of the network.
+
+%%%
+%%%
+\subsection{Training procedure}
+%%%
+%%%
+
+The training procedure entails passing a set of training examples through the network a number of times. 
+Once the entire training data set has been passed through the network and the weights have been updated accordingly, the training has completed one epoch.
+Showing the network the same training example \joe{say why this is helpful}
+
+\begin{itemize}
+	\item epochs, show same data many times
+	\item amount of data, testis in X
+	\item say about over-training and losses
+\end{itemize}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -371,8 +391,14 @@ This can then classify the network into the chosen output.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The aim for this work is to use a \ac{CNN} to classify time-frequency spectrograms of \ac{LIGO} data.
-
+The aim for this work is to use a \ac{CNN} to classify \ac{LIGO} data into one of two classes: signal or noise.
+Here the signal class refers to a \ac{CW} signal from an isolated neutron star as described in Sec.~\ref{searchcw:model}.
+Noise then refers to anything else which appear in the data, from Gaussian noise to instrumental artefacts. 
+In Sec.~\ref{soap:reuslts} to reduce the effect of instrumental artefacts, each of the search sub-bands was analysed by eye to determine if a sub-band was contaminated. 
+Sub-bands which contained an artefact were then removed from the search.
+This is a time consuming process. The main goal of the \ac{CNN} approach is to automate this part of the search.
+This section will describe how we design the network to extract features and distinguish signals from instrumental artefacts.
+We will then present results form searches in a range of \ac{LIGO} observing runs which include: S6, O1 and O2.
 
 
 %%%%%%%%%%%%%%%
@@ -846,6 +872,13 @@ For each section of the pipeline we have take the average total time for each jo
 
 This gives the entire search including testing a total run time of $ \sim 386$ hours, however, the majority of the time is taken generating data which can be easily parallelised. 
 Rather than taking hundreds of hours, the generating data sections takes $\mathcal{O}(1)$ hours in real time.
+
+
+%%%%%
+%%%%%
+\section{\label{machine:cnn:sens_size} Sensitivity with the size of dataset}
+%%%%%
+%%%%%
 
 
 
