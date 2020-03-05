@@ -103,6 +103,7 @@ signals in~\cite{dreissigacker2019DeeplearningContinuous}.
 
 % structure of the paper
 %
+\joe{rewrite as structure different to paper}
 In Sec.\ref{soap} we will summarise the basics of how the SOAP search works. In
 Sec.~\ref{cnn} we explain how \acp{CNN} operate followed by how we generate
 data to train the \ac{CNN} in Sec.~\ref{data}. We then describe the entire search from raw data to results in Sec.~\ref{pipeline} and finally in Sec.~\ref{results} we
@@ -219,21 +220,28 @@ In the work that follows we use the Leaky RELU function and the sigmoid function
 
 %%%%%%%%%%%
 %%%%%%%%%%%
-\section{Convolutional Neural Networks}
+\section{\label{machine:cnn}Convolutional Neural Networks}
 %%%%%%%%%%%
 %%%%%%%%%%%
 
-Convolutional neural networks are based on the same principles as the neural networks described above. 
-The difference being that \acp{CNN} use additional types of layers which can help to reduce the size of the problem.
-For explanations that follow, I will use \acp{CNN} in the context of classifying images into one of two classes.
+\acp{CNN} are a different type of deep neural network than in Sec.~\ref{machine:nn}.
+They are a types of network which are primarily used in image
+processing and recognition
+\cite{lecun2015DeepLearning,lecun1998GradientbasedLearning,waibel1989PhonemeRecognition,krizhevsky2012ImageNetClassificationa}.
+Here the general idea is summarised. 
+A \ac{CNN} is designed to take in data, identify different features within that data and classify
+what those features or combinations of those features mean.
+In the context of this work the input data is a time-frequency spectrogram which may contain a simulated \ac{CW} signal.
+The output is then a single number which represents if a signal is present.
+Here a value of 1 represents a signal and 0 is not a signal.
+A \ac{CNN} can learn how to identify features by being trained on many
+examples of the input data where the output is known.
+For example, an input spectrogram with a simulated \ac{CW} signal would have an output value of 1.
+Given the set of training examples, the many parameters of the \ac{CNN} can
+be updated such that it gives the best result for any new image. 
+This process is the same as neural networks in Sec.~\ref{machine:nn} and will be described in greater detain in Sec.~\ref{machine:training}
 
-In a standard neural network, every pixel of an image is used as an input pixel. Therefore, the ordering of these pixels does not matter (as long as they are consistent across training examples).
-Often in images, one wants to identify a feature within the image, this feature could potentially be in any part of the image. 
- 
-For example, in an input image every pixel is flattened into a single dimensional array before being input to the network.
-\acp{CNN} try to retain some location information for each of the pixels.
-Whilst \acp{CNN} can be used for single dimensional inputs, they were generally developed for images.
-As well as retaining some location information, they reduce the size of the networks parameters.
+The key features of \acp{CNN} which distinguish them from ordinary neural networks is some additional types of layers including: Convolutional layers and max pooling layers. 
 
 
 %%%%%%%%%%
@@ -244,51 +252,49 @@ As well as retaining some location information, they reduce the size of the netw
 
 Convolutional layers have some similarities to standard fully connected layers as described in Sec.~\ref{machine:nn:structure}. 
 The main difference being how the weights are applied to the inputs.
-To show the difference I have an example of a simple input image which has 9 pixels, this is shows in Fig.~\ref{machine:cnn:convlayer:input}.
-
 A fully connected neural network would flatten this image and apply Eq.~\ref{machine:nn:neuron:equation} to the inputs.
-A convolutional layer however, filters the image and output a filtered image of the same size(the image can be a different size it depends how the layer was set up).
+This involves having a separate weight for each of the input pixels in an image.
+A convolutional layer however, filters the image and outputs a filtered image of the same size (the image can be a different size it depends how the layer was set up).
 This convolution is defined by,
 \begin{equation}
 \label{machine:cnn:conv:equation}
 O_{i,j} = f\left( \sum_{m} \sum_{n} F_{m,n}x_{i-m,j-n}\right) ,
 \end{equation}
 where $O$ is the output image, $x$ is the input image, $F$ is the convolutional filter and $f$ is the activation function.
-Assuming we use the image in Fig.~\ref{} as input to this network, in the fully connected case one output neuron would have 10 parameters to vary.
-In the convolutional neural network case, assuming a filter size of 2$\times$2, one has 5 parameters to vary.  This then outputs am image of 9x9 pixels. \joe{sort out example}
-This can then reduce the size of the parameter space, and should be able to identify the important features in the image when trained.
+The weights of the filter $F_{m,n}$ are what are updated when the network is trained.
+Fig.~\ref{machine:cnn:convlayer:input} shows an example of a 6x6 image and the results of filtering the image using Eq.~\ref{machine:cnn:conv:equation} with two different filters $F$. 
+In this case the network has 4 parameters for each filtered image which can be updated as opposed to the 36 which a full connected network would have for a single neuron.
 
-Whilst this is hard to picture mathematically, it can be easier seen as a 2x2 filter which is convolved with the input image. 
-Fig.~\ref{} shows how the convolutional filter is applied.
-The output of a convolutional layer is then an image which is half the filter length less length in each dimension. 
-In practice, the input images are often padded with zeros such that the output image is the same size as the input image. 
+Fig.~\ref{machine:cnn:convlayer:input} demonstrates how a filter which matches a feature in an image can highlight that particular feature. 
+I.e. the diagonal line in the bottom left of the input is enhances by Filter 1, which matches that feature. 
 
 \begin{figure}[p]
 
     \centering
     \includegraphics[width=\columnwidth]{C4_cnn/conv_filters.pdf}
-    \caption{Convolutional filters can be designed to `pick out' certain features within an image. In this simple example above, the first filter (filter 1) matches the diagonal line in that orientation better than filter 2. The output filtered image the exaggerates this filter. The coefficients of the filter i.e. $F_{m,n}$ in Eq.~\ref{machine:cnn:conv:equation}, in this are set to ones and zeros.
-    These are the weights which are trained by the network. In this an cases that follow, to get the same size image in the output as the input, the image is padded with zeros. I this image it was necessary to pad above and to the right of the image.}
+    \caption{Convolutional filters can be designed to `pick out' certain features within an image. In this simple example above, the first filter (filter 1) matches the diagonal line in the bottom left of the input better than filter 2. The output filtered image the exaggerates this filter. The coefficients of the filter i.e. $F_{m,n}$ in Eq.~\ref{machine:cnn:conv:equation}, in this are set to ones and zeros.
+    These are the weights which are trained by the network. In this an cases that follow, to get the same size image in the output as the input, the image is padded with zeros. I this image it was necessary to pad above and to the right of the image. The output of a convolutional layer is then the filtered images above after a bias and activation function have been applied. }
     \label{machine:cnn:convlayer:input}
 
 \end{figure}
 
-A convolutional layer has a number of different parameters which can be varied when setting up a model.
+A convolutional layer has a number of different hyper-parameters which can be varied when setting up a model.
 Below I list each of the adaptable parameters and what they do.
 
 \begin{description}
-\item[Filter size] The filter size is the size and shape of the convolutional filter. The filter does not have to be square, however must be less than the dimensions of the image.
+\item[Filter size] The filter size is the size and shape of the convolutional filter. In Fig.~\ref{machine:cnn:convlayer:input} we use a filter size of 2$\times$2. The filter does not have to be square, however must be less than the dimensions of the image.
 
-\item[Number of filters] The number of filters can be any value. If you have $K$ filter kernels, then the convolutional layer will output $K$ filtered images.
+\item[Number of filters] The number of filters can be any value. If you have $K$ filter kernels, then the convolutional layer will output $K$ filtered images. In Fig.~\ref{machine:cnn:convlayer:input} we use two filters and therefore, the output of the layer is two images.
 
-\item[Activation function] The activation function is generally kept the same for each of the layers, however this can be set here. The different types have been explained in Sec.~\ref{machine:nn:activation}.
+\item[Activation function] The activation function is generally kept the same for each of the layers, however this can be set here. The different types have been explained in Sec.~\ref{machine:nn:activation} and are applied as in Eq.~\ref{machine:cnn:conv:equation}.
 
-\item[Stride] The stride is when the convolution is applied to every other pixel. This method reduces the size of the output by the same factor. This is not used in the rest of this work.
+\item[Stride] A normal convolutional layer applies a filter by multiplying by a filter, then shifting over by one pixel and repeating. Applying a stride mean rather than shifting by one pixel, one shifts by a number greater than one. This reduces the size of the output by the same factor of stride. i.e. if you skip one pixel (a stride of 2) then the image will be half the size on output. This has a similar affect to max-pooling which we describe in Sec.~\ref{machine:cnn:maxpool} an use for the rest of this work.  
 \end{description}
 
-The convolutional layers with reduce the number of parameters used in each network or model, which can speed up the training procedure.
-In a normal neural network the image is flattened, therefore, any information which related the location of a pixel to another is lost. 
-Convolutions can keep hold of this information and look for similar patters within an image.
+The convolutional layers with reduce the number of updatable parameters used in each network or model.
+However, the output of a convolutional layer is a number of images which ar potential the same size as the input. 
+This has potentially increased the size of the parameter space for the next layer.
+To decrease this a type of layer known as max-pooling is used.
 
 %%%%%%%%%
 %%%%%%%%
@@ -297,13 +303,17 @@ Convolutions can keep hold of this information and look for similar patters with
 %%%%%%%%%%%
 
 Max pooling layers are designed to reduce the size of the problem whilst holding on to as much important information as possible.
-the idea of this layer is relatively simple, it reduces the image size by taking the maximum value in a region of a given size.
-For example, in Fig.~\ref{machine:cnn:maxpool:image}, the image is reduced by a 2$\times$2 max pooling layer.
+These do not contain any trainable parameters.
+The idea of this layer is relatively simple, it reduces the image size by taking the maximum value in a region of a given size.
+Fig.~\ref{machine:cnn:maxpool:image} shows the output of the first filtered image in Fig.~\ref{machine:cnn:convlayer:input}.
+The image is then reduced by a 2$\times$2 max pooling layer.
+The output of max-pooling Then shows a large value in the bottom left, this is where the input image matched the filter in Fig.~\ref{machine:cnn:convlayer:input}.
+This demonstrates how the max-pooling layer can hold on to important information whilst reducing the image size.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\columnwidth]{C4_cnn/maxpool.pdf}
-    \caption{Max pooling layers aim to reduce the size of am image whilst retaining important information within the original image. Above shows an example where a 2$\times$2 maxpooling layer is used. }
+    \caption{Max pooling layers aim to reduce the size of am image whilst retaining important information within the original image. Above shows an example where a 2$\times$2 max-pooling layer is used on the output of Filter 1 in Fig.~\ref{machine:cnn:convlayer:input}. This retains the information that the input image matches the filter in the bottom left.}n
     \label{machine:cnn:maxpool:image}
 \end{figure}
 
@@ -314,25 +324,32 @@ For example, in Fig.~\ref{machine:cnn:maxpool:image}, the image is reduced by a 
 %%%%%%%%%%%%%%
 
 \acp{CNN} are usually structured such that they can extract larger features from an input image, then the outputs from this are passed on to be classified.
-To extract the larger features any number of different convolutional layers and max-pooling layers used.
-Once this then outputs $K$ images, the values are flattened into a one dimensional array an passed to a set of fully connected layers. 
-This is essentially the same type of network described in Sec.~\ref{machine:nn}.
-This can then classify the network into the chosen output.
+The `feature extraction' part of the network consists of the convolutional layers and the max-pooling described in Sec.~\ref{machine:cnn}.
+The outputs of the final max-pooling layer are then flattened and used as the input to a fully connected network.
+This fully connected network the classifies these outputs into a number of classes.
+Fig.~\ref{machine:cnn:structure:example} shows an example of the layout. 
+Here an input image which is the same as in previous examples is passed onto a single convolutional layer with two different filters.
+The output of two filtered images is passed to a max-pooling layer.
+The two max-pooled images are flattened into 18 input neurons, this then passes through a fully connected network to a single output neuron.
+This shows a simple example, however, there are many hyper-parameters of the network which can be changed.
+These include: the number of filters in a convolutional layer, the number of convolutional layers and max-pooling layers, the number of hidden layers in the fully connected section and the number of neurons in the hidden layers. 
+This example also shows the network being classified to a single output as this is how we use \acp{CNN} for the following work.
 
 \begin{figure}[h]
-	\includegraphics[width=\textwidth]{testimg.png}
-	\caption{}
+	\includegraphics[width=\textwidth]{C4_cnn/cnn_structure_ex.pdf}
+	\caption{Convolutional neural networks consist of two broad sections, the `feature extraction' part which is the convolutional and max-pooling layers, and the classification part which is the fully connected part of the network. This diagram shows a simple example of an image passing through a single convolutional layer with two filters, a single max-pooling layer and a simple fully connected network with a single hidden layer consisting of 4 neurons. }
+	\label{machine:cnn:structure:example}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%
-\section{\label{machine:nn:training}Training}
+\section{\label{machine:training}Training}
 %%%%%%%%%%%%%%%%%
 
 % introduce training concept
 %
 Once the structure of the network is decided, the network needs to be trained.
-This means that the weights and bias' for every neuron need to be updated such
+This means that the weights and bias' for every neuron and filter need to be updated such
 that the neural network gives a useful output. For this
 work we will classify the input images using a single output neuron.
 This neuron outputs a value between 0 and 1 using a sigmoid function.
@@ -384,6 +401,8 @@ Showing the network the same training example \joe{say why this is helpful}
 	\item say about over-training and losses
 \end{itemize}
 
+\joe{need to say somewhere what this actually does, i.e. why its useful}
+
 
 
 
@@ -397,7 +416,7 @@ Showing the network the same training example \joe{say why this is helpful}
 The aim for this work is to use a \ac{CNN} to classify \ac{LIGO} data into one of two classes: signal or noise.
 Here the signal class refers to a \ac{CW} signal from an isolated neutron star as described in Sec.~\ref{searchcw:model}.
 Noise then refers to anything else which appear in the data, from Gaussian noise to instrumental artefacts. 
-In Sec.~\ref{soap:reuslts} to reduce the effect of instrumental artefacts, each of the search sub-bands was analysed by eye to determine if a sub-band was contaminated. 
+In Sec.~\ref{soap:results} to reduce the effect of instrumental artefacts, each of the search sub-bands was analysed by eye to determine if a sub-band was contaminated. 
 Sub-bands which contained an artefact were then removed from the search.
 This is a time consuming process. The main goal of the \ac{CNN} approach is to automate this part of the search.
 This section will describe how we design the network to extract features and distinguish signals from instrumental artefacts.
