@@ -266,7 +266,8 @@ Fig.~\ref{machine:cnn:convlayer:input} shows an example of a 6x6 image and the r
 In this case the network has 4 parameters for each filtered image which can be updated as opposed to the 36 which a full connected network would have for a single neuron.
 
 Fig.~\ref{machine:cnn:convlayer:input} demonstrates how a filter which matches a feature in an image can highlight that particular feature. 
-I.e. the diagonal line in the bottom left of the input is enhances by Filter 1, which matches that feature. 
+i.e. the diagonal line in the bottom left of the input is enhances by Filter 1, which matches that feature. 
+When this type of layer is trained, the weights of the filter are updated. The filter should then ideally match the feature which is intended to be extracted.
 
 \begin{figure}[p]
 
@@ -392,14 +393,15 @@ This means that the weights can be updated to minimise the loss function and the
 %%%
 
 The training procedure entails passing a set of training examples through the network a number of times. 
-Once the entire training data set has been passed through the network and the weights have been updated accordingly, the training has completed one epoch.
-Showing the network the same training example \joe{say why this is helpful}
+Once the entire training data set has been passed through the network (forward pass) and the weights have been updated accordingly (back propagation), the training has completed one epoch.
+If the data was passed and the weights were updated a single time, the loss may decrease by is likely not at a minimum.
+Passing the data through again may move the weights to a lower loss.
+This process is repeated a number of times to try and find the minimum loss.
 
-\begin{itemize}
-	\item epochs, show same data many times
-	\item amount of data, testis in X
-	\item say about over-training and losses
-\end{itemize}
+If for example the network is large, i.e. it has many trainable parameters, and the data set contains simple features, then the network can over train.
+This mean the network learns specific features of the data-set rather than a general representation of it. 
+To monitor this, after each epoch of training the loss is measured on a subset (test set) of the data which was not used for training. 
+If the loss of the training set decreases but the loss of this test set begins to increase, then this is an indicator of over training. 
 
 \joe{need to say somewhere what this actually does, i.e. why its useful}
 
@@ -433,12 +435,12 @@ In this section the structure of the networks which are used in this analysis
 are described. There are three main inputs of data for each \ac{CNN}: spectrograms, Viterbi maps and the Viterbi statistic. Each of these are different representations of the raw detector data. In this analysis we train a separate \ac{CNN} for each of
 these inputs and then a further three which use these combinations of inputs:
 Viterbi map + spectrogram, Viterbi map + Viterbi statistic and Viterbi map +
-Viterbi statistic + spectrogram. In all of the layers excluding the output layer of each \ac{CNN}, the activation functions in Eq.~\ref{cnn:conv:equation} and \ref{machine:nn:neuron:equation} are defined by a function titled `leakyRELU' \cite{maas2013RectifierNonlinearities}. 
+Viterbi statistic + spectrogram. In all of the layers excluding the output layer of each \ac{CNN}, the activation functions in Eq.~\ref{machine:cnn:conv:equation} and \ref{machine:nn:neuron:equation} are defined by a function titled `leakyRELU' \cite{maas2013RectifierNonlinearities}. 
 For our output neuron a sigmoid function is
 used as an activation function such that the output is limited between 0 or 1.
 For a given input a \ac{CNN} can then output a value between 0 and 1. When the output value is closer to 1, the input is more likely to contain a signal. 
 The output value can then be treated as a detection statistic. 
-The structure of the network is shown in Fig.~\ref{results:cnnlayout} and is explained below. 
+The structure of the network is shown in Fig.~\ref{machine:results:cnnlayout} and is explained below. 
 
 \begin{description}
 	\item [Viterbi statistic] This is the simplest of the networks and will
@@ -446,7 +448,7 @@ The structure of the network is shown in Fig.~\ref{results:cnnlayout} and is exp
 	single neuron which takes in the Viterbi statistic applies a weight and bias
 	and then passes through a sigmoid function.
 	
-	\item [Viterbi map] The Viterbi map \ac{CNN} takes in a down-sampled Viterbi map of size (156,89), this is described more in Sec.~\ref{data:downsample}.
+	\item [Viterbi map] The Viterbi map \ac{CNN} takes in a down-sampled Viterbi map of size (156,89), this is described more in Sec.~\ref{machine:data:downsample}.
 	This \ac{CNN} consists of two convolutional layers and 3 fully connected layers. The first layer has
 	8 filters which have a size of $5\times5$ pixels, the second layer has 8
 	filters with a size of $3\times3$ pixels. After each of these layers we use a
@@ -455,7 +457,7 @@ The structure of the network is shown in Fig.~\ref{results:cnnlayout} and is exp
 	functions. Finally these lead to an output neuron which uses a sigmoid
 	function.
 	
-	\item [Spectrogram] The spectrogram \ac{CNN} takes in a down-sampled spectrograms of size (156,89), this is described more in Sec.~\ref{data:downsample}.
+	\item [Spectrogram] The spectrogram \ac{CNN} takes in a down-sampled spectrograms of size (156,89), this is described more in Sec.~\ref{machine:data:downsample}.
 	This \ac{CNN} has an identical structure as the Viterbi map \ac{CNN}, however, takes two channels as input. The two channels are the spectrograms of two different detectors.
 	
 \end{description}
@@ -504,7 +506,7 @@ Where when each of these are combined, the \ac{CNN} should be able to pick to im
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\label{data} Data generation}
+\section{\label{machine:data} Data generation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -518,7 +520,7 @@ the networks.
 Test data is a separate set of simulations which is used to generate
 efficiency curves and test the network.
 Search data does not contain any simulated signal injections and is used to search for real signals.
-For the majority of the analysis that follows, we use real detector data for all three of these data-sets, the exact observing runs will be explained in Sec.~\ref{results}. 
+For the majority of the analysis that follows, we use real detector data for all three of these data-sets, the exact observing runs will be explained in Sec.~\ref{machine:results}. 
 The noise in real data contains many non Gaussian features, a particular class of these is known as instrumental lines and they have a large affect on \ac{CW} searches. 
 The aim is to have a network which does not 
 \joe{still trying to think how to write}
@@ -544,14 +546,14 @@ even bands and vice versa.
 This then means that each time we want to search over data, we will have two final networks. One which will be run on odd bands and a separately trained network which is run on even bands. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\label{data:injections} Signal simulations}
+\subsection{\label{machine:data:injections} Signal simulations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % describe signal injection
 %
 To inject the simulated signals into real data we generate a random set of signal
 parameters which are drawn from prior distributions defined in
-Table~\ref{data:injections:table}. The \ac{SNR} of each simulation is then uniformly distributed between 50 and 150. Where the \ac{SNR} is the integrated `recovered' \ac{SNR}. This is calculated for each time segment using the definition of optimal \ac{SNR} in \cite{prix2007SearchContinuous}, the total \ac{SNR} is then the sum of the squares of these.
+Table~\ref{machine:data:injections:table}. The \ac{SNR} of each simulation is then uniformly distributed between 50 and 150. Where the \ac{SNR} is the integrated `recovered' \ac{SNR}. This is calculated for each time segment using the definition of optimal \ac{SNR} in \cite{prix2007SearchContinuous}, the total \ac{SNR} is then the sum of the squares of these.
 The \ac{GW} amplitude $h_{0}$ is scaled based on the noise \ac{PSD} to achieve this \ac{SNR}. 
 The power spectrum of the signal can then be simulated in each time segment of a time-frequency spectrogram. This is done by assuming that the spectrogram is $\chi^2$ distributed.
 The the antenna pattern functions are taken into account for the given source parameters and detector such that the \ac{SNR} for each time segment is calculated.
@@ -565,7 +567,7 @@ The \acp{SNR} reported below are then the sum of the squares of the \acp{SNR} fr
 %
 \begin{table*}
 	%                                         
-	\caption{\label{data:injections:table} Table shows the upper and lower limits
+	\caption{\label{machine:data:injections:table} Table shows the upper and lower limits
 		over which each signal parameter was randomized. The parameters $\alpha,\sin{\left(\delta \right)},f,\;\log{\left( \dot{f} \right)},\; \cos{\left(\iota
 			\right)},\; \phi_0,\; \psi$ were sampled
 		uniformly in the ranges specified in the table. The frequencies $f_{\rm l}$ and $f_{\rm u}$
@@ -573,6 +575,7 @@ The \acp{SNR} reported below are then the sum of the squares of the \acp{SNR} fr
 		into. Excluding the distribution of frequencies $f$, all the injections parameters are sampled from the same distributions as the S6
 		\ac{MDC}~\cite{walsh2016ComparisonMethods}.}
 	%
+	\scalebox{0.9}{
 	\bgroup
 	\def\arraystretch{1.5}
 	\centering
@@ -588,10 +591,11 @@ The \acp{SNR} reported below are then the sum of the squares of the \acp{SNR} fr
 		\hline
 	\end{tabular}
 	\egroup
+}	
 \end{table*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\label{data:augmentation} Augmentation}
+\subsection{\label{machine:data:augmentation} Augmentation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % introduce augmentation
@@ -616,7 +620,7 @@ bins. As we use real data, there are gaps in time where the detectors were not
 operating. We preserve the location of these gaps when augmenting the data.
 When shifting the data in frequency, we shift each band up and down by 30 frequency bins (0.016 Hz) and up and down by 60 frequency bins (0.032 Hz).
 When rolling the data in time, we roll each sub-band by 100 time segments (100 days). 
-Fig.~\ref{data:augmentation:examples} shows examples of the original data, a flip in frequency, a roll in time and a flip in time.
+Fig.~\ref{machine:data:augmentation:examples} shows examples of the original data, a flip in frequency, a roll in time and a flip in time.
 For each frequency shift, we flip the sub-band in time and frequency and roll the sub-band in time.
 This then gives us 3 transformations for each of the 4 frequency shifts, which including the original data gives 20 times the number of training examples.
 
@@ -624,11 +628,11 @@ This then gives us 3 transformations for each of the 4 frequency shifts, which i
 	\centering
 	\includegraphics[width=0.7\columnwidth]{C4_cnn/augmentation.pdf}
 	\caption{The data is transformed by flipping the data in frequency (panel 2), rolling the data in time by 100 bins (panel 3) and flipping the data in time (panel 4). The original summed spectrogram is show in panel 1. Simulated signals can then be injected using this data as noise. The plots above show a broad wandering line to demonstrate the changes to the data when it is augmented, however, the majority of sub-bands contain almost Gaussian noise. }
-	\label{data:augmentation:examples}
+	\label{machine:data:augmentation:examples}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\label{data:downsample} Downsampling}
+\subsection{\label{machine:data:downsample} Downsampling}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % introduce downsampling
@@ -649,24 +653,24 @@ To reduce the size of the data further, the package `resize' from scikit-image
 \cite{vanderwalt2014ScikitimageImage} is used, this uses interpolation to
 resize the summed spectrograms to a size of (156,89) [time segments,frequency
 bins]. This size was defined based on the summed spectrograms of the S6 data-set. This is 1/3 the number of summed segments in time, 1/2 the number of segments in frequency. The down-sampling is applied to the
-spectrograms and \acp{vitmap}. 
+spectrograms and vitmaps. 
 In \cite{bayley2019SOAPGeneralised} we demonstrated that summing spectrograms can increase the speed and sensitivity of our search.
 When down-sampling the image, we found that reducing the amount of data had a small affect on the sensitivity of the \acp{CNN} used.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\label{pipeline}Search pipeline}
+\section{\label{machine:pipeline}Search pipeline}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In previous sections each component of the search pipeline has been described,
-however, described below is how each component fits together. Fig.~\ref{pipeline:flow} shows a flow diagram of the pipeline. The pipeline is run in three different ways: training the \ac{CNN}, testing the search and running a search on real data. 
+however, described below is how each component fits together. Fig.~\ref{machine:pipeline:flow} shows a flow diagram of the pipeline. The pipeline is run in three different ways: training the \ac{CNN}, testing the search and running a search on real data. 
 
 \begin{figure}[htp]
 	\centering
 	\scalebox{0.7}{
 	\input{./C4_cnn/flow.tikz}}
-	\caption{\label{pipeline:flow} This diagram shows the SOAP pipeline from start to finish. There are three main sections: Training (red), Testing (green) and Searching (grey) for both the odd and even bands. The blue sections mean that the same operations is done in all cases.}
+	\caption{\label{machine:pipeline:flow} This diagram shows the SOAP pipeline from start to finish. There are three main sections: Training (red), Testing (green) and Searching (grey) for both the odd and even bands. The blue sections mean that the same operations is done in all cases.}
 	
 \end{figure}
 
@@ -683,9 +687,9 @@ however, described below is how each component fits together. Fig.~\ref{pipeline
 	\item[4. Band splitting]  As a \ac{CNN} should not be trained on the same data that it will be tested on, each of the $0.1$ Hz wide sub-bands are split into `odd' or `even' bands. 
 	
 	\item[5a. Training data generation] To generate training data the
-	process is the same as in Sec.~\ref{data}.  Each of the $0.1$ Hz sub-bands is `augmented' as in Sec.~\ref{data:augmentation}. For each of the augmented bands, the data is duplicated and then signals are injected into them with \acp{SNR} in the range 50-150. This gives us and example for a noise class and a signal class. There are two of these sets, on for `even' bands and one for `odd'.
+	process is the same as in Sec.~\ref{data}.  Each of the $0.1$ Hz sub-bands is `augmented' as in Sec.~\ref{machine:data:augmentation}. For each of the augmented bands, the data is duplicated and then signals are injected into them with \acp{SNR} in the range 50-150. This gives us and example for a noise class and a signal class. There are two of these sets, on for `even' bands and one for `odd'.
 	
-	\item[5b. Test data generation] For test data signals following parameters in Tab.~\ref{data:injections:table} are injected in to 50\% of the $0.1$ Hz sub-bands. These signal have and \ac{SNR} in the range 20-200. Where we have a set for `odd' and a set for `even'.
+	\item[5b. Test data generation] For test data signals following parameters in Tab.~\ref{machine:data:injections:table} are injected in to 50\% of the $0.1$ Hz sub-bands. These signal have and \ac{SNR} in the range 20-200. Where we have a set for `odd' and a set for `even'.
 	
 	\item[5c. Search data] This data is generated such that we can search for a real signal. The sub-bands described in part 4 are now overlapping by 0.05 Hz. This means that if there is a signal it should be fully contained within at least one sub-band. There are both `odd' and `even' versions of this search data.
 	
@@ -703,7 +707,7 @@ however, described below is how each component fits together. Fig.~\ref{pipeline
 	
 	\item[11a. Signal candidates] The signals which have a statistic in the top 1\% are taken for a followup investigation. This can be another search, or just a look `by-eye'.
 	
-	\item[11c. Efficiency curves] The statistics can be plotted against \ac{SNR} to see how the network classified signals with the \ac{SNR} of the injection. Then the efficiency curves can be generated, this is described in further detail in Sec.~\ref{sensitivity} .
+	\item[11c. Efficiency curves] The statistics can be plotted against \ac{SNR} to see how the network classified signals with the \ac{SNR} of the injection. Then the efficiency curves can be generated, this is described in further detail in Sec.~\ref{machine:results:sensitivity} .
 	
 	
 	
@@ -712,15 +716,15 @@ however, described below is how each component fits together. Fig.~\ref{pipeline
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\label{results}Results}
+\section{\label{machine:results}Results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The networks described in Sec.~\ref{cnn:networks} were trained and tested on four different data-sets: the S6 \ac{MDC} as in \cite{bayley2019SOAPGeneralised,walsh2016ComparisonMethods}, our own injections into O2 data and Gaussian noise which had the same gaps and noise floor as the S6 data-set, and our own injections into real S6 data. 
+The networks described in Sec.~\ref{machine:cnn:networks} were trained and tested on four different data-sets: the S6 \ac{MDC} as in \cite{bayley2019SOAPGeneralised,walsh2016ComparisonMethods}, our own injections into O2 data and Gaussian noise which had the same gaps and noise floor as the S6 data-set, and our own injections into real S6 data. 
 Each of the searches use training and test data in the frequency range of 100-400 Hz, except the S6 \ac{MDC} which uses data in the range 40-500 Hz for testing and training. 
 
 
-\subsection{\label{sensitivity} Sensitivity}
+\subsection{\label{machine:results:sensitivity} Sensitivity}
 
 To investigate the sensitivity of the pipeline we use two measures: the sensitivity depth $\mathcal{D}$ \cite{prix2007SearchContinuous} and optimal \ac{SNR} $\rho$ \cite{behnke2015PostprocessingMethods} which are both defined in \cite{bayley2019SOAPGeneralised} as,
 %
@@ -748,34 +752,61 @@ y(x) = \frac{\sum_i b_i \mathcal{G}(x_i - x,2)}{\sum_i \mathcal{G}(x_i - x,2)},
 where $b_i$ is the binomial data where $b_i=1$ when the statistic is above the $1\%$ false alarm value, $x_i$ is the \ac{SNR} of point $b_i$, $x$ is the current location in \ac{SNR} and $\mathcal{G}(x_i - x,2)$ is a Gaussian with a mean of the current \ac{SNR} and a standard deviation of 2.
 The efficiency curves for each of the described data-sets are shown in Figs.~\ref{results:o2},\ref{results:s6gauss} and \ref{results:s6mdc}.
 
+
+%%%%%%%%
+\subsubsection{O1}
+%%%%%%%%%%
+
+For the first test, injections were made into the O1 data-set as in Sec.~\ref{data} between 100 Hz and 400 Hz. Then each of the 6 networks described in Sec.~\ref{cnn:networks} were trained and tested on this data. 
+Fig.~\ref{machine:results:o1} shows the sensitivity curves for this test for both \ac{SNR} and sensitivity depth for each of the 6 networks. Focusing on Fig.~\ref{machine:results:snr_o1}, the least sensitive, i.e. furthest to the right, of the \acp{CNN} is the Viterbi statistic (vitstat), this is expected as we know that the Viterbi statistic is sensitive to instrumental lines. 
+The spectrogram \ac{CNN} has an improved sensitivity over the Viterbi statistic, this importantly does not involve the SOAP search but is run entirely on down-sampled and summed spectrograms. 
+Whilst this network is approaching the most sensitive of the examples in Fig.~\ref{results:o2}, and with further efforts may reach it, this network takes $\sim10$ times the amount of training time. This will be explained in more detail in Sec.~\ref{results:timing}.
+The remaining networks achieved almost the same sensitivity. 
+The vitmap network however, is the fastest of these to train and is used as an input for all of these remaining networks.
+For the O1 data-set we show that with a false alarm of 1\% the Viterbi map \ac{CNN} achieves a sensitivity of SNR $~73$ and sensitivity depth of $~12\; {\rm Hz}^{-1/2}$ with 95\% efficiency.
+The \ac{SNR} here should not be compared between different runs as this is the integrated `Recovered' \ac{SNR}. Therefore, observing runs, such as O1, which were shorted will appear to have a greater sensitivity when they in fact do not. 
+
+\begin{figure}
+	%\centering
+	\begin{subfigure}[h]{0.5\textwidth}
+		\includegraphics[width=\columnwidth]{C4_cnn/o1_snr_eff.pdf}
+		\label{machineresults:snr_o1}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.5\textwidth}
+		\includegraphics[width=\columnwidth]{C4_cnn/o1_depth_eff.pdf}
+		\label{machine:results:depth_o1}
+	\end{subfigure}
+	\caption{\label{machine:results:o1} In the O1 data-set, each of the six \acp{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate.  }
+	
+\end{figure}
+
 %%%%%%%%%
 \subsubsection{O2}
 %%%%%%%%%%
 
-For the first test, injections were made into the O2 data-set as in Sec.~\ref{data} between 100 Hz and 400 Hz. Then each of the 6 networks described in Sec.~\ref{cnn:networks} were trained and tested on this data. 
-Fig.~\ref{results:o2} shows the sensitivity curves for this test for both \ac{SNR} and sensitivity depth for each of the 6 networks. Focusing on Fig.~\ref{results:snr_o2}, the least sensitive, i.e. furthest to the right, of the \acp{CNN} is the Viterbi statistic (vitstat), this is expected as we know that the Viterbi statistic is sensitive to instrumental lines. 
-The spectrogram \ac{CNN} has an improved sensitivity over the Viterbi statistic, this importantly does not involve the SOAP search but is run entirely on down-sampled and summed spectrograms. 
-Whilst this network is approaching the most sensitive of the examples in Fig.~\ref{results:o2}, and with further efforts may reach it, this network takes $\sim10$ times the amount of training time. This will be explained in more detail in Sec.~\ref{results:timing}.
-The remaining four networks all achieve a similar sensitivity, each of these networks contain the Viterbi map (vitmap) as one of their inputs or their only input. Therefore, it is assumed that the dominating effect on the sensitivity originated from the Viterbi maps. In following tests the focus will be in the Viterbi map \ac{CNN} as in all cases this is among the most sensitive.
+For the next test, injections were made into the O2 data-set in the same way as in the last section. Then each of the 6 networks described in Sec.~\ref{cnn:networks} were trained and tested on this data. 
+Fig.~\ref{machine:results:o2} shows the sensitivity curves for this test for both \ac{SNR} and sensitivity depth for each of the 6 networks.
+The results here are very similar to the results from the O1 simulations.
+The Viterbi statistic is the least sensitive `network', followed by the spectrogram \ac{CNN}.
+The remaining four networks all achieve a similar sensitivity, each of these remaining networks contain the Viterbi map as one of their inputs. Therefore, it is assumed that the dominating effect on the sensitivity originated from the Viterbi maps. In following tests the focus will be with the Viterbi map \ac{CNN} as in all cases this is among the most sensitive.
 For the O2 data-set we show that with a false alarm of 1\% the Viterbi map \ac{CNN} achieves a sensitivity of SNR $~95$ and sensitivity depth of $~12\; {\rm Hz}^{-1/2}$ with 95\% efficiency.
+This result in the sensitivity depth in Fig.~\ref{machine:results:depth_o2} does not vary much from the results from O1, Fig.~\ref{machine:results:depth_o1}. 
+Whilst one might expect the sensitivity to increase due to the increase in sensitivity and longer observing run.
+However, this is not the case \joe{why?}.
 
 \begin{figure}
 	%\centering
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\columnwidth]{C4_cnn/o2_snr_eff.pdf}
-		\label{results:snr_o2}
+		\label{machine:results:snr_o2}
 	\end{subfigure}
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\columnwidth]{C4_cnn/o2_depth_eff.pdf}
-		\label{results:depth_o2}
+		\label{machine:results:depth_o2}
 	\end{subfigure}
-	\caption{\label{results:o2} In the O2 data-set, each of the six \acp{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate. These show that the use of spectrograms and the Viterbi maps with \acp{CNN} greatly improve the sensitivity when compared to the Viterbi statistic. For each \ac{CNN} which uses a combination of inputs it achieves a similar sensitivity to the \ac{CNN} which uses just the Viterbi map. This implies that the Viterbi map contains the most information out of the tested \acp{CNN}. }
+	\caption{\label{machine:results:o2} In the O2 data-set, each of the six \acp{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate. These show that the use of spectrograms and the Viterbi maps with \acp{CNN} greatly improve the sensitivity when compared to the Viterbi statistic. For each \ac{CNN} which uses a combination of inputs it achieves a similar sensitivity to the \ac{CNN} which uses just the Viterbi map. This implies that the Viterbi map contains the most information out of the tested \acp{CNN}. }
 	
 \end{figure}
-
-%%%%%%%%
-\subsubsection{O1}
-%%%%%%%%%%
 
 
 
@@ -783,26 +814,26 @@ For the O2 data-set we show that with a false alarm of 1\% the Viterbi map \ac{C
 \subsubsection{Gaussian noise}
 %%%%%%%%%%%
 
-The second test involves using injections into Gaussian noise. For this test we tried to replicate the S6 data-set without including instrumental artefacts such as lines. We included the same gaps in data as S6 and the noise floor of S6 was replicated by scaling the \ac{SNR} of any injection in any give \ac{SFT}. 
-Fig.~\ref{results:s6gauss} shows the sensitivity curves for the Viterbi statistic and Viterbi map \ac{CNN} for both the Gaussian noise run with S6 gaps and for injections into the S6 data-set. 
+The next test involves using injections into Gaussian noise. For this test we tried to replicate the S6 data-set without including instrumental artefacts such as lines. We included the same gaps in data as S6 and the noise floor of S6 was replicated by scaling the \ac{SNR} of any injection in any given \ac{SFT}. 
+Fig.~\ref{machine:results:s6gauss} shows the sensitivity curves for the Viterbi statistic and Viterbi map \ac{CNN} for both the Gaussian noise run with S6 gaps and for injections into the S6 data-set. 
 In the Gaussian noise data-set the curves for both statistics, Viterbi map and the Viterbi statistic, show very similar results, this is to be expected as the main use of the \ac{CNN} was to reduce the effect of instrumental lines, for which there is none in this data set. 
 The advantage of using the Viterbi maps in a \ac{CNN} becomes clear which it is tested on injections into real data with many instrumental lines. 
-The remaining curves in Fig.~\ref{results:s6gauss} show these tests, and it becomes clear that the Viterbi map \ac{CNN} reduces the effect of instrumental lines and therefore increases the searches sensitivity. 
+The remaining curves in Fig.~\ref{machine:results:s6gauss} show these tests, and it becomes clear that the Viterbi map \ac{CNN} reduces the effect of instrumental lines and therefore increases the searches sensitivity. 
 These tests in S6 also show that the effect of instrumental lines was far greater in this run than in O2. 
-This is shown in Fig.~\ref{results:o2} where the separation between the Viterbi statistic curves and the Viterbi map curves is much smaller than the S6 curves in Fig.~\ref{results:s6gauss}.
-For injections into Gaussian noise following S6 gaps we show that with a false alarm of 1\% the Viterbi map \ac{CNN} achieves a sensitivity of SNR $~85$ and sensitivity depth of $~20\; {\rm Hz}^{-1/2}$ with 95\% efficiency. For injections into real S6 data the search achieves a sensitivity of SNR $~115$ and sensitivity depth of $~11\; {\rm Hz}^{-1/2}$ with 95\% efficiency and 1\% false alarm. We can also see from Fig.~\ref{results:s6gauss} that the sensitivity in Gaussian noise with S6 gaps is better than in real S6 data, so there are still some elements of the search which reduces the sensitivity.
+This is shown in Fig.~\ref{machine:results:o2} where the separation between the Viterbi statistic curves and the Viterbi map curves is much smaller than the S6 curves in Fig.~\ref{machine:results:s6gauss}.
+For injections into Gaussian noise following S6 gaps we show that with a false alarm of 1\% the Viterbi map \ac{CNN} achieves a sensitivity of SNR $~85$ and sensitivity depth of $~20\; {\rm Hz}^{-1/2}$ with 95\% efficiency. For injections into real S6 data the search achieves a sensitivity of SNR $~115$ and sensitivity depth of $~11\; {\rm Hz}^{-1/2}$ with 95\% efficiency and 1\% false alarm. We can also see from Fig.~\ref{machine:results:s6gauss} that the sensitivity in Gaussian noise with S6 gaps is better than in real S6 data, so there are still some elements of the search which reduces the sensitivity.
 
 \begin{figure}
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\columnwidth]{C4_cnn/gauss_and_s6_snr_eff.pdf}
-		\label{results:snr_s6}
+		\label{machine:results:snr_s6}
 	\end{subfigure}
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\columnwidth]{C4_cnn/gauss_and_s6_depth_eff.pdf}
-		\label{results:depth_s6}
+		\label{machine:results:depth_s6}
 	\end{subfigure}
 
-	\caption{\label{results:s6gauss} We aimed to compare the sensitivity of this search on simulations on real data (s6) to simulations in Gaussian noise (gauss). The Gaussian noise injections included the same gaps in data as the S6 data set. The \ac{SNR} of the simulated signal in Gaussian noise was adjusted based on the noise floor of S6. The sensitivity curves show that the Viterbi map \ac{CNN} (vitmap)achieves a similar sensitivity to the Viterbi statistic (vitstat) in Gaussian noise. This is because the main factor which effects the sensitivity of the Viterbi statistic is instrumental lines. As expected in real data, the Viterbi statistic is far less sensitive. The power of the \ac{CNN} becomes clear in tests on real data. The sensitivity of the Viterbi map \ac{CNN} is improved by over a factor of 2 in \ac{SNR} when tested on S6 data.}
+	\caption{\label{machine:results:s6gauss} We aimed to compare the sensitivity of this search on simulations on real data (s6) to simulations in Gaussian noise (gauss). The Gaussian noise injections included the same gaps in data as the S6 data set. The \ac{SNR} of the simulated signal in Gaussian noise was adjusted based on the noise floor of S6. The sensitivity curves show that the Viterbi map \ac{CNN} (vitmap)achieves a similar sensitivity to the Viterbi statistic (vitstat) in Gaussian noise. This is because the main factor which effects the sensitivity of the Viterbi statistic is instrumental lines. As expected in real data, the Viterbi statistic is far less sensitive. The power of the \ac{CNN} becomes clear in tests on real data. The sensitivity of the Viterbi map \ac{CNN} is improved by over a factor of 2 in \ac{SNR} when tested on S6 data.}
 	
 \end{figure}
 
@@ -810,20 +841,20 @@ For injections into Gaussian noise following S6 gaps we show that with a false a
 \subsubsection{S6}
 %%%%%%%%%%
 
-The final test was set up to again use the S6 data-set, however, we use a standard set of injections in the S6 \ac{MDC} \cite{walsh2016ComparisonMethods} to compare directly to other \ac{CW} search pipelines. In Fig.~\ref{results:s6mdc} we show the results of the sensitivity curves from these injections. Fig.~\ref{results:mdccomp} shows the direct comparison in depth of the results in \cite{walsh2016ComparisonMethods} with the results from the SOAP search with the Viterbi map \ac{CNN}. This shows that we achieve a sensitivity similar to many other semi-coherent searches with the exception of the Einstein@home search \cite{abbott2016ResultsDeepest}. For tests in the S6 \ac{MDC} we show that with a false alarm of 1\% the Viterbi map \ac{CNN} achieves a sensitivity of SNR $~90$ and sensitivity depth of $~16\; {\rm Hz}^{-1/2}$ with 95\% efficiency.
+The final test was set up to again use the S6 data-set, however, we use a standard set of injections in the S6 \ac{MDC} \cite{walsh2016ComparisonMethods} to compare directly to other \ac{CW} search pipelines. In Fig.~\ref{machine:results:s6mdc} we show the results of the sensitivity curves from these injections. Fig.~\ref{machine:results:mdccomp} shows the direct comparison in depth of the results in \cite{walsh2016ComparisonMethods} with the results from the SOAP search with the Viterbi map \ac{CNN}. This shows that we achieve a sensitivity similar to many other semi-coherent searches with the exception of the Einstein@home search \cite{abbott2016ResultsDeepest}. For tests in the S6 \ac{MDC} we show that with a false alarm of 1\% the Viterbi map \ac{CNN} achieves a sensitivity of SNR $~90$ and sensitivity depth of $~16\; {\rm Hz}^{-1/2}$ with 95\% efficiency.
 
 
 \begin{figure}
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\columnwidth]{C4_cnn/S6MDC_snr.pdf}
-		\label{results:snr_s6mdc}
+		\label{machine:results:snr_s6mdc}
 	\end{subfigure}
 \begin{subfigure}[h]{0.5\textwidth}
 	\includegraphics[width=\columnwidth]{C4_cnn/S6MDC_depth.pdf}
-	\label{results:mdccomp}
+	\label{machine:results:mdccomp}
 \end{subfigure}
 
-	\caption{\label{results:s6mdc} In the S6 \ac{MDC} \cite{walsh2016ComparisonMethods}, sensitivity curves were made for a set of \ac{CW} searches. 
+	\caption{\label{machine:results:s6mdc} In the S6 \ac{MDC} \cite{walsh2016ComparisonMethods}, sensitivity curves were made for a set of \ac{CW} searches. 
 		We have taken the list of detected pulsars for each search from this paper \cite{walsh2016ComparisonMethods} and replotted using the method in Sec.~\ref{sensitivity} to compare the sensitivities. 
 		This is results for all pulsar injections in the 40-500 Hz band in the S6 \ac{MDC}.
 		This shows how the SOAP search with a \ac{CNN} achieves a similar sensitivity some other \ac{CW} searches. 
@@ -905,7 +936,7 @@ Rather than taking hundreds of hours, the generating data sections takes $\mathc
 
 When training a network, the general rule is the more data the better. 
 This limits effects such as over-training mentioned in Sec.~\ref{machine:nn:training}.
-To investigate how the sensitivity of the search changes with the number of training examples, the Viterbi map (vitmap) network in Sec.\ref{machine:results:...} was trained using a range of different training example numbers. 
+To investigate how the sensitivity of the search changes with the number of training examples, the Viterbi map (vitmap) network in Sec.\ref{machine:results} was trained using a range of different training example numbers. 
 These networks are then tested on the same dataset to see how they perform.
 This was repeated for two data-sets: \ac{CW} simulations in Gaussian noise and simulations in \acp{LIGO} O1 data-set. 
 For both of these cases six different networks were trained, these used 100, 500, 1000, 5000, 10000 and 15000 Viterbi maps as their training datasets.
