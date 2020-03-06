@@ -109,6 +109,81 @@ Sec.~\ref{cnn} we explain how \acp{CNN} operate followed by how we generate
 data to train the \ac{CNN} in Sec.~\ref{data}. We then describe the entire search from raw data to results in Sec.~\ref{pipeline} and finally in Sec.~\ref{results} we
 show the results from this search and compare to similar analyses. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\label{soap} SOAP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% introduce SOAP and show example of outputs
+%
+SOAP~\cite{bayley2019SOAPGeneralised} is an un-modeled search for long
+duration signals which is based on the Viterbi
+algorithm~\cite{viterbi1967ErrorBounds}. In its most simple form SOAP
+analyses a spectrogram to find the time-frequency track which gives the highest
+sum of \ac{FFT} power. If a signal is present and sufficiently loud then this
+is the track which is most likely to come from some signal.
+In~\cite{bayley2019SOAPGeneralised} the algorithm has been expanded to
+search through multiple detectors as well as including a statistic to penalise
+artefacts in the data from the instrument as opposed to from an astrophysical
+source. 
+
+% refer to the figure showing the Viterbi track for S6
+%
+Fig.~\ref{soap:viterbiplot} shows an example of the spectrogram data which is
+searched through and the outputs of SOAP; the three main output components are
+the frequency track, the Viterbi statistic and the Viterbi map.
+
+\begin{figure}[h]
+	%\centering
+	\includegraphics[scale=0.43]{C4_cnn/two_vit_example.pdf}
+	%
+	\caption{\label{soap:viterbiplot} This plot shows the inputs and outputs of the
+		SOAP search. The top two panels are time-frequency spectrograms which have been pre-processed as described in Sec.~\ref{pipeline}. This
+		data is a 0.1 Hz wide frequency band from the S6 observing run \cite{} \joe{reference} which includes a string simulated \ac{CW} signal. The white areas in the spectrograms are gaps in data when the detector was not operating. These both have the
+		optimal track found by SOAP overlaid. The bottom panel shows the normalised Viterbi map, the intensity of a
+		pixel in this image relates to the log-probability that a track ends in and
+		particular frequency bin at a given time.}
+	%
+\end{figure}
+
+% describe the main data products from the search
+%
+\begin{description} 
+	%
+	\item [Viterbi track] The Viterbi track is the most probable track through time-frequency data given a choice of statistic. 
+	%
+	\item [Viterbi statistic] The Viterbi statistic is the sum of the individual statistics along the Viterbi track. In the analysis that follows, the `line-aware' Viterbi statistic is used. 
+	This is the sum of the log-odds ratios, $p_{\rm signal}/(p_{\rm line} + p_{\rm noise})$ along the track. This is defined in more detail in \cite{bayley2019SOAPGeneralised}
+	%
+	\item [Viterbi map]
+	The Viterbi map value of the Viterbi statistic for every time-frequency bin in the spectrogram. 
+	This represents the most probable track which ends in any time-frequency bin.
+	In the Viterbi maps, each time slice is normalised individually, i.e., each
+	vertical slice has been normalised such that the sum of their exponentiated
+	values is equal to 1. This way each pixel in the image can be interpreted as a
+	value related to the log-probability that there is a signal in the bin at that
+	time.
+	%
+\end{description}
+
+% Mention line aware statistic
+%
+To determine whether an simulated astrophysical signal has been detected,
+in~\cite{bayley2019SOAPGeneralised} we used the Viterbi `line aware' statistic alone described above.  
+The `line-aware' statistic reduced the affect of instrumental lines on the analysis, however the `line-aware' statistic is still contaminated by certain types of line.
+For example, the statistic is affected by broad wandering lines as they offer high power tracks in both detectors.
+To reduce the effect of these instrumental lines, we looked through the spectrograms and
+Viterbi maps of individual bands by eye as in Fig.~\ref{soap:viterbiplot}.
+Bands which appeared to be contaminated were then removed from the search.
+
+% what was different in this analysis
+%
+In this search the spectrograms and the Viterbi map contained extra information
+over the Viterbi statistic. 
+We aim to utilise this in addition to the Viterbi statistic to replace the process of removing contaminated bands `by eye' and therefore automating the search. 
+A useful tool which can be used to classify this extra information is convolutional neural networks. 
+
 %%%%%%%%%%%
 %%%%%%%%%%%
 \section{\label{machine:nn}Neural networks}
