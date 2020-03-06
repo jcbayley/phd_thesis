@@ -1120,7 +1120,7 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 \begin{table}
 	\centering
 	%
-	\caption{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \ac{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \ac{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_L)/p(M_N)$ had 10 parameters distributed in linearly between the limits. \label{soap:results:parameters}}
+	\caption{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \ac{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \ac{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_L)/p(M_N)$ had 10 parameters distributed in linearly between the limits. \label{soap:las:optimisation:table}}
 	
 	%
 	\bgroup
@@ -1143,10 +1143,10 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 	\egroup
 \end{table}
 
-For each point in Fig.~\ref{soap:optimisation:gauss}, the entire SOAP search was run using the corresponding parameters as input. 
+For each point in Fig.~\ref{soap:las:optimisation:gauss}, the entire SOAP search was run using the corresponding parameters as input. 
 Efficiency curves are then generated for each of these runs and the values for the \ac{SNR} at 80\% efficiency are recorded. 
-Fig.~\ref{soap:optimisation:gauss} then shows the 80\% efficiency for each parameter value.
-There appears not to be any single value which gives an optimum, however, the dark stripe in Fig.~\ref{soap:optimisation:gauss} running from the bottom left to the red cross is the combinations of parameters which give the best result. 
+Fig.~\ref{soap:las:optimisation:gauss} then shows the 80\% efficiency for each parameter value.
+There appears not to be any single value which gives an optimum, however, the dark stripe in Fig.~\ref{soap:las:optimisation:gauss} running from the bottom left to the red cross is the combinations of parameters which give the best result. 
 The point where the red lines cross is the parameters used in previous searched in Sec.~\ref{soap:results:gaplessgauss} and \ref{soap:results:gausss6}.
 This falls on the line where the algorithm performs best. 
 Venturing far from this `optimum' line does not change the results a great deal as the \ac{SNR} does not change much.
@@ -1171,7 +1171,7 @@ These slices are made by taking the mean across the parameters not shown in the 
 The range chosen for the transition matrix parameter $\tau$ as small with a small number of points, this is because the impact of this parameter was expected to be small. 
 Fig~.\ref{soap:las:optimisation:s6mdc} demonstrates that changing this parameter does not have much affect on the final sensitivity. 
 The parameter $w_S$ appears to have a clear location around a value of $3$ where the sensitivity is at a minimum. This is not far from the value of the parameter which is used for all other searches in this thesis (the red line).
-The parameters $w_L$ and $p(M_L)/p(M_S)$ \joe{check its line over signal not noise} show that the sensitivity drops substantially as the values increase. 
+The parameters $w_L$ and $p(M_L)/p(M_G)$ \joe{check its line over signal not noise} show that the sensitivity drops substantially as the values increase. 
 In these examples the optimum value may be out of the range chosen here.
 Whilst this could be improves slightly by running with a larger parameter space, this is a time consuming process.
 The results in Sec.~\ref{soap:results} show that the current values of the parameters (red lines in Fig~.\ref{soap:las:optimisation:s6mdc}) are sufficiently sensitive when compared to other searches.
@@ -1183,7 +1183,7 @@ These values are,
 	\tau &= 1.0 \\
 	w_S &= 3.0 \\
 	w_L &= 20.0 \\
-	p(M_L)/p(M_S) &= 0.2879
+	p(M_L)/p(M_G) &= 0.2879 .
 \end{split}
 \end{equation}
 
@@ -1194,10 +1194,9 @@ These values are,
     \label{soap:las:optimisation:s6mdc}
 \end{figure}
 
-To choose optimum parameters,
-Now the parameters have been optimised for both the Gaussian noise case and the real S6 data case, we can test the effect of the statistic when used on a band which has an instrumental line injected. 
+To visualise how these better optimised parameters are to the values used in Sec.~\ref{soap:results} we can compare how they perform on a simulated signal in a time-frequency spectrogram. 
+In one of the detectors a narrow instrumental line can also be simulated.
 In Fig.~\ref{soap:las:optimisation:vitexample} an example a \ac{CW} signal injected into Gaussian noise in both detectors. 
-This also shows a simple example of an instrumental line injected into one detector. 
 In the Gaussian noise optimised case the search is looking for high power in both detectors which the strong instrumental line satisfied when the astrophysical signal is weak. 
 The S6 optimised statistic looks for more consistent \ac{SNR} in each of the detectors.
 The two different lines show the statistic optimised on the Gaussian noise injections and the S6 \ac{MDC} injections.
@@ -1205,7 +1204,7 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{testimg.png}
+    \includegraphics[width=\linewidth]{C3_soap/line_example.pdf}
     \caption{This figure shows an example of when the line aware statistic is used compared to a version when it is not.}
     \label{soap:las:optimisation:vitexample}
 \end{figure}
