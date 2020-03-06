@@ -1152,9 +1152,9 @@ This falls on the line where the algorithm performs best.
 Venturing far from this `optimum' line does not change the results a great deal as the \ac{SNR} does not change much.
 The search is then not particularly sensitive to choice of parameters in Gaussian noise.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{C3_soap/gauss_optimised.pdf}
+    \includegraphics[width=0.9\linewidth]{C3_soap/gauss_optimised.pdf}
     \caption{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_S$ were optimised. The key part to remember when reading this plot is that the lower the value of \ac{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
     \label{soap:las:optimisation:gauss}
 \end{figure}
@@ -1171,7 +1171,7 @@ These slices are made by taking the mean across the parameters not shown in the 
 The range chosen for the transition matrix parameter $\tau$ as small with a small number of points, this is because the impact of this parameter was expected to be small. 
 Fig~.\ref{soap:las:optimisation:s6mdc} demonstrates that changing this parameter does not have much affect on the final sensitivity. 
 The parameter $w_S$ appears to have a clear location around a value of $3$ where the sensitivity is at a minimum. This is not far from the value of the parameter which is used for all other searches in this thesis (the red line).
-The parameters $w_L$ and $p(M_L)/p(M_G)$ \joe{check its line over signal not noise} show that the sensitivity drops substantially as the values increase. 
+The parameters $w_L$ and $p(M_L)/p(M_G)$ show that the sensitivity drops substantially as the values increase. 
 In these examples the optimum value may be out of the range chosen here.
 Whilst this could be improves slightly by running with a larger parameter space, this is a time consuming process.
 The results in Sec.~\ref{soap:results} show that the current values of the parameters (red lines in Fig~.\ref{soap:las:optimisation:s6mdc}) are sufficiently sensitive when compared to other searches.
@@ -1187,7 +1187,7 @@ These values are,
 \end{split}
 \end{equation}
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \includegraphics[width=\linewidth]{C3_soap/s6_optimised.pdf}
     \caption{When using real S6 data, all four parameters of the search were optimised over on simulations in real data. The plot above shows the \ac{SNR} at 80\% efficiency for each of the parameters where the ranges are in Tab.~\ref{soap:las:optimisation:table}. Lower values of \ac{SNR} mean the search is performing better. The red lines show the parameters used in the searches in this section and the sections that follow. Whilst this does not seem optimal, the search does not underperform much when a poor choice of parameters is used. }
@@ -1204,8 +1204,8 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{C3_soap/line_example.pdf}
-    \caption{This figure shows an example of when the line aware statistic is used compared to a version when it is not.}
+    \includegraphics[width=0.9\linewidth]{C3_soap/line_example.pdf}
+    \caption{As a visualisation of the line aware statistic working, an astrophysical signal was simulated in both the H1 and L1 detectors. In one detector an instrumental line was added. In the top panel above the tracks identified by different values of the line aware statistic are shown shifted up by 10 frequency bins. This allows the underlying feature to be identified. In the top two panels the sinusoidal nature of the \ac{CW} signal can be identified in the data, and was identified by the line aware statistic using the S6 MDC optimal values (blue line). The top panel also contains a narrow spectral line at $\sim 102.5$ Hz. The values of the statistic optimised for the Gaussian noise case do not identify the signal but identify the spectral line as the most likely signal. The final panel shows the Viterbi map for the statistic values optimised in the S6 MDC. }
     \label{soap:las:optimisation:vitexample}
 \end{figure}
 
