@@ -346,7 +346,7 @@ For a more detailed view on how r-modes generate \ac{GW} see \citep{owen1998Grav
 
 The theory mentioned above and the indirect detection of gravitational waves from the Hulse-Taylor binary pulsar system left little doubt as to whether \ac{GW} existed. 
 The real challenge was to design an instrument which could directly detect gravitational waves.
-There were a number of different proposed methods for the design of the instrument which includes: resonant bar detectors, both ground based and space based interferometers, pulsar timing arrays and cosmic microwave background detectors. 
+There were a number of different proposed methods for the design of the instrument which includes: resonant bar detectors, both ground based and space based interferometers, pulsar timing arrays and cosmic microwave background (CMB) detectors. 
 Resonant bar detectors were initially designed and built by Joseph Weber \citep{weber1966ObservationThermal}. 
 These are large cylinders of metal which should resonate as a gravitational wave passes by. 
 There are a few different designs of this type of detector, including an omni-directional design \citep{dewaard2003MiniGRAILFirst}. 
@@ -375,8 +375,16 @@ If the length of one of the arms is changed then the interference pattern will c
 An interferometer can then measure small changes in the mirrors position.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{C1_intro/interferometer.pdf}
-    \caption{This figure shows a basic interferometer.ETMY and ETMX refer to the end test masses, which are just mirrors at the end of the interferometer arms. ITMY and ITMX refer to the internal test masses, these create a cavity in the interferometers arms which can build up laser power. BS is the beam splitter which splits the Laser beam equally to each arm, this them recombines the beams back to the detector.}
+    \begin{subfigure}[h]{0.6\linewidth}
+    	 \includegraphics[width=\textwidth]{C1_intro/interferometer.pdf}
+    	 \caption{Simple interferometer.}
+    \end{subfigure}
+	\begin{subfigure}[h]{0.6\linewidth}
+		\includegraphics[width=\textwidth]{C1_intro/interferometer_fabry.pdf}
+		\caption{Fabry-Perot interferometer.}
+	\end{subfigure}
+    \caption{\ac{LIGO} uses interferometry to make a detection. This has many additional features, one of which is shown above. ETMY and ETMX refer to the end test masses, which are just mirrors at the end of the interferometer arms. The beam splitter splits the Laser beam equally to each arm, this them recombines the beams back to the detector.
+    ITMY and ITMX refer to the internal test masses, these create a Fabry-Perot cavity in the interferometers arms which can build up laser power. }
     \label{detectors:interferometer}
 \end{figure}
 
