@@ -379,7 +379,7 @@ The phase difference of the light can be related to the wavelength of the light,
 \end{equation}
 where $\Delta \phi$ is the phase change and $\Delta L$ is the difference in the arm lengths \citep{brown2017ComparisonSelfselected}.
 An interferometer can then measure small changes in the mirrors position.
-\begin{figure}[h]
+\begin{figure}[hp]
     \centering
     \begin{subfigure}[h]{0.6\linewidth}
     	 \includegraphics[width=\textwidth]{C1_intro/interferometer.pdf}
@@ -422,9 +422,9 @@ Many of these techniques are designed to reduce non-astrophysical affects on the
 %%%%%%%%%
 
 An important factor to know when using detector data to search for astrophysical signals is the detectors response.
-This measures how sensitive the detector is to different locations on the sky.
+This measures how sensitive the detector is to different directions.
 An example of the antenna response for \ac{LIGO} is in Fig.~\ref{intro:detectors:response} where the detectors arms lie on the x and y axis of the image.
-This is clear when thinking about how a gravitational wave affects the test masses. 
+This is clear when thinking about how a gravitational wave affects the test masses as in Fig.~\ref{gw:polarisations}. 
 As the \ac{GW} is transverse to its propagation, when the detector is face on to the source, there will be a maximum change in the arm lengths and therefore a maximum sensitivity. 
 In the same way the sensitivity will be at a minimum when edge to the source.
 
@@ -441,10 +441,10 @@ In the same way the sensitivity will be at a minimum when edge to the source.
 %%%%%%%%%%
 %%%%%%%%%%
 
-To increase the sensitivity of the \ac{LIGO} detectors, any effect on the output of the interferometer which is not astrophysical needs to be reduced.
-This involves understanding what causes certain noise features in the detector, and how the affect of these can be reduced. 
+To increase the sensitivity of the \ac{LIGO} detectors, any effect on the output of the interferometer which is not astrophysical ideally needs to be reduced.
+This involves understanding what causes certain noise features in the detector, and how the affect of these can be limited. 
 Within the detector, there are many sources of noise.
-Some of these noise sources and their affect on the detectors strain sensitivity are all shown in Fig.~\ref{detectors:noisesensitivity} from \citep{aasi2015AdvancedLIGO}.
+Some of these noise sources and how they limit the detectors strain sensitivity are all shown in Fig.~\ref{detectors:noisesensitivity} from \citep{aasi2015AdvancedLIGO}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{C1_intro/noise_sensitivity.jpg}
@@ -454,11 +454,11 @@ Some of these noise sources and their affect on the detectors strain sensitivity
 Here I will summarise some of the limiting sources and also sources which become useful for understanding later sections.
 
 \begin{description}
-\item[Seismic noise] This originates from the seismic activity of the earth and effects the lower frequencies. This can be earthquakes or ocean waves. Seismic waves cause the mirrors to oscillate and induce a change in the length of the arm. This is reduced by having multi stage suspensions in the detectors.
+\item[Seismic noise] This originates from the seismic activity of the earth and effects lower frequencies. This can be oscillations such as earthquakes or ocean waves. Seismic waves cause the mirrors to oscillate and induce a change in the length of the arm. This is reduced by having multi stage suspensions in the detectors which essentially absorb the seismic oscillations \citep{matichard2015SeismicIsolation}.
 
-\item[Coating noise] This is in general due to two main factors, the thermal noise of the coating and brownian noise. The Brownian noise is from the mechanical dissipation in the coating and the thermal noise is due to thermal dissipation. The Brownian noise is the dominant factor as shown in Fig.~\ref{detectors:noisesensitivity}. This is reduced by using different coatings on the mirrors.
+\item[Coating noise] This is in general due to two main factors, the thermal noise of the coating and Brownian noise. The Brownian noise is from the mechanical dissipation in the coating and the thermal noise is due to thermal dissipation. The Brownian noise is the dominant factor as shown in Fig.~\ref{detectors:noisesensitivity}. These effects are limited by using different coatings on the mirrors \citep{abernathy0OverviewResearch}.
 
-\item[Quantum noise] Quantum noise is a fundamental limit due to the statistical uncertainty of counting photons. This limits the sensitivity at many frequencies.There are methods to reduce this include squeezing of the light \citep{}. 
+\item[Quantum noise] Quantum noise is a fundamental limit due to the statistical uncertainty of counting photons. This limits the sensitivity at many frequencies.There are methods to reduce this include squeezing of the light \citep{aasi2013EnhancedSensitivity}. 
 
 \item[Electronics noise] Whilst this is not shown in Fig.~\ref{detectors:noisesensitivity}, this becomes important to searches described later. These have a different effect on the detector which is more narrowband frequency lines. This is generated by the digital and analogue electronics that are used to measure the signal. 
 \end{description}
