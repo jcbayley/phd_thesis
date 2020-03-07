@@ -366,41 +366,53 @@ These are the focus of this section as the analysis that will follow uses data f
 
 Laser interferometers use the interference of light to measure a length with high precision.
 The majority of this section will focus on ground based interferometers such as \ac{LIGO} and Virgo \citep{aasi2015AdvancedLIGO,acernese2015AdvancedVirgo}.
-A simple design of an interferometer is shown in Fig.~\ref{detectors:interferometer}. 
+A simple design of an interferometer is shown in Fig.~\ref{detectors:interferometer:simple}. 
 A laser beam is fired at a beam splitter which splits the light equally down two perpendicular arms. 
 Each of these beams is reflected from a mirror at the end of either arm.
 The light then returns to the beam splitter where the two beams are combined and sent to a photo-detector.
 At the output, there is an interference pattern between the two beams.
 If the length of one of the arms is changed then the interference pattern will change as the phase of one beam changes with respect to the other.
+The phase difference of the light can be related to the wavelength of the light, $\lambda_l$ and the length of the detectors arms $L$ by,
+\begin{equation}
+\label{intro:detectors:phasechange}
+\Delta \phi \sim \frac{\Delta L}{\lambda_l},
+\end{equation}
+where $\Delta \phi$ is the phase change and $\Delta L$ is the difference in the arm lengths \citep{brown2017ComparisonSelfselected}.
 An interferometer can then measure small changes in the mirrors position.
 \begin{figure}[h]
     \centering
     \begin{subfigure}[h]{0.6\linewidth}
     	 \includegraphics[width=\textwidth]{C1_intro/interferometer.pdf}
     	 \caption{Simple interferometer.}
+    	 \label{detectors:interferometer:simple}
     \end{subfigure}
 	\begin{subfigure}[h]{0.6\linewidth}
 		\includegraphics[width=\textwidth]{C1_intro/interferometer_fabry.pdf}
 		\caption{Fabry-Perot interferometer.}
+		\label{detectors:interferometer:fabry}
 	\end{subfigure}
     \caption{\ac{LIGO} uses interferometry to make a detection. This has many additional features, one of which is shown above. ETMY and ETMX refer to the end test masses, which are just mirrors at the end of the interferometer arms. The beam splitter splits the Laser beam equally to each arm, this them recombines the beams back to the detector.
     ITMY and ITMX refer to the internal test masses, these create a Fabry-Perot cavity in the interferometers arms which can build up laser power. }
     \label{detectors:interferometer}
 \end{figure}
-
+%
 This can be used in gravitational wave detection as the mirrors at the end of each arm of the interferometer can be treated as `free' test masses.
-Fig.~\ref{detectors:interferometer} shows the effect of a \ac{GW} in free test masses.
-In the interferometer, this affect essentially changes the relative lengths of the two arms.
+Fig.~\ref{gw:polarisations} shows the effect of a \ac{GW} in free test masses.
+In the interferometer, this affect essentially changes the relative lengths of the two arms, i.e. $\Delta L$ in Eq.~\ref{intro:detectors:phasechange}.
 The change of the interference pattern with time is then related to the \ac{GW}.
+In practice the interference is held at a single point by adjusting the position of the two mirrors.
+The \ac{GW} is then related to the readout of the mirrors control system.
+
 If the mirrors at the end of the arms (ETMX and ETMY) are are placed further from the beam splitter, then the phase difference between the arms at the beam splitter for the same length change of one arm would be greater. 
 This means that increasing the length of the detectors arms increases the sensitivity. 
-A method to achieve a similar affect without physically increasing the arm length is to use a Fabry-Perot cavity \citep{aasi2015AdvancedLIGO}.
-This is where a semi-transparent mirror is places between the beam splitter and end mirror in each arm (ITMX and ITMY).
+A method to achieve a similar affect without physically increasing the arm length is to use a Fabry-Perot cavity \citep{aasi2015AdvancedLIGO}, this is shown in Fig.~\ref{detectors:interferometer:fabry}.
+This is where a semi-transparent mirror is placed between the beam splitter and end mirror in each arm (ITMX and ITMY).
 Light enters this cavity and reflects back and forth between the two mirrors (ITMX and ETMX) a number of times before returning to the beam splitter.
 This increases the time the light spends in one arm and is equivalent to increasing the arm length.
 Actual ground based \ac{GW} detectors such as \ac{LIGO} \citep{abbott2009LIGOLaser} and Virgo \citep{acernese2015AdvancedVirgo} are much more complicated than described above.
 They use many techniques to increase the sensitivity some of which are outlined in \citep{aasi2015AdvancedLIGO,abbott2009LIGOLaser}.
-Many of these techniques are designed to reduce non-astrophysical affects on the detector, some of these effects are listed in Sec.~\ref{intro:detector:noise}
+Many of these techniques are designed to reduce non-astrophysical affects on the detector, some of these effects and solutions are listed in Sec.~\ref{intro:detector:noise}.
+
 
 
 %%%%%%%%%%%
