@@ -103,15 +103,14 @@ signals in~\cite{dreissigacker2019DeeplearningContinuous}.
 
 % structure of the paper
 %
-\joe{rewrite as structure different to paper}
-In Sec.\ref{soap} we will summarise the basics of how the SOAP search works. In
-Sec.~\ref{cnn} we explain how \acp{CNN} operate followed by how we generate
-data to train the \ac{CNN} in Sec.~\ref{data}. We then describe the entire search from raw data to results in Sec.~\ref{pipeline} and finally in Sec.~\ref{results} we
+In Sec.\ref{cnn:soap} we will summarise the basics of how the SOAP search works. In
+Sec.~\ref{machine:nn}, \ref{machine:cnn} and \ref{machine:training} we explain how \acp{CNN} operate and how they are trained. Sec.~\ref{machine:cw} will describe how this is applied to an \ac{CW} search. 
+This includes the structure of the \ac{CNN} in Sec.~\ref{machine:cw:structure} and the entire search from raw data to results in Sec.~\ref{machine:pipeline}. Finally in Sec.~\ref{machine:results} we
 show the results from this search and compare to similar analyses. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\label{soap} SOAP}
+\section{\label{cnn:soap} SOAP}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1009,30 +1008,33 @@ Rather than taking hundreds of hours, the generating data sections takes $\mathc
 %%%%%
 %%%%%
 
-When training a network, the general rule is the more data the better. 
-This limits effects such as over-training mentioned in Sec.~\ref{machine:nn:training}.
-To investigate how the sensitivity of the search changes with the number of training examples, the Viterbi map (vitmap) network in Sec.\ref{machine:results} was trained using a range of different training example numbers. 
+When training a network, the general rule is that the more data the better. 
+More data can limit effects such as over-training mentioned in Sec.~\ref{machine:training}.
+To investigate how the sensitivity of the search changes with the number of training examples, the Viterbi map (vitmap) network in Sec.\ref{machine:results} was trained using a range of sizes of the training set. 
 These networks are then tested on the same dataset to see how they perform.
 This was repeated for two data-sets: \ac{CW} simulations in Gaussian noise and simulations in \acp{LIGO} O1 data-set. 
-For both of these cases six different networks were trained, these used 100, 500, 1000, 5000, 10000 and 15000 Viterbi maps as their training datasets.
-Here the training data-sets are the same used as in Sec.~\ref{}.
-These were then tested on the same data-sets in Sec.~\ref{}.
+For both of these cases six different networks were trained, these used: 100, 500, 1000, 5000, 10000 and 15000 Viterbi maps as their training datasets.
+Each of these different sizes of training data is a randomly selected subset of the training data used in Sec.~\ref{machine:results:sensitivity}.
+The test data for each was the same entire tests sets as in Sec.~\ref{machine:results:sensitivity}.
 
 In the Gaussian noise case, the majority of the networks performed the same. 
 This is with the exception of the network which was trained with 100 input Viterbi maps. 
-The implication of this is that the information in the Viterbi maps is relatively easy to extract in this case. 
-As the network is trying to distinguish Gaussian noise from a simulated \ac{CW} signal, one would expect this to be the easiest of all examples above to solve. \joe{dont like this explanation}
+The implication of this is that the information in the Viterbi maps is relatively easy to extract when simulations are in Gaussian noise. 
+In this case the network is trying to distinguish Gaussian noise from a simulated \ac{CW} signal.
+Therefore, one would expect this to be an easier problem for the network to solve than when trying to distinguish an \ac{CW} signal from instrumental lines and Gaussian noise. 
 
 \begin{figure}[h]
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\linewidth]{C4_cnn/gauss_sens_with_trainnum_eff.pdf}
+		\label{machine:cnn:sens_size:gauss_sens:eff}
 		\caption{}
 	\end{subfigure}
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\linewidth]{C4_cnn/gauss_sens_with_trainnum.pdf}
+		\label{machine:cnn:sens_size:gauss_sens:train}
 		\caption{}
 	\end{subfigure}
-	\caption{}
+	\caption{The amount of training data needed for an \ac{CNN} to perform well depends on the problem. Here I show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Fig.~\ref{machine:cnn:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:cnn:sens_size:gauss_sens:train} shows the values of \ac{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:cnn:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark. }
 	\label{machine:cnn:sens_size:gauss_sens}
 \end{figure}
 
@@ -1041,20 +1043,20 @@ The noise class for the networks then contains many variations compared to the G
 This a harder challenge to the neural network by essentially increasing the size of the parameter space.
 Because of this, one would expect the network to need many more training examples to be able to achieve a similar sensitivity to Gaussian noise.
 In Fig.~\ref{machine:cnn:sens_size:o1_sens}, one can see that using 100 training examples is not enough and the network does not achieve any sensitivity at any \ac{SNR}.
-The increase in training examples has a larger affect than in the Gaussian noise case. \joe{is that true}
-
-
+This seems to agree that real data poses a harder problem, therefore, more training examples are needed for the network to perform well.
 
 \begin{figure}[h]
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\linewidth]{C4_cnn/o1_sens_with_trainnum_eff.pdf}
+		\label{machine:cnn:sens_size:o1_sens:eff}
 		\caption{}
 	\end{subfigure}
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\linewidth]{C4_cnn/o1_sens_with_trainnum.pdf}
+		\label{machine:cnn:sens_size:o1_sens:train}
 		\caption{}
 	\end{subfigure}
-	\caption{}
+	\caption{Here I show how the sensitivity changes as a function of the number of training examples for simulations in O1 data. Fig.~\ref{machine:cnn:sens_size:o1_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:cnn:sens_size:o1_sens:train} shows the values of \ac{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a large increase in the sensitivity of the \ac{CNN}. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:cnn:sens_size:o1_sens:train} as it does not reach the 90\% efficiency mark.}
 	\label{machine:cnn:sens_size:o1_sens}
 \end{figure}
 

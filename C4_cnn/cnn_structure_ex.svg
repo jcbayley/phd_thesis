@@ -859,16 +859,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="760.02886"
-     inkscape:cy="572.67574"
+     inkscape:cx="887.33869"
+     inkscape:cy="610.21027"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1680"
      inkscape:window-height="1028"
      inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:window-y="-22"
+     inkscape:window-maximized="0"
      inkscape:snap-global="false"
      showguides="true"
      inkscape:guide-bbox="true" />
@@ -11314,5 +11314,75 @@
        id="path53289"
        d="m 364.8229,163.36522 h 13.52702"
        style="fill:none;stroke:#081d58;stroke-width:1.01254606;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker53293)" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff791b;stroke-width:1.16499996;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58434"
+       width="31.183035"
+       height="32.694939"
+       x="12.095239"
+       y="119.35118" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff791b;stroke-width:1.16499996;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58436"
+       width="39.498512"
+       height="38.55357"
+       x="136.26042"
+       y="81.931534" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff791b;stroke-width:1.16499996;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58438"
+       width="15.875"
+       height="15.875"
+       x="185.39732"
+       y="66.434517" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff7b00;stroke-width:1.165;stroke-miterlimit:4;stroke-dasharray:4.66,4.66;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58440"
+       width="31.56101"
+       height="31.75"
+       x="11.717261"
+       y="183.41815" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff6d00;stroke-width:1.165;stroke-miterlimit:4;stroke-dasharray:4.66,4.66;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58442"
+       width="40.443455"
+       height="39.120537"
+       x="132.10268"
+       y="217.81398" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff5f00;stroke-width:1.165;stroke-miterlimit:4;stroke-dasharray:4.66,4.66;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58444"
+       width="16.063988"
+       height="16.252975"
+       x="184.45239"
+       y="269.78571" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0500;stroke-width:1.165;stroke-miterlimit:4;stroke-dasharray:4.66,4.66;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58446"
+       width="31.003265"
+       height="32.339611"
+       x="184.95052"
+       y="189.55765" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0600;stroke-width:1.165;stroke-miterlimit:4;stroke-dasharray:4.66,4.66;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58448"
+       width="19.243404"
+       height="20.847023"
+       x="301.21274"
+       y="208.26649" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0600;stroke-width:1.16499996;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58450"
+       width="32.072342"
+       height="33.141422"
+       x="246.68977"
+       y="113.38583" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0600;stroke-width:1.29952323;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect58452"
+       width="19.108883"
+       height="20.712502"
+       x="339.49954"
+       y="107.03863" />
   </g>
 </svg>

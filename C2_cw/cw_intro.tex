@@ -1,6 +1,7 @@
 \chapter{\label{searchcw}Searching for continuous gravitational waves}
 
 Continuous gravitational waves have particular challenges when it comes to their detection.
+\joe{probably will say more about why here}
 Whilst I have described the potential sources of the signal and its approximate signal type in Sec.~\ref{intro:sources:cw},to perform a search for this signal more detail is needed.
 In this section I will go into more detail on the `mountain' model in Sec.~\ref{intro:source:cw:mountain} and its wave-form description. 
 This models is then used in various search methods for \ac{CW} signals.
@@ -301,7 +302,7 @@ Many of these searches use a set of 1800s long Fourier transforms as the input d
 	
 	\item[Powerflux] Powerflux uses a standard set of 1800s \acp{SFT}. For each point in parameter space, the power in this set of \acp{SFT} along the frequency track is recorded. This power is then weighted depending on the antenna pattern and noise of the detector. In longer stretches of $\sim$ 1 month, the weighted power is summed. Any point in parameter space which produces high power in each of these stretches is identified as a potential signal. This search can then be repeated around each candidate with a finer resolution in parameter space. This is explained in more detail and tested in \citep{abadie2012AllskySearch,walsh2016ComparisonMethods,ligoscientificcollaborationandvirgocollaboration2016ComprehensiveAllsky}
 	
-	\item[Viterbi] \joe{should probably mention other Viterbi searches}
+	\item[Viterbi] The Viterbi algorithm \citep{viterbi1967ErrorBounds} has been used in \citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden} to search for a \acp{CW} with randomly wandering spin frequency. This algorithm was applied to specific sources, where the $\mathcal{F}$-statistic is used on short duration segments which are then incoherently combined using the Viterbi algorithm.
 	
 	
 \end{description}
@@ -343,11 +344,20 @@ Running computing clusters can be costly, therefore, the focus of much of this t
 %%%%%%%%%5
 %%%%%%%%%%%
 \section{\label{searchcw:motivation}Motivation}
-%%%%%%%%%5
+%%%%%%%%%%
 %%%%%%%%%%
 
-The searches described above are computationally intensive, where the fastest takes $\sim$1 million core-hours.
-Many of the above searches search over a large parameter space, this .......
+The searches described above are computationally intensive, where the fastest takes $\sim$1 million core-hours to search through 4 months of O1 data.
+
+When searching for an \ac{CW} signal, there is a large parameter space to search. This is because the sky resolution to a \ac{CW} signal is small. 
+
 The motivation for much of the work that follows is to develop search algorithms which can reduce this computational time without a large loss in sensitivity to \ac{CW} signals.
 \joe{more}
+
+\begin{itemize}
+	\item Searches are computationally expensive
+	\item Due to large data and large parmeter space
+	\item This taken many computaitonal resources and much cost
+	\item the aim of work is to reduce the computational cost with a modest reduction in sensitivirty.
+\end{itemize}
 
