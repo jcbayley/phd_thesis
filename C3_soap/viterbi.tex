@@ -1,4 +1,4 @@
-\chapter{\label{soap}SOAP: A generalised application of the Viterbi algorithm to search for continuous gravitational wave sources.}
+\chapter{\label{soap}SOAP: A generalised application of the Viterbi algorithm to searches for continuous gravitational-wave signals.}
 
 The SOAP search is a semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
 The algorithm looks though narrow-banded time-frequency spectrograms of data to find the `most probable track' in frequency through it.
@@ -11,7 +11,7 @@ Therefore, it can be assumed that if the frequency track with the highest sum of
 Now as calculating all possible tracks is computationally expensive. Given that in the example in Fig.~\ref{soap:motivation:plot}, the spectrogram is frequency 180 bins wide $M$ and 400 time segments long $N$ and after each segment the track has $T$ possible options to jump to (in this case it is 180 options), The total number of possible tracks is $T^{M \times N}$. For this spectrogram this value is $180^{72000}$, this is an unreasonable number of tracks to possibly calculate. This is where the Viterbi algorithm \citep{viterbi1967ErrorBounds} is useful as it can efficiently find the track which gives the maximum sum of power. For an equivalent search the Viterbi algorithm would have to do $T*M*N$ calculations for find the optimum track. The method of how this is done is explained in the following sections.
 
 The majority of this chapter that follows has been reviewed and published as in \citep{bayley2019GeneralizedApplication}. This was work done by the author under the supervision of Prof. Graham Woan and Dr. Chris Messenger.
-The work in Sec.~\ref{soap:lineawareamp}, Sec.~\ref{soap:las:optimisation}, Sec.~\ref{soap:sensfreq} and Sec.~\ref{soap:sens:other} which is supplementary material.
+The exceptions are work in Sec.~\ref{soap:lineawareamp}, Sec.~\ref{soap:las:optimisation}, Sec.~\ref{soap:sensfreq} and Sec.~\ref{soap:sens:other} which is supplementary material.
 
 
 \begin{figure}
