@@ -1,6 +1,6 @@
 \chapter{\label{soap} SOAP: A generalised application of the Viterbi algorithm to searches for continuous gravitational-wave signals.}
 
-The SOAP search is a semi-coherent \ac{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
+The SOAP search is a semi-coherent \gls{CW} search algorithm that aims to reduce the computational time needed to find a potential signal. 
 The algorithm looks though narrow-banded time-frequency spectrograms of data to find the `most probable track' in frequency through it.
 This `most probable track' is then the most likely track which a pulsars frequency would follow.
 The motivation of the search is simple, if we looked at a frequency band in a spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible randomly wandering track from a starting frequency bin to an end frequency bin. For each of these tracks the sum of the spectrogram power along the track can be found such that for each track there is a single value. Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values. If there is a signal present in this band then it could be assumed that the signal which gives the highest sum of spectrogram power is the track which is most likely to follow the signals frequency track. 
@@ -18,7 +18,7 @@ The exceptions are work in Sec.~\ref{soap:lineawareamp}, Sec.~\ref{soap:las:opti
 
 \centering
 \includegraphics[width=\linewidth]{C3_soap/soap_spect_motivation.pdf}
-\caption{This figure shows an example of a time-frequency spectrogram which is typical of \ac{LIGO} data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
+\caption{This figure shows an example of a time-frequency spectrogram which is typical of \gls{LIGO} data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
 \label{soap:motivation:plot}
 
 \end{figure}
@@ -28,23 +28,23 @@ The exceptions are work in Sec.~\ref{soap:lineawareamp}, Sec.~\ref{soap:las:opti
 %
 % introduce the signal
 %
-One of the main targets for current ground based \ac{GW} detectors, including \ac{LIGO}~\citep{abbott2009LIGOLaser, aasi2015AdvancedLIGO} and Virgo~\citep{acernese2008StatusVirgo, acernese2015AdvancedVirgo}, are sources of continuous gravitational waves. These are long-duration, quasi-monochromatic  sinusoidal signals that are well-modelled by a Taylor series expansion in the signal phase. A likely source of such signals are rapidly spinning non axisymmetric neutron stars.  A number of possible emission mechanisms are outlined in~\citep{prix2009GravitationalWaves,owen2009ProbingNeutron}.
+One of the main targets for current ground based \gls{GW} detectors, including \gls{LIGO}~\citep{abbott2009LIGOLaser, aasi2015AdvancedLIGO} and Virgo~\citep{acernese2008StatusVirgo, acernese2015AdvancedVirgo}, are sources of continuous gravitational waves. These are long-duration, quasi-monochromatic  sinusoidal signals that are well-modelled by a Taylor series expansion in the signal phase. A likely source of such signals are rapidly spinning non axisymmetric neutron stars.  A number of possible emission mechanisms are outlined in~\citep{prix2009GravitationalWaves,owen2009ProbingNeutron}.
 
 %
 % introduce semi-coherent search algorithms
 %
-These types of \acp{GW} are expected to give strain amplitudes that are significantly below the detector's noise spectral density, and need sensitive search algorithms for detection. The most sensitive method is to use a coherent matched filter which requires knowledge of the waveform beforehand such that it can be coherently correlated with the data. This approach is used in searches for gravitational signals from known pulsars such as~\citep{dupuis2005BayesianEstimation,astone2010MethodDetection,schutz1998DataAnalysis,collaboration2017FirstSearch,abbott2019SearchesGravitational}. For broad parameter space searches, where the parameters of the signal are unknown, a large number of template waveforms must be used to sufficiently cover the parameter space.  This approach rapidly becomes computationally impractical as the search space grows, so semi-coherent search methods have been developed to deliver the maximum overall sensitivity for a given computational cost. Semi-coherent searches break the data up into sections of either time or frequency and perform a coherent analysis on these sections separately. These intermediate results can then be recombined incoherently in a number of different ways to form the final search result outlined in ~\citep{creighton2000SearchingPeriodic,abbott2019AllskySearch} and references therein.
+These types of \glspl{GW} are expected to give strain amplitudes that are significantly below the detector's noise spectral density, and need sensitive search algorithms for detection. The most sensitive method is to use a coherent matched filter which requires knowledge of the waveform beforehand such that it can be coherently correlated with the data. This approach is used in searches for gravitational signals from known pulsars such as~\citep{dupuis2005BayesianEstimation,astone2010MethodDetection,schutz1998DataAnalysis,collaboration2017FirstSearch,abbott2019SearchesGravitational}. For broad parameter space searches, where the parameters of the signal are unknown, a large number of template waveforms must be used to sufficiently cover the parameter space.  This approach rapidly becomes computationally impractical as the search space grows, so semi-coherent search methods have been developed to deliver the maximum overall sensitivity for a given computational cost. Semi-coherent searches break the data up into sections of either time or frequency and perform a coherent analysis on these sections separately. These intermediate results can then be recombined incoherently in a number of different ways to form the final search result outlined in ~\citep{creighton2000SearchingPeriodic,abbott2019AllskySearch} and references therein.
 
 
 %
 % introduce SOAP
 %
-The analysis that we present here is known as SOAP \citep{ellis2006SnakesPlanea} and is based on the Viterbi algorithm~\citep{viterbi1967ErrorBounds}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \ac{GW} data. Another variant of the algorithm \citep{suvorova2016HiddenMarkova} has recently been used, amongst other applications, as part of a \ac{CW} search to track a pulsar with randomly wandering spin frequency~\citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \acp{SFT}.
+The analysis that we present here is known as SOAP \citep{ellis2006SnakesPlanea} and is based on the Viterbi algorithm~\citep{viterbi1967ErrorBounds}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \gls{GW} data. Another variant of the algorithm \citep{suvorova2016HiddenMarkova} has recently been used, amongst other applications, as part of a \gls{CW} search to track a pulsar with randomly wandering spin frequency~\citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \glspl{SFT}.
 
 %
 % describe the paper structure
 %
-In the next section we will describe the Viterbi algorithm and the basic SOAP implementation to \ac{GW} time-frequency data. We then describe additional features to the algorithm, including the use of data from multiple detectors. As well as this we describe methods used to ignore instrumental effects in the data, such as incoherently summing data and a `line aware' statistic. In the final section as well as a test of the computational cost of the search, we show results of a search performed on datasets of increasing complexity: Gaussian noise with no gaps (i.e., contiguous in time), Gaussian noise with gaps simulating real data more accurately, and finally real \ac{LIGO} data taken during the sixth science run. 
+In the next section we will describe the Viterbi algorithm and the basic SOAP implementation to \gls{GW} time-frequency data. We then describe additional features to the algorithm, including the use of data from multiple detectors. As well as this we describe methods used to ignore instrumental effects in the data, such as incoherently summing data and a `line aware' statistic. In the final section as well as a test of the computational cost of the search, we show results of a search performed on datasets of increasing complexity: Gaussian noise with no gaps (i.e., contiguous in time), Gaussian noise with gaps simulating real data more accurately, and finally real \gls{LIGO} data taken during the sixth science run. 
 
 
 \section{\label{soap:viterbi}Viterbi algorithm}
@@ -56,7 +56,7 @@ The Viterbi algorithm is an efficient method for determining the most probable s
 %
 % Defining varibles and what data we use
 %
-In this work we apply the Viterbi algorithm to a \ac{GW} strain time-series to find the most probable track of a single variable-frequency signal in the noisy data.  We divide the time series into $N$ equal-length and contiguous segments ${\bm x}_j$,  defining the set $D \equiv \{{\bm x}_j\}$. The `states' in the model correspond to the frequencies a signal could have in each segment. A `track' is a list of such frequencies ${\bm \nu}\equiv \{\nu_j\}$, where  $\nu_j$ is the frequency in the segment ${\bm x_j}$.
+In this work we apply the Viterbi algorithm to a \gls{GW} strain time-series to find the most probable track of a single variable-frequency signal in the noisy data.  We divide the time series into $N$ equal-length and contiguous segments ${\bm x}_j$,  defining the set $D \equiv \{{\bm x}_j\}$. The `states' in the model correspond to the frequencies a signal could have in each segment. A `track' is a list of such frequencies ${\bm \nu}\equiv \{\nu_j\}$, where  $\nu_j$ is the frequency in the segment ${\bm x_j}$.
 
 %
 % defining probabilities
@@ -147,7 +147,7 @@ The Viterbi algorithm finds the most probable track $\hat{\bm \nu}$ by calculati
 %
 % define the transition matrix
 %
-An important concept when using the Viterbi algorithm is the`transition matrix' $T$, which is defined as the matrix that stores the prior log-probabilities $\log p(\nu_j \mid \nu_{j-1})$. These transition probabilities depend only on the size and direction of the transition, and in our case correspond to a jump in frequency when moving from the $(j-1)$th to the $j$th state. It is within the transition matrix that we impose some loose model constraints. For example it is usual in the time-frequency plane for frequencies to only have discrete values (frequency bins) and a track might only be allowed to move by one bin in each time step, restricting it to a \ac{UCD} transition or `jump' or equivalently setting the size of the first dimension of the transition matrix $n_1 = 3$. We can also impose that the transition probabilities are independent of the current track location in frequency, i.e. $p(\nu_j \mid \nu_{j-1})=p(\nu_{j+k} \mid \nu_{j+k-1})$. This leads to the transition matrix containing only three numbers, corresponding to the three prior log-probabilities that the track was in the corresponding \ac{UCD} frequency bin at the previous time step. These numbers are chosen to reflect the prior probability of a frequency deviation in the track and depend on the class of signals that one wishes to detect.
+An important concept when using the Viterbi algorithm is the`transition matrix' $T$, which is defined as the matrix that stores the prior log-probabilities $\log p(\nu_j \mid \nu_{j-1})$. These transition probabilities depend only on the size and direction of the transition, and in our case correspond to a jump in frequency when moving from the $(j-1)$th to the $j$th state. It is within the transition matrix that we impose some loose model constraints. For example it is usual in the time-frequency plane for frequencies to only have discrete values (frequency bins) and a track might only be allowed to move by one bin in each time step, restricting it to a \gls{UCD} transition or `jump' or equivalently setting the size of the first dimension of the transition matrix $n_1 = 3$. We can also impose that the transition probabilities are independent of the current track location in frequency, i.e. $p(\nu_j \mid \nu_{j-1})=p(\nu_{j+k} \mid \nu_{j+k-1})$. This leads to the transition matrix containing only three numbers, corresponding to the three prior log-probabilities that the track was in the corresponding \gls{UCD} frequency bin at the previous time step. These numbers are chosen to reflect the prior probability of a frequency deviation in the track and depend on the class of signals that one wishes to detect.
 For the majority of examples that follow, a symmetric transition matrix is used, i.e. the probability of a transition up a frequency bin is equal to the probability of a transition down a frequency bin. This allows us to parameterise the one dimensional transition matrix with a single value, this value is the ratio of the probability of a transition to the same frequency bin, to either up or down a frequency bin. 
 
 In later sections we will consider more complex situations in which the transition matrix describes the prior probability associated with sequences of even earlier transitions (`memory') and the case where there are multiple detectors. In these cases the number of dimensions of the transition matrix can grow substantially to account for the extra complexity of the problem.
@@ -183,7 +183,7 @@ s}-1}x_{j,r} {\rm
 e}^{i\nu_{j,k} t_r}\right|^2,
 \end{equation}
 %
-where $N_{\rm s}$ is the number of data points in each segment and $t_{r}$ is the time corresponding to $x_{j,r}$, the $r$th sample in the $j$th data segment. $\sigma_{j,k}^2$ is the noise variance and is calculated as an estimate of the noise \ac{PSD} in the $k$th sample and the $j$th data segment. It is worth noting at this point that it is also possible to write this as a likelihood ratio, and therefore write out detection statistic as a log-odds ratio, however, we will discuss this in more depth in Sec.~\ref{soap:las}. The log-likelihoods of each segment can be calculated at discrete frequencies before running the algorithm by computing the power spectra for each segment from discrete Fourier transforms of the data. In the \ac{GW} field these standard data forms are known as \acp{SFT}.
+where $N_{\rm s}$ is the number of data points in each segment and $t_{r}$ is the time corresponding to $x_{j,r}$, the $r$th sample in the $j$th data segment. $\sigma_{j,k}^2$ is the noise variance and is calculated as an estimate of the noise \gls{PSD} in the $k$th sample and the $j$th data segment. It is worth noting at this point that it is also possible to write this as a likelihood ratio, and therefore write out detection statistic as a log-odds ratio, however, we will discuss this in more depth in Sec.~\ref{soap:las}. The log-likelihoods of each segment can be calculated at discrete frequencies before running the algorithm by computing the power spectra for each segment from discrete Fourier transforms of the data. In the \gls{GW} field these standard data forms are known as \glspl{SFT}.
 
 The Viterbi algorithm records two quantities for each frequency and time bin: The first, $V_{j,k}$, contains the value defined by Eq.~\ref{soap:viterbi:maxtracklog}, which is the log-probability of the most probable path ending in position $j,k$. The second, $A_{j,k}$, is the transition, or `jump', used to achieve the most probable path. The algorithm can be divided into three main sections: initialisation, iteration and identification. These three sections are described in pseudo-code in Alg.~\ref{soap:single:algorithm} and a simple demonstration of the algorithm at work is shown in Fig.~\ref{soap:plots}.
 %
@@ -239,9 +239,9 @@ The Viterbi algorithm records two quantities for each frequency and time bin: Th
 
 \caption{ Fig.~\ref{soap:plot:data} shows
 the observed data, i.e the log-likelihood values $C_{j,k}$. Fig.~\ref{soap:plot:likelihood} shows the calculated
-log-probabilities $V_{j,k}$. $A_{j,k}$ is shown in parentheses, where the \ac{UCD}
+log-probabilities $V_{j,k}$. $A_{j,k}$ is shown in parentheses, where the \gls{UCD}
 components correspond to $i= [-1,0,1]$ respectively. The red line shows the
-path that gives the maximum probability. The transition matrix for the \ac{UCD} jumps is $[0,1,0]$ and corresponds to the un-normalised prior
+path that gives the maximum probability. The transition matrix for the \gls{UCD} jumps is $[0,1,0]$ and corresponds to the un-normalised prior
 log-probabilities of these jumps occurring.}
 \label{soap:plots}
 \end{figure}
@@ -258,7 +258,7 @@ log-probabilities of these jumps occurring.}
     \begin{equation} \label{soap:single:vitsum}
     V_{j,k} = \max_{i}({C_{j,k} }+ T_{i} + V_{j-1,k+i}),
     \end{equation}
-    where $i$ is the size and direction of the jump. For example, in Fig.~\ref{soap:plots} columns 1--4 are calculated in order using Eq.~\ref{soap:single:vitsum}, where it maximises over three possible previous positions in frequency. These positions are the frequency bins \ac{UCD} of the current position. The size and direction of the jump, $i$, which gives the maximum probability is then saved to $A_{j,k}$. These are shown in parentheses below the log-probabilities in Fig.~\ref{soap:plots} where \ac{UCD} correspond to values of $i = [-1,0,1]$ respectively.
+    where $i$ is the size and direction of the jump. For example, in Fig.~\ref{soap:plots} columns 1--4 are calculated in order using Eq.~\ref{soap:single:vitsum}, where it maximises over three possible previous positions in frequency. These positions are the frequency bins \gls{UCD} of the current position. The size and direction of the jump, $i$, which gives the maximum probability is then saved to $A_{j,k}$. These are shown in parentheses below the log-probabilities in Fig.~\ref{soap:plots} where \gls{UCD} correspond to values of $i = [-1,0,1]$ respectively.
 %
 % Identification
 %
@@ -283,7 +283,7 @@ If there are $Q$ detectors operating simultaneously we have $Q$ sets of data whi
 %
 % Doppler shift at each detector
 %
-The received instantaneous frequency of a given astrophysical signal will be nearly the same for all ground-based \ac{GW} detectors, and our
+The received instantaneous frequency of a given astrophysical signal will be nearly the same for all ground-based \gls{GW} detectors, and our
 algorithm should be sensitive to tracks that show this consistency in
 frequency. However there \emph{will} be small differences between the frequencies measured at detectors that are not co-located, due to differential Doppler shifts caused by Earth rotation. As a result the signal could fall in different frequency bins at each detector.
 
@@ -302,13 +302,13 @@ where ${\bm v}_a$ is the velocity of detector $a$ in an inertial reference frame
 \Delta f_{\rm max}  \approx 3.1\times 10^{-6} f_0.
 \end{equation}
 %
-For a signal frequency of 200\,Hz the largest possible instantaneous difference in frequency between detectors is therefore $6.2\times 10^{-4}$\,Hz.  Our standard 1800\,s-long \acp{SFT} have a frequency bin-width of $5.6\times 10^{-4}$\,Hz, making this difference significant. As a result it is not enough to simply enforce that the signal tracks follow identical paths in the two detectors and we must allow some level of flexibility on the scale of $\pm 1$ frequency bin.~\chris{I find this paragraph a bit too specific to our analysis choices. We don't have to state the SFT length here. We can simply point out that you can tune the SFT length to give you differing probability distributions on your transition matrix elements. We've chosen to only 1800 sec SFTs and focus on 200\,Hz and therefore use 3 possibilities (UCD) but we could have used a different SFT length and frequency giving us any number of possible jumps. I think that we should make things easy for ourselves and state that we only ever consider 3 possibilities and then you simply tune the SFT length to your frequency spread.}
+For a signal frequency of 200\,Hz the largest possible instantaneous difference in frequency between detectors is therefore $6.2\times 10^{-4}$\,Hz.  Our standard 1800\,s-long \glspl{SFT} have a frequency bin-width of $5.6\times 10^{-4}$\,Hz, making this difference significant. As a result it is not enough to simply enforce that the signal tracks follow identical paths in the two detectors and we must allow some level of flexibility on the scale of $\pm 1$ frequency bin.~\chris{I find this paragraph a bit too specific to our analysis choices. We don't have to state the SFT length here. We can simply point out that you can tune the SFT length to give you differing probability distributions on your transition matrix elements. We've chosen to only 1800 sec SFTs and focus on 200\,Hz and therefore use 3 possibilities (UCD) but we could have used a different SFT length and frequency giving us any number of possible jumps. I think that we should make things easy for ourselves and state that we only ever consider 3 possibilities and then you simply tune the SFT length to your frequency spread.}
 \fi
 
 %
 % Continue algorithm explanation
 %
-To account for these small differences in signal tracks in each detector, we reference the observed tracks to a third (pseudo) detector located at the centre of the Earth which would be insensitive to Earth spin. The signal frequencies in each real detector are then allowed to vary within a certain number of frequency bins from the track in the reference detector. In the examples that follow, we only consider the possibilities that the track in each real detector is no more that one frequency bin away from the reference track. We can tune the length of the \acp{SFT} to ensure this is a valid assumption.
+To account for these small differences in signal tracks in each detector, we reference the observed tracks to a third (pseudo) detector located at the centre of the Earth which would be insensitive to Earth spin. The signal frequencies in each real detector are then allowed to vary within a certain number of frequency bins from the track in the reference detector. In the examples that follow, we only consider the possibilities that the track in each real detector is no more that one frequency bin away from the reference track. We can tune the length of the \glspl{SFT} to ensure this is a valid assumption.
 As well as differences in signal frequency, due to antenna patterns and other effects, the measured signal amplitude may differ between the detectors. In the following example we assume that the signal has the same amplitude in each detector, however, in Sec.~\ref{soap:las} we discuss the case where they differ.
 
 We will now show how the algorithm in Sec.~\ref{soap:single} can be modified to handle a two-detector network (i.e., $Q=2$),  however any number of detectors can easily be accommodated. In the two detector case the joint probability of two (real) tracks, $\nu^{(1)}$ and $\nu^{(2)}$, and the geocentric track $\nu$, given the data, is
@@ -336,7 +336,7 @@ where ${C}^{(1)}$ and ${C}^{(2)}$ refer to the log-likelihoods in detectors 1 an
 %
 % More details on the doppler constraints
 %
-At every time step the frequency bin position for each real detector is forced to be within $n_l$ or $n_m$ bins of the track in the geocentred detector, where $n_l$ and $n_m$ depend on how much each detector could possibly be Doppler shifted. As mentioned previously, we only consider the case where $n_l=1$ and $n_m = 1$,  allowing the track from each real detector to be at most one frequency bin away from the geocentred track position. While we tune the \ac{SFT} length to keep this condition for different frequencies, it is also possible to tune the values of $n_l$ and $n_m$ to get a similar effect.
+At every time step the frequency bin position for each real detector is forced to be within $n_l$ or $n_m$ bins of the track in the geocentred detector, where $n_l$ and $n_m$ depend on how much each detector could possibly be Doppler shifted. As mentioned previously, we only consider the case where $n_l=1$ and $n_m = 1$,  allowing the track from each real detector to be at most one frequency bin away from the geocentred track position. While we tune the \gls{SFT} length to keep this condition for different frequencies, it is also possible to tune the values of $n_l$ and $n_m$ to get a similar effect.
 %
 % how do we do this in practice?
 %
@@ -374,7 +374,7 @@ Rather than considering only the previous step in our decision-making process, w
 A memory of $m=0$ therefore corresponds to the methods described in previous sections.
 With a non-zero memory the transition matrix can a-priori make certain sequences of jumps more probable and assign different prior probabilities for these jump sequences e.g., `up then centre' may be less preferable to `centre then centre'.
 As a result we can increase the chance of the most probable track matching an expected astrophysical signal.
-In a single detector search with a memory of $m=1$, if we only allow \ac{UCD} transitions, then for every frequency bin we save 3 values. These are proportional to the log-probabilities of a track coming from a \ac{UCD} bin in the previous time step, where the maximisation is over the corresponding \ac{UCD} bins two time steps back.
+In a single detector search with a memory of $m=1$, if we only allow \gls{UCD} transitions, then for every frequency bin we save 3 values. These are proportional to the log-probabilities of a track coming from a \gls{UCD} bin in the previous time step, where the maximisation is over the corresponding \gls{UCD} bins two time steps back.
 Eq.~\ref{soap:multidet:vitsum} then is then modified to,
 %
 \begin{equation}
@@ -382,7 +382,7 @@ Eq.~\ref{soap:multidet:vitsum} then is then modified to,
 V_{j,k,s} = \max_{h} ({C}_{j,k} + T_{s,h} +  V_{j-1,k+s,k+s+h}),
 \end{equation}
 %
-where $s$ and $h$ refer to the \ac{UCD} jumps at the time step $j-1$ and $j-2$ respectively.  Similar to the previous two sections, the algorithm is split into three parts: initialisation, iteration, and the track identification:
+where $s$ and $h$ refer to the \gls{UCD} jumps at the time step $j-1$ and $j-2$ respectively.  Similar to the previous two sections, the algorithm is split into three parts: initialisation, iteration, and the track identification:
 
 \begin{description}
 % initialisation
@@ -396,7 +396,7 @@ where $s$ and $h$ refer to the \ac{UCD} jumps at the time step $j-1$ and $j-2$ r
 %
 \end{description}
 
-The number of elements over which one must search increases rapidly with memory length, and has a strong impact on the computational cost of the analysis. For the single detector Viterbi approach the number of calculations made is $3 \times N \times M$ if we only allow \ac{UCD} jumps, where $N$ and $M$ are the number of time are frequency bins respectively. When memory is included this increases to $3^{m+1} \times N \times M $.
+The number of elements over which one must search increases rapidly with memory length, and has a strong impact on the computational cost of the analysis. For the single detector Viterbi approach the number of calculations made is $3 \times N \times M$ if we only allow \gls{UCD} jumps, where $N$ and $M$ are the number of time are frequency bins respectively. When memory is included this increases to $3^{m+1} \times N \times M $.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -405,13 +405,13 @@ The number of elements over which one must search increases rapidly with memory 
 %
 % describe what we propose to do with summed SFT power
 %
-In this section a method of incoherently-summing a set of \acp{SFT} to increase the \ac{SNR} of a signal in a segment is outlined. To be more precise, it is actually the log-likelihoods which are summed, i.e. the quantity in Eq.~\ref{soap:periodogram}. We can write the new summed set of data $F_j$ as,
+In this section a method of incoherently-summing a set of \glspl{SFT} to increase the \gls{SNR} of a signal in a segment is outlined. To be more precise, it is actually the log-likelihoods which are summed, i.e. the quantity in Eq.~\ref{soap:periodogram}. We can write the new summed set of data $F_j$ as,
 %
 \begin{equation}
 F_j = \sum_{i}^{N_s}C_{i,k}
 \end{equation}
 %
-where $N_s$ is the number of \acp{SFT} to sum together and the log-likelihood $C(\nu_{i,k})$ is defined in Eq.~\ref{soap:periodogram}.
+where $N_s$ is the number of \glspl{SFT} to sum together and the log-likelihood $C(\nu_{i,k})$ is defined in Eq.~\ref{soap:periodogram}.
 We can see this is possible by looking at Eq.~\ref{soap:single:likelihood}, where we can use the product of likelihoods,
 %
 \begin{equation}
@@ -422,9 +422,9 @@ p(D \mid \nu) &\propto p(x_1,x_2 \ldots x_n \mid \nu) \\
 \end{split}
 \end{equation}
 %
-If the data contains gaps where the detector was not observing, then we fill the gaps in the power spectrum with a constant value which is the expectation value of the log-likelihood. The procedure of filling in the gaps of the data is completed before any summing.  Therefore, the data should have the same mean regardless of how much real data is in each sum. In the examples that follow, we sum the \acp{SFT} over the length of one day.
+If the data contains gaps where the detector was not observing, then we fill the gaps in the power spectrum with a constant value which is the expectation value of the log-likelihood. The procedure of filling in the gaps of the data is completed before any summing.  Therefore, the data should have the same mean regardless of how much real data is in each sum. In the examples that follow, we sum the \glspl{SFT} over the length of one day.
 
-The main motivation for summing the data is to increase the \ac{SNR} of a signal in the segments. The risk is that a signal can move between adjacent frequency bins during a day. To reduce this risk, we choose the frequency bin width such that it is more likely that a signal will be contained within a single frequency bin that cross a bin edge. In practise, to ensure that this is true, the segment or \ac{SFT} length and the number of segments which are summed can be tuned for each search. As well as increasing the \ac{SNR}, summing over one day should average out the antenna pattern. This means that the log-likelihood value in any bin should be more similar between detectors, however, there is still some variation due to the sky localisation and polarisation.
+The main motivation for summing the data is to increase the \gls{SNR} of a signal in the segments. The risk is that a signal can move between adjacent frequency bins during a day. To reduce this risk, we choose the frequency bin width such that it is more likely that a signal will be contained within a single frequency bin that cross a bin edge. In practise, to ensure that this is true, the segment or \gls{SFT} length and the number of segments which are summed can be tuned for each search. As well as increasing the \gls{SNR}, summing over one day should average out the antenna pattern. This means that the log-likelihood value in any bin should be more similar between detectors, however, there is still some variation due to the sky localisation and polarisation.
 
 This also has two main effects on the transition matrix, the first is that as each segment of data is now one day long, a jump between frequency bins is far more likely, therefore, the transition matrix elements are modified to account for this. The second is that as the data is averaged over one day, the signal should remain is the same frequency bin between detectors, therefore, there is no longer a need for the multi-dimensional transition matrix described in Sec.~\ref{soap:multidet}.
 
@@ -437,10 +437,10 @@ The volume of the data is also reduced by a factor of $1/N_s$, therefore, the ti
 
 Using the same example in Sec.~\ref{soap:multidet}, we have two detectors that are at opposite sides of the earth on the equator.
 A signal in the equatorial plane at 150\,Hz will have a spread of frequency of $\Delta f = 3.1 \times 10^{-6} \times 150 \; \rm{Hz} = 4.7 \times 10^{-4} \; \rm{Hz}$.
-This is less than the bin width of our 1800\,s \acp{SFT} which is $5.6 \times 10^{-4} \; \rm{Hz}$.
-Therefore, over the course of one day the signal should spend most of its time within one \ac{SFT} frequency bin.
-For the real \ac{LIGO} detectors this will be less due to their locations, therefore, we can assume that the signal stays within one frequency bin for the duration of a day.
-This then allows us to sum the \acp{SFT} over one day, i.e. as we have 1800\,s long \acp{SFT}, we can add every 48 together.
+This is less than the bin width of our 1800\,s \glspl{SFT} which is $5.6 \times 10^{-4} \; \rm{Hz}$.
+Therefore, over the course of one day the signal should spend most of its time within one \gls{SFT} frequency bin.
+For the real \gls{LIGO} detectors this will be less due to their locations, therefore, we can assume that the signal stays within one frequency bin for the duration of a day.
+This then allows us to sum the \glspl{SFT} over one day, i.e. as we have 1800\,s long \glspl{SFT}, we can add every 48 together.
 
 \fi
 %%%%%%%
@@ -452,12 +452,12 @@ This then allows us to sum the \acp{SFT} over one day, i.e. as we have 1800\,s l
 %
 % what is the line aware statistic
 %
-The multiple-detector algorithm described in Sec.~\ref{soap:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \ac{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
+The multiple-detector algorithm described in Sec.~\ref{soap:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \gls{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
 
 %
 % More detail on what this is applied to
 %
-For most of the analysis examples presented here we use data which is the incoherent sum of 30-minute normalised \acp{SFT} over a day (described in more detail in Sec.~\ref{soap:sumdata}). As a result the effects of the detector antenna patterns and of differential Doppler shifts are significantly reduced, and any signal should have a broadly similar summed log-likelihood in the same frequency bin in each detector. The statistic can then be modified such that we expect a similar log-likelihood in each detector.
+For most of the analysis examples presented here we use data which is the incoherent sum of 30-minute normalised \glspl{SFT} over a day (described in more detail in Sec.~\ref{soap:sumdata}). As a result the effects of the detector antenna patterns and of differential Doppler shifts are significantly reduced, and any signal should have a broadly similar summed log-likelihood in the same frequency bin in each detector. The statistic can then be modified such that we expect a similar log-likelihood in each detector.
 
 We first consider the model of Gaussian noise with no signal present. Within
 a single summed segment, the likelihood of Gaussian noise at
@@ -469,7 +469,7 @@ p(F_j|\nu_j,M_{\text{N}},I) = \frac{1}{2^{d/2}\Gamma(d/2)}F_j^{d/2 - 1}\exp{\lef
 \frac{F_j}{2}\right\}}
 \end{equation}
 %
-where $F_j$ is the frequency domain power summed over sub-segments within a single day, as described in Sec.~\ref{soap:sumdata} and  $d$ is the number of degrees of freedom,  equal to twice the total number of summed SFTs.  $M_{\rm{N}}$ represents the model that the data is simply Gaussian noise. In the presence of a signal (model $M_{\text{S}}$), the power should follow a non central $ \chi^2 $ distribution in which the non-centrality parameter $\lambda$ is the square of the \ac{SNR}, $(\lambda = \rho_{\rm{opt}}^2 )$, i.e.
+where $F_j$ is the frequency domain power summed over sub-segments within a single day, as described in Sec.~\ref{soap:sumdata} and  $d$ is the number of degrees of freedom,  equal to twice the total number of summed SFTs.  $M_{\rm{N}}$ represents the model that the data is simply Gaussian noise. In the presence of a signal (model $M_{\text{S}}$), the power should follow a non central $ \chi^2 $ distribution in which the non-centrality parameter $\lambda$ is the square of the \gls{SNR}, $(\lambda = \rho_{\rm{opt}}^2 )$, i.e.
 %
 \begin{equation}
 \label{las:noncentral}
@@ -479,7 +479,7 @@ I_{d/2 -1}\left( \sqrt{\lambda F_j}\right).
 \end{split}
 \end{equation}
 %
-If a signal is present we therefore expect the \ac{SFT} powers in both detectors to follow Eq.~\ref{las:noncentral}.  Assuming for the moment that the noise variance is the same in both, we can determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
+If a signal is present we therefore expect the \gls{SFT} powers in both detectors to follow Eq.~\ref{las:noncentral}.  Assuming for the moment that the noise variance is the same in both, we can determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
 %
 \begin{equation}
 \label{las:signal}
@@ -489,7 +489,7 @@ p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I)p(F^{(2)}_{j}|\nu_j,\lambda,M_{\text{
 \end{split}
 \end{equation}
 %
-We set the prior on $\lambda$ to be an exponential distribution of width $w$, this is done somewhat arbitrarily as we expect the majority of signals to have a low \ac{SNR}. This distribution follows,
+We set the prior on $\lambda$ to be an exponential distribution of width $w$, this is done somewhat arbitrarily as we expect the majority of signals to have a low \gls{SNR}. This distribution follows,
 \begin{equation}
 \label{las:prior}
 p(\lambda,w) = \exp\left( \frac{-\lambda}{w}\right).
@@ -559,19 +559,19 @@ This then means Eq.~\ref{soap:multidet:vitsum} is modified to,
 \end{equation}
 %
 where $\hat{V}$ refers to a log-odds ratio.
-The maximised statistic now has three tuneable parameters: the width, $w_S$ in Eq.~\ref{las:prior}, on the prior for a signal \ac{SNR} squared, $p_{\rm S}(\lambda)$, the width, $w_L$ of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \ac{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \ac{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
+The maximised statistic now has three tuneable parameters: the width, $w_S$ in Eq.~\ref{las:prior}, on the prior for a signal \gls{SNR} squared, $p_{\rm S}(\lambda)$, the width, $w_L$ of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \gls{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \gls{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
 
 %
 % Two detector line aware statistic
 %
-This line-aware statistic can be applied in a more powerful way when we use multiple detectors and is similar to the approach in \citep{keitel2014SearchContinuousa}. The multiple-detector algorithm described in Sec.~\ref{soap:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \ac{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
+This line-aware statistic can be applied in a more powerful way when we use multiple detectors and is similar to the approach in \citep{keitel2014SearchContinuousa}. The multiple-detector algorithm described in Sec.~\ref{soap:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \gls{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
 
 %
 % More detail on what this is applied to
 %
-For most of the analysis examples presented here we use data which is the incoherent sum of 30-minute normalised \acp{SFT} over a day (described in more detail in Sec.~\ref{soap:sumdata}). As a result the effects of the detector antenna patterns and of differential Doppler shifts are significantly reduced, and any signal should have a broadly similar summed log-likelihood in the same frequency bin in each detector. The statistic can then be modified such that we expect a similar log-likelihood in each detector.
+For most of the analysis examples presented here we use data which is the incoherent sum of 30-minute normalised \glspl{SFT} over a day (described in more detail in Sec.~\ref{soap:sumdata}). As a result the effects of the detector antenna patterns and of differential Doppler shifts are significantly reduced, and any signal should have a broadly similar summed log-likelihood in the same frequency bin in each detector. The statistic can then be modified such that we expect a similar log-likelihood in each detector.
 
-In a similar way to the single-detector case, we can write out the evidence for each of the three models as follows. If a signal is present we therefore expect the \ac{SFT} powers in both detectors to follow Eq.~\ref{las:noncentral}.  Assuming for the moment that the noise variance is the same in both, we can determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
+In a similar way to the single-detector case, we can write out the evidence for each of the three models as follows. If a signal is present we therefore expect the \gls{SFT} powers in both detectors to follow Eq.~\ref{las:noncentral}.  Assuming for the moment that the noise variance is the same in both, we can determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
 %
 \begin{equation}
 \label{las:signal}
@@ -627,7 +627,7 @@ For the multi-detector case we then modify Eq.~\ref{soap:multidet:vitsum} to,
 where $\hat{V}$ refers to a log-odds ratio.
 This is then optimised over the same three parameters as the single detector case.
 
-Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic in Eq.~\ref{soap:lineaware:logodds} for different \ac{FFT} powers $F$.
+Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic in Eq.~\ref{soap:lineaware:logodds} for different \gls{FFT} powers $F$.
 \begin{figure}
 \centering
 
@@ -636,7 +636,7 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 \includegraphics[width=1.\linewidth]{C3_soap/lookup_noline.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
+\caption{This shows the distribution of the lines aware statistic plotted against the \gls{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
 \label{soap:las:detp:noline}
 \end{minipage}
 \end{subfigure}
@@ -646,7 +646,7 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 \includegraphics[width=1.\columnwidth]{C3_soap/lookup_linesmall.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. Here we include the line part of the statistic.}
+\caption{This shows the distribution of the lines aware statistic plotted against the \gls{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. Here we include the line part of the statistic.}
 \label{soap:las:detp:linesmall}
 \end{minipage}
 \end{subfigure}
@@ -656,7 +656,7 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 \includegraphics[width=1.\columnwidth]{C3_soap/lookup_linebig.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 1$. Here the effect of lines is expected to be larger than the previous panel on the search. Therefore, the statistic forces the two detectors to have more similar power.}
+\caption{This shows the distribution of the lines aware statistic plotted against the \gls{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 1$. Here the effect of lines is expected to be larger than the previous panel on the search. Therefore, the statistic forces the two detectors to have more similar power.}
 \label{soap:las:detp:linebig}
 \end{minipage}
 \end{subfigure}
@@ -672,33 +672,33 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In Sec.~\ref{soap:las} the `line aware' statistic was designed to penalise high \ac{SFT} powers in a single detector and reward powers which have a similar \ac{SNR}. This is often a useful statistic to use when the detectors have similar sensitivities, however, this is not always the case. During an observing run of a gravitational wave detector, their sensitivity will vary with time due fluctuating or new noise sources or potentially upgrades which can increase the sensitivity. A change in the sensitivity, or noise floor, affects the \ac{SNR} of a possible signal in in the data, i.e. a lower noise floor results in a higher \ac{SNR}. 
-In this section the above `line aware' statistic is modified to account for the difference in sensitivities of the detectors, and therefore search for a consistent amplitude between detectors as opposed to \ac{SNR}.
+In Sec.~\ref{soap:las} the `line aware' statistic was designed to penalise high \gls{SFT} powers in a single detector and reward powers which have a similar \gls{SNR}. This is often a useful statistic to use when the detectors have similar sensitivities, however, this is not always the case. During an observing run of a gravitational wave detector, their sensitivity will vary with time due fluctuating or new noise sources or potentially upgrades which can increase the sensitivity. A change in the sensitivity, or noise floor, affects the \gls{SNR} of a possible signal in in the data, i.e. a lower noise floor results in a higher \gls{SNR}. 
+In this section the above `line aware' statistic is modified to account for the difference in sensitivities of the detectors, and therefore search for a consistent amplitude between detectors as opposed to \gls{SNR}.
 
-There are two main factors which are taken into account when determining how sensitive a detector is in a particular time interval: the \ac{PSD} of detector and the duty cycle. The \ac{PSD} of the detector is essentially how sensitive the detector is at that time and the duty cycle is the fraction of time in a given interval that the detector was collecting data. A decrease in the duty cycle and an increase in the \ac{PSD} will decrease the \ac{SNR} and vice-versa. To search for consistent amplitude Eq.\ref{lineaware:stat} is modified by weighting each detector by its \ac{PSD} and duty cycle.
+There are two main factors which are taken into account when determining how sensitive a detector is in a particular time interval: the \gls{PSD} of detector and the duty cycle. The \gls{PSD} of the detector is essentially how sensitive the detector is at that time and the duty cycle is the fraction of time in a given interval that the detector was collecting data. A decrease in the duty cycle and an increase in the \gls{PSD} will decrease the \gls{SNR} and vice-versa. To search for consistent amplitude Eq.\ref{lineaware:stat} is modified by weighting each detector by its \gls{PSD} and duty cycle.
 
-The definition of \ac{SNR} is taken from \citep{} as, 
+The definition of \gls{SNR} is taken from \citep{} as, 
 \begin{equation}
     \rho_0^2 = \frac{h_0^2 T}{S}(\alpha_1A + \alpha_2B + \alpha_3C),
 \end{equation}
-where $\rho_0$ is the optimal \ac{SNR}, $h_0$ is the signal amplitude, $T$ is the time of observation, $S$ is the noise \ac{PSD} and the term in brackets include the antenna pattern of the detector. 
-The signal with amplitude $h_0$ will be the same amplitude at both detectors (H and L), therefore we can relate the \ac{SNR} in each detector by,
+where $\rho_0$ is the optimal \gls{SNR}, $h_0$ is the signal amplitude, $T$ is the time of observation, $S$ is the noise \gls{PSD} and the term in brackets include the antenna pattern of the detector. 
+The signal with amplitude $h_0$ will be the same amplitude at both detectors (H and L), therefore we can relate the \gls{SNR} in each detector by,
 \begin{equation}
 \label{lineawareamp:snrequate}
     \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_H} \frac{(\alpha_1A_L + \alpha_2B_L + \alpha_3C_L)}{(\alpha_1A_H + \alpha_2B_H + \alpha_3C_H)} .
 \end{equation}
 
-For the majority of the analysis that follows the \acp{SFT} are summed over one day, this will be explained in greater detail in Sec.~\ref{soap:sumdata}. 
+For the majority of the analysis that follows the \glspl{SFT} are summed over one day, this will be explained in greater detail in Sec.~\ref{soap:sumdata}. 
 The components in the above equation which have the form $(\alpha_1A + \alpha_2B + \alpha_3C)$, account for the antenna pattern of the earth as it rotates.
-These can be approximated to be the same for the two detectors H1 and L1 as we will essentially be averaging out the daily modulation by summing \acp{SFT}.
+These can be approximated to be the same for the two detectors H1 and L1 as we will essentially be averaging out the daily modulation by summing \glspl{SFT}.
 Therefore we can simplify the above Eq.~\ref{lineawareamp:snrequate} to, 
 \begin{equation}
 \label{lineawareamp:snrratio}
     \rho_L^2 = \frac{\rho_H^2 S_H T_L}{S_L T_H} = l \rho_H^2 .
 \end{equation}
-This then gives a factor $l = S_H T_L/S_L T_H$ which relates the \ac{SNR} of each detector, where $S$ and $T$ are values that are known for a given data-set prior to running the search.
+This then gives a factor $l = S_H T_L/S_L T_H$ which relates the \gls{SNR} of each detector, where $S$ and $T$ are values that are known for a given data-set prior to running the search.
 
-This ratio of \acp{SNR} can be included in the integral over \ac{SNR} for the signal model in Eq.~\ref{las:signal} as follows,
+This ratio of \glspl{SNR} can be included in the integral over \gls{SNR} for the signal model in Eq.~\ref{las:signal} as follows,
 \begin{equation}
 \label{lineawareamp:signal}
 p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_S}) 
@@ -716,7 +716,7 @@ p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda,
 \end{split}
 \end{equation}
 
-Fig.~\ref{soap:lineawareamp:example} shows an example of the values of the statistic described in Eq.~\ref{lineawareamp:line} plotted against a range of \ac{FFT} powers from each detector. This demonstrated how the statistic accounts for a difference in sensitivity on detectors by allowing the \ac{FFT} power or effectively \ac{SNR} to vary more.
+Fig.~\ref{soap:lineawareamp:example} shows an example of the values of the statistic described in Eq.~\ref{lineawareamp:line} plotted against a range of \gls{FFT} powers from each detector. This demonstrated how the statistic accounts for a difference in sensitivity on detectors by allowing the \gls{FFT} power or effectively \gls{SNR} to vary more.
 
 In Fig.~\ref{soap:lineawareamp:example} we show an example of two detectors with large differences in sensitivity, and how the statistic which takes this into account can improve the search sensitivity in this case.
 
@@ -728,7 +728,7 @@ In Fig.~\ref{soap:lineawareamp:example} we show an example of two detectors with
 \includegraphics[width=0.9\linewidth]{C3_soap/lookup_3d_2.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
+\caption{This shows the distribution of the lines aware statistic plotted against the \gls{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 0$ and $p(M_L)/p(M_G) = 0$. So the line part of the statistic is not operating.}
 \label{soap:lineawareamp:plot:noline}
 \end{minipage}
 \end{subfigure}
@@ -737,7 +737,7 @@ In Fig.~\ref{soap:lineawareamp:example} we show an example of two detectors with
 \includegraphics[width=0.9\columnwidth]{C3_soap/lookup_3d_1.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 2$ and $p(M_L)/p(M_G) = 1$. Here the line part of the statistic has the same \ac{SNR} and the signal part, i.e. we expect the \ac{SNR} of a signal to be similar to that of a line.}
+\caption{This shows the distribution of the lines aware statistic plotted against the \gls{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 2$ and $p(M_L)/p(M_G) = 1$. Here the line part of the statistic has the same \gls{SNR} and the signal part, i.e. we expect the \gls{SNR} of a signal to be similar to that of a line.}
 \label{soap:lineawareamp:plot:linesmall}
 \end{minipage}
 \end{subfigure}
@@ -747,7 +747,7 @@ In Fig.~\ref{soap:lineawareamp:example} we show an example of two detectors with
 \includegraphics[width=0.9\columnwidth]{C3_soap/lookup_3d_0.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the distribution of the lines aware statistic plotted against the \ac{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 10$ and $p(M_L)/p(M_G) = 1$. Here we expect the \ac{SNR} of a line to be larger than a signal.}
+\caption{This shows the distribution of the lines aware statistic plotted against the \gls{FFT} power in each detector. This example is for parameters $p_s(\lambda) = 2$,$p_l(\lambda) = 10$ and $p(M_L)/p(M_G) = 1$. Here we expect the \gls{SNR} of a line to be larger than a signal.}
 \label{soap:lineawareamp:plot:linebig}
 \end{minipage}
 \end{subfigure}
@@ -763,7 +763,7 @@ In Fig.~\ref{soap:lineawareamp:example} we show an example of two detectors with
 The sensitivity of the algorithm was tested by searching for artificial
 signals from isolated pulsars added to three types of noise-like data:
 continuous Gaussian noise, Gaussian noise but with periods of missing data,
-and real detector data (the S6 \ac{MDC}~\citep{walsh2016ComparisonMethods}). The S6 \ac{MDC} refers to a standardised set of simulated signals which are injected into real data, this set is also what is used for the injections into the two Gaussian noise cases. We describe each
+and real detector data (the S6 \gls{MDC}~\citep{walsh2016ComparisonMethods}). The S6 \gls{MDC} refers to a standardised set of simulated signals which are injected into real data, this set is also what is used for the injections into the two Gaussian noise cases. We describe each
 of the tests in more detail in Sec.~\ref{soap:results:gaplessgauss},\ref{soap:results:gausss6} and
 \ref{soap:results:s6}, but several common pre-processing steps are performed
 before running these datasets through the Viterbi algorithm:
@@ -772,19 +772,19 @@ before running these datasets through the Viterbi algorithm:
 %
 \begin{enumerate}
 %
-\item We read \acp{SFT} generated from 1800\,s stretches of data in 2\,Hz
-    bands between 100 and 200\,Hz. The \acp{SFT} length is chosen to ensure that any signal is likely to be contained within the width of a single
+\item We read \glspl{SFT} generated from 1800\,s stretches of data in 2\,Hz
+    bands between 100 and 200\,Hz. The \glspl{SFT} length is chosen to ensure that any signal is likely to be contained within the width of a single
     frequency bin during the length of one day, rather than being split
     across the bin edges (see below).
 %
-\item We estimate the noise \ac{PSD} for each \ac{SFT} by calculating a
+\item We estimate the noise \gls{PSD} for each \gls{SFT} by calculating a
     running median over frequency using LALSuite
     code {\tt XLALSFTtoRnmed} \citep{ligoscientificcollaboration2018LIGOAlgorithm}, this includes a bias factor to
-    convert this to the mean and has a width of 100 bins. We then normalise the \ac{SFT} by dividing it
+    convert this to the mean and has a width of 100 bins. We then normalise the \gls{SFT} by dividing it
     by its running median, giving the noise-like parts of the spectrum a
     mean power of approximately one.
 
-\item The \acp{SFT} are then summed over one day, as described in
+\item The \glspl{SFT} are then summed over one day, as described in
     Sec.~\ref{soap:sumdata}. The signal parameters are chosen so that
     within the frequencies of the search, the signal will not fall in more than two frequency bins over this
     period.
@@ -798,14 +798,14 @@ before running these datasets through the Viterbi algorithm:
 %
 where ${\bm v}^{(1,2)}$ is the velocity of detector $1,2$ in an inertial reference frame, $f_0$ is the
 instantaneous signal frequency in the frame, $\hat{\bm s}$ is the unit vector in the direction of the source and  $c$ is the speed of light.
-The maximum difference in frequency seen by the two \ac{LIGO} detectors
+The maximum difference in frequency seen by the two \gls{LIGO} detectors
 is 
 \begin{equation} \label{soap:results:doppler:diff}
 \Delta f_{\rm rot} \approx 6.5\times 10^{-7} f_0,
 \end{equation}
 %
 so the frequency measured from a source in the equatorial plane with $f_0=200$\,Hz will differ by up to $1.3 \times 10^{-4}$\,Hz in the two detectors.
-This is $\sim 4$ times smaller than the frequency bin width of 1800\,s \acp{SFT} ($5.6 \times
+This is $\sim 4$ times smaller than the frequency bin width of 1800\,s \glspl{SFT} ($5.6 \times
 10^{-4}$\,Hz), so signals at frequencies lower than this are likely to appear in the same frequency bin in the two detectors. Therefore, whilst at higher frequencies we still allow the signal to be in different frequency bins between the detectors, in the following searches, we do not allow this.
 %
 
@@ -852,20 +852,20 @@ frequency bin, i.e., all the elements in Eq.~\ref{soap:lineaware:stat}.  In this
 \includegraphics[scale=0.45]{C3_soap/viterbi_tracks.pdf}
 %
 \caption{\label{soap:tracks} The results that the SOAP algorithm returns from an injection with an optimal
-\ac{SNR} of 90, i.e., the \ac{SNR} in H1 is 64 and the \ac{SNR} in L1 is 62.
-The signal is injected into Gaussian noise, where the 1800\,s \acp{SFT} have been
-summed over 1 day.  The top panel shows a simulation of summed \acp{SFT} from H1, the second panel shows the same for L1,
+\gls{SNR} of 90, i.e., the \gls{SNR} in H1 is 64 and the \gls{SNR} in L1 is 62.
+The signal is injected into Gaussian noise, where the 1800\,s \glspl{SFT} have been
+summed over 1 day.  The top panel shows a simulation of summed \glspl{SFT} from H1, the second panel shows the same for L1,
 the third panel shows the values proportional to the
 log-odds ratios in Eq.~\ref{soap:lineaware:stat}.
 The log-odds have been normalised such that the sum of
-all the odds ratios in every time bin are equal to 1. The bottom panel shows the injected signal track (black dotted) and the track found in the `imaginary' detector by the two-detector SOAP search with the line-aware statistic (red), both of these tracks are at the geo-centre. In this case the \ac{RMS} of the difference between the Viterbi track and injected signal track was $\sim$1 bin, where 1 bin is 0.00056 Hz wide.}
+all the odds ratios in every time bin are equal to 1. The bottom panel shows the injected signal track (black dotted) and the track found in the `imaginary' detector by the two-detector SOAP search with the line-aware statistic (red), both of these tracks are at the geo-centre. In this case the \gls{RMS} of the difference between the Viterbi track and injected signal track was $\sim$1 bin, where 1 bin is 0.00056 Hz wide.}
 %
 \end{figure*}
 
 
 In the following tests there are two main quantities which we use to determine
 the sensitivity. These are sensitivity depth $\mathcal{D}$ and the optimal
-\ac{SNR} $\rho$.  The sensitivity depth, $\mathcal{D}$, is defined in
+\gls{SNR} $\rho$.  The sensitivity depth, $\mathcal{D}$, is defined in
 \citep{behnke2015PostprocessingMethods} as,
 %
 \begin{equation}
@@ -873,7 +873,7 @@ the sensitivity. These are sensitivity depth $\mathcal{D}$ and the optimal
 \mathcal{D}(f) = \frac{\sqrt{S_h(f)}}{h_0},
 \end{equation}
 %
-where $S_h(f)$ is the single-sided noise \ac{PSD} and $h_0$ is the \ac{GW} amplitude.  The optimal \ac{SNR} is defined as,
+where $S_h(f)$ is the single-sided noise \gls{PSD} and $h_0$ is the \gls{GW} amplitude.  The optimal \gls{SNR} is defined as,
 %
 \begin{equation}
 \rho^2 = \sum_X 4
@@ -883,7 +883,7 @@ where $S_h(f)$ is the single-sided noise \ac{PSD} and $h_0$ is the \ac{GW} ampli
  where $X$ indexes the
 detectors and $\tilde{h}(f)$ is the Fourier transform of the time
 series of the signal $h(t)$. This expression is defined in~\citep{prix2007SearchContinuous} for
-a double-sided \ac{PSD} and we have defined it for the more common single-sided
+a double-sided \gls{PSD} and we have defined it for the more common single-sided
 case.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -897,7 +897,7 @@ case.
 The first test involves injecting signals into Gaussian noise. The power spectrum of a Gaussian noise time-series follows a $\chi^2$ distribution with two degrees of freedom, therefore, as we search through the power spectrum, we generate spectrograms which follow a $\chi^2$ distribution. 
 These spectrograms are 0.1\,Hz wide and are set at 0.05\,Hz intervals between 100\,Hz and 200\,Hz. The bins are $1./1800$\,Hz wide and 1800s long, where the total length of data is the same as S6, i.e., $\sim 1.3$ years.
 We then generate the signals, where the pulsars parameters are
-fixed to the same values as the injections in the S6 \ac{MDC} in this band, 
+fixed to the same values as the injections in the S6 \gls{MDC} in this band, 
 these values are outlined in \citep{walsh2016ComparisonMethods}.
 
 %
@@ -935,15 +935,15 @@ where $p(x_0,k)$ is the prior and we set to a flat prior and $p(x \mid x_0, k)$ 
 p(\bar{x} \mid x_0, k) = \prod_{j=0}\frac{n!}{k!(n-k)!}s(x_j \mid x_0, k)^{k} \\ (1-s(x_j \mid x_0,k))^{n-k}.
 \end{split}
 \end{equation}
-To plot the efficiency curves and lower and upper error bounds, we sample Eq.~\ref{soap:results:binomialbayes} using \ac{MCMC} and then take the mean and the 5th and 95th percentiles respectively for each point in SNR or depth and plot these.
-Fig.~\ref{soap:results:gausss6:eff_snr} and  \ref{soap:results:gausss6:eff_depth} then show the efficiency curves for the analyses plotted against the signals optimal \ac{SNR} and depth respectively.
+To plot the efficiency curves and lower and upper error bounds, we sample Eq.~\ref{soap:results:binomialbayes} using \gls{MCMC} and then take the mean and the 5th and 95th percentiles respectively for each point in SNR or depth and plot these.
+Fig.~\ref{soap:results:gausss6:eff_snr} and  \ref{soap:results:gausss6:eff_depth} then show the efficiency curves for the analyses plotted against the signals optimal \gls{SNR} and depth respectively.
 The parameters of the search and their optimised values are shown in Tab.~\ref{soap:results:parameters}. Where we set the prior on the line model to 0 as this part is irrelevant to this search due to the lack of lines in the data.
 
 %
 \begin{table}
 \centering
 %
-\caption{Table shows the ranges of the search parameters and their optimised values for injections into  gapless Gaussian noise, Gaussian noise with gaps and the S6 \ac{MDC}. For gapless Gaussian noise and Gaussian noise with gaps, there are 10 parameter values spaced linearly between the limits. For the S6 \ac{MDC} the parameters, $\tau$, $w_{\rm{L}}$ and $w_{\rm{S}}$ were distributed in log space between the limits and $p(M_L)/p(M_N)$ is distributed uniformly. \label{soap:results:parameters}}
+\caption{Table shows the ranges of the search parameters and their optimised values for injections into  gapless Gaussian noise, Gaussian noise with gaps and the S6 \gls{MDC}. For gapless Gaussian noise and Gaussian noise with gaps, there are 10 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the parameters, $\tau$, $w_{\rm{L}}$ and $w_{\rm{S}}$ were distributed in log space between the limits and $p(M_L)/p(M_N)$ is distributed uniformly. \label{soap:results:parameters}}
 
 %
 \bgroup
@@ -981,11 +981,11 @@ optimised & 1.00000001 & 4.0 & 5.0 & 0.0387 \\
 % 95\% efficiency results and time spent on signal track
 %
 From this we can determine that in Gaussian noise without gaps, the Viterbi
-algorithm can detect to an \ac{SNR} of $\sim60 $ and a depth of $\sim
+algorithm can detect to an \gls{SNR} of $\sim60 $ and a depth of $\sim
 33$\,Hz$^{-1/2}$ with 95\% efficiency at a 1\% false alarm.
 
 Fig.~\ref{soap:results:gausss6:res_snr} and \ref{soap:results:gausss6:res_depth},
-show the \ac{RMS} of the difference between the injected signal track and the track found by Viterbi for \ac{SNR} and sensitivity depth respectively. This shows that at \ac{SNR} of 60, where we are detecting signals with a 95\% efficiency, the signals have a mean \ac{RMS} of $\sim 2$ frequency bins. Here one bin width is 0.00056 Hz therefore, we have and \ac{RMS} of $\sim 0.0012$ Hz. \
+show the \gls{RMS} of the difference between the injected signal track and the track found by Viterbi for \gls{SNR} and sensitivity depth respectively. This shows that at \gls{SNR} of 60, where we are detecting signals with a 95\% efficiency, the signals have a mean \gls{RMS} of $\sim 2$ frequency bins. Here one bin width is 0.00056 Hz therefore, we have and \gls{RMS} of $\sim 0.0012$ Hz. \
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -996,8 +996,8 @@ show the \ac{RMS} of the difference between the injected signal track and the tr
 %
 % Intro to what data was used
 %
-In the second test, we attempt to more closely mirror the S6 \ac{MDC}~\citep{walsh2016ComparisonMethods} in two stages. The first uses the same injection method as Sec.~\ref{soap:results:gaplessgauss} however, removes the \acp{SFT} where there are gaps in S6. 
-The second uses the same injection method again including gaps, however, uses a different value for the noise floor for each \ac{SFT}, this is calculated for each band and \ac{SFT} from S6 data.
+In the second test, we attempt to more closely mirror the S6 \gls{MDC}~\citep{walsh2016ComparisonMethods} in two stages. The first uses the same injection method as Sec.~\ref{soap:results:gaplessgauss} however, removes the \glspl{SFT} where there are gaps in S6. 
+The second uses the same injection method again including gaps, however, uses a different value for the noise floor for each \gls{SFT}, this is calculated for each band and \gls{SFT} from S6 data.
 
 Both detectors in S6 had a duty cycle of $\sim$50\%~\citep{aasi2015CharacterizationLIGO}, which means that there are sections of time where there is no data in either one or both detectors. In the sections where one detector is observing but the other is not, the multi detector statistic will not behave correctly as it only has access to data from a single detector.
 In these sections we switch from using the multi-detector statistic to the single-detector statistic using the same parameters, these are both defined in defined in Sec.~\ref{soap:las}.
@@ -1009,15 +1009,15 @@ The process of removing sub-bands and generating efficiency curves is the same a
 
 
 We set a 1\% false alarm rate and generate an efficiency curve for
-\ac{SNR} and depth in Fig.~\ref{soap:results:gausss6:eff_snr} and
+\gls{SNR} and depth in Fig.~\ref{soap:results:gausss6:eff_snr} and
 Fig.~\ref{soap:results:gausss6:eff_depth} respectively. From these efficiency plots we can
-see to an \ac{SNR} of $\sim 72$ or a depth of $\sim 13$\,Hz$^{-1/2}$ at a 95\%
+see to an \gls{SNR} of $\sim 72$ or a depth of $\sim 13$\,Hz$^{-1/2}$ at a 95\%
 confidence with a false alarm of 1\%.
 
 The parameters of the search which were optimised and their optimised values are shown in Tab.~\ref{soap:results:parameters}.
 
 
-In Fig.~\ref{soap:results:gausss6:res_snr} and ~\ref{soap:results:gausss6:res_depth} show the \ac{RMS} of the difference between the injected signal track and the track found by Viterbi for \ac{SNR} and sensitivity depth respectively. This shows that at \ac{SNR} of 72, where we are detecting signals with a 95\% efficiency, the signals have a mean \ac{RMS} of $\sim 10$ frequency bins (0.0056 Hz).
+In Fig.~\ref{soap:results:gausss6:res_snr} and ~\ref{soap:results:gausss6:res_depth} show the \gls{RMS} of the difference between the injected signal track and the track found by Viterbi for \gls{SNR} and sensitivity depth respectively. This shows that at \gls{SNR} of 72, where we are detecting signals with a 95\% efficiency, the signals have a mean \gls{RMS} of $\sim 10$ frequency bins (0.0056 Hz).
 
 \begin{figure*}[p]
 \centering
@@ -1044,10 +1044,10 @@ In Fig.~\ref{soap:results:gausss6:res_snr} and ~\ref{soap:results:gausss6:res_de
 \label{soap:results:gausss6:res_depth}
 \end{subfigure}
 
-\caption{Panels \ref{soap:results:gausss6:eff_snr} and \ref{soap:results:gausss6:eff_depth} show the detection efficiency as a function of \ac{SNR} and depth respectively. Here \ac{SNR} is the the integrated \ac{SNR} which we would expect to recover from the available data. The four curves refer to injections into gapless Gaussian noise (red), Gaussian noise with gaps in data, where the noise floor is either fixed (blue-dashed) or it is moving with time (orange) in the same way as the S6~\ac{MDC} and injections into real data i.e., the S6~\ac{MDC}. In the gapless Gaussian noise case, the recovered integrated \ac{SNR} refers to the \ac{SNR} the injection would have if it had the same amount of data as in the cases with gaps.
+\caption{Panels \ref{soap:results:gausss6:eff_snr} and \ref{soap:results:gausss6:eff_depth} show the detection efficiency as a function of \gls{SNR} and depth respectively. Here \gls{SNR} is the the integrated \gls{SNR} which we would expect to recover from the available data. The four curves refer to injections into gapless Gaussian noise (red), Gaussian noise with gaps in data, where the noise floor is either fixed (blue-dashed) or it is moving with time (orange) in the same way as the S6~\gls{MDC} and injections into real data i.e., the S6~\gls{MDC}. In the gapless Gaussian noise case, the recovered integrated \gls{SNR} refers to the \gls{SNR} the injection would have if it had the same amount of data as in the cases with gaps.
 The curves are made by fitting a sigmoid Eq.~\ref{soap:results:sigmoid} to binomial detection data with a 1\% false alarm rate, as explained in Sec.~\ref{soap:results:gaplessgauss}, the error bounds are the 5\% and 95\% intervals.
-At 95\% efficiency and a 1\% false alarm rate, this shows we can detect to an \ac{SNR}  of $\sim 60$ and a sensitivity depth of $\sim 34$\,Hz$^{-1/2}$ for gapless Gaussian noise and an \ac{SNR}  of $\sim 69$ and $72$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$ and $\sim 10$\,Hz$^{-1/2}$ for the Gaussian with gaps case with fixed noise floor and moving noise floor respectively. For the S6 \ac{MDC} we can detect an \ac{SNR} of $\sim 74$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$. 
- Panels \ref{soap:results:gausss6:res_snr} and \ref{soap:results:gausss6:res_depth} show the \ac{RMS} of the difference between the injected signal track and the track found by SOAP as a function of \ac{SNR} and sensitivity depth respectively. This is shown in units of bins where each bin is 0.00056 Hz wide.\label{soap:results:gausss6:plots} }
+At 95\% efficiency and a 1\% false alarm rate, this shows we can detect to an \gls{SNR}  of $\sim 60$ and a sensitivity depth of $\sim 34$\,Hz$^{-1/2}$ for gapless Gaussian noise and an \gls{SNR}  of $\sim 69$ and $72$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$ and $\sim 10$\,Hz$^{-1/2}$ for the Gaussian with gaps case with fixed noise floor and moving noise floor respectively. For the S6 \gls{MDC} we can detect an \gls{SNR} of $\sim 74$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$. 
+ Panels \ref{soap:results:gausss6:res_snr} and \ref{soap:results:gausss6:res_depth} show the \gls{RMS} of the difference between the injected signal track and the track found by SOAP as a function of \gls{SNR} and sensitivity depth respectively. This is shown in units of bins where each bin is 0.00056 Hz wide.\label{soap:results:gausss6:plots} }
 \end{figure*}
 
 
@@ -1057,9 +1057,9 @@ At 95\% efficiency and a 1\% false alarm rate, this shows we can detect to an \a
 %
 % Intro to what data was run on and how it was split
 %
-For a more direct comparison to other \ac{CW} searches and to see how the
-algorithm performs with real data, we test the two detector SOAP algorithm using the S6 \ac{MDC}. We focus this search on the 100-200\,Hz band, there are two main reasons for this, one being that this is \acp{LIGO} most sensitive band and the other is that for much higher frequencies the signal will drift over larger frequency ranges, therefore, our \ac{SFT} length will have to be changed.
-Here the 1800\,s \acp{SFT} are split as in Sec.~\ref{soap:results}, whereafter normalisation, the data is split into 0.1\,Hz wide sub-bands overlapping by 0.05\,Hz.
+For a more direct comparison to other \gls{CW} searches and to see how the
+algorithm performs with real data, we test the two detector SOAP algorithm using the S6 \gls{MDC}. We focus this search on the 100-200\,Hz band, there are two main reasons for this, one being that this is \glspl{LIGO} most sensitive band and the other is that for much higher frequencies the signal will drift over larger frequency ranges, therefore, our \gls{SFT} length will have to be changed.
+Here the 1800\,s \glspl{SFT} are split as in Sec.~\ref{soap:results}, whereafter normalisation, the data is split into 0.1\,Hz wide sub-bands overlapping by 0.05\,Hz.
 
 The two detector SOAP algorithm using the line-aware statistic in Sec.~\ref{soap:las} is then run on each sub-band under the assumption that the detectors have the same sensitivity.
 For this search we have four parameters which we optimise, the ranges and optimised values are shown in Tab.~\ref{soap:results:parameters}.
@@ -1090,8 +1090,8 @@ in Sec.~\ref{soap:results:gausss6} and \ref{soap:results:gaplessgauss}.
 %
 
 Fig.~\ref{soap:results:gausss6:eff_depth} and Fig.~\ref{soap:results:gausss6:eff_snr} show the efficiency curves
-for \ac{SNR} and depth respectively.  These show that we can detect and
-\ac{SNR} of $\sim 74$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$ with
+for \gls{SNR} and depth respectively.  These show that we can detect and
+\gls{SNR} of $\sim 74$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$ with
 an efficiency of 95\% at a false alarm of 1\%. These results can then be compared to other searches in the S6 MDC comparison paper~\citep{walsh2016ComparisonMethods}. Whilst we only search in the 100 - 200 Hz range, the closest comparison in \citep{walsh2016ComparisonMethods} is the test in the 40 - 500 Hz range, such as in Fig.~4 in \citep{walsh2016ComparisonMethods}. Here our algorithm sits roughly in the middle of all other searches in terms of sensitivity.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1104,10 +1104,10 @@ For the above searches we used optimised versions on the line aware statistic, h
 The aim is to find the best parameters for any given search; the four parameters are $\tau$,$p_S(\lambda)$, $p_L(\lambda)$ and $p(M_L)/p(M_G)$.
 We find the optimum values empirically by running the entire search for each parameter value that need to be tested. This is possible as the search is relatively fast, this will be explained in Sec~.\ref{soap:results:time}. 
 The line aware statistic is time consuming to calculate, therefore, to reduce the computational time, it is pre-calculated and places into lookup tables such that it is calculated once and called many times. 
-These lookup tables were calculated for values of \ac{FFT} power $F$ in the range 1 to 400 in each of the detectors as shown in Fig.~\ref{soap:las:osgl_plots}. For each parameter the ranges in which they were optimised were chosen based on expected \acp{SNR} of each of the injections. 
+These lookup tables were calculated for values of \gls{FFT} power $F$ in the range 1 to 400 in each of the detectors as shown in Fig.~\ref{soap:las:osgl_plots}. For each parameter the ranges in which they were optimised were chosen based on expected \glspl{SNR} of each of the injections. 
 
 We can the use a measure of the sensitivity of that search and pick the lookup table which gives the highest sensitivity. 
-We measure the sensitivity by taking the value of \ac{SNR} which is at 80\% efficiency at 1\% false alarm. 
+We measure the sensitivity by taking the value of \gls{SNR} which is at 80\% efficiency at 1\% false alarm. 
 
 \subsection{Gaussian noise simulations}
 
@@ -1120,7 +1120,7 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 \begin{table}
 	\centering
 	%
-	\caption{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \ac{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \ac{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_L)/p(M_N)$ had 10 parameters distributed in linearly between the limits. \label{soap:las:optimisation:table}}
+	\caption{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \gls{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_L)/p(M_N)$ had 10 parameters distributed in linearly between the limits. \label{soap:las:optimisation:table}}
 	
 	%
 	\bgroup
@@ -1144,29 +1144,29 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 \end{table}
 
 For each point in Fig.~\ref{soap:las:optimisation:gauss}, the entire SOAP search was run using the corresponding parameters as input. 
-Efficiency curves are then generated for each of these runs and the values for the \ac{SNR} at 80\% efficiency are recorded. 
+Efficiency curves are then generated for each of these runs and the values for the \gls{SNR} at 80\% efficiency are recorded. 
 Fig.~\ref{soap:las:optimisation:gauss} then shows the 80\% efficiency for each parameter value.
 There appears not to be any single value which gives an optimum, however, the dark stripe in Fig.~\ref{soap:las:optimisation:gauss} running from the bottom left to the red cross is the combinations of parameters which give the best result. 
 The point where the red lines cross is the parameters used in previous searched in Sec.~\ref{soap:results:gaplessgauss} and \ref{soap:results:gausss6}.
 This falls on the line where the algorithm performs best. 
-Venturing far from this `optimum' line does not change the results a great deal as the \ac{SNR} does not change much.
+Venturing far from this `optimum' line does not change the results a great deal as the \gls{SNR} does not change much.
 The search is then not particularly sensitive to choice of parameters in Gaussian noise.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\linewidth]{C3_soap/gauss_optimised.pdf}
-    \caption{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_S$ were optimised. The key part to remember when reading this plot is that the lower the value of \ac{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
+    \caption{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_S$ were optimised. The key part to remember when reading this plot is that the lower the value of \gls{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
     \label{soap:las:optimisation:gauss}
 \end{figure}
 
 
 \subsection{S6 MDC injections}
 
-As the S6 \ac{MDC} data-set is real detector data, there are many examples of instrumental lines. 
+As the S6 \gls{MDC} data-set is real detector data, there are many examples of instrumental lines. 
 This is where we expect the line-aware statistic to have the greatest effect in rejecting lines. 
 Here the all of the four parameters are optimised over in the ranges described in Tab.~\ref{soap:results:parameters}. 
 This greatly increases the number of lookup tables which need to be generated and therefore the number of time the search needs to be run. 
-Fig~.\ref{soap:las:optimisation:s6mdc} shows the slices through parameters space for each of the parameters where the values are the \acp{SNR} at 80\% efficiency.  
+Fig~.\ref{soap:las:optimisation:s6mdc} shows the slices through parameters space for each of the parameters where the values are the \glspl{SNR} at 80\% efficiency.  
 These slices are made by taking the mean across the parameters not shown in the figure.
 The range chosen for the transition matrix parameter $\tau$ as small with a small number of points, this is because the impact of this parameter was expected to be small. 
 Fig~.\ref{soap:las:optimisation:s6mdc} demonstrates that changing this parameter does not have much affect on the final sensitivity. 
@@ -1190,22 +1190,22 @@ These values are,
 \begin{figure}[p]
     \centering
     \includegraphics[width=\linewidth]{C3_soap/s6_optimised.pdf}
-    \caption{When using real S6 data, all four parameters of the search were optimised over on simulations in real data. The plot above shows the \ac{SNR} at 80\% efficiency for each of the parameters where the ranges are in Tab.~\ref{soap:las:optimisation:table}. Lower values of \ac{SNR} mean the search is performing better. The red lines show the parameters used in the searches in this section and the sections that follow. Whilst this does not seem optimal, the search does not underperform much when a poor choice of parameters is used. }
+    \caption{When using real S6 data, all four parameters of the search were optimised over on simulations in real data. The plot above shows the \gls{SNR} at 80\% efficiency for each of the parameters where the ranges are in Tab.~\ref{soap:las:optimisation:table}. Lower values of \gls{SNR} mean the search is performing better. The red lines show the parameters used in the searches in this section and the sections that follow. Whilst this does not seem optimal, the search does not underperform much using the current choice of parameters (red). }
     \label{soap:las:optimisation:s6mdc}
 \end{figure}
 
 To visualise how these better optimised parameters are to the values used in Sec.~\ref{soap:results} we can compare how they perform on a simulated signal in a time-frequency spectrogram. 
 In one of the detectors a narrow instrumental line can also be simulated.
-In Fig.~\ref{soap:las:optimisation:vitexample} an example a \ac{CW} signal injected into Gaussian noise in both detectors. 
+In Fig.~\ref{soap:las:optimisation:vitexample} an example a \gls{CW} signal injected into Gaussian noise in both detectors. 
 In the Gaussian noise optimised case the search is looking for high power in both detectors which the strong instrumental line satisfied when the astrophysical signal is weak. 
-The S6 optimised statistic looks for more consistent \ac{SNR} in each of the detectors.
-The two different lines show the statistic optimised on the Gaussian noise injections and the S6 \ac{MDC} injections.
+The S6 optimised statistic looks for more consistent \gls{SNR} in each of the detectors.
+The two different lines show the statistic optimised on the Gaussian noise injections and the S6 \gls{MDC} injections.
 This demonstrates how the `line aware' statistic improves the robustness of the algorithm against non astrophysical signals. 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{C3_soap/line_example.pdf}
-    \caption{As a visualisation of the line aware statistic working, an astrophysical signal was simulated in both the H1 and L1 detectors. In one detector an instrumental line was added. In the top panel above the tracks identified by different values of the line aware statistic are shown shifted up by 10 frequency bins. This allows the underlying feature to be identified. In the top two panels the sinusoidal nature of the \ac{CW} signal can be identified in the data, and was identified by the line aware statistic using the S6 MDC optimal values (blue line). The top panel also contains a narrow spectral line at $\sim 102.5$ Hz. The values of the statistic optimised for the Gaussian noise case do not identify the signal but identify the spectral line as the most likely signal. The final panel shows the Viterbi map for the statistic values optimised in the S6 MDC. }
+    \caption{As a visualisation of the line aware statistic working, an astrophysical signal was simulated in both the H1 and L1 detectors. In one detector an instrumental line was added. In the top panel above the tracks identified by different values of the line aware statistic are shown shifted up by 10 frequency bins. This allows the underlying feature to be identified. In the top two panels the sinusoidal nature of the \gls{CW} signal can be identified in the data, and was identified by the line aware statistic using the S6 MDC optimal values (blue line). The top panel also contains a narrow spectral line at $\sim 102.5$ Hz. The values of the statistic optimised for the Gaussian noise case do not identify the signal but identify the spectral line as the most likely signal. The final panel shows the Viterbi map for the statistic values optimised in the S6 MDC. }
     \label{soap:las:optimisation:vitexample}
 \end{figure}
 
@@ -1216,13 +1216,13 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
 %%%%%%%%%%%%%%%%%%%%
 
 All of the above tests, the search was conducted in the range from 100-200 Hz.
-This was chosen to be within the most sensitive band of \ac{LIGO} as this is where a signal is most likely to be discovered.
+This was chosen to be within the most sensitive band of \gls{LIGO} as this is where a signal is most likely to be discovered.
 However, signals can appear at much higher frequencies also.
 Therefore, it is important to see how the sensitivity of the search varies with the frequency.
  
-For this test we simulated \ac{CW} signals in Gaussian noise with no gaps in data. 
-The injections used the same source parameters as in the a6 \ac{MDC} \citep{walsh2016ComparisonMethods} and the tests above. 
-This has the exception that the integrated recovered \ac{SNR} of the signal is sampled uniformly between 50 and 500. 
+For this test we simulated \gls{CW} signals in Gaussian noise with no gaps in data. 
+The injections used the same source parameters as in the a6 \gls{MDC} \citep{walsh2016ComparisonMethods} and the tests above. 
+This has the exception that the integrated recovered \gls{SNR} of the signal is sampled uniformly between 50 and 500. 
 These injections were then made at frequencies of 100,250,500,750,1000,1500 and 2000 Hz, where the band width is 2 Hz. i.e. the simulations were in frequency bands 100-102 Hz, 250-252 Hz etc.
 The setup of the search was the same as in the above sections. 
 Here each sub-band is 0.1 Hz wide, and the parameters of the SOAP search were as in Tab.~\ref{soap:results:parameters}.
@@ -1238,7 +1238,7 @@ The current setup of the search does not allow this size of jump, therefore, wou
 The other main factor which will decrease this sensitivity is the sub-band width of 0.1 Hz. 
 Similarly to before, as the frequency increases the scale of the Doppler modulation will increase as in Eq.~\ref{soap:results:dforbit}.
 For example at 1000 Hz, the Doppler shift is $\sim 0.1$ Hz, the signal is then more likely to not be fully contained within a frequency band. 
-Therefore, the search can not accumulate all of the injected \ac{SNR}
+Therefore, the search can not accumulate all of the injected \gls{SNR}
 
 Whilst these parameters of the search can be changed to depend on frequency, this was meant as a small test to see how sensitivity varies with frequency.
 
@@ -1271,6 +1271,16 @@ Whilst these parameters of the search can be changed to depend on frequency, thi
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 
+Whilst SOAP was designed to search for sources of \glspl{CW}, when set up correctly, it can be applied to searching for many other types.
+This is because the search is essentially un-modelled, and in its simplest form looks for tracks of high power in a spectrogram.
+
+\subsubsection{CBC}
+
+CBC signals cover a wide frequency range and are very short signals in \gls{LIGO} detectors. 
+In previous SOAP searches the default length of \gls{SFT} has been 1800 s, this is not suitable when searching for \gls{CBC} signals.
+We can take shorter time base for the \glspl{SFT}, however, to get a required resolution, these can overlap.
+\joe{section not complete}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1279,15 +1289,15 @@ Whilst these parameters of the search can be changed to depend on frequency, thi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-One of the main strengths of this search is the drastically reduced computational cost when compared to other current \ac{CW} searches.
+One of the main strengths of this search is the drastically reduced computational cost when compared to other current \gls{CW} searches.
 The scaling of the computing cost can be estimated for a single detector by looking at the number of calculations that need to be made. 
 The number of calculations for a single detector search, $N^{(1)}_{\rm{calcs}}$ is,
 \begin{equation}
 \label{soap:results:time:singlecalc}
 N^{(1)}_{\rm{calcs}} = n_{1}^{m}NM,
 \end{equation}
-where $n_1$ is the size of the transition matrix, $N$ is the number of \acp{SFT}, $M$ is the number of frequency bins and $m$ is the amount of memory described in Sec.~\ref{soap:memory}. Where the computing cost scales linearly with the number of frequency bins and \acp{SFT}.
-In the following test we ignore `memory' and look at the time taken for the single detector search where the time taken to read and save data is ignored. Here the data is the same size as the S6 \ac{MDC} for a single detector search and the search is over a 0.1\,Hz band, where we set $n_1=3$. This test, and the following test, was run locally on a MacBook Air with a 1.3 GHz Intel Core i5 processor .We can then write the time taken ,$T$, as,
+where $n_1$ is the size of the transition matrix, $N$ is the number of \glspl{SFT}, $M$ is the number of frequency bins and $m$ is the amount of memory described in Sec.~\ref{soap:memory}. Where the computing cost scales linearly with the number of frequency bins and \glspl{SFT}.
+In the following test we ignore `memory' and look at the time taken for the single detector search where the time taken to read and save data is ignored. Here the data is the same size as the S6 \gls{MDC} for a single detector search and the search is over a 0.1\,Hz band, where we set $n_1=3$. This test, and the following test, was run locally on a MacBook Air with a 1.3 GHz Intel Core i5 processor .We can then write the time taken ,$T$, as,
 %
 \begin{equation}
 T = 0.56\,\rm{sec}\left( \frac{N}{22538}\right) \left( \frac{M}{180}\right) \left( \frac{N_{\rm{bands}}}{1}\right),
@@ -1302,7 +1312,7 @@ N^{(Q)}_{\rm{calcs}} = NMn_{1}^{m} \prod_{q=1}^{Q}n_{q+1},
 \end{equation}
 where $n_1$ is the first dimension of the transition matrix, $Q$ is the number of detectors and $n_{q+1}$ is the size of the transition matrix element which refers to detector $q$.
 For our tests we set $n_1=n_{q+1}=3$ and use 2 detectors i.e., $Q=2$ which each have the same size data as the previous test. The actual time taken to run however, depends on the version of the algorithm which is run. For example, including the line aware statistic slows the search slightly.
-For the two detector where two \ac{SFT} powers are summed,
+For the two detector where two \gls{SFT} powers are summed,
 \begin{equation}
 T = 1.35 \rm{s}\left( \frac{N}{22538}\right) \left( \frac{M}{180}\right) \left( \frac{N_{\rm{bands}}}{1}\right).
 \end{equation}
@@ -1327,39 +1337,39 @@ This paper outlines the method and derives the statistics behind the method in a
 % overview of results from tests
 %
 We tested SOAP on a set of fake isolated pulsar signals in the
-100\;--\;200\,Hz range, based on 1800s \acp{SFT} summed over one day.
+100\;--\;200\,Hz range, based on 1800s \glspl{SFT} summed over one day.
 The three datasets that included these signals comprised continuous Gaussian noise, Gaussian noise but with temporal gaps corresponding to LIGO dead times in the S6 data run, and real data, i.e., the
-S6 \ac{MDC}. Although a major attraction of SOAP is its sensitivity to a wide
-range of signal types, in the tests above it was optimised to detect isolated pulsar signals below 100\,Hz with low spin-down to offer a comparison with other \ac{CW} searches. From these tests, by setting a
-95\% efficiency and a false alarm of 1\%, we found that in the case of  continuous Gaussian data we could detect a signal with an optimal \ac{SNR} of $\sim 60$ and a
-depth of $\sim 33$\,Hz$^{-1/2}$ with an \ac{RMS} of the difference between the injected and Viterbi track being $\sim 2$ frequency bins (0.0012 Hz).
+S6 \gls{MDC}. Although a major attraction of SOAP is its sensitivity to a wide
+range of signal types, in the tests above it was optimised to detect isolated pulsar signals below 100\,Hz with low spin-down to offer a comparison with other \gls{CW} searches. From these tests, by setting a
+95\% efficiency and a false alarm of 1\%, we found that in the case of  continuous Gaussian data we could detect a signal with an optimal \gls{SNR} of $\sim 60$ and a
+depth of $\sim 33$\,Hz$^{-1/2}$ with an \gls{RMS} of the difference between the injected and Viterbi track being $\sim 2$ frequency bins (0.0012 Hz).
 When gaps were introduced into the data to simulate S6 we could detect a signal with an
-\ac{SNR} $\sim 72$  and a depth of $\sim 10$\,Hz$^{-1/2}$, with an \ac{RMS} of $\sim 10$ bins (0.0056 Hz). The drop in sensitivity here is simply because  there is $\sim 50 \%$ less data compared to the previous case. Finally, in the S6 \ac{MDC} we could
-detect a signal with an \ac{SNR} $\sim 74$ and a depth of $\sim
+\gls{SNR} $\sim 72$  and a depth of $\sim 10$\,Hz$^{-1/2}$, with an \gls{RMS} of $\sim 10$ bins (0.0056 Hz). The drop in sensitivity here is simply because  there is $\sim 50 \%$ less data compared to the previous case. Finally, in the S6 \gls{MDC} we could
+detect a signal with an \gls{SNR} $\sim 74$ and a depth of $\sim
 13$\,Hz$^{-1/2}$.
 These real data contain non-Gaussian artefacts such as instrumental lines and this causes a further drop in sensitivity.
-Whilst not a full comparison to other searches in the S6 \ac{MDC} \citep{walsh2016ComparisonMethods}, as we only tested on a subset
-of the bands, this search has a sensitivity which is comparable to some other \ac{CW} searches, however offers a massive increase in speed.
+Whilst not a full comparison to other searches in the S6 \gls{MDC} \citep{walsh2016ComparisonMethods}, as we only tested on a subset
+of the bands, this search has a sensitivity which is comparable to some other \gls{CW} searches, however offers a massive increase in speed.
 
-We chose the specific frequency band to search over as the data which we used, i.e., the summed data, becomes less effective at frequencies much higher than 200\,Hz, and using the parameters of our simulations, signals can spread over many frequency bins in a day, reducing sensitivity further, however this can be mitigated by using shorter \acp{SFT} or performing their summation over 12 (rather than 24) hours.
+We chose the specific frequency band to search over as the data which we used, i.e., the summed data, becomes less effective at frequencies much higher than 200\,Hz, and using the parameters of our simulations, signals can spread over many frequency bins in a day, reducing sensitivity further, however this can be mitigated by using shorter \glspl{SFT} or performing their summation over 12 (rather than 24) hours.
 
 %
 % some other features to test in the future
 %
 The methods described in this paper present a basic approach for gravitational-wave signal searches using SOAP. However there are several further developments that could increase its sensitivity. Some of these are outlined below:
 
-One of the main features which reduces the sensitivity of the search is non-gaussianities within the data, namely instrumental lines. Although we have a statistic which penalises these features, in some cases it will also penalise a strong signal. For example, when the amplitude of the noise floor is high for one detector or the duty factor is lower, the signal will appear more like an instrumental line to this statistic. We hope to improve the search statistic in the future by searching for consistent amplitudes as opposed to consistent \ac{SNR}, i.e, the statistic will take the amplitude of the noise floor and the duty factor into account.
+One of the main features which reduces the sensitivity of the search is non-gaussianities within the data, namely instrumental lines. Although we have a statistic which penalises these features, in some cases it will also penalise a strong signal. For example, when the amplitude of the noise floor is high for one detector or the duty factor is lower, the signal will appear more like an instrumental line to this statistic. We hope to improve the search statistic in the future by searching for consistent amplitudes as opposed to consistent \gls{SNR}, i.e, the statistic will take the amplitude of the noise floor and the duty factor into account.
 
 One variation of this method which has been described in this paper is `memory', which is where the tracks jump in frequency is determined by the previous $n$ jumps. This has yet to be fully tested, however, we expect that this will increase our sensitivity to signals where have a better idea of their frequency evolution. This however, comes at a cost in computational time which we can estimate given Eq.~\ref{soap:results:time:numbercalcs} in Sec.~\ref{soap:results:time}.
 
-Further additions to the search include using the Fourier transform of the \ac{SFT} power along the Viterbi track as a detection statistic.
+Further additions to the search include using the Fourier transform of the \gls{SFT} power along the Viterbi track as a detection statistic.
 If the Viterbi track follows that from an astrophysical signal, then we should see the effects of the antenna pattern in this Fourier transform as a peak at half a sidereal day.
 If the track follows something which is not astrophysical then this should not be seen this peak in this Fourier transform.
-This only applies to the search directly on the \acp{SFT} not the summed data, as the antenna pattern variations will have been averaged out in the summing.
+This only applies to the search directly on the \glspl{SFT} not the summed data, as the antenna pattern variations will have been averaged out in the summing.
 
 As well as searching for astrophysical signals, SOAP can also be used to search for and identify instrumental lines. Here we use single detector data, or multiple channels from a single detector, to identify quasi-monochromatic features on the data for further study.
 
-Whilst this paper presents initial tests on sensitivity, further tests will be needed for a full comparison to other \ac{CW} search methods.  
+Whilst this paper presents initial tests on sensitivity, further tests will be needed for a full comparison to other \gls{CW} search methods.  
 This search, however, aims to look for signals which may not follow the standard
 frequency evolution and is intended to return potentially interesting
 candidates for a more sensitive followup.

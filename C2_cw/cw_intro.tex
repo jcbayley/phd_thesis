@@ -1,25 +1,42 @@
 \chapter{\label{searchcw}Searching for continuous gravitational waves}
+%%%%
 
+%--------------------
+% introduce problems in searching for CW
+%---------------------
 Continuous gravitational waves have particular challenges when it comes to their detection.
-\joe{probably will say more about why here}
-Whilst I have described the potential sources of the signal and its approximate signal type in Sec.~\ref{intro:sources:cw},to perform a search for this signal more detail is needed.
+The nature of \gls{CW} are that they are long duration, this means that they would be observed for the entirety of a detectors observing runs. 
+The signals also have an intrinsically small amplitude which is below the noise floor of current ground based detectors such as \gls{LIGO}.
+This means the for a detection, the entire observing runs data will be needed to accumulate enough \gls{SNR} for a signal to be observed.
+Given that \gls{LIGO} samples as $\sim 16$ kHz (generally downsampled to $\sim 4$ kHz) this leaves a huge amount of data which needs to be searched through.
+As will be described in Sec.~\ref{searchcw:search:coherent} and \ref{searchcw:search:semi}, this requires a large amount of computational resources to perform these searches.
+For some types of search, the parameter space can also be very large, this only adds to the computational time and in some cases makes it infeasible.
+
+%---------------------
+% Describe this chapter 
+%--------------------------
+Whilst I have described the potential sources of the signal and its approximate signal type in Sec.~\ref{intro:sources:cw},to perform a search the wave-form of a signal and how it is observed is needed.
 In this section I will go into more detail on the `mountain' model in Sec.~\ref{intro:source:cw:mountain} and its wave-form description. 
-This models is then used in various search methods for \ac{CW} signals.
-In Sec.~\ref{searchcw:search} I will overview a subset of current searches for \ac{CW} signals.
+This model is then used in various search methods for \gls{CW} signals.
+In Sec.~\ref{searchcw:search} I will overview a subset of current searches for \gls{CW} signals.
 Sec.~\ref{searchcw:motivation} explains the motivation for the majority of the work in this thesis.
 
+%%%%%
+%%%%%
 \section{\label{searchcw:model}Continuous signal model}
+%%%%
+%%%%
 
-The model of a \ac{GW} signal from a pulsar is relatively simple, it is a quasi-sinusoidal signal. This means that the signal is a sinusoid with a slowly varying frequency. One reason for the slow variance in the frequency is due to the energy loss to \ac{GW} as the pulsar spins down.
+The model of a \gls{GW} signal from a pulsar is relatively simple, it is a quasi-sinusoidal signal. This means that the signal is a sinusoid with a slowly varying frequency. One reason for the slow variance in the frequency is due to the energy loss to \gls{GW} as the pulsar spins down.
 Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
 The parameters of each pulsar can be split into two sections: the Doppler components ($\alpha,\delta,{\bm f}$) and its amplitude components ($\psi,\phi_0, \iota, h_0, \theta$). This ignores any orbital parameters which would be present if the star was in a binary systems and higher order frequency derivatives.
 They are defined as follows: the sky positions $\alpha$ and $delta$ refer to the right ascension and declination. 
 ${\bm f}$ refers to the source frequency and its derivatives. 
-$\psi$ and $\phi_0$ and $h_0 $ are the \ac{GW} polarisation, initial phase and amplitude respectively. 
+$\psi$ and $\phi_0$ and $h_0 $ are the \gls{GW} polarisation, initial phase and amplitude respectively. 
 $\iota$ is the inclination angle which is how much the source is tilted relative to the observer. 
 $\theta$ is the `wobble angle' or the angle between the rotation axis and the symmetry axis of the neutron star.
 
-The definition of the \ac{GW} from a neutron star here follows that in \citep{riles2017RecentSearches,schutz1998DataAnalysis,dupuis2005BayesianEstimation}. The amplitude of the \ac{GW} can be defined as,
+The definition of the \gls{GW} from a neutron star here follows that in \citep{riles2017RecentSearches,schutz1998DataAnalysis,dupuis2005BayesianEstimation}. The amplitude of the \gls{GW} can be defined as,
 \begin{equation}
 \label{intro:cw:ht}
 h(t) = F_+(t)h_{+}(t) +F_{\times}(t)h_{\times}(t),
@@ -33,17 +50,17 @@ These are defined by,
         h_{\times}(t) &= h_0  \cos{(\iota)} \sin{\left( \Phi(t)\right) } \\
     \end{split}
 \end{equation}
-The plus and cross polarised components then depend on the \ac{GW} amplitude $h_0$, the inclination angle of the source $\iota$ and the phase evolution of the \ac{GW}. Here I have chosen to assume a small wobble angle $\theta$, however, this is included in \citep{schutz1998DataAnalysis}. The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \ac{SSB} can be defined as,
+The plus and cross polarised components then depend on the \gls{GW} amplitude $h_0$, the inclination angle of the source $\iota$ and the phase evolution of the \gls{GW}. Here I have chosen to assume a small wobble angle $\theta$, however, this is included in \citep{schutz1998DataAnalysis}. The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \gls{SSB} can be defined as,
 \begin{equation}
 \label{searchcw:model:phase}
     \Phi(t_{{\rm SSB}}) = \phi_0 + 2\pi\left[ f(t_{{\rm SSB}} - t_0) + \frac{1}{2} \dot{f} (t_{{\rm SSB}} - t_0)^2 + .....\right] .
 \end{equation}
 This consists of an initial phase $\phi_0$ which is the phase at time $t_0$, the frequency of the signal $f$ and its derivative ${\dot{f}}$ at time $t_0$. Here we show the phase to second order, however, this can be easily extended if necessary. 
-The time at the \ac{SSB} $t_{{\rm SSB}}$ can be transformed to the time $t$ at the detector by,
+The time at the \gls{SSB} $t_{{\rm SSB}}$ can be transformed to the time $t$ at the detector by,
 \begin{equation}
 t_{{\rm SSB}} = t - \frac{\mathbf{r}_d \cdot \mathbf{k}}{c} + \delta_t.
 \end{equation}
-Here $\mathbf{r}_d$ is the position of the detector with reference to the \ac{SSB}, $\mathbf{k}$ is a unit vector in the direction of the source. This essentially takes into account the Doppler shift of the signal due to the movement of the detector, i.e. as the earth rotates and orbits the sun. $c$ is the speed of light and $\delta t$ is extra corrections from the Einstein, Binary and Shapiro delay \citep{}.
+Here $\mathbf{r}_d$ is the position of the detector with reference to the \gls{SSB}, $\mathbf{k}$ is a unit vector in the direction of the source. This essentially takes into account the Doppler shift of the signal due to the movement of the detector, i.e. as the earth rotates and orbits the sun. $c$ is the speed of light and $\delta t$ is extra corrections from the Einstein, Binary and Shapiro delay \citep{}.
 The amplitudes $h_0$ in Eq.~\ref{intro:cw:amplitudes} are defined by,
 \begin{equation}
     h_0 = \frac{16 \pi^2 G}{c^4} \frac{\epsilon I f^2}{r},
@@ -67,7 +84,7 @@ F_{+}(t) &= \sin{\zeta}[a(t)\cos{(2\psi)} + b(t)\sin{(2\psi)}], \\
 F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
 \end{split}
 \end{equation}
-where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle of the \ac{GW} and $a(t)$ and $b(t)$ are defined in \citep{schutz1998DataAnalysis} and relate the sky location to the orientation of the detector at a given time. 
+where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the polarisation angle of the \gls{GW} and $a(t)$ and $b(t)$ are defined in \citep{schutz1998DataAnalysis} and relate the sky location to the orientation of the detector at a given time. 
 A full derivation of this can be found in \citep{schutz1998DataAnalysis} where each of these terms are expanded.
 
 Eqs.~\ref{intro:cw:ht} - \ref{intro:cw:antenna} then describe the amplitude and phase evolution of a signal at a given detector location and orientation.
@@ -82,7 +99,7 @@ Eqs.~\ref{intro:cw:ht} - \ref{intro:cw:antenna} then describe the amplitude and 
 %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
-A key part in understanding the different methods to search for \ac{GW} or any data analysis, is understanding probability and statistics. 
+A key part in understanding the different methods to search for \gls{GW} or any data analysis, is understanding probability and statistics. 
 This gives understanding of the random processes underlying all measured quantities. 
 Whilst there are generally two approaches to statistics: Frequentist and Bayesian, here I will focus on the Bayesian approach.  
 
@@ -181,12 +198,12 @@ p({\bm \theta} \mid {\bm d}, I) \propto p({\bm \theta}, I)p({\bm d} \mid {\bm \t
 \end{equation}
 To find this posterior you could then calculate (sample) the value for every point in parameter space. This however, is very computationally expensive and often the posterior distribution is located in a small area in parameter space. 
 Therefore, the majority of the time is sampling a area of parameter space where the posterior is close to zero, and this is not particularly useful. 
-A method titled \ac{MCMC} was proposed \citep{metropolis1953EquationState} to deal with this issue, more information on this can be found in \citep{vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
+A method titled \gls{MCMC} was proposed \citep{metropolis1953EquationState} to deal with this issue, more information on this can be found in \citep{vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
 This builds up the posterior distribution by randomly jumping around in the parameter space.
 It starts by calculating the posterior value for a particular point in parameter space. Then it will randomly jump to another parameter space point. 
 The posterior can then be calculated again, if the posterior value is higher then the jump is `accepted'. This just means that the parameter values of this point are stored.
 If the posterior value is lower than the previous step then the jump is accepted with some probability. This means that there is a random chance that a value lower than the current is accepted.
-As the accepted positions aim for areas where the posterior is higher, \ac{MCMC} does not waste time calculating areas in parameter space of low posterior values.
+As the accepted positions aim for areas where the posterior is higher, \gls{MCMC} does not waste time calculating areas in parameter space of low posterior values.
 The samples which were accepted then build the posterior distribution. 
 
 In certain situations it can be useful to calculate the evidence in Eq.\ref{intro:bayes:evidence}. 
@@ -231,10 +248,10 @@ In general the searches in each of these categories use two distinct techniques:
 A Fully coherent search generally uses a pre generated waveform which follows the model described in Sec.~\ref{searchcw:model}. 
 This contains all the phase information of the signal.
 The set of parameters which generated the waveform which `matches' the best can then be considered as the optimum set of parameters given the data.
-This is known as a matched filter \citep{} and is used in \ac{CW} searches in \citep{dupuis2005BayesianEstimation,}.
+This is known as a matched filter \citep{} and is used in \gls{CW} searches in \citep{dupuis2005BayesianEstimation,}.
 
-The matched filter maximises the signal to noise ratio for a given filter, in this case the filter is our \ac{CW} model. 
-The matched filter used for \ac{CW} models is defined in \citep{prix2007SearchContinuous} and it titled the $\mathcal{F}$-statistic. 
+The matched filter maximises the signal to noise ratio for a given filter, in this case the filter is our \gls{CW} model. 
+The matched filter used for \gls{CW} models is defined in \citep{prix2007SearchContinuous} and it titled the $\mathcal{F}$-statistic. 
 This essentially maximises a likelihood with respect to the parameters.
 If one assumes that the noise $n$ is Gaussian and zero mean, the data $x$ can be written as,
 \begin{equation}
@@ -259,9 +276,9 @@ Another method which uses templates is described in \citep{dupuis2005BayesianEst
 
 This type of search can take long periods of time. 
 This is due both to the size of the parameter space and the amount of data which needs to be searched.
-\ac{CW} searches need long observation times in order to accumulate the required \ac{SNR} for detection.
-Therefore, most searches use data from an entire \ac{LIGO} observing run which can last for $\mathcal{O}(1)$ years.
-Given that the sampling rate for the \ac{GW} channel is $16$ kHz usually downsampled to $\sim 4$ kHz, the quantity of data is large. 
+\gls{CW} searches need long observation times in order to accumulate the required \gls{SNR} for detection.
+Therefore, most searches use data from an entire \gls{LIGO} observing run which can last for $\mathcal{O}(1)$ years.
+Given that the sampling rate for the \gls{GW} channel is $16$ kHz usually downsampled to $\sim 4$ kHz, the quantity of data is large. 
 
 
 Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all-sky and directed searches, this type of search is no feasible. 
@@ -285,35 +302,35 @@ This method can greatly reduce the time taken for the analysis depending on the 
 
 There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. 
 I will summarise some of these searches below, some of these searches were summarised and compared in \citep{walsh2016ComparisonMethods}.
-Many of these searches use a set of 1800s long Fourier transforms as the input data, known as \acp{SFT}. This is a default for many all-sky \ac{CW} searches, where it assumes that the signal remains within one frequency bin during that 1800s.
+Many of these searches use a set of 1800s long Fourier transforms as the input data, known as \glspl{SFT}. This is a default for many all-sky \gls{CW} searches, where it assumes that the signal remains within one frequency bin during that 1800s.
 
 \begin{description}
 	
-	\item[Stack-slide] Stack uses a set of Fourier transforms of the data known as \acp{SFT}, specifically it uses the power spectrum of these. Each of the separate Fourier transforms (segments) is shifted up or down relative to the others to account for the Doppler modulation of the source. The power from each can then be stacked. More explanation of this can be found in \citep{brady2000SearchingPeriodic, cutler2005ImprovedStackslide}  
+	\item[Stack-slide] Stack uses a set of Fourier transforms of the data known as \glspl{SFT}, specifically it uses the power spectrum of these. Each of the separate Fourier transforms (segments) is shifted up or down relative to the others to account for the Doppler modulation of the source. The power from each can then be stacked. More explanation of this can be found in \citep{brady2000SearchingPeriodic, cutler2005ImprovedStackslide}  
 	
 	\item[Hough] The Hough transform is based on the stack-slide algorithm. The main difference is that the detection statistic for each segment is assigned a weight of 0 or 1 depending if it crossed a detection threshold. The Hough transform can the create a `Hough map' which gives a view of the data in parameter space. This approach is explained in greater detail in \citep{krishnan2004HoughTransform,antonucci2008DetectionPeriodic}. 
 	This method has been applied in two main ways known as Sky Hough \citep{krishnan2004HoughTransform}and Frequency Hough \citep{antonucci2008DetectionPeriodic,astone2014MethodAllsky}.
 	
 	\item[Einstein@Home] Einstein at home uses the $\mathcal{F}$-statistic mentioned above in various stages. It has a hierarchical structure where it starts with a coarse parameter space with shorter coherence times. This search then provides a list of candidates from this run in coarse parameter space. The parameter space is then more finely sampled around the parameters of the candidates and this process is repeated. The search can also increases the coherence length when searching around given candidates to improve the sensitivity of the search. This algorithm has many additions which are explained in more detail in \citep{singh2016ResultsAllsky,papa2016HierarchicalFollowup,walsh2016ComparisonMethods}
-	This provides the most sensitive all-sky \ac{CW} search, however, uses a large amount of computing power. This is achieved by using a distributed computing projects, more details can be found at \citep{EinsteinHome}. 
+	This provides the most sensitive all-sky \gls{CW} search, however, uses a large amount of computing power. This is achieved by using a distributed computing projects, more details can be found at \citep{EinsteinHome}. 
 	
 	\item[Time domain $\mathcal{F}$-statistic] The time domain $\mathcal{F}$-statistic splits the data into narrowband segments of length $\sim$ 2 days \citep{walsh2016ComparisonMethods}. Then a coherent search using the $\mathcal{F}$-statistic is applied to each of these segments. Values of this statistic above a threshold are stored. Coincidences are then found in each segment, where candidates are selected best on a given threshold. This is explained in greater detail in \citep{aasi2014ImplementationTextdollar,walsh2016ComparisonMethods}.
 	
 	
-	\item[Powerflux] Powerflux uses a standard set of 1800s \acp{SFT}. For each point in parameter space, the power in this set of \acp{SFT} along the frequency track is recorded. This power is then weighted depending on the antenna pattern and noise of the detector. In longer stretches of $\sim$ 1 month, the weighted power is summed. Any point in parameter space which produces high power in each of these stretches is identified as a potential signal. This search can then be repeated around each candidate with a finer resolution in parameter space. This is explained in more detail and tested in \citep{abadie2012AllskySearch,walsh2016ComparisonMethods,ligoscientificcollaborationandvirgocollaboration2016ComprehensiveAllsky}
+	\item[Powerflux] Powerflux uses a standard set of 1800s \glspl{SFT}. For each point in parameter space, the power in this set of \glspl{SFT} along the frequency track is recorded. This power is then weighted depending on the antenna pattern and noise of the detector. In longer stretches of $\sim$ 1 month, the weighted power is summed. Any point in parameter space which produces high power in each of these stretches is identified as a potential signal. This search can then be repeated around each candidate with a finer resolution in parameter space. This is explained in more detail and tested in \citep{abadie2012AllskySearch,walsh2016ComparisonMethods,ligoscientificcollaborationandvirgocollaboration2016ComprehensiveAllsky}
 	
-	\item[Viterbi] The Viterbi algorithm \citep{viterbi1967ErrorBounds} has been used in \citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden} to search for a \acp{CW} with randomly wandering spin frequency. This algorithm was applied to specific sources, where the $\mathcal{F}$-statistic is used on short duration segments which are then incoherently combined using the Viterbi algorithm.
+	\item[Viterbi] The Viterbi algorithm \citep{viterbi1967ErrorBounds} has been used in \citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden} to search for a \glspl{CW} with randomly wandering spin frequency. This algorithm was applied to specific sources, where the $\mathcal{F}$-statistic is used on short duration segments which are then incoherently combined using the Viterbi algorithm.
 	
 	
 \end{description}
 
 
-Each of these searches uses a large computational cost. In \citep{walsh2016ComparisonMethods} a \ac{MDC} was conducted to compare the sensitivity of some of the searches, where an expected runtime for and O1 search was presented. Result in O1 for some of these searches can now be found in \citep{ligoscientificcollaborationandvirgocollaboration2017AllskySearch}.
+Each of these searches uses a large computational cost. In \citep{walsh2016ComparisonMethods} a \gls{MDC} was conducted to compare the sensitivity of some of the searches, where an expected runtime for and O1 search was presented. Result in O1 for some of these searches can now be found in \citep{ligoscientificcollaborationandvirgocollaboration2017AllskySearch}.
 The results of this are shown in Tab.\ref{searchcw:search:semi:cost}.
 \begin{table}
 	\centering
 	%
-	\caption{From \citep{walsh2016ComparisonMethods}, shows the computational cost for the first 4 months of advanced \ac{LIGO} for each search. One \ac{MSU}, where one standard unit is one core-hour on a standard core. ` Expected computational costs of searches using the first four months of advanced \ac{LIGO} data with each search pipeline. These estimates are for a different data observing time from that of the \ac{MDC}, and do not cover the same parameter space as each other or the \ac{MDC}. The Einstein@Home searches uses the computing resources of the Einstein@Home project and is designed to run for 6 - 10 months in the Einstein@Home grid.'  \label{searchcw:search:semi:cost}}
+	\caption{From \citep{walsh2016ComparisonMethods}, shows the computational cost for the first 4 months of advanced \gls{LIGO} for each search. One \gls{MSU}, where one standard unit is one core-hour on a standard core. ` Expected computational costs of searches using the first four months of advanced \gls{LIGO} data with each search pipeline. These estimates are for a different data observing time from that of the \gls{MDC}, and do not cover the same parameter space as each other or the \gls{MDC}. The Einstein@Home searches uses the computing resources of the Einstein@Home project and is designed to run for 6 - 10 months in the Einstein@Home grid.'  \label{searchcw:search:semi:cost}}
 	
 	%
 	\bgroup
@@ -338,7 +355,7 @@ The results of this are shown in Tab.\ref{searchcw:search:semi:cost}.
 	\egroup
 \end{table}
 Even the fastest of these searches takes close to 1 million core-hours to search through four months of data.
-Running computing clusters can be costly, therefore, the focus of much of this thesis is to develop techniques to reduce the computational cost of an all-sky search for \ac{CW}.
+This is one of the larger current issued in \gls{CW} searches as this is a slow process and running computing clusters can be costly.
 
 
 %%%%%%%%%5
@@ -347,17 +364,13 @@ Running computing clusters can be costly, therefore, the focus of much of this t
 %%%%%%%%%%
 %%%%%%%%%%
 
-The searches described above are computationally intensive, where the fastest takes $\sim$1 million core-hours to search through 4 months of O1 data.
+The searches described in Sec.~\ref{searchcw:search} are computationally expensive, where the fastest takes $\sim$1 million core-hours to search through 4 months of O1 data.
+Many of these searches use well-modelled signals to compare to the data. This leads to the parameter space having to be finely sampled such that it is sufficiently covered.  
+The motivation for much of the work then follows from these points. 
+The aim was to develop searches which used minimal computational resources and could work outside of the \gls{CW} model in Sec.~\ref{searchcw:model}.
+This thesis then outlines algorithms which can reduce this computational time of searches for \gls{CW} whilst retaining as much sensitivity to \gls{CW} signals as possible.
+There are two main sections which follow, Sec.~\ref{soap} will outline an essentially un-modelled \gls{CW} search method which uses the Viterbi algorithm.
+Sec~\ref{machine} will then outline an method which used machine learning, specifically \glspl{CNN} as both its own \gls{CW} search and an extension to the search described in Sec.~\ref{soap}.
+Following chapters then explain applications of these searches.
 
-When searching for an \ac{CW} signal, there is a large parameter space to search. This is because the sky resolution to a \ac{CW} signal is small. 
-
-The motivation for much of the work that follows is to develop search algorithms which can reduce this computational time without a large loss in sensitivity to \ac{CW} signals.
-\joe{more}
-
-\begin{itemize}
-	\item Searches are computationally expensive
-	\item Due to large data and large parmeter space
-	\item This taken many computaitonal resources and much cost
-	\item the aim of work is to reduce the computational cost with a modest reduction in sensitivirty.
-\end{itemize}
 

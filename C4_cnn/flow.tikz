@@ -25,8 +25,8 @@
     
   \node [block] (sft) {1.\\ SFTs from Time series};
   
-  \node [block, below of=sft] (norm) {2. \\ Divide \ac{SFT} to running median and get power spectrum.};
-  \node [block, below of=norm] (narrow) {3. \\ Narrowband \ac{SFT} };
+  \node [block, below of=sft] (norm) {2. \\ Divide \gls{SFT} to running median and get power spectrum.};
+  \node [block, below of=norm] (narrow) {3. \\ Narrowband \gls{SFT} };
   
   \node [block, below right =1.5cm and -0.9cm of narrow] (odd) {4. \\ Odd.};
   \node [block, below left =1.5cm and -0.9cm of narrow] (even) {4. \\ Even.};
@@ -43,7 +43,7 @@
   \node [blocktrain, below of= trainodd] (trainsumodd) {6a. \\Training data};
   \node [blocktrain, below of=trainsumodd] (trainlookupodd) {7a. \\ Training data};
   \node [blocktrain, below of=trainlookupodd] (traindownsampodd) {8a. \\  Training data};
-  \node [blocktrain, below of=traindownsampodd] (trainnetworkodd) {9. \\ Train `odd' \ \ac{CNN}};
+  \node [blocktrain, below of=traindownsampodd] (trainnetworkodd) {9. \\ Train `odd' \ \gls{CNN}};
 
   \node [blocksearch,right of=testodd] (searchodd) {5c.\\ Search data};
   \node [blocksearch, below of= searchodd] (searchsumodd) {6c. \\Search data};
@@ -73,7 +73,7 @@
   \node [blocktrain, below of= traineven] (trainsumeven) {6a. Training data};
   \node [blocktrain, below of=trainsumeven] (trainlookupeven) {7a. \\Training data};
   \node [blocktrain, below of=trainlookupeven] (traindownsampeven) {8a. \\ Training data};
-  \node [blocktrain, below of=traindownsampeven] (trainnetworkeven) {9. \\ Train `even'  \ \ac{CNN}};
+  \node [blocktrain, below of=traindownsampeven] (trainnetworkeven) {9. \\ Train `even'  \ \gls{CNN}};
 
   
   \node [blocktest, below = 1.4cm of testblankeven] (testclassifyeven) {10b.\\ Test data};
@@ -175,9 +175,9 @@
   
   % final labels over lines
   
-   \node[fillnode,below] at (bkclasseven.south) {Classify sub-bands with \ `odd' \ac{CNN}};
+   \node[fillnode,below] at (bkclasseven.south) {Classify sub-bands with \ `odd' \gls{CNN}};
    
-   \node[fillnode,below] at (bkclassodd.south) {Classify sub-bands with \ `even' \ac{CNN}};
+   \node[fillnode,below] at (bkclassodd.south) {Classify sub-bands with \ `even' \gls{CNN}};
  
     
 \end{tikzpicture}
