@@ -2,13 +2,13 @@
 %%%%%
 
 
-Gravitational waves were first predicted in 1915 as a consequence of Einstein's general theory of relativity \citep{einstein2005GrundlageAllgemeinen}.
+\Glspl{GW} were first predicted in 1915 as a consequence of Einstein's general theory of relativity \citep{einstein2005GrundlageAllgemeinen}.
 They are theorised as ripples in the fabric of space-time.
 The first observational evidence that \glspl{GW} exist came from observations of the Hulse-Taylor binary \citep{weisberg1981GravitationalWaves,weisberg2004RelativisticBinary}. 
 This observation showed a binary pulsar system whose time of periastron was advancing. i.e. the orbit was decaying. 
 This implies that the periastron time separation was decreasing with time. 
 If the separation of two orbiting objects is decreasing then the system is losing energy somewhere.
-The loss in energy matched the \gls{GR} prediction which assumed the energy was lost to \gls{GW}.
+The loss in energy matched the \gls{GR} prediction which assumed the energy was lost to \glspl{GW}.
 This gave hope of \glspl{GW} existence and helped lead the way to designing instruments which could directly detect them.
 The first direct detection of gravitational waves was made in 2015 when the two \gls{LIGO} detectors in the US \citep{abbott2016ObservationGravitational} identified a signal from a \gls{BBH} system.
 This was not only the first observation of \glspl{GW} but gave information on a yet unobserved astrophysical system.
@@ -66,7 +66,7 @@ This is defined as,
     ds^2 = g_{\mu \nu} dx^{\mu}dx^{\nu}.
 \end{equation}
 As in Einstein's notation this is a sum over the indices $\mu$ and $\nu$.  
-Eq.~\ref{intro:lineelement} is essentially Pythagoras's theorem, therefore, can be though to describe the space-time `distance' between the two events.
+Eq.~\ref{intro:lineelement} can be thought to describe the space-time `distance' between the two events.
 For flat space-time, $\eta_{\mu\nu}$, this can then be written as,
 \begin{equation}
     ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2.
@@ -128,7 +128,7 @@ The affect of each of the polarisations on a ring of test particles can be seen 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{C1_intro/polarisation_ring.pdf}
-    \caption{Shows how the plus and cross polarisation's affect a ring of test particles. This assumes the wave is travelling out of the page and the effects have been greatly exaggerated. This also shows an example of how this effects the test masses of an interferometer. This will be described in more detail in Sec.~\ref{intro:detector}.}
+    \caption[Plus and Cross polarisations]{Shows how the plus and cross polarisation's affect a ring of test particles. This assumes the wave is travelling out of the page and the effects have been greatly exaggerated. This also shows an example of how this effects the test masses of an interferometer. This will be described in more detail in Sec.~\ref{intro:detector}.}
     \label{gw:polarisations}
 \end{figure}
 
@@ -172,7 +172,7 @@ Fig.~\ref{intro:sources:signaltypes} shows an example of each of the signals and
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{C1_intro/sources_types.pdf}
-    \caption{Each \gls{GW} signal type can be categorised based on its signal length and how well the signal is modelled. Transient signals which are short duration, include both well modelled \gls{CBC} signals and unknown Burst signals. Long duration signals include well modelled \gls{CW} signals and unknown Stochastic signals.}
+    \caption[GW signal types]{Each \gls{GW} signal type can be categorised based on its signal length and how well the signal is modelled. Transient signals which are short duration, include both well modelled \gls{CBC} signals and unknown Burst signals. Long duration signals include well modelled \gls{CW} signals and unknown Stochastic signals.}
     \label{intro:sources:signaltypes}
 \end{figure}
 In the sections that follow, I will give an overview of the potential sources of each of these signal categories and their wave-forms.
@@ -278,7 +278,7 @@ Fig.~\ref{intro:source:cw:mountain} shows an exaggerated example of a deformatio
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\textwidth]{C1_intro/neutron_star_mountain.pdf}
-	\caption{The neutron star has some ellipticity which mean that the star deforms such that it is not symmetric around its rotation axis. This is thought of as a `mountain' on the surface of the neutron star. The diagram above shows an extremely exaggerated view of what this could look like.}
+	\caption[Generating \glspl{CW} from mountains on neutron stars.]{The neutron star has some ellipticity which mean that the star deforms such that it is not symmetric around its rotation axis. This is thought of as a `mountain' on the surface of the neutron star. The diagram above shows an extremely exaggerated view of what this could look like.}
 	\label{intro:source:cw:mountain}
 \end{figure}
 
@@ -311,7 +311,7 @@ Fig.~\ref{intro:source:cw:rmode} shows an highly exaggerated view of a neutron s
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{C1_intro/rmode.pdf}
-	\caption{The r-modes can travel in either direction in the star. in the case when the r-mode is moving clockwise and the neutron star is moving anticlockwise, if the neutron star is rotating fast enough it can cause unstable emission of \gls{GW}. This image was reconstructed from \citep{jonesCFSInstability}.}
+	\caption[Generating \glspl{GW} from r-modes in neutron stars.]{The r-modes can travel in either direction in the star. in the case when the r-mode is moving clockwise and the neutron star is moving anticlockwise, if the neutron star is rotating fast enough it can cause unstable emission of \gls{GW}. This image was reconstructed from \citep{jonesCFSInstability}.}
 	\label{intro:source:cw:rmode}
 \end{figure}
 If these modes are excited in a non-rotating star, then they will emit \gls{GW} where the \gls{GW}  carries away angular momentum \citep{jonesCFSInstability}. 
@@ -387,7 +387,7 @@ An interferometer can then measure small changes in the mirrors position.
 		\caption{Fabry-Perot interferometer.}
 		\label{detectors:interferometer:fabry}
 	\end{subfigure}
-    \caption{\gls{LIGO} uses interferometry to make a detection. This has many additional features, one of which is shown above. ETMY and ETMX refer to the end test masses, which are just mirrors at the end of the interferometer arms. The beam splitter splits the Laser beam equally to each arm, this them recombines the beams back to the detector.
+    \caption[Basic layout of the \gls{LIGO} detectors.]{\gls{LIGO} uses interferometry to make a detection. This has many additional features, one of which is shown above. ETMY and ETMX refer to the end test masses, which are just mirrors at the end of the interferometer arms. The beam splitter splits the Laser beam equally to each arm, this them recombines the beams back to the detector.
     ITMY and ITMX refer to the internal test masses, these create a Fabry-Perot cavity in the interferometers arms which can build up laser power. }
     \label{detectors:interferometer}
 \end{figure}
@@ -427,7 +427,7 @@ In the same way the sensitivity will be at a minimum when edge to the source.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{C1_intro/LIGO_beam_patterns.png}
-    \caption{The antenna response is shown as in \citep{romano2019SearchesStochastic} for the plus, cross and average polarisation's. The detectors arms lie on the x and y axis in the above plots. }
+    \caption[Antenna response of the \gls{LIGO} detectors.]{The antenna response is shown as in \citep{romano2019SearchesStochastic} for the plus, cross and average polarisation's. The detectors arms lie on the x and y axis in the above plots. }
     \label{intro:detectors:response}
 \end{figure}
 
@@ -444,7 +444,7 @@ Some of these noise sources and how they limit the detectors strain sensitivity 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{C1_intro/noise_sensitivity.jpg}
-    \caption{The different noise sources affect the sensitivity of the \gls{LIGO} detectors at different frequencies. This shows the various sources how the affect the noise curve \citep{aasi2015AdvancedLIGO}.}
+    \caption[Example strain sensitivity curves for different noise sources in \gls{LIGO}.]{The different noise sources affect the sensitivity of the \gls{LIGO} detectors at different frequencies. This shows the various sources how the affect the noise curve \citep{aasi2015AdvancedLIGO}.}
     \label{detectors:noisesensitivity}
 \end{figure}
 Here I will summarise some of the limiting sources and also sources which become useful for understanding later sections.

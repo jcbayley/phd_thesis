@@ -79,7 +79,7 @@ One can show this by taking the power spectrum of a finite length sinusoid, and 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{AppendixA/sinc_fft.pdf}
-	\caption{If one takes the power spectrum of a sinusoid with finite length, this returns the same distribution as the square of a sinc function.}
+	\caption[Sinc function compared to \gls{FFT} of finite length sinusoid.]{If one takes the power spectrum of a sinusoid with finite length, this returns the same distribution as the square of a sinc function.}
 	\label{app1:sin:sinc}
 \end{figure}
 
@@ -157,24 +157,24 @@ I_2 & = \exp{\left\{  - i \frac{\pi}{2} 2 \dot{r} \left(\frac{(r_{0c} - r_c)}{\d
 \end{split}
 \end{equation}
 
-One can then use the fresnel $S(x)$ and $C(x)$ defined by,
+One can then use the Fresnel $S(x)$ and $C(x)$ defined by
 \begin{equation}
 \begin{split}
 C(x) &= \int_0^x \cos{\frac{\pi}{2} t^2} dt \\
 S(x) &= \int_0^x \sin{\frac{\pi}{2} t^2} dt \\
 \end{split}
 \end{equation}
-The fourier transform is then,
+The Fourier transform is then,
 \begin{equation}
 A_{r_c} = \frac{aN}{2\sqrt{2\dot{r}}} e^{i(\phi - \pi q^2/\dot{r})} \left[ S(Z) -  S(Y) + i(C(Y) - C(Z))   \right],
 \end{equation}
 where,
-The power spectrum is then,
+The power spectrum is then
 \begin{equation}
 |A_{r_c}|^2 = \frac{a^2 N^2}{4\dot{r}}  \left[ (S(Z) -  S(Y))^2 + (C(Y) - C(Z))^2   \right]
 \end{equation}
 
-This can then be converted back into frequencies using the raltions in ....,
+This can then be converted back into frequencies using the relations in Eq.~\ref{},
 \begin{equation}
 \label{app1:power_fresnel}
 |A_{r_c}|^2 = \frac{a^2 N^2}{4\dot{f}T^2}  \left[ (S(Z) -  S(Y))^2 + (C(Y) - C(Z))^2   \right]
@@ -193,7 +193,7 @@ By taking a simple signal, we can verify that this is correct. Fig.~\ref{app1:si
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{testimg.png}
-	\caption{comparing sin fft with sinc function}
+	\caption[Comparison of power spectrum simulation with \gls{FFT} of sinusoid with frequency derivative.]{comparing sin fft with sinc function}
 	\label{app1:sinderivative:fresnel}
 \end{figure}
 
@@ -204,28 +204,28 @@ Fig.~\ref{app1:spect:centerbin} shows an example of a signal of fixed frequency 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/centerbin_nodop_noant.pdf}
-	\caption{By simulating a signal with a frequency in the center of a band, all of the signals power is contained within a single frequency bin. This shows an example of this kind of simulation in a spectrogram. The red line is the signals frequency evolution.}
+	\caption[Generated spectrogram in center of frequency bin.]{By simulating a signal with a frequency in the center of a band, all of the signals power is contained within a single frequency bin. This shows an example of this kind of simulation in a spectrogram. The red line is the signals frequency evolution.}
 	\label{app1:spect:centerbin}
 \end{figure}
 When the signals frequency is then moved to the edge of a bin, the power can be seen to be distributed evenly between the two surrounding frequency bins. This can be seen in Fig.~\ref{app1:spect:edgebin}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/edgebin_nodop_noant.pdf}
-	\caption{By placing the signal at the edge of a frequency bin, the power is distributed around surrounding frequency bin, this can be seen above. The red line is the signals frequency evolution.}
+	\caption[Generated spectrogram at edge of frequency bin.]{By placing the signal at the edge of a frequency bin, the power is distributed around surrounding frequency bin, this can be seen above. The red line is the signals frequency evolution.}
 	\label{app1:spect:edgebin}
 \end{figure}
 The doppler shift of a signal can then be added such that the frequency changes with time. This is shown in Fig.~\ref{app1:spect:doppler}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/edgebin_doppler_noant.pdf}
-	\caption{Including the Doppler shift of a signal due to the earths rotation and orbit cause the signal to be modulated in frequency. This also causes a modulation in the \gls{SNR} of the signal in and single frequency bin as it moves between bins. The red line is the signals frequency evolution.}
+	\caption[Generated spectrogram of \gls{CW} signal with Doppler shift.]{Including the Doppler shift of a signal due to the earths rotation and orbit cause the signal to be modulated in frequency. This also causes a modulation in the \gls{SNR} of the signal in and single frequency bin as it moves between bins. The red line is the signals frequency evolution.}
 	\label{app1:spect:doppler}
 \end{figure}
 Finally Fig.~\ref{app1:spect:antenna} shows the Doppler modulation and the antenna pattern modulation of a \gls{CW} signal. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/edgebin_doppler_antenna.pdf}
-	\caption{The antenna pattern modulation can also be included to completely simulate a potential \gls{CW} signal in a spectrogram. The red line is the signals frequency evolution.}
+	\caption[Generated spectrogram of \gls{CW} signal with Doppler shift and antenna pattern modulation.]{The antenna pattern modulation can also be included to completely simulate a potential \gls{CW} signal in a spectrogram. The red line is the signals frequency evolution.}
 	\label{app1:spect:antenna}
 \end{figure}
 

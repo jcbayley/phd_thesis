@@ -18,7 +18,7 @@ The exceptions are work in Sec.~\ref{soap:lineawareamp}, Sec.~\ref{soap:las:opti
 
 \centering
 \includegraphics[width=\linewidth]{C3_soap/soap_spect_motivation.pdf}
-\caption{This figure shows an example of a time-frequency spectrogram which is typical of \gls{LIGO} data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
+\caption[Example of frequency tracks through a spectrogram and their summed power.]{This figure shows an example of a time-frequency spectrogram which is typical of \gls{LIGO} data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
 \label{soap:motivation:plot}
 
 \end{figure}
@@ -237,7 +237,7 @@ The Viterbi algorithm records two quantities for each frequency and time bin: Th
 \label{soap:plot:likelihood}
 \end{subfigure}
 
-\caption{ Fig.~\ref{soap:plot:data} shows
+\caption[Simple example of how Viterbi algorithm works.]{ Fig.~\ref{soap:plot:data} shows
 the observed data, i.e the log-likelihood values $C_{j,k}$. Fig.~\ref{soap:plot:likelihood} shows the calculated
 log-probabilities $V_{j,k}$. $A_{j,k}$ is shown in parentheses, where the \gls{UCD}
 components correspond to $i= [-1,0,1]$ respectively. The red line shows the
@@ -660,7 +660,7 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 \label{soap:las:detp:linebig}
 \end{minipage}
 \end{subfigure}
-\caption{Lookup tables using the line aware statistic in Eq.~\ref{soap:lineaware:stat:multi}.}
+\caption[Lookup table for line aware statistic.]{Lookup tables using the line aware statistic in Eq.~\ref{soap:lineaware:stat:multi}.}
 \label{soap:las:osgl_plots}
 \end{figure}
 
@@ -751,7 +751,7 @@ In Fig.~\ref{soap:lineawareamp:example} we show an example of two detectors with
 \label{soap:lineawareamp:plot:linebig}
 \end{minipage}
 \end{subfigure}
-\caption{Lookup tables using the line aware statistic for consistent amplitude as in Sec.~\ref{soap:lineawareamp}. Each of these use the parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. }
+\caption[Lookup tables for line aware statistic with consistent amplitude.]{Lookup tables using the line aware statistic for consistent amplitude as in Sec.~\ref{soap:lineawareamp}. Each of these use the parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. }
 \label{soap:lineawareamp:example}
 \end{figure}
 
@@ -851,7 +851,7 @@ frequency bin, i.e., all the elements in Eq.~\ref{soap:lineaware:stat}.  In this
 %\centering
 \includegraphics[scale=0.45]{C3_soap/viterbi_tracks.pdf}
 %
-\caption{\label{soap:tracks} The results that the SOAP algorithm returns from an injection with an optimal
+\caption[Example of SOAP algorithms and outputs when run on H1 and L1 spectrograms.]{\label{soap:tracks} The results that the SOAP algorithm returns from an injection with an optimal
 \gls{SNR} of 90, i.e., the \gls{SNR} in H1 is 64 and the \gls{SNR} in L1 is 62.
 The signal is injected into Gaussian noise, where the 1800\,s \glspl{SFT} have been
 summed over 1 day.  The top panel shows a simulation of summed \glspl{SFT} from H1, the second panel shows the same for L1,
@@ -943,7 +943,7 @@ The parameters of the search and their optimised values are shown in Tab.~\ref{s
 \begin{table}
 \centering
 %
-\caption{Table shows the ranges of the search parameters and their optimised values for injections into  gapless Gaussian noise, Gaussian noise with gaps and the S6 \gls{MDC}. For gapless Gaussian noise and Gaussian noise with gaps, there are 10 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the parameters, $\tau$, $w_{\rm{L}}$ and $w_{\rm{S}}$ were distributed in log space between the limits and $p(M_L)/p(M_N)$ is distributed uniformly. \label{soap:results:parameters}}
+\caption[Table of line aware statistic parameters which were optimised.]{Table shows the ranges of the search parameters and their optimised values for injections into  gapless Gaussian noise, Gaussian noise with gaps and the S6 \gls{MDC}. For gapless Gaussian noise and Gaussian noise with gaps, there are 10 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the parameters, $\tau$, $w_{\rm{L}}$ and $w_{\rm{S}}$ were distributed in log space between the limits and $p(M_L)/p(M_N)$ is distributed uniformly. \label{soap:results:parameters}}
 
 %
 \bgroup
@@ -1044,7 +1044,7 @@ In Fig.~\ref{soap:results:gausss6:res_snr} and ~\ref{soap:results:gausss6:res_de
 \label{soap:results:gausss6:res_depth}
 \end{subfigure}
 
-\caption{Panels \ref{soap:results:gausss6:eff_snr} and \ref{soap:results:gausss6:eff_depth} show the detection efficiency as a function of \gls{SNR} and depth respectively. Here \gls{SNR} is the the integrated \gls{SNR} which we would expect to recover from the available data. The four curves refer to injections into gapless Gaussian noise (red), Gaussian noise with gaps in data, where the noise floor is either fixed (blue-dashed) or it is moving with time (orange) in the same way as the S6~\gls{MDC} and injections into real data i.e., the S6~\gls{MDC}. In the gapless Gaussian noise case, the recovered integrated \gls{SNR} refers to the \gls{SNR} the injection would have if it had the same amount of data as in the cases with gaps.
+\caption[Sensitivity curves for SOAP search when run on S6 and Gaussian noise.]{Panels \ref{soap:results:gausss6:eff_snr} and \ref{soap:results:gausss6:eff_depth} show the detection efficiency as a function of \gls{SNR} and depth respectively. Here \gls{SNR} is the the integrated \gls{SNR} which we would expect to recover from the available data. The four curves refer to injections into gapless Gaussian noise (red), Gaussian noise with gaps in data, where the noise floor is either fixed (blue-dashed) or it is moving with time (orange) in the same way as the S6~\gls{MDC} and injections into real data i.e., the S6~\gls{MDC}. In the gapless Gaussian noise case, the recovered integrated \gls{SNR} refers to the \gls{SNR} the injection would have if it had the same amount of data as in the cases with gaps.
 The curves are made by fitting a sigmoid Eq.~\ref{soap:results:sigmoid} to binomial detection data with a 1\% false alarm rate, as explained in Sec.~\ref{soap:results:gaplessgauss}, the error bounds are the 5\% and 95\% intervals.
 At 95\% efficiency and a 1\% false alarm rate, this shows we can detect to an \gls{SNR}  of $\sim 60$ and a sensitivity depth of $\sim 34$\,Hz$^{-1/2}$ for gapless Gaussian noise and an \gls{SNR}  of $\sim 69$ and $72$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$ and $\sim 10$\,Hz$^{-1/2}$ for the Gaussian with gaps case with fixed noise floor and moving noise floor respectively. For the S6 \gls{MDC} we can detect an \gls{SNR} of $\sim 74$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$. 
  Panels \ref{soap:results:gausss6:res_snr} and \ref{soap:results:gausss6:res_depth} show the \gls{RMS} of the difference between the injected signal track and the track found by SOAP as a function of \gls{SNR} and sensitivity depth respectively. This is shown in units of bins where each bin is 0.00056 Hz wide.\label{soap:results:gausss6:plots} }
@@ -1120,7 +1120,7 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 \begin{table}
 	\centering
 	%
-	\caption{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \gls{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_L)/p(M_N)$ had 10 parameters distributed in linearly between the limits. \label{soap:las:optimisation:table}}
+	\caption[Table of optimisation parameters for line aware statistic.]{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \gls{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_L)/p(M_N)$ had 10 parameters distributed in linearly between the limits. \label{soap:las:optimisation:table}}
 	
 	%
 	\bgroup
@@ -1155,7 +1155,7 @@ The search is then not particularly sensitive to choice of parameters in Gaussia
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\linewidth]{C3_soap/gauss_optimised.pdf}
-    \caption{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_S$ were optimised. The key part to remember when reading this plot is that the lower the value of \gls{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
+    \caption[Optimisation of line aware statistic in Gaussian noise.]{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_S$ were optimised. The key part to remember when reading this plot is that the lower the value of \gls{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
     \label{soap:las:optimisation:gauss}
 \end{figure}
 
@@ -1190,7 +1190,7 @@ These values are,
 \begin{figure}[p]
     \centering
     \includegraphics[width=\linewidth]{C3_soap/s6_optimised.pdf}
-    \caption{When using real S6 data, all four parameters of the search were optimised over on simulations in real data. The plot above shows the \gls{SNR} at 80\% efficiency for each of the parameters where the ranges are in Tab.~\ref{soap:las:optimisation:table}. Lower values of \gls{SNR} mean the search is performing better. The red lines show the parameters used in the searches in this section and the sections that follow. Whilst this does not seem optimal, the search does not underperform much using the current choice of parameters (red). }
+    \caption[Optimisation of line aware statistic in real S6 data.]{When using real S6 data, all four parameters of the search were optimised over on simulations in real data. The plot above shows the \gls{SNR} at 80\% efficiency for each of the parameters where the ranges are in Tab.~\ref{soap:las:optimisation:table}. Lower values of \gls{SNR} mean the search is performing better. The red lines show the parameters used in the searches in this section and the sections that follow. Whilst this does not seem optimal, the search does not underperform much using the current choice of parameters (red). }
     \label{soap:las:optimisation:s6mdc}
 \end{figure}
 
@@ -1205,7 +1205,7 @@ This demonstrates how the `line aware' statistic improves the robustness of the 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{C3_soap/line_example.pdf}
-    \caption{As a visualisation of the line aware statistic working, an astrophysical signal was simulated in both the H1 and L1 detectors. In one detector an instrumental line was added. In the top panel above the tracks identified by different values of the line aware statistic are shown shifted up by 10 frequency bins. This allows the underlying feature to be identified. In the top two panels the sinusoidal nature of the \gls{CW} signal can be identified in the data, and was identified by the line aware statistic using the S6 MDC optimal values (blue line). The top panel also contains a narrow spectral line at $\sim 102.5$ Hz. The values of the statistic optimised for the Gaussian noise case do not identify the signal but identify the spectral line as the most likely signal. The final panel shows the Viterbi map for the statistic values optimised in the S6 MDC. }
+    \caption[Example of improvements when using optimised parameters for line aware statistic.]{As a visualisation of the line aware statistic working, an astrophysical signal was simulated in both the H1 and L1 detectors. In one detector an instrumental line was added. In the top panel above the tracks identified by different values of the line aware statistic are shown shifted up by 10 frequency bins. This allows the underlying feature to be identified. In the top two panels the sinusoidal nature of the \gls{CW} signal can be identified in the data, and was identified by the line aware statistic using the S6 MDC optimal values (blue line). The top panel also contains a narrow spectral line at $\sim 102.5$ Hz. The values of the statistic optimised for the Gaussian noise case do not identify the signal but identify the spectral line as the most likely signal. The final panel shows the Viterbi map for the statistic values optimised in the S6 MDC. }
     \label{soap:las:optimisation:vitexample}
 \end{figure}
 
@@ -1259,7 +1259,7 @@ Whilst these parameters of the search can be changed to depend on frequency, thi
 		\label{soap:sens:snrfreq}
 	\end{subfigure}
 
-\caption{The sensitivity of the SOAP search in this configuration decreases as the frequency of the pulsar increases. This setup of data for the search however, was optimised for the 100-200 frequency band and can be changed for different frequencies. \ref{soap:sens:eff} shows the efficiency curves with 1\% false alarm rate for each frequency. \ref{soap:sens:snrfreq} shows the values from the efficiency curves at 90\% efficiency.}
+\caption[How the sensitivity of SOAP changes with frequency.]{The sensitivity of the SOAP search in this configuration decreases as the frequency of the pulsar increases. This setup of data for the search however, was optimised for the 100-200 frequency band and can be changed for different frequencies. \ref{soap:sens:eff} shows the efficiency curves with 1\% false alarm rate for each frequency. \ref{soap:sens:snrfreq} shows the values from the efficiency curves at 90\% efficiency.}
 \label{soap:sens:results}
 
 \end{figure}

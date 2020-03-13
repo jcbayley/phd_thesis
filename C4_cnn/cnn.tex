@@ -135,7 +135,7 @@ the frequency track, the Viterbi statistic and the Viterbi map.
 	%\centering
 	\includegraphics[scale=0.43]{C4_cnn/two_vit_example.pdf}
 	%
-	\caption{\label{soap:viterbiplot} This plot shows the inputs and outputs of the
+	\caption[Example SOAP output from H1 and L1 input spectrograms. ]{\label{soap:viterbiplot} This plot shows the inputs and outputs of the
 		SOAP search. The top two panels are time-frequency spectrograms which have been pre-processed as described in Sec.~\ref{machine:pipeline}. This
 		data is a 0.1 Hz wide frequency band from the S6 observing run \cite{} \joe{reference} which includes a string simulated \gls{CW} signal. The white areas in the spectrograms are gaps in data when the detector was not operating. These both have the
 		optimal track found by SOAP overlaid. The bottom panel shows the normalised Viterbi map, the intensity of a
@@ -228,7 +228,7 @@ This will be explained in more detail in Sec.~\ref{machine:nn:activation}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\columnwidth]{C4_cnn/neuron.pdf}
-    \caption{Basic neuron}
+    \caption[Basic neuron]{Basic neuron showing the four input parameters $x_n$ and their corresponding weights $w_n$. These are multiplied and summed as in Eq.~\ref{machine:nn:neuron:equation}. A bias $b$ is added and this value is passed through and activation function $f$ to the output.}
     \label{machine:nn:neuron:plot}
 \end{figure}
 
@@ -259,7 +259,7 @@ If there is a small number of training examples and a large and complex network,
 \begin{figure}[h]
     \centering
     \includegraphics[width=\columnwidth]{C4_cnn/simple_network.pdf}
-    \caption{A neural network is structured with layers. Each of the circles in these layers are neurons as described in Sec.~\ref{machine:nn:neuron} and Fig.~\ref{machine:nn:neuron:plot}. The networks contain an input layer which is usually the data which you would like to analyse. Then this passes to a number of `hidden' layers, in the above diagram there are two. Hidden layers are just layers which exist between the input and the output. The output layer is then the desired output, above I have chosen a single neuron as output. This is such that the network could classify the input to a value between 0 and 1. Every neuron in a layer is connected to the output of all neurons in the previous layer.}
+    \caption[Example structure of a neural network.]{A neural network is structured with layers. Each of the circles in these layers are neurons as described in Sec.~\ref{machine:nn:neuron} and Fig.~\ref{machine:nn:neuron:plot}. The networks contain an input layer which is usually the data which you would like to analyse. Then this passes to a number of `hidden' layers, in the above diagram there are two. Hidden layers are just layers which exist between the input and the output. The output layer is then the desired output, above I have chosen a single neuron as output. This is such that the network could classify the input to a value between 0 and 1. Every neuron in a layer is connected to the output of all neurons in the previous layer.}
     \label{machine:nn:structure:plot}
 \end{figure}
 
@@ -282,7 +282,7 @@ In the work that follows we use the Leaky RELU function and the sigmoid function
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\columnwidth]{C4_cnn/activations.pdf}
-	\caption{There are many different activations function which are used, and essentially any function can be defined if necessary. Above is shown a subset of the more commonly used functions. The linear function is not used, however, is there to compare to common non linear function.}
+	\caption[Examples of activation functions.]{There are many different activations function which are used, and essentially any function can be defined if necessary. Above is shown a subset of the more commonly used functions. The linear function is not used, however, is there to compare to common non linear function.}
 	\label{machine:nn:activation:plot}
 \end{figure}
 
@@ -345,7 +345,7 @@ When this type of layer is trained, the weights of the filter are updated. The f
 
     \centering
     \includegraphics[width=\columnwidth]{C4_cnn/conv_filters.pdf}
-    \caption{Convolutional filters can be designed to `pick out' certain features within an image. In this simple example above, the first filter (filter 1) matches the diagonal line in the bottom left of the input better than filter 2. The output filtered image the exaggerates this filter. The coefficients of the filter i.e. $F_{m,n}$ in Eq.~\ref{machine:cnn:conv:equation}, in this are set to ones and zeros.
+    \caption[How convolutions are applied in convolutional neural networks.]{Convolutional filters can be designed to `pick out' certain features within an image. In this simple example above, the first filter (filter 1) matches the diagonal line in the bottom left of the input better than filter 2. The output filtered image the exaggerates this filter. The coefficients of the filter i.e. $F_{m,n}$ in Eq.~\ref{machine:cnn:conv:equation}, in this are set to ones and zeros.
     These are the weights which are trained by the network. In this an cases that follow, to get the same size image in the output as the input, the image is padded with zeros. I this image it was necessary to pad above and to the right of the image. The output of a convolutional layer is then the filtered images above after a bias and activation function have been applied. }
     \label{machine:cnn:convlayer:input}
 
@@ -386,7 +386,7 @@ This demonstrates how the max-pooling layer can hold on to important information
 \begin{figure}[h]
     \centering
     \includegraphics[width=\columnwidth]{C4_cnn/maxpool.pdf}
-    \caption{Max pooling layers aim to reduce the size of am image whilst retaining important information within the original image. Above shows an example where a 2$\times$2 max-pooling layer is used on the output of Filter 1 in Fig.~\ref{machine:cnn:convlayer:input}. This retains the information that the input image matches the filter in the bottom left.}n
+    \caption[How max pooling layers are applied in \glspl{CNN}.]{Max pooling layers aim to reduce the size of am image whilst retaining important information within the original image. Above shows an example where a 2$\times$2 max-pooling layer is used on the output of Filter 1 in Fig.~\ref{machine:cnn:convlayer:input}. This retains the information that the input image matches the filter in the bottom left.}n
     \label{machine:cnn:maxpool:image}
 \end{figure}
 
@@ -410,7 +410,7 @@ This example also shows the network being classified to a single output as this 
 
 \begin{sidewaysfigure}[hp]
 	\includegraphics[width=\textwidth]{C4_cnn/cnn_structure_ex.pdf}
-	\caption{Convolutional neural networks consist of two broad sections, the `feature extraction' part which is the convolutional and max-pooling layers, and the classification part which is the fully connected part of the network. This diagram shows a simple example of an image passing through a single convolutional layer with two filters, a single max-pooling layer and a simple fully connected network with a single hidden layer consisting of 4 neurons. The values in this diagram omit the use of any activation function such that the values are easier to follow. In a real network the activation functions are important.}
+	\caption[Structure of \glspl{CNN}.]{Convolutional neural networks consist of two broad sections, the `feature extraction' part which is the convolutional and max-pooling layers, and the classification part which is the fully connected part of the network. This diagram shows a simple example of an image passing through a single convolutional layer with two filters, a single max-pooling layer and a simple fully connected network with a single hidden layer consisting of 4 neurons. The values in this diagram omit the use of any activation function such that the values are easier to follow. In a real network the activation functions are important.}
 	\label{machine:cnn:structure:example}
 \end{sidewaysfigure}
 
@@ -558,7 +558,7 @@ Where when each of these are combined, the \gls{CNN} should be able to pick to i
 	\centering
 	\includegraphics[width=0.9\columnwidth]{C4_cnn/networks.pdf}
 	%
-	\caption{\label{machine:results:cnnlayout} The structure of the Viterbi map and
+	\caption[Structure of \glspl{CNN} used in the search got \glspl{CW}.]{\label{machine:results:cnnlayout} The structure of the Viterbi map and
 		spectrogram \glspl{CNN} used in this analysis are the same, with the difference
 		that the spectrogram takes two images as input. They each use two convolutional
 		layers and 3 fully connected layers before they're output to a single neuron which represents the probability of belonging to the signal class. The
@@ -629,7 +629,7 @@ The \glspl{SNR} reported below are then the sum of the squares of the \glspl{SNR
 %
 \begin{table*}
 	%                                         
-	\caption{\label{machine:data:injections:table} Table shows the upper and lower limits
+	\caption[Parameters used for simulations of \gls{CW} signals.]{\label{machine:data:injections:table} Table shows the upper and lower limits
 		over which each signal parameter was randomized. The parameters $\alpha,\sin{\left(\delta \right)},f,\;\log{\left( \dot{f} \right)},\; \cos{\left(\iota
 			\right)},\; \phi_0,\; \psi$ were sampled
 		uniformly in the ranges specified in the table. The frequencies $f_{\rm l}$ and $f_{\rm u}$
@@ -689,14 +689,13 @@ This then gives us 3 transformations for each of the 4 frequency shifts, which i
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\columnwidth]{C4_cnn/augmentation.pdf}
-	\caption{The data is transformed by flipping the data in frequency (panel 2),
+	\caption[How data is augmented, i.e. flipping in time and frequency.]{The data is transformed by flipping the data in frequency (panel 2),
 		rolling the data in time by 100 bins (panel 3) and flipping the data in time
 		(panel 4). The original summed spectrogram is show in panel 1. Simulated
 		signals can then be injected using this data as noise. The plots above show a
 		broad wandering line to demonstrate the changes to the data when it is
 		augmented, however, the majority of sub-bands contain almost Gaussian
-		noise.~\chris{I dislike figure titles. Could you use subfigures where they
-			allow you to put a caption under each plot.} }
+		noise. }
 	\label{machine:data:augmentation:examples}
 	
 \end{figure}
@@ -747,7 +746,7 @@ running a search on real data.
 	\centering
 	\scalebox{0.7}{
 		\input{./C4_cnn/flow.tikz}}
-	\caption{\label{machine:pipeline:flow} This diagram shows the SOAP pipeline from start to finish. There are three main sections: Training (red), Testing (green) and Searching (grey) for both the odd and even bands. The blue sections mean that the same operations is done in all cases.}
+	\caption[Flow diagram for entire SOAP and \gls{CNN} search.]{\label{machine:pipeline:flow} This diagram shows the SOAP pipeline from start to finish. There are three main sections: Training (red), Testing (green) and Searching (grey) for both the odd and even bands. The blue sections mean that the same operations is done in all cases.}
 	
 \end{figure}
 
@@ -946,7 +945,7 @@ The \gls{SNR} here should not be compared between different runs as this is the 
 		\caption{}
 		\label{machine:results:depth_o1}
 	\end{subfigure}
-	\caption{ In the O1 data-set, each of the six \glspl{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate. }
+	\caption[O1 results from SOAP and \gls{CNN} search.]{ In the O1 data-set, each of the six \glspl{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate. }
 	\label{machine:results:o1}
 	
 \end{figure}
@@ -977,7 +976,7 @@ However, this is not the case \joe{why?}.
 		\caption{}
 		\label{machine:results:depth_o2}
 	\end{subfigure}
-	\caption{\label{machine:results:o2} In the O2 data-set, each of the six \glspl{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate. These show that the use of spectrograms and the Viterbi maps with \glspl{CNN} greatly improve the sensitivity when compared to the Viterbi statistic. For each \gls{CNN} which uses a combination of inputs it achieves a similar sensitivity to the \gls{CNN} which uses just the Viterbi map. This implies that the Viterbi map contains the most information out of the tested \glspl{CNN}. }
+	\caption[O2 results from SOAP and \gls{CNN} search.]{\label{machine:results:o2} In the O2 data-set, each of the six \glspl{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate. These show that the use of spectrograms and the Viterbi maps with \glspl{CNN} greatly improve the sensitivity when compared to the Viterbi statistic. For each \gls{CNN} which uses a combination of inputs it achieves a similar sensitivity to the \gls{CNN} which uses just the Viterbi map. This implies that the Viterbi map contains the most information out of the tested \glspl{CNN}. }
 	
 \end{figure}
 
@@ -1008,7 +1007,7 @@ For injections into Gaussian noise following S6 gaps we show that with a false a
 		\label{machine:results:depth_s6}
 	\end{subfigure}
 
-	\caption{\label{machine:results:s6gauss} We aimed to compare the sensitivity of this search on simulations on real data (s6) to simulations in Gaussian noise (gauss). The Gaussian noise injections included the same gaps in data as the S6 data set. The \gls{SNR} of the simulated signal in Gaussian noise was adjusted based on the noise floor of S6. The sensitivity curves show that the Viterbi map \gls{CNN} (vitmap)achieves a similar sensitivity to the Viterbi statistic (vitstat) in Gaussian noise. This is because the main factor which effects the sensitivity of the Viterbi statistic is instrumental lines. As expected in real data, the Viterbi statistic is far less sensitive. The power of the \gls{CNN} becomes clear in tests on real data. The sensitivity of the Viterbi map \gls{CNN} is improved by over a factor of 2 in \gls{SNR} when tested on S6 data.}
+	\caption[Gaussian noise results from SOAP and \gls{CNN} search.]{\label{machine:results:s6gauss} We aimed to compare the sensitivity of this search on simulations on real data (s6) to simulations in Gaussian noise (gauss). The Gaussian noise injections included the same gaps in data as the S6 data set. The \gls{SNR} of the simulated signal in Gaussian noise was adjusted based on the noise floor of S6. The sensitivity curves show that the Viterbi map \gls{CNN} (vitmap)achieves a similar sensitivity to the Viterbi statistic (vitstat) in Gaussian noise. This is because the main factor which effects the sensitivity of the Viterbi statistic is instrumental lines. As expected in real data, the Viterbi statistic is far less sensitive. The power of the \gls{CNN} becomes clear in tests on real data. The sensitivity of the Viterbi map \gls{CNN} is improved by over a factor of 2 in \gls{SNR} when tested on S6 data.}
 	
 \end{figure}
 
@@ -1029,7 +1028,7 @@ The final test was set up to again use the S6 data-set, however, we use a standa
 	\label{machine:results:mdccomp}
 \end{subfigure}
 
-	\caption{\label{machine:results:s6mdc} In the S6 \gls{MDC} \cite{walsh2016ComparisonMethods}, sensitivity curves were made for a set of \gls{CW} searches. 
+	\caption[S6 \gls{MDC} results from SOAP and \gls{CNN} search.]{\label{machine:results:s6mdc} In the S6 \gls{MDC} \cite{walsh2016ComparisonMethods}, sensitivity curves were made for a set of \gls{CW} searches. 
 		We have taken the list of detected pulsars for each search from this paper \cite{walsh2016ComparisonMethods} and replotted using the method in Sec.~\ref{machine:results:sensitivity} to compare the sensitivities. 
 		This is results for all pulsar injections in the 40-500 Hz band in the S6 \gls{MDC}.
 		This shows how the SOAP search with a \gls{CNN} achieves a similar sensitivity some other \gls{CW} searches. 
@@ -1046,7 +1045,7 @@ For each section of the pipeline we have take the average total time for each jo
 \begin{table}[h]
 	%                     
 	\centering                                                                                            
-	\caption{\label{timing:table}Table shows the timings for each part of the search. These are approximate timings and vary when different amounts of data are input. This was run on data between 100-400 Hz.}
+	\caption[Table showing computational cost of each part of the SOAP and \gls{CNN} search.]{\label{timing:table}Table shows the timings for each part of the search. These are approximate timings and vary when different amounts of data are input. This was run on data between 100-400 Hz.}
 	
 	%   
 	\scalebox{0.8}{%
@@ -1137,7 +1136,7 @@ Therefore, one would expect this to be an easier problem for the network to solv
 		\caption{}
 		\label{machine:results:sens_size:gauss_sens:train}
 	\end{subfigure}
-	\caption{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here I show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Fig.~\ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark. \joe{would be nice to get some errorbars of some sort on the right hand side plot}}
+	\caption[Sensitivity with size of data set for Gaussian noise simulations.]{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here I show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Fig.~\ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark. \joe{would be nice to get some errorbars of some sort on the right hand side plot}}
 	\label{machine:results:sens_size:gauss_sens}
 \end{figure}
 
@@ -1160,7 +1159,7 @@ Therefore, more training examples are needed for the network to perform well on 
 		\caption{}
 		\label{machine:results:sens_size:o1_sens:train}
 	\end{subfigure}
-	\caption{Here I show how the sensitivity changes as a function of the number of training examples for simulations in O1 data. Fig.~\ref{machine:results:sens_size:o1_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:o1_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a large increase in the sensitivity of the \gls{CNN}. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:o1_sens:train} as it does not reach the 90\% efficiency mark.}
+	\caption[Sensitivity with size of data set for O1 simulations.]{Here I show how the sensitivity changes as a function of the number of training examples for simulations in O1 data. Fig.~\ref{machine:results:sens_size:o1_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:o1_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a large increase in the sensitivity of the \gls{CNN}. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:o1_sens:train} as it does not reach the 90\% efficiency mark.}
 	\label{machine:results:sens_size:o1_sens}
 \end{figure}
 
@@ -1185,7 +1184,7 @@ Generally this is only useful to picture at the first layer as the network can m
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{C4_cnn/vitmap_cnn_visualisation_signal.pdf}
-	\caption{This shows a visualisation of the convolution neural network used for Viterbi maps above}
+	\caption[Network visualisation]{This shows a visualisation of the convolution neural network used for Viterbi maps above}
 	\label{cnn:vis:vitmap:signal}
 \end{figure}
 

@@ -49,7 +49,7 @@ Some instrumental lines are clearly visible when looking at one fo the \gls{LIGO
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{C5_detchar/ligo_o1_asd_annot.pdf}
-    \caption{There are many features in the \gls{LIGO} detectors averaged \gls{ASD}. This image was taken from \citep{GWOpen} where I have annotated some of the stronger lines. The power line from the mains in the USA is at 60 Hz. Some of the calibration lines are around 30 Hz, 331 Hz and 1083 Hz. The various violin modes of the suspensions are at 300, 500, 600 and 900 Hz where I have only marked the 500 Hz mirror suspension modes \citep{GWOpen}.}
+    \caption[Strain \gls{ASD} for the \gls{LIGO} detectors.]{There are many features in the \gls{LIGO} detectors averaged \gls{ASD}. This image was taken from \citep{GWOpen} where I have annotated some of the stronger lines. The power line from the mains in the USA is at 60 Hz. Some of the calibration lines are around 30 Hz, 331 Hz and 1083 Hz. The various violin modes of the suspensions are at 300, 500, 600 and 900 Hz where I have only marked the 500 Hz mirror suspension modes \citep{GWOpen}.}
     \label{detchar:line:psd}
 \end{figure}
 The frequency spectrum in Fig.~\ref{detchar:line:psd} shows the time averaged spectra the \gls{GW} channel of the \gls{LIGO} detectors. 
@@ -155,7 +155,7 @@ Through many of the searches performed on real data, many instrumental lines wer
 An example of this can be seen in Fig.~\ref{}.
 \begin{figure}[h]
 	\includegraphics[width=\textwidth]{testimg.png}
-	\caption{image of broad wandering line found by soap astrophysical search}
+	\caption[Broad wandering line example.]{image of broad wandering line found by soap astrophysical search}
 	\label{detchar:soap:astrowander}
 \end{figure}
 This demonstrates a broad and wandering line in a single detector and how the SOAP search is affected by it. 
@@ -183,7 +183,7 @@ These plots and the equivalent plots for other sub-bands can then allow the sub-
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F58_5_58_7_noise.png}
-	\caption{The SOAP search outputs three main quantities, the Viterbi maps, the Viterbi track and the Viterbi statistic. The Viterbi track is shown above overlaid onto the 1800s \gls{SFT} power spectrum including the detector gaps for \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) \citep{}. This track is an indicator as to what type of signal the track is following. The above track indicated that this is just noise. The returned Viterbi statistic is also consistent with that of noise. The Viterbi map is another visualisation of the sub-band, how to interpret this has been explained in previous sections. However, here there does no appear to be a clear signal. The final panel is a way to visualise how the \gls{SFT} power changes along the Viterbi track. Also on this plot is an estimate of the mean noise floor for this band to visualise how the sensitivity of the detector changed over the course of the run. }
+	\caption[Example SOAP output for Gaussian like noise.]{The SOAP search outputs three main quantities, the Viterbi maps, the Viterbi track and the Viterbi statistic. The Viterbi track is shown above overlaid onto the 1800s \gls{SFT} power spectrum including the detector gaps for \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) \citep{}. This track is an indicator as to what type of signal the track is following. The above track indicated that this is just noise. The returned Viterbi statistic is also consistent with that of noise. The Viterbi map is another visualisation of the sub-band, how to interpret this has been explained in previous sections. However, here there does no appear to be a clear signal. The final panel is a way to visualise how the \gls{SFT} power changes along the Viterbi track. Also on this plot is an estimate of the mean noise floor for this band to visualise how the sensitivity of the detector changed over the course of the run. }
 	\label{detchar:soap:noiseplot}
 \end{figure}
 %
@@ -196,7 +196,7 @@ Using this information along with the Viterbi statistic result, this particular 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F47_6_47_8_linenarrow.png}
-	\caption{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a narrow spectral artefact in the band. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. In this there is a narrow spectral line at $\sim 47.69$ Hz. The Viterbi track then follows this line of high power. The Viterbi map has much higher values for the log-probability in this line case compared to the noise case, this is an indicator some real signal. The probability in the Viterbi maps drops to zero in some areas due to the strength of the instrumental line. }
+	\caption[Example SOAP output for string narrow instrumental line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a narrow spectral artefact in the band. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. In this there is a narrow spectral line at $\sim 47.69$ Hz. The Viterbi track then follows this line of high power. The Viterbi map has much higher values for the log-probability in this line case compared to the noise case, this is an indicator some real signal. The probability in the Viterbi maps drops to zero in some areas due to the strength of the instrumental line. }
 	\label{detchar:soap:lineplot}
 \end{figure}
 %
@@ -209,7 +209,7 @@ These pieces of information along with the large value of the Viterbi statistic 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F53_7_53_9_wander.png}
-	\caption{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a wandering spectral line. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. This shows how some spectral lines do not have a fixed frequency bin can wander through the band. These are especially hard to track and monitor. The Viterbi track here shows is clearly different from the noise case in Fig.~\ref{detchar:soap:noiseplot} as the track is more tightly concentrated around some areas of power. }
+	\caption[Example SOAP output for wandering line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a wandering spectral line. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. This shows how some spectral lines do not have a fixed frequency bin can wander through the band. These are especially hard to track and monitor. The Viterbi track here shows is clearly different from the noise case in Fig.~\ref{detchar:soap:noiseplot} as the track is more tightly concentrated around some areas of power. }
 	\label{detchar:soap:wanderplot}
 \end{figure}
 %
@@ -252,7 +252,7 @@ A flow diagram of how the SOAP search works for instrumental line searches can b
 	\centering
 	\input{./C5_detchar/detchar_flow.tikz}
 	
-	\caption{\label{detchar:summary:flow} The SOAP search for instrumental lines is simpler than other searches. A simple version of the search is run separately for each detector, where the raw \glspl{SFT} are divided by their running median, narrow-banded and then the search is run. }
+	\caption[Flow diagram for SOAP line search.]{\label{detchar:summary:flow} The SOAP search for instrumental lines is simpler than other searches. A simple version of the search is run separately for each detector, where the raw \glspl{SFT} are divided by their running median, narrow-banded and then the search is run. }
 	
 \end{figure} 
 These stages are as follows:
@@ -275,7 +275,7 @@ There are generally two separate parts to the page: selecting the observing run 
 \begin{sidewaysfigure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/summary_annot.pdf}
-	\caption{The summary pages are made for each observing run (in this case just O2 and O3). The range of times can then be selected from a set of start and end times. This is in general the entire observing run and monthly runs of this search. These pages can be found at \citep{bayleyHome}}
+	\caption[Example summary page for SOAP search]{The summary pages are made for each observing run (in this case just O2 and O3). The range of times can then be selected from a set of start and end times. This is in general the entire observing run and monthly runs of this search. These pages can be found at \citep{bayleyHome}}
 	\label{detchar:summary:plots}
 \end{sidewaysfigure}
 
