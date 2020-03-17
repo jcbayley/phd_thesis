@@ -70,11 +70,25 @@ However, in the real world this sinusoid has a limited length and one will inste
 If the sinusoids frequency falls at the center of a frequency bin then the entire power of the signal will be contained within that frequency bin.
 However, if it is not perfectly centered on a frequency bin, then the power of the signal will begin to be spread over surrounding frequency bins. 
 The aim is then to simulate how the signal is spread over surrounding frequency bins.
-If one has a sinusoid with a finite length, this is equivalent to taking an infinitely long sinusoid and convolving it square window (box). 
+If one has a sinusoid with a finite length, this is equivalent to taking an infinitely long sinusoid and convolving it rectangular window (box). 
 The frequency response is then the Fourier transform of the sinusoid convolved with the Fourier transform of the box window.
 The Fourier transform of a box window is a sinc and of an infinitely long sinusoid is a delta function. 
 The resulting Fourier transform is then a sinc function.
-One can show this by taking the power spectrum of a finite length sinusoid, and plotting the square of a sinc function on top as shown in Fig.~\ref{app1:sin:sinc}.
+One can write this down mathematically by writing the signal as
+\begin{equation}
+ n(t) = \exp{\left\{  i 2 \pi f_0 t \right\}},
+\end{equation}
+where $f_0$ is the signals frequency.
+The Fourier transform for this for a finite length of time which ranges between $-T/2 < t < T/2$ can be written as
+\begin{equation}
+\begin{split}
+\tilde{n}(f) &= \int_{-T/2}^{T/2} \exp{\left\{  -i 2 \pi(f -  f_0) t \right\}} dt \\
+&= \frac{1}{-i\pi (f - f_0)} \left( \exp{\left\{  -i \pi(f -  f_0) T \right\}} + \exp{\left\{  -i \pi(f -  f_0) T \right\}}      \right) \\
+&= \frac{2 \sin{\left( \pi (f - f_0) T \right)}}{ \pi (f - f_0)} \\
+&= T \mathrm{sinc} \left( \pi(f-f_0)T\right)
+\end{split}
+\end{equation}
+ One can verify this by taking the power spectrum of a finite length sinusoid, and plotting the square of a sinc function on top as shown in Fig.~\ref{app1:sin:sinc}.
 
 \begin{figure}
 	\centering
@@ -84,7 +98,7 @@ One can show this by taking the power spectrum of a finite length sinusoid, and 
 \end{figure}
 
 For a sinusoid which has some frequency derivative the Fourier transform changes slightly. 
-One can start with the definition of a signal with a constant frequency derivative such that
+Similarly to above one can start with the definition of a signal with a constant frequency derivative such that
 \begin{equation}
  f = f_0 + \dot{f} t ,
 \end{equation}

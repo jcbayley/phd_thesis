@@ -1271,15 +1271,33 @@ Whilst these parameters of the search can be changed to depend on frequency, thi
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 
-Whilst SOAP was designed to search for sources of \glspl{CW}, when set up correctly, it can be applied to searching for many other types.
+Whilst SOAP was designed to search for sources of \glspl{CW}, when set up correctly, it can be applied to searching for other signal types.
 This is because the search is essentially un-modelled, and in its simplest form looks for tracks of high power in a spectrogram.
+Therefore, if the signal can be represented in a spectrogram, then it can be searched for using SOAP.
 
 \subsubsection{CBC}
 
 CBC signals cover a wide frequency range and are very short signals in \gls{LIGO} detectors. 
-In previous SOAP searches the default length of \gls{SFT} has been 1800 s, this is not suitable when searching for \gls{CBC} signals.
-We can take shorter time base for the \glspl{SFT}, however, to get a required resolution, these can overlap.
-\joe{section not complete}
+The longest of these are \gls{BNS} signals which are on the order of 10 s. 
+In previous SOAP searches the default length of \gls{SFT} has been 1800 s, however ,this is not suitable when searching for \gls{CBC} signals.
+We then need a shorter time base for each of the \glspl{SFT}, where for following examples these are overlapping in time.
+This allows us to achieve the desired time and frequency resolution
+
+Fig.~\ref{soap:sens:other:gw170817} shows an example of the two detector SOAP search running on data +2s and -5 s of the GW170817 merger time \citep{abbott2017GW170817Observation}. 
+The spectrograms show the \glspl{SFT} power spectra divided by their median.
+Each of the \glspl{SFT} is 0.2 s long and are overlapping by 90\% (0.189 s), this gives a frequency resolution of 5 Hz. 
+Whilst this may not be an optimal setup for this particular search, it demonstrates that SOAP can identify a \gls{BNS} signal within the data. 
+The example in Fig.~\ref{soap:sens:other:gw170817} show the result between $\sim 20$ and $\sim 520$ Hz, however the SOAP search returns the same track for a wider band-width up to 2000 Hz. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{C3_soap/gw170817_vitplot.pdf}
+	\caption[SOAP search run on GW170817]{The SOAP search was run on a spectrogram of \gls{LIGO} data +2 and -5 seconds around the merger of GW170817 \citep{abbott2017GW170817Observation}. Each \gls{FFT} in the spectrograms are 0.2 s long and are overlapping by  0.189 s (95\%). This demonstrates that the SOAP search can identify part of a \gls{BNS} signal within the data, particularly the lower frequency parts.}
+	\label{soap:sens:other:gw170817}
+\end{figure}
+
+Searching for \gls{BBH} systems becomes more difficult as they are in the \gls{LIGO} band for a short period of time ($ < 1 s$).
+To see the evolution of the signal in a spectrogram, the time resolution required means that the frequency bins are too large to see the signals evolution.
 
 
 
