@@ -22,12 +22,17 @@
 % These margins are the university guidelines
 \usepackage[onehalfspacing]{setspace}  % gives one-and-a-half line spacing
 % doublespacing is another option and can be changed in the text
+\usepackage[]{hyperref}
+\hypersetup{
+	colorlinks=true,
+}
 \usepackage{dcolumn}   % needed for some tables
 \usepackage{bm}        % for math
 \usepackage{amssymb}   % for math
 \usepackage{amsmath}
 \usepackage{color}
-\usepackage{acronym}
+%\usepackage{acronym}
+\usepackage[toc,acronym]{glossaries}
 \usepackage{algcompatible}
 \usepackage{newfloat}
 \usepackage{cancel}
@@ -36,10 +41,6 @@
 \usetikzlibrary{shadows,arrows,arrows.meta,positioning,backgrounds,fit,chains,scopes}
 \usepackage{subcaption}
 \graphicspath{{./figures/}}
-\usepackage[]{hyperref}
-\hypersetup{
-    colorlinks=true,
-}
 \usepackage{sidecap}
 
 
@@ -76,6 +77,42 @@ placement=tbhp,
 %\usepackage{charter}
 %\usepackage[expert]{mathdesign}
 
+
+\makeglossaries
+
+\newacronym{GW}{GW}{gravitational-wave}
+\newacronym{GR}{GR}{general relativity}
+\newacronym{GRB}{GRB}{gamma ray burst}
+\newacronym{CW}{CW}{continuous gravitational wave}
+\newacronym{CBC}{CBC}{compact binary coalescence}
+\newacronym{BBH}{BBH}{binary black hole}
+\newacronym{BNS}{BNS}{binary neutron star}
+\newacronym{NSBH}{NSBH}{neutron star black hole}
+\newacronym{EMRI}{EMRI}{extreme mass ratio inspiral}
+\newacronym{NS}{NS}{neutron star}
+\newacronym{EOS}{EOS}{equation of state}
+\newacronym{EM}{EM}{electromagnetic}
+\newacronym{SNR}{SNR}{signal-to-noise-ratio}
+\newacronym{LIGO}{LIGO}{Laser Interferometer Gravitational-wave Observatory}
+\newacronym{SFT}{SFT}{short Fourier transform}
+\newacronym{FFT}{FFT}{fast Fourier transform}
+\newacronym{UCD}{UCD}{up, centre or down}
+\newacronym{MDC}{MDC}{mock data challenge}
+\newacronym{PSD}{PSD}{power spectral density}
+\newacronym{ROC}{ROC}{receiver operating characteristic}
+\newacronym{RMS}{RMS}{root median square}
+\newacronym{MCMC}{MCMC}{Markov-Chain Monte Carlo}
+\newacronym{SOAP}{SOAP}{snakes on a plane}
+\newacronym{CNN}{CNN}{convolutional neural network}
+\newacronym{CMB}{CMB}{cosmic microwave background}
+\newacronym{LISA}{LISA}{laser interferometer space antenna}
+\newacronym{PEM}{PEM}{physical environment monitor}
+\newacronym{CFS}{CFS}{Chandrasekhar, Friedman and Schutz}
+\newacronym{SSB}{SSB}{solar system barycenter}
+\newacronym{MSU}{MSU}{million standard units}
+\newacronym{ASD}{ASD}{amplitude spectral density}
+
+
 \begin{document}
 \begin{titlepage}
 \centering
@@ -101,43 +138,18 @@ February 2017
 \end{titlepage}
 \frontmatter  % Turn off chapter numbering, use roman page numbers
 \include{abstract}
+\glsunsetall
 \tableofcontents
 \listoftables
 \listoffigures
+\glsresetall
 \include{acknowledgements}
 \include{declaration}
 
-\acrodef{GW}[GW]{gravitational-wave}
-\acrodef{GR}[GR]{general relativity}
-\acrodef{GRB}[GRB]{gamma ray burst}
-\acrodef{CW}[CW]{continuous wave}
-\acrodef{CBC}[CBC]{compact binary coalescence}
-\acrodef{BBH}[BBH]{binary black hole}
-\acrodef{BNS}[BNS]{binary neutron star}
-\acrodef{NSBH}[NSBH]{neutron star black hole}
-\acrodef{EMRI}[EMRI]{extreme mass ratio inspiral}
-\acrodef{NS}[NS]{neutron star}
-\acrodef{EOS}[EOS]{equation of state}
-\acrodef{EM}[EM]{electromagnetic}
-\acrodef{SNR}[SNR]{signal-to-noise-ratio}
-\acrodef{LIGO}[LIGO]{Laser Interferometer Gravitational-wave Observatory}
-\acrodef{SFT}[SFT]{short Fourier transform}
-\acrodef{FFT}[FFT]{fast Fourier transform}
-\acrodef{UCD}[UCD]{up, centre or down}
-\acrodef{MDC}[MDC]{mock data challenge}
-\acrodef{PSD}[PSD]{power spectral density}
-\acrodef{ROC}[ROC]{receiver operating characteristic}
-\acrodef{RMS}[RMS]{root median square}
-\acrodef{MCMC}[MCMC]{Markov-Chain Monte Carlo}
-\acrodef{SOAP}[SOAP]{snakes on a plane}
-\acrodef{CNN}[CNN]{convolutional neural network}
-\acrodef{CMB}[CMB]{cosmic microwave background}
-\acrodef{LISA}[LISA]{laser interferometer space antenna}
-\acrodef{PEM}[PEM]{physical environment monitor}
-\acrodef{CFS}[CFS]{Chandrasekhar, Friedman and Schutz}
-\acrodef{SSB}[SSB]{solar system barycenter}
-\acrodef{MSU}[MSU]{million standard units}
-\acrodef{ASD}[ASD]{amplitude spectral density}
+\glossarystyle{listhypergroup}
+\printglossaries
+	
+
 
 \mainmatter % Turn on chapter numbering, reset page numbers, use arabic
 \include{C1_intro/introduction}

@@ -13,3 +13,13 @@
 *.bcf
 *.xml
 *.synctex.*
+
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+
+__tmp
