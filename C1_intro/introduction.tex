@@ -36,7 +36,7 @@ Finally I will summarise this work and discuss future developments in chapter \r
 In general relativity, gravity is thought of as the curvature of space-time and matter moves according to this curvature. 
 The matter in the universe also has an effect on the curvature of the space-time.
 The larger the mass of matter the more the space-time is distorted.
-Space-time can generally be described by Einstein's field equations,
+Space-time can generally be described by Einstein's field equations
 \begin{equation}
 \label{intro:gravwaves:efe}
     G_{\mu \nu} = \frac{8 \pi G}{c^4}T_{\mu \nu}.
@@ -46,7 +46,7 @@ The stress energy tensor essentially describes the matter and energy in the univ
 The Einstein tensor contains information on the curvature of the universe. 
 This can be derived directly from the metric tensor $g_{\mu \nu}$ which describes the geometry of the universe.
 Einstein's equations then explain how the curvature of space-time changes with the energy and matter within it. 
-In empty space one can assume that the geometry of space-time is flat, i.e. there is no curvature to space-time. The metric tensor for this can then be defined as,
+In empty space one can assume that the geometry of space-time is flat, i.e. there is no curvature to space-time. The metric tensor for this can then be defined as
 \begin{equation}
 g_{\mu \nu} = \eta_{\mu \nu} = \left(
 \begin{matrix}
@@ -60,14 +60,14 @@ g_{\mu \nu} = \eta_{\mu \nu} = \left(
 Each index of this matrix refers to a space-time dimension, i.e. $x^0 = t$, $x^1=x$, $x^2=y$ and $x^3=z$. 
 Measuring a distance $dx$ in space-time can be different for different observers, therefore, one needs a measure which is invariant for every observer. 
 This is the space-time interval $ds$, also known as the line element, between two `events' in space-time. 
-This is defined as,
+This is defined as
 \begin{equation}
 \label{intro:lineelement}
     ds^2 = g_{\mu \nu} dx^{\mu}dx^{\nu}.
 \end{equation}
 As in Einstein's notation this is a sum over the indices $\mu$ and $\nu$.  
 Eq.~\ref{intro:lineelement} can be thought to describe the space-time `distance' between the two events.
-For flat space-time, $\eta_{\mu\nu}$, this can then be written as,
+For flat space-time, $\eta_{\mu\nu}$, this can then be written as
 \begin{equation}
     ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2.
 \end{equation}
@@ -75,7 +75,7 @@ The Einstein equations Eq.~\ref{intro:gravwaves:efe} then demonstrate how the cu
 
 A gravitational wave can be described as a ripple in this space time.
 The simplest way to visualise this is just a small time dependent change to the flat space-time metric $\eta_{\mu\nu}$.
-In linearised theory of gravity, the space-time metric $g_{\mu \nu}$ can be defined as,
+In linearised theory of gravity, the space-time metric $g_{\mu \nu}$ can be defined as
 \begin{equation}
 \label{intro:gravwave:metric}
     g_{\mu \nu} = \eta_{\mu \nu} + h_{\mu \nu},
@@ -83,22 +83,22 @@ In linearised theory of gravity, the space-time metric $g_{\mu \nu}$ can be defi
 where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some perturbation, where $|h_{\mu \nu}| \ll 1$ \citep{flanagan2005BasicsGravitational}. 
 In this linearised theory the perturbations to the metric tensor are assumed to be small, therefore, Einstein's field equations can be solved such that the solution is a plane wave. 
 I will skip over lots of the calculation here, however, more information on this derivation can be found in \citep{flanagan2005BasicsGravitational,} \joe{more references}
-By using $g_{\mu \nu}$ from Eq.~\ref{intro:gravwave:metric}, we can write the linearised Einstein equations as,
+By using $g_{\mu \nu}$ from Eq.~\ref{intro:gravwave:metric}, we can write the linearised Einstein equations as
 \begin{equation}
 \label{intro:lineinstein}
     \Box h_{\mu \nu} = -16 \pi T_{\mu\nu},
 \end{equation}
-where $\Box$ is the d'Alembert operator which in flat space is defined by,
+where $\Box$ is the d'Alembert operator which in flat space is defined by
 \begin{equation}
 		\Box = -\frac{1}{c^2} \frac{\partial^2}{\partial t^2} + \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}
 \end{equation}
 In empty space there is no matter, therefore, all the components of the stress energy tensor  are zero, i.e. $T_{\mu \nu} = 0$.
-This allows Eq.~\ref{intro:lineinstein} to be reduced to, 
+This allows Eq.~\ref{intro:lineinstein} to be reduced to
 \begin{equation}
     \Box h_{\mu \nu} = 0.
 \end{equation}
 This then takes the form or a common physics problem known as a wave equation. 
-This follows the same form as in electrodynamics, therefore, the general solutions can be written down as,
+This follows the same form as in electrodynamics, therefore, the general solutions can be written down as
 \begin{equation}
     h_{\mu\nu} = A_{\mu\nu}e^{ik_{\alpha} x^{\alpha}},
 \end{equation}
@@ -109,7 +109,7 @@ This is just a choice of coordinate system which does not change any current ass
 This gauge imposes two conditions: one is that $h_{\mu \nu}$ is traceless, i.e. that the sum of the diagonal elements are 0 and the other is that $h_{\mu \nu}$ is transverse. 
 The transverse element means that the oscillations of the wave happen perpendicular to the direction of travel.
 At this point we can choose that the wave is travelling in the $z$ direction which means that $k = (\omega,0,0,k)$.
-By then adopting the TT gauge there are only two unique components to the metric such that the perturbation is defined as,
+By then adopting the TT gauge there are only two unique components to the metric such that the perturbation is defined as
 \begin{equation}
 \label{intro:gw:gravwave}
 h_{\mu \nu} = \left( 
@@ -138,13 +138,13 @@ The affect of each of the polarisations on a ring of test particles can be seen 
 
 To generate gravitational waves we go back to Eq.~\ref{intro:lineinstein} where we include the stress-energy term on the right hand side.
 Following the derivation in \citep{flanagan2005BasicsGravitational}, one can find that the gravitational wave amplitude is related to the second moment of the mass distribution.
-The second moment of the mass distribution $I_{\mu\nu}$is defined as,
+The second moment of the mass distribution $I_{\mu\nu}$is defined as
 \begin{equation}
     I_{\mu \nu}(t) = \int \rho(t,{\bf x}) x^\mu x^\nu d^3x,
 \end{equation}
 where $\rho$ is the mass density, and $x_i$ and $x_j$ are the coordinates \citep{flanagan2005BasicsGravitational}. 
 This is the quadrupole moment tensor without the trace subtracted.
-The gravitational wave amplitude is then defined as,
+The gravitational wave amplitude is then defined as
 \begin{equation}
 \label{intro:gravwave:amp}
     h_{\mu \nu} = \frac{2}{r}  \frac{d^2 I_{\mu \nu}(t-r)}{dt^2}.
@@ -283,7 +283,7 @@ Fig.~\ref{intro:source:cw:mountain} shows an exaggerated example of a deformatio
 \end{figure}
 
 This deformation or asymmetry can be quantified by the ellipticity $\epsilon$ of the neutron star.
-This is defined using the principal moments of inertial,
+This is defined using the principal moments of inertial
 \begin{equation}
 \label{ellipticity}
 \epsilon = \frac{I_{xx}-I_{yy}}{I_{zz}},
@@ -368,7 +368,7 @@ Each of these beams is reflected from a mirror at the end of either arm.
 The light then returns to the beam splitter where the two beams are combined and sent to a photo-detector.
 At the output, there is an interference pattern between the two beams.
 If the length of one of the arms is changed then the interference pattern will change as the phase of one beam changes with respect to the other.
-The phase difference of the light can be related to the wavelength of the light, $\lambda_l$ and the length of the detectors arms $L$ by,
+The phase difference of the light can be related to the wavelength of the light, $\lambda_l$ and the length of the detectors arms $L$ by
 \begin{equation}
 \label{intro:detectors:phasechange}
 \Delta \phi \sim \frac{\Delta L}{\lambda_l},

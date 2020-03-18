@@ -208,7 +208,7 @@ These parameters and their application are grouped into objects called neurons, 
 
 Neurons are the building blocks of any neural network.
 They perform simple operations on any number of input values and then output a single value.
-The output $o$ of a neuron is defined by the equation,
+The output $o$ of a neuron is defined by the equation
 
 \begin{equation}
     o = f\left(b + \sum_{i=1}^{N} w_i x_i  \right),
@@ -325,7 +325,7 @@ The main difference being how the weights are applied to the inputs.
 A fully connected neural network would flatten this image and apply Eq.~\ref{machine:nn:neuron:equation} to the inputs.
 This involves having a separate weight for each of the input pixels in an image.
 A convolutional layer however, filters the image and outputs a filtered image of the same size (the image can be a different size it depends how the layer was set up).
-This convolution is defined by,
+This convolution is defined by
 \begin{equation}
 \label{machine:cnn:conv:equation}
 O_{i,j} = f\left( \sum_{m} \sum_{n} F_{m,n}x_{i-m,j-n}\right) ,
@@ -438,7 +438,7 @@ This stops the network from over-fitting to specific examples. Instead it should
 Initially each of the training examples is propagated though the network to its single output value which lies between 0 and 1. Using a loss function, this output is then be compared to
 the label of the input data which is either 0 or 1. There are many types of loss function which can be used, this depends on the type of problem which one wants to solve. As we are classifying
 between two classes in out networks, the loss function, $L$, is the binary
-crossentropy defined as,
+crossentropy defined as
 %
 \begin{equation}\label{cnn:loss} 
 L = -\frac{1}{N} \sum_{i}^{N} y_i\log{(p_i)} + (1-y_i)\log{(1-p_i)},
@@ -616,7 +616,7 @@ Table~\ref{data:injections:table}. The \gls{SNR} of each simulation is then unif
 The \gls{GW} amplitude $h_{0}$ is scaled based on the noise \gls{PSD} to achieve this \gls{SNR}. 
 The power spectrum of the signal can then be simulated in each time segment of a time-frequency spectrogram. This is done by assuming that the spectrogram is $\chi^2$ distributed.
 The the antenna pattern functions are taken into account for the given source parameters and detector such that the \gls{SNR} for each time segment is calculated.
-This \gls{SNR} is spread over neighboring frequency bins dependent on its location in frequency.
+This \gls{SNR} is spread over neighbouring frequency bins dependent on its location in frequency.
 The power spectrum values can then be drawn from a non-central $\chi^2$ distribution with the non centrality parameter equal to the square of the \gls{SNR}.
 Each signal is simulated in two detectors: \glspl{LIGO} H1 and L1.
 The \glspl{SNR} reported below are then the sum of the squares of the \glspl{SNR} from each detector.
@@ -743,6 +743,7 @@ running a search on real data.
 \begin{figure}[htp]
 	\centering
 	\scalebox{0.7}{
+			\centering
 		\input{./C4_cnn/flow.tikz}}
 	\caption[Flow diagram for entire SOAP and \gls{CNN} search.]{\label{machine:pipeline:flow} This diagram shows the SOAP pipeline from start to finish. There are three main sections: Training (red), Testing (green) and Searching (grey) for both the odd and even bands. The blue sections mean that the same operations is done in all cases.}
 	
@@ -836,12 +837,6 @@ running a search on real data.
 	\gls{SNR} of the injection. This can potentially be extended to other signal parameters also. 
 	Then the efficiency curves can be generated, this is described in further detail in Sec.~\ref{machine:results:sensitivity}.
 	
-	\chris{One thing I am still confused about is search, test and training data.
-		Maybe I missed it but can you point me to the place (or add text to explain)
-		that the search data is just the data, the training data is a mix of augmented
-		data and injections, and so is the test data. In all cases the data is real.
-		The injections in the test data are different to the ones in the training data
-		and the augmentations in the test data is different to the training data.} \joe{this is said at the start of the data section \ref{data}}
 	
 \end{description}
 
@@ -873,7 +868,7 @@ training.
 To investigate the sensitivity of the pipeline we use two measures: the
 sensitivity depth $\mathcal{D}$ \cite{prix2007SearchContinuous} and optimal
 \gls{SNR} $\rho$ \cite{behnke2015PostprocessingMethods} which are both defined
-in \cite{bayley2019SOAPGeneralised} as,
+in \cite{bayley2019SOAPGeneralised} as
 %
 \begin{equation}
 \label{machine:results:depth}
@@ -881,7 +876,7 @@ in \cite{bayley2019SOAPGeneralised} as,
 \end{equation}
 %
 where $S_h(f)$ is the single-sided noise \gls{PSD} and $h_0$ is the \gls{GW}
-amplitude. The optimal \gls{SNR} is defined as,
+amplitude. The optimal \gls{SNR} is defined as
 %
 \begin{equation}
 \rho^2 = \sum_X 4
@@ -906,7 +901,7 @@ As the \gls{SNR} is sampled uniformly between the range 20-200 as in Sec.~\ref{m
 Instead, one can define some window around a point in \gls{SNR} and count the fraction of statistics which exceed the false alarm threshold within that window.
 We define the window as a Gaussian with a standard deviation of 2, this is wide enough to contain enough injections per \gls{SNR} to achieve a reliable value. The Gaussian window was chosen to down weights statistics which are further away from the given point in \gls{SNR}.
 This can then slide along the \gls{SNR} axes and estimate the efficiency as a function of \gls{SNR}
-The efficiency curves $y$ are then be calculated using,
+The efficiency curves $y$ are then be calculated using
 %
 \begin{equation}
 y(x) = \frac{\sum_i H(O_i - O^{1\%}) \mathcal{G}(x_i - x,2)}{\sum_i \mathcal{G}(x_i - x,2)},
@@ -1134,7 +1129,7 @@ Therefore, one would expect this to be an easier problem for the network to solv
 		\caption{}
 		\label{machine:results:sens_size:gauss_sens:train}
 	\end{subfigure}
-	\caption[Sensitivity with size of data set for Gaussian noise simulations.]{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here I show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Fig.~\ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark. \joe{would be nice to get some errorbars of some sort on the right hand side plot}}
+	\caption[Sensitivity with size of data set for Gaussian noise simulations.]{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here I show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Fig.~\ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark.}
 	\label{machine:results:sens_size:gauss_sens}
 \end{figure}
 
@@ -1171,21 +1166,42 @@ Therefore, more training examples are needed for the network to perform well on 
 
 Neural network are generally hard to visualise due to the large number or parameters in the network that have to be varied.
 However, there are methods which can be used to see how input data is affected by the network.
-This can be useful to see how the network performs when given certain types of data and gives some insight into how the networks work
+This can be useful to see how the network performs when given certain types of data and gives some insight into how the networks work.
 
-In the examples above we use \glspl{CNN}, the first few layers of this are build using convolutional filters.
-The filters weights should ideally correspond to the shape of the feature which one wants to extract from the image. 
-Generally this is only useful to picture at the first layer as the network can make subsequent layer and representations quite abstract.
-
+One way to visualise the network is to pass a piece of data through the network and see how each of the layers transforms the input.
+Figs.~\ref{machine:cnn:vis:vitmap:signal}, \ref{machine:cnn:vis:vitmap:line} and \ref{machine:cnn:vis:vitmap:noise} show an example of this.
+The layout is equivalent to that in Fig.~\ref{machine:results:cnnlayout}.
+In these figures, the outputs from each of the layers in the \gls{CNN} are shown. The first being the convolutional layers, followed by their max-pooling layers. 
+The final fully connected layers are illustrated with connecting lines.
+The final neuron is then the value of the statistic which we use for the above analysis.
+Fig.~\ref{machine:cnn:vis:vitmap:signal} shows an input of a Viterbi where the corresponding time-frequency spectrograms contained a strong \gls{CW} signal.
+In this figure the next layer is the first convolutional layer, where 8 filtered Viterbi maps can be seen. 
+This is then reduced in size by a max-pooling layer, followed by another convolutional and max-pooling layer.
+After this point, the figures can be compared and it becomes obvious that different neurons light up when the input is part of the signal class or when it in the noise class.
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{C4_cnn/vitmap_cnn_visualisation_signal.pdf}
-	\caption[Network visualisation]{This shows a visualisation of the convolution neural network used for Viterbi maps above}
-	\label{cnn:vis:vitmap:signal}
+	\caption[Network visualisation for a signal injection]{The \gls{CNN} can be visualised by seeing how a piece of data is passed through the network. This figure shows how the image is processed in each layer of the network. The input here is a Viterbi map which results from the SOAP algorithm. The input to SOAP here is a time-frequency spectrogram which contains a strong \gls{CW} signal. The final output neuron here is a 1 indicating that this is likely to contain a signal. }
+	\label{machine:cnn:vis:vitmap:signal}
 \end{figure}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{C4_cnn/vitmap_cnn_visualisation_line.pdf}
+	\caption[Network visualisation for instrumental line.]{This visualisation of the Viterbi map \gls{CNN} shows the input of a Viterbi map where the time-frequency spectrogram contains an instrumental line. Here the output neuron has a value of 0.4, far below that in Fig.~\ref{machine:cnn:vis:vitmap:signal}.}
+	\label{machine:cnn:vis:vitmap:line}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{C4_cnn/vitmap_cnn_visualisation_noise.pdf}
+	\caption[Network visualisation for noise.]{This visualisation of the Viterbi map \gls{CNN} shows the input of a Viterbi map where the time-frequency spectrogram contains just Gaussian noise. The output here is similar to the case where an instrumental line is injected, i.e. the output is much less than 1. }
+	\label{machine:cnn:vis:vitmap:noise}
+\end{figure}
+
+\clearpage
 
 %%%%%%%%%
 %%%%%%%%

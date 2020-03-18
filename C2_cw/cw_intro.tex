@@ -36,13 +36,13 @@ $\psi$ and $\phi_0$ and $h_0 $ are the \gls{GW} polarisation, initial phase and 
 $\iota$ is the inclination angle which is how much the source is tilted relative to the observer. 
 $\theta$ is the `wobble angle' or the angle between the rotation axis and the symmetry axis of the neutron star.
 
-The definition of the \gls{GW} from a neutron star here follows that in \citep{riles2017RecentSearches,schutz1998DataAnalysis,dupuis2005BayesianEstimation}. The amplitude of the \gls{GW} can be defined as,
+The definition of the \gls{GW} from a neutron star here follows that in \citep{riles2017RecentSearches,schutz1998DataAnalysis,dupuis2005BayesianEstimation}. The amplitude of the \gls{GW} can be defined as
 \begin{equation}
 \label{intro:cw:ht}
 h(t) = F_+(t)h_{+}(t) +F_{\times}(t)h_{\times}(t),
 \end{equation}
 where $h_{+},h_{\times}$ are the plus and cross polarisations functions as in Eq.\ref{intro:gw:gravwave} and $F_{+},F_{\times}$ are the antenna pattern functions to the two polarisations.
-These are defined by,
+These are defined by
 \begin{equation}
 \label{intro:cw:amplitudes}
     \begin{split}
@@ -50,23 +50,23 @@ These are defined by,
         h_{\times}(t) &= h_0  \cos{(\iota)} \sin{\left( \Phi(t)\right) } \\
     \end{split}
 \end{equation}
-The plus and cross polarised components then depend on the \gls{GW} amplitude $h_0$, the inclination angle of the source $\iota$ and the phase evolution of the \gls{GW}. Here I have chosen to assume a small wobble angle $\theta$, however, this is included in \citep{schutz1998DataAnalysis}. The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \gls{SSB} can be defined as,
+The plus and cross polarised components then depend on the \gls{GW} amplitude $h_0$, the inclination angle of the source $\iota$ and the phase evolution of the \gls{GW}. Here I have chosen to assume a small wobble angle $\theta$, however, this is included in \citep{schutz1998DataAnalysis}. The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \gls{SSB} can be defined as
 \begin{equation}
 \label{searchcw:model:phase}
     \Phi(t_{{\rm SSB}}) = \phi_0 + 2\pi\left[ f(t_{{\rm SSB}} - t_0) + \frac{1}{2} \dot{f} (t_{{\rm SSB}} - t_0)^2 + .....\right] .
 \end{equation}
 This consists of an initial phase $\phi_0$ which is the phase at time $t_0$, the frequency of the signal $f$ and its derivative ${\dot{f}}$ at time $t_0$. Here we show the phase to second order, however, this can be easily extended if necessary. 
-The time at the \gls{SSB} $t_{{\rm SSB}}$ can be transformed to the time $t$ at the detector by,
+The time at the \gls{SSB} $t_{{\rm SSB}}$ can be transformed to the time $t$ at the detector by
 \begin{equation}
 t_{{\rm SSB}} = t - \frac{\mathbf{r}_d \cdot \mathbf{k}}{c} + \delta_t.
 \end{equation}
 Here $\mathbf{r}_d$ is the position of the detector with reference to the \gls{SSB}, $\mathbf{k}$ is a unit vector in the direction of the source. This essentially takes into account the Doppler shift of the signal due to the movement of the detector, i.e. as the earth rotates and orbits the sun. $c$ is the speed of light and $\delta t$ is extra corrections from the Einstein, Binary and Shapiro delay \citep{}.
-The amplitudes $h_0$ in Eq.~\ref{intro:cw:amplitudes} are defined by,
+The amplitudes $h_0$ in Eq.~\ref{intro:cw:amplitudes} are defined by
 \begin{equation}
     h_0 = \frac{16 \pi^2 G}{c^4} \frac{\epsilon I f^2}{r},
 \end{equation}
 where $G$ is the gravitational constant, $c$ is the speed of light, $\epsilon$ is the ellipticity of the star, $f$ is the sum of the frequency of rotation of the star and the frequency of precession, $r$ is the distance to the star and $I_{zz}$ is the moment of inertia with respect to the rotation axis $z$.
-The ellipticity of the star $\epsilon$ is a measure of the distortion of the star around its rotation axis and is defined by,
+The ellipticity of the star $\epsilon$ is a measure of the distortion of the star around its rotation axis and is defined by
 \begin{equation}
     \epsilon = \frac{I_{xx} - I_{yy}}{I_{zz}},
 \end{equation}
@@ -76,7 +76,7 @@ In Eq.~\ref{intro:cw:ht}, $F_+(t)$ and $F_{\times}(t)$ are the antenna pattern f
 These describe how sensitive a detector is to a particular location on the sky at any given time. 
 The amplitude of the signal will vary dependent on the orientation and location of the detector relative to the source.
 This is described in Sec.~\ref{intro:detector} and the response to sky location is shown in Fig.~\ref{intro:detectors:response}.
-These components are defined in \citep{schutz1998DataAnalysis} as,
+These components are defined in \citep{schutz1998DataAnalysis} as
 \begin{equation}
 \label{intro:cw:antenna}
 \begin{split}
@@ -120,11 +120,11 @@ We can define the probability of some event $A$ as $p(A)$ where probabilities fo
 	An intersection is then the probability that both and event $A$ and an event $B$ happens. This is written as $p(A \cap B)$.
 	
 	\item [Independent and dependent Events]
-	If the events $A$ and $B$ are independent, i.e. the event $A$ does not affect the outcome of event $B$, then,
+	If the events $A$ and $B$ are independent, i.e. the event $A$ does not affect the outcome of event $B$, then
 	\begin{equation}
 	p(A \cap B) = p(A)p(B).
 	\end{equation}
-	However, if the event $A$ is dependent on event $B$, i.e. the event $A$ affects event $B$ or vice versa, then the joint probability of both events is,
+	However, if the event $A$ is dependent on event $B$, i.e. the event $A$ affects event $B$ or vice versa, then the joint probability of both events is
 	\begin{equation}
 	\label{dependentevent}
 	p(A \cap B) = p(A)p(B \mid A) = p(B)p(A \mid B).
@@ -133,7 +133,7 @@ We can define the probability of some event $A$ as $p(A)$ where probabilities fo
 	
 	\item [Conditional probability]
 	Conditional probability arises from situations where the outcome of one event will affect the outcome of future events.
-	The definition of this arises from the the dependent events defined above in Eq.~\ref{dependentevent},
+	The definition of this arises from the the dependent events defined above in Eq.~\ref{dependentevent}
 	\begin{equation}
 	p(A \mid B) = \frac{p(A \cap B)}{p(B)}.
 	\end{equation}
@@ -143,11 +143,11 @@ We can define the probability of some event $A$ as $p(A)$ where probabilities fo
 	\begin{equation}
 	p(A \mid B) = \frac{p(A \cap B)}{p(B)} \quad \rm{and} \quad p(B \mid A) = \frac{p(A \cap B)}{p(A)}
 	\end{equation}
-	such that then,
+	such that
 	\begin{equation}
 	p(B)p(A \mid B) = p(A)p(B \mid A)
 	\end{equation}
-	and this is rearranged to Bayes theorem,
+	and this is rearranged to Bayes theorem
 	\begin{equation}
 	p(A \mid B) = \frac{p(A)p(B \mid A)}{p(B)}
 	\end{equation}
@@ -161,7 +161,7 @@ We can define the probability of some event $A$ as $p(A)$ where probabilities fo
 %%%%%%%%%%%%%%%
 
 We can take Bayes theorem from Sec.~\ref{intro:prob:basic} and apply it to a problem which involves infering some parameters from some model. Here we can relabel the events $A$ and $B$ with the data ${\bm d}$ and the parameters ${\bm \theta}$ of some model $I$.
-Eq.~\ref{intro:prob:bayes} then becomes,
+Eq.~\ref{intro:prob:bayes} then becomes
 \begin{equation}
 \label{intro:bayes:bayes}
 p({\bm \theta} \mid {\bm d}, I) = \frac{p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I)}{p({\bm d} \mid I)}
@@ -192,7 +192,7 @@ The most difficult part to calculate is the evidence in Eq.~\ref{intro:bayes:evi
 There is however, a way around having to calculate this. For any given mode $I$, the evidence $p({\bm d}\mid I)$ is the same for any set of parameters ${\bm \theta}$ in Eq.~\ref{intro:bayes:bayes}. 
 The evidence is then just a normalisation factor for the posterior distribution. 
 When different models are not being compared, and we assume the model $I$ to be true, we no longer need to calculate the evidence.
-The posterior distribution can then be found by sampling,
+The posterior distribution can then be found by sampling
 \begin{equation}
 p({\bm \theta} \mid {\bm d}, I) \propto p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I).
 \end{equation}
@@ -208,7 +208,7 @@ The samples which were accepted then build the posterior distribution.
 
 In certain situations it can be useful to calculate the evidence in Eq.\ref{intro:bayes:evidence}. 
 For example, if there are two different models which could represent the data, the evidence can be used to determine which of the two models is more likely.
-This is known as a Bayes factor where two models $I_1$ and $I_2$ are compares and is defined as,
+This is known as a Bayes factor where two models $I_1$ and $I_2$ are compares and is defined as
 \begin{equation}
 B = \frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)}
 \end{equation}
@@ -253,19 +253,19 @@ This is known as a matched filter \citep{} and is used in \gls{CW} searches in \
 The matched filter maximises the signal to noise ratio for a given filter, in this case the filter is our \gls{CW} model. 
 The matched filter used for \gls{CW} models is defined in \citep{prix2007SearchContinuous} and it titled the $\mathcal{F}$-statistic. 
 This essentially maximises a likelihood with respect to the parameters.
-If one assumes that the noise $n$ is Gaussian and zero mean, the data $x$ can be written as,
+If one assumes that the noise $n$ is Gaussian and zero mean, the data $x$ can be written as
 \begin{equation}
 		x(t) = n(t) + h(t).
 \end{equation}
-The likelihood can then be written as,
+The likelihood can then be written as
 \begin{equation}
 		\log \Lambda = \left( x \mid h \right) - \frac{1}{2} \left( h \mid h\right) 
 \end{equation}
-where the product $(x \mid y)$ is defined as,
+where the product $(x \mid y)$ is defined as
 \begin{equation}
 		\left( x \mid y \right) = 4 \mathcal{R} \int^{\infty}_{-\infty}  \frac{\tilde{x}^{{\rm X}}(f) \tilde{y}^{{\rm X *}}(f)  }{S^{X}(f)} \mathrm{d}f.
 \end{equation}
-This is fulle expanded into the $\mathcal{F}$-statistic in \citep{schutz1998DataAnalysis}, however, it is essentially this likelihood function which is maximised. 
+This is fully expanded into the $\mathcal{F}$-statistic in \citep{schutz1998DataAnalysis}, however, it is essentially this likelihood function which is maximised. 
 
 
 Targeted searches look for a specific pulsar which has been observed in the electromagnetic spectrum.

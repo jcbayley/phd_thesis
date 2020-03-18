@@ -1202,12 +1202,29 @@ The S6 optimised statistic looks for more consistent \gls{SNR} in each of the de
 The two different lines show the statistic optimised on the Gaussian noise injections and the S6 \gls{MDC} injections.
 This demonstrates how the `line aware' statistic improves the robustness of the algorithm against non astrophysical signals. 
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.9\linewidth]{C3_soap/line_example.pdf}
     \caption[Example of improvements when using optimised parameters for line aware statistic.]{As a visualisation of the line aware statistic working, an astrophysical signal was simulated in both the H1 and L1 detectors. In one detector an instrumental line was added. In the top panel above the tracks identified by different values of the line aware statistic are shown shifted up by 10 frequency bins. This allows the underlying feature to be identified. In the top two panels the sinusoidal nature of the \gls{CW} signal can be identified in the data, and was identified by the line aware statistic using the S6 MDC optimal values (blue line). The top panel also contains a narrow spectral line at $\sim 102.5$ Hz. The values of the statistic optimised for the Gaussian noise case do not identify the signal but identify the spectral line as the most likely signal. The final panel shows the Viterbi map for the statistic values optimised in the S6 MDC. }
     \label{soap:las:optimisation:vitexample}
 \end{figure}
+
+\subsubsection{Comparison of sensitivity}
+
+To compare the different parameters of the line aware statistic, three parameter sets were used. 
+The optimised values for the Gaussian noise case and the S6 \gls{MDC} case above are used alongside the values optimised in Tab.~\ref{soap:results:parameters}.
+These three parameter sets are run on the S6 \gls{MDC} simulations between 40 and 500 Hz to compare their sensitivity. 
+The process of running on the S6 \gls{MDC} and generating the efficiency curves is the same as in Sec.~\ref{soap:results}.
+Fig.~\ref{soap:las:optimisation:comparison} shows the efficiency curves at a 10\% false alarm rate. 
+This, along with Fig.~\ref{soap:las:optimisation:gauss} and \ref{soap:las:optimisation:s6mdc} shows that the search is relatively insensitive to the choice of parameters.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{C3_soap/optimised_comparison.pdf}
+	\caption[Comparison of three sets of parameters of the line aware statistic.]{The sensitivity can be compared for three sets of parameters of the line aware statistic. These are the two sets optimised for Gaussian noise and the S6 \gls{MDC} above and the values used in Tab.~\ref{soap:results:parameters}. }
+	\label{soap:las:optimisation:comparison}
+\end{figure}
+
 
 \clearpage
 
