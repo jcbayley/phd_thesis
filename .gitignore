@@ -23,3 +23,9 @@
 *.ist
 
 __tmp
+corrections/Joe main 12 March.pdf
+thesis.sublime-project
+thesis.sublime-workspace
+main.fls
+main.fdb_latexmk
+.vscode/settings.json

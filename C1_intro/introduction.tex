@@ -82,7 +82,7 @@ In linearised theory of gravity, the space-time metric $g_{\mu \nu}$ can be defi
 \end{equation}
 where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is some perturbation, where $|h_{\mu \nu}| \ll 1$ \citep{flanagan2005BasicsGravitational}. 
 In this linearised theory the perturbations to the metric tensor are assumed to be small, therefore, Einstein's field equations can be solved such that the solution is a plane wave. 
-I will skip over lots of the calculation here, however, more information on this derivation can be found in \citep{flanagan2005BasicsGravitational,} \joe{more references}
+More information on this derivation can be found in \citep{flanagan2005BasicsGravitational,letiec2016TheoryGravitational}.
 By using $g_{\mu \nu}$ from Eq.~\ref{intro:gravwave:metric}, we can write the linearised Einstein equations as
 \begin{equation}
 \label{intro:lineinstein}
@@ -97,19 +97,19 @@ This allows Eq.~\ref{intro:lineinstein} to be reduced to
 \begin{equation}
     \Box h_{\mu \nu} = 0.
 \end{equation}
-This then takes the form or a common physics problem known as a wave equation. 
-This follows the same form as in electrodynamics, therefore, the general solutions can be written down as
+This is of course the wave equation. 
+This follows the same form as in electrodynamics and the general plane-wave solutions have the form
 \begin{equation}
     h_{\mu\nu} = A_{\mu\nu}e^{ik_{\alpha} x^{\alpha}},
 \end{equation}
 where each component of $h_{\mu \nu}$ is a sinusoid travelling along vector $k_{\alpha}$ with amplitude $A_{\mu\nu}$ \citep{capano2011SearchingGravitational}.
-At this point the set of equations are not simple, the symmetric tensor $A_{\mu \nu}$ has 10 independent components.
-This can be greatly simplified by choosing a different gauge (coordinate system) where the metric perturbation is both transverse and traceless (TT) \citep{flanagan2005BasicsGravitational}.
+At this point the set of equations are not simple; the symmetric tensor $A_{\mu \nu}$ has 10 independent components.
+This can be greatly simplified by choosing a different gauge where the metric perturbation is both transverse and traceless (TT) \citep{flanagan2005BasicsGravitational}.
 This is just a choice of coordinate system which does not change any current assumptions. A traceless metric is one where the sum of the diagonal elements are 0 and a transverse metric is when the oscillations are perpendicular to the direction of travel. 
 This gauge imposes two conditions: one is that $h_{\mu \nu}$ is traceless, i.e. that the sum of the diagonal elements are 0 and the other is that $h_{\mu \nu}$ is transverse. 
 The transverse element means that the oscillations of the wave happen perpendicular to the direction of travel.
 At this point we can choose that the wave is travelling in the $z$ direction which means that $k = (\omega,0,0,k)$.
-By then adopting the TT gauge there are only two unique components to the metric such that the perturbation is defined as
+By then adopting the TT gauge there are only two unique components to the metric such that the perturbation is
 \begin{equation}
 \label{intro:gw:gravwave}
 h_{\mu \nu} = \left( 
@@ -144,11 +144,12 @@ The second moment of the mass distribution $I_{\mu\nu}$is defined as
 \end{equation}
 where $\rho$ is the mass density, and $x_i$ and $x_j$ are the coordinates \citep{flanagan2005BasicsGravitational}. 
 This is the quadrupole moment tensor without the trace subtracted.
-The gravitational wave amplitude is then defined as
+The gravitational wave amplitude is then
 \begin{equation}
 \label{intro:gravwave:amp}
-    h_{\mu \nu} = \frac{2}{r}  \frac{d^2 I_{\mu \nu}(t-r)}{dt^2}.
+    h_{\mu \nu} = \frac{2}{r}  \frac{d^2 I_{\mu \nu}(t-r)}{dt^2},
 \end{equation}
+where $r$ is the distance from the source \citep{letiec2016TheoryGravitational}.
 This has a slight modification in the TT gauge, see \citep{flanagan2005BasicsGravitational}, however, has the same relationship between the mass quarupole and the \gls{GW} amplitude.
 This shows that for a \gls{GW} to be generated, the second derivative of the mass quadrupole moment is needed.
 A mass quadrupole moment only exists when the mass distribution is not spherically symmetric.
@@ -182,7 +183,7 @@ In the sections that follow, I will give an overview of the potential sources of
 \subsection{\label{sources:transient} Transient}
 %%%%%%%%%%%%%%%
 
-Transient sources of gravitational waves give short duration signals which are observable from milliseconds to tens of seconds depending on the source. 
+Transient sources of gravitational waves are short duration signals which are observable from milliseconds to tens of seconds depending on the source. 
 Some of these sources will emit signals for a much longer time, however these are at a lower frequency and lower amplitude and not observable by current ground based detectors detectors.
 Transient signals can be further split into two categories based on how well they are modelled. 
 \glspl{CBC} have well modelled wave-forms and bursts are generally from un-modelled or unknown sources.
