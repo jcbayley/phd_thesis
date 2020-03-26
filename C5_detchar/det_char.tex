@@ -278,11 +278,11 @@ A flow diagram of how the SOAP search works for instrumental line searches can b
 \end{figure} 
 These stages are as follows:
 \begin{description}
-	\item[1. \glspl{SFT} from timeseries] The \glspl{SFT} are generated for the \gls{GW} output channel. This is done by the Fscan search, therefore we do not repeat this process. Currently the search only runs on the \gls{GW} channel, however, in the future could be made to run on others.
+	\item[1. \glspl{SFT} from time series] The \glspl{SFT} are generated for the \gls{GW} output channel. This is done by the Fscan search, therefore we do not repeat this process. Currently the search only runs on the \gls{GW} channel, however, in the future could be made to run on others.
 	
 	\item[2. Divide \gls{SFT} by running median] In this stage each \gls{SFT} is divided by its running median which is 100 bins wide. The running median takes each \gls{SFT} and applies a window of 100 bins, where the median of these 100 frequency bins is taken. This window then slides over the \gls{SFT} producing an `filtered' \gls{SFT}which should exclude outliers.
 	
-	\item[3. Narrow-band \gls{SFT}] The \gls{SFT} is then split into 0.2 Hz wide sub-bands for the SOAP search to run on. These smaller bands are chosen as the SOAP search pull information on the most likely track, therefore, smaller bands are not contaminated by areas of high power in neighbouring frequency bands. 
+	\item[3. Narrow-band \gls{SFT}] The \gls{SFT} is then split into 0.2 Hz wide sub-bands for the SOAP search to run on. These smaller bands are chosen as the SOAP search pull information on the most likely track, therefore, smaller bands are not contaminated by areas of high power in neighboring frequency bands. 
 	
 	\item[4. Run SOAP and generate plots] This stage runs the SOAP search with a flat transition matrix probability and generates plots as shown in Fig.~\ref{detchar:soap:noiseplot}.
 	
