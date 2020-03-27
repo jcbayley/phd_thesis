@@ -187,19 +187,18 @@ A useful tool which can be used to classify this extra information is convolutio
 %%%%%%%%%%%
 
 
-Throughout this section I will summarise one machine learning technique which are known as Neural networks. 
-Neural networks, as the name may suggest, was developed as a way for a computer to mimic the neurons in the brain.
-To understand why this would be useful, a common example used is the ability for an algorithm to identify hand written digits.
+Throughout this section I will summarise one machine learning technique known as a neural network. 
+Neural networks, as the name may suggest, were developed as a way for a computer to mimic neurons in the brain.
+To understand why this would be useful, one can try to design an algorithm to identify hand written digits.
 This seems like a simple task as a brain can complete with ease. 
 However, writing a traditional algorithm to perform this same task is very difficult. 
 The algorithm would have to identify a particular shape which has a huge amount of variation.
-Neural networks offer a way to deal with this problem as they can be trained on large datasets.
-This is similar to how a human brain is `trained'. 
-In a lifetime of a brain many examples of different symbols are seen and each time a new one is seen the brain `updates' itself based on what is observed. 
-This process is essentially replicated for a neural network, where the algorithm can be updated such that it can correctly identify each digit.
-
-This process can be replicated in a neural network, where it has many parameters which can be modified or `trained'. 
-These parameters and their application are grouped into objects called neurons, many of these neurons are used to build a neural network.
+Neural networks offer a way to deal with this problem as they can be trained on large datasets, similar to how a human brain is `trained'. 
+In the lifetime of a brain, many examples of different hand written digits are seen. 
+For each new example the brain `updates' itself based on the new version of the observed digit. 
+This process is essentially replicated in a neural network where the algorithm can be updated for each example, with the goal of correctly identifying a digit.
+A neural network has many parameters which can be modified or `trained', it is these parameters which are updated after each new example of a digit. 
+These parameters are grouped into objects called neurons, many combinations of neurons can then be used to build a neural network.
 
 %%%%%%%%%
 %%%%%%%%%
@@ -216,13 +215,11 @@ The output $o$ of a neuron is defined by the equation
     \label{machine:nn:neuron:equation}
 \end{equation}
 
-where $b$ is the bias, $x$ is the input, $w$ is the weights, $f$ is the activation function, $o$ is the output and $N$ is the number of inputs.
-Here the input $x$ represents either the data which is input, i.e the pixels of the image which contains the digit in the example above, or the output of another neuron.
-The weights $w$ then represents how important each of those data points are to this problem, or specifically this neuron. 
+where $b$ is the bias, $x_i$ is an input value with a corresponding weight $w_i$, $f$ is the activation function, $o$ is the output and $N$ is the number of inputs.
+Here the inputs $\mathbf{x}$ represents either the data which is input, in the example above this is the pixels in the digits image, or the output of another neuron.
+The weights $\mathbf{w}$ then represent the importance of each data point to this neuron. 
 The bias $b$ is then just an extra factor which can shift the data by a fixed value.
 The activation function $f$ is then a function which can have many forms, in the simplest case in a neuron known as a `perceptron', it provides a cut where any value above a given threshold is 1 and any below is 0, this will be explained in more detail in Sec.~\ref{machine:nn:activation}. 
-However, there are many different types of activation functions which can be applied to different situations.
-This will be explained in more detail in Sec.~\ref{machine:nn:activation}.
 
 \begin{figure}[h]
     \centering
@@ -232,8 +229,8 @@ This will be explained in more detail in Sec.~\ref{machine:nn:activation}.
 \end{figure}
 
 In the example in Fig.~\ref{machine:nn:neuron:plot} I have shows a neuron which has 4 input variables, or 4 input data points. 
-When a network is trained, or when it learns, the weights applied to each of the inputs and the bias are updated to better represent the input data.
-This training procedure is explained in more detail in Sec.~\ref{machine:nn:training}
+When a network is trained the weights and the bias are updated to better represent the input data.
+This training procedure is explained in more detail in Sec.~\ref{machine:nn:training}.
 Many neurons are then used in combination with each other to develop a neural network which can be applied to more complex problems.
 
 %%%%%%%%%%%%%%%%%%%%
@@ -247,13 +244,12 @@ An example of a simple neural network is shown in Fig.~\ref{machine:nn:structure
 The first layer is the input layer, this is just the data points from an input example.
 In the example of hand drawn digits, this would be the pixels from the image of the digit.
 The final layer represents the information that you intend the network to extract from the input data. 
-In the hand drawn digit example, this could have 10 output values corresponding to each digit 0-9. 
+In the hand drawn digit example, this could have 10 output neurons corresponding to each digit 0-9. 
 Each of these outputs is then a value which is related to the probability of that digit being present in the image.  
 
-When designing a network, the user will have a defined input layer size from the data and a set number for the output layer which represents, for a classification example, the number of output classes. 
+When designing a network, the user will have a defined input layer size from the data and a desired number of output neurons which represents, for a classification example, the number of output classes. 
 The number of hidden layers and the number of neurons in those hidden layers can be arbitrarily changed. 
 In general if the data contains more complex information the size or complexity of the network will need to be increased for it to be able to extract the information. 
-If there is a small number of training examples and a large and complex network, it may be able to learn the input data set as opposed the the general information that they represent.
 
 \begin{figure}[h]
     \centering
@@ -267,10 +263,11 @@ If there is a small number of training examples and a large and complex network,
 \subsection{\label{machine:nn:activation}Activation functions}
 %%%%%%%%%%%%%%%%%
 
-The activation function is how the output of a neuron is transformed. 
+The activation function transforms the sum of the data and weights as in Eq.~\ref{machine:nn:neuron:equation}. 
 The most simple activation function is a cut as described in Sec.~\ref{machine:nn:neuron}, however, this type of activation does not perform well.
 Activations functions a generally based on a few properties.
-The activation function is generally non-linear, this allows networks with multiple layers to be used to approximate a function. A linear activation function means that any number of layers in a network is equivalent to a single layer network.
+It is generally non-linear, this allows networks with multiple layers to be used to approximate a function. 
+A linear activation function means that any number of layers in a network is equivalent to a single layer network \citep{}.
 Another property which is desired in activation function is that it is continuously differentiable. This is to allow algorithms such as gradient descent to optimise the network. 
 The functions are found to perform better if they are monotonic and smooth.
 There are many choices when defining this in the network, some of the available options are shown in Fig.~\ref{machine:nn:activation:plot}.
