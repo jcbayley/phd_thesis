@@ -2,7 +2,7 @@
 
 %%%%%%%%%%%%%%%%
 In this section I outline how we inject a \gls{CW} signal into data. This can generally be done in two different ways: simulating a signal in the time domain and injecting into time domain noise or simulating the signal in the frequency domain. 
-The searches described in Sec.~\ref{soap} and Sec.~\ref{cnn} only use output power spectra] 
+The searches described in Sec.~\ref{soap} and Sec.~\ref{machine} only use output power spectra] 
 Generating the time series and performing a Fourier transform or generating the signal in the frequency domain is time consuming. 
 In this section I will outline how I simulate the power spectrum of \gls{CW} signals and inject them into a \gls{PSD}.
 This should greatly improve the speed of data generation.
@@ -188,21 +188,21 @@ The values of this for the center location of each frequency bin surrounding the
 A full spectrogram of a loud signal ($\sim 1000$ \gls{SNR}) can be seen in Fig.~\ref{app1:spect:centerbin}, \ref{app1:spect:edgebin}, \ref{app1:spect:doppler} and \ref{app1:spect:antenna} to demonstrate the signal simulations.
 The signal frequency for each time segment can be found using the model described in Sec.~\ref{searchcw:model}.
 Fig.~\ref{app1:spect:centerbin} shows an example of a signal of fixed frequency which is simulated at the center of a frequency bin.
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/centerbin_nodop_noant.pdf}
 	\caption[Generated spectrogram in center of frequency bin.]{By simulating a signal with a frequency in the center of a band, all of the signals power is contained within a single frequency bin. This shows an example of this kind of simulation in a spectrogram. The red line is the signals frequency evolution.}
 	\label{app1:spect:centerbin}
 \end{figure}
 When the signals frequency is then moved to the edge of a bin, the power can be seen to be distributed evenly between the two surrounding frequency bins. This can be seen in Fig.~\ref{app1:spect:edgebin}.
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/edgebin_nodop_noant.pdf}
 	\caption[Generated spectrogram at edge of frequency bin.]{By placing the signal at the edge of a frequency bin, the power is distributed around surrounding frequency bin, this can be seen above. The red line is the signals frequency evolution.}
 	\label{app1:spect:edgebin}
 \end{figure}
 The doppler shift of a signal can then be added such that the frequency changes with time. This is shown in Fig.~\ref{app1:spect:doppler}.
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/edgebin_doppler_noant.pdf}
 	\caption[Generated spectrogram of \gls{CW} signal with Doppler shift.]{Including the Doppler shift of a signal due to the earths rotation and orbit cause the signal to be modulated in frequency. This also causes a modulation in the \gls{SNR} of the signal in and single frequency bin as it moves between bins. The red line is the signals frequency evolution.}
