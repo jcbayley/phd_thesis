@@ -11,11 +11,12 @@ This is a field which aims to use computers to learn information without being g
 With the increase in available computing power in recent years along with the easier access to large data-sets, machine learning has become a much more accessible technique.
 One of the techniques in particular is a method known as deep learning which uses deep neural networks.
 These have been used extensively in classification problems as well as many others.
+Neural networks wave a large range of applications, and have gained increasing popularity for use in \gls{GW} data analysis problems.
 
 %------------------------
-%Overview of what is paper and not
+%Overview of what is chapter is
 %--------------------------
-This chapter aims to given an overview of neural networks, specifically \glspl{CNN} and their application to a \gls{CW} search. 
+This chapter aims to give an overview of neural networks, specifically \glspl{CNN} and their application to a \gls{CW} search. 
 The majority of this section is written in a paper which is yet to be published, however, is aimed to be submitted soon.
 The differences are, Sec.~\ref{machine:nn}, \ref{machine:cnn} and \ref{machine:training} which describe the operation of neural networks have more detail in this thesis than in the paper draft. 
 Sec.\ref{machine:results:sens_size} is additional material which is currently not included in the paper draft.
@@ -852,23 +853,25 @@ running a search on real data.
 
 % a general introduction statement about the results
 %
-The networks described in Sec.~\ref{machine:cw:structure} were trained and tested on four different data-sets: the S6 \gls{MDC} as in~\cite{bayley2019SOAPGeneralised,walsh2016ComparisonMethods}, our own
+The networks described in Sec.~\ref{machine:cw:structure} were trained and tested on
+four different data-sets: the S6 \gls{MDC} as
+in~\citep{bayley2019SOAPGeneralised,walsh2016ComparisonMethods}, our own
 injections into O2 data, Gaussian noise which had the same gaps and noise
 floor as the S6 data-set, and our own injections into real S6 data. Each of
-the searches use training and test data in the frequency range of 100-400 Hz,
+the searches use training and testing data in the frequency range of 100-400 Hz,
 except the S6 \gls{MDC} which uses data in the range 40-500 Hz for testing and
 training. 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\label{machine:results:sensitivity} Sensitivity}
-
 
 % define the figures of merit - the depth and SNR
 %
 To investigate the sensitivity of the pipeline we use two measures: the
 sensitivity depth $\mathcal{D}$ \cite{prix2007SearchContinuous} and optimal
-\gls{SNR} $\rho$ \cite{behnke2015PostprocessingMethods} which are both defined
-in \cite{bayley2019SOAPGeneralised} as
+\gls{SNR} $\rho$ \citep{behnke2015PostprocessingMethods} which are both defined
+in \citep{bayley2019SOAPGeneralised}.
+The sensitivity depth is defined as
 %
 \begin{equation}
 \label{machine:results:depth}
@@ -876,43 +879,48 @@ in \cite{bayley2019SOAPGeneralised} as
 \end{equation}
 %
 where $S_h(f)$ is the single-sided noise \gls{PSD} and $h_0$ is the \gls{GW}
-amplitude. The optimal \gls{SNR} is defined as
+amplitude. The optimal \gls{SNR} is defined as,
 %
 \begin{equation}
+\label{machine:results:snr}
 \rho^2 = \sum_X 4
 \Re\int^{\infty}_{0}\frac{\tilde{h}^X(f)\tilde{h}^{X*}(f)}{S^X(f)}df,
 \end{equation}
 %
 where $X$ indexes the detectors and $\tilde{h}(f)$ is the Fourier transform of
 the time series of the signal $h(t)$. This expression is defined
-in~\cite{prix2007SearchContinuous} for a double-sided \gls{PSD} and we have
+in~\citep{prix2007SearchContinuous} for a double-sided \gls{PSD} and we have
 defined it for the more common single-sided case.
-
 
 % describe setting a false alarm threshold
 %
 The sensitivity curves shown in Fig.~\ref{machine:results:o2},\ref{machine:results:s6gauss} and
 \ref{machine:results:s6mdc} were generated using a $1\%$ false alarm rate, where the
-false alarm threshold is the value of our statistic where $1\%$ of sub-bands which
-do not contain an injection exceed that value. This is then used as a detection
-threshold.
-The efficiency is defined as the fraction of events which exceed the false alarm rate for any given \gls{SNR}.
-As the \gls{SNR} is sampled uniformly between the range 20-200 as in Sec.~\ref{machine:pipeline}, the efficiency cannot be calculated for any individual \gls{SNR}.
-Instead, one can define some window around a point in \gls{SNR} and count the fraction of statistics which exceed the false alarm threshold within that window.
-We define the window as a Gaussian with a standard deviation of 2, this is wide enough to contain enough injections per \gls{SNR} to achieve a reliable value. The Gaussian window was chosen to down weights statistics which are further away from the given point in \gls{SNR}.
-This can then slide along the \gls{SNR} axes and estimate the efficiency as a function of \gls{SNR}
-The efficiency curves $y$ are then be calculated using
+false alarm threshold is the value of our statistic where $1\%$ of sub-bands
+which do not contain an injection exceed that value. This is then used as a
+detection threshold. The efficiency is defined as the fraction of events which
+exceed the false alarm rate for any given \gls{SNR}.  The \gls{SNR} is sampled
+uniformly between the range 20-200 as described in Sec.~\ref{machine:pipeline}.
+Therefore, we do not have multiple simulations for a discrete \gls{SNR} but adopt a different approach.
+Instead, one can define some window around a point in \gls{SNR} and count the fraction of statistics which
+exceed the false alarm threshold within that window.  We define the window as a
+Gaussian with a standard deviation of 2, this is wide enough to contain enough
+injections at a given \gls{SNR} to achieve a reliable value.
+The efficiency curves $y$ are then be calculated using,
 %
 \begin{equation}
-y(x) = \frac{\sum_i H(O_i - O^{1\%}) \mathcal{G}(x_i - x,2)}{\sum_i \mathcal{G}(x_i - x,2)},
+\label{machine:results:gauss_smooth}
+y(\rho) = \frac{\sum_i H(O_i - O^{1\%}) \mathcal{G}(\rho_i;\mu=\rho,\sigma=2)}{\sum_i
+\mathcal{G}(\rho_i;\mu=\rho,\sigma=2)},
 \end{equation}
 %
-where $O_i$ is the output statistic from the \gls{CNN}, $O^{1\%}$ is the statistic value at a 1\% false alarm rate, $H$ is the Heaviside step function which has a value of 1 for positive values and 0 for negative values. $x_i$ is the \gls{SNR} of a simulation with output $O_i$, $x$ is the current location in \gls{SNR} and $\mathcal{G}(x_i - x,2)$ is a Gaussian with a
-mean of the current \gls{SNR} and a standard deviation of 2.  
-The sensitivity curves for each of the described data-sets are shown in
-Figs.~\ref{machine:results:o2}, \ref{machine:results:o1}, \ref{machine:results:s6gauss} and
-\ref{machine:results:s6mdc}.
-
+where $O_i$ is the output statistic from the \gls{CNN}, $O^{1\%}$ is the
+statistic value corresponding to a 1\% false alarm rate, $H$ is the Heaviside
+st ep function which has a value of 1 for positive input arguments and 0 for negative arguments. 
+The \gls{SNR} if a simulation with output $O_i$ is defined in Eq.~\ref{machine:results:gauss_smooth} using $\rho_i$. The current location in \gls{SNR} is then $\rho$.
+The window is a Gaussian with a mean of the current \gls{SNR} and a standard deviation of 2, $\mathcal{G}(\rho_i, \mu = \rho,\sigma=2)$. 
+ The sensitivity curves for each of the described data-sets are shown in
+Figs.~\ref{machine:results:o2},\ref{machine:results:s6gauss} and \ref{machine:results:s6mdc}.
 
 %%%%%%%%
 \subsubsection{O1}
@@ -947,18 +955,38 @@ The \gls{SNR} here should not be compared between different runs as this is the 
 \subsubsection{O2}
 %%%%%%%%%%
 
-For the next test, injections were made into the O2 data-set in the same way as in the last section. Then each of the 6 networks described in Sec.~\ref{machine:cw:structure} were trained and tested on this data. 
-Fig.~\ref{machine:results:o2} shows the sensitivity curves for this test for both \gls{SNR} and sensitivity depth for each of the 6 networks.
-The results here are very similar to the results from the O1 simulations.
-The Viterbi statistic is the least sensitive `network', followed by the spectrogram \gls{CNN}.
-The remaining four networks all achieve a similar sensitivity, each of these remaining networks contain the Viterbi map as one of their inputs. Therefore, it is assumed that the dominating effect on the sensitivity originated from the Viterbi maps. In following tests the focus will be with the Viterbi map \gls{CNN} as in all cases this is among the most sensitive.
-For the O2 data-set we show that with a false alarm of 1\% the Viterbi map \gls{CNN} achieves a sensitivity of SNR $~95$ and sensitivity depth of $~12\; {\rm Hz}^{-1/2}$ with 95\% efficiency.
-This result in the sensitivity depth in Fig.~\ref{machine:results:depth_o2} does not vary much from the results from O1, Fig.~\ref{machine:results:depth_o1}. 
-Whilst one might expect the sensitivity to increase due to the increase in sensitivity and longer observing run.
-However, this is not the case \joe{why?}.
+% describe the first test - O2 injections
+%
+For the first test, injections were made into the O2 data-set as described in
+Sec.~\ref{machine:data} between 100 Hz and 400 Hz. Each of the 6 networks described in
+Sec.~\ref{machine:cw:structure} were then trained and tested on this data.
+Figure ~\ref{machine:results:o2} shows the sensitivity curves for
+this test for both \gls{SNR} and sensitivity depth for each of the 6 networks.
+Focusing on Fig.~\ref{machine:results:snr_o2}, the least sensitive of the \glspl{CNN} is the
+Viterbi statistic (vitstat). This is
+expected as we know that the despite the line-aware aspect of the Viterbi statistic, it can still confuse some instrumental lines with an astrophysical signal. 
+The spectrogram \gls{CNN} has an improved sensitivity over the Viterbi statistic,
+this importantly does not involve the SOAP search but is run entirely on
+down-sampled and summed spectrograms. This network is approaching the
+most sensitive of the examples in Fig.~\ref{machine:results:o2}.
+With further investigation involving perhaps different network structures or larger or higher resolution data sets, this could potentially reach the same sensitivity as other networks. However, this network
+takes $\sim10$ times the amount of training time compared to the Viterbi map network. This
+is explained in more detail in Sec.~\ref{machine:results:timing}. The
+remaining four networks all achieve a similar sensitivity, each of these
+networks contain the Viterbi map (vitmap) as one of their inputs or their only
+input. Therefore, it is assumed that the dominating effect on the sensitivity
+originated from the Viterbi maps.  In the following tests the focus
+will be on the Viterbi map \gls{CNN} as in all cases this is among the most
+sensitive. For the O2 data-set we show that with a false
+alarm probability of 1\% the Viterbi map \gls{CNN} achieves a
+sensitivity of \gls{SNR} $~95$ and sensitivity depth of $~12\; {\rm Hz}^{-1/2}$
+with 95\% efficiency.
+In Fig.~\ref{machine:results:snr_o2} the sensitivity of the spectrogram \gls{CNN} drops after an \gls{SNR} of 150. 
+This is most likely due to the training set containing simulations between and \gls{SNR} of 50 and 150, therefore, has not seen signal simulations of higher \gls{SNR}.
+The dip in sensitivity in Fig.~\ref{machine:results:depth_o2} at lower depths is from the same origin as Fig.~\ref{machine:results:snr_o2}. 
+
 
 \begin{figure}
-	%\centering
 	\begin{subfigure}[h]{0.5\textwidth}
 		\includegraphics[width=\columnwidth]{C4_cnn/o2_snr_eff.pdf}
 		\caption{}
@@ -969,7 +997,12 @@ However, this is not the case \joe{why?}.
 		\caption{}
 		\label{machine:results:depth_o2}
 	\end{subfigure}
-	\caption[O2 results from SOAP and \gls{CNN} search.]{\label{machine:results:o2} In the O2 data-set, each of the six \glspl{CNN} were tested. The efficiency plots above are for a 1\% false alarm rate. These show that the use of spectrograms and the Viterbi maps with \glspl{CNN} greatly improve the sensitivity when compared to the Viterbi statistic. For each \gls{CNN} which uses a combination of inputs it achieves a similar sensitivity to the \gls{CNN} which uses just the Viterbi map. This implies that the Viterbi map contains the most information out of the tested \glspl{CNN}. }
+
+	\caption[O2 results from SOAP and \gls{CNN} search.]{\label{machine:results:o2}  In the O2 data-set, each of the six \glspl{CNN} were tested. The efficiency plots above are for a 1\% false alarm rates.
+	Fig.~\ref{machine:results:snr_o2} shows the efficiency of the search as a function of \gls{SNR} and Fig.\ref{machine:results:depth_o2} shows the efficiency as a function of sensitivity depth.
+	The efficiency here is a measure of the fraction of events which exceed the 1\% false alarm probability for any given \gls{SNR}.
+	These plots both show the sensitivity of the Viterbi statistic is far below that of the different \glspl{CNN}. 
+	The others are grouped with a similar sensitivity.}
 	
 \end{figure}
 
@@ -979,14 +1012,39 @@ However, this is not the case \joe{why?}.
 \subsubsection{Gaussian noise}
 %%%%%%%%%%%
 
-The next test involves using injections into Gaussian noise. For this test we tried to replicate the S6 data-set without including instrumental artefacts such as lines. We included the same gaps in data as S6 and the noise floor of S6 was replicated by scaling the \gls{SNR} of any injection in any given \gls{SFT}. 
-Fig.~\ref{machine:results:s6gauss} shows the sensitivity curves for the Viterbi statistic and Viterbi map \gls{CNN} for both the Gaussian noise run with S6 gaps and for injections into the S6 data-set. 
-In the Gaussian noise data-set the curves for both statistics, Viterbi map and the Viterbi statistic, show very similar results, this is to be expected as the main use of the \gls{CNN} was to reduce the effect of instrumental lines, for which there is none in this data set. 
-The advantage of using the Viterbi maps in a \gls{CNN} becomes clear which it is tested on injections into real data with many instrumental lines. 
-The remaining curves in Fig.~\ref{machine:results:s6gauss} show these tests, and it becomes clear that the Viterbi map \gls{CNN} reduces the effect of instrumental lines and therefore increases the searches sensitivity. 
-These tests in S6 also show that the effect of instrumental lines was far greater in this run than in O2. 
-This is shown in Fig.~\ref{machine:results:o2} where the separation between the Viterbi statistic curves and the Viterbi map curves is much smaller than the S6 curves in Fig.~\ref{machine:results:s6gauss}.
-For injections into Gaussian noise following S6 gaps we show that with a false alarm of 1\% the Viterbi map \gls{CNN} achieves a sensitivity of SNR $~85$ and sensitivity depth of $~20\; {\rm Hz}^{-1/2}$ with 95\% efficiency. For injections into real S6 data the search achieves a sensitivity of SNR $~115$ and sensitivity depth of $~11\; {\rm Hz}^{-1/2}$ with 95\% efficiency and 1\% false alarm. We can also see from Fig.~\ref{machine:results:s6gauss} that the sensitivity in Gaussian noise with S6 gaps is better than in real S6 data, so there are still some elements of the search which reduces the sensitivity.
+% describe the second test - Gaussian noise
+%
+The second test involves using simulations in Gaussian noise and comparing this to simulations in S6 data.
+ For this test we replicate the S6
+data-set without including instrumental artefacts such as lines. We included
+the same gaps in data as S6 and the noise floor of S6 was replicated by scaling
+the \gls{SNR} of an injection in any given \gls{SFT} by an estimate of its \gls{PSD}. 
+Figure ~\ref{machine:results:s6gauss}
+shows the \gls{SNR} and depth sensitivity curves for the Viterbi statistic and Viterbi map \gls{CNN}
+for both the Gaussian noise run with S6 gaps and for injections into the S6
+data-set. In the Gaussian noise data-set the curves for both statistics,
+Viterbi map \gls{CNN} and the Viterbi statistic, show very similar
+results, this is to be expected as the main use of the \gls{CNN} was to reduce
+the effect of instrumental lines, for which there are none in this data set.
+The advantage of using the Viterbi maps in a \gls{CNN} becomes clear when it is
+tested on simulations into real S6 data with many instrumental lines.
+The two curves corresponding to simulations real S6 data in Fig.~\ref{machine:results:snr_s6} show the sensitivity as a function of \gls{SNR} in these tests. It becomes clear here that the Viterbi map \gls{CNN} reduces the effect of instrumental
+lines and therefore increases the searches sensitivity to \gls{SNR}. 
+A similar feature can be seen in Fig.\ref{machine:results:depth_s6} where the use of an \gls{CNN} greatly increases the sensitivity.
+
+These tests on S6 data also show
+that the effect of instrumental lines was far greater in this run than in O2.
+This is shown in Fig.~\ref{machine:results:snr_o2} where the separation between the Viterbi
+statistic curves and the Viterbi map curves is much smaller than the S6 curves
+in Fig.~\ref{machine:results:snr_s6}. For simulations into Gaussian noise following S6
+gaps we show that with a false alarm of 1\% the Viterbi map \gls{CNN} achieves a
+sensitivity of SNR $~85$ and sensitivity depth of $~20\; {\rm Hz}^{-1/2}$ with
+95\% efficiency. For injections into real S6 data the search achieves a
+sensitivity of SNR $~115$ and sensitivity depth of $~11\; {\rm Hz}^{-1/2}$ with
+95\% efficiency and 1\% false alarm. We can also see from
+Fig.~\ref{machine:results:snr_s6} that the sensitivity of the vitmap \gls{CNN} in Gaussian noise with S6 gaps
+is better than in real S6 data.
+There are then still some artefacts in real data which reduce the sensitivity, these could potentially be non Gaussian artefacts such as weak instrumental lines.  
 
 \begin{figure}
 	\begin{subfigure}[h]{0.5\textwidth}
@@ -1000,15 +1058,48 @@ For injections into Gaussian noise following S6 gaps we show that with a false a
 		\label{machine:results:depth_s6}
 	\end{subfigure}
 
-	\caption[Gaussian noise results from SOAP and \gls{CNN} search.]{\label{machine:results:s6gauss} We aimed to compare the sensitivity of this search on simulations on real data (s6) to simulations in Gaussian noise (gauss). The Gaussian noise injections included the same gaps in data as the S6 data set. The \gls{SNR} of the simulated signal in Gaussian noise was adjusted based on the noise floor of S6. The sensitivity curves show that the Viterbi map \gls{CNN} (vitmap)achieves a similar sensitivity to the Viterbi statistic (vitstat) in Gaussian noise. This is because the main factor which effects the sensitivity of the Viterbi statistic is instrumental lines. As expected in real data, the Viterbi statistic is far less sensitive. The power of the \gls{CNN} becomes clear in tests on real data. The sensitivity of the Viterbi map \gls{CNN} is improved by over a factor of 2 in \gls{SNR} when tested on S6 data.}
+	\caption[Gaussian noise results from SOAP and \gls{CNN} search.]{\label{machine:results:s6gauss} We compared the sensitivity of this
+	search on simulations on real S6 data (s6) to simulations in Gaussian noise
+	(gauss). Figure \ref{machine:results:snr_s6} shows the efficiency of the search as a function of \gls{SNR} and Fig.~\ref{machine:results:depth_s6} shows the efficiency as a function of sensitivity depth.
+	The efficiency is the fraction of events which exceed the 1\% false alarm threshold for a given \gls{SNR} or depth.
+	The Gaussian noise injections included the same gaps in data as the S6
+	data set. The \gls{SNR} of the simulated signal in Gaussian noise was adjusted
+	based on the noise floor of S6. 
+	In the Gaussian noise simulations the searches achieve an efficiency of $90\%$ with 1\% false alarm at an \gls{SNR} $\sim 85$ and $\sim 90$ for the Viterbi map and Viterbi statistic respectively.
+	In the real S6 noise simulations the searches achieve an efficiency of $90\%$ with 1\% false alarm at an \gls{SNR} $\sim 108$ and $ > 200$ for the Viterbi map and Viterbi statistic respectively.}
 	
 \end{figure}
+
 
 %%%%%%%
 \subsubsection{S6}
 %%%%%%%%%%
 
-The final test was set up to again use the S6 data-set, however, we use a standard set of injections in the S6 \gls{MDC} \cite{walsh2016ComparisonMethods} to compare directly to other \gls{CW} search pipelines. In Fig.~\ref{machine:results:s6mdc} we show the results of the sensitivity curves from these injections. Fig.~\ref{machine:results:mdccomp} shows the direct comparison in depth of the results in \cite{walsh2016ComparisonMethods} with the results from the SOAP search with the Viterbi map \gls{CNN}. This shows that we achieve a sensitivity similar to many other semi-coherent searches with the exception of the Einstein@home search \cite{abbott2016ResultsDeepest}. For tests in the S6 \gls{MDC} we show that with a false alarm of 1\% the Viterbi map \gls{CNN} achieves a sensitivity of SNR $~90$ and sensitivity depth of $~16\; {\rm Hz}^{-1/2}$ with 95\% efficiency.
+% the 3rd test - S6 MDC comparison
+%
+The final test was set up to again use the S6 data-set, however, in this case
+we use a standard set of injections in the S6
+\gls{MDC}~\citep{walsh2016ComparisonMethods} to compare directly to other \gls{CW}
+search pipelines. In Fig.~\ref{machine:results:s6mdc} we show the results of the
+sensitivity curves from these injections. 
+In both Fig.~\ref{machine:results:snr_s6mdc} and \ref{machine:results:depth_s6mdc} the sensitivity curves are substantially more noisy than in Fig.~\ref{machine:results:o2} or \ref{machine:results:s6gauss}, this is mainly due to the size of the testing set.
+The standard set of simulations in Fig.~\ref{machine:results:s6mdc} contained $\sim 900$ signal simulations between 40 and 500 Hz where the majority of these signals are distributed between an \gls{SNR} of 0 and 150. 
+Figures \ref{machine:results:o2} and \ref{machine:results:s6gauss} are generated using $2300$ simulations between 40 and 500 Hz and \glspl{SNR} of 20 and 200 as described in Sec.~\ref{machine:pipeline}.
+Figure ~\ref{machine:results:depth_s6mdc} shows the direct comparison in depth of the
+results in~\citep{walsh2016ComparisonMethods} with the results from the SOAP
+search with the Viterbi map \gls{CNN}. This shows that we achieve a sensitivity
+consistent with that of other semi-coherent searches with the
+exception of the Einstein@home search~\citep{abbott2016ResultsDeepest}. Whilst
+we are not at the most sensitive end of these searches, the SOAP and \gls{CNN}
+search offers a greatly reduced computational cost. This will be explained in more detail in
+Sec.~\ref{machine:results:timing}. This particular test was limited to searching for
+isolated neutron stars, however, unlike some other semi-coherent searches such as Einstein@Home \citep{singh2016ResultsAllsky} or the time domain $\mathcal{F}$-statistic \citep{aasi2014ImplementationTextdollar}, SOAP has a lot of flexibility in the type of signal which it can search for.
+The inclusion of the \gls{CNN} does introduce some dependency of the search
+on the model as the training set for the \gls{CNN} contained simulations of isolated pulsars. 
+However, this is not a limitation of the method but of the training set as, for example, a new training set using a different signal model could be generated. 
+For tests in the S6 \gls{MDC} we show that with a false alarm of 1\% the Viterbi map
+\gls{CNN} achieves a sensitivity in SNR of $\sim 90$ and sensitivity depth of
+$\sim 16\;{\rm Hz}^{-1/2}$ with 95\% efficiency.
 
 
 \begin{figure}
@@ -1021,16 +1112,19 @@ The final test was set up to again use the S6 data-set, however, we use a standa
 	\label{machine:results:mdccomp}
 \end{subfigure}
 
-	\caption[S6 \gls{MDC} results from SOAP and \gls{CNN} search.]{\label{machine:results:s6mdc} In the S6 \gls{MDC} \cite{walsh2016ComparisonMethods}, sensitivity curves were made for a set of \gls{CW} searches. 
-		We have taken the list of detected pulsars for each search from this paper \cite{walsh2016ComparisonMethods} and replotted using the method in Sec.~\ref{machine:results:sensitivity} to compare the sensitivities. 
-		This is results for all pulsar injections in the 40-500 Hz band in the S6 \gls{MDC}.
-		This shows how the SOAP search with a \gls{CNN} achieves a similar sensitivity some other \gls{CW} searches. 
-	}
+	\caption[S6 \gls{MDC} results from SOAP and \gls{CNN} search.]{\label{machine:results:s6mdc} To compare the SOAP and \gls{CNN} search to other existing \gls{CW} searches, we used a standard set of injections used in the S6 \gls{MDC} \citep{walsh2016ComparisonMethods}.
+	We have taken the list of detected pulsars for each search
+	from this paper \citep{walsh2016ComparisonMethods} and replotted using the
+	method in Sec.~\ref{machine:results:sensitivity} to compare the sensitivities to the SOAP + \gls{CNN} search. 
+	This includes results for all pulsar simulations between 40 and 500 Hz. 
+	The efficiency curves are generated with a 1\% false alarm probability. }
 	
 \end{figure}
 
-
+%%%%%
 \subsection{\label{machine:results:timing} Computational time}
+%%%%
+
 
 A key part of any \gls{CW} search is the computational time taken, the majority of the time for this search is used generating the appropriate data. 
 For each section of the pipeline we have take the average total time for each job to complete, where each job runs on 2.0 Hz and it runs between 100 and 400 Hz. These are approximate timings taken for all the jobs to finish when run on CIT and can vary.
