@@ -264,21 +264,20 @@ In general if the data contains more complex information the size or complexity 
 %%%%%%%%%%%%%%%%%
 
 The activation function transforms the sum of the data and weights as in Eq.~\ref{machine:nn:neuron:equation}. 
-The most simple activation function is a cut as described in Sec.~\ref{machine:nn:neuron}, however, this type of activation does not perform well.
-Activations functions a generally based on a few properties.
-It is generally non-linear, this allows networks with multiple layers to be used to approximate a function. 
-A linear activation function means that any number of layers in a network is equivalent to a single layer network \citep{}.
-Another property which is desired in activation function is that it is continuously differentiable. This is to allow algorithms such as gradient descent to optimise the network. 
-The functions are found to perform better if they are monotonic and smooth.
-There are many choices when defining this in the network, some of the available options are shown in Fig.~\ref{machine:nn:activation:plot}.
+The most simple activation function is to set a threshold where for any number above this the output is 1 otherwise the output is zero. However, this type of activation known as a perceptron does not always perform well in neural networks.
+Activations functions are generally non-linear, this reflects the non-linearity of real world problems and allows networks to learn that. 
+A linear activation function means that any number of layers in a network is equivalent to a single layer network.
+Another property which is desired in activation function is that it is continuously differentiable. This is to allow algorithms such as gradient descent to optimise the network \citep{nwankpa2018ActivationFunctions}. 
+There are many choices when defining this in the network, some of the available options are shown in Fig.~\ref{machine:nn:activation:plot} \citep{nwankpa2018ActivationFunctions}.
 One of the more commonly used activation function is the LeakyRELU function, this is explained in more detail in \citep{maas2013RectifierNonlinearities}.
-In the work that follows we use the Leaky RELU function and the sigmoid function.
+In the work that follows we use the LeakyRELU function and the sigmoid function.
+The sigmoid function is used on the output such that values are constrained between 0 and 1, the LeakyRELU is used everywhere else. 
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\columnwidth]{C4_cnn/activations.pdf}
-	\caption[Examples of activation functions.]{There are many different activations function which are used, and essentially any function can be defined if necessary. Above is shown a subset of the more commonly used functions. The linear function is not used, however, is there to compare to common non linear function.}
+	\caption[Examples of activation functions.]{There are many different activations function which are used, any function can be defined for this however, a subset of the more commonly used functions is shown here.}
 	\label{machine:nn:activation:plot}
 \end{figure}
 
@@ -292,11 +291,9 @@ In the work that follows we use the Leaky RELU function and the sigmoid function
 %%%%%%%%%%%
 %%%%%%%%%%%
 
-\glspl{CNN} are a different type of deep neural network than in Sec.~\ref{machine:nn}.
-They are a types of network which are primarily used in image
+\glspl{CNN} are a different type of deep neural network than in Sec.~\ref{machine:nn}, they are primarily used in image
 processing and recognition
 \cite{lecun2015DeepLearning,lecun1998GradientbasedLearning,waibel1989PhonemeRecognition,krizhevsky2012ImageNetClassificationa}.
-Here the general idea is summarised. 
 A \gls{CNN} is designed to take in data, identify different features within that data and classify
 what those features or combinations of those features mean.
 In the context of this work the input data is a time-frequency spectrogram which may contain a simulated \gls{CW} signal.
