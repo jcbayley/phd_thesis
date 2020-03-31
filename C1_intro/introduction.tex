@@ -41,7 +41,7 @@ Space-time can generally be described by Einstein's field equations
     G_{\mu \nu} = \frac{8 \pi G}{c^4}T_{\mu \nu}.
 \end{equation}
 where $G_{\mu \nu}$ is the Einstein tensor and $T_{\mu \nu}$ is the stress-energy tensor.
-The stress energy tensor essentially describes the mass-energy in the universe, where its components contain information on the density of energy and momentum.
+The stress energy tensor describes the mass-energy in the universe, where its components contain information on the density of energy and momentum.
 The Einstein tensor contains information on the curvature of the universe. 
 This can be derived directly from the metric tensor $g_{\mu \nu}$ which describes the geometry of the universe.
 Einstein's equations then explain how the curvature of space-time changes with the mass-energy within it. 
@@ -202,8 +202,8 @@ For higher mass systems such as \gls{BBH} these signals are detectable by ground
 For lower mass systems such as \gls{BNS} they can be detected for longer periods $\mathcal{O}(10)$s. 
 The lower frequency parts of the signal (i.e. earlier times) aim to be detected by future space based detectors such as \gls{LISA} \citep{danzmann1996LISALaser}.
 
-In systems which have a neutron star, during the in-spiral when the objects are \joe{find better word, close compared to what}close, the neutron star can deform due tidal interactions between the objects \citep{hernandezvivanco2019MeasuringNeutron,harry2018ObservingMeasuring}. 
-This becomes useful as it will affect the generated waveform and can help place limits on and determine the \gls{EOS} for the dense matter in a neutron star \citep{hernandezvivanco2019MeasuringNeutron,harry2018ObservingMeasuring}.
+In systems which have a neutron star, during the in-spiral and merger phase, the neutron star can deform due tidal interactions between the objects \citep{flanagan2008ConstrainingNeutronstar}. 
+This becomes useful as it will affect the generated waveform and can help place limits on and determine the \gls{EOS} for the dense matter in a neutron star \citep{harry2018ObservingMeasuring}. %\citep{hernandezvivanco2019MeasuringNeutron}
 \gls{BNS} systems also offer a way do observe objects in multiple different channels, or what is known as multi-messenger astronomy. 
 This is where the object can be viewed in the \gls{EM} spectrum as well as in gravitational waves.
 This offers much in the field of astronomy as it can aid in the measurement of the Hubble constant \citep{theligoscientificcollaborationandthevirgocollaboration2017GravitationalwaveStandard}. 
@@ -217,7 +217,7 @@ Observations of \gls{BBH} systems can also give information on how black holes a
 Burst sources are also short duration however, are un-modelled or difficult to model, in the sense that the exact waveform of the signal is unknown.
 There are two possible reasons for the lack in knowledge of the waveform: the physics of the system is too complicated to model in a reasonable amount of time or there is no model of the source.
 As there is no model to generate waveforms, burst searches cannot use matched filtering as in \gls{CBC} searches.
-Rather burst searches look for short bursts in power which is coherent between multiple detectors \citep{cornish2015BayeswaveBayesian, klimenko2008CoherentMethod} \joe{Check that search is actually coherent}.
+Rather burst searches look for short bursts in power which is coincident between multiple detectors \citep{cornish2015BayeswaveBayesian, klimenko2008CoherentMethod}.
 There are a number of systems which could potentially emit a short duration burst signals.
 These include core collapse supernovae \citep{ott2008GravitationalWave}, \glspl{GRB} \citep{aasi2014SearchGravitational}, cosmic strings \citep{damour2005GravitationalRadiation} and other unknown sources.
 Detecting \gls{GW} from one of these sources could offer more insight into the processes which cause core collapse supernovae. 
@@ -248,13 +248,12 @@ When detected, these signals may be able to offer insights into the early univer
 
 \glspl{CW} are long duration signals which can be well modelled.
 The signals last for times greater than the observation runs of ground based detectors and in general have a fixed or slowly varying frequency.
-There are a number or potential sources of \glspl{CW} including \glspl{CBC} long before their merger.
-\joe{how long before, and rewite this sentance}Long before a \gls{CBC} merger, the two compact objects are orbiting each other whilst slowly inspiralling.
-This will emit a long duration, almost fixed frequency sinusoid as its signal.
+There are a number or potential sources of \glspl{CW} including a \gls{CBC} signal earlier in the inspiral phase.
+Before the final stages of the inspiral of a \gls{CBC} signal, the objects orbiting at much slower non-relatavistic speeds. They therefore emit a \gls{GW} with a slowly varying frequency and can remain in this phase for millions of years. 
 This signal however, is at lower frequency than ground based detectors can detect, therefore space based detectors such as \gls{LISA} \citep{danzmann1996LISALaser} are expected to observe this type of \gls{CW}.
 
 The primary source for many \glspl{CW} searches is rapidly rotating neutron stars with spin periods ranging from $\sim 10^{-3} - 10$ s \citep{manchester2005AustraliaTelescope}.
-Neutron stars originate when a massive \joe{how massive} star collapses and are the remnant of this collapse, they are objects with incredibly high density and are highly magnetised with field strengths of $10^8 - 10^{15}$ G \citep{konar2017MagneticFields}.
+Neutron stars originate when a massive star $\sim 11 - 20 M_{\odot}$ collapses and are the remnant of this collapse, they are objects with incredibly high density and are highly magnetised with field strengths of $10^8 - 10^{15}$ G \citep{konar2017MagneticFields}.
 They have masses around $1.4-2 \; M_{\odot}$ contained in a star with radius of $\sim 10$ km.
 Despite many observations in the electromagnetic spectrum and a large amount of research, these objects are not well understood.
 A key part or neutron stars which is not understood is the \gls{EOS}. A review of the current understanding can be found in \cite{lattimer2016EquationState}.
@@ -340,8 +339,7 @@ There were a number of different proposed methods for the design of the instrume
 The first resonant bar detector was designed and built by Joseph Weber \citep{weber1966ObservationThermal}. 
 These are large cylinders of metal which should resonate as a gravitational wave passes by. 
 There are a few different designs of this type of detector, including an omni-directional design \citep{dewaard2003MiniGRAILFirst}. 
-The majority of these detectors are no longer operational \joe{why}.
-Pulsar timing arrays aim to use the accurate arrival time of pulses from millisecond pulsars to measure \gls{GW} \citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and the observer, the arrival time of the pulses should change \joe{by how much}. 
+Pulsar timing arrays aim to use the accurate arrival time of pulses from millisecond pulsars to measure \gls{GW} \citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and the observer, the arrival time of the pulses should change by $\mathcal{O}(10)$ ns \citep{hobbs2017GravitationalWave}. 
 Whilst a detection has not been made using pulsar timing arrays, these methods are still in use.
 Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisation's of the CMB \citep{ade2018ConstraintsPrimordial}.  
 These use the a range of detectors to look at the CMB however, are yet to confirm a detection of a \gls{GW} signal.

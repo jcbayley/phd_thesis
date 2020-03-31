@@ -196,7 +196,7 @@ The algorithm would have to identify a particular shape which has a huge amount 
 Neural networks offer a way to deal with this problem as they can be trained on large datasets, similar to how a human brain is `trained'. 
 In the lifetime of a brain, many examples of different hand written digits are seen. 
 For each new example the brain `updates' itself based on the new version of the observed digit. 
-This process is essentially replicated in a neural network where the algorithm can be updated for each example, with the goal of correctly identifying a digit.
+This process is replicated in a neural network where the algorithm can be updated for each example, with the goal of correctly identifying a digit.
 A neural network has many parameters which can be modified or `trained', it is these parameters which are updated after each new example of a digit. 
 These parameters are grouped into objects called neurons, many combinations of neurons can then be used to build a neural network.
 
@@ -291,20 +291,17 @@ The sigmoid function is used on the output such that values are constrained betw
 %%%%%%%%%%%
 %%%%%%%%%%%
 
-\glspl{CNN} are a different type of deep neural network than in Sec.~\ref{machine:nn}, they are primarily used in image
-processing and recognition
+\glspl{CNN} are a different type of deep neural network than in Sec.~\ref{machine:nn}, they are primarily used in image processing and recognition
 \cite{lecun2015DeepLearning,lecun1998GradientbasedLearning,waibel1989PhonemeRecognition,krizhevsky2012ImageNetClassificationa}.
-A \gls{CNN} is designed to take in data, identify different features within that data and classify
-what those features or combinations of those features mean.
+A \gls{CNN} has a similar goal to a full connected neural network; it is designed to take in data, identify different features within that data and classify what those features or combinations of those features mean.
 In the context of this work the input data is a time-frequency spectrogram which may contain a simulated \gls{CW} signal.
-The output is then a single number which represents if a signal is present.
-Here a value of 1 represents a signal and 0 is not a signal.
+The output is then a single number gives a probability that a signal is present.
 A \gls{CNN} can learn how to identify features by being trained on many
-examples of the input data where the output is known.
-For example, an input spectrogram with a simulated \gls{CW} signal would have an output value of 1.
+examples of the input data which has a label.
+For example, an input spectrogram with a simulated \gls{CW} signal would be labelled to have a signal.
 Given the set of training examples, the many parameters of the \gls{CNN} can
 be updated such that it gives the best result for any new image. 
-This process is the same as neural networks in Sec.~\ref{machine:nn} and will be described in greater detain in Sec.~\ref{machine:training}
+This process is the same as neural networks in Sec.~\ref{machine:nn} and will be described in greater detail in Sec.~\ref{machine:training}.
 
 The key features of \glspl{CNN} which distinguish them from ordinary neural networks is some additional types of layers including: Convolutional layers and max pooling layers. 
 
@@ -331,8 +328,8 @@ Fig.~\ref{machine:cnn:convlayer:input} shows an example of a 6x6 image and the r
 In this case the network has 4 parameters for each filtered image which can be updated as opposed to the 36 which a full connected network would have for a single neuron.
 
 Fig.~\ref{machine:cnn:convlayer:input} demonstrates how a filter which matches a feature in an image can highlight that particular feature. 
-i.e. the diagonal line in the bottom left of the input is enhances by Filter 1, which matches that feature. 
-When this type of layer is trained, the weights of the filter are updated. The filter should then ideally match the feature which is intended to be extracted.
+i.e. the diagonal line in the bottom left of the input is enhanced by Filter 1, which matches that feature. 
+When this type of layer is trained, the weights of the filter are updated. The filter should then ideally match the feature which is intended to be extracted from the image.
 
 \begin{figure}[p]
 
@@ -358,7 +355,7 @@ Below I list each of the adaptable parameters and what they do.
 \end{description}
 
 The convolutional layers with reduce the number of updatable parameters used in each network or model.
-However, the output of a convolutional layer is a number of images which ar potential the same size as the input. 
+However, the output of a convolutional layer is a number of images which are potential the same size as the input. 
 This has potentially increased the size of the parameter space for the next layer.
 To decrease this a type of layer known as max-pooling is used.
 
@@ -440,8 +437,8 @@ L = -\frac{1}{N} \sum_{i}^{N} y_i\log{(p_i)} + (1-y_i)\log{(1-p_i)},
 \end{equation}
 %
 where $p$ is the networks predicted output which has any value in the range $[0,1]$ and $y$ is the true output which has binary labels 0 or 1. This is calculated as the sum over all training examples. 
-The loss function is minimised when the output matches the `truth'. This essentially
-tells the neural network how close to the truth it is. The weights and bias' of
+The loss function is minimised when the output matches the `truth'. This
+tells the neural network how close to the truth this output is. The weights and bias' of
 the neural network can be updated based on the value of this loss function. The
 process of updating the weights and other parameters is called back-propagation,
 and typically uses a form of gradient descent
@@ -1223,7 +1220,7 @@ Therefore, one would expect this to be an easier problem for the network to solv
 
 When simulating signals in real O1 data, many of the sub-bands will contain instrumental lines. 
 The noise class for the networks then contains many variations compared to the Gaussian noise case. 
-This a harder challenge to the neural network by essentially increasing the size of the parameter space.
+This is a harder challenge for the neural network as it increases the size of the parameter space.
 Because of this, one would expect the network to need many more training examples to be able to achieve a similar sensitivity to Gaussian noise.
 In Fig.~\ref{machine:results:sens_size:o1_sens:eff}, one can see that using 100 training examples is not enough and the network does not achieve any sensitivity at any \gls{SNR}. This means that the \gls{CNN} cannot classify any injection as detected using this number of training examples.
 Fig.~\ref{machine:results:sens_size:o1_sens:train} seems to agree that real data poses a harder problem as the sensitivity drastically increases as the number of training examples is increased.
