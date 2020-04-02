@@ -2,7 +2,7 @@
 
 %%%%%%%%%%%%%%%%
 In this section I outline how we inject a \gls{CW} signal into data. This can generally be done in two different ways: simulating a signal in the time domain and injecting into time domain noise or simulating the signal in the frequency domain. 
-The searches described in Sec.~\ref{soap} and Sec.~\ref{cnn} only use output power spectra] 
+The searches described in Sec.~\ref{soap} and Sec.~\ref{machine} only use output power spectra] 
 Generating the time series and performing a Fourier transform or generating the signal in the frequency domain is time consuming. 
 In this section I will outline how I simulate the power spectrum of \gls{CW} signals and inject them into a \gls{PSD}.
 This should greatly improve the speed of data generation.
@@ -17,12 +17,12 @@ Instead, the \gls{SNR} of the signal can be estimated in given frequency bins an
 
 It can be shown that the \gls{PSD} of Gaussian noise with zero mean and unit variance is a $\chi^2$ distribution with 2 degrees of freedom. Therefore, if we want to generate a spectrogram for Gaussian noise, we just generate a two dimensional array of values distributed as $\chi^2$ with two degrees of freedom.
 Assuming that there is some sinusoidal signal with a given \gls{SNR} within a Gaussian noise time-series with zero mean and unit variance, the \gls{FFT} power in a particular frequency bin can be estimated using a non-central $\chi^2$ distribution with 2 degrees of freedom, where the non centrality parameter is the square of the \gls{SNR}. 
-To calculate the \gls{SNR} in a given frequency bin the equation in \citep{prix2007SearchContinuous} for optimal \gls{SNR} was used,
+To calculate the \gls{SNR} in a given frequency bin the equation in \citep{prix2007SearchContinuous} for optimal \gls{SNR} was used
 \begin{equation}
 	\label{app1:snr2}
     \rho(0)^2 = \frac{1}{2}h_0^2 T S^{-1} \left[ \alpha_1 A + \alpha_2 B + \alpha_3 C \right],
 \end{equation}
-where $h_0$ is the \gls{GW} amplitude, $T$ is the total observing time is seconds, $S^{-1}$ is the mean \gls{PSD} noise floor. The values of $\alpha$ are then defined in \citep{prix2007SearchContinuous} by,
+where $h_0$ is the \gls{GW} amplitude, $T$ is the total observing time is seconds, $S^{-1}$ is the mean \gls{PSD} noise floor. The values of $\alpha$ are then defined in \citep{prix2007SearchContinuous} by
 \begin{equation}
 \begin{split}
 \alpha_1 &= \frac{1}{4}\left(1 + \cos^2 \left( \iota\right)  \right)^2 \cos^2\left( 2 \psi \right)  + \cos^2\left( \iota\right)  \sin^2 \left( 2\psi \right) \\
@@ -31,7 +31,7 @@ where $h_0$ is the \gls{GW} amplitude, $T$ is the total observing time is second
 \end{split}
 \end{equation}
 where $\psi$ is the gravitational wave phase and $\iota$ is the inclination angle of the source.
-The values of $A,B$ and $C$ in Eq.~\ref{app1:snr2} are functions which represent the time averages antenna patterns, they are defined by,
+The values of $A,B$ and $C$ in Eq.~\ref{app1:snr2} are functions which represent the time averages antenna patterns, they are defined by
 \begin{equation}
 \begin{split}
 A &\equiv \langle a^2 \rangle \\
@@ -39,7 +39,7 @@ B &\equiv \langle b^2 \rangle \\
 C &\equiv \langle ab \rangle, \\
 \end{split}
 \end{equation}
-where $a$ and $b$ are the antenna pattern functions defined in \citep{schutz1998DataAnalysis} as,
+where $a$ and $b$ are the antenna pattern functions defined in \citep{schutz1998DataAnalysis} as
 \begin{equation}
 \begin{split}
 a(t) &= \frac{1}{16}\sin{2\gamma}(3-\cos{2\lambda})(3-\cos2\delta)\cos[2(\alpha-\phi_r -\Omega t)] \\
@@ -111,7 +111,7 @@ n(t) &= a \exp{\left[2\pi \int_0^t f(t) dt + \phi\right]}, \\
 \label{app1:waveform}
 \end{split}
 \end{equation}
-where $\phi$ is some extra phase..
+where $\phi$ is some extra phase.
 In cases that follow we will have a finite length of data, we can center this around a time of zero; this is equivalent to applying a box window the signal.
 If we define the length of our signal as $T$ we can say that the signal $n(t) = 0$ outside of $-T/2 \leq t \leq T/2$ \citep{misaridis2005UseModulated}.
 The Fourier transform can then be written as
@@ -122,7 +122,7 @@ The Fourier transform can then be written as
 &= \frac{a}{2} e^{i\phi} \left[  I  \right]. \\
 \end{split}
 \end{equation}
-The integral can then be written as,
+The integral can then be written as
 \begin{equation}
 \begin{split}
 I &= \int_{-T/2}^{T/2} \exp{\left\{i 2 \pi \left(\frac{\dot{f}}{2} t^2 + f_{0}t - f \right) \right\}} dt \\
@@ -136,11 +136,11 @@ We can then substitute using
 \begin{equation}
 v = \sqrt{2\dot{f}}\left( t - \frac{(f-f_0)}{\dot{f}}  \right)
 \end{equation}
-where,
+where
 \begin{equation}
 dv = \sqrt{2\dot{f}} dt. 
 \end{equation}
-The integral then becomes,
+The integral then becomes
 \begin{equation}
 I  = \exp{\left\{  - i \frac{\pi}{2} 2 \dot{f} \left(\frac{(f - f_0)}{\dot{f}}\right)^2 \right\}}\int_{-V_l}^{V_u} \exp{\left\{i \frac{\pi}{2} v^2\right\}} dv
 \end{equation}
@@ -165,18 +165,17 @@ C(x) &= \int_0^x \cos{\frac{\pi}{2} t^2} dt \\
 S(x) &= \int_0^x \sin{\frac{\pi}{2} t^2} dt \\
 \end{split}
 \end{equation}
-The Fourier transform is then,
+The Fourier transform is then
 \begin{equation}
 \tilde{n}(f) = \frac{a}{2\sqrt{2\dot{f}}} \exp{ \left\{ i(\phi - \pi \frac{f - f_0}{\dot{f}}) \right\} } \left[ C(V_l) + C(V_u) + i(S(V_l) + S(V_u))   \right],
 \end{equation}
-where,
-The power spectrum is then
+where the power spectrum is then
 \begin{equation}
 |\tilde{n}(f)|^2 = \frac{a^2}{4|\dot{f}|}  \left[ (C(V_l) +  C(V_u))^2 + (S(V_l) + S(V_u))^2   \right]
 \label{app1:power_fresnel}
 \end{equation}
 
-By taking a simple signal, we can verify that this is correct. Fig.~\ref{app1:sinderivative:fresnel} demonstrates the \gls{FFT} of a simple signal and the power spectrum estimation using Eq.~\ref{app1:power_fresnel}.
+By taking a simple signal, we can verify that this is correct. Figure \ref{app1:sinderivative:fresnel} demonstrates the \gls{FFT} of a simple signal and the power spectrum estimation using Eq.~\ref{app1:power_fresnel}.
 
 \begin{figure}
 	\centering
@@ -188,22 +187,22 @@ By taking a simple signal, we can verify that this is correct. Fig.~\ref{app1:si
 The values of this for the center location of each frequency bin surrounding the signal frequency can then be calculated for each time segment. 
 A full spectrogram of a loud signal ($\sim 1000$ \gls{SNR}) can be seen in Fig.~\ref{app1:spect:centerbin}, \ref{app1:spect:edgebin}, \ref{app1:spect:doppler} and \ref{app1:spect:antenna} to demonstrate the signal simulations.
 The signal frequency for each time segment can be found using the model described in Sec.~\ref{searchcw:model}.
-Fig.~\ref{app1:spect:centerbin} shows an example of a signal of fixed frequency which is simulated at the center of a frequency bin.
-\begin{figure}[h]
+Figure \ref{app1:spect:centerbin} shows an example of a signal of fixed frequency which is simulated at the center of a frequency bin.
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/centerbin_nodop_noant.pdf}
 	\caption[Generated spectrogram in center of frequency bin.]{By simulating a signal with a frequency in the center of a band, all of the signals power is contained within a single frequency bin. This shows an example of this kind of simulation in a spectrogram. The red line is the signals frequency evolution.}
 	\label{app1:spect:centerbin}
 \end{figure}
 When the signals frequency is then moved to the edge of a bin, the power can be seen to be distributed evenly between the two surrounding frequency bins. This can be seen in Fig.~\ref{app1:spect:edgebin}.
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/edgebin_nodop_noant.pdf}
 	\caption[Generated spectrogram at edge of frequency bin.]{By placing the signal at the edge of a frequency bin, the power is distributed around surrounding frequency bin, this can be seen above. The red line is the signals frequency evolution.}
 	\label{app1:spect:edgebin}
 \end{figure}
 The doppler shift of a signal can then be added such that the frequency changes with time. This is shown in Fig.~\ref{app1:spect:doppler}.
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{AppendixA/edgebin_doppler_noant.pdf}
 	\caption[Generated spectrogram of \gls{CW} signal with Doppler shift.]{Including the Doppler shift of a signal due to the earths rotation and orbit cause the signal to be modulated in frequency. This also causes a modulation in the \gls{SNR} of the signal in and single frequency bin as it moves between bins. The red line is the signals frequency evolution.}

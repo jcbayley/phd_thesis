@@ -23,3 +23,10 @@
 *.ist
 
 __tmp
+thesis.sublime-project
+thesis.sublime-workspace
+main.fls
+main.fdb_latexmk
+.vscode/settings.json
+tag.tex
+corrections/*
