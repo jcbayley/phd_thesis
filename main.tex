@@ -32,13 +32,21 @@
 \usepackage{dcolumn}   % needed for some tables
 \usepackage{bm}        % for math
 \usepackage{amssymb}   % for math
-\usepackage{amsmath}
-\usepackage{color}
+\usepackage{amsmath}   % for math
+\usepackage{color}     % for colors
+
+% packages for acronyms/glossary
 %\usepackage{acronym}
 \usepackage[toc,acronym]{glossaries}
 %\renewcommand*{\glstextformat}[1]{\textsf{#1}}
 
-\usepackage{algcompatible}
+% Chapter quotes
+%\usepackage{epigraph}
+%\setlength\epigraphwidth{8cm}
+%\setlength\epigraphrule{0pt}
+
+
+\usepackage{algcompatible} % algorithms
 \usepackage{newfloat}
 \usepackage{cancel}
 \usepackage{tikz}
@@ -48,7 +56,7 @@
 \graphicspath{{./figures/}}
 \usepackage{sidecap}
 
-
+% setup for biber
 \usepackage[
     backend=biber,
     style=numeric,
@@ -60,9 +68,11 @@
 ]{biblatex}
 \addbibresource{references.bib}
 
+% some math operators
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
 
+% pseudocode section
 \DeclareFloatingEnvironment[
 fileext=loa,
 listname=List of Algorithms,

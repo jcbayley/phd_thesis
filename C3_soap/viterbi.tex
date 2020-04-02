@@ -1,4 +1,5 @@
 \chapter[SOAP for CW searches.]{\label{soap} SOAP: A generalised application of the Viterbi algorithm to searches for continuous gravitational-wave signals.}
+%\epigraph{I've had it with these motherf****g snakes on this motherf****g plane}{ --- \textit{Samuel Jackson}, Snakes on a Plane}
 
 The SOAP search is a semi-coherent \gls{CW} search algorithm that aims to
 reduce the computational time needed to find a potential signal.  The algorithm
@@ -44,7 +45,7 @@ This was work done by the author
 under the supervision of Prof. Graham Woan and Dr. Chris Messenger.
 
 
-\begin{figure}
+\begin{figure}[ht]
 
 \centering
 \includegraphics[width=\linewidth]{C3_soap/soap_spect_motivation.pdf}
@@ -84,7 +85,7 @@ In the next section we will describe the Viterbi algorithm and the basic SOAP im
 The Viterbi algorithm is an efficient method for determining the most probable set of states (a single `track' of steps on the time-frequency plane) in a Markov model dependent on data, where the model has a discrete number of states at each step. Rather than computing the probability of every possible track and selecting the most probable, the algorithm maximises this probability after every discrete step. As a result, a partial track which cannot ultimately be the most probable is rejected before the next step is calculated, and only a fraction of all possible tracks need to be computed to find the one that is most probable.
 
 %
-% Defining varibles and what data we use
+% Defining variables and what data we use
 %
 In this work we apply the Viterbi algorithm to a \gls{GW} strain time-series to find the most probable track of a single variable-frequency signal in the noisy data.  We divide the time series into $N$ equal-length and contiguous segments ${\bm x}_j$,  defining the set $D \equiv \{{\bm x}_j\}$. The `states' in the model correspond to the frequencies a signal could have in each segment. A `track' is a list of such frequencies ${\bm \nu}\equiv \{\nu_j\}$, where  $\nu_j$ is the frequency in the segment ${\bm x_j}$.
 
@@ -134,7 +135,7 @@ p(D \mid {\bm \nu}) = \prod_{j=0}^{N-1}p({\bm x_j} \mid \nu_j),
  where $p({\bm x_j} \mid \nu_j)$ is the likelihood of our
 signal having a frequency $\nu_j$ in the $j$th segment.
 
-Using Eqs.~\ref{soap:viterbi:bayes},\ref{soap:viterbi:prior} and
+Using Eq.~\ref{soap:viterbi:bayes},\ref{soap:viterbi:prior} and
 \ref{soap:viterbi:likelihood}, the posterior probability is then
 %
 \begin{equation}
@@ -306,7 +307,7 @@ The most probable track is the one traced backwards from the highest probability
 \section{\label{soap:multidet}Multiple detectors}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% introduce what multidetector means
+% introduce what multi-detector means
 %
 If there are $Q$ detectors operating simultaneously we have $Q$ sets of data which can be combined appropriately to provide input to the Viterbi search described above. We must also modify the allowed transitions encoded within the transition matrix to take account of the extra prior constraints that are now available.
 
@@ -454,14 +455,14 @@ p(D \mid \nu) &\propto p(x_1,x_2 \ldots x_n \mid \nu) \\
 %
 If the data contains gaps where the detector was not observing, then we fill the gaps in the power spectrum with a constant value which is the expectation value of the log-likelihood. The procedure of filling in the gaps of the data is completed before any summing.  Therefore, the data should have the same mean regardless of how much real data is in each sum. In the examples that follow, we sum the \glspl{SFT} over the length of one day.
 
-The main motivation for summing the data is to increase the \gls{SNR} of a signal in the segments. The risk is that a signal can move between adjacent frequency bins during a day. To reduce this risk, we choose the frequency bin width such that it is more likely that a signal will be contained within a single frequency bin that cross a bin edge. In practise, to ensure that this is true, the segment or \gls{SFT} length and the number of segments which are summed can be tuned for each search. As well as increasing the \gls{SNR}, summing over one day should average out the antenna pattern. This means that the log-likelihood value in any bin should be more similar between detectors, however, there is still some variation due to the sky localisation and polarisation.
+The main motivation for summing the data is to increase the \gls{SNR} of a signal in the segments. The risk is that a signal can move between adjacent frequency bins during a day. To reduce this risk, we choose the frequency bin width such that it is more likely that a signal will be contained within a single frequency bin that cross a bin edge. In practice, to ensure that this is true, the segment or \gls{SFT} length and the number of segments which are summed can be tuned for each search. As well as increasing the \gls{SNR}, summing over one day should average out the antenna pattern. This means that the log-likelihood value in any bin should be more similar between detectors, however, there is still some variation due to the sky localisation and polarisation.
 
 This also has two main effects on the transition matrix, the first is that as each segment of data is now one day long, a jump between frequency bins is far more likely, therefore, the transition matrix elements are modified to account for this. The second is that as the data is averaged over one day, the signal should remain is the same frequency bin between detectors, therefore, there is no longer a need for the multi-dimensional transition matrix described in Sec.~\ref{soap:multidet}.
 
 The volume of the data is also reduced by a factor of $1/N_s$, therefore, the time taken for the algorithm to run is also reduced by the same factor.
 
 %%%%
-% EXTRA INFO NOT INCULDED AT THE MOMENT
+% EXTRA INFO NOT INCLUDED AT THE MOMENT
 %%%%%%%
 \iffalse
 
@@ -589,7 +590,7 @@ This then means Eq.~\ref{soap:multidet:vitsum} is modified to,
 \end{equation}
 %
 where $\hat{V}$ refers to a log-odds ratio.
-The maximised statistic now has three tuneable parameters: the width, $w_S$ in Eq.~\ref{las:prior}, on the prior for a signal \gls{SNR} squared, $p_{\rm S}(\lambda)$, the width, $w_L$ of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \gls{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \gls{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
+The maximised statistic now has three tune-able parameters: the width, $w_S$ in Eq.~\ref{las:prior}, on the prior for a signal \gls{SNR} squared, $p_{\rm S}(\lambda)$, the width, $w_L$ of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \gls{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \gls{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
 
 %
 % Two detector line aware statistic
@@ -666,7 +667,7 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 \includegraphics[width=0.9\linewidth]{C3_soap/lookup_noline.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{\joe{redo this caption aswell}This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 0$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0$. So the line part of the statistic is not operating.So the line part of the statistic is not
+\caption{This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 0$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0$. So the line part of the statistic is not operating.So the line part of the statistic is not
 operating.}
 \label{soap:las:detp:noline}
 \end{minipage}
@@ -891,7 +892,7 @@ procedure, the signals received at each detector are forced to follow a common t
 %
 \item The algorithm then returns the most probable track though the data, and the value
 $\propto$ the log-odds in the final time step, i.e., the
-maximum final value, $\max_j(V_{N,j})$, in Eq.~\ref{soap:lineaware:stat}, which is then our detection statistic.
+maximum final value, $\max_j(V_{N,j})$, in Eq.~\ref{soap:lineaware:stat:multi}, which is then our detection statistic.
 
 %
 \end{enumerate}
@@ -901,7 +902,7 @@ maximum final value, $\max_j(V_{N,j})$, in Eq.~\ref{soap:lineaware:stat}, which 
 As an example of what the algorithm returns, Fig.~\ref{soap:tracks} shows
 the tracks in the two detectors, H1 and L1. This also shows the
 log-odds ratio of ending in any
-frequency bin, i.e., all the elements in Eq.~\ref{soap:lineaware:stat}.  In this figure, each time segment of the odds ratios have been normalised such that the sum of the odds ratios is 1.
+frequency bin, i.e., all the elements in Eq.~\ref{soap:lineaware:stat:multi}.  In this figure, each time segment of the odds ratios have been normalised such that the sum of the odds ratios is 1.
 
 
 
@@ -914,7 +915,7 @@ frequency bin, i.e., all the elements in Eq.~\ref{soap:lineaware:stat}.  In this
 The signal is injected into Gaussian noise, where the 1800\,s \glspl{SFT} have been
 summed over 1 day.  The top panel shows a simulation of summed \glspl{SFT} from H1, the second panel shows the same for L1,
 the third panel shows the values proportional to the
-log-odds ratios in Eq.~\ref{soap:lineaware:stat}.
+log-odds ratios in Eq.~\ref{soap:lineaware:stat:multi}.
 The log-odds have been normalised such that the sum of
 all the odds ratios in every time bin are equal to 1. The bottom panel shows the injected signal track (black dotted) and the track found in the `imaginary' detector by the two-detector SOAP search with the line-aware statistic (red), both of these tracks are at the geo-centre. In this case the \gls{RMS} of the difference between the Viterbi track and injected signal track was $\sim$1 bin, where 1 bin is 0.00056 Hz wide.}
 %
@@ -950,7 +951,7 @@ case.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% intro to what data was used and defenitions
+% intro to what data was used and definitions
 %
 The first test involves injecting signals into Gaussian noise. The power spectrum of a Gaussian noise time-series follows a $\chi^2$ distribution with two degrees of freedom, therefore, as we search through the power spectrum, we generate spectrograms which follow a $\chi^2$ distribution. 
 These spectrograms are 0.1\,Hz wide and are set at 0.05\,Hz intervals between 100\,Hz and 200\,Hz. The bins are $1./1800$\,Hz wide and 1800s long, where the total length of data is the same as S6, i.e., $\sim 1.3$ years.
@@ -961,7 +962,7 @@ these values are outlined in \citep{walsh2016ComparisonMethods}.
 %
 % describe the pre-pruning of signals
 %
-The values of $f_0$ for the injections were not always centred in a
+The values of $f_0$ for the injections were not always centered in a
 sub-band, therefore a number of sub-bands contained only part of the injected
 signal. These sub-bands were ignored as they contaminated the signal statistics
 and only the sub-band which contained the whole signal was accepted.  This
@@ -1061,7 +1062,7 @@ Both detectors in S6 had a duty cycle of $\sim$50\%~\citep{aasi2015Characterizat
 In these sections we switch from using the multi-detector statistic to the single-detector statistic using the same parameters, these are both defined in defined in Sec.~\ref{soap:las}.
 
 %
-% describe the pre-pruning of signals and how efficieny curves were calculated
+% describe the pre-pruning of signals and how efficiency curves were calculated
 %
 The process of removing sub-bands and generating efficiency curves is the same as in Sec.~\ref{soap:results:gaplessgauss}.
 
@@ -1252,7 +1253,7 @@ In these examples the optimum value may be out of the range chosen here.
 The sensitivity of this search could be improved slightly by running with a wider parameter
 space in $w_{\rm{L}}$ and $p(M_{\rm{L}})/p(M_{\rm{G}})$.
 The optimisation procedure has a much larger computational cost than the search itself. Therefore, as one of the searches strengths is its speed, and that the sensitivity change is relatively insensitive to the choice of parameters, see Fig.~\ref{soap:las:optimisation:comp_sens}, the search on a wider parameter space was not run.
-The results in Sec.~\ref{soap:results} show that the current values of the parameters (red lines in Fig~.\ref{soap:las:optimisation:s6mdc}) are sufficiently sensitive when compared to other searches.
+The results in Sec.~\ref{soap:results} show that the current values of the parameters (red lines in Fig.~\ref{soap:las:optimisation:s6mdc}) are sufficiently sensitive when compared to other searches.
 To choose optimum parameters for this search, the minimum point for each parameter was chosen. 
 This is the minimum in each of the diagonal plots in Fig~.\ref{soap:las:optimisation:s6mdc}.
 These values are,
@@ -1282,15 +1283,16 @@ in a time-frequency spectrogram. In Fig.~\ref{soap:las:optimisation:vitexample} 
 In the Gaussian noise optimised case the search is looking for high power in both
 detectors which the strong instrumental line satisfied when the astrophysical
 signal is weak.  The S6 optimised statistic looks for more consistent \gls{SNR}
-in each of the detectors.  The lines labelled Lineaware and Old Lineaware refer to parameters in Eq.~\ref{soap:las:optimisation:s6_par} and Tab.~\ref{soap:results:parameters} respectively. 
+in each of the detectors.  The lines labelled Line-aware and Old Line-aware refer to parameters in Eq.~\ref{soap:las:optimisation:s6_pars} and Tab.~\ref{soap:results:parameters} respectively. 
 This demonstrates how the `line aware' statistic improves the robustness of the
 algorithm against non astrophysical signals when correct parameters are chosen.
 Figure \ref{soap:las:optimisation:vitexample} shows the results for a specific example, however, Sec.~\ref{soap:las:optimisation:comp_sens} demonstrates how the search is not particularly sensitive to choice of parameters when tested on many examples. 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.9\linewidth]{C3_soap/line_example.pdf}
-    \caption[Example of improvements when using optimised parameters for line aware statistic.]{As a visualisation of the line aware statistic working, an astrophysical signal was simulated in both the H1 and L1 detectors. In one detector an instrumental line was added. In the top panel above the tracks identified by different values of the line aware statistic are shown shifted up by 10 frequency bins. This allows the underlying feature to be identified. In the top two panels the sinusoidal nature of the \gls{CW} signal can be identified in the data, and was identified by the line aware statistic using the S6 MDC optimal values (blue line). The top panel also contains a narrow spectral line at $\sim 102.5$ Hz. The values of the statistic optimised for the Gaussian noise case do not identify the signal but identify the spectral line as the most likely signal. The final panel shows the Viterbi map for the statistic values optimised in the S6 MDC. }
+    \includegraphics[width=1.0\linewidth]{C3_soap/line_example.pdf}
+	\caption[Example of improvements when using optimised parameters for line aware statistic.]{ The spectrograms of H1 and L1 which contain a \gls{CW} simulation are shown in the first and second panel respectively. The top panel (H1) also contains a narrow spectral line at $\sim 102.5$ Hz.
+	The Viterbi tracks from the SOAP search with Line-aware statistic optimised for S6 and Gaussian noise are shown in blue and red respectively. These are shifted up by 10 frequency bins to allow the underlying feature to be identified in the spectrogram. The third and fourth panel show the Viterbi map for the statistic values optimised in the S6 MDC and Gaussian noise respectively. The Viterbi map for the S6 \gls{MDC} statistic shows areas of high log-odds around the signal track. The Viterbi map for the Gaussian noise optimised statistic shows high log-odds around the signal and the instrumental line and identified the track along the instrumental line to be the most significant.}
     \label{soap:las:optimisation:vitexample}
 \end{figure}
 
@@ -1398,10 +1400,10 @@ Whilst this may not be an optimal setup for this particular search, it demonstra
 The example in Fig.~\ref{soap:sens:other:gw170817} show the result between
 $20$ and $520$ Hz, however the SOAP search returns the same track
 for a wider band-width up to 2000 Hz.
-Some work has been done on a variant of the Viterbi algorithm to search for a postmerger remnant of the GW170817 merger \citep{abbott2019SearchGravitational}.
+Some work has been done on a variant of the Viterbi algorithm to search for a post-merger remnant of the GW170817 merger \citep{abbott2019SearchGravitational}.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{C3_soap/gw170817_vitplot.pdf}
         \caption[SOAP search run on GW170817]{The SOAP search was run on a
@@ -1415,12 +1417,21 @@ log-odds along the path of the \gls{BNS} signal.}
 
 Searching for \gls{BBH} systems becomes more difficult as they are in the \gls{LIGO} band for a short period of time ($ < 1 s$).
 To see the evolution of the signal in a spectrogram, the time resolution required means that the frequency bins are too large to see the signals evolution.
+There are other time-frequency representations which we would use such as the Q transform to allow us to search for these signals. However, the bins here are not independent, therefore the Bayesian formalism described in this chapter is no longer technically true.
+The SOAP search can still be run on the Q transform however, this is shown for GW150914 \citep{abbott2016ObservationGravitational} in Fig.~\ref{soap:sens:other:gw150914}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\linewidth]{C3_soap/GW150914_soap.pdf}
+        \caption[SOAP search run on GW150914]{The Q transform is taken around GW150914 \citep{abbott2016ObservationGravitational}. The top two panels who the Q transform for H1 and L1 respectively, where the red track is the Viterbi track identified in each of the transforms. The final panel then shows the output Viterbi map for this data. The two tracks follow the frequency evolution of the \gls{BBH} signal as is sweeps through the band and the Vitebri map shows areas of large log-odds where the \gls{BBH} signal has high Q transform power.}
+\label{soap:sens:other:gw150914}
+
+\end{figure}
+
 This section serves as a demonstration that it is possible to use SOAP for other types of search, it has more flexibility than the majority of examples in this thesis show.
 This is an area of work which would benefit from further
-investigation.~\chris{However, it's not impossible since there are TF
-representations that show chirp-like structures. They don't use spectrograms
-though. You could use different input data BUT you would have the issue of
-independence of bins.}
+investigation.
+
 
 ~\chris{You could expand upon this subsection. One thing to address is the
 issue that the signal does not last for the entire length of the window. What
@@ -1481,9 +1492,7 @@ Running the line-aware statistic search should take $\sim 14$ core-hours to run 
 
 \subsection{Paper discussion}
 
-In this paper~\chris{have you decided on what you're doing about langiage like
-this? Are you keeping "paper" or editing throughout to be more thesis chapter
-like?} we describe an application of the Viterbi algorithm, called SOAP,
+In this paper we describe an application of the Viterbi algorithm, called SOAP,
 to search for continuous sources of gravitational waves.  This paper outlines
 the method and derives the statistics behind the method in a consistent
 Bayesian formalism. It then presents the results from the first set of tests of
@@ -1531,6 +1540,17 @@ frequency evolution and is intended to return potentially interesting
 candidates for a more sensitive followup.
 
 \subsection{Extra work discussion}
+
+Sections \ref{soap:lineawareamp}, \ref{soap:las:optimisation}, \ref{soap:sensfreq} and \ref{soap:sens:other} are additional to the published work in \citep{bayley2019SOAPGeneralised}.
+In Sec.~\ref{soap:lineawareamp}, the line-aware statistic was developed to be able to search through detectors with unequal sensitivities and duty cycles. 
+
+In Sec.~\ref{soap:las:optimisation} the optimisation of the line-aware statistic was described. 
+This optimised the parameters of the line aware statistic in a case where the data does and does not contain instrumental aretefacts.
+This revealed that there are large areas of parameter space where the search performs at or close to its optimum. 
+As the optimisation procedure is time consuming, this allows the same set of line-aware statistic parameters to be run on multiple observing runs withough having to re-optimise the parameters. 
+
+The tests conducted in Sec.~\ref{soap:results} were all in the sensitive frequency band of \gls{LIGO}. 
+To see how the sensitivity of SOAP varied with Sec.~\ref{soap:sensfreq} th
 
 ~\chris{You could add to this section with a discussion about the extra things
 you've added in the Sec. 3.9, Sec. 3.11, Sec. 3.11.3 and Sec. 3.11.4.}

@@ -130,7 +130,7 @@ Fig.~\ref{soap:viterbiplot} shows an example of the spectrogram data which is
 searched through and the outputs of SOAP; the three main output components are
 the frequency track, the Viterbi statistic and the Viterbi map.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	%\centering
 	\includegraphics[scale=0.43]{C4_cnn/two_vit_example.pdf}
 	%
@@ -221,7 +221,7 @@ The weights $\mathbf{w}$ then represent the importance of each data point to thi
 The bias $b$ is then just an extra factor which can shift the data by a fixed value.
 The activation function $f$ is then a function which can have many forms, in the simplest case in a neuron known as a `perceptron', it provides a cut where any value above a given threshold is 1 and any below is 0, this will be explained in more detail in Sec.~\ref{machine:nn:activation}. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\columnwidth]{C4_cnn/neuron.pdf}
     \caption[Basic neuron]{Basic neuron showing the four input parameters $x_n$ and their corresponding weights $w_n$. These are multiplied and summed as in Eq.~\ref{machine:nn:neuron:equation}. A bias $b$ is added and this value is passed through and activation function $f$ to the output.}
@@ -251,7 +251,7 @@ When designing a network, the user will have a defined input layer size from the
 The number of hidden layers and the number of neurons in those hidden layers can be arbitrarily changed. 
 In general if the data contains more complex information the size or complexity of the network will need to be increased for it to be able to extract the information. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{C4_cnn/simple_network.pdf}
     \caption[Example structure of a neural network.]{A neural network is structured with layers. Each of the circles in these layers are neurons as described in Sec.~\ref{machine:nn:neuron} and Fig.~\ref{machine:nn:neuron:plot}. The networks contain an input layer which is usually the data which you would like to analyse. Then this passes to a number of `hidden' layers, in the above diagram there are two. Hidden layers are just layers which exist between the input and the output. The output layer is then the desired output, above I have chosen a single neuron as output. This is such that the network could classify the input to a value between 0 and 1. Every neuron in a layer is connected to the output of all neurons in the previous layer.}
@@ -274,7 +274,7 @@ In the work that follows we use the LeakyRELU function and the sigmoid function.
 The sigmoid function is used on the output such that values are constrained between 0 and 1, the LeakyRELU is used everywhere else. 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\columnwidth]{C4_cnn/activations.pdf}
 	\caption[Examples of activation functions.]{There are many different activations function which are used, any function can be defined for this however, a subset of the more commonly used functions is shown here.}
@@ -542,7 +542,7 @@ For example, the Viterbi statistic contains no information on the structure of t
 The addition of the spectrograms aimed to include even more information about this piece of data. 
 Where when each of these are combined, the \gls{CNN} should be able to pick to important information from each of these representations.
 
-% plot of vitmap and spretrogram structure 
+% plot of vitmap and spectrogram structure 
 %
 \begin{figure}[p]
 	\centering
@@ -767,7 +767,7 @@ running a search on real data.
 	into `odd' or `even' bands. A \gls{CNN} can then be trained on even bands and tested on odd bands and vice versa.
 	%
 	\item[5a. Training data generation] To generate training data the process is
-	the same as described in Sec.~\ref{data}. Each of the $0.1$ Hz sub-bands is
+	the same as described in Sec.~\ref{machine:data}. Each of the $0.1$ Hz sub-bands is
 	`augmented' as in Sec.~\ref{machine:data:augmentation}. For each of the augmented
 	bands, the data is duplicated such that there is a second copy of every augmented band. 
 	In the copied set of bands, signals are injected into them with
@@ -1338,7 +1338,7 @@ not. This would then remove then need to manually look through frequency bands
 and remove those which are contaminated with non-astrophysical (instrumental)
 features. 
 
-% techncal results summary
+% technical results summary
 %
 We tested 6 separate \glspl{CNN} which take in some combination of the three representations of the input data: the Viterbi statistic, the Viterbi map and normalised spectrograms. 
 The aim of using different input data types is that each would

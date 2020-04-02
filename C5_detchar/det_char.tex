@@ -63,7 +63,7 @@ This includes coupling via shared power and grounds.
 When different components share the same power supplies, if a component draws power with a given period, then the voltage will decrease repeatedly at this frequency. 
 Another component which shares this same power supply can then also see this drop in voltage and this can potentially become visible in a recorded output. 
 Another mechanism is coupling through magnetic fields, this is common when cables are close to each other, the magnetic field in one can affect the other, therefore, coupling noise between different systems.
-Coupling can also occur though a physical connection, known as mechanical coupling, for example the resonances of the suspension fibres which couple directly into the mirrors.
+Coupling can also occur though a physical connection, known as mechanical coupling, for example the resonances of the suspension fibers which couple directly into the mirrors.
 
 %
 % Origins of some lines and how they can be mitigated
@@ -111,7 +111,7 @@ The lines affect searches in the \gls{GW} channel, this is the output of the det
 This is the channel where the affect of lines is intended to be minimised.
 
 %
-% Auxilliary channels 
+% Auxiliary channels 
 As well as the \gls{GW} channel, the detector records many different channels known as auxiliary channels. 
 These channels monitor many components of the detector, and importantly are not sensitive to \glspl{GW}.
 Many of the channels useful for line searches are the \glspl{PEM}.
@@ -192,7 +192,7 @@ This shows how the line search identifies the same instrumental line albeit at a
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F111_5_111_7_wander_2.png}
-	\caption[Example SOAP output for wandering line]{The SOAP line search is run on a similar frequency band to Fig.~\ref{soap:detchar:astrowander}. This returns a similar track however at a resolution of 1800 s rather than one day.}
+	\caption[Example SOAP output for wandering line]{The SOAP line search is run on a similar frequency band to Fig.~\ref{detchar:soap:astrowander}. This returns a similar track however at a resolution of 1800 s rather than one day.}
 	\label{detchar:soap:linewander}
 \end{figure}
 %
@@ -205,7 +205,7 @@ This shows how the line search identifies the same instrumental line albeit at a
 \end{figure}
 %
 Fig.~\ref{detchar:soap:noiseplot} shows an example of the spectrogram of a sub-band which does not contain any signal or spectral artefacts but is Gaussian distributed noise. 
-The track in the top panel of this plots shows the power spectrum including detector gaps from 1800 s \glspl{SFT} in \gls{LIGO} Hanfords data from its second observing run (O2). 
+The track in the top panel of this plots shows the power spectrum including detector gaps from 1800 s \glspl{SFT} in \gls{LIGO} Hanford's data from its second observing run (O2). 
 The Viterbi track is overlaid and the structure of the track indicates that there is no signal present, this is because the track appears to be randomly wandering and has a large spread over the entire band. 
 The Viterbi map plot does not show much structure and contains areas of low log-probability.
 Using this information along with the Viterbi statistic result, this particular sub-band can be considered to not contain an instrumental artefact. 
@@ -342,7 +342,7 @@ Armadillo was a project which aimed to develop a diagnostics tool to be used at 
 \begin{itemize}
 	\item LIGO has large control systems
 	\item these can be generally split into two parts: Analogue and digital control systems
-	\item Armadillo was a tool that focusses on the digital control sysyem
+	\item Armadillo was a tool that focusses on the digital control system
 	\item Having an understanging of what happens to a signal as it passes through the control system is important it can help identify source of glitches
 	\item one way to do this is to look at the transfer funtion of a possible signal path 
 	\item Armadillo aimed to find a simple way to return the transfer function between any two points in the control system.
