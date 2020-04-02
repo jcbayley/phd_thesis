@@ -4,19 +4,19 @@
 %%%%%%%%%%%%
 %%%%%
 
-When searching for \gls{GW} signals, it is important to understand the origins of noise artefacts in the detectors data which does not originate from an astrophysical source.
+When searching for \gls{GW} signals, it is important to understand the origins of noise artefacts in the detector data which does not originate from an astrophysical source.
 A large fraction of \gls{GW} search algorithms, including SOAP above, assume that the detectors noise follows a Gaussian distribution.
 However, the detectors contain artefacts which do not follow this distribution. 
 These artefacts can negatively affect many searches for \glspl{GW} as they can be easily mistaken for a real \gls{GW} signal.
 Some of the potential sources of these artefacts have been mentioned in Sec.~\ref{intro:detector:noise}. 
-There are many different classes of artefact, some key types include: glitches, these are short duration broad band bursts in power and instrumental lines which are long duration narrow-band signals.
+There are many different classes of artefact, including: glitches, which are short duration broad band bursts in power and instrumental lines, which are long duration narrow-band signals.
 To conduct a reliable search there are two main tasks which are necessary for detector characterisation.
 The first is identifying the artefact such that any search knows which frequency bands and time segments are contaminated.
 The search can then address that section of data, this could mean removing that section of data or use more sophisticated techniques to deal with the artefact \citep{pankow2018MitigationInstrumental}.
 The second task is to find the source of the artefact. 
 If the source of the artefact is found, it can potentially be removed or limited for future data runs.
 
-The focus of this chapter is on a particular class of artefact called instrumental lines and how they affect \gls{CW} searches.
+The focus of this chapter is on instrumental lines and how they affect \gls{CW} searches.
 Sec.~\ref{detchar:lines} will introduce different sub-classes of instrumental line and how each of them affects a \gls{CW} search.
 Sec.~\ref{detchar:monitor} will outline how these artefacts are detected and monitored, and describe current tools used for this task.
 Sec.~\ref{detchar:soap} will describe how the \gls{CW} search algorithm introduces in Sec.~\ref{soap} can be used to search for instrumental lines.
@@ -40,7 +40,7 @@ They affect search methods in two main ways.
 They can cause the search to produce outliers which are then considered as \gls{GW} candidates.
 Extra efforts then have to be made to analyse these outliers further.
 If the line is close to the \gls{GW} signal in frequency, then it can conceal the power of the \gls{GW}, or if it is overlapping, the search becomes very difficult.
-It is therefore crucial to understand the structure and origin of these lines when performing a search for \gls{GW}, specifically \gls{CW} and stochastic searches.
+It is therefore crucial to understand the structure and origin of these lines when performing a search for \gls{GW}, specifically \gls{CW} and stochastic searches \joe{explain why stochastic}.
 
 %
 % What lines look like and how the appear in the GW channel
@@ -54,7 +54,7 @@ Some instrumental lines are clearly visible when looking at a \gls{ASD} or \gls{
     \label{detchar:line:psd}
 \end{figure}
 %
-The frequency spectrum in Fig.~\ref{detchar:line:psd} shows the time averaged spectra the \gls{GW} channel of the \gls{LIGO} detectors. 
+The \gls{ASD} in Fig.~\ref{detchar:line:psd} shows the time averaged spectra the \gls{GW} channel of the \gls{LIGO} detectors. 
 The \gls{GW} channel is the error signal on the mirrors whilst they are being held on a resonance, i.e. how much the mirrors have to be moved to keep the same intensity at the output of the interferometer.
 The lines seen in the spectrum are not from any \gls{GW} and are usually from ground based sources.
 To see the lines in the \gls{GW} channel, they must be coupled in via some mechanism. 
@@ -72,9 +72,9 @@ Many of the spectral lines seen in the frequency spectrum, Fig.~\ref{detchar:lin
 These cannot be eliminated, therefore need to be understood such that their effect on searches is minimised.
 Some of the strongest of these lines are listed below:
 \begin{description}
-	\item[Power line] The power line harmonics are fundamental to the detector and originate from the mains supply in the USA. These lines exist at 60 Hz which is the frequency of the mains alternating current oscillates at \citep{aasi2015CharacterizationLIGO}.
+	\item[Power line] The power line harmonics are fundamental to the detector and originate from the mains supply in the USA. These lines exist at 60 Hz which is the frequency of the mains alternating current \citep{aasi2015CharacterizationLIGO}. European detectors Virgo and GEO have a power line at 50 Hz instead of 60 Hz.
 	
-	\item[Violin modes] The violin modes are associated with the suspensions of the mirrors and the beam splitter in the detector. These are designed to have a narrow frequency spectrum such that they contaminate as smaller part of the spectrum as possible. These are the lines around 500 Hz for the mirrors and 300, 600 and 900 Hz for the beam-splitter \citep{GWOpen} in Fig.~\ref{detchar:line:psd}.
+	\item[Violin modes] The violin modes are associated with the suspensions of the mirrors and the beam splitter in the detector. These are designed to have a narrow frequency spectrum such that they contaminate as small a part of the spectrum as possible. These are the lines around 500 Hz for the mirrors and 300, 600 and 900 Hz for the beam-splitter \citep{GWOpen} in Fig.~\ref{detchar:line:psd}.
 	
 	\item[Calibration lines] The mirrors of the \gls{LIGO} detectors, are held at a resonance of the cavity in the arms of the interferometer. This then requires a feedback loop to hold them at resonance as a \gls{GW} passes the detector. Calibration lines are used to calibrate this feedback loop such that the arm length changes are accurate \citep{tuyenbayev2016ImprovingLIGO,coughlin2010NoiseLine}.
 \end{description}
@@ -101,7 +101,7 @@ These pose a real challenge to some \gls{CW} searches, and require a lot of inve
 \section{\label{detchar:monitor}Identifying and monitoring instrumental lines}
 %%%%%%%%%%
 %%%%%%%%%%
-
+\joe{mention wiki page somewhere, eg : https://wiki.ligo.org/CW/O3aLineCleaningInfo}
 %
 % into to why lines are monitored
 
@@ -112,8 +112,8 @@ This is the channel where the affect of lines is intended to be minimised.
 
 %
 % Auxilliary channels 
-As well and the \gls{GW} channel the detector records many different channels known as auxiliary channels. 
-These channels monitor many components of the detector, and importantly are not sensitive to \gls{GW}.
+As well as the \gls{GW} channel, the detector records many different channels known as auxiliary channels. 
+These channels monitor many components of the detector, and importantly are not sensitive to \glspl{GW}.
 Many of the channels useful for line searches are the \glspl{PEM}.
 These include sensors such as seismometers measuring the ground motion, temperature sensors, magnetometers etc. 
 These channels can be very useful in identifying the source of an instrumental line.
@@ -130,9 +130,9 @@ There are a number of tools which are used to monitor these spectral lines, alon
 Some of the tools used are described below. 
 
 \begin{description}
-	\item[Fscan] Fscan \citep{coughlin2010NoiseLine} takes \glspl{FFT} of the raw detector data, typically these are 1800s long. This is done for all of the auxiliary channels as well as the \gls{GW} channel. The \glspl{FFT} are then averaged over a day and time-frequency spectrograms are generated. After known lines such as Violin modes and power lines are subtracted, noise lines can be identified. A threshold can be set and anything in the spectrograms which exceed this threshold are flagged as a line. These can then be compared across multiple different channels. More detail on how the lines are identified can be found in \citep{coughlin2010NoiseLine}
+	\item[Fscan] Fscan \citep{coughlin2010NoiseLine} takes \glspl{FFT} of the raw detector data, typically these are 1800s long. This is done for all of the auxiliary channels as well as the \gls{GW} channel. The \glspl{FFT} are then averaged over a day and time-frequency spectrograms are generated. After known lines such as Violin modes and power lines are subtracted, noise lines can be identified. A threshold can be set and anything in the spectrograms which exceed this threshold are flagged as a line. These can then be compared across multiple different channels. More detail on how the lines are identified can be found in \citep{coughlin2010NoiseLine}.
 	
-	\item[Coherence] Coherence searches for the coherence between different channels and different detectors. This is similar to searches for stochastic gravitational waves. More detail of how this works can be found in \citep{covas2018IdentificationMitigation}
+	\item[Coherence] Coherence searches for the coherence between different channels and different detectors. This is similar to searches for stochastic gravitational waves. More detail of how this works can be found in \citep{covas2018IdentificationMitigation}.
 	
 	\item[Finetooth] Many of the instrumental lines found are part of combs. These are repeating structures where the harmonics (teeth) of a line make up the comb which is defined by the start frequency and tooth spacing. Finetooth is a tool which identifies and monitors these combs \citep{neunzertDailyComb}.
 	
@@ -141,8 +141,10 @@ Some of the tools used are described below.
 \end{description}
 
 
-These tools offer many ways for the detector characterisation team to identify instrumental lines and hunt for their source. A summary of these efforts for the advanced \gls{LIGO} data can be found in \citep{covas2018IdentificationMitigation}.
+These tools offer many ways for the detector characterisation team to identify instrumental lines and hunt for their source. A summary of these efforts for the advanced \gls{LIGO} data can be found in \citep{covas2018IdentificationMitigation}, or the \gls{LIGO} wiki page {\tt \url{https://wiki.ligo.org/DetChar/O3LinesCombsInvestigations}}.
 The following sections describe how the SOAP search described in Sec.~\ref{soap} can be used as an extra tool to aid in the identification and monitoring of instrumental lines.
+
+\clearpage
 
 %%%%%%%%%%%
 %%%%%%%%%%%
@@ -242,11 +244,15 @@ Figure \ref{detchar:soap:rankedstats} shows an example of a histogram of the ran
 The sub-bands which give statistic values which lie outside the main distribution can then be viewed for further investigation. The high values outside the distribution are currently defined rather arbitrarily, this could either be something like the top 10\% of sub-bands or could involve looking through the ranked list until signals begin to look like noise. 
 The top results which are deemed to come from an instrumental line can be compared to the known line lists from the other line tools mentioned in Sec.~\ref{detchar:monitor}.
 Any new lines can be investigated further by methods described in \citep{covas2018IdentificationMitigation} using the tools in Sec.~\ref{detchar:monitor}.
+A list of lines which have been categorised by these searches can be found here in {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/index.html}} and lines which have not been categorised in {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/Unidentified/index.html}}.
+The two line lists above can then be compared to the output of the SOAP line search.
+
+
 When running this search SOAP identified lines which did not appear in other line lists, therefore, offers a method to search for weaker lines. \joe{actually check this}
 
 \joe{need to mention why this is good as extra tool, i.e. searching for wandering lines, identifies track of very weak lines etc, things that other searches cannot do}
 
-
+\clearpage 
 %%%%%%%%%%%
 %%%%%%%%%%%%
 \section{\label{detchar:summary}Summary pages}
@@ -295,7 +301,7 @@ The observing run is selected at the top of the page, where currently this has o
 From this menu the detector can be selected, currently only \glspl{LIGO} H1 and L1 detectors are present.
 The selection of frequencies and viewing of outputs then happens on this page.
 The key information of each page is the plots shown in Figs.~\ref{detchar:soap:linewander} - \ref{detchar:soap:wanderplot}.
-These clearly show the data with a number of representations of the data. They show the time frequency spectrgrams of the data, the output Viterbi tracks which identify the most probable frequency track, the Viterbi maps which allow the probability of a signal as a function of the time and frequency bin to be viewed. 
+These clearly show the data with a number of representations of the data. They show the time frequency spectrograms of the data, the output Viterbi tracks which identify the most probable frequency track, the Viterbi maps which allow the probability of a signal as a function of the time and frequency bin to be viewed. 
 Finally they show the spectrogram power along the Viterbi track with the mean noise floor of the detector during the observing run.
 This should provide enough information to determine whether an instrumental line in present.
 To navigate each page, the left panel contains a calendar where the start and end times of a result can be selected. 
@@ -322,3 +328,39 @@ The loud features such as Violin modes can then be marked. This means that these
 \end{sidewaysfigure}
 
 The summary pages are then hoped to be useful alongside the other tools for searching for instrumental lines. \joe{more}
+
+\clearpage
+
+%%%%%%%%%%%
+%%%%%%%%%%%
+\section{Armadillo}
+%%%%%%%%%%%
+%%%%%%%%%%%
+
+Armadillo was a project which aimed to develop a diagnostics tool to be used at the \gls{LIGO} detectors.
+
+\begin{itemize}
+	\item LIGO has large control systems
+	\item these can be generally split into two parts: Analogue and digital control systems
+	\item Armadillo was a tool that focusses on the digital control sysyem
+	\item Having an understanging of what happens to a signal as it passes through the control system is important it can help identify source of glitches
+	\item one way to do this is to look at the transfer funtion of a possible signal path 
+	\item Armadillo aimed to find a simple way to return the transfer function between any two points in the control system.
+\end{itemize}
+
+
+To find the transfer function between any two points in the digital control system, one needs to know all the possible paths a signal could take between those two points and each of the component filters which lie along the paths.
+The models of the digital control system for \gls{LIGO} are stored in Simulink diagrams \citep{}.
+These generally 
+
+\begin{itemize}
+	\item May components are need to explain a transfer function
+	\item first step is to load all the models from simulink diagrams
+	\item these contain of many blocks and connections see Fig ....
+	\item each block can be a single filter or a submodel which contains many more filters
+	\item there is then a large number of filters and possible paths
+	\item for each filter, one needs to load the `FOTON' filter files which contain the coefficients 
+	\item there are also blocks which are matricies which only allow a signal to pass along a certain path at a given time
+	\item These are defined int EPICS by the user, and their values at any time are stored
+	\item 
+\end{itemize}

@@ -312,9 +312,9 @@ The key features of \glspl{CNN} which distinguish them from ordinary neural netw
 %%%%%%%%%%
 %%%%%%%%%%
 
-Convolutional layers have some similarities to standard fully connected layers as described in Sec.~\ref{machine:nn:structure}. 
+Convolutional layers have some similarities to fully connected layers as described in Sec.~\ref{machine:nn:structure}. 
 The main difference being how the weights are applied to the inputs.
-A fully connected neural network would flatten this image and apply Eq.~\ref{machine:nn:neuron:equation} to the inputs.
+If we assume that the input to the network is some image, then a fully connected neural network would flatten this image and apply Eq.~\ref{machine:nn:neuron:equation} to the input pixels.
 This involves having a separate weight for each of the input pixels in an image.
 A convolutional layer however, filters the image and outputs a filtered image of the same size (the image can be a different size it depends how the layer was set up).
 This convolution is defined by
@@ -324,12 +324,12 @@ O_{i,j} = f\left( \sum_{m} \sum_{n} F_{m,n}x_{i-m,j-n}\right) ,
 \end{equation}
 where $O$ is the output image, $x$ is the input image, $F$ is the convolutional filter and $f$ is the activation function.
 The weights of the filter $F_{m,n}$ are what are updated when the network is trained.
-Fig.~\ref{machine:cnn:convlayer:input} shows an example of a 6x6 image and the results of filtering the image using Eq.~\ref{machine:cnn:conv:equation} with two different filters $F$. 
+Figure \ref{machine:cnn:convlayer:input} shows an example of a 6x6 image and the results of filtering the image using Eq.~\ref{machine:cnn:conv:equation} with two different filters $F$. 
 In this case the network has 4 parameters for each filtered image which can be updated as opposed to the 36 which a full connected network would have for a single neuron.
 
-Fig.~\ref{machine:cnn:convlayer:input} demonstrates how a filter which matches a feature in an image can highlight that particular feature. 
+Figure \ref{machine:cnn:convlayer:input} demonstrates how a filter which matches a feature in an image can highlight that particular feature. 
 i.e. the diagonal line in the bottom left of the input is enhanced by Filter 1, which matches that feature. 
-When this type of layer is trained, the weights of the filter are updated. The filter should then ideally match the feature which is intended to be extracted from the image.
+When this type of layer is trained, the weights of the filter are updated. After training the filter weights should then ideally match the feature which is intended to be extracted from the image.
 
 \begin{figure}[p]
 
@@ -341,20 +341,20 @@ When this type of layer is trained, the weights of the filter are updated. The f
 
 \end{figure}
 
-A convolutional layer has a number of different hyper-parameters which can be varied when setting up a model.
+A convolutional layer has a number of different hyper-parameters which can be varied when setting up a \gls{CNN}.
 Below I list each of the adaptable parameters and what they do.
 
 \begin{description}
 \item[Filter size] The filter size is the size and shape of the convolutional filter. In Fig.~\ref{machine:cnn:convlayer:input} we use a filter size of 2$\times$2. The filter does not have to be square, however must be less than the dimensions of the image.
 
-\item[Number of filters] The number of filters can be any value. If you have $K$ filter kernels, then the convolutional layer will output $K$ filtered images. In Fig.~\ref{machine:cnn:convlayer:input} we use two filters and therefore, the output of the layer is two images.
+\item[Number of filters] The number of filters can be any value. The convolutional layer will output the same number of filtered images as there are filters. In Fig.~\ref{machine:cnn:convlayer:input} we use two filters and therefore, the output of the layer is two images.
 
 \item[Activation function] The activation function is generally kept the same for each of the layers, however this can be set here. The different types have been explained in Sec.~\ref{machine:nn:activation} and are applied as in Eq.~\ref{machine:cnn:conv:equation}.
 
-\item[Stride] A normal convolutional layer applies a filter by multiplying by a filter, then shifting over by one pixel and repeating. Applying a stride mean rather than shifting by one pixel, one shifts by a number greater than one. This reduces the size of the output by the same factor of stride. i.e. if you skip one pixel (a stride of 2) then the image will be half the size on output. This has a similar affect to max-pooling which we describe in Sec.~\ref{machine:cnn:maxpool} an use for the rest of this work.  
+\item[Stride] A normal convolutional layer applies a filter by multiplying by a filter, then shifting over by one pixel and repeating. Applying a stride mean rather than shifting by one pixel, one shifts by a number greater than one. This reduces the size of the output by the same factor of stride. i.e. if you skip one pixel (a stride of 2) then the image will be half the size on output. This has a similar affect to max-pooling which we describe in Sec.~\ref{machine:cnn:maxpool}.  
 \end{description}
 
-The convolutional layers with reduce the number of updatable parameters used in each network or model.
+The convolutional layers can reduce the number of updatable parameters used in each network compared to an equivalent fully connected network.
 However, the output of a convolutional layer is a number of images which are potential the same size as the input. 
 This has potentially increased the size of the parameter space for the next layer.
 To decrease this a type of layer known as max-pooling is used.
@@ -390,7 +390,7 @@ This demonstrates how the max-pooling layer can hold on to important information
 The `feature extraction' part of the network consists of the convolutional layers and the max-pooling described in Sec.~\ref{machine:cnn}.
 The outputs of the final max-pooling layer are then flattened and used as the input to a fully connected network.
 This fully connected network the classifies these outputs into a number of classes.
-Fig.~\ref{machine:cnn:structure:example} shows an example of the layout. 
+Figure \ref{machine:cnn:structure:example} shows an example of the layout. 
 Here an input image which is the same as in previous examples is passed onto a single convolutional layer with two different filters.
 The output of two filtered images is passed to a max-pooling layer.
 The two max-pooled images are flattened into 18 input neurons, this then passes through a fully connected network to a single output neuron.
@@ -918,7 +918,7 @@ Figs.~\ref{machine:results:o2},\ref{machine:results:s6gauss} and \ref{machine:re
 %%%%%%%%%%
 
 For the first test, injections were made into the O1 data-set as in Sec.~\ref{machine:data} between 100 Hz and 400 Hz. Then each of the 6 networks described in Sec.~\ref{machine:cnn:structure} were trained and tested on this data. 
-Fig.~\ref{machine:results:o1} shows the sensitivity curves for this test for both \gls{SNR} and sensitivity depth for each of the 6 networks. Focusing on Fig.~\ref{machine:results:snr_o1}, the least sensitive, i.e. furthest to the right, of the \glspl{CNN} is the Viterbi statistic (vitstat), this is expected as we know that the Viterbi statistic is sensitive to instrumental lines. 
+Figure \ref{machine:results:o1} shows the sensitivity curves for this test for both \gls{SNR} and sensitivity depth for each of the 6 networks. Focusing on Fig.~\ref{machine:results:snr_o1}, the least sensitive, i.e. furthest to the right, of the \glspl{CNN} is the Viterbi statistic (vitstat), this is expected as we know that the Viterbi statistic is sensitive to instrumental lines. 
 The spectrogram \gls{CNN} has an improved sensitivity over the Viterbi statistic, this importantly does not involve the SOAP search but is run entirely on down-sampled and summed spectrograms. 
 Whilst this network is approaching the most sensitive of the examples in Fig.~\ref{machine:results:o1}, and with further efforts may reach it, this network takes $\sim10$ times the amount of training time. This will be explained in more detail in Sec.~\ref{machine:results:timing}.
 The remaining networks achieved almost the same sensitivity. 
@@ -1117,68 +1117,94 @@ $\sim 16\;{\rm Hz}^{-1/2}$ with 95\% efficiency.
 %%%%
 
 
-A key part of any \gls{CW} search is the computational time taken, the majority of the time for this search is used generating the appropriate data. 
-For each section of the pipeline we have take the average total time for each job to complete, where each job runs on 2.0 Hz and it runs between 100 and 400 Hz. These are approximate timings taken for all the jobs to finish when run on CIT and can vary.
+A key property of any \gls{CW} search is the computational
+time taken for the search to run. 
+Table \ref{timing:table} shows the timings for different sections of the search when run on the S6 dataset. 
+This can be split into three main sections: data generation, \gls{CNN} training and \gls{CNN} testing.
+To get from raw \glspl{SFT} to results with this search, the majority of the computational time taken is in the data generation step.
+The timings shown Tab.~\ref{timing:table} are for the S6 observing run where each section is run on a single \gls{CPU} or \gls{GPU}, however, in practice the generation of the data is generally run on multiple \glspl{CPU} on a computing cluster.
+The training and testing of a \gls{CNN} is done on a single\gls{GPU}, this substantially decreases the training time compared to a \gls{CPU} due to the parallel nature of neural networks. 
 
-\begin{table}[h]
-	%                     
-	\centering                                                                                            
-	\caption[Table showing computational cost of each part of the SOAP and \gls{CNN} search.]{\label{timing:table}Table shows the timings for each part of the search. These are approximate timings and vary when different amounts of data are input. This was run on data between 100-400 Hz.}
-	
-	%   
-	\scalebox{0.8}{%
-	\bgroup
-	\def\arraystretch{1.5}
-	\centering
-	\begin{tabular}{c c c}
-		\multicolumn{3}{c}{{\bf Generating data on CPU}}  \\
-		\hline
-		\hline
-		& Time [hrs] & \\
-		\hline
-		Narrow-banding & $9$ &  \\
-		\hline
-		Training data& $239$ & \\
-		\hline
-		Test data& $75$ & \\
-		\hline
-		Search data& $40$ & \\
-		\hline
-		\hline
-		\multicolumn{3}{c}{{\bf Training \glspl{CNN} on GPU} }  \\
-		\hline
-		\hline
-		& Training time [hrs] & Loading time [hrs]\\
-		\hline
-		Viterbi statistic & $0.03$ & $0.2$ \\
-		\hline
-		Viterbi map & $0.8$ & $0.7$ \\
-		\hline
-		spectrogram & $9$ & $1$\\
-		\hline
-		Viterbi map \\ + Viterbi statistic& $1$ &$0.7$ \\
-		\hline
-		Viterbi map \\ + spectrogram& $1.4$ & $1.6$\\
-		\hline
-		Viterbi map \\ + Viterbi statistic \\ + spectrogram& $1.5$ & $2$ \\
-		\hline
-		\hline
-		\multicolumn{3}{c}{{\bf Testing \glspl{CNN} on real data on GPU}}  \\
-		\hline
-		\hline
-		& Testing [s] & Loading [s] \\
-		\hline
-		& $5$ & $60-160$ \\
-		\hline
-		\hline
-	\end{tabular}
-	\egroup
-}
+
+\begin{table}
+%                                                                                                                 
+\caption{\label{timing:table}
+The approximate timings were measured for each part of the search. This table shows the timings for training and testing starting from raw \glspl{SFT}. This is the results from S6 which is the longest run we tested. We used S6 data in the frequency range
+between 40-500 Hz and it had a length 22538 \glspl{SFT} with time base of 1800 s. In the training,testing and search data sections we averaged the \glspl{SFT} over one day such that we had 469 time segments as input to the \glspl{CNN}. The data generation times here are for a single \gls{CPU} however, in reality this will be split across many separate \glspl{CPU}. The training and testing is completed on a single \gls{GPU}.}
+
+%   
+\centering
+\bgroup
+\def\arraystretch{1.5}
+\centering
+\begin{tabular}{c c c}
+ \multicolumn{3}{c}{{\bf Generating data on single \gls{CPU}}}  \\
+\hline
+\hline
+ & \multicolumn{2}{c}{Time [hrs]} \\
+\hline
+Narrow-banding & \multicolumn{2}{c}{$\sim 9$}   \\
+\hline
+Training data& \multicolumn{2}{c}{$\sim 240$} \\
+\hline
+Testing data& \multicolumn{2}{c}{$\sim 75$}  \\
+\hline
+Search data& \multicolumn{2}{c}{$\sim 40$}  \\
+\hline
+\hline
+ \multicolumn{3}{c}{{\bf Training \glspl{CNN} on single \gls{GPU}} }  \\
+\hline
+\hline
+ & Training time [hrs] & Loading time [hrs]\\
+\hline
+Viterbi statistic & $0.03$ & $0.2$ \\
+\hline
+Viterbi map & $0.8$ & $0.7$ \\
+\hline
+spectrogram & $9$ & $1$\\
+\hline
+Viterbi map \\ + Viterbi statistic& $1$ &$0.7$ \\
+\hline
+Viterbi map \\ + spectrogram& $1.4$ & $1.6$\\
+\hline
+Viterbi map \\ + Viterbi statistic \\ + spectrogram& $1.5$ & $2$ \\
+\hline
+\hline
+ \multicolumn{3}{c}{{\bf Testing \glspl{CNN} on real data on \gls{GPU}}}  \\
+ \hline
+ \hline
+ & Testing [s] & Loading [s] \\
+\hline
+ All \glspl{CNN} & $5$ & $60-160$ \\
+\hline
+\hline
+\end{tabular}
+\egroup
 \end{table}
 
-This gives the entire search including testing a total run time of $ \sim 386$ hours, however, the majority of the time is taken generating data which can be easily parallelised. 
-Rather than taking hundreds of hours, the generating data sections takes $\mathcal{O}(1)$ hours in real time.
+% conclusions to be drawn from the table of timings
+%
+One can start from raw \glspl{SFT} from the S6 dataset without any trained networks, where this dataset has 22538, 1800 s long \glspl{SFT} and we search between 40-500 Hz, i.e. 828000 frequency bins. 
+This search would have a total computing time of $ \sim 386$ hours on a single \gls{CPU} and \gls{GPU}.
+However, the majority of this time is taken generating the appropriate data.
+The generation of training, testing and search data can be easily parallelised, where in practice this is split over 200 \glspl{CPU} so that it takes $\sim 2$ hours instead of $\sim 355$ hours. 
+Rather than taking $\sim 364$ hours, the generating data section then takes $\sim 11$ hours in real time.
+After this parallelisation, if one was given S6 data without any trained networks, the search would then take approximately $13$ hours to get an efficiency curve and a list of candidates. In this case I assume that only the Viterbi map network is trained and tested based on the conclusions from Sec.~\ref{machine:results}. 
 
+The computational cost could be reduced further if a network had been trained on a previous observing run. 
+This would mean that the generating of the training data and the training of the network may not be needed.
+This would reduce the total run time on S6 to $\sim 9.5$ hours. 
+However, this does not drastically reduce the run time as the majority of the time is spent narrow-banding the \glspl{SFT} which is not run in parallel.
+
+To reduce the time taken to generate results at the end of an observing run, one could narrowband the \glspl{SFT} periodically as the data is taken during an observing run. 
+This would allow the results to be generated within $\sim 3.5$ hours of the end of the run.
+\glspl{SFT} generated on a regular basis would allow results to be generated during an observing run.
+This could be done, for example, on a weekly basis by adding 7 days of pixels to a spectrogram, then retraining a \gls{CNN} and generating results.
+
+The computational cost of this search is small when compared to other existing \gls{CW} searches. In \cite{walsh2016ComparisonMethods} the expected computational cost for the first 4 months of O1 for each search is shown, where the fastest search takes $0.9$ million core-hours (Hough searches) and the slowest is $100-170$ million core-hours (Einstein@Home).
+The equivalent cost of the SOAP + \gls{CNN} search is $\sim 100-200$ core-hours which is $\sim 5-10$ thousand times faster.
+
+\clearpage
 
 %%%%%
 %%%%%
@@ -1186,22 +1212,21 @@ Rather than taking hundreds of hours, the generating data sections takes $\mathc
 %%%%%
 %%%%%
 
-When training a network, the general rule is that the more data the better. 
-More data can limit effects such as over-training mentioned in Sec.~\ref{machine:training}.
+When training a \gls{CNN}, the general rule is that the more data the better. 
+More data can limit effects such as over-training mentioned in Sec.~\ref{machine:training}, and can increase the \glspl{CNN} sensitivity.
 To investigate how the sensitivity of the search changes with the number of training examples, the Viterbi map (vitmap) network in Sec.\ref{machine:results} was trained using a range of sizes of the training set. 
-These networks are then tested on the same dataset to see how they perform.
+These networks are then tested on a separate dataset of a fixed size to see how they perform.
 This was repeated for two data-sets: \gls{CW} simulations in Gaussian noise and simulations in \glspl{LIGO} O1 data-set. 
 For both of these cases six different networks were trained, these used: 100, 500, 1000, 5000, 10000 and 15000 Viterbi maps as their training datasets.
 Each of these different sizes of training data is a randomly selected subset of the training data used in Sec.~\ref{machine:results:sensitivity}.
 The test data for each was the same entire tests sets as in Sec.~\ref{machine:results:sensitivity}.
 
-In the Gaussian noise case, the majority of the networks performed the same. 
-Fig.~\ref{machine:results:sens_size:gauss_sens:eff} shows that in the Gaussian noise case, the majority of the networks performed with approximately the same sensitivity. 
+Figure \ref{machine:results:sens_size:gauss_sens:eff} shows that in the Gaussian noise case, the majority of the networks performed with approximately the same sensitivity. 
 This is with the exception of the network which was trained with 100 input Viterbi maps. 
-Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows that the sensitivity does appear to decrease, however, this is only by a few values in \gls{SNR}.
+Figure \ref{machine:results:sens_size:gauss_sens:train} shows that the sensitivity does appear to decrease, however, this is only by an \gls{SNR} of $\sim 5$.
 The implication of this is that the information in the Viterbi maps is relatively easy to extract when simulations are in Gaussian noise. 
 In this case the network is trying to distinguish Gaussian noise from a simulated \gls{CW} signal.
-Therefore, one would expect this to be an easier problem for the network to solve than when trying to distinguish an \gls{CW} signal from instrumental lines and Gaussian noise. 
+Therefore, one would expect this to be an easier problem for the network to solve compared to trying to distinguish an \gls{CW} signal from instrumental lines and Gaussian noise. 
 
 \begin{figure}[h]
 	\begin{subfigure}[h]{0.5\textwidth}
@@ -1214,16 +1239,16 @@ Therefore, one would expect this to be an easier problem for the network to solv
 		\caption{}
 		\label{machine:results:sens_size:gauss_sens:train}
 	\end{subfigure}
-	\caption[Sensitivity with size of data set for Gaussian noise simulations.]{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here I show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Fig.~\ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark.}
+	\caption[Sensitivity with size of data set for Gaussian noise simulations.]{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here I show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Figure \ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark.}
 	\label{machine:results:sens_size:gauss_sens}
 \end{figure}
 
 When simulating signals in real O1 data, many of the sub-bands will contain instrumental lines. 
-The noise class for the networks then contains many variations compared to the Gaussian noise case. 
-This is a harder challenge for the neural network as it increases the size of the parameter space.
+The noise class for the \gls{CNN} then contains many variations compared to the Gaussian noise case. 
+This is a harder challenge for the \gls{CNN} as it increases the size of the parameter space.
 Because of this, one would expect the network to need many more training examples to be able to achieve a similar sensitivity to Gaussian noise.
-In Fig.~\ref{machine:results:sens_size:o1_sens:eff}, one can see that using 100 training examples is not enough and the network does not achieve any sensitivity at any \gls{SNR}. This means that the \gls{CNN} cannot classify any injection as detected using this number of training examples.
-Fig.~\ref{machine:results:sens_size:o1_sens:train} seems to agree that real data poses a harder problem as the sensitivity drastically increases as the number of training examples is increased.
+In Fig.~\ref{machine:results:sens_size:o1_sens:eff}, one can see that using 100 training examples is not enough for the \gls{CNN} to achieve any sensitivity at any \gls{SNR}. This means that the \gls{CNN} cannot classify any injection as detected using this number of training examples.
+Figure \ref{machine:results:sens_size:o1_sens:train} seems to agree that real data poses a harder problem as the sensitivity drastically increases as the number of training examples is increased.
 Therefore, more training examples are needed for the network to perform well on real data.
 
 \begin{figure}[h]
@@ -1237,7 +1262,7 @@ Therefore, more training examples are needed for the network to perform well on 
 		\caption{}
 		\label{machine:results:sens_size:o1_sens:train}
 	\end{subfigure}
-	\caption[Sensitivity with size of data set for O1 simulations.]{Here I show how the sensitivity changes as a function of the number of training examples for simulations in O1 data. Fig.~\ref{machine:results:sens_size:o1_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:o1_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a large increase in the sensitivity of the \gls{CNN}. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:o1_sens:train} as it does not reach the 90\% efficiency mark.}
+	\caption[Sensitivity with size of data set for O1 simulations.]{Here I show how the sensitivity changes as a function of the number of training examples for simulations in O1 data. Figure \ref{machine:results:sens_size:o1_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:o1_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a large increase in the sensitivity of the \gls{CNN}. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:o1_sens:train} as it does not reach the 90\% efficiency mark.}
 	\label{machine:results:sens_size:o1_sens}
 \end{figure}
 
@@ -1268,7 +1293,7 @@ After this point, the figures can be compared and it becomes obvious that differ
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{C4_cnn/vitmap_cnn_visualisation_signal.pdf}
-	\caption[Network visualisation for a signal injection]{The \gls{CNN} can be visualised by seeing how a piece of data is passed through the network. This figure shows how the image is processed in each layer of the network. The input here is a Viterbi map which results from the SOAP algorithm. The input to SOAP here is a time-frequency spectrogram which contains a strong \gls{CW} signal. The final output neuron here is a 1 indicating that this is likely to contain a signal. }
+	\caption[Network visualisation for a signal injection]{The \gls{CNN} can be visualised by seeing how a piece of data is passed through the network. This figure shows how the image is processed in each layer of the network. The input here is a Viterbi map which results from the SOAP algorithm. The input to SOAP here is a time-frequency spectrogram which contains a strong \gls{CW} signal. This then passes through 8 convolutional filters, then 8 max-pooling layers, then another set of 8 convolutional and max-pooling layers.the values are then flattened and it passes through 3 layers of 8 fully connected neurons.The final output neuron here is a 1 indicating that this is likely to contain a signal. }
 	\label{machine:cnn:vis:vitmap:signal}
 \end{figure}
 
@@ -1294,27 +1319,69 @@ After this point, the figures can be compared and it becomes obvious that differ
 %%%%%%%%%
 %%%%%%%%%
 
-In this paper we summarise an extension of the SOAP algorithm which makes use of a \gls{CNN} to limit the effect of instrumental lines in a search for sources of continuous gravitational waves.
-The SOAP search has a number of outputs for a given input spectrogram, where the main focus here is the Viterbi statistic and the Viterbi map. 
-The Viterbi statistic has previously been used as a measure of whether there is a signal in a given frequency band, and the Viterbi maps are images which have the same shape as the input spectrogram, but gives a likelihood that there is a signal in a given location. 
-The aim of the \gls{CNN} was to use the Viterbi maps and spectrograms as input images such that each frequency band can be classified to either having a signal or not. 
-This would then remove then need to manually look through frequency bands and remove ones which are contaminated with non astrophysical features. 
 
-We tested 6 separate \glspl{CNN} which all take in different input data or different combinations of data as input. 
-The three input data types are: the Viterbi statistic, the Viterbi map and the spectrograms which are summed and divided by a running median.
-The aim of using different input data types is that each would provide a different piece of information than the others, this had the hope that the combinations of these should then increase our sensitivity. 
-The tests found that the \gls{CNN} which uses the Viterbi map alone as input was more sensitive than any other which used a single data type as input. 
-Each of the \glspl{CNN} which used a combination of input data types had a similar sensitivity to the Viterbi map \gls{CNN}, therefore, it is assumed that the Viterbi map provides the most useful information when detecting a signal. 
-Given that the main aim of this paper was to reduce the effect of instrumental lines on the SOAP search, in Gaussian noise data, the \gls{CNN} search should achieve a similar sensitivity to the Viterbi statistic alone. 
-The tests in Gaussian noise with S6 gaps showed that at a 95 \% efficiency and a 1\% false alarm rate the Viterbi statistic and Viterbi map achieved a sensitivity of SNR 95 and 90 respectively. 
-When the same test was run in real S6 data at a 95 \% efficiency and a 1\% false alarm rate the Viterbi statistic and Viterbi map achieved a sensitivity of SNR 300 and 120 respectively.
-This demonstrates that the Viterbi map has a much larger effect when used on real data due to the presence of many instrumental lines within real data. 
+% main summary - what the paper was about
+%
+In this paper we summarise an extension of the SOAP algorithm \citep{bayley2019SOAPGeneralised}.
+The extension makes use of a \gls{CNN} to limit the effect of
+instrumental lines in a search for sources of \gls{CW}. 
+The SOAP search has a number of outputs for a given input
+spectrogram, in this paper we focus on using two of the outputs: the Viterbi statistic and the Viterbi map.
+The Viterbi statistic has previously been used as a
+measure of whether there is an astrophysical signal in a given frequency band as in \citep{bayley2019SOAPGeneralised}.
+The Viterbi maps are output maps with the same shape as the input
+spectrogram, these however give a value related to the probability that a signal is in any time-frequency bin. 
+The aim of the \gls{CNN} approach is to use
+both the Viterbi maps and spectrograms as input images to more effectively classify each
+frequency band to either having an astrophysical signal or
+not. This would then remove then need to manually look through frequency bands
+and remove those which are contaminated with non-astrophysical (instrumental)
+features. 
 
-These tests were once again repeated using a standard set of injections into S6 data such that a direct comparison can be made with other \gls{CW} search pipelines. 
-At a 95 \% efficiency and a 1\% false alarm rate the Viterbi map \gls{CNN} achieved a sensitivity of \gls{SNR} $ \sim 90$ and sensitivity depth $\sim 14 \; \rm{Hz}^{-1/2}$ .
-We have shown that the SOAP + \gls{CNN} approach can achieve a similar sensitivity to other semi-coherent \gls{CW} search algorithms but with a greatly reduced computational cost.
+% techncal results summary
+%
+We tested 6 separate \glspl{CNN} which take in some combination of the three representations of the input data: the Viterbi statistic, the Viterbi map and normalised spectrograms. 
+The aim of using different input data types is that each would
+provide a different representation of the same information, this had
+the potential to increase the sensitivity of the search. The tests found
+that the \gls{CNN} which uses the Viterbi map alone as input was more sensitive
+than any other which used a single data type as input. Each of the \glspl{CNN}
+that used a combination of input data types had a similar sensitivity to the
+Viterbi map \gls{CNN}, therefore, we concluded that the Viterbi map provides the most
+useful information when detecting a signal.  Given that the main aim of this
+paper was to reduce the effect of instrumental lines on the SOAP search, in
+Gaussian noise data (with no such lines), the \gls{CNN} search should achieve a
+similar sensitivity to the Viterbi statistic alone. The tests in Gaussian noise
+with S6 gaps showed that at a 95 \% efficiency and a 1\% false alarm rate the
+Viterbi statistic and Viterbi map achieved a sensitivity of SNR 95 and 90
+respectively. When the same test was run in real S6 data at a 95 \% efficiency
+and a 1\% false alarm rate the Viterbi statistic and Viterbi map achieved
+corresponding sensitivities of SNR 300 and 120 respectively. This demonstrates
+that the Viterbi map approach has a much larger effect when used on real data
+due to the presence of many instrumental lines. 
 
-This search also offers a lot of flexibility in the signal type which can be searched, in the above examples the focus is on isolated neutron stars such that a comparison can be made to other \gls{CW} searches, however, this search is un-modelled. By changing the input parameters of the search, different signal types can be searched over, and in the future we aim to test its ability to identify more exotic sources of \gls{GW}. 
-Further to this, we aim to make minor modifications to this pipeline such that some of the source parameters can be approximated. This should then return enough information to pass onto a more sensitive search for the signal. 
+% comparison with other pipelines
+%
+These tests were once again repeated using a standard set of injections into S6
+data such that a direct comparison can be made with other \gls{CW} search
+pipelines. At a 95\% efficiency and a 1\% false alarm rate the Viterbi map
+\gls{CNN} achieved a sensitivity of \gls{SNR} $ \sim 90$ and sensitivity depth
+$\sim 14 \; \rm{Hz}^{-1/2}$ . We have shown that the SOAP + \gls{CNN} approach
+can achieve a similar sensitivity to other semi-coherent \gls{CW} search
+algorithms but with a greatly reduced computational cost.
+
+% final statement
+%
+This search also offers a lot of flexibility in the signal type which can be
+searched, in the above examples the focus is on isolated neutron stars such
+that a comparison can be made to other \gls{CW} searches, however, this search
+is un-modelled. By changing the input parameters of the search, different
+signal types can be searched over, and in future work we aim to test its
+ability to identify other sources of \gls{GW} such as neutron stars in binary systems.
+Further to this, we aim to apply a more advances Bayesian analysis to enable parameter estimation of some parameters of the signal.
+These parameters would then provide crucial information for a deeper followup by fully coherent pipelines. 
+
+
+
 
 

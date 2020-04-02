@@ -22,9 +22,12 @@
 % These margins are the university guidelines
 \usepackage[onehalfspacing]{setspace}  % gives one-and-a-half line spacing
 % doublespacing is another option and can be changed in the text
+\usepackage{xcolor}
+\definecolor{linkblue}{HTML}{335c97}
 \usepackage[]{hyperref}
 \hypersetup{
-	colorlinks=true,
+    colorlinks=True,
+    linkcolor=linkblue,
 }
 \usepackage{dcolumn}   % needed for some tables
 \usepackage{bm}        % for math
@@ -33,6 +36,8 @@
 \usepackage{color}
 %\usepackage{acronym}
 \usepackage[toc,acronym]{glossaries}
+%\renewcommand*{\glstextformat}[1]{\textsf{#1}}
+
 \usepackage{algcompatible}
 \usepackage{newfloat}
 \usepackage{cancel}
@@ -111,6 +116,8 @@ placement=tbhp,
 \newacronym{SSB}{SSB}{solar system barycenter}
 \newacronym{MSU}{MSU}{million standard units}
 \newacronym{ASD}{ASD}{amplitude spectral density}
+\newacronym{CPU}{CPU}{central processing unit}
+\newacronym{GPU}{GPU}{graphics processing unit}
 
 
 \begin{document}

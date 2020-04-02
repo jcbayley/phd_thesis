@@ -10,7 +10,7 @@ spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible
 randomly wandering track from a starting frequency bin to an end frequency bin.
 For each of these tracks the sum of the spectrogram power along the track can
 be found such that for each track there is a single value.
-Fig.~\ref{soap:motivation:plot} shows a histogram of a subset of these values.
+Figure \ref{soap:motivation:plot} shows a histogram of a subset of these values.
 If there is a signal present in this band then it could be assumed that the
 signal which gives the highest sum of spectrogram power is the track which is
 most likely to follow the signals frequency track~\chris{It's not clear why you
@@ -405,7 +405,7 @@ A memory of $m=0$ therefore corresponds to the methods described in previous sec
 With a non-zero memory the transition matrix can a-priori make certain sequences of jumps more probable and assign different prior probabilities for these jump sequences e.g., `up then centre' may be less preferable to `centre then centre'.
 As a result we can increase the chance of the most probable track matching an expected astrophysical signal.
 In a single detector search with a memory of $m=1$, if we only allow \gls{UCD} transitions, then for every frequency bin we save 3 values. These are proportional to the log-probabilities of a track coming from a \gls{UCD} bin in the previous time step, where the maximisation is over the corresponding \gls{UCD} bins two time steps back.
-Eq.~\ref{soap:multidet:vitsum} then is then modified to,
+Equation \ref{soap:multidet:vitsum} then is then modified to,
 %
 \begin{equation}
 \label{soap:memory:stat}
@@ -663,20 +663,18 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\linewidth]{C3_soap/lookup_noline.pdf}
+\includegraphics[width=0.9\linewidth]{C3_soap/lookup_noline.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{\joe{redo this caption aswell}This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 0$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0$. So the line part of the statistic is not operating.So the line part of the statistic is not
-operating.~\chris{explain what PSD mean is in all these plots and are these
-plots for the LAS for consistent amplitude? What is $p_{l}(\lambda)$? Has it
-been defined before? }}
+operating.}
 \label{soap:las:detp:noline}
 \end{minipage}
 \end{subfigure}
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\columnwidth]{C3_soap/lookup_linesmall.pdf}
+\includegraphics[width=0.9\columnwidth]{C3_soap/lookup_linesmall.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 5$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0.03$. Here we include the line part of the statistic.}
@@ -686,14 +684,14 @@ been defined before? }}
 
 \begin{subfigure}[h]{\linewidth}
 \begin{minipage}{0.65\linewidth}
-\includegraphics[width=1.\columnwidth]{C3_soap/lookup_linebig.pdf}
+\includegraphics[width=0.9\columnwidth]{C3_soap/lookup_linebig.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
 \caption{This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 5$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 1$. Here the effect of lines is expected to be larger than the previous panel on the search. Therefore, the statistic forces the two detectors to have more similar power.}
 \label{soap:las:detp:linebig}
 \end{minipage}
 \end{subfigure}
-\caption[Lookup table for line aware statistic.]{Lookup tables using the line aware statistic in Eq.~\ref{soap:lineaware:stat:multi}.}
+\caption[Lookup table for line aware statistic.]{Lookup tables using the line aware statistic in Eq.~\ref{soap:lineaware:stat:multi}. The \gls{PSD} mean is the expected mean of a $\chi^2$ distribution with 48 degrees of freedom, i.e. the expected power from out summed spectrograms $F_j$.}
 \label{soap:las:osgl_plots}
 \end{figure}
 
@@ -728,9 +726,9 @@ the duty cycle and an increase in the \gls{PSD} will decrease the \gls{SNR} and
 vice-versa. To search for consistent amplitude Eq.\ref{lineaware:stat} is
 modified by weighting each detector by its \gls{PSD} and duty cycle.
 
-The definition of \gls{SNR} is taken from \citep{}~\chris{missing ref} as, 
+The definition of \gls{SNR} is taken from \citep{prix2007SearchContinuous} as, 
 \begin{equation}
-    \rho_0^2 = \frac{h_0^2 T}{S}(\alpha_1A + \alpha_2B + \alpha_3C),
+    \rho_0^2 = \frac{h_0^2 T}{2 S}(\alpha_1A + \alpha_2B + \alpha_3C),
 \end{equation}
 where $\rho_0$ is the optimal \gls{SNR}, $h_0$ is the signal amplitude, $T$ is
 the time of observation, $S$ is the noise \gls{PSD} and the terms in brackets include the antenna pattern of the detector. 
@@ -775,7 +773,7 @@ statistic described in Eq.~\ref{lineawareamp:line} plotted against a range of
 accounts for a difference in sensitivity between detectors by allowing the \gls{FFT}
 power, or effectively \gls{SNR}, to vary more.
 
-In Fig.~\ref{soap:lineawareamp:example} we show slices of the line-aware statistic with consistent amplitude for different values of $l$ in Eq.~\ref{ineawareamp:snrratio}. 
+In Fig.~\ref{soap:lineawareamp:example} we show slices of the line-aware statistic with consistent amplitude for different values of $l$ in Eq.~\ref{lineawareamp:snrratio}. 
 Figure \ref{soap:lineawareamp:plot:noline} shows a slice where the \gls{SNR} and duty cycle of the two detectors is the same, this is symmetric in the line-aware statistic as in Sec.~\ref{soap:las}.
 The asymmetry in Fig.~\ref{soap:lineawareamp:plot:linebig} demonstrates how as the sensitivity of one detector (L1) increases compared to (H1) the line-aware statistic allows for lower powers in H1 with corresponding higher powers in L1.
 
@@ -811,7 +809,7 @@ The asymmetry in Fig.~\ref{soap:lineawareamp:plot:linebig} demonstrates how as t
 \label{soap:lineawareamp:plot:linebig}
 \end{minipage}
 \end{subfigure}
-\caption[Lookup tables for line aware statistic with consistent amplitude.]{Lookup tables using the line aware statistic for consistent amplitude as in Sec.~\ref{soap:lineawareamp}. Each of these use the parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. The \gls{PSD} mean is the expected mean of a $\chi^2$ distribution with 48 degrees of freedom, i.e. the expected power from out summed spectrograms $F_j$. \joe{change plot labels to match text}}
+\caption[Lookup tables for line aware statistic with consistent amplitude.]{Lookup tables using the line aware statistic for consistent amplitude as in Sec.~\ref{soap:lineawareamp}. Each of these use the parameters $p_s(\lambda) = 4$,$p_l(\lambda) = 5$ and $p(M_L)/p(M_G) = 0.03$. The \gls{PSD} mean is the expected mean of a $\chi^2$ distribution with 48 degrees of freedom, i.e. the expected power from out summed spectrograms $F_j$. }
 \label{soap:lineawareamp:example}
 \end{figure}
 
@@ -996,7 +994,7 @@ p(\bar{x} \mid x_0, k) = \prod_{j=0}\frac{n!}{k!(n-k)!}s(x_j \mid x_0, k)^{k} \\
 \end{split}
 \end{equation}
 To plot the efficiency curves and lower and upper error bounds, we sample Eq.~\ref{soap:results:binomialbayes} using \gls{MCMC} and then take the mean and the 5th and 95th percentiles respectively for each point in SNR or depth and plot these.
-Fig.~\ref{soap:results:gausss6:eff_snr} and  \ref{soap:results:gausss6:eff_depth} then show the efficiency curves for the analyses plotted against the signals optimal \gls{SNR} and depth respectively.
+Figure \ref{soap:results:gausss6:eff_snr} and \ref{soap:results:gausss6:eff_depth} then show the efficiency curves for the analyses plotted against the signals optimal \gls{SNR} and depth respectively.
 The parameters of the search and their optimised values are shown in Tab.~\ref{soap:results:parameters}. Where we set the prior on the line model to 0 as this part is irrelevant to this search due to the lack of lines in the data.
 
 %
@@ -1166,14 +1164,14 @@ best parameters for any given search; the four parameters are
 $\tau$, $w_{\rm{S}}$, $w_{\rm{L}}$ and $p(M_{\rm{L}})/p(M_{\rm{G}})$.  We find
 the optimum values empirically by running the entire search for each parameter
 value that needs to be tested. This is possible as the search is relatively
-fast, this will be explained in Sec~.\ref{soap:results:time}.  The line aware
+fast, this will be explained in Sec.~\ref{soap:results:time}.  The line aware
 statistic is time consuming to calculate, therefore, to reduce the
 computational time, it is pre-calculated and placed into lookup tables such
 that it is calculated once and called many times.  These lookup tables were
-calculated for values of the \gls{FFT} power summed over one day $F$ in the range 1 to 400 in each of
-the detectors as shown in Fig.~\ref{soap:las:osgl_plots}. For each parameter
-the ranges in which they were optimised were chosen based on expected
-\glspl{SNR} of each of the injections~\chris{grammar and a bit vague}. 
+calculated for values of the \gls{SFT} power summed over one day $F$. The summed \gls{SFT} power is in the range 1 to 400 in each of the detectors as shown in Fig.~\ref{soap:las:osgl_plots}.
+The four parameters ranges were chosen based on what we expect to see.
+For example we expect a signal to have a small \gls{SNR} therefore, the range of $w_{\rm{S}}$ is between 0.1-10 in the S6 case.
+We expect the instrumental lines to have a larger \gls{SNR} therefore, $w_{\rm{L}}$ ranges between 0.1-20 in the S6 case. Each of the parameter ranges is shown in Tab.~\ref{soap:las:optimisation:table}.
 
 We can then use a measure of the sensitivity of that search and pick the set of parameters lookup
 table which gives the highest sensitivity. 
@@ -1183,7 +1181,7 @@ We measure the sensitivity by taking the value of \gls{SNR} which is at 80\% eff
 
 For injections into Gaussian noise, we know that there are no instrumental
 lines, therefore, we do not need to optimise over the `lines' part of the
-statistic and can set the parameter $p(M_L)/p(M_G)$ to zero which renders the
+statistic and can set the parameter $p(M_{\rm{L}})/p(M_{\rm{G}})$ to zero which renders the
 parameter $p_L(\lambda)$ redundant. 
 This then reduces the complexity of the problem by leaving us with only two parameters to optimise over, $\tau$ and $p_S(\lambda)$. 
 Whilst this optimisation was partially done in Sec.~\ref{soap:results}, with the result in Tab.~\ref{soap:results:parameters}, this is repeated more completely here.
@@ -1193,7 +1191,7 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 \begin{table}
 	\centering
 	%
-	\caption[Table of optimisation parameters for line aware statistic.]{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \gls{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_L)/p(M_N)$ had 10 parameters distributed in linearly between the limits. \label{soap:las:optimisation:table}}
+	\caption[Table of optimisation parameters for line aware statistic.]{Table shows the ranges of the search parameters and their optimised values for injections into Gaussian noise and the S6 \gls{MDC}. For Gaussian noise there are 30 parameter values spaced linearly between the limits. For the S6 \gls{MDC} the transition matrix parameters, $\tau$, had three values space between the limits. This is because the search is relatively insensitive to this parameter. The parameters $w_{\rm{L}}$, $w_{\rm{S}}$ and $p(M_{\rm{L}})/p(M_{\rm{G}})$ had 10 parameters distributed in linearly between the limits. \label{soap:las:optimisation:table}}
 	
 	%
 	\bgroup
@@ -1202,7 +1200,7 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 	\begin{tabular}{c c c c c}
 		\hline
 		\hline
-		& $\tau$ & $w_S$ & $w_L$ & $p(M_L)/p(M_N)$ \\
+		& $\tau$ & $w_S$ & $w_L$ & $p(M_{\rm{L}})/p(M_{\rm{G}})$ \\
 		\hline
 		& \multicolumn{4}{ c }{\textbf{Gaussian noise}} \\
 		\hline
@@ -1218,7 +1216,7 @@ The parameters were optimised in the range shown in Tab.~\ref{soap:las:optimisat
 
 For each point in Fig.~\ref{soap:las:optimisation:gauss}, the entire SOAP search was run using the corresponding parameters as input. 
 Efficiency curves are then generated for each of these runs and the values for the \gls{SNR} at 80\% efficiency are recorded. 
-Fig.~\ref{soap:las:optimisation:gauss} then shows the 80\% efficiency for each parameter value.
+Fig.~ur\ref{soap:las:optimisation:gauss} then shows the 80\% efficiency for each parameter value.
 There appears not to be any single value which gives an optimum, however, the dark stripe in Fig.~\ref{soap:las:optimisation:gauss} running from the bottom left to the red cross is the combinations of parameters which give the best result. 
 The point where the red lines cross is the parameters used in previous searched in Sec.~\ref{soap:results:gaplessgauss} and \ref{soap:results:gausss6}.
 This falls on the line where the algorithm performs best. 
@@ -1228,7 +1226,7 @@ The search is then not particularly sensitive to choice of parameters in Gaussia
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\linewidth]{C3_soap/gauss_optimised.pdf}
-    \caption[Optimisation of line aware statistic in Gaussian noise.]{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_S$ were optimised. The key part to remember when reading this plot is that the lower the value of \gls{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
+    \caption[Optimisation of line aware statistic in Gaussian noise.]{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_{\rm{S}}$ were optimised. The key part to remember when reading this plot is that the lower the value of \gls{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section. }
     \label{soap:las:optimisation:gauss}
 \end{figure}
 
@@ -1248,12 +1246,12 @@ taking the mena anyway?} across the parameters not shown in the figure.
 The range chosen for the transition matrix parameter $\tau$ is small with only 3 point, this is because the parameter is expected to have little impact on the result. 
 Fig~.\ref{soap:las:optimisation:s6mdc} demonstrates that changing this
 parameter does not have much effect on the final sensitivity. 
-The parameter $w_S$ appears to have a clear location around a value of $3$ where the sensitivity is at a minimum. This is not far from the value of the parameter which is used for all other searches in this thesis (the red line).
-The parameters $w_L$ and $p(M_L)/p(M_G)$ show that the sensitivity drops substantially as the values increase. 
+The parameter $w_{\rm{S}}$ appears to have a clear location around a value of $3$ where the sensitivity is at a minimum. This is not far from the value of the parameter which is used for all other searches in this thesis (the red line).
+The parameters $w_{\rm{L}}$ and $p(M_{\rm{L}})/p(M_{\rm{G}})$ show that the sensitivity drops substantially as the values increase. 
 In these examples the optimum value may be out of the range chosen here.
-Whilst this could be improved slightly by running with a larger parameter
-space, this is a time consuming process~\chris{boo-hoo. Not a very strong
-argument against extending the range}.
+The sensitivity of this search could be improved slightly by running with a wider parameter
+space in $w_{\rm{L}}$ and $p(M_{\rm{L}})/p(M_{\rm{G}})$.
+The optimisation procedure has a much larger computational cost than the search itself. Therefore, as one of the searches strengths is its speed, and that the sensitivity change is relatively insensitive to the choice of parameters, see Fig.~\ref{soap:las:optimisation:comp_sens}, the search on a wider parameter space was not run.
 The results in Sec.~\ref{soap:results} show that the current values of the parameters (red lines in Fig~.\ref{soap:las:optimisation:s6mdc}) are sufficiently sensitive when compared to other searches.
 To choose optimum parameters for this search, the minimum point for each parameter was chosen. 
 This is the minimum in each of the diagonal plots in Fig~.\ref{soap:las:optimisation:s6mdc}.
@@ -1346,14 +1344,7 @@ As the signal frequency increases the scale of the
 Doppler modulation will increase as shown in Eq.~\ref{soap:results:dforbit}.
 For example at 1000 Hz, the Doppler shift is $\sim 0.1$ Hz, the signal is then more likely to not be fully contained within a frequency band. 
 Therefore, the search can not accumulate all of the injected \gls{SNR}
-
-Whilst these parameters of the search can be changed to depend on frequency,
-this was meant as a small test to see how sensitivity varies with
-frequency~\chris{Don't step back from your work. This sentence sounds like,
-"hey, I did a test but it's not that good, it's only a small test, nothing to
-see here. Just state the test, its limitations and the conclusions you've drawn
-from it. Simple.}.
-
+The search in its current state however, does lose sensitivity as the signal frequency increases.
 
 \begin{figure}
 	
@@ -1386,37 +1377,29 @@ from it. Simple.}.
 Whilst SOAP was designed to search for sources of \glspl{CW}, when set up correctly, it can be applied to searching for other signal types.
 This is because the search is essentially un-modelled, and in its simplest form looks for tracks of high power in a time-frequency spectrogram.
 Therefore, if the signal can be represented in a spectrogram, then it can be
-searched for using SOAP~\chris{I agree but techncailly it should also have the
-property of living on a single track (some signals do not) and it should
-ideally span the time length of the spectrogram (i.e., be continuous in some
-way}.
+searched for using SOAP. 
+Ideally the signal will also live on a single track and span the time length of the spectrogram. 
 
 CBC signals cover a wide frequency range and are very short signals in \gls{LIGO} detectors compared to \glspl{CW}. 
-The longest of these are \gls{BNS} signals which are on the order of 10
-s~\chris{they actually last $\sim$100s after entering our band. The length
-depends only on the low frequency sensitivity and what we class as the lowest
-frequency.}. 
+The longest of these are \gls{BNS} signals which are generally detectable for $\mathcal{10}$
+s. 
 In previous SOAP searches the default length of \gls{SFT} has been 1800 s, however ,this is not suitable when searching for \gls{CBC} signals.
 We then need a shorter time base for each of the \glspl{SFT}.
 In the following examples the \glspl{SFT} are overlapping in time, this allows us to achieve the desired time and frequency resolution.
-~\chris{However, it does also mean that the data is not independent and our
-Bayesian formulation is now not correct in the strcitest sense.}
+However, this means that the \glspl{SFT} are no longer independent and out Bayesian formalism is not technically correct.
 
 Fig.~\ref{soap:sens:other:gw170817} shows an example of the two detector SOAP search running on data +2s and -5 s of the GW170817 merger time \citep{abbott2017GW170817Observation}. 
 The spectrograms show the \glspl{SFT} power spectra divided by their
-~\chris{running?} median.
+running median.
 Each \gls{SFT} is 0.2 s long and are overlapping by 90\% (0.189 s), this gives a frequency resolution of 5 Hz. 
-Fig.~\ref{soap:sens:other:gw170817} shows how SOAP identifies a track which
-follows that of the \gls{BNS} and the Viterbi map shows a clear excess of power
-~\chris{well power is in the SFTs. In the Vitmap we actually have log prob so
-maybe a more specific statement is suitable.}where the signal lies.
+Figure \ref{soap:sens:other:gw170817} shows how SOAP identifies a track which
+follows that of the \gls{BNS} and the Viterbi map shows a clear excess of log probability where the signal lies.
 Whilst this may not be an optimal setup for this particular search, it demonstrates that SOAP can identify a \gls{BNS} signal within the data. 
 The example in Fig.~\ref{soap:sens:other:gw170817} show the result between
-$\sim 20$ and $\sim 520$ Hz~\chris{why is this approximate? You made the plot
-so you know the exact bounds.}, however the SOAP search returns the same track
-for a wider band-width up to 2000 Hz.~\chris{Did Lilli ever do the BNS analysis
-with their Viterbi algorithm? Did it ever get published. If so, you should
-reference it.} 
+$20$ and $520$ Hz, however the SOAP search returns the same track
+for a wider band-width up to 2000 Hz.
+Some work has been done on a variant of the Viterbi algorithm to search for a postmerger remnant of the GW170817 merger \citep{abbott2019SearchGravitational}.
+
 
 \begin{figure}[h]
 	\centering
@@ -1424,9 +1407,8 @@ reference it.}
         \caption[SOAP search run on GW170817]{The SOAP search was run on a
 spectrogram of \gls{LIGO} data +2 and -5 seconds around the merger of GW170817
 \citep{abbott2017GW170817Observation}. The top two panels show the spectrograms from \glspl{LIGO} H1 and L1 detectors respectively. Each \gls{FFT} in the spectrograms are
-0.2 s long and are overlapping by  0.189 s (95\%). The red track shows the output Viterbi track. The final panel shows the Viterbi map output. The \gls{BNS} signal here is GW170817 \citep{abbott2017GW170817Observation}, where the coalescence is at a time of 0. The red The Viterbi map shows a area of higher
-log-odds along the path of the \gls{BNS} signal.~\chris{
-Also, you might want to offest the red lines so that the SFT power can be seen.}}
+0.2 s long and are overlapping by  0.189 s (95\%). The red track shows the output Viterbi track shifted up by 50 Hz so that the signal can bee seen in the spectrogram. The final panel shows the Viterbi map output. The \gls{BNS} signal here is GW170817 \citep{abbott2017GW170817Observation}, where the coalescence is at a time of 0. The Viterbi map shows a area of higher
+log-odds along the path of the \gls{BNS} signal.}
 \label{soap:sens:other:gw170817}
 
 \end{figure}
@@ -1477,30 +1459,27 @@ N^{(Q)}_{\rm{calcs}} = NMn_{1}^{m} \prod_{q=1}^{Q}n_{q+1},
 \end{equation}
 where $n_1$ is the first dimension of the transition matrix, $Q$ is the number of detectors and $n_{q+1}$ is the size of the transition matrix element which refers to detector $q$.
 For our tests we set $n_1=n_{q+1}=3$ and use 2 detectors i.e., $Q=2$ which each have the same size data as the previous test. The actual time taken to run however, depends on the version of the algorithm which is run. For example, including the line aware statistic slows the search slightly.
-For the two detector ~\chris{case} where two \gls{SFT} powers are summed,
+For the two detector case where two \gls{SFT} powers are summed,
 \begin{equation}
-T = 1.35 \rm{s}\left( \frac{N}{22538}\right) \left( \frac{M}{180}\right) \left( \frac{N_{\rm{bands}}}{1}\right).
+T_{\rm{sum-power}} = 1.35 \rm{s}\left( \frac{N}{22538}\right) \left( \frac{M}{180}\right) \left( \frac{N_{\rm{bands}}}{1}\right).
 \end{equation}
 The same search now including the line aware statistic, which is implemented using a lookup table, changes this to,
 \begin{equation}
-T = 25.7 \rm{s}\left( \frac{N}{22538}\right) \left( \frac{M}{180}\right) \left( \frac{N_{\rm{bands}}}{1}\right).
+T_{\rm{line-aware}} = 25.7 \rm{s}\left( \frac{N}{22538}\right) \left( \frac{M}{180}\right) \left( \frac{N_{\rm{bands}}}{1}\right).
 \end{equation}
-~\chris{You can't say that $T$ equals one thing and then say that $T$ equals
-another thing. They are diferent $T$s so best to add a subscript to each of
-them indicating what they apply to.}
 
 Other searches, excluding Einstein@home which takes on the order of months to
 run ( $>100$ million core-hours \citep{walsh2016ComparisonMethods}), take
 $1-10$ million core-hours \citep{walsh2016ComparisonMethods}.
-This~\chris{ambiguous. What is "this"?} search
-should take $\mathcal{O}(10^3)$ core-hours~\chris{Can you make the notation
-match between statements - say thousands and millions or say $10^3$ and $10^6$}.
-
+Running the line-aware statistic search should take $\sim 14$ core-hours to run between 100 and 200 Hz, not including the generation of data.
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\label{soap:dicussion}Discussion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Paper discussion}
 
 In this paper~\chris{have you decided on what you're doing about langiage like
 this? Are you keeping "paper" or editing throughout to be more thesis chapter
@@ -1550,6 +1529,8 @@ Whilst this paper presents initial tests on sensitivity, further tests will be n
 This search, however, aims to look for signals which may not follow the standard
 frequency evolution and is intended to return potentially interesting
 candidates for a more sensitive followup.
+
+\subsection{Extra work discussion}
 
 ~\chris{You could add to this section with a discussion about the extra things
 you've added in the Sec. 3.9, Sec. 3.11, Sec. 3.11.3 and Sec. 3.11.4.}
