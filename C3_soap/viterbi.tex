@@ -11,15 +11,10 @@ spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible
 randomly wandering track from a starting frequency bin to an end frequency bin.
 For each of these tracks the sum of the spectrogram power along the track can
 be found such that for each track there is a single value.
-Figure \ref{soap:motivation:plot} shows a histogram of a subset of these values.
-If there is a signal present in this band then it could be assumed that the
-signal which gives the highest sum of spectrogram power is the track which is
-most likely to follow the signals frequency track~\chris{It's not clear why you
-can assume this. The point is that the we would expect the maximum track in
-noise to have certain properties including it's likely summed value. We can
-only distinguish things from that distribution if they show properties
-different to the noise distribution. A loud enough signal will do that.}.  In
-Fig.~\ref{soap:motivation:plot} the optimum track in red shows a
+Figure \ref{soap:motivation:plot} shows a histogram of a subset of these values, where the main distribution is from tracks which are through noise.
+Signals which lie outside this are then tracks which follow features which are not noise like.
+The track which gives the maximum sum of spectrogram power is the least noise-like and therefore, can be taken as most likely to be from some signal.
+In Fig.~\ref{soap:motivation:plot} the optimum track in red shows a
 statistic value of $\sim 1700$ which is far outside the main distribution of
 summed powers.  The red track follows that  an injected signal.  This
 demonstrates that the sum of the spectrogram power along a track which follows
@@ -1418,7 +1413,7 @@ log-odds along the path of the \gls{BNS} signal.}
 Searching for \gls{BBH} systems becomes more difficult as they are in the \gls{LIGO} band for a short period of time ($ < 1 s$).
 To see the evolution of the signal in a spectrogram, the time resolution required means that the frequency bins are too large to see the signals evolution.
 There are other time-frequency representations which we would use such as the Q transform to allow us to search for these signals. However, the bins here are not independent, therefore the Bayesian formalism described in this chapter is no longer technically true.
-The SOAP search can still be run on the Q transform however, this is shown for GW150914 \citep{abbott2016ObservationGravitational} in Fig.~\ref{soap:sens:other:gw150914}
+The SOAP search can still be run on the Q transform however, this is shown for GW150914 \citep{abbott2016ObservationGravitational} in Fig.~\ref{soap:sens:other:gw150914}.
 
 \begin{figure}[ht]
 	\centering
@@ -1427,6 +1422,8 @@ The SOAP search can still be run on the Q transform however, this is shown for G
 \label{soap:sens:other:gw150914}
 
 \end{figure}
+
+In both Fig.~\ref{soap:sens:other:gw150914} and \ref{soap:sens:other:gw170817}, the signal does not last for the entire length of the time-frequency band, 
 
 This section serves as a demonstration that it is possible to use SOAP for other types of search, it has more flexibility than the majority of examples in this thesis show.
 This is an area of work which would benefit from further
