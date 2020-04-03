@@ -4,23 +4,38 @@
 %%%%%%%%%%%%
 %%%%%
 
-When searching for \gls{GW} signals, it is important to understand the origins of noise artefacts in the detector data which does not originate from an astrophysical source.
-A large fraction of \gls{GW} search algorithms, including SOAP above, assume that the detectors noise follows a Gaussian distribution.
-However, the detectors contain artefacts which do not follow this distribution. 
-These artefacts can negatively affect many searches for \glspl{GW} as they can be easily mistaken for a real \gls{GW} signal.
-Some of the potential sources of these artefacts have been mentioned in Sec.~\ref{intro:detector:noise}. 
-There are many different classes of artefact, including: glitches, which are short duration broad band bursts in power and instrumental lines, which are long duration narrow-band signals.
-To conduct a reliable search there are two main tasks which are necessary for detector characterisation.
-The first is identifying the artefact such that any search knows which frequency bands and time segments are contaminated.
-The search can then address that section of data, this could mean removing that section of data or use more sophisticated techniques to deal with the artefact \citep{pankow2018MitigationInstrumental}.
-The second task is to find the source of the artefact. 
-If the source of the artefact is found, it can potentially be removed or limited for future data runs.
+When searching for \gls{GW} signals, it is important to understand the origins
+of noise artefacts in the detector data which does~\chris{do} not originate from an
+astrophysical source.  A large fraction of \gls{GW} search algorithms,
+including SOAP above~\chris{above?}, assume that the detectors noise follows a Gaussian
+distribution~\chris{we don't totally assume that, e.g., the line aware stat you
+have already discussed}.  However, the detectors contain artefacts which do not follow
+this distribution.  These artefacts can negatively affect many searches for
+\glspl{GW} as they can be easily mistaken for a real \gls{GW} signal.  Some of
+the potential sources of these artefacts have been mentioned in
+Sec.~\ref{intro:detector:noise}.  There are many different classes of artefact,
+including: glitches, which are short duration broad band bursts in
+power~\chris{comma} and
+instrumental lines, which are long duration narrow-band signals.  To conduct a
+reliable search there are two main tasks which are necessary for detector
+characterisation.  The first is identifying the artefact such that any search
+knows which frequency bands and time segments are contaminated.  The search can
+then address that section of data, this could mean removing that section of
+data or use~\chris{using} more sophisticated techniques to deal with the artefact
+\citep{pankow2018MitigationInstrumental}.  The second task is to find the
+source of the artefact~\chris{be clearer. You mean the particular instrumental
+or environmental source}.  If the source of the artefact is found, it can
+potentially be removed or limited for future data runs.
 
-The focus of this chapter is on instrumental lines and how they affect \gls{CW} searches.
+The focus of this chapter is on instrumental lines and how they affect \gls{CW}
+searches~\chris{isn't it more about how to search for and identify intrumental
+lines?}.
 Sec.~\ref{detchar:lines} will introduce different sub-classes of instrumental line and how each of them affects a \gls{CW} search.
 Sec.~\ref{detchar:monitor} will outline how these artefacts are detected and monitored, and describe current tools used for this task.
-Sec.~\ref{detchar:soap} will describe how the \gls{CW} search algorithm introduces in Sec.~\ref{soap} can be used to search for instrumental lines.
-Finally Sec.~\ref{detchar:summary} will show the outputs of the search and this is displayed for ease of use.
+Sec.~\ref{detchar:soap} will describe how the \gls{CW} search algorithm
+introduced in Sec.~\ref{soap} can be used to search for instrumental lines.
+Finally Sec.~\ref{detchar:summary} will show the outputs of the search and this
+is displayed for ease of use~\chris{final sentence is a grammatical mess}.
 
 
 
@@ -33,68 +48,151 @@ Finally Sec.~\ref{detchar:summary} will show the outputs of the search and this 
 %
 % Introduce instrumental lines
 
-Instrumental lines have the general structure that they are persistent noise artefacts.
-There are many classes of instrumental line spanning a range from narrow, fixed frequency spectral artefacts to broader ($<0.1$ Hz) features which have a time varying frequency known as wandering lines.
-For many of these lines, it is difficult to distinguish them from an astrophysical signal.
-They affect search methods in two main ways. 
-They can cause the search to produce outliers which are then considered as \gls{GW} candidates.
-Extra efforts then have to be made to analyse these outliers further.
-If the line is close to the \gls{GW} signal in frequency, then it can conceal the power of the \gls{GW}, or if it is overlapping, the search becomes very difficult.
-It is therefore crucial to understand the structure and origin of these lines when performing a search for \gls{GW}, specifically \gls{CW} and stochastic searches \joe{explain why stochastic}.
+Instrumental lines have the general structure that they are persistent noise
+artefacts~\chris{this isn't really a structure}.  There are many classes of
+instrumental line spanning a range from narrow, fixed frequency spectral
+artefacts to broader ($<0.1$ Hz) features which have a time varying frequency
+known as wandering lines.  For many of these lines, it is difficult to
+distinguish them from an astrophysical signal.  They affect search methods in
+two main ways.  They can cause the search to produce outliers which are then
+considered as \gls{GW} candidates.  Extra efforts then have to be made to
+analyse these outliers further.  If the line is close to the \gls{GW} signal in
+frequency, then it can conceal the power of the \gls{GW}, or if it is
+overlapping, the search becomes very difficult~\chris{how exactly?}.  It is therefore crucial to
+understand the structure and origin of these lines when performing a search for
+\gls{GW}, specifically \gls{CW} and stochastic searches \joe{explain why
+stochastic}.~\chris{lines also affect the noise floor estimate and can
+therefore contaminate searches indirectly.}
 
 %
 % What lines look like and how the appear in the GW channel
 
-Some instrumental lines are clearly visible when looking at a \gls{ASD} or \gls{PSD} of the \gls{LIGO} detectors. Figure \ref{detchar:line:psd} shows the \gls{ASD} for \glspl{LIGO} Hanford and Livingston detectors during their first observing run (O1) \citep{GWOpen}. This clearly shows some peaks which are associated with strong lines, some have been labelled. There are however, many more weaker line which become visible when spectra are averaged over longer times.
+Some instrumental lines are clearly visible when looking at a \gls{ASD} or
+\gls{PSD} of the \gls{LIGO} detectors. Figure \ref{detchar:line:psd} shows the
+\gls{ASD} for \glspl{LIGO} Hanford and Livingston detectors during their first
+observing run (O1) \citep{GWOpen}. This clearly shows some peaks which are
+associated with strong lines, some have been labelled~\chris{strange use of
+comma here}. There are however, many
+more weaker lines which become visible when spectra are averaged over longer
+times.
 %
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{C5_detchar/ligo_o1_asd_annot.pdf}
-    \caption[Strain \gls{ASD} for the \gls{LIGO} detectors.]{There are many features in the \gls{LIGO} detectors averaged \gls{ASD}. This image was taken from \citep{GWOpen} where I have annotated some of the stronger lines. The power line from the mains in the USA is at 60 Hz. Some of the calibration lines are around 30 Hz, 331 Hz and 1083 Hz. The various violin modes of the suspensions are at 300, 500, 600 and 900 Hz where I have only marked the 500 Hz mirror suspension modes \citep{GWOpen}.}
-    \label{detchar:line:psd}
-\end{figure}
+\begin{figure} \centering
+\includegraphics[width=\textwidth]{C5_detchar/ligo_o1_asd_annot.pdf}
+\caption[Strain \gls{ASD} for the \gls{LIGO} detectors.]{There are many
+features in the \gls{LIGO} detectors averaged \gls{ASD}.~\chris{start every
+figure cpation with a 1 sentence summary/description/title. In this case you
+are plottin the LIGO detector ASDs at the time of the GW150914 event in O1.
+Also, I would personally cut out the title and maybe mention the dodgy drop at
+the high frequencies.} This image was taken
+from \citep{GWOpen} where I have~\chris{maybe best to not use language like
+this. Better to say that certain lines have been annoted rather than state "I"} annotated some of the stronger lines. The
+power line from the mains in the USA is at 60 Hz. Some of the calibration lines
+are around 30 Hz, 331 Hz and 1083 Hz. The various violin modes of the
+suspensions are at 300, 500, 600 and 900 Hz where I have only marked the 500 Hz
+mirror suspension modes \citep{GWOpen}.} \label{detchar:line:psd} \end{figure}
 %
-The \gls{ASD} in Fig.~\ref{detchar:line:psd} shows the time averaged spectra the \gls{GW} channel of the \gls{LIGO} detectors. 
-The \gls{GW} channel is the error signal on the mirrors whilst they are being held on a resonance, i.e. how much the mirrors have to be moved to keep the same intensity at the output of the interferometer.
-The lines seen in the spectrum are not from any \gls{GW} and are usually from ground based sources.
-To see the lines in the \gls{GW} channel, they must be coupled in via some mechanism. 
-There are a number of ways in which this happens which are outlined in \citep{covas2018IdentificationMitigation}.
-This includes coupling via shared power and grounds. 
-When different components share the same power supplies, if a component draws power with a given period, then the voltage will decrease repeatedly at this frequency. 
-Another component which shares this same power supply can then also see this drop in voltage and this can potentially become visible in a recorded output. 
-Another mechanism is coupling through magnetic fields, this is common when cables are close to each other, the magnetic field in one can affect the other, therefore, coupling noise between different systems.
-Coupling can also occur though a physical connection, known as mechanical coupling, for example the resonances of the suspension fibers which couple directly into the mirrors.
+The \gls{ASD} in Fig.~\ref{detchar:line:psd} shows the time averaged spectra
+~\chris{of} the \gls{GW} channel of the \gls{LIGO} detectors.  The \gls{GW} channel is the
+error signal on the mirrors whilst they are being held on a resonance, i.e. how
+much the mirrors have to be moved to keep the same intensity at the output of
+the interferometer.~\chris{this last statement seems out of place and would be
+better used in the introduction chapters - after being expanded upon a bit. The
+error signal in this case is just $h(t)$ which you have been quite happy to use
+without this kind of description until now.}  The lines seen in the spectrum are not from any \gls{GW}
+and are usually from ground based sources.  To see the lines in the \gls{GW}
+channel, they must be coupled in via some mechanism~\chris{the average reader
+won't know exactly what you mean by "coupling in". What does it mean?}.  There are a number of
+ways in which this happens which are outlined in
+\citep{covas2018IdentificationMitigation}.  This includes coupling via shared
+power and grounds~\chris{power and grounds? Add some extra helpful descriptive
+words for the reader. What is "grounds"?}.  When different components share the same power supplies, if
+a component draws power with a given period, then the voltage will decrease
+repeatedly at this frequency.  Another component which shares this same power
+supply can then also see this drop in voltage and this can potentially become
+visible in a recorded output.  Another mechanism is coupling through magnetic
+fields, this is common when cables are close to each other, the magnetic field
+in one can affect the other, therefore, coupling noise between different
+systems.  Coupling can also occur though a physical connection, known as
+mechanical coupling, for example the resonances of the suspension fibers which
+couple directly into the mirrors~\chris{and therefore the output error signal?}.
 
 %
 % Origins of some lines and how they can be mitigated
 
-Many of the spectral lines seen in the frequency spectrum, Fig.~\ref{detchar:line:psd} are fundamental to the design of the detector. 
-These cannot be eliminated, therefore need to be understood such that their effect on searches is minimised.
-Some of the strongest of these lines are listed below:
-\begin{description}
-	\item[Power line] The power line harmonics are fundamental to the detector and originate from the mains supply in the USA. These lines exist at 60 Hz which is the frequency of the mains alternating current \citep{aasi2015CharacterizationLIGO}. European detectors Virgo and GEO have a power line at 50 Hz instead of 60 Hz.
-	
-	\item[Violin modes] The violin modes are associated with the suspensions of the mirrors and the beam splitter in the detector. These are designed to have a narrow frequency spectrum such that they contaminate as small a part of the spectrum as possible. These are the lines around 500 Hz for the mirrors and 300, 600 and 900 Hz for the beam-splitter \citep{GWOpen} in Fig.~\ref{detchar:line:psd}.
-	
-	\item[Calibration lines] The mirrors of the \gls{LIGO} detectors, are held at a resonance of the cavity in the arms of the interferometer. This then requires a feedback loop to hold them at resonance as a \gls{GW} passes the detector. Calibration lines are used to calibrate this feedback loop such that the arm length changes are accurate \citep{tuyenbayev2016ImprovingLIGO,coughlin2010NoiseLine}.
-\end{description}
-In \citep{davis2019ImprovingSensitivity}, techniques are used to counter the affect of power lines and calibration lines on searches. 
+Many of the spectral lines seen in the frequency spectrum,
+Fig.~\ref{detchar:line:psd} are fundamental to the design of the detector.
+These cannot~\chris{never say never - don't be so definitive.} be eliminated, therefore need to be understood such that their
+effect on searches is minimised.  Some of the strongest of these lines are
+listed below:
 
-Along with the fundamental lines of the detector which cannot be removed at the source, there are a large number of other lines whose source has been found and can be removed. 
-Many of these are from mechanisms described earlier such as shared power supplies or grounds. These can be removed by, for example, using a different power supply for different systems. See \citep{covas2018IdentificationMitigation} for a full investigation into the mitigation of these lines.
+\begin{description}
+	\item[Power line] The power line harmonics are fundamental to the
+detector and originate from the mains~\chris{power} supply in the
+USA~\chris{acronym?}. These lines exist at 60 Hz which is the frequency of the
+mains alternating current \citep{aasi2015CharacterizationLIGO}. \chris{The} European
+detectors Virgo and GEO have a power line at 50 Hz instead of 60 Hz.
+	
+        \item[Violin modes] The violin modes are associated with the
+suspensions~\chris{} of the mirrors and the beam splitter in the detector. These are
+designed to have a narrow frequency spectrum such that they contaminate as
+small a part of the spectrum as possible. These are the lines around 500 Hz for
+the mirrors and 300, 600 and 900 Hz for the beam-splitter \citep{GWOpen} in
+Fig.~\ref{detchar:line:psd}.
+	
+        \item[Calibration lines] The mirrors of the \gls{LIGO}
+detectors,~\chris{random misplaced comma} are
+held at a resonance~\chris{what does this mean? Every time you say something
+vague like this you are begging the external examiner to question you about it.
+Do you want to be questioned about the resonance of cavities?} of the cavity in the arms of the interferometer. This then
+requires a feedback loop to hold them at resonance as a \gls{GW} passes the
+detector. Calibration lines are used to calibrate this feedback loop such that
+the arm length changes are accurate
+\citep{tuyenbayev2016ImprovingLIGO,coughlin2010NoiseLine}.~\chris{yes, but what
+is a calibration line? You say that they are used for something but what are
+they?}  
+\end{description}
+In \citep{davis2019ImprovingSensitivity}, techniques are used to counter the
+affect of power lines and calibration lines on searches~\chris{this sentence
+seems to come out of nowhere and stand in isolation}. 
+
+Along with~\chris{an example of slightly less formal writing here. Along could
+be replaced by Together.} the fundamental lines of the detector which
+cannot~\chris{never say never. My Mum would have never belived you could cook
+rice in less than 15 minutes but I can do it in the microwave in 1 minute 30.} be
+removed at the source, there are a large number of other lines whose source has
+been found and can be removed.  Many of these are from mechanisms described
+earlier such as shared power supplies or grounds. These can be removed by, for
+example, using a different power supply for different systems. See
+\citep{covas2018IdentificationMitigation} for a full investigation into the
+mitigation of these lines.
 
 %
 % How lines affect CW searches
 
-These lines have large effect on all searches for \glspl{GW} both if the astrophysical signals frequencies overlap with the frequency of the line and can cause outliers. 
-Long duration searches for \glspl{CW} are particularity sensitive to this type of artefact.
-As described in Sec.~\ref{searchcw}, \glspl{CW} are long duration signals with a slowly varying frequency.
-In the case of an isolated neutron star, the signal which is searched for is narrow-band and a fixed frequency which is Doppler modulated by the earths rotation and orbit.
-For certain areas of parameter space, such as close to the poles, the astrophysical signal of an isolated neutron star can appear very similar to a narrow band fixed frequency instrumental line. 
-Many of these lines can be mitigated by using multiple detectors data. If a signal appears in a one detector and not the others, then it is likely that the signal is from an instrumental line and not an astrophysical source. 
-These contaminated frequency bands can either be removed or a statistic similar to that described in Sec.~\ref{soap:las} or \citep{keitel2014SearchContinuous} can be used to limit their effect.
-However, there are many examples of instrumental line which appear at the same or similar frequencies in multiple detectors.
-These pose a real challenge to some \gls{CW} searches, and require a lot of investigation to limit their affect.
+These lines have~\chris{a} large effect on all searches for \glspl{GW} both if
+the astrophysical signals frequencies overlap with the frequency of the line
+and can cause outliers~\chris{need some extra punctuation to understand this
+sentence}.  Long duration searches for \glspl{CW}~\chris{Isn't it search for
+long duration CWs? Your way simply says that the searches themselves are long
+duration} are
+particularity sensitive to this type of artefact.  As described in
+Sec.~\ref{searchcw}, \glspl{CW} are long duration signals with a slowly varying
+frequency.  In the case of an isolated neutron star, the signal which is
+searched for is narrow-band and a fixed frequency which~\chris{and not which} is Doppler modulated by
+the earths rotation and orbit~\chris{also amplitude modulated by the antenna
+patterns as Earth rotates}. For certain areas of parameter space, such as
+close to the poles~\chris{what are the poles?}, the astrophysical signal of an isolated neutron star can
+appear very similar to a narrow band fixed frequency instrumental line.  Many
+of these lines~\chris{the effects of these lines} can be mitigated by using multiple detector data. If a signal
+appears in one detector and not the others, then it is likely that the signal
+is from an instrumental line and not an astrophysical source.  These
+contaminated frequency bands can either be removed or a statistic similar to
+that described in Sec.~\ref{soap:las} or \citep{keitel2014SearchContinuous} can
+be used to limit their effect.  However, there are many examples of
+instrumental line which appear at the same or similar frequencies in multiple
+detectors.  These pose a real challenge to some \gls{CW} searches, and require
+a lot~\chris{again, not very formal. a lot could be substantial or an in-depth
+etc.} of investigation to limit their affect.
 
 %%%%%%%%%%
 %%%%%%%%%%
