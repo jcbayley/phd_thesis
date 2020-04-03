@@ -203,44 +203,99 @@ etc.} of investigation to limit their affect.
 %
 % into to why lines are monitored
 
-When a detector is running, it is very important to identify instrumental lines and monitor them.
-This can then lead to either locating the origin of the line such that it can be removed, or allowing it to be flagged for other search algorithms.
-The lines affect searches in the \gls{GW} channel, this is the output of the detector which \gls{GW} are observed and is the data using is previous chapters.
-This is the channel where the affect of lines is intended to be minimised.
+When a detector is running, it is very important to identify instrumental lines
+and monitor them.  This can then lead to either locating the origin of the line
+such that it can be removed, or allowing it to be flagged for other search
+algorithms.  The lines affect searches in the \gls{GW} channel, this is the
+output of the detector~\chris{in} which \gls{GW} are observed and is the data used is
+previous chapters.  This is the channel where the affect of lines is intended
+to be minimised.~\chris{this paragrpah could be tidied up a bit. Very clunky.}
 
 %
 % Auxiliary channels 
-As well as the \gls{GW} channel, the detector records many different channels known as auxiliary channels. 
-These channels monitor many components of the detector, and importantly are not sensitive to \glspl{GW}.
-Many of the channels useful for line searches are the \glspl{PEM}.
-These include sensors such as seismometers measuring the ground motion, temperature sensors, magnetometers etc. 
-These channels can be very useful in identifying the source of an instrumental line.
-The main goal is to reduce the number of artefacts in the \gls{GW} such that it is as close to Gaussian noise as possible.
-If an artefact shows up in the \gls{GW} channel in coincidence with one of the \gls{PEM} then this is an indicator that the artefact originates from something related to that \gls{PEM}.
-For example, say a magnetometer located near some electronics has a long duration line in its spectrum at the same frequency as the main \gls{GW} channel. 
-This indicates that noise from this piece of electronics is somehow coupling into the detector. 
-One can then investigate that piece of electronics further to see how it couples in.
+As well as~\chris{Formal: In addition to} the \gls{GW} channel, the detector
+records many different channels known as auxiliary channels.  These channels
+monitor many components of the detector, and importantly are not sensitive to
+\glspl{GW}.  Many of the channels useful for line searches are the \glspl{PEM}.
+These include sensors~\chris{do the channels include sensors? No. The sensors
+are used to record the data assigned as "channels". Be careful with language.}
+such as seismometers measuring the ground motion, temperature sensors,
+magnetometers etc.  These channels can be very useful in identifying the source
+of an instrumental line.  The main goal is to reduce the number of artefacts in
+the \gls{GW} such that it is as close to Gaussian noise as possible.  If an
+artefact shows up in the \gls{GW} channel in coincidence with one of the
+\gls{PEM} then this is an indicator that the artefact originates from something
+related to that \gls{PEM}.  For example, say a~\chris{too informal - consider
+that a} magnetometer located near some~\chris{too informal}
+electronics has a long duration line in its spectrum at the same frequency as
+the main \gls{GW} channel.  This indicates that noise from this piece of
+electronics is somehow coupling into the detector.  One can then investigate
+that piece of electronics further to see~\chris{informal - test or investigate} how it couples in.
 
 %
 % tools to monitor all the channels
 
-There are a number of tools which are used to monitor these spectral lines, along with a team of people which regularly look though the results, a summary of these for the first two observing runs of \gls{LIGO} can be found in \citep{covas2018IdentificationMitigation}.
-Some of the tools used are described below. 
+There are a number of tools which are used to monitor these spectral lines,
+along with a team of people which~\chris{that} regularly look though the
+results,~\chris{not a comma situation in this sentence} a summary
+of these for the first two observing runs of \gls{LIGO} can be found in
+\citep{covas2018IdentificationMitigation}.  Some of the tools used are
+described below.~\chris{sort out the grammar in this paragraph} 
 
 \begin{description}
-	\item[Fscan] Fscan \citep{coughlin2010NoiseLine} takes \glspl{FFT} of the raw detector data, typically these are 1800s long. This is done for all of the auxiliary channels as well as the \gls{GW} channel. The \glspl{FFT} are then averaged over a day and time-frequency spectrograms are generated. After known lines such as Violin modes and power lines are subtracted, noise lines can be identified. A threshold can be set and anything in the spectrograms which exceed this threshold are flagged as a line. These can then be compared across multiple different channels. More detail on how the lines are identified can be found in \citep{coughlin2010NoiseLine}.
+        \item[Fscan] Fscan~\chris{Double Fscan} \citep{coughlin2010NoiseLine}
+takes \glspl{FFT} of the raw detector data, typically these are 1800s long.
+This is done for all of the auxiliary channels as well as the \gls{GW} channel.
+The \glspl{FFT} are then averaged over a day and time-frequency spectrograms
+are generated. After known lines such as Violin modes and power lines are
+subtracted, noise lines can be identified. A threshold can be set and
+anything~\chris{informal}
+in the spectrograms which exceed this threshold are~\chris{is} flagged as a line. These
+can then be compared across multiple different channels. More detail on how the
+lines are identified can be found in \citep{coughlin2010NoiseLine}.
 	
-	\item[Coherence] Coherence searches for the coherence between different channels and different detectors. This is similar to searches for stochastic gravitational waves. More detail of how this works can be found in \citep{covas2018IdentificationMitigation}.
+        \item[Coherence] Coherence~\chris{Double Coherence} searches for the coherence between different
+channels and different detectors. This is similar to searches for stochastic
+gravitational waves. More detail of how this works can be found in
+\citep{covas2018IdentificationMitigation}.~\chris{You could potentially expand
+upon this and give a few more details.}
 	
-	\item[Finetooth] Many of the instrumental lines found are part of combs. These are repeating structures where the harmonics (teeth) of a line make up the comb which is defined by the start frequency and tooth spacing. Finetooth is a tool which identifies and monitors these combs \citep{neunzertDailyComb}.
+        \item[Finetooth] Many of the instrumental lines found are part of
+combs. These are repeating structures where the harmonics (teeth) of a
+line~\chris{So the terminology is mixed up here. A signal that exhibits some
+kind of periodic frequency or amplitude modulation can appear as distinct
+harmonics - each of which is a line. The collection of regularly spaces lines
+make up the "comb". }
+make up the comb which is defined by the start frequency and tooth spacing.
+Finetooth is a tool which identifies and monitors these combs
+\citep{neunzertDailyComb}.
 	
-	\item[NoEMi] NoEMi uses \glspl{FFT} and identifies peaks within the spectrum. It can then find coincidences with auxiliary channels and label is there are overlapping peaks with the \gls{GW} channel. This can then tracks the lines with time. All of the information is stored in a database where more detail on its operation can be found in \citep{accadia2012NoEMiNoise}.
+        \item[NoEMi] NoEMi~\chris{Double NoEMi} uses \glspl{FFT} and identifies peaks within the
+spectrum. It can then find coincidences with auxiliary channels and label is
+there are overlapping peaks with the \gls{GW} channel~\chris{grammatical
+badness in this sentence}. This can then tracks the
+lines with time~\chris{obvious typo but also an unusually short sentence}. All of the information is stored in a database where more
+detail on its operation can be found in \citep{accadia2012NoEMiNoise}.~\chris{I
+am not really left with any clear understanding of how this works. In general,
+you have an opportunity here to at least double the text alloacted to each of
+these competing/complimentary line finding approaches.}
 	
 \end{description}
 
 
-These tools offer many ways for the detector characterisation team to identify instrumental lines and hunt for their source. A summary of these efforts for the advanced \gls{LIGO} data can be found in \citep{covas2018IdentificationMitigation}, or the \gls{LIGO} wiki page {\tt \url{https://wiki.ligo.org/DetChar/O3LinesCombsInvestigations}}.
-The following sections describe how the SOAP search described in Sec.~\ref{soap} can be used as an extra tool to aid in the identification and monitoring of instrumental lines.
+These tools offer many ways for the detector characterisation team~\chris{it
+seems strange to be limiting the use of these tools (and your own) to a
+specific group of people. I would suggest that you don't refer to the detchar
+team but rather refer to GW scientists working on understanding the behaviour
+of the detector} to identify
+instrumental lines and hunt for their source. A summary of these efforts for
+the advanced \gls{LIGO} data can be found in
+\citep{covas2018IdentificationMitigation}, or the \gls{LIGO} wiki page {\tt
+\url{https://wiki.ligo.org/DetChar/O3LinesCombsInvestigations}}~\chris{this
+link is specific to O3 and not to the advanced detectors in general}. The following
+sections describe how the SOAP search described in Sec.~\ref{soap} can be used
+as an extra tool to aid in the identification and monitoring of instrumental
+lines.
 
 \clearpage
 
