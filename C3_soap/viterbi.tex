@@ -1227,43 +1227,24 @@ The search is then not particularly sensitive to choice of parameters in Gaussia
 \end{figure}
 
 
-\subsection{S6 MDC injections}
+\subsection{S6 \gls{MDC} injections}
 
 As the S6 \gls{MDC} data-set is real detector data, there are many examples of instrumental lines. 
 This is where we expect the line-aware statistic to have the greatest effect in rejecting lines. 
 Here all four parameters are optimised over in the ranges described in Tab.~\ref{soap:results:parameters}. 
 This greatly increases the number of lookup tables which need to be generated
-and therefore the number of times the search needs to be run. 
+and therefore the number of times the search needs to be run.
+To reduce the time taken for the optimisation, the tests were run for each set of parameters in the 100-200 Hz frequency band.
 Figure \ref{soap:las:optimisation:s6mdc} shows the projections in
-parameter space for each of the parameters where the values are the \glspl{SNR} at 80\% efficiency.  
-These projections are made by taking the mean~\chris{if you're taking the mean then
-these aren't slices, they're projections or marginalisations. Why are you
-taking the mena anyway?} across the parameters not shown in the figure.
+parameter space for each of the parameters where the values are the \glspl{SNR} at 90\% efficiency.  
+These projections are made by taking the mean across the other parameters.
 The range chosen for the transition matrix parameter $\tau$ is small with only 3 point, this is because the parameter is expected to have little impact on the result. 
-Fig~.\ref{soap:las:optimisation:s6mdc} demonstrates that changing this
+Figure \ref{soap:las:optimisation:s6mdc} demonstrates that changing this
 parameter does not have much effect on the final sensitivity. 
-The parameter $w_{\rm{S}}$ appears to have a clear location around a value of $3$ where the sensitivity is at a minimum. This is not far from the value of the parameter which is used for all other searches in this thesis (the red line).
-The parameters $w_{\rm{L}}$ and $p(M_{\rm{L}})/p(M_{\rm{G}})$ show that the sensitivity drops substantially as the values increase. 
-In these examples the optimum value may be out of the range chosen here.
-The sensitivity of this search could be improved slightly by running with a wider parameter
-space in $w_{\rm{L}}$ and $p(M_{\rm{L}})/p(M_{\rm{G}})$.
-The optimisation procedure has a much larger computational cost than the search itself. Therefore, as one of the searches strengths is its speed, and that the sensitivity change is relatively insensitive to the choice of parameters, see Fig.~\ref{soap:las:optimisation:comp_sens}, the search on a wider parameter space was not run.
-The results in Sec.~\ref{soap:results} show that the current values of the parameters (red lines in Fig.~\ref{soap:las:optimisation:s6mdc}) are sufficiently sensitive when compared to other searches.
-To choose optimum parameters for this search, the minimum point for each parameter was chosen. 
-This is the minimum in each of the diagonal plots in Fig~.\ref{soap:las:optimisation:s6mdc}.
-These values are,
-\begin{equation}
-	\label{soap:las:optimisation:s6_pars}
-\begin{split}
-	\tau &= 1.0 \\
-	w_S &= 3.0 \\
-	w_L &= 20.0 \\
-	p(M_L)/p(M_G) &= 0.2879 .
-\end{split}
-\end{equation}
-~\chris{We've discussed that the obvious thing to do is to take the global
-minimum value. I don't think you are doing this. You are taking the
-marginalised values. You do not explain why you do this.}
+
+To find the optimal set of parameters, the global minimum of the parameter space is found. 
+There were $ $ \joe{fill} sets of parameters which were at this minimum, which along with the distribution in Fig.~\ref{soap:las:optimisation:s6mdc} demonstrates how the sensitivity if insensitive to the choice of parameters within some range.
+\joe{need to say a bit more here}
 
 \begin{figure}[p]
     \centering
@@ -1272,16 +1253,19 @@ marginalised values. You do not explain why you do this.}
     \label{soap:las:optimisation:s6mdc}
 \end{figure}
 
-To visualise how these better optimised parameters are to the values used in
-Sec.~\ref{soap:results} we can compare how they perform on a simulated signal
+To visualise how these optimised parameters perform compared to the values used in
+Sec.~\ref{soap:results} we can test how they perform on a simulated signal
 in a time-frequency spectrogram. In Fig.~\ref{soap:las:optimisation:vitexample} one of the detectors contains a narrow instrumental line and both detectors contain a \gls{CW} signal.
 In the Gaussian noise optimised case the search is looking for high power in both
 detectors which the strong instrumental line satisfied when the astrophysical
-signal is weak.  The S6 optimised statistic looks for more consistent \gls{SNR}
-in each of the detectors.  The lines labelled Line-aware and Old Line-aware refer to parameters in Eq.~\ref{soap:las:optimisation:s6_pars} and Tab.~\ref{soap:results:parameters} respectively. 
-This demonstrates how the `line aware' statistic improves the robustness of the
-algorithm against non astrophysical signals when correct parameters are chosen.
-Figure \ref{soap:las:optimisation:vitexample} shows the results for a specific example, however, Sec.~\ref{soap:las:optimisation:comp_sens} demonstrates how the search is not particularly sensitive to choice of parameters when tested on many examples. 
+signal is weak. 
+This is demonstrated in the viterbi map in the fourth panel of Fig.~\ref{soap:las:optimisation:vitexample}, the log-odds becomes dominated by the instrumental line. Whilst the astrophysical signal is still visible for parts of the spectrogram, the line dominates.
+The S6 optimised statistic looks for more consistent \gls{SNR} in each of the detectors. 
+The lines labelled Line-aware and Old Line-aware refer to parameters in Eq.~\ref{soap:las:optimisation:s6_pars} and Tab.~\ref{soap:results:parameters} respectively. 
+This demonstrates how using the line-aware part of the statistic improves the robustness of the
+algorithm against non-astrophysical signals.
+Figure \ref{soap:las:optimisation:vitexample} shows how the two statistics optimised for the S6 \gls{MDC} perfom similarly on a specific example.
+However, Sec.~\ref{soap:las:optimisation:comp_sens} demonstrates how each set of parameters performs when tested on many examples. 
 
 \begin{figure}[h]
     \centering
@@ -1295,9 +1279,9 @@ Figure \ref{soap:las:optimisation:vitexample} shows the results for a specific e
 
 To compare the different parameters of the line aware statistic, three parameter sets were used. 
 The optimised values for the Gaussian noise case and the S6 \gls{MDC} case above are used alongside the values optimised in Tab.~\ref{soap:results:parameters}.
-These three parameter sets are run on the S6 \gls{MDC} simulations between 40 and 500 Hz to compare their sensitivity. 
+These three parameter sets are tested on S6 \gls{MDC} simulations between 40 and 500 Hz, which is a wider range than they were optimised for.
 The process of running on the S6 \gls{MDC} and generating the efficiency curves is the same as in Sec.~\ref{soap:results}.
-Fig.~\ref{soap:las:optimisation:comparison} shows the efficiency curves at a 10\% false alarm rate. 
+Figure \ref{soap:las:optimisation:comparison} shows the efficiency curves at a 10\% false alarm rate. 
 This, along with Fig.~\ref{soap:las:optimisation:gauss} and \ref{soap:las:optimisation:s6mdc} shows that the search is relatively insensitive to the choice of parameters.
 
 \begin{figure}[h]
