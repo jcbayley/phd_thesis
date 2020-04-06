@@ -1430,9 +1430,11 @@ log-odds along the path of the \gls{BNS} signal.}
 
 Searching for \gls{BBH} systems becomes more difficult as they are in the \gls{LIGO} band for a short period of time ($ < 1 s$).
 To see the evolution of the signal in a spectrogram, the time resolution required means that the frequency bins are too large to see the signals evolution.
-There are other time-frequency representations which we would use such as the Q transform to allow us to search for these signals. However, the bins here are not independent, therefore the Bayesian formalism described in this chapter is no longer technically true.
-The SOAP search can still be run on the Q transform however, this is shown for GW150914 \citep{abbott2016ObservationGravitational} in Fig.~\ref{soap:sens:other:gw150914}.
-
+There are other time-frequency representations such as the Q transform, which allow us to visualise and search for these signals. However, the bins Q-transforms are not independent, therefore the Bayesian formalism described in this chapter is no longer technically true.
+Despite this, the SOAP search can still be run on the Q transform and return useful results, this is shown for GW150914 \citep{abbott2016ObservationGravitational} in Fig.~\ref{soap:sens:other:gw150914}.
+The viterbi map in Fig.~\ref{soap:sens:other:gw150914} shows how the SOAP search highlights the \gls{GW} signal. 
+This representation could then be used with other algorithms to identify the \gls{CBC} signal.
+%
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{C3_soap/GW150914_soap.pdf}
@@ -1440,19 +1442,16 @@ The SOAP search can still be run on the Q transform however, this is shown for G
 \label{soap:sens:other:gw150914}
 
 \end{figure}
+%
 
-In both Fig.~\ref{soap:sens:other:gw150914} and \ref{soap:sens:other:gw170817}, the signal does not last for the entire length of the time-frequency band, 
-
+In both Fig.~\ref{soap:sens:other:gw150914} and \ref{soap:sens:other:gw170817}, the signal does not last for the entire length of the time-frequency band. 
+SOAP is designed long duration signals where the \gls{SNR} can be build up over time, and a frequency track exists for the entire length.
+Regardless of the signal, SOAP will always return an optimal track for the entire length of the time-frequency representation. 
+Therefore, although short \gls{CBC} signals are not the ideal source for SOAP, what it can do is highlight areas which are more likely to contain a signal. 
+This is shown in both the Viterbi maps in Fig.~\ref{soap:sens:other:gw150914} and \ref{soap:sens:other:gw170817}.
 This section serves as a demonstration that it is possible to use SOAP for other types of search, it has more flexibility than the majority of examples in this thesis show.
 This is an area of work which would benefit from further
 investigation.
-
-
-~\chris{You could expand upon this subsection. One thing to address is the
-issue that the signal does not last for the entire length of the window. What
-could you say about that? You could make the argument that SOAP makes the TF
-track far more visible that a spectrogram and other algoritjhms could be
-developed to search the vitmaps?}
 
 \clearpage
 
@@ -1510,6 +1509,8 @@ to search for continuous sources of gravitational waves.  This chapter outlines
 the method and derives the statistics behind the method in a consistent
 Bayesian formalism. It then presents the results from the first set of tests of
 sensitivity for the SOAP algorithm on three separate datasets.
+
+%overview of sections line aware, memory etc
 
 
 %
