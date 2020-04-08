@@ -30,3 +30,4 @@ main.fdb_latexmk
 .vscode/settings.json
 tag.tex
 corrections/*
+thesis.code-workspace
