@@ -5,9 +5,9 @@
 %%%%%
 
 When searching for \gls{GW} signals, it is important to understand the origins
-of noise artefacts in the detector data which does~\chris{do} not originate from an
+of noise artefacts in the detector data which do not originate from an
 astrophysical source.  A large fraction of \gls{GW} search algorithms,
-including SOAP above~\chris{above?}, assume that the detectors noise follows a Gaussian
+including SOAP in Sec.~\ref{soap}, assume that the detectors noise follows a Gaussian
 distribution~\chris{we don't totally assume that, e.g., the line aware stat you
 have already discussed}.  However, the detectors contain artefacts which do not follow
 this distribution.  These artefacts can negatively affect many searches for
@@ -15,27 +15,23 @@ this distribution.  These artefacts can negatively affect many searches for
 the potential sources of these artefacts have been mentioned in
 Sec.~\ref{intro:detector:noise}.  There are many different classes of artefact,
 including: glitches, which are short duration broad band bursts in
-power~\chris{comma} and
+power, and
 instrumental lines, which are long duration narrow-band signals.  To conduct a
 reliable search there are two main tasks which are necessary for detector
 characterisation.  The first is identifying the artefact such that any search
 knows which frequency bands and time segments are contaminated.  The search can
 then address that section of data, this could mean removing that section of
-data or use~\chris{using} more sophisticated techniques to deal with the artefact
+data or using more sophisticated techniques to deal with the artefact
 \citep{pankow2018MitigationInstrumental}.  The second task is to find the
-source of the artefact~\chris{be clearer. You mean the particular instrumental
-or environmental source}.  If the source of the artefact is found, it can
+instrumental or environmental source of the artefact.  If the source of the artefact is found, it can
 potentially be removed or limited for future data runs.
 
-The focus of this chapter is on instrumental lines and how they affect \gls{CW}
-searches~\chris{isn't it more about how to search for and identify intrumental
-lines?}.
+The focus of this chapter is on how to search for and identify instrumental lines, and how this can improve the sensitivity of \gls{CW} searches.
 Sec.~\ref{detchar:lines} will introduce different sub-classes of instrumental line and how each of them affects a \gls{CW} search.
 Sec.~\ref{detchar:monitor} will outline how these artefacts are detected and monitored, and describe current tools used for this task.
 Sec.~\ref{detchar:soap} will describe how the \gls{CW} search algorithm
 introduced in Sec.~\ref{soap} can be used to search for instrumental lines.
-Finally Sec.~\ref{detchar:summary} will show the outputs of the search and this
-is displayed for ease of use~\chris{final sentence is a grammatical mess}.
+Finally Sec.~\ref{detchar:summary} will describe the user interface for investigation SOAP's output.
 
 
 
@@ -48,21 +44,20 @@ is displayed for ease of use~\chris{final sentence is a grammatical mess}.
 %
 % Introduce instrumental lines
 
-Instrumental lines have the general structure that they are persistent noise
-artefacts~\chris{this isn't really a structure}.  There are many classes of
+Instrumental lines can be generally described as persistent noise
+artefacts.  There are many classes of
 instrumental line spanning a range from narrow, fixed frequency spectral
 artefacts to broader ($<0.1$ Hz) features which have a time varying frequency
 known as wandering lines.  For many of these lines, it is difficult to
 distinguish them from an astrophysical signal.  They affect search methods in
 two main ways.  They can cause the search to produce outliers which are then
 considered as \gls{GW} candidates.  Extra efforts then have to be made to
-analyse these outliers further.  If the line is close to the \gls{GW} signal in
-frequency, then it can conceal the power of the \gls{GW}, or if it is
-overlapping, the search becomes very difficult~\chris{how exactly?}.  It is therefore crucial to
-understand the structure and origin of these lines when performing a search for
+analyse these outliers further.  If the line is close to or overlapping with the \gls{GW}
+frequency, then it can conceal the power of the \gls{GW}. 
+Lines can also affect searches for \glspl{CW} by giving an incorrect estimate of the noise floor of the detector.
+It is therefore crucial to understand the structure and origin of these lines when performing a search for
 \gls{GW}, specifically \gls{CW} and stochastic searches \joe{explain why
-stochastic}.~\chris{lines also affect the noise floor estimate and can
-therefore contaminate searches indirectly.}
+stochastic}.
 
 %
 % What lines look like and how the appear in the GW channel
@@ -70,9 +65,8 @@ therefore contaminate searches indirectly.}
 Some instrumental lines are clearly visible when looking at a \gls{ASD} or
 \gls{PSD} of the \gls{LIGO} detectors. Figure \ref{detchar:line:psd} shows the
 \gls{ASD} for \glspl{LIGO} Hanford and Livingston detectors during their first
-observing run (O1) \citep{GWOpen}. This clearly shows some peaks which are
-associated with strong lines, some have been labelled~\chris{strange use of
-comma here}. There are however, many
+observing run (O1) \citep{GWOpen}. This clearly shows peaks which are
+associated with strong lines, where some of these have been labelled. There are however, many
 more weaker lines which become visible when spectra are averaged over longer
 times.
 %
@@ -92,13 +86,7 @@ suspensions are at 300, 500, 600 and 900 Hz where I have only marked the 500 Hz
 mirror suspension modes \citep{GWOpen}.} \label{detchar:line:psd} \end{figure}
 %
 The \gls{ASD} in Fig.~\ref{detchar:line:psd} shows the time averaged spectra
-~\chris{of} the \gls{GW} channel of the \gls{LIGO} detectors.  The \gls{GW} channel is the
-error signal on the mirrors whilst they are being held on a resonance, i.e. how
-much the mirrors have to be moved to keep the same intensity at the output of
-the interferometer.~\chris{this last statement seems out of place and would be
-better used in the introduction chapters - after being expanded upon a bit. The
-error signal in this case is just $h(t)$ which you have been quite happy to use
-without this kind of description until now.}  The lines seen in the spectrum are not from any \gls{GW}
+of the \gls{GW} channel of the \gls{LIGO} detectors. The lines seen in the spectrum are not from any \gls{GW}
 and are usually from ground based sources.  To see the lines in the \gls{GW}
 channel, they must be coupled in via some mechanism~\chris{the average reader
 won't know exactly what you mean by "coupling in". What does it mean?}.  There are a number of
