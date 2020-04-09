@@ -55,9 +55,11 @@ considered as \gls{GW} candidates.  Extra efforts then have to be made to
 analyse these outliers further.  If the line is close to or overlapping with the \gls{GW}
 frequency, then it can conceal the power of the \gls{GW}. 
 Lines can also affect searches for \glspl{CW} by giving an incorrect estimate of the noise floor of the detector.
+In searches for the \gls{SGWB}, channel data from multiple detectors is cross-correlated to identify a potential signal \citep{allen1999DetectingStochastic}.
+If there is a noise source such as an instrumental line which is coherent between the detectors, this will show up as an excess in the cross-correlation statistic\citep{covas2018IdentificationMitigation}.
+Any noise source which is local to both the detectors could then be visible in this cross-correlation.
 It is therefore crucial to understand the structure and origin of these lines when performing a search for
-\gls{GW}, specifically \gls{CW} and stochastic searches \joe{explain why
-stochastic}.
+\gls{GW}, specifically \gls{CW} and stochastic searches.
 
 %
 % What lines look like and how the appear in the GW channel
@@ -108,29 +110,27 @@ listed below:
 
 \begin{description}
 	\item[Power line] The power line harmonics are fundamental to the
-		detector and originate from the mains power supply in the
-		\gls{USA}. These lines exist at 60 Hz which is the frequency of the
-		mains alternating current \citep{aasi2015CharacterizationLIGO}. The European
-		detectors Virgo and GEO have a power line at 50 Hz instead of 60 Hz.
+	detector and originate from the mains power supply in the
+	\gls{USA}. These lines exist at 60 Hz which is the frequency of the
+	mains alternating current \citep{aasi2015CharacterizationLIGO}. The European
+	detectors Virgo and GEO have a power line at 50 Hz instead of 60 Hz.
 	
     \item[Violin modes] The violin modes are associated with the
-		suspensions fibers of the mirrors and the beam splitter in the detector. These are
-		designed to have a narrow frequency spectrum such that they contaminate as
-		small a part of the spectrum as possible. These are the lines around 500 Hz for
-		the mirrors and 300, 600 and 900 Hz for the beam-splitter \citep{GWOpen} in
-		Fig.~\ref{detchar:line:psd}.
+	suspensions fibers of the mirrors and the beam splitter in the detector. These are
+	designed to have a narrow frequency spectrum such that they contaminate as
+	small a part of the spectrum as possible. These are the lines around 500 Hz for
+	the mirrors and 300, 600 and 900 Hz for the beam-splitter \citep{GWOpen} in
+	Fig.~\ref{detchar:line:psd}.
 	
-    \item[Calibration lines] The mirrors of the \gls{LIGO}
-		detectors are
-		held at a resonance~\chris{what does this mean? Every time you say something
-		vague like this you are begging the external examiner to question you about it.
-		Do you want to be questioned about the resonance of cavities?} of the cavity in the arms of the interferometer. This then
-		requires a feedback loop to hold them at resonance as a \gls{GW} passes the
-		detector. Calibration lines are used to calibrate this feedback loop such that
-		the arm length changes are accurate
-		\citep{tuyenbayev2016ImprovingLIGO,coughlin2010NoiseLine}.~\chris{yes, but what
-		is a calibration line? You say that they are used for something but what are
-		they?}  
+	\item[Calibration lines] As described in Sec.~\ref{intro:detector} a \gls{GW} passing the detector will cause a change in the arm lengths of the interferometer, causing a power fluctuation at the output of the detector. 
+	For stable operation of the interferometer, the power fluctuations are suppressed by using a feedback loop to control the detectors differential arm length. The error signal of this loop is then $h(t)$ \citep{ligoscientificcollaboration2017CalibrationAdvanced}.
+	However, this is not entirely true as the transfer function of this feedback loop will affect the measurement of $h(t)$.
+	It is therefore important to understand and correct for this feedback loop.
+	The primary method for calibrating this is known as a photon calibrator \citep{karki2016AdvancedLIGO}.
+	This applies a power modulated laser to the test mass, where the periodic force from radiation pressure appears as a calibration line in the detectors spectrum.
+	This is then applied at a range of frequency from a few Hz to several kHz \citep{karki2016AdvancedLIGO}.
+	This can then be used along with other methods to calibrate the feedback loop \citep{ligoscientificcollaboration2017CalibrationAdvanced,coughlin2010NoiseLine,tuyenbayev2016ImprovingLIGO}.
+ 
 \end{description}
 
 Together with the fundamental lines of the detector, which are difficult to remove at the source, there are a large number of other lines whose source has been found and can be removed.  
@@ -207,15 +207,16 @@ described below.
 	lines are identified can be found in \citep{coughlin2010NoiseLine}.
 	
     \item[Coherence] This tool searches for the coherence between different
-	channels and different detectors. This is similar to searches for stochastic
-	gravitational waves \citep{allen1999DetectingStochastic}. This uses the cross correlation between two different channels, this can be different detectors \gls{GW} channels or a \gls{GW} channel and a \gls{PEM} channel. More detail of how this works can be found in
-	\citep{covas2018IdentificationMitigation}.~\chris{You could potentially expand
-	upon this and give a few more details.}
+	channels and different detectors. This is similar to searches for the stochastic
+	gravitational wave background \citep{allen1999DetectingStochastic}. This uses the cross correlation between two different channels, this can be different detectors \gls{GW} channels or a \gls{GW} channel and a \gls{PEM} channel. 
+	Significant lines are then found by setting thresholds on the values of the coherence, where these can be flagged for further investigation.
+	More detail of how this works can be found in \citep{covas2018IdentificationMitigation,coughlin2010NoiseLine,}.
 	
 	\item[Finetooth] If a line exhibits some periodic amplitude or frequency modulation, then it can appear as harmonics in the frequency spectrum, where the collection of regularly spaced harmonics make up a `comb'. 
 	Many of the instrumental lines identified in the spectrum are then not from separate sources but are part of `combs' which originate from a single source. 
 	These combs are characterised by their start frequency and the spacing of the harmonics (tooth spacing).
 	Finetooth is a tool which identifies and monitors these combs \citep{neunzertDailyComb}.
+	\joe{say what this actually does}
 
 	
 	\item[\Gls{NoEMi}] This tool uses various methods to identify peaks in an \gls{SFT}, analyse these peaks, find coincidences between \glspl{SFT} and tracks lines. 
@@ -252,90 +253,72 @@ lines.
 % Why SOAP may be good at finding instrumental lines
 % 
 ~\chris{I love all the SOAP puns but are you actually "cleaning" lines with
-SOAP?} The SOAP search has been run on a number of observing runs~\chris{run on runs}
-to search for \gls{CW}.  One of the major factors which~\chris{that} limited the sensitivity
-of the search is the presence of instrumental lines within the data.  Many of
+SOAP?} The SOAP search has been tested on a number of observing runs
+to search for \gls{CW}.  One of the major factors that limited the sensitivity
+of the search, is the presence of instrumental lines within the data.  Many of
 the potential candidates which SOAP returned could be identified as an
-instrumental line. An example of one of these candidates can be seen in
-Fig.~\ref{detchar:soap:astrowander}.
+instrumental line.
 %
-\begin{figure}[h]
+\begin{figure}[h]t
 	\includegraphics[width=\textwidth]{C5_detchar/plot_F111_5_wandering_line.png}
         \caption[Broad wandering line example.]{~\chris{Comment for all plots.
-Start with a descriptive sentence of hwt is being plotted.} Broader
-instrumental lines are generally weaker and can be mistaken for an
-astrophysical signal by the SOAP astrophysical search. Above an example of two
-broad lines in the H1 detector is shown, where SOAP has identified one of
-the~\chris{sort out this sentence. It's got grammar problems and isn't
-complete.}.
-The top two panels show the summed spectrograms from the H1 and L1 panels with
-the optimal Viterbi track overlaid. The third panel shows the normalised
-spectrogram power along the Viterbi track for each of the detectors. The final
-panel shows the Viterbi map for this frequency band.~\chris{I know that this is
-an astrophysical result plot but the colour scheme is quite differnet to the
-line search outputs from SOAP.}}
+			Start with a descriptive sentence of hwt is being plotted.} Broader
+			instrumental lines are generally weaker and can be mistaken for an
+			astrophysical signal by the SOAP astrophysical search. Above an example of two
+			broad lines in the H1 detector is shown, where SOAP has identified one of
+			the~\chris{sort out this sentence. It's got grammar problems and isn't
+			complete.}.
+			The top two panels show the summed spectrograms from the H1 and L1 panels with
+			the optimal Viterbi track overlaid. The third panel shows the normalised
+			spectrogram power along the Viterbi track for each of the detectors. The final
+			panel shows the Viterbi map for this frequency band.~\chris{I know that this is
+			an astrophysical result plot but the colour scheme is quite differnet to the
+			line search outputs from SOAP.}
+			}
 \label{detchar:soap:astrowander}
 
 \end{figure}
 %
-~\chris{Fig 5.2 straight after Fig 5.2 - clunky} Figure
-\ref{detchar:soap:astrowander} shows a broad and wandering line in a single
+Figure \ref{detchar:soap:astrowander} shows a broad and wandering line in a single
 detector causing the SOAP search to mistake it for an astrophysical signal.
 This is because the SOAP line aware statistic from Sec.~\ref{soap:las} finds
 areas of higher power which are consistent between detectors according to the
 parameters~\chris{according to the parameters is nebulous - be specific} of the
-statistic. These types of line are difficult to mitigate in the astrophysical
-search, however, this has a side effect of being useful to identify the
-instrumental lines themselves.~\chris{You have not explained why the line aware
-statistic fails in this example case - you really should if you haven't
-already. If you have then please refer the reader to the appropriate section.}
+statistic. These types of line are difficult to mitigate in an astrophysical
+search as there is consistent higher \gls{SFT} power in both the broad line and the noise in the other detector.
+However, this has a side effect of being useful to identify the
+instrumental lines themselves.
 In this section, I will explain the setup of the search to identify
 instrumental lines.
 
-Whilst it is useful to run searches on auxiliary channels when trying to
-identify the lines source, the aim of this search was to flag potential lines.
-Therefore, this search currently only runs on the \gls{GW} channel where the
-flagged lines can be investigated further.  In the future this could be
-modified to search multiple channels to find coincidences between them.
-Sec.~\ref{soap} described how multiple detectors can be used to increase the
-sensitivity of a search for \glspl{CW}~\chris{you jump quickly into the
-multiple detectors argument but it's confusing becuase it's straight after the
-multiple channels discussion. For multi-channel data you would also want to
-consider using it just like you do for multi-detector. However, you next
-statement is that you don't want to do this here.}. However, when searching for
-instrumental lines, the aim is to have the reverse~\chris{is it really the
-"reverese" effect?} effect, therefore, a simple search is run separately on
-each detector.  This then removed any~\chris{tenses are all over the place
-here} of the statistics developed in Sec.~\ref{soap:las} and uses the
-`normalised' \gls{SFT} power as the statistic in the SOAP search~\chris{here
-you only refer to a previous section but I think you should specifically point
-to the equation that defines your statistc in this case. Plus you should define
-any fixed or tuned parameters if there are any - or is it only the transition
-matrix?}. The single
+It is often useful to search through the auxiliary channels when trying to
+identify the source or a line. 
+This would involve using out multiple detector search in Sec.~\ref{soap:multidet} to identify lines which are coincident between channels. 
+The aim of this section however, is to flag potential lines within the \gls{GW} channel.
+Whilst we have developed a statistic in Eq.~\ref{soap:las:stat} to penalise line like signals, we revert to using the
+`normalised' \gls{SFT} power as the statistic in the SOAP search. The single
 detector search then has one parameter to vary, the transition matrix
-parameter.  This governs how probable the frequency track is to transition up
-straight or down a frequency bin~\chris{maybe a bit of puncuation in this last
-sentence}.  In this search we are aiming to find any~\chris{not really any, but
-line-like} non Gaussian artefacts,
-therefore, we allow an equal probability for the track to jump in any
-direction, however, limit it to change by one frequency bin after each time
-segment.  Whilst the astrophysical search summed the \glspl{SFT} over one day
+parameter $\tau$.  This governs how probable the frequency track is to transition up,
+straight or down a frequency bin.  In this search we are aiming to find any line-like artefact.
+Therefore, we allow an equal probability for the track to jump in any
+direction, but limit it to change by one frequency bin after each time
+segment.  
+
+Whilst the astrophysical search summed the \glspl{SFT} over one day
 as shown in Fig.~\ref{detchar:soap:astrowander}, for the line search, we assume
 that instrumental lines are stronger than astrophysical signals and therefore
-should be identifiable in the raw 1800s long \glspl{SFT}~\chris{possible
+should be identifiable in the raw 1800s long \glspl{SFT}.
+A search could also be run on summed \glspl{SFT}, which may improve the sensitivity to weaker lines,.~\chris{possible
 examiner question - what would happen if you did sum the data and do the line
 search on summed power?}. The Fscan search
-described above generates \glspl{SFT} every day of varying lengths~\chris{super
-ambiguous - it's like Fscan randomply churns out whatever SFT lengths it feesl
-like}, and this
-includes 1800 s long \glspl{FFT}.  For this line search, we split the 1800 s
-long Fscan \glspl{FFT} into 0.2 Hz~\chris{why 0.2Hz? Didn't you use 0.1Hz for
-the search. Please provide motivation for this choice.} wide sub-bands and run the single detector
-search on each sub-band.  This then returns the same outputs as described in
+described above generates \glspl{SFT} which are 1800 s long (as well as some other lengths).  For this line search, we split the 1800 s
+long Fscan \glspl{FFT} into 0.2 Hz wide sub-bands and run the single detector
+search on each sub-band. A 0.2 Hz wide sub-band was chosen for this to reduce halve the number of output plots to save and further analyse, this however, could be reduced to 0.1 Hz if necessary.  The search then returns the same outputs as described in
 Sec.~\ref{soap} and Sec.~\ref{machine}: the frequency track (Viterbi track), a
 Viterbi map and a Viterbi statistic.  Here the Viterbi statistic is just the
-sum of the \gls{SFT} power along the frequency track.  The line search then
-outputs plots as shown in Fig.~\ref{detchar:soap:linewander},
+sum of the \gls{SFT} power along the frequency track.  
+
+The line search then outputs plots as shown in Fig.~\ref{detchar:soap:linewander},
 \ref{detchar:soap:noiseplot}, \ref{detchar:soap:lineplot} and
 \ref{detchar:soap:wanderplot}.  These plots and the equivalent plots for other
 sub-bands can then allow each sub-band to be classified into containing an
@@ -350,7 +333,7 @@ kind of things! and why do they have different band widths? Also this is a beast
 up.}
 
 %
-\begin{figure}
+\begin{figure}[hpt]
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F111_5_111_7_wander_2.png}
 	\caption[Example SOAP output for wandering line]{\chris{start with a
@@ -362,7 +345,7 @@ things.} The SOAP line search is run on a similar frequency band to Fig.~\ref{de
 \end{figure}
 %
 
-\begin{figure}
+\begin{figure}[hpt]
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F58_5_58_7_noise.png}
 	\caption[Example SOAP output for Gaussian like noise.]{~\chris{the
@@ -386,22 +369,19 @@ when you refer to the plot.}}
 	\label{detchar:soap:noiseplot}
 \end{figure}
 %
-Fig.~\ref{detchar:soap:noiseplot}~\chris{You can't start a sentence with the
-abreviated version of Figure or Section or Equation. It has to be the full
-version} shows an example of the spectrogram of a
+Figure \ref{detchar:soap:noiseplot} shows an example of the spectrogram of a
 sub-band which does not contain any signal or spectral artefacts but is
 Gaussian distributed noise.  The track in the top panel of this plot shows the
 power spectrum including detector gaps from 1800 s \glspl{SFT} in \gls{LIGO}
 Hanford's data from its second observing run (O2).  The Viterbi track is
-overlaid and the structure of the track indicates that there is no
-~\chris{astrophysical?} signal
-present,~\chris{comma not really suitable here} this is because the track appears to be randomly wandering and has a
-large spread over the entire band. The Viterbi map plot does not show much
+appears to be randomly wandering and is spread over the entire band, indicating that there is no astrophysical signal
+present. 
+ The Viterbi map plot does not show much
 structure and contains areas of low log-probability.  Using this information
 along with the Viterbi statistic result, this particular sub-band can be
 considered to not contain an instrumental artefact. 
 %
-\begin{figure}
+\begin{figure}[hpt]
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F47_6_47_8_linenarrow.png}
 	\caption[Example SOAP output for string narrow instrumental line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a narrow spectral artefact in the band. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. In this there is a narrow spectral line at $\sim 47.69$ Hz. The Viterbi track then follows this line of high power. The Viterbi map has much higher values for the log-probability in this line case compared to the noise case, this is an indicator some real signal. The probability in the Viterbi maps drops to zero in some areas due to the strength of the instrumental line. }
@@ -409,7 +389,7 @@ considered to not contain an instrumental artefact.
 \end{figure}
 %
 
-Fig.~\ref{detchar:soap:lineplot}~\chris{no abreviation of Fig here}
+Figure \ref{detchar:soap:lineplot}
 demonstrates the same figure as before~\chris{you can't say things like "the
 same figure as before" - refer specifically to the relavent figure.} but now with a strong and narrow
 instrumental line in the sub-band.  The Viterbi track now clearly indicates
@@ -426,7 +406,7 @@ can tell you have stable the signal was in amplitude and can certainly help to
 rule out an astrophysical signal. Something to mention?} 
 
 %
-\begin{figure}
+\begin{figure}[hpt]
 	\centering
 	\includegraphics[width=\textwidth]{C5_detchar/track_F53_7_53_9_wander.png}
 	\caption[Example SOAP output for wandering line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a wandering spectral line. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. This shows how some spectral lines do not have a fixed frequency bin can wander through the band. These are especially hard to track and monitor. The Viterbi track here shows is clearly different from the noise case in Fig.~\ref{detchar:soap:noiseplot} as the track is more tightly concentrated around some areas of power. }
@@ -434,38 +414,41 @@ rule out an astrophysical signal. Something to mention?}
 \end{figure}
 %
 
-Fig.~\ref{detchar:soap:wanderplot} once again~\chris{mbiguous language - this
-figure hasn't shown anything before} shows the equivalent plots to
+Figure \ref{detchar:soap:wanderplot} shows the equivalent plots to
 Fig.~\ref{detchar:soap:noiseplot} and \ref{detchar:soap:lineplot} but now
-contains some~\chris{informal - a} wandering spectral artefact.  This is
-some~\chris{informal} line which wanders in
-frequency as is moves though the band~\chris{moving through the band is the
-same as wandering in frequency - you mean moves through time or equivelent}.  This can be seen in the frequency
+contains a wandering spectral artefact.  This is
+a line which wanders in
+frequency as is moves though time.  This can be seen in the frequency
 track, which here does not have much spread, however, the frequency of the
-potential signal~\chris{what is a potential signal? just use track} changes with time.  There are also areas where the signal
-could have potentially~\chris{potential signal and now the signal could have
-potentially switched} switched to a separate spectral artefact within the same
-band. Fig.~\ref{detchar:soap:wanderplot} shows this discrete jump around
+track changes with time.  There are also areas where the track switched to a separate spectral artefact within the same
+band. This is where there are, for example, two instrumental lines within the same frequency band. The Viterbi algorithm will identify both of these and try to find a single track through the time-frequency spectrogram which given the highest sum of \gls{SFT} power. This could involve the algorithm using power from both of the lines at different times to build more \gls{SFT} power, the optimal track would then lie on both lines at different times. Fig.~\ref{detchar:soap:wanderplot} shows this discrete jump around
 January.~\chris{you have to allow the reader to understand these concepts
 slowly. You are very abruptly introducing the concept of tracks switching but
 you must explain in more detail what you mean by this.} 
 
 The combination of the Viterbi statistic, Viterbi map and spectrograms are then
-used to flag this~\chris{which sub-band are we talking about?} sub-band as
-containing some sort of~\chris{too informal - a possible} instrumental
-artefact.  The example plots here~\chris{where is here?} show some specific
-examples, however, there is a lot of variation in the types of lines and
+used to flag any given sub-band as
+containing a possible instrumental
+artefact.  Figures \ref{detchar:soap:linewander},
+\ref{detchar:soap:noiseplot}, \ref{detchar:soap:lineplot} and
+\ref{detchar:soap:wanderplot} show some specific
+examples of lines, however, there is a lot of variation in the types of lines and
 features which appear in all of the SOAP outputs.  This line search then works
-by initially ranking all of the Viterbi statistics, the largest values will be
-most likely from an instrumental artefact~\chris{you have to be very careful
-saying things like this. Saying something is the "most likely" is a very clear
-probabilistic statement however you have provided no formal proof that this is
-the case. You should remove this statement but you shoiuld also explain why you
-think that high Vit stat values would be good indicators for the presence of a
-line artefact}. Figure~\ref{detchar:soap:rankedstats} shows an example of a
-histogram of the ranked statistics~\chris{which statitics? Vit stat? Also the
-plot is missing - I assume this is the double mode distribution you were taling
-about today.} from O2. The sub-bands which give statistic
+by initially ranking all of the Viterbi statistics.
+Larger values of the Viterbi statistic are good indicators that there is an instrumental line present within the sub-band. 
+Larger Viterbi statistic's indicate that there is a tracks of high \gls{SFT} power within the sub-band, which is a similar signature to an instrumental line.
+
+Figure~\ref{detchar:soap:rankedstats} shows an example of a
+histogram of the ranked Viterbi statistics from O2. 
+%
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{C5_detchar/statistic_hists_O3_H1.pdf}
+	\caption[Viterbi statistics for H1 in O3]{\joe{change to O2} }
+	\label{detchar:soap:rankedstats}
+\end{figure}
+%
+The sub-bands which give statistic
 values which lie outside the main distribution can then be viewed for further
 investigation. The high values outside the distribution are currently defined
 rather arbitrarily, this could either be something like the top 10\% of
