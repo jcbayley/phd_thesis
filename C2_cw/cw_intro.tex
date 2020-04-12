@@ -190,22 +190,22 @@ Often when using Bayesian statistics the aim is to find posterior distribution o
 There are very few cases where this can be calculated analytically, therefore, numerical methods are almost always used to find the posterior.
 This can be difficult to calculate numerically especially in problems where the parameters space has many dimensions.
 The most difficult part to calculate is the evidence in Eq.~\ref{intro:bayes:evidence}, this involves calculating an integral over all possible parameters.
-There is however, a way around having to calculate this. For any given mode $I$, the evidence $p({\bm d}\mid I)$ is the same for any set of parameters ${\bm \theta}$ in Eq.~\ref{intro:bayes:bayes}. 
+There is however, a way around having to calculate this. For any given model $I$, the evidence $p({\bm d}\mid I)$ is the same for any set of parameters ${\bm \theta}$ in Eq.~\ref{intro:bayes:bayes}. 
 The evidence is then just a normalisation factor for the posterior distribution. 
 When different models are not being compared, and we assume the model $I$ to be true, we no longer need to calculate the evidence.
-The posterior distribution can then be found by sampling
+The unnormalised posterior distribution can then be found by sampling
 \begin{equation}
 p({\bm \theta} \mid {\bm d}, I) \propto p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I).
 \end{equation}
-To find this posterior you could then calculate (sample) the value for every point in parameter space. This however, is very computationally expensive and often the posterior distribution is located in a small area in parameter space. 
-Therefore, the majority of the time is sampling a area of parameter space where the posterior is close to zero, and this is not particularly useful. 
-A method titled \gls{MCMC} was proposed \citep{metropolis1953EquationState} to deal with this issue, more information on this can be found in \citep{vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
-This builds up the posterior distribution by randomly jumping around in the parameter space.
-It starts by calculating the posterior value for a particular point in parameter space. Then it will randomly jump to another parameter space point. 
-The posterior can then be calculated again, if the posterior value is higher then the jump is `accepted'. This just means that the parameter values of this point are stored.
-If the posterior value is lower than the previous step then the jump is accepted with some probability. This means that there is a random chance that a value lower than the current is accepted.
-As the accepted positions aim for areas where the posterior is higher, \gls{MCMC} does not waste time calculating areas in parameter space of low posterior values.
-The samples which were accepted then build the posterior distribution. 
+To numerically approximate this posterior you could then calculate (sample) the value over a grid of points parameter space, which can quickly become computationally expensive. Often the posterior distribution is located in a small area within the parameter space, so the majority of the computational time is spent sampling a area of parameter space where the posterior is close to zero.
+Most problems are interested in areas of high probability, i.e the larger values of the posterior. 
+A method titled \gls{MCMC} can be used to concentrate the samples around areas of high probability, which can approximate the posterior distribution more efficiently, more information on this can be found in \citep{metropolis1953EquationState,vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
+This builds up the posterior distribution by using a Markov chain, where each step in the chain only depends on the previous step.
+It starts by calculating the posterior value for a particular point in parameter space. Then it will randomly jump to another parameter space point, where a new value for the posterior can be calculated.
+If the new posterior value is higher than the previous step then the jump is `accepted'. This just means that the parameter values of this point are stored.
+If the posterior value is lower than the previous step then the jump is accepted with some probability.
+This means that the accepted positions are located around areas of high posterior values, the \gls{MCMC} algorithm does not waste time calculating the posterior in uninteresting areas of parameter space.
+The accepted samples then build the posterior distribution. 
 
 In certain situations it can be useful to calculate the evidence in Eq.\ref{intro:bayes:evidence}. 
 For example, if there are two different models which could represent the data, the evidence can be used to determine which of the two models is more likely.
