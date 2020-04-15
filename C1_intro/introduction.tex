@@ -62,30 +62,25 @@ to the examiner that you are an expert in the general field of GW astrophysics.}
 %%%%%%%%%%%
 %%%%%%%%%
 
-In general relativity, gravity is thought of as the curvature of space-time and
-matter moves according to this curvature.  The matter in the universe also has
-an effect on the curvature of the space-time.  The larger the mass of matter
-the more the space-time is distorted~\chris{more short sharp stochastic
-statements}.  Space-time can generally be described by Einstein's field
-equations~\chris{ref to Einstein 1915?}
+In general relativity, gravity is thought of as the curvature of space-time, where
+matter moves according to this curvature. Matter also has
+an effect on the curvature itself, where larger masses will distort space-time more than smaller masses. 
+To describe space-time, one would want to link the curvature to the matter mathematically, this was done in 1915 \citep{einstein2005GrundlageAllgemeinen} \joe{douvle check the reference} where Einstein developed his field equations
 \begin{equation}
 \label{intro:gravwaves:efe}
     G_{\mu \nu} = \frac{8 \pi G}{c^4}T_{\mu \nu}.
 \end{equation}
-where $G_{\mu \nu}$ is the Einstein tensor and $T_{\mu \nu}$ is the
-stress-energy tensor.  The stress energy tensor describes the mass-energy in
-the universe~\chris{not really the universe in general. It describes the stress
-energy of the system under consideration}, where its components contain
-information on the density of energy and momentum~\chris{of what?}.  The
-Einstein tensor contains information on the curvature of the
-universe.~\chris{why not replace the full stop and "This" with "which"?
-smoother} This can be derived directly from the metric tensor $g_{\mu \nu}$
-which describes the geometry of the universe~\chris{again with the universe}.
+where $G_{\mu \nu}$ is the Einstein tensor, $G$ is the gravitational constant, $c$ is the speed of light and $T_{\mu \nu}$ is the
+stress-energy tensor.  The stress energy tensor contains information on the density and flux of energy and momentum at a given point in space-time.  
+The Einstein tensor contains information on the curvature of the
+universe, which can be derived directly from the metric tensor $g_{\mu \nu}$
+which describes the space-time geometry.
 Einstein's equations then explain how the curvature of space-time changes with
-the mass-energy within it.  In empty space one can assume that the geometry of
-space-time is flat, i.e. there is no curvature to space-time. The metric tensor
-for this can then be defined as
+the mass-energy within it.  
+
+In empty space, i.e $T_{\mu \nu} = 0$, one can assume that the geometry of space-time is flat, i.e. there is no curvature to space-time. The metric tensor for flat space is defined as
 \begin{equation}
+    \label{intro:gw:minkowski}
 g_{\mu \nu} = \eta_{\mu \nu} = \left(
 \begin{matrix}
 -1 & 0 & 0 & 0 \\
@@ -99,22 +94,22 @@ Each index of this matrix refers to a space-time dimension, i.e. $x^0 = t$,
 $x^1=x$, $x^2=y$ and $x^3=z$.  Measuring a distance $dx$ in space-time can be
 different for different observers, therefore, one needs a measure which is
 invariant for every observer.  This is the space-time interval $ds$, also known
-as the line element, between two `events' in space-time.  This is defined as
+as the line element, between two `events' in space-time, which is defined as
 \begin{equation}
 \label{intro:lineelement}
     ds^2 = g_{\mu \nu} dx^{\mu}dx^{\nu}.
 \end{equation}
-
-As in Einstein's notation this is a sum over the indices $\mu$ and
-$\nu$~\chris{strange phrasing}.  Equation \ref{intro:lineelement} can be
+This equation is a sum over the indices $\mu$ and
+$\nu$.  
+Equation \ref{intro:lineelement} can be
 thought to describe the space-time `distance' between the two events.  For flat
-space-time, $\eta_{\mu\nu}$, this can then be written as
+space-time, $\eta_{\mu\nu}$, Eq.~\ref{intro:gw:minkowski} and \ref{intro:lineelement} can be combined to find the space-time interval
 %
 \begin{equation}
     ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2.
 \end{equation}
 %
-The Einstein equations~\chris{defined in or by} Eq.~\ref{intro:gravwaves:efe}
+The Einstein equations defined in Eq.~\ref{intro:gravwaves:efe}
 then demonstrate how the curvature of space-time $G_{\mu\nu}$ depends on the
 matter and energy distribution $T_{\mu \nu}$ within it.~\chris{I think that
 there are enough steps missing between defining G from g that this last
@@ -124,7 +119,7 @@ space-time curvature.}
 A gravitational wave can be described as a ripple in this space time~\chris{you
 already said this, maybe expand upon "ripple" here}.  The simplest way to
 visualise this is just a small time dependent change to the flat space-time
-metric $\eta_{\mu\nu}$.  In~\chris{the} linearised theory of gravity, the
+metric $\eta_{\mu\nu}$.  In the linearised theory of gravity, the
 space-time metric $g_{\mu \nu}$ can be defined as
 \begin{equation}
 \label{intro:gravwave:metric}
@@ -132,23 +127,17 @@ space-time metric $g_{\mu \nu}$ can be defined as
 \end{equation}
 where $ \eta_{\mu \nu}$ is the metric for flat space-time and $h_{\mu \nu}$ is
 some perturbation, where $|h_{\mu \nu}| \ll 1$
-\citep{flanagan2005BasicsGravitational}.  In this linearised theory the
-perturbations to the metric tensor are assumed to be small~\chris{well yes, you
-just said that in the previous sentence?}, therefore, Einstein's field
-equations can be solved such that the solution is a plane wave~\chris{this
-sentence reads as though, because the perturbations are small, logically that
-means there is a plane wave solution. I would advise rephrasing it. In the
-regime of small perturbations it can be shown that the solutions are... }.
-More information on this derivation can be found in
-\citep{flanagan2005BasicsGravitational,letiec2016TheoryGravitational}.  By
-using $g_{\mu \nu}$ from Eq.~\ref{intro:gravwave:metric}, we can write the
+\citep{flanagan2005BasicsGravitational}. In the regime of small perturbations, it can be shown that the solutions are plane waves,
+more information on this derivation can be found in
+\citep{flanagan2005BasicsGravitational,letiec2016TheoryGravitational}.  
+
+By using $g_{\mu \nu}$ from Eq.~\ref{intro:gravwave:metric}, we can write the
 linearised Einstein equations as
 \begin{equation}
 \label{intro:lineinstein}
     \Box h_{\mu \nu} = -16 \pi T_{\mu\nu},
 \end{equation}
-where $\Box$ is the d'Alembert operator which in flat space~\chris{but we are
-in perturbed space, not flat space - explain} is defined by
+where $\Box$ is the d'Alembert operator defined by
 \begin{equation}
 		\Box = -\frac{1}{c^2} \frac{\partial^2}{\partial t^2} + \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}
 \end{equation}
@@ -164,23 +153,20 @@ electrodynamics and the general plane-wave solutions have the form
     h_{\mu\nu} = A_{\mu\nu}e^{ik_{\alpha} x^{\alpha}},
 \end{equation}
 where each component of $h_{\mu \nu}$ is a sinusoid traveling along vector
-$k_{\alpha}$~\chris{I think they are travelling along vector $k$ and
-$k_{\alpha}$ are the components of the vector} with amplitude $A_{\mu\nu}$
-\citep{capano2011SearchingGravitational}.  At this point the set of equations
-are not simple; the symmetric tensor $A_{\mu \nu}$ has 10 independent
+$\mathbf{k}$ with amplitude $A_{\mu\nu}$
+\citep{capano2011SearchingGravitational}. 
+
+At this point the set of equations are not simple; the symmetric tensor $A_{\mu \nu}$ has 10 independent
 components~\chris{why is it symmetric? It is, but why?}. This can be greatly
 simplified by choosing a different gauge where the metric perturbation is both
 transverse and traceless (TT) \citep{flanagan2005BasicsGravitational}.  This is
 just a choice of coordinate system which does not change any current
 assumptions \joe{read more about gauges}~\chris{See Martin Hendry's GR notes
-section of GWs}. A traceless metric is one where the sum of the diagonal
-elements are 0 and a transverse metric is when the oscillations are
-perpendicular to the direction of travel.~\chris{this previous sentence can be
-removed since you then repeat it next}  This gauge imposes two conditions: one
+section of GWs}. This gauge imposes two conditions: one
 is that $h_{\mu \nu}$ is traceless, i.e. that the sum of the diagonal elements
 are 0 and the other is that $h_{\mu \nu}$ is transverse.  The transverse
 element means that the oscillations of the wave happen perpendicular to the
-direction of travel.  At this point we can choose that the wave is traveling in
+direction of travel.  At this point we can choose that the wave is travelling in
 the $z$ direction which means that $k = (\omega,0,0,k)$.  By then adopting the
 TT gauge there are only two unique components to the metric such that the
 perturbation is
@@ -197,26 +183,19 @@ h_{\mu \nu} = \left(
 e^{i(kt - wt)}.
 \end{equation}
 The two unique components are then the two polarisations of gravitational
-waves, $h_{+}$ and $h_{\times}$.  The affect~\chris{careful with your affects
-and effects. This one is wrong.} of each of the polarisations on a
-ring of test particles~\chris{say more! This is your best opportunity to
-express what GWs actually do. What are test particles? What does the diagram
-actually show?} can be seen in Fig.~\ref{gw:polarisations} where the
-gravitational wave is travelling out of the page.~\chris{think about having
-paragraphs even when you;re going through the maths. There is currently 1
-single paragraph in section 1.1}
-
+waves, $h_{+}$ and $h_{\times}$. The effect of each of the polarisations can be seen when acting on a ring of independent test masses shown in Fig.~\ref{gw:polarisations}, where in this example the \gls{GW} is travelling out of the page along the $z$ axis.
+From Eq.~\ref{intro:gw:gravwave} one can see that the $h_{+}$ component causes space-time to be stretched in the $x$ axis and compressed in the $y$ axis before returning to normal then stretching in the $y$ axis and compressing in the $x$ axis. This can be seen as the test masses being distorted into an ellipse with the semi-major axis along the $x$ or $y$ axis.
+The cross polarisation has a similar affect to the plus polarisation but is rotated 45 degrees.
+%
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{C1_intro/polarisation_ring.pdf}
- \caption[Plus and Cross polarisations]{Shows~\chris{what shows? Don't trim
-down sentences like this - Diagrams showing ...} how the plus and cross
+ \caption[Plus and Cross polarisations]{These diagrams show how the plus and cross
 polarisations affect a ring of test particles. This assumes
-the~\chris{gravitational?} wave is travelling out of the page and the effects
+the \gls{GW} is travelling out of the page, where the effects
 have been greatly exaggerated. This also shows an example of how this
-effects~\chris{affects} the test masses of an interferometer.  This will be
-described in more detail in Sec.~\ref{intro:detector}~\chris{yes, but more
-description - if not here then definitely in the text}.}
+affects the test masses of an interferometer. This will be
+described in more detail in Sec.~\ref{intro:detector}.}
 \label{gw:polarisations}
 \end{figure}
 
@@ -224,31 +203,18 @@ description - if not here then definitely in the text}.}
 
 \subsubsection{Generating gravitational waves}
 
-To generate gravitational waves~\chris{I won't mention it again but use your
-acronyms or remove your acronyms} we go back to Eq.~\ref{intro:lineinstein}
-where we include the stress-energy term on the right hand side.~\chris{but we
-haven't returned to the RHS yet - at least that is not clear at this point}
-Following the derivation in \citep{flanagan2005BasicsGravitational}, one can
-find that the gravitational wave amplitude~\chris{what is the GW amplitude? How
-is it related to $h_{\mu\nu}$?} is related to the second moment of the mass
-distribution.  The second moment of the mass distribution~\chris{clunky double
-use of 2nd moment of the ...} $I_{\mu\nu}$is defined as
+To generate \gls{GW} we can follow the derivation in \citep{flanagan2005BasicsGravitational}, where one can solve Eq.~\ref{intro:lineinstein} to find the \gls{GW} perturbation $h_{\mu \nu}$.
+The result of this is that $h+{\mu \nu}$ is related to the second moment of the mass distribution by
+\begin{equation}
+    \label{intro:gravwave:amp}
+        h_{\mu \nu} = \frac{2}{r}  \frac{d^2}{dt^2} I_{\mu \nu}(t-r),
+\end{equation}
+where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} and $I_{\mu \nu}$ is the second moment of the mass distribution defined by 
 \begin{equation}
     I_{\mu \nu}(t) = \int \rho(t,{\bf x}) x^\mu x^\nu d^3x,
 \end{equation}
-where $\rho$ is the mass density, and $x_i$ and $x_j$ are the
-coordinates~\chris{the coordinates ahve already been
-defined}~\citep{flanagan2005BasicsGravitational}.  This is the quadrupole
-moment tensor without the trace subtracted~\chris{great! but why is that
-relavent?}. The gravitational wave amplitude is then
-\begin{equation}
-\label{intro:gravwave:amp}
-    h_{\mu \nu} = \frac{2}{r}  \frac{d^2 I_{\mu \nu}(t-r)}{dt^2},
-\end{equation}
-~\chris{please make the fraction look more like a second derivative and not
-just a fraction, i.e. put the $I$ term after the fraction} where $r$ is the
-distance from the source \citep{letiec2016TheoryGravitational}.  This has a
-slight modification in the TT gauge, see
+where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational}.  
+This has a slight modification in the TT gauge, see
 \citep{flanagan2005BasicsGravitational}, however, has the same relationship
 between the mass quadrupole and the \gls{GW} amplitude.  This shows that for
 \gls{GW} to be generated, the second derivative of the mass quadrupole moment
@@ -279,17 +245,11 @@ momement (or higher order).}
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
 
-There are many potential sources for \gls{GW}.~\chris{why such a short
-sentence? Join it onto the next one.} The expected sources can be split into 3
-general categories based on their signal type: Transient, Stochastic and
+There are many potential sources for \gls{GW}, which can be split into 3
+general categories based on their signal type: \gls{CBC}, Burst, Stochastic and
 \glspl{CW}.  These categories are chosen based on the length of the signal and
 how well modelled the signal is.  Figure \ref{intro:sources:signaltypes} shows
-an example of each of the signals and their category.~\chris{I'm a bit
-confused. We've got 3 categories (transient, stochastic and CWs) but we also
-have 2 types (short and long) but we also have 2 orthogonal types (modelled and
-un-modelled). Just to add to this, the LVC has always had 4 groups (CW, CBC,
-burst, stochastic). I like your diagram but I don't like the statrement that
-their are 3 categories.}
+an example of each of the signals and their category.
 %
 \begin{figure}[h]
     \centering
@@ -310,30 +270,14 @@ typically being weaker amplitude)}}
 \end{figure}
 
 In the sections that follow, I will give an overview of the potential sources
-of each of these signal categories and their wave-forms~\chris{decide on
-waveform or wave-form. Be consistent.}.
+of each of these signal categories and their waveforms.
 
 
-%%%%%%%%%%%%%%%
-\subsection{\label{sources:transient}Transient}
-%%%%%%%%%%%%%%%
+\subsection{\label{sources:transient:cbc}Compact Binary Coalescence}
 
-Transient sources of \glspl{GW} are short duration signals which are, depending
-on the source, observable from milliseconds to tens of seconds in current
-ground based detectors frequency band.  Some of these sources, particularly
-\gls{CBC} sources, will emit signals for a much longer time, however these are
-at a lower frequency and not observable by current ground based detectors
-detectors~\chris{The BNS detection 170817 was in our detcetors band for ~100
-seconds so you should correct you statements here.}. Transient signals can be
-further split into two categories based on how well they are modelled.
-\glspl{CBC} have well modelled wave-forms and bursts are generally from
-un-modelled or unknown sources.
-
-\subsubsection{\label{sources:transient:cbc}Compact Binary Coalescence}
-
-\glspl{CBC} originate from the in-spiral and merger~\chris{and ring-down} of
+\glspl{CBC} originate from the in-spiral, merger and ring-down of
 two compact objects which are gravitationally bound.  The objects inspiral as
-they lost~\chris{grammar} energy to~\chris{through?} the radiation of
+they lose energy through the radiation of
 gravitational waves.  Dependent on the masses and distances of the two objects,
 the gravitational waves generated by the system can be detected by ground based
 detector such as \gls{LIGO} \citep{aasi2015AdvancedLIGO} and Virgo
@@ -408,10 +352,10 @@ point is why do you only mention one of them?}
 
 
 %%%%%%%%%%%%%%
-\subsubsection{\label{sources:transient:burst}Burst}
+\subsection{\label{sources:transient:burst}Burst}
 %%%%%%%%%%%%%%%%%
 
-Burst sources are also short duration however, ~\chris{they?} are un-modelled or
+Burst sources are also short duration however, they are un-modelled or
 difficult to model, in the sense that the exact waveform of the signal is
 unknown.  There are two possible reasons for the lack in knowledge of the
 waveform: the physics of the system is too complicated to model in a reasonable

@@ -53,14 +53,15 @@ These are defined by
 The plus and cross polarised components then depend on the \gls{GW} amplitude $h_0$, the inclination angle of the source $\iota$ and the phase evolution of the \gls{GW}. Here I have chosen to assume a small wobble angle $\theta$, however, this is included in \citep{schutz1998DataAnalysis}. The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \gls{SSB} can be defined as
 \begin{equation}
 \label{searchcw:model:phase}
-    \Phi(t_{{\rm SSB}}) = \phi_0 + 2\pi\left[ f(t_{{\rm SSB}} - t_0) + \frac{1}{2} \dot{f} (t_{{\rm SSB}} - t_0)^2 + .....\right] .
+    \Phi(t_{{\rm SSB}}) = \phi_0 + 2\pi\left[ f_0(t_{{\rm SSB}} - t_0) + \frac{1}{2} \dot{f_0} (t_{{\rm SSB}} - t_0)^2 + .....\right] .
 \end{equation}
-This consists of an initial phase $\phi_0$ which is the phase at time $t_0$, the frequency of the signal $f$ and its derivative ${\dot{f}}$ at time $t_0$. Here we show the phase to second order, however, this can be easily extended if necessary. 
+This consists of an initial phase $\phi_0$ which is the phase at time $t_0$, the frequency of the signal $f_0$ and its derivative ${\dot{f}}$ measured at time $t_0$. Here we show the phase to second order, however, this can be easily extended if necessary. 
 The time at the \gls{SSB} $t_{{\rm SSB}}$ can be transformed to the time $t$ at the detector by
 \begin{equation}
-t_{{\rm SSB}} = t - \frac{\mathbf{r}_d \cdot \mathbf{k}}{c} + \delta_t.
+	\label{searchcw:model:ssbtime}
+t_{{\rm SSB}} = t + \frac{\mathbf{r}_d \cdot \mathbf{n}}{c} + \delta_t.
 \end{equation}
-Here $\mathbf{r}_d$ is the position of the detector with reference to the \gls{SSB}, $\mathbf{k}$ is a unit vector in the direction of the source. This essentially takes into account the Doppler shift of the signal due to the movement of the detector, i.e. as the earth rotates and orbits the sun. $c$ is the speed of light and $\delta t$ is extra corrections from the Einstein, Binary and Shapiro delay \citep{}.
+Here $\mathbf{r}_d$ is the position of the detector with reference to the \gls{SSB}, $\mathbf{n}$ is a unit vector in the direction of the source. This essentially takes into account the Doppler shift of the signal due to the movement of the detector, i.e. as the earth rotates and orbits the sun. $c$ is the speed of light and $\delta t$ is extra corrections from the Einstein, Binary and Shapiro delay \citep{}.
 The amplitudes $h_0$ in Eq.~\ref{intro:cw:amplitudes} are defined by
 \begin{equation}
     h_0 = \frac{16 \pi^2 G}{c^4} \frac{\epsilon I f^2}{r},

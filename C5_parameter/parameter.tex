@@ -4,51 +4,165 @@
 %%%%%%%%%%%%
 %%%%%
 
+Throughout Sec.~\ref{soap} and \ref{machine} we developed techniques which could identify whether a potential signal is present within a small frequency band ($0.1 Hz$) and return the most likely frequency track if the signal in that band.
+This is useful information for all-sky searches as it can limit the parameter space for deeper searches such as those described in Sec.~\ref{searchcw:search:targeted}. 
+However, this only limits the parameters space to a smaller frequency band, and potentially the frequency and derivative if we used the Viterbi track information.
+This still leaves a large parameter space which a more sensitive method would have to search through.
+In particular the sky position of the source has to be sampled finely as \gls{LIGO} can accurately localise a \gls{CW} source.
+This is because the source is observed at multiple positions as the earth orbits sun, giving an effective aperture of the earth's orbital radius.
+The SOAP search would therefore benefit if it could provide more information on the astrophysical source.
 
-\begin{itemize}
-    \item Introduce why parameter estimation is useful, why why current search does not
-    \item sky position cand narrow targeted searches to search over narrower parameter space
-    \item the sky position $\alpha, \delta$ for a \gls{CW} is a function of the frequency evolution of the source
-    \item SOAP return a frequency track which give parameters for the sky position
-    \item this is currently limited to search for isolated neutrons stars
+In this chapter I will outline a Bayesian method which uses the output Viterbi tracks of the SOAP search in Sec.~\ref{soap} to return some astrophysical parameters of a source.
+Sec.~\ref{par_est:freq} will outline the model of the frequency evolution of a \gls{CW} from a source with a slowly varying frequency,
+Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and Sec.~\ref{par_est:results} will show the results from testing on simulated signals.
 
-\end{itemize}
+%%%%
+%%%%
+\section{\label{par_est:freq}Pulsar frequency evolution}
+%%%%
+%%%%
 
-\section{Bayesian Model}
+The SOAP search returns a Viterbi track, where if this track follows the frequency of a pulsar signal, frequency evolution contains information of the sky position ($\alpha, \delta$) and the frequency of the source $f$ and its derivative $\dot{f}$ where we ignore higher order frequency derivatives.
+From the Viterbi track, we should then be able to extract this information as we have a model for the phase evolution (and therefore frequency evolution) of the source described in Eq.~\ref{searchcw:model:phase} in Sec.~\ref{searchcw:model}.
+To relate this phase evolution to the sky position parameters, we can look closer at Eq.~\ref{searchcw:model:ssbtime}, where we describe the shift in arrival time due to the earths motion. 
 
-\begin{itemize}
-    \item Viterbi tracks contain information of the frequency evolution of a potential signal.
-    \item A \gls{GW} from an isolated neutron star follows the equations in \ref{}, where we are interested here in the parameters which govern the frequency evolution.
-    \item these are the initial frequency $f_0$ and its derivatives $\dot{f}$ and the sky position parameter $\alpha$ and $\delta$.
-    \item we can easily define a frequency evolution from this set of parameters by Equation ...... 
-\end{itemize}
+The second term in Eq.~\ref{searchcw:model:ssbtime} describes the Doppler shift due to the earth's orbit and rotation.
+Where the $\bm{r}$ is the position of the detector and $\bm{n}$ is a unit vector in the direction of the source. 
+As in \citep{schutz1998DataAnalysis}, we use the coordinate frame in the \gls{SSB} where the $z$ axis is perpendicular to the ecliptic and the $x$ axis is parallel to the celestial sphere.
+In this frame the unit vector pointing towards the star can be written as 
+\begin{equation}
+    \label{par_est:freq:unit}
+    \bm{n} = 
+    \left(
+    \begin{matrix}
+        1 & 0 & 0  \\
+        0 & \cos \epsilon & \sin \epsilon \\
+        0 & -\sin \epsilon & \cos \epsilon \\
+    \end{matrix} \right)
+    \left(
+    \begin{matrix}
+        \cos(\alpha)\cos(\delta)  \\
+        \sin(\alpha)\cos(\delta) \\
+        \sin(\delta) \\
+    \end{matrix} \right),
+\end{equation}
+where $\alpha$ and $\delta$ are the right ascension and declination (sky position) of the source and $\epsilon$ is the angle between the ecliptic and the earth's equator.
+The first matrix in Eq.~\ref{par_est:freq:unit} describes a rotation from the \joe{earths} frame where $\alpha$ and $\delta$ are measured to the \gls{SSB} frame. 
+The second matrix transforms the sky position parameters to their component $x,y,z$ coordinates.
 
-\subsection{Prior}
+The position vector of the earth at a time $t$, $\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, can split into the addition of two components, the position due to the orbit of the earth and position due to the rotation of the earth.
+The position of the earth in its orbit is described in cartesian coordinates as
+\begin{equation}
+    \bm{r}_{orb} = R_{\mathrm{O}}
+    \left(
+    \begin{matrix}
+        \cos{\left( \Omega_{\mathrm{O}} t + \phi_{\omega){O}}  \right)}  \\
+        \sin{\left( \Omega_{\mathrm{O}} t + \phi_{\omega){O}}  \right)} \\
+        0 \\
+    \end{matrix} \right),
+\end{equation}
+where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU), $\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit $2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{\omega){O}}$ is some phase which defines the position of the earth in its orbital motion.
+The position due to the rotation of the earth can then be described by 
+\begin{equation}
+    \bm{r}_{rot} = R_{\mathrm{R}}
+    \left(
+    \begin{matrix}
+        1 & 0 & 0  \\
+        0 & \cos \epsilon & \sin \epsilon \\
+        0 & -\sin \epsilon & \cos \epsilon \\
+    \end{matrix} \right)
+    \left(
+    \begin{matrix}
+        \cos{(\lambda)}\cos{\left( \Omega_{\mathrm{R}} t + \phi_{\omega){R}}  \right)}  \\
+        \cos{(\lambda)}\sin{\left( \Omega_{\mathrm{R}} t + \phi_{\omega){R}}  \right)} \\
+        \sin{(\lambda)} \\
+    \end{matrix} \right),
+\end{equation}
+where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where $T_{\mathrm{R}}$ is one day, $\phi_{\omega){O}}$ is some phase which defines the position of the earth in its rotational motion and $\lambda$ is the latitude of the detectors site.
+These two components can then be added to find the location of the detector in the \gls{SSB} frame
+\begin{equation}
+    \bm{r} = \bm{r}_{orb} + \bm{r}_{rot}.
+\end{equation}
 
-\begin{itemize}
-    \item Use a flat prior in parameter space in $\sin{\delta},\alpha$, where delta ranges between .....etc 
-\end{itemize}
+We can now describe the phase evolution of the signal at the detectors site from just the sky position ($\alpha, \delta$) and frequency and its derivative $f,\dot{f}$. 
+The frequency of a pulsars signal at any point on the frequency track is then defined by the derivative of the phase with respect to time
+\begin{equation}
+    f = \frac{d\Phi}{dt}, 
+\end{equation}
+where $\Phi$ is defined in Eq.~\ref{searchcw:model:phase}.
+\joe{maybe add the actual frequency evolution equation}
 
+%
+%
+\section{\label{par_est:bayes}Bayesian Model}
+%
+%
 
-\subsection{Likelihood}
+As described in Sec.~\ref{par_est:freq} we have a model of a pulsars frequency evolution and we have our Viterbi track which is our observation of a frequency track.
+We would now like to estimate the parameters $\bm{\theta} = \left\{\alpha, \delta, f, \dot{f} \right\}$ of a pulsar given that we have observed the frequency track $\bm{V}$.
+To do this we use a Bayesian model, where the idea was introduced in Sec.~\ref{intro:prob:bayes}, where we rewrite Bayes formula in terms of this problem
+\begin{equation}
+    \label{par_est:bayes:eqn}
+    p(\bm{\theta} \mid \bm{V}, I) = \frac{p(\bm{\theta}) p(\bm{V} \mid \bm{\theta}, I)}{p(\bm{V} \mid I)}
+\end{equation}
+where $p(\bm{\theta} \mid \bm{V}, I)$ is the posterior which we are interested in, $p(\bm{\theta})$ is the prior, $p(\bm{V} \mid \bm{\theta}, I)$ is the likelihood and $\bm{V} \mid I)$ is the evidence.
+The following sections will describe how we set up the prior and likelihood for this problem.
 
-\begin{itemize}
+%
+%
+\subsection{\label{par_est:bayes:likelihood}Likelihood}
+%
+%
+
+The likelihood describes how the noise of the data is distributed, i.e. if we subtracted the model frequency track from our observed frequency track, what is the distribution of these values.
+If the simulated pulsar signal has an infinitely large \gls{SNR} then the Viterbi track would follow the pulsars frequency track exactly, which would leave a noise distribution of 0 with no variance. 
+If conversely, the \gls{SNR} was zero then the Viterbi track would wander randomly through the frequency band and the noise would have a large variance in frequency.
+The noise distribution of a Viterbi track, is then dependent on the \gls{SNR} if the signal within the band.
+As the distribution of the noise is unknown analytically, we calculate it empirically using many simulated signals.
+
+In Sec.~\ref{soap:results} we generated $\mathcal{O}(10^{4})$ simulated signal which, amongst other quantities, saved the Viterbi track, the simulated pulsar frequency track and the signals \gls{SNR}, $\rho$.
+These simulations had \glspl{SNR} between 50 and 150, \joe{might update to 20-200}.
+We can estimate the noise distribution by taking the \gls{KDE} of the differences between the Viterbi and pulsar frequency tracks for all simulations in a given \gls{SNR} range.
+We split the likelihood into 90 discrete bins, each of which are \gls{SNR} 2 wide, where this ranges from \gls{SNR} 20 to 200.
+Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a subset of the likelihood bins. 
+The sharp peaks in the center of each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents simulations where the Viterbi track is close to the simulated pulsar track, and the broader distributions represent areas of the Viterbi track has not identified the pulsar track but is wandering randomly.
+The sub plots in Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases the distribution is more closely centred around 0, i.e. the Viterbi and pulsar tracks are similar, which is expected.
+%
+\begin{figure}[ht]
+
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/KDE_range_50_100.pdf}
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows the \gls{KDE} estimates of the probability density of the differences between the simulated (injected) pulsar frequency track and the recovered Viterbi track for a number of \gls{SNR} ranges. The difference in the tracks is measured in discrete frequency bins. Each \gls{KDE} is generated from $\sim 300$ simulations which each have $\sim 400$ elements in their frequency tracks. This shows a subset of the binned likelihoods between the range of \gls{SNR} 50 and 150.}
+    \label{par_est:bayes:likelihood:kde142}
     
-    \item we then have a Viterbi track which was identified in the data and a frequncy track which can be easily generated by a model.
-    \item To the estimate the parameter for the Viterbi track, we need to define a likelihood function.
-    \item item looking at the Viterbi tracks, their noise is highly dependent on the \gls{SNR} of the signal
-    \item given that this is not an analytically defined distribution, we cna define it empirically
-\end{itemize}
+    \end{figure}
+%
+
+This does introduce one more parameter to search over in out Bayesian model, which is the \gls{SNR} ($\rho$) of the signal.
+These \glspl{KDE} are the used as the likelihood function $p(\bm{V} \mid \bm{\theta}, I)$ in the Bayesian model in Eq.~\ref{par_est:bayes:eqn}, where we not have five parameters $\bm{\theta} = \left\{\alpha, \delta, f, \dot{f} , \rho \right\}$.
 
 
-\subsection{Nested sampling}
+%
+\subsection{Prior}
+%
+We set up a simple prior which does not assume much about the parameters, other than limits on their range. 
+We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through and a flat prior in the frequency derivative in the range $[-1\cdot 10^{9},1\cdot 10^{9}]$.
+The prior for $\rho$ is also flat in the range $[50,200]$.
 
-\begin{itemize}
-    \item Estimates Evidence .....
-\end{itemize}
-
-
+%%%%
+%%%%
 \section{Results}
+%%%%
+%%%%
+
+For the tests of this method, we generate a pulsar signal in a spectrogram and run the SOAP search as in Sec.~\ref{soap:results} and \ref{machine:results}.
+In each of these we record the simulated pulsar frequency track, the Viterbi track and the pulsar signal parameters $\alpha, \delta, f, \dot{f} , \rho$.
+
+To test this method, we initially generated a spectrogram simulated pulsars frequency track with the exact same recovered Viterbi track. This is then the best possible result which the method could return.
+
+
+
+
 Tested on a number of signals to see what we could recover, 
 plots of sky positions compared to injected signals, 
 Gaussian noise etc...
