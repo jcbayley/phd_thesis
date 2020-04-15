@@ -567,15 +567,16 @@ field, thereby causing a hot spot \citep{haskell2015DetectingGravitational}.
 This `hot spot' could cause a deformation on the surface of the star which is
 not axisymmetric.  The magnetic stresses from strong magnetic fields within the
 star, could potentially also cause non axisymmetric deformations to the star
-\citep{}.  Finally the spin down of the pulsar itself could cause stresses in
-the crust of the star until the point of breaking, its then after this break
-which could leave a distortion in the crust \citep{becker2009NeutronStars}.
-More details on the signal waveform of this type of \gls{GW} and methods to
-search for it will be explained in Sec.~\ref{searchcw}.
+\citep{}~\chris{fix reference - I think Cutler had a paper on this}. Finally
+the spin down of the pulsar itself could cause stresses in the crust of the
+star until the point of breaking, its then after this break which could leave a
+distortion in the crust \citep{becker2009NeutronStars}~\chris{grammar is a bit
+dodgy here}.  More details on the signal waveform of this type of \gls{GW} and
+methods to search for it will be explained in Sec.~\ref{searchcw}.
  
- %%%%%%%%%%%%%%
- \subsubsection{Neutron star oscillations}
- %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\subsubsection{Neutron star oscillations}
+%%%%%%%%%%%%%%%
 There are a number of oscillation modes within a star such as f-modes, p-modes
 and r-modes \citep{becker2009NeutronStars}.  These are similar to oscillations
 in the earth which are measured in terrestrial seismology.  The difference
@@ -583,13 +584,16 @@ between these modes is the restoring force bringing the perturbed state back to
 equilibrium.  For example, gravity is the restoring force for f-modes where the
 oscillations happen in the crust of the star.  The more promising of these for
 gravitational wave emission and detection is the r-mode
-\citep{lasky2015GravitationalWaves}.  These are oscillations in the neutron
-superfluid part of the star, where the restoring force is the Coriolis effect
-from the rotation of the star.  These modes can become unstable to \gls{GW}
-emission in rapidly rotating neutron stars \citep{lasky2015GravitationalWaves},
-making them most likely for a detection.  For more details on this mechanism
-see
-\citep{lasky2015GravitationalWaves,owen1998GravitationalWaves,jonesCFSInstability}.
+\citep{lasky2015GravitationalWaves}~\chris{this reference is to a review bit
+there are potentially better dedicated r-mode references you could use.}.
+These are oscillations in the neutron superfluid part of the star, where the
+restoring force is the Coriolis effect from the rotation of the star.  These
+modes can become unstable to \gls{GW} emission in rapidly rotating neutron
+stars \citep{lasky2015GravitationalWaves}, making them most likely for a
+detection.  For more details on this mechanism see
+\citep{lasky2015GravitationalWaves,owen1998GravitationalWaves,jonesCFSInstability}.~\chris{You
+have a bunch of text that you've removed that discusses r-modes. My initial
+feeling is that you should add more explanation to this existing paragraph.}
 
 %%
 %% IM REMOVING THIS AS PROBABLY CAN'T ANSWER MANY QUESTIONS ON IT
@@ -632,18 +636,50 @@ For a more detailed view on how r-modes generate \gls{GW} see \citep{owen1998Gra
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 
-The indirect detection of gravitational waves from the Hulse-Taylor binary pulsar system left little doubt that \gls{GW} existed. 
-The real challenge was to design an instrument which could directly detect gravitational waves.
-There were a number of different proposed methods for the design of the instrument, notably: resonant bar detectors, both ground based and space based interferometers, pulsar timing arrays and cosmic microwave background (CMB) detectors. 
-The first resonant bar detector was designed and built by Joseph Weber \citep{weber1966ObservationThermal}. 
-These are large cylinders of metal which should resonate as a gravitational wave passes by. 
-There are a few different designs of this type of detector, including an omni-directional design \citep{dewaard2003MiniGRAILFirst}. 
-Pulsar timing arrays aim to use the accurate arrival time of pulses from millisecond pulsars to measure \gls{GW} \citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and the observer, the arrival time of the pulses should change by $\mathcal{O}(10)$ ns \citep{hobbs2017GravitationalWave}. 
-Whilst a detection has not been made using pulsar timing arrays, these methods are still in use.
-Cosmic microwave background detectors aimed to look for evidence of gravitational waves in the polarisations of the CMB \citep{ade2018ConstraintsPrimordial}.  
-These use the a range of detectors to look at the CMB however, are yet to confirm a detection of a \gls{GW} signal.
-The most commonly known design of a \gls{GW} detector is the ground based interferometer, these made the first detection of \gls{GW} in 2015 \citep{abbott2016ObservationGravitational}. 
-These are the focus of this section as the analysis that will follow uses data from the \gls{LIGO} detectors in the USA \citep{abbott2009LIGOLaser,aasi2015AdvancedLIGO} and Virgo detector in Italy \citep{acernese2015AdvancedVirgo,acernese2008StatusVirgo}. 
+The indirect detection of gravitational waves from the Hulse-Taylor binary
+pulsar system~\chris{add ref} left little doubt that \gls{GW} existed.  The
+real challenge was to design an instrument which could directly detect
+gravitational waves.  There were~\chris{you use "were" but I think "are" is
+better since some of these don't yet exist} a number of different proposed
+methods for the design of the instrument, notably: resonant bar detectors, both
+ground based and space based interferometers, pulsar timing arrays~\chris{PTAs
+are not really a designed instrument} and cosmic microwave background (CMB)
+detectors. The first resonant bar detector was designed and built by Joseph
+Weber \citep{weber1966ObservationThermal}.  These are large cylinders of metal
+which should~\chris{I wouldn't use words like "should" in this context}
+resonate as a gravitational wave passes by.  There are a few different designs
+of this type of detector, including an omni-directional design
+\citep{dewaard2003MiniGRAILFirst}~\chris{another series of short sharp
+sentences}. Pulsar timing arrays aim to use the accurate arrival time of pulses
+from millisecond pulsars to measure \gls{GW}
+\citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and
+the observer, the arrival time of the pulses should~\chris{again, better to use
+"will"} change by $\mathcal{O}(10)$ ns
+\citep{hobbs2017GravitationalWave}~\chris{too vague a description - why 10ns?
+What is the GW source? What if it's further away? Do you still get 10ns?  The
+answer is the astrophsyical stochastic background at nanohertz frequencies from
+the universes population of super massive black hole binaries. }.  Whilst a
+detection has not been made using pulsar timing arrays, these methods are still
+in use~\chris{strange way to say that people are still searching}.  Cosmic
+microwave background detectors aimed to look~\chris{grammar - detectors don't
+look at anything, they detect. In this case they detect the CMB and scientists
+then analyse the data for evidence of B-mode polarisation} for evidence of
+gravitational waves in the polarisations of the CMB
+\citep{ade2018ConstraintsPrimordial}.  These use the a~\chris{grammar} range of
+detectors to look at the CMB~\chris{define the CMB acronym} however, are yet to
+confirm a detection of a \gls{GW} signal.  The most commonly known
+design~\chris{they're not really common are they. There are 5 in the world.
+Really, the thing to point out is that bar detectors are old technology and
+IFOs are the current best known experiment for ground and space based "direct"
+detection.} of a \gls{GW} detector is the ground based interferometer, these
+made the first detection of \gls{GW} in 2015
+\citep{abbott2016ObservationGravitational}.  These are the focus of this
+section as the analysis that will follow uses data from the \gls{LIGO}
+detectors in the USA \citep{abbott2009LIGOLaser,aasi2015AdvancedLIGO} and Virgo
+detector in Italy
+\citep{acernese2015AdvancedVirgo,acernese2008StatusVirgo}.~\chris{there are
+potentially 3 or 4 paragraphs here if you were to expand on bar detectors, PTAs
+and CMB measurements.} 
 
 %%%%%%%%
 %%%%%%%%%
@@ -651,21 +687,32 @@ These are the focus of this section as the analysis that will follow uses data f
 %%%%%%%%%%
 %%%%%%%%%
 
-Laser interferometers use the interference of light to measure a length with high precision.
-The majority of this section will focus on ground based interferometers such as \gls{LIGO} and Virgo \citep{aasi2015AdvancedLIGO,acernese2015AdvancedVirgo}.
-A simple design of an interferometer is shown in Fig.~\ref{detectors:interferometer:simple}. 
-A laser beam is fired at a beam splitter which splits the light equally down two perpendicular arms. 
-Each of these beams is reflected from a mirror at the end of either arm.
-The light then returns to the beam splitter where the two beams are combined and sent to a photo-detector.
-At the output, there is an interference pattern between the two beams.
-If the length of one of the arms is changed then the interference pattern will change as the phase of one beam changes with respect to the other.
-The phase difference of the light can be related to the wavelength of the light, $\lambda_l$ and the length of the detectors arms $L$ by
+Laser interferometers use the interference of light to measure a
+length~\chris{change (IMPORTANT)} with high precision.  The majority of this
+section will focus on ground based interferometers such as \gls{LIGO} and Virgo
+\citep{aasi2015AdvancedLIGO,acernese2015AdvancedVirgo}.  A simple design of an
+interferometer is shown in Fig.~\ref{detectors:interferometer:simple}.  A laser
+beam is fired at a beam splitter which splits the light equally down two
+perpendicular arms.  Each of these beams is reflected from a mirror at the end
+of either arm.  The light then returns to the beam splitter where the two beams
+are combined and sent to a photo-detector.  At the output, there is an
+interference pattern between the two beams.  If the length of one of the arms
+is changed then the interference pattern will change as the phase of one beam
+changes with respect to the other.  The phase difference of the light can be
+related to the wavelength of the light, $\lambda_l$ and the length of the
+detectors arms $L$ by~\chris{OK, but still a lot of short sharp sentences here}
+%
 \begin{equation}
 \label{intro:detectors:phasechange}
 \Delta \phi \sim \frac{\Delta L}{\lambda_l},
 \end{equation}
-where $\Delta  \phi$ is the phase change and $\Delta L$ is the difference in the arm lengths.
+%
+~\chris{in this expression your phase change is a dimensionless fraction of a
+cycle where 1 equals a full cycle. Are you sure that you don't want to be
+talking about radians? In which case you need $2\pi$ on the RHS} where $\Delta
+\phi$ is the phase change and $\Delta L$ is the difference in the arm lengths.
 An interferometer can then measure small changes in the mirrors position.
+
 \begin{figure}[hp]
     \centering
     \begin{subfigure}[h]{0.6\linewidth}
@@ -678,21 +725,38 @@ An interferometer can then measure small changes in the mirrors position.
 		\caption{Fabry-Perot interferometer.}
 		\label{detectors:interferometer:fabry}
 	\end{subfigure}
-    \caption[Basic layout of the \gls{LIGO} detectors.]{\gls{LIGO} uses interferometry to make a detection. This has many additional features, one of which is shown above. ETMY and ETMX refer to the end test masses, which are the mirrors at the end of the interferometer arms. The beam splitter splits the Laser beam equally to each arm, this them recombines the beams back to the detector.
-    ITMY and ITMX refer to the internal test masses, these create a Fabry-Perot cavity in the interferometers arms which can build up laser power. }
-    \label{detectors:interferometer}
+    \caption[Basic layout of the \gls{LIGO} detectors.]{\gls{LIGO} uses
+interferometry to make a detection. This has many additional features, one of
+which is shown above.~\chris{please change the 1st 2 sentences here - they are
+overly simplistci and don't actually make sense.} ETMY and ETMX refer to the
+end test masses, which are the mirrors at the end of the interferometer arms.
+The beam splitter splits the Laser beam equally to each arm, this them
+recombines the beams back to the detector~\chris{you already say this in the
+main text}.  ITMY and ITMX refer to the internal test masses, these create a
+Fabry-Perot cavity in the interferometers arms which can build up laser
+power.~\chris{do you need both diagrams? You only talk about the second one?} }
+\label{detectors:interferometer}
 \end{figure}
+
+This can be used in gravitational wave detection as the mirrors at the end of
+each arm of the interferometer can be treated as `free' test masses.  Figure
+\ref{gw:polarisations} shows the effect of a \gls{GW} on free test masses.  One
+can see this by looking at the proper separation~\chris{best to use the
+standard terminology of "proper distance"} between two test masses.  If we
+place two test masses along the $x$ axis with separation $L_c$ where a
+gravitational wave is travelling along the $z$ axis, the proper distance
+between them is given by
 %
-This can be used in gravitational wave detection as the mirrors at the end of each arm of the interferometer can be treated as `free' test masses.
-Figure \ref{gw:polarisations} shows the effect of a \gls{GW} on free test masses.
-One can see this by looking at the proper separation between two test masses. 
-If we place two test masses along the $x$ axis with separation $L_c$ where a gravitational wave is travelling along the $z$ axis, the proper distance between them is given by
 \begin{equation}
     L = \int_{0}^{L_c} \sqrt{g_{xx}} dx,
 \end{equation}
-where $g_{xx} = 1 + h_{+}(t)$ is the combination of Eq.~\ref{intro:gravwave:metric} and Eq.~\ref{intro:gw:gravwave}. 
-As the metric perturbation is small is can be can be expanded to first order, i.e. $\sqrt{g_{xx}} = \sqrt{1 + h_{+}(t)} \approx 1 + \frac{1}{2}h_{+}(t)$.
-The proper distance is then
+%
+where $g_{xx} = 1 + h_{+}(t)$ is the combination of
+Eq.~\ref{intro:gravwave:metric} and Eq.~\ref{intro:gw:gravwave}.  As the metric
+perturbation is small~\chris{could use the standard mathemtaical notation to
+say that} is can be expanded to first order, i.e.  $\sqrt{g_{xx}} = \sqrt{1 +
+h_{+}(t)} \approx 1 + \frac{1}{2}h_{+}(t)$.  The proper distance is then
+%
 \begin{equation}
     \label{intro:detectors:properdist}
     \begin{split}
@@ -700,28 +764,53 @@ The proper distance is then
       &\approx L_c + L_c \frac{1}{2}h_{+}(t).
     \end{split}
 \end{equation}
-From Eq.~\ref{intro:detectors:properdist} on can see that in this configuration the plus polarisation of the gravitational wave causes the separation between the two test masses to oscillate \citep{flanagan2005BasicsGravitational}.
-This oscillation can then be expressed as a fractional length change 
+%
+~\chris{state the approximation that the wave isn't actually changing as you
+integrate along the arm length - this is the long wavelength approximation -
+i.e. $h(t)$ is basically constant for the laser photon.} From
+Eq.~\ref{intro:detectors:properdist} on can see that in this configuration the
+plus polarisation of the gravitational wave causes the separation between the
+two test masses to oscillate \citep{flanagan2005BasicsGravitational}.  This
+oscillation can then be expressed as a fractional length change
+%
 \begin{equation}
     \label{intro:detectors:fraclength}
     \frac{\delta L}{L} \approx \frac{1}{2} h_{+}.
 \end{equation}
-In the interferometer, this affect changes the lengths of the two arms, which therefore changes $\Delta L$ in Eq.~\ref{intro:detectors:phasechange}.
-The change of the interference pattern with time is then related to the \gls{GW}.
-In practice the position of the two mirrors are held in position such that the interference pattern does not change.
-The \gls{GW} is then related to the readout of the mirrors control system.
+%
+In the interferometer, this affect~\chris{effect} changes the lengths of the
+two arms, which therefore changes $\Delta L$ in
+Eq.~\ref{intro:detectors:phasechange}.  The change of the interference pattern
+with time is then related to the \gls{GW}.  In practice the position of the two
+mirrors are held in position such that the interference pattern does not
+change~\chris{perect opportunity to say that it is held on a dark fringe}.
+The \gls{GW} is then related to~\chris{"related to" is strangley vague} the
+readout of the mirrors control system.
 
-If one looks at Eq.~\ref{intro:detectors:fraclength} then if the mirrors at the end of the arms (ETMX and ETMY) are are placed further from the beam splitter, i.e. $L$ is increased, then the length change of the arms due to the gravitational wave will be greater.  
-This means that increasing the length of the detectors arms increases the sensitivity of the interferometer. 
-A method to achieve a similar affect without physically increasing the arm length is to use a Fabry-Perot cavity \citep{aasi2015AdvancedLIGO}, this is shown in Fig.~\ref{detectors:interferometer:fabry}.
-This is where a semi-transparent mirror is placed between the beam splitter and end mirror in each arm (ITMX and ITMY).
-Light enters this cavity and reflects back and forth between the two mirrors (ITMX and ETMX) a number of times before returning to the beam splitter.
-This increases the time the light spends in one arm and is equivalent to increasing the arm length.
-Actual ground based \gls{GW} detectors such as \gls{LIGO} \citep{abbott2009LIGOLaser} and Virgo \citep{acernese2015AdvancedVirgo} are much more complicated than described above.
-They use many techniques to increase the sensitivity some of which are outlined in \citep{aasi2015AdvancedLIGO,abbott2009LIGOLaser}.
-Many of these techniques are designed to reduce non-astrophysical affects on the detector, some of these effects and solutions are listed in Sec.~\ref{intro:detector:noise}.
-
-
+If one looks at Eq.~\ref{intro:detectors:fraclength} then if the mirrors at the
+end of the arms (ETMX and ETMY~\chris{use the acronym package}) are are placed
+further from the beam splitter, i.e. $L$ is increased, then the length change
+of the arms due to the gravitational wave will be greater.  This means that
+increasing the length of the detectors arms increases the sensitivity of the
+interferometer.  A method to achieve a similar affect without physically
+increasing the arm length is to use a Fabry-Perot cavity
+\citep{aasi2015AdvancedLIGO}, this is shown in
+Fig.~\ref{detectors:interferometer:fabry}.  This is where a semi-transparent
+mirror is placed between the beam splitter and end mirror in each arm (ITMX and
+ITMY~\chris{use the acronym package}).  Light enters this cavity and reflects
+back and forth between the two mirrors (ITMX and ETMX) a number of times before
+returning to the beam splitter.  This increases the time the light spends in
+one arm and is equivalent to increasing the arm length~\chris{even more
+important to mention the long wavelength approximation now}.  Actual ground
+based \gls{GW} detectors such as \gls{LIGO} \citep{abbott2009LIGOLaser} and
+Virgo \citep{acernese2015AdvancedVirgo} are much more complicated than
+described above.  They use many techniques to increase the sensitivity some of
+which are outlined in
+\citep{aasi2015AdvancedLIGO,abbott2009LIGOLaser}~\chris{are you sure you don't
+want to discuss signal and power recycling?}.  Many of these techniques are
+designed to reduce non-astrophysical affects~\chris{effects} on the detector,
+some of these effects and solutions are listed in
+Sec.~\ref{intro:detector:noise}.
 
 %%%%%%%%%%%
 %%%%%%%%%%
@@ -729,18 +818,37 @@ Many of these techniques are designed to reduce non-astrophysical affects on the
 %%%%%%%%%%
 %%%%%%%%%
 
-An important factor to know when using detector data to search for astrophysical signals is the detectors antenna pattern.
-This measures how sensitive the detector is to different directions.
-An example of the antenna response for \gls{LIGO} is in Fig.~\ref{intro:detectors:response} where the detectors arms lie on the x and y axis of the image.
-This is clear when thinking about how a gravitational wave affects the test masses as in Fig.~\ref{gw:polarisations}. 
-As the \gls{GW} is transverse to its propagation, when the detector is face on to the source, there will be a maximum change in the arm lengths and therefore a maximum sensitivity. 
-In the same way the sensitivity will be at a minimum when edge to the source.
+An important factor to know when using detector data to search for
+astrophysical signals is the detectors antenna pattern~\chris{This is not the
+way to introduce fundamental aspects of GW physics. It reads like a safety
+training video "If you're going to work at this Argos then you need to know a
+few things about ladders..." You also need to do more than simply show a few
+plots. Please at least describe how they modify the detector output in terms of
+having plus and cross terms multiplying the plus and cross $h(t)$ components -
+use an equation or 2 (in other words, what is $R^{+,\times}$ in
+Fig.~\ref{intro:detectors:response}. Better still would be a simple derivation.
+Do you have Andersson and Creighton to hand?}. This measures how sensitive the
+detector is to different directions~\chris{and polarisations}. An example of
+the antenna response for \gls{LIGO} is in Fig.~\ref{intro:detectors:response}
+where the detectors arms lie on the x and y axis of the image.  This is clear
+when thinking about how a gravitational wave affects the test masses as in
+Fig.~\ref{gw:polarisations}~\chris{is the average pattern important? Do you
+discuss it?}.  As the \gls{GW} is transverse to its propagation,
+when the detector is face on to the source, there will be a maximum change in
+the arm lengths and therefore a maximum sensitivity.  In the same way the
+sensitivity will be at a minimum when edge to the source.~\chris{this is a good
+start in explaining the plots but please expand. Why are their nulls in cetain
+directions?}
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{C1_intro/LIGO_beam_patterns.png}
-    \caption[Antenna response of the \gls{LIGO} detectors.]{The antenna response is shown as in \citep{romano2019SearchesStochastic} for both the plus and cross polarisations and their average. The detectors arms lie on the x and y axis in the above plots. }
-    \label{intro:detectors:response}
+    \caption[Antenna response of the \gls{LIGO} detectors.]{The antenna
+response is shown as in \citep{romano2019SearchesStochastic} for both the plus
+and cross~\chris{$+$ and $\times$?} polarisations and their average~\chris{why
+is the avergae relavent?}. The detectors arms lie on the x and
+y axis in the above plots~\chris{use mathmode $x$ and $y$ when referring to
+variables}. } \label{intro:detectors:response}
 \end{figure}
 
 %%%%%%%%%%%
@@ -749,30 +857,73 @@ In the same way the sensitivity will be at a minimum when edge to the source.
 %%%%%%%%%%
 %%%%%%%%%%
 
-To increase the sensitivity of the \gls{LIGO} detectors, any effect on the output of the interferometer which is not astrophysical ideally needs to be reduced.
-This involves understanding what causes certain noise features in the detector, and how the affect of these can be limited. 
-Within the detector, there are many sources of noise.
-Some of these noise sources and how they limit the detectors strain sensitivity are all shown in Fig.~\ref{detectors:noisesensitivity} from \citep{aasi2015AdvancedLIGO}.
+To increase the sensitivity of the \gls{LIGO} detectors, any effect on the
+output of the interferometer which is not astrophysical ideally needs to be
+reduced.  This involves understanding what causes certain noise features in the
+detector, and how the affect~\chris{OK, you really need to get the whole
+affect-effect thing sorted out. Affect is the verb "you can affect something"
+and effect is the noun "it had this effect" - get it sorted throughout} of
+these can be limited.  Within the detector, there are many sources of noise.
+Some of these noise sources and how they limit the detectors strain sensitivity
+are all shown in Fig.~\ref{detectors:noisesensitivity} from
+\citep{aasi2015AdvancedLIGO}.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{C1_intro/noise_sensitivity.jpg}
-    \caption[Example strain sensitivity curves for different noise sources in \gls{LIGO}.]{The different noise sources affect the sensitivity of the \gls{LIGO} detectors at different frequencies. This shows the various sources how the affect the noise curve \citep{aasi2015AdvancedLIGO}.}
-    \label{detectors:noisesensitivity}
+    \caption[Example strain sensitivity curves for different noise sources in
+\gls{LIGO}.]{The different noise sources affect the sensitivity of the
+\gls{LIGO} detectors~\chris{LIGO or advanced LIGO?} at different frequencies. This shows the various sources
+how the affect the noise curve~\chris{grammar} \citep{aasi2015AdvancedLIGO}.}
+\label{detectors:noisesensitivity} 
 \end{figure}
-Here I will summarise some of the limiting sources and also sources which become useful for understanding later sections.
+
+Here I will summarise some of the limiting sources and also sources which
+become useful for understanding later sections.
 
 \begin{description}
-\item[Seismic noise] This originates from vibrations in the earth which can be from effects such as the earths seismic activity or anthropogenic sources. This affects lower lower frequencies of \glspl{LIGO} spectrum. This can be oscillations such as earthquakes or ocean waves. Seismic waves cause the mirrors to oscillate and induce a change in the length of the arm. This is reduced by having multi stage suspensions in the detectors which filter out the seismic oscillations \citep{matichard2015SeismicIsolation}.
+\item[Seismic noise] This originates from vibrations in the earth~\chris{when
+referring to the planet Earth it should be capitalised - if talking about dirt
+then it shouldn't.} which can be from effects such as the earths seismic
+activity or anthropogenic sources. This affects lower~\chris{what is lower in
+this context?} frequencies of \glspl{LIGO} spectrum. This can be oscillations
+such as earthquakes or ocean waves. Seismic waves cause the mirrors to
+oscillate~\chris{you make it sound like earthquakes don't?} and induce a change
+in the length of the arm. This is reduced by having multi-stage suspensions in
+the detectors which filter out the seismic oscillations
+\citep{matichard2015SeismicIsolation}.
 
-\item[Coating noise] This is in general due to two main factors, the thermal noise of the coating and Brownian noise. The Brownian noise is from the mechanical dissipation in the coating and the thermal noise is due to thermal dissipation. The Brownian noise is the dominant factor as shown in Fig.~\ref{detectors:noisesensitivity}. These effects are limited by using different coatings on the mirrors \citep{abernathy0OverviewResearch}.
+\item[Coating noise] This is in general due to two main factors, the thermal
+noise of the coating and Brownian noise. The Brownian noise is from the
+mechanical dissipation in the coating and the thermal noise is due to thermal
+dissipation. The Brownian noise is the dominant factor as shown in
+Fig.~\ref{detectors:noisesensitivity}. These effects are limited by using
+different coatings on the mirrors \citep{abernathy0OverviewResearch}.
 
-\item[Quantum noise] Quantum noise is a fundamental limit due to the statistical uncertainty of counting photons. This limits the sensitivity at many frequencies.There are methods to reduce this include squeezing of the light \citep{aasi2013EnhancedSensitivity}. 
+\item[Quantum noise] Quantum noise is a fundamental limit due to the
+statistical uncertainty of counting photons~\chris{when do we count photons?}.
+This limits the sensitivity at many frequencies. There are methods to reduce
+this include squeezing of the light \citep{aasi2013EnhancedSensitivity}. 
 
-\item[Electronics noise \joe{technical noise maybe}] Whilst this is not shown in Fig.~\ref{detectors:noisesensitivity}, this becomes important to searches described later. These have a different effect on the detector which is more narrowband frequency lines. This is generated by the digital and analogue electronics that are used to measure the signal. 
+\item[Electronics noise \joe{technical noise maybe}] Whilst this is not shown
+in Fig.~\ref{detectors:noisesensitivity}, this becomes important to searches
+described later. These have a different effect on the detector which is more
+narrowband frequency lines~\chris{grammar}. This is generated by the digital and analogue
+electronics that are used to measure the signal~\chris{and control the complex
+detcetor system}.  
 \end{description}
 
-There are also many other sources of noise in the detector which I have not listed. However, these are often not the limiting cases of noise or are not relevant to this thesis.
-In Sec.~\ref{detchar} I will go into more detail about specific noise sources in the detector known as instrumental lines and how they can be monitored and potentially removed. 
+There are also many other sources of noise in the detector which I have not
+listed. However, these are often not the limiting cases of noise or are not
+relevant to this thesis.  In Sec.~\ref{detchar} I will go into more detail
+about specific noise sources in the detector known as instrumental lines and
+how they can be monitored and potentially removed.~\chris{my general feeling
+abou this detector section is that unlike a purely astrophsyically focussed
+thesis you have more of a responsibility to understand the detector and the
+noise sources. Since you have a dedicated chapter on detchar you are riding the
+line between data analysis and experiment. I would recommend some expansion on
+the topics that you mention in passing, e.g. boost the discussio nof noise
+sources} 
 
 
 
