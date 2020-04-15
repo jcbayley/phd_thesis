@@ -475,143 +475,126 @@ This then allows us to sum the \glspl{SFT} over one day, i.e. as we have 1800\,s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\label{soap:las}Line-aware statistic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% what is the line aware statistic
-%
-The multiple-detector algorithm described in Sec.~\ref{soap:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \gls{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
+
 
 %
-% More detail on what this is applied to
+% what is the single detector line aware statistic
 %
-For most of the analysis examples presented here we use data which is the incoherent sum of 30-minute normalised \glspl{SFT} over a day (described in more detail in Sec.~\ref{soap:sumdata}). As a result the effects of the detector antenna patterns and of differential Doppler shifts are significantly reduced, and any signal should have a broadly similar summed log-likelihood in the same frequency bin in each detector. The statistic can then be modified such that we expect a similar log-likelihood in each detector.
+The single-detector algorithm described in Sec.~\ref{soap:single} returns the most probable track of the loudest signal assumed to be in Gaussian noise. However, an astrophysical signal is not expected to have an amplitude which is orders of magnitude above the noise floor, but have an amplitude more similar to the noise. Therefore, a signal with a large amplitude is more likely to be of instrumental origin rather than astrophysical \citep{coughlin2010NoiseLine,aasi2015CharacterizationLIGO,covas2018IdentificationMitigation}.
 
 We first consider the model of Gaussian noise with no signal present. Within
 a single summed segment, the likelihood of Gaussian noise at
 frequency $\nu$ is given by a $\chi^2$ distribution,
 %
 \begin{equation}
-\label{las:central}
+\label{soap:las:central}
 p(F_j|\nu_j,M_{\text{N}},I) = \frac{1}{2^{d/2}\Gamma(d/2)}F_j^{d/2 - 1}\exp{\left\{
 \frac{F_j}{2}\right\}}
 \end{equation}
 %
-where $F_j$ is the frequency domain power summed over sub-segments within a single day, as described in Sec.~\ref{soap:sumdata} and  $d$ is the number of degrees of freedom,  equal to twice the total number of summed \glspl{SFT}.  $M_{\rm{N}}$ represents the model that the data is simply Gaussian noise. In the presence of a signal (model $M_{\text{S}}$), the power should follow a non central $ \chi^2 $ distribution in which the non-centrality parameter $\lambda$ is the square of the \gls{SNR}, $(\lambda = \rho_{\rm{opt}}^2 )$, i.e.
+where $F_j$ is the frequency domain power summed over sub-segments within a single day, as described in Sec.~\ref{soap:sumdata} and  $d$ is the number of degrees of freedom,  equal to twice the total number of summed SFTs.  $M_{\rm{N}}$ represents the model that the data is simply Gaussian noise. In the presence of a signal (model $M_{\text{S}}$), the power should follow a non central $ \chi^2 $ distribution in which the non-centrality parameter $\lambda$ is the square of the \gls{SNR}, $(\lambda = \rho_{\rm{opt}}^2 )$, i.e.,
 %
 \begin{equation}
-\label{las:noncentral}
+\label{soap:las:noncentral}
 \begin{split}
 p(F_j|\nu_j,\lambda,M_{\text{S}},I) = \frac{1}{2} \exp{\left\{ -\frac{F_j+\lambda}{2}\right\}} \left( \frac{F_j}{\lambda} \right)^{d/4 - 1/2} \\
 I_{d/2 -1}\left( \sqrt{\lambda F_j}\right).
 \end{split}
 \end{equation}
 %
-If a signal is present we therefore expect the \gls{SFT} powers in both detectors to follow Eq.~\ref{las:noncentral}.  Assuming for the moment that the noise variance is the same in both, we can determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
+
+If a signal is present we therefore expect the \gls{SFT} powers in the detector to follow Eq.~\ref{soap:las:noncentral}.  We can then determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
 %
 \begin{equation}
-\label{las:signal}
+\label{soap:las:signal:single}
 \begin{split}
-p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_S}) \\
-p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I)p(F^{(2)}_{j}|\nu_j,\lambda,M_{\text{S}},I) d\lambda.
+p(F^{(1)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,w) 
+p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I) d\lambda.
 \end{split}
 \end{equation}
 %
-We set the prior on $\lambda$ to be an exponential distribution of width $w$, this is done somewhat arbitrarily as we expect the majority of signals to have a low \gls{SNR}. This distribution follows,
+Here we set the prior on $\lambda$ to be an exponential distribution of width $w$, this is done somewhat arbitrarily as we expect the majority of signals to have a low \gls{SNR}. This distribution follows,
 \begin{equation}
-\label{las:prior}
+\label{soap:las:prior}
 p(\lambda,w) = \exp\left( \frac{-\lambda}{w}\right).
 \end{equation}
 
-On the other hand, if an instrumental line is present in one of the detectors we expect to see signal-like power in that detector and noise-like power in the other.  The evidence for this `line' model ($M_{\text{L}}$) is therefore
-%
-\begin{equation}
-\label{las:line}
-\begin{split}
-p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_L}) \\
-\left[ p(F^{(1)}_{j}|\nu_j,M_{\rm{N}},I)p(F^{(2)}_{j}|\nu_j,\lambda,M_{\rm{S}},I) \right. \\
-\left. + p(F^{(1)}_{j}|\nu_j,\lambda,M_{\rm{S}},I)p(F^{(2)}_{j}|\nu_j,M_{\rm{N}},I)\right]d\lambda ,
-\end{split}
-\end{equation}
-%
-The third option to consider is the simple case of approximately Gaussian noise in both of the detectors,
-%
-\begin{equation}
-\label{las:noise}
-\begin{split}
-p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,\lambda,M_{\rm{G}},I) = p(F^{(1)}_{j} \mid \nu_j,M_{\rm{G}},I) \\
-p(F^{(2)}_{j} \mid \nu_j,M_{\rm{G}},I) .
-\end{split}
-\end{equation}
-The posterior probability of model $M_{\text{GL}}$, which contains the probability of Gaussian noise or Gaussian noise with a line in one detector, (taken as mutually exclusive) is
-\begin{equation}
-\begin{split}
-p(M_{\rm{GL}} \mid F^{(1)}_{j},F^{(2)}_{j},\nu_j ,I) = p(M_{\rm{G}} \mid F^{(1)}_{j},F^{(2)}_{j},\nu_j ,I) \\
-+p(M_{\rm{L}} \mid F^{(1)}_{j},F^{(2)}_{j} ,\nu_j, I),
-\end{split}
-\end{equation}
-where we assume that $M_{\rm{G}}$ and $M_{\rm{L}}$ are mutually exclusive.
+In this single-detector case, we expect an astrophysical signal to look very similar to that of a line other than its amplitude (or SNR). Therefore, we set the evidence for an astrophysical signal and an instrumental signal to follow Eq.~\ref{soap:las:signal:single}, where the width $w$ different between the two models.
 
-%
+We then have three models, one for an astrophysical signal, one for an instrumental line and one for Gaussian noise. 
+
+The posterior probability of model $M_{\text{GL}}$, which contains the probability of Gaussian noise or Gaussian noise with a line (taken as mutually exclusive) is
+\begin{equation}
+\begin{split}
+p(M_{\rm{GL}} \mid F^{(1)}_{j},\nu_j ,I) = p(M_{\rm{G}} \mid F^{(1)}_{j},\nu_j ,I) \\
++p(M_{\rm{L}} \mid F^{(1)}_{j} ,\nu_j, I).
+\end{split}
+\end{equation}
+
+
 We can now find the posterior odds ratio for the presence of a signal over noise or a line,
 \begin{equation}
-\label{soap:las:odds}
+\label{soap:odds:single}
 \begin{split}
-O_{\rm{SGL}}(F^{(1)}_{j},F^{(2)}_{j}\mid\nu_j) &=  \frac{p(M_{\rm{S}} \mid F^{(1)}_{j},F^{(2)}_{j} ,\nu_j)}{p(M_{\rm{GL}} \mid F^{(1)}_{j},F^{(2)}_{j},\nu_j)}
-= \frac{p(M_{\rm{S}} \mid F^{(1)}_{j},F^{(2)}_{j} ,\nu_j)}{p(M_{\rm{G}} \mid F^{(1)}_{j},F^{(2)}_{j} ,\nu_j) +p(M_{\rm{L}} \mid F^{(1)}_{j},F^{(2)}_{j} ,\nu_j)}\\
-&=\frac{p(M_{\rm{S}})p(F^{(1)}_{j},F^{(2)}_{j} \mid M_{\rm{S}},\nu_j)}{p(M_{\rm{G}})p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{G}},\nu_j) + p(M_{\rm{L}})p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{L}},\nu_j) } \\
-&= \frac{p(F^{(1)}_{j},F^{(2)}_{j} \mid M_{\rm{S}},\nu_j)p(M_{\rm{S}})/p(M_{\rm{G}})}{p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{G}},\nu_j) + p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{L}},\nu_j)p(M_{\rm{L}})/p(M_{\rm{N}}) }
+O^{(1)}_{\rm{S/GL}}(F^{(1)}_{j}\mid\nu_j) &=  \frac{p(M_{\rm{S}} \mid F^{(1)}_{j} ,\nu_j)}{p(M_{\rm{GL}} \mid F^{(1)}_{j},\nu_j)}
+= \frac{p(M_{\rm{S}} \mid F^{(1)}_{j} ,\nu_j)}{p(M_{\rm{G}} \mid F^{(1)}_{j} ,\nu_j) +p(M_{\rm{L}} \mid F^{(1)}_{j} ,\nu_j)}\\
+&=\frac{p(M_{\rm{S}})p(F^{(1)}_{j} \mid M_{\rm{S}},\nu_j)}{p(M_{\rm{G}})p(F^{(1)}_{j}\mid M_{\rm{G}},\nu_j) + p(M_{\rm{L}})p(F^{(1)}_{j}\mid M_{\rm{L}},\nu_j) } \\
+&= \frac{p(F^{(1)}_{j} \mid M_{\rm{S}},\nu_j)p(M_{\rm{S}})/p(M_{\rm{G}})}{p(F^{(1)}_{j}\mid M_{\rm{G}},\nu_j) + p(F^{(1)}_{j}\mid M_{\rm{L}},\nu_j)p(M_{\rm{L}})/p(M_{\rm{G}}) }
 \end{split}
 \end{equation}
 In practice it is convenient to use the log odds ratio,
 \begin{equation}
 \begin{split}
-\label{soap:las:logodds}
-\log\left[ O_{\rm{SGL}}(F^{(1)}_{j},F^{(2)}_{j})\right] &=  \log\left[ p(F^{(1)}_{j},F^{(2)}_{j} \mid M_{\rm{S}}) \right] \\
-&- \left[ \log\left( p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{G}}) \right. \right. \\
-&\left.\left.+  p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{L}})p(M_{\rm{L}})/p(M_{\rm{G}})\right) \right]
+\label{soap:logodds:single}
+\log\left[ O^{(1)}_{\rm{S/GL}}(F^{(1)}_{j})\right] &=  \log\left[ p(F^{(1)}_{j} \mid M_{\rm{S}}) \right] \\
+&- \left[ \log\left( p(F^{(1)}_{j}\mid M_{\rm{G}}) \right. \right. \\
+&\left.\left.+  p(F^{(1)}_{j}\mid M_{\rm{L}})p(M_{\rm{L}})/p(M_{\rm{G}})\right) \right]
 \end{split}
 \end{equation}
-As we are only interested in the maximum of $\log\left[ O_{\rm{SGL}}(F^{(1)}_{j},F^{(2)}_{j})\right]$, the factor $\log\left[ p(M_{\rm{S}})/p(M_{\rm{G}})\right]$ can be dropped from the expression.
-
+As we are only interested in the maximum of $\log\left[ O^{(1)}_{\rm{S/GL}}(F^{(1)}_{j})\right]$, the factor $\log\left[ p(M_{\rm{S}})/p(M_{\rm{G}})\right]$ can be dropped from the expression.
 
 In this version of the Viterbi algorithm, rather than storing a value proportional to the log-probabilities as in Sec.~\ref{soap:multidet}, here we store a value proportional to the log-odds ratio.
-Here we take the log-odds ratio defined in Eq.~\ref{soap:las:logodds}, which is the log-odds of a signal having a similar power in each detector, and add the log-prior odds $p(\bm{\nu} \mid M_S)/(p(\bm{\nu} \mid M_N) + p(\bm{\nu} \mid M_L))$ which is the log-prior or any particular track. By assuming that the track transitions for the line and noise model are equally probable for any jump, we set the denominator of the prior-odds is a constant $b$.
-This then means Eq.~\ref{soap:multidet:vitsum} is modified to,
+Here we take the log-odds ratio defined in Eq.~\ref{soap:logodds:single} and add the log-prior odds $p(\bm{\nu} \mid M_S)/(p(\bm{\nu} \mid M_N) + p(\bm{\nu} \mid M_L))$ which is the log-prior or any particular track. By assuming that the track transitions for the line and noise model are equally probable for any jump, we set the denominator of the prior-odds is a constant $b$.
+This then means Eq.~\ref{soap:single:vitsum} is modified to,
 \begin{equation}
 \begin{split}
-\label{lineaware:stat}
+\label{soap:las:stat}
 \hat{V}_{i,j} = \max_{k,l,m}\left(T_{k,l,m} + b + V_{i-1,j+k}   \right. \\
- + \left.  \log\left[O_{\rm{SGL}}\left(F^{(1)}_{j},F^{(2)}_{j}\right)\right]\right),
+ + \left.  \log\left[O^{(1)}_{\rm{S/GL}}\left(F^{(1)}_{j}\right)\right]\right),
 \end{split}
 \end{equation}
 %
 where $\hat{V}$ refers to a log-odds ratio.
-The maximised statistic now has three tune-able parameters: the width, $w_S$ in Eq.~\ref{las:prior}, on the prior for a signal \gls{SNR} squared, $p_{\rm S}(\lambda)$, the width, $w_L$ of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \gls{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \gls{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
+The maximised statistic now has three tuneable parameters: the width ($w_S$) in Eq.~\ref{soap:las:prior}, on the prior for a signal \gls{SNR} squared, $p_{\rm S}(\lambda)$, the width ($w_L$) of the prior in the case of a line, $p_{\rm L}(\lambda)$, and the ratio of the prior on the line and noise models, $p({M_{\rm L}})/p({M_{\rm G}})$.  These parameters are optimised for each search, where we initially estimate the \gls{SNR} of a signal we hope to be sensitive to in each time slice, then use this as a guide for the width of the signal prior. This is then repeated for an expected line \gls{SNR} and this is used for the width of the line prior. The ratio of line and noise models runs in the range 0 to 1, we set this limit as we do not expect an instrumental line to be as likely as Gaussian noise in any particular frequency bin.
+
+
+\
 
 %
 % Two detector line aware statistic
 %
-This line-aware statistic can be applied in a more powerful way when we use multiple detectors and is similar to the approach in \citep{keitel2014SearchContinuousa}. The multiple-detector algorithm described in Sec.~\ref{soap:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \gls{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
+This line-aware statistic can be applied in a more powerful way when we use multiple detectors and is similar to the approach in \cite{keitel2014SearchContinuous}. The multiple-detector algorithm described in Sec.~\ref{soap:multidet} returns the most probable track of a common signal assumed to be in Gaussian noise. As a consequence the algorithm will return large values of the log-likelihood even if there are inconsistent values of \gls{SFT} power between the detectors, either from non-Gaussian noise or because the signal is not equally strong in the two detectors. However a signal with unequal power in the two detectors is more likely to be a non-Gaussian instrumental line than an astrophysical signal. The line-aware statistic described in this section is designed to make the search more robust to such instrumental artefacts within realistic non-Gaussian data whilst maintaining sensitivity to astrophysical signals.
 
 %
 % More detail on what this is applied to
 %
 For most of the analysis examples presented here we use data which is the incoherent sum of 30-minute normalised \glspl{SFT} over a day (described in more detail in Sec.~\ref{soap:sumdata}). As a result the effects of the detector antenna patterns and of differential Doppler shifts are significantly reduced, and any signal should have a broadly similar summed log-likelihood in the same frequency bin in each detector. The statistic can then be modified such that we expect a similar log-likelihood in each detector.
 
-In a similar way to the single-detector case, we can write out the evidence for each of the three models as follows. If a signal is present we therefore expect the \gls{SFT} powers in both detectors to follow Eq.~\ref{las:noncentral}.  Assuming for the moment that the noise variance is the same in both, we can determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
+In a similar way to the single-detector case, we can write out the evidence for each of the three models as follows. If a signal is present we therefore expect the \gls{SFT} powers in both detectors to follow Eq.~\ref{soap:las:noncentral}.  Assuming for the moment that the noise variance is the same in both, we can determine the evidence for model $M_{\text{S}}$ by marginalising over $\lambda$,
 %
 \begin{equation}
-\label{las:signal}
+\label{soap:las:signal}
 \begin{split}
 p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_S}) \\
 p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I)p(F^{(2)}_{j}|\nu_j,\lambda,M_{\text{S}},I) d\lambda.
 \end{split}
 \end{equation}
 %
-We set the prior on $\lambda$ the same as in the single detector case in Eq.~\ref{las:prior}.
+We set the prior on $\lambda$ the same as in the single detector case in Eq.~\ref{soap:las:prior}.
 In this case, if an instrumental line is present in one of the detectors we expect to see signal-like power in that detector and noise-like power in the other.  The evidence for this `line' model ($M_{\text{L}}$) is therefore
 %
 \begin{equation}
-\label{las:line}
+\label{soap:las:line}
 \begin{split}
 p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_L}) \\
 \left[ p(F^{(1)}_{j}|\nu_j,M_{\rm{N}},I)p(F^{(2)}_{j}|\nu_j,\lambda,M_{\rm{S}},I) \right. \\
@@ -622,7 +605,7 @@ p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda,
 The third option is the simple case of approximately Gaussian noise in both of the detectors,
 %
 \begin{equation}
-\label{las:noise}
+\label{soap:las:noise}
 \begin{split}
 p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,\lambda,M_{\rm{G}},I) = p(F^{(1)}_{j} \mid \nu_j,M_{\rm{G}},I) \\
 p(F^{(2)}_{j} \mid \nu_j,M_{\rm{G}},I) .
@@ -630,10 +613,10 @@ p(F^{(2)}_{j} \mid \nu_j,M_{\rm{G}},I) .
 \end{equation}
 
 %
-We can now find the posterior odds ratio for the presence of a signal over noise or a line by following the same steps as in Eq.~\ref{soap:las:odds}. Once again we write this as a log-odds ratio,
+We can now find the posterior odds ratio for the presence of a signal over noise or a line by following the same steps as in Eq.~\ref{soap:odds:single}. Once again we write this as a log-odds ratio,
 \begin{equation}
 \begin{split}
-\label{soap:lineaware:logodds}
+\label{soap:logodds}
 \log\left[ O^{(2)}_{\rm{S/GL}}(F^{(1)}_{j},F^{(2)}_{j})\right] &=  \log\left[ p(F^{(1)}_{j},F^{(2)}_{j} \mid M_{\rm{S}}) \right] \\
 &- \left[ \log\left( p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{G}}) \right. \right. \\
 &\left.\left.+  p(F^{(1)}_{j},F^{(2)}_{j}\mid M_{\rm{L}})p(M_{\rm{L}})/p(M_{\rm{G}})\right) \right]
@@ -644,7 +627,7 @@ The factor $\log\left[ p(M_{\rm{S}})/p(M_{\rm{G}})\right]$ can again be dropped 
 For the multi-detector case we then modify Eq.~\ref{soap:multidet:vitsum} to,
 \begin{equation}
 \begin{split}
-\label{soap:lineaware:stat:multi}
+\label{soap:las:stat:multi}
 \hat{V}_{i,j} = \max_{k,l,m}\left(T_{k,l,m} + b + V_{i-1,j+k}   \right. \\
  + \left.  \log\left[O^{(2)}_{\rm{S/GL}}\left(F^{(1)}_{j},F^{(2)}_{j}\right)\right]\right),
 \end{split}
@@ -653,7 +636,7 @@ For the multi-detector case we then modify Eq.~\ref{soap:multidet:vitsum} to,
 where $\hat{V}$ refers to a log-odds ratio.
 This is then optimised over the same three parameters as the single detector case.
 
-Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic in Eq.~\ref{soap:lineaware:logodds} for different \gls{FFT} powers $F$.
+Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic in Eq.~\ref{soap:las:logodds} for different \gls{FFT} powers $F$.
 \begin{figure}
 \centering
 
@@ -687,7 +670,7 @@ operating.}
 \label{soap:las:detp:linebig}
 \end{minipage}
 \end{subfigure}
-\caption[Lookup table for line aware statistic.]{Lookup tables using the line aware statistic in Eq.~\ref{soap:lineaware:stat:multi}. The \gls{PSD} mean is the expected mean of a $\chi^2$ distribution with 48 degrees of freedom, i.e. the expected power from out summed spectrograms $F_j$.}
+\caption[Lookup table for line aware statistic.]{Lookup tables using the line aware statistic in Eq.~\ref{soap:las:stat:multi}. The \gls{PSD} mean is the expected mean of a $\chi^2$ distribution with 48 degrees of freedom, i.e. the expected power from out summed spectrograms $F_j$.}
 \label{soap:las:osgl_plots}
 \end{figure}
 
@@ -719,7 +702,7 @@ detector and the duty cycle. The \gls{PSD} of the detector is a measure of how
 sensitive the detector is at that time and the duty cycle is the fraction of
 time in a given interval that the detector was collecting data. A decrease in
 the duty cycle and an increase in the \gls{PSD} will decrease the \gls{SNR} and
-vice-versa. To search for consistent amplitude Eq.\ref{lineaware:stat} is
+vice-versa. To search for consistent amplitude Eq.\ref{soap:las:stat:multi} is
 modified by weighting each detector by its \gls{PSD} and duty cycle.
 
 The definition of \gls{SNR} is taken from \citep{prix2007SearchContinuous} as, 
@@ -887,7 +870,7 @@ procedure, the signals received at each detector are forced to follow a common t
 %
 \item The algorithm then returns the most probable track though the data, and the value
 $\propto$ the log-odds in the final time step, i.e., the
-maximum final value, $\max_j(V_{N,j})$, in Eq.~\ref{soap:lineaware:stat:multi}, which is then our detection statistic.
+maximum final value, $\max_j(V_{N,j})$, in Eq.~\ref{soap:las:stat:multi}, which is then our detection statistic.
 
 %
 \end{enumerate}
@@ -897,7 +880,7 @@ maximum final value, $\max_j(V_{N,j})$, in Eq.~\ref{soap:lineaware:stat:multi}, 
 As an example of what the algorithm returns, Fig.~\ref{soap:tracks} shows
 the tracks in the two detectors, H1 and L1. This also shows the
 log-odds ratio of ending in any
-frequency bin, i.e., all the elements in Eq.~\ref{soap:lineaware:stat:multi}.  In this figure, each time segment of the odds ratios have been normalised such that the sum of the odds ratios is 1.
+frequency bin, i.e., all the elements in Eq.~\ref{soap:las:stat:multi}.  In this figure, each time segment of the odds ratios have been normalised such that the sum of the odds ratios is 1.
 
 
 
@@ -910,7 +893,7 @@ frequency bin, i.e., all the elements in Eq.~\ref{soap:lineaware:stat:multi}.  I
 The signal is injected into Gaussian noise, where the 1800\,s \glspl{SFT} have been
 summed over 1 day.  The top panel shows a simulation of summed \glspl{SFT} from H1, the second panel shows the same for L1,
 the third panel shows the values proportional to the
-log-odds ratios in Eq.~\ref{soap:lineaware:stat:multi}.
+log-odds ratios in Eq.~\ref{soap:las:stat:multi}.
 The log-odds have been normalised such that the sum of
 all the odds ratios in every time bin are equal to 1. The bottom panel shows the injected signal track (black dotted) and the track found in the `imaginary' detector by the two-detector SOAP search with the line-aware statistic (red), both of these tracks are at the geo-centre. In this case the \gls{RMS} of the difference between the Viterbi track and injected signal track was $\sim$1 bin, where 1 bin is 0.00056 Hz wide.}
 %

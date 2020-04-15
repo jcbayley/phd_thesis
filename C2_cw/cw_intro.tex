@@ -5,12 +5,12 @@
 % introduce problems in searching for CW
 %---------------------
 Continuous gravitational waves have particular challenges when it comes to their detection.
-The nature of \gls{CW} are that they are long duration, this means that they would be observed for the entirety of a detectors observing runs. 
+\glspl{CW} are long duration, this means that they would be observed for the entirety of a detectors observing runs. 
 The signals also have an intrinsically small amplitude which is below the noise floor of current ground based detectors such as \gls{LIGO}.
 This means the for a detection, the entire observing runs data will be needed to accumulate enough \gls{SNR} for a signal to be observed.
 Given that \gls{LIGO} samples as $\sim 16$ kHz (generally downsampled to $\sim 4$ kHz) this leaves a huge amount of data which needs to be searched through.
-As will be described in Sec.~\ref{searchcw:search:coherent} and \ref{searchcw:search:semi}, this requires a large amount of computational resources to perform these searches.
-For some types of search, the parameter space can also be very large, this only adds to the computational time and in some cases makes it infeasible.
+As will be described in Sec.~\ref{searchcw:search}, this requires a large amount of computational resources to perform these searches.
+For some types of search the parameter space can also be very large, this only adds to the computational time, which in some cases makes the search infeasible.
 
 %---------------------
 % Describe this chapter 
@@ -190,22 +190,22 @@ Often when using Bayesian statistics the aim is to find posterior distribution o
 There are very few cases where this can be calculated analytically, therefore, numerical methods are almost always used to find the posterior.
 This can be difficult to calculate numerically especially in problems where the parameters space has many dimensions.
 The most difficult part to calculate is the evidence in Eq.~\ref{intro:bayes:evidence}, this involves calculating an integral over all possible parameters.
-There is however, a way around having to calculate this. For any given mode $I$, the evidence $p({\bm d}\mid I)$ is the same for any set of parameters ${\bm \theta}$ in Eq.~\ref{intro:bayes:bayes}. 
+There is however, a way around having to calculate this. For any given model $I$, the evidence $p({\bm d}\mid I)$ is the same for any set of parameters ${\bm \theta}$ in Eq.~\ref{intro:bayes:bayes}. 
 The evidence is then just a normalisation factor for the posterior distribution. 
 When different models are not being compared, and we assume the model $I$ to be true, we no longer need to calculate the evidence.
-The posterior distribution can then be found by sampling
+The unnormalised posterior distribution can then be found by sampling
 \begin{equation}
 p({\bm \theta} \mid {\bm d}, I) \propto p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I).
 \end{equation}
-To find this posterior you could then calculate (sample) the value for every point in parameter space. This however, is very computationally expensive and often the posterior distribution is located in a small area in parameter space. 
-Therefore, the majority of the time is sampling a area of parameter space where the posterior is close to zero, and this is not particularly useful. 
-A method titled \gls{MCMC} was proposed \citep{metropolis1953EquationState} to deal with this issue, more information on this can be found in \citep{vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
-This builds up the posterior distribution by randomly jumping around in the parameter space.
-It starts by calculating the posterior value for a particular point in parameter space. Then it will randomly jump to another parameter space point. 
-The posterior can then be calculated again, if the posterior value is higher then the jump is `accepted'. This just means that the parameter values of this point are stored.
-If the posterior value is lower than the previous step then the jump is accepted with some probability. This means that there is a random chance that a value lower than the current is accepted.
-As the accepted positions aim for areas where the posterior is higher, \gls{MCMC} does not waste time calculating areas in parameter space of low posterior values.
-The samples which were accepted then build the posterior distribution. 
+To numerically approximate this posterior you could then calculate (sample) the value over a grid of points parameter space, which can quickly become computationally expensive. Often the posterior distribution is located in a small area within the parameter space, so the majority of the computational time is spent sampling a area of parameter space where the posterior is close to zero.
+Most problems are interested in areas of high probability, i.e the larger values of the posterior. 
+A method titled \gls{MCMC} can be used to concentrate the samples around areas of high probability, which can approximate the posterior distribution more efficiently, more information on this can be found in \citep{metropolis1953EquationState,vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
+This builds up the posterior distribution by using a Markov chain, where each step in the chain only depends on the previous step.
+It starts by calculating the posterior value for a particular point in parameter space. Then it will randomly jump to another parameter space point, where a new value for the posterior can be calculated.
+If the new posterior value is higher than the previous step then the jump is `accepted'. This just means that the parameter values of this point are stored.
+If the posterior value is lower than the previous step then the jump is accepted with some probability.
+This means that the accepted positions are located around areas of high posterior values, the \gls{MCMC} algorithm does not waste time calculating the posterior in uninteresting areas of parameter space.
+The accepted samples then build the posterior distribution. 
 
 In certain situations it can be useful to calculate the evidence in Eq.\ref{intro:bayes:evidence}. 
 For example, if there are two different models which could represent the data, the evidence can be used to determine which of the two models is more likely.
@@ -232,74 +232,56 @@ In following sections the methods described above are used to estimate various p
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
-There are many different methods to search for continuous gravitational waves.
-They can be split into three general categories: Targeted searches, Directed searches and All-sky searches.
-The main difference between these different categories is the amount which is known about the source prior to the search.
-For targeted searches the sky position $(\alpha,\delta)$ and rotation frequency are known from electromagnetic observations, i.e. X-ray, radio or $\gamma$-ray.
-Directed searches have information on the sky position $(\alpha,\delta)$ but not the rotation frequency.
-For all-sky searches, there is no prior knowledge of the pulsar, therefore, is a search for unknown pulsars.
-In general the searches in each of these categories use two distinct techniques: Fully coherent searches and Semi-coherent searches
+Searches for \glspl{CW} can be split into three general categories: Targeted searches, Directed searches and All-sky searches, where the different categories are based on the amount of source parameters which are known prior to running the search.
 
 %%%%%%
 %%%%%%
-\subsection{\label{searchcw:search:coherent}Fully coherent}
+\subsection{\label{searchcw:search:targeted}Targeted}
 %%%%%%
 %%%%%%
 
-A Fully coherent search generally uses a pre generated waveform which follows the model described in Sec.~\ref{searchcw:model}. 
-This contains all the phase information of the signal.
-The set of parameters which generated the waveform which `matches' the best can then be considered as the optimum set of parameters given the data.
-This is known as a matched filter \citep{} and is used in \gls{CW} searches in \citep{dupuis2005BayesianEstimation,}.
+Targeted searches search for specific pulsars which have parameters known from electromagnetic observations, i.e. X-ray, radio or $\gamma$-ray.
+These can give the sky position parameters $\alpha$ and $\delta$ and the source frequency parameters $f$ and its derivatives, where there could also be extra parameters if the pulsar is in a binary system.
+Targeted searches can then use these parameters as input such that they search over the remaining parameters $h_0, \iota, \phi_0, \psi$.
+The main targeted searches are the Bayesian time-domain search \citep{dupuis2005BayesianEstimation}, the matched filter $\mathcal{F}$-statistic \citep{schutz1998DataAnalysis} and the 5-Vector approach \citep{astone2010MethodDetection}.
 
-The matched filter maximises the signal to noise ratio for a given filter, in this case the filter is our \gls{CW} model. 
-The matched filter used for \gls{CW} models is defined in \citep{prix2007SearchContinuous} and it titled the $\mathcal{F}$-statistic. 
-This maximises a likelihood with respect to the parameters.
-If one assumes that the noise $n$ is Gaussian and zero mean, the data $x$ can be written as
-\begin{equation}
-		x(t) = n(t) + h(t).
-\end{equation}
-The likelihood can then be written as
-\begin{equation}
-		\log \Lambda = \left( x \mid h \right) - \frac{1}{2} \left( h \mid h\right) 
-\end{equation}
-where the product $(x \mid y)$ is defined as
-\begin{equation}
-		\left( x \mid y \right) = 4 \mathcal{R} \int^{\infty}_{-\infty}  \frac{\tilde{x}^{{\rm X}}(f) \tilde{y}^{{\rm X *}}(f)  }{S^{X}(f)} \mathrm{d}f.
-\end{equation}
-This is fully expanded into the $\mathcal{F}$-statistic in \citep{schutz1998DataAnalysis}, however, it is this likelihood function which is maximised. 
+The Bayesian time-domain search is based on reducing the dataset to a manageable size such that Bayesian parameter estimation can be applied with a reasonable computational cost. 
+This search uses sky position and frequency parameters of the source to perform a slowly evolving heterodyne which removes the phase evolution of the source \citep{dupuis2005BayesianEstimation}.
+This allows the signal to be low pass filtered and heavily downsampled without losing any of the signals information.
+This reduced dataset can then be used in a Bayesian approach to search over the parameters $h_0, \iota, \phi_0, \psi$, see \citep{dupuis2005BayesianEstimation} for further information.
+The matched filter $\mathcal{F}$-statistic uses the same heterodyned data as the Bayesian method, howeverm, calculates a maximum likelihood $\mathcal{F}$-statistic instead of a Bayesian posterior \citep{schutz1998DataAnalysis,prix2007SearchContinuous, aasi2014GRAVITATIONALWAVES}. It uses the same heterodyned data as the Bayesian method, but computes a maximum likelihood statisic
 
+The 5-Vector search is based in the frequency domain, which makes use of the five frequency harmonics caused by the sidereal amplitude modulation caused by the detectors antenna response as the earth rotates \citep{astone2010MethodDetection,aasi2014GRAVITATIONALWAVES}. 
+A summary of the application of the searches for initial and advanced \gls{LIGO} can be found in \citep{aasi2014GRAVITATIONALWAVES,abbott2019SearchesGravitationala}.
 
-Targeted searches look for a specific pulsar which has been observed in the electromagnetic spectrum.
-These observations give information such as the sky position and the frequency evolution of the source.
-Using knowledge of the earths position around the sun, which is well known, one can use the accurate sky position and frequency of a known source to find its phase evolution in Eq.~\ref{searchcw:model:phase}.
-This mean that for this type of search one can maximise the likelihood with respect to the parameters  $h_0, \phi_0, \iota$ and $\psi$.
-Another method which uses templates is described in \citep{dupuis2005BayesianEstimation}, this uses a Bayesian approach.
-
-This type of search can take long periods of time. 
-This is due both to the size of the parameter space and the amount of data which needs to be searched.
-\gls{CW} searches need long observation times in order to accumulate the required \gls{SNR} for detection.
-Therefore, most searches use data from an entire \gls{LIGO} observing run which can last for $\mathcal{O}(1)$ years.
-Given that the sampling rate for the \gls{GW} channel is $16$ kHz usually downsampled to $\sim 4$ kHz, the quantity of data is large. 
-
-
+Due to the long observation times needed to accumulate the required \gls{SNR} for detection, most searches use data from an entire \gls{LIGO} observing run which can last for $\mathcal{O}(1)$ years.
+Given that the sampling rate for the \gls{GW} channel is $16$ kHz (often downsampled to $\sim 4$ kHz), the amount of data in a year can be upt to $\mathcal{O}(2)$ terabytes, therefore these types of search can be computationally costly. 
 Whilst the fully coherent matched filter searches have methods to reduce the computational time for known sources, in all-sky and directed searches, this type of search is no feasible. 
 This is because all-sky and directed searches have a wider parameter space, therefore, enough templates need to be made to sufficiently cover the large parameter space. 
 This task quickly becomes impossible for coherent matched filtering for an entire observing run due to the amount of time needed. This problem led to the development of semi-coherent searches which will be introduced in the next section. 
 
+%%%%%%
+%%%%%%
+\subsection{\label{searchcw:search:directed}Directed}
+%%%%%%
+%%%%%%
+Directed searches generally know some of the source parameters such as the sky position $(\alpha,\delta)$ but not the rotation frequency. This includes searches for neutron stars in binary systems such as Sco-X1 \citep{abbott2017UpperLimits,meadors2016TuningScorpius}.
+These searches use the similar techniques as all-sky searches, which will be described in Sec.~\ref{searchcw:search:allsky}, they differ in that they can limit the parameter space based on the known parameters.
 
 %%%%%%
 %%%%%%
-\subsection{\label{searchcw:search:semi}Semi coherent}
+\subsection{\label{searchcw:search:allsky}All-sky searches}
 %%%%%%
 %%%%%%
 
-Semi-coherent searches offered a solution to searching over large parameters spaces and large amounts of data. 
-As is directed and all-sky searches the phase evolution of the source is not known, one cannot use a coherent search for the entire observing run.
-It may however, be possible to approximately describe the phase for a shorter length of time known as the coherence time, $T_{coh}$.
-The general idea of a semi-coherent search is to break the data-set into smaller section which each can be analysed coherently.
-The coherent analysis can use the matched filter as described in Sec.~\ref{searchcw:search:coherent} or another method such as a Fourier transform.
-The results from each of these individual sections can the be combined incoherently using various methods which will be summarised later. 
-This method can greatly reduce the time taken for the analysis depending on the coherence length, however, will always come with some loss in sensitivity. 
+All-sky searches have no prior knowledge of the pulsars parameters, therefore, search over all the pulsar parameters $h_0, \iota, \psi, \phi_0, f, \dot{f}, \alpha, \delta$.
+To use the techniques described in Sec.~\ref{searchcw:search:targeted} for an all sky search, to sufficiently cover the entire parameter space, the search would not be feasible to run due to its large computational cost.
+Instead a type of search known as a semi-coherent search was developed.
+These offered a solution to searching over the large parameters space and data size. 
+The general idea of a semi-coherent search is to break the dataset into smaller segments of length $T_{coh}$, which each can be analysed coherently.
+The techniques described in Sec.~\ref{searchcw:search:targeted} or another method such as a Fourier transform can be used to analyse these small segments.
+The results from each segment can the be combined incoherently using various methods which will be summarised below.
+This method can greatly reduce the computational cost for the analysis depending on the coherence length, but will reduce the sensitivity compared to the targeted methods. 
 
 There are many different types of semi-coherent search which use various methods to incoherently combine the coherently analysed results. 
 I will summarise some of these searches below, some of these searches were summarised and compared in \citep{walsh2016ComparisonMethods}.
