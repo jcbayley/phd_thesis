@@ -156,18 +156,60 @@ The prior for $\rho$ is also flat in the range $[50,200]$.
 %%%%
 
 For the tests of this method, we generate a pulsar signal in a spectrogram and run the SOAP search as in Sec.~\ref{soap:results} and \ref{machine:results}.
-In each of these we record the simulated pulsar frequency track, the Viterbi track and the pulsar signal parameters $\alpha, \delta, f, \dot{f} , \rho$.
+In each of these we record the Viterbi track and the pulsar signal parameters $\alpha, \delta, f, \dot{f} , \rho$ associated with the pulsars frequency track.
+This contains the information needed to run the bayesian analysis described in Sec.~\ref{par_est:bayes}.
+We generated signals with the parameters as described in Tab.~\ref{}, which had an \gls{SNR} range between 20 and 200\joe{check}, and frequency ranges between 40 and 500 Hz \joe{check}.
+However, as the \gls{SNR} is the simulations decreases, the probability of SOAP identifying the signal decreases. 
+As this analysis is intended to be the first stage of a follow up of those results, we use the detection statistics mentioned in Sec.~\ref{soap:results} to identify `detected' signals.
+In these sections, we set a 1\% false alarm rate to generate efficiency curves, therefore, for this analysis we use the top 1\% of Viterbi statistics from this search band for a follow up analysis.
 
-To test this method, we initially generated a spectrogram simulated pulsars frequency track with the exact same recovered Viterbi track. This is then the best possible result which the method could return.
+As an example of what is returned by the Bayesian analysis described in Sec.\ref{par_est:bayes}, Fig.~\ref{par_est:results:example_posterior} shows the returned marginal posterior distributions for each of the parameters in the search.
+
+\begin{figure}[pt]
+
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/cornerplot.png}
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows an example of the posterior distribution of a signal with \gls{SNR} \joe{SNR}. Each panel shows the marginal distributions for each parameter, where the parameters used for the simulation are marked in red.}
+    \label{par_est:results:example_posterier}
+    
+\end{figure}
+%
+
+As mentioned above \joe{mention above}, one of the largest issues with all-sky searches is the number of templates needed to sufficiently cover the parameter space in sky position. 
+Therefore, the marginal posterior for the sky position can be plotted for a \joe{words} of the position as shown in Fig.~\ref{}.
+The Viterbi tracks and pulsar frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
+In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital plane of the earth, for any ecliptic longitude, there are two sky positions at opposite ecliptic latitudes which will return the same frequency track. 
+This then means that we would expect the posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{} and \ref{}.
+The sky position parameters of the pulsar are in the equatorial coordinate system, i.e. the earth as the reference frame, therefore have been transformed into the Ecliptic frame to make the sky position posteriors easier to read and understand.
+%
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/skypos_ecliptic.png}
+    \caption[Example of posterior of sky position]{This figure shows an example of the marginal posterior distribution of the sky position of a signal with \gls{SNR} \joe{SNR}. The coordinates are in the ecliptic frame.}
+    \label{par_est:results:example_posterier}
+    
+\end{figure}
+%
+
+\section{searching over many signals section \joe{need a name}}
+
+To test this analysis, the Bayesian method in Sec.~\ref{par_est:bayes} is run on the simulation which had Viterbi statistics within the top 1\% of those in the search band between 40 and 500 Hz.
+For each of these simulations, the analysis returns a posterior distribution of the parameters.
+
+One method to asses the ability of this to identify the correct parameters is the p-p plot.
+\joe{need better description of p-p plot}
+
+This is calculated using the marginal distributions for each of the parameters.
+In Fig.~\ref{} we show the p-p plot which was generated from \joe{top 1\%} 200 simulated signals.
+If the plots lie along the diagonal line, this means that the posterior distributions agree with the simulated parameters, whereas line which are far away from this indicate that the parameters are not consistent with the injections.
+
+Figure \ref{ppplot} shows that the simulated signals are not completely consistent with the injected parameters for the \joe{which parameters}
+
+
+Another method to asses the power of this analysis in terms of locating the sky positions of the source is the measure the area on the sky which this can localise to.
+To do this 
 
 
 
 
-Tested on a number of signals to see what we could recover, 
-plots of sky positions compared to injected signals, 
-Gaussian noise etc...
-\subsection{Injections}
-
-\subsection{Sky parameters}
-
-
+\joe{say what reduction in sky area is useful for passing on to future searches}

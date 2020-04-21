@@ -12,7 +12,7 @@ reached slightly early after each orbit, implying that the pulsars orbit was
 decreasing with time.  If the separation of two orbiting objects is decreasing
 then the system must be losing energy.  The loss in energy matched the \gls{GR}
 prediction which assumed the energy was lost to \glspl{GW}.  This gave hope of
-\glspl{GW} existence~\chris{the existence of GWs} and helped lead the way
+the existence of \glspl{GW} and helped lead the way
 to~\chris{didn't really lead the way - more motivated} designing instruments
 which could directly detect them.~\chris{up until about here you are simply
 writing a series of static statements which sound stilted and read as bullet
@@ -21,7 +21,7 @@ smoother.} ~\chris{new paragrpah?} The first direct detection of gravitational
 waves was made in 2015 when the two \gls{LIGO} detectors in the US
 \citep{abbott2016ObservationGravitational} identified a signal from a \gls{BBH}
 system.  This was not only the first observation of a \gls{GW} but gave
-information on a yet~\chris{an as yet} unobserved~\chris{type of} astrophysical
+information on an as yet unobserved type of astrophysical
 system.  This has since been followed by many more detections of \gls{BBH}
 signals involving \gls{LIGO} and Virgo including
 \citep{abbott2017GW170814ThreeDetector,theligoscientificcollaboration2020GW190425Observation}~\chris{strange
@@ -32,8 +32,7 @@ detected but that also had an EM counterpart OR first system with a counterpart
 detected?}.  This allowed verification~\chris{what does verification eman in
 this sense?} of the source from optical counterparts and started the era of
 multi-messenger astronomy.  These detections opened up the field of
-gravitational wave~\chris{if you have an acronym then use it, don't pick and
-choose} astronomy, where many more detections are expected to give more
+\gls{GW} astronomy, where many more detections are expected to give more
 information on the universe and objects within it.
 
 As well as searching for \gls{BBH} and \gls{BNS} signals, there are many
@@ -319,67 +318,45 @@ There are also many other problems which can be addressed using observations of 
 Burst sources are also short duration however, they are un-modelled or
 difficult to model, in the sense that the exact waveform of the signal is
 unknown.  There are two possible reasons for the lack in knowledge of the
-waveform: the physics of the system is too complicated to model in a reasonable
-amount of time~\chris{what does a reasonbale amount of time mean? For
-supernovae the simulations are computaionally costly but the problem is
-modelling all of the physics.} or there is no model of the source.  As there is
-no model to generate waveforms, burst searches cannot use matched filtering as
-in \gls{CBC} searches~\chris{do CBC searches use matched filtering? You haven't
-mentioned that yet. What is matched filtering?}. Rather, burst searches look
-for short bursts in power~\chris{what is power?}
-which is coincident between multiple detectors
-\citep{cornish2015BayeswaveBayesian, klimenko2008CoherentMethod}.  There are a
-number of systems which could potentially emit  short duration burst signals.
-These include core collapse supernovae \citep{ott2008GravitationalWave},
-\glspl{GRB} \citep{aasi2014SearchGravitational}~\chris{aren't GRBs the signal
-you get from a BNS merger, not an un-modelled burst? Are you taling about a
-different type of GRB?}, cosmic strings
-\citep{damour2005GravitationalRadiation} and other unknown sources.  Detecting
-\gls{GW} from one of these sources could offer more insight into the processes
-which cause core collapse supernovae~\chris{careful with your explanations.
-Only a detection of a core collapse supernova could tell us about that, not any
-of the other things you listed.}. 
+waveform: the physics of the system is too complicated to model or is unknown, or the system itself is unknown.  
 
-As burst searches are un-modelled, they are sensitive to almost any signal
-which is coherent between detectors~\chris{what does "coherent" between
-detectors mean?}. This allows them to also search for signals from \gls{CBC} as
-well as any \gls{GW} signal from an unknown source.~\chris{strange phrasing}
+There are a number of systems which could potentially emit short duration burst signals, including core collapse supernovae \citep{ott2008GravitationalWave}, cosmic strings
+\citep{damour2005GravitationalRadiation} and other unknown sources.  Detecting
+\gls{GW} from core collapse supernovae could offer more insight into the processes
+and parameters associated with them, this is due to the \glspl{GW} being emitted from deeper inside the star than electromagnetic waves.
+
+Searching for these types of signals requires methods which do not depend on a model, therefore look for signals with a broad range of possible waveforms.
+For example, one of these methods takes the wavelet transform of individual detectors data to get a time-frequency representation \citep{klimenko2004PerformanceWaveBurst}, then identifies coincident power in these time-frequency maps between the detectors. 
+Other searches develop this idea further to search for signals which are coherent between detectors \citep{cornish2015BayeswaveBayesian, klimenko2008CoherentMethod}, i.e. have the same phase \joe{check this again, explain more}.
+
+As well as searching for core collapse supernovae, cosmic strings and well modelled \gls{CBC} signals \citep{aasi2014SearchGravitational}, they offer a method to search for short \gls{GW} signals from an unknown source. 
 
 
 %%%%%%%%%%%%%%%
 \subsection{Stochastic}
 %%%%%%%%%%%%%%%
 
-The stochastic background has no signal model~\chris{yes it does. Different
-models predict differnt background spectra - just like we estimate/predict the
-PSD of the detector noise. Theorists predict the PSD of the stochastic
-background and it may depend on a number of unknown parameters. The key point
-is that the noise realisation can't be predicted}, however, is expected to be a
-persistent source of \gls{GW} in the background of the detector.  The
-stochastic background~\chris{this is the astrophysical background - this is
-disinct from the primordial stochastic backgroiund from the big-bang.} is the
-incoherent sum of many unresolved~\chris{what is "unresolved"?} \gls{GW}
-signals.  The source of these signals can be anything from cosmological sources
-such as cosmic strings to \gls{CBC} signals~\chris{these signals are the
-cumulative sum of the ensemble of all "unresolved" sources in the universe.}.
-These signals can be thought of as the \gls{GW} analogue of the
-\gls{CMB}~\chris{well kind of. The astrophysical background is more like the
-foreground noise that the CMB scientists have to remove. The real CMB analogy
-is the primordial GW stochastic background from the big-bang.}.  The signal is
+The stochastic background appears as a persistent random signal at the detector, where the statistical properties of this noise can be predicted using various different models.   
+There are broadly two categories to the stochastic background: the astrophysical background and the cosmological background. 
+\joe{finish references}
+The astrophysical background originates from the superposition of many weak \gls{GW} from astrophysical sources such as \glspl{CBC} \citep{regimbau2011AstrophysicalGravitational}. 
+This would provide information on the history of astrophysical processes in the universe.
+The cosmological background originates from the early universe from sources such as inflation or cosmic strings \citep{maggiore2000GravitationalWave}, and can be though of as the \gls{GW} analogue of the \gls{CMB}.
+\glspl{GW} from inflation or cosmic strings would help describe early times in the evolution of the universe \citep{christensen2018StochasticGravitational}.
+
+The stochastic \gls{GW} background is generally characterised by its energy density per log frequency, which can be related to its spectral density. 
+The model of this energy density can then be used as a filter to search through the spectral density from gravitational wave detectors such as \gls{LIGO}.
+As the stochastic background is noise-like it is very difficult to distinguish from noise within a single detector \citep{christensen2018StochasticGravitational}, therefore, search methods correlate signals between multiple detectors
+\citep{romano2019SearchesStochastic,christensen2018StochasticGravitational}.
+
+The signal is
 assumed to be isotropic such that it can be observed at any point on the sky
 \citep{christensen2018StochasticGravitational}~\chris{a strange interpretation
 of isotropic. Isotropic means that the statistical properties of the background
 are the same in any direction we observe it. Thst's definitley the case for the
 primordial background but for the astrophsyical background, local structure in
 universe may mean it won't be isotropic. See https://arxiv.org/abs/1101.2762}.
-As the stochastic background is noise-like it is very difficult to distinguish
-from noise within a single detector
-\citep{christensen2018StochasticGravitational}.  Therefore, searches for the
-stochastic background correlate signals between multiple detectors
-\citep{romano2019SearchesStochastic,christensen2018StochasticGravitational}.
-When detected, these signals may be able to offer insights into the early
-universe and its formation~\chris{please expand upon this in light of my
-comments}.
+
 
 
 
@@ -387,55 +364,29 @@ comments}.
 \subsection{\label{intro:sources:cw}Continuous waves}
 %%%%%%%%%%%%%%%%%%%%
 
-\glspl{CW} are long duration signals which can be well modelled~\chris{don't
-you do a search for un-modelled CWs? How does that fit in with this
-definition?}.  The signals last for times~\chris{have durations?} greater than
-the observation runs of ground based detectors and in general have a
-fixed~\chris{I don't know of any case with a fixed frequency especially if
-you're talking about received signals} or slowly varying frequency.  There are
-a number of potential sources of \glspl{CW} including a \gls{CBC} signal
-earlier in the inspiral phase.  Before the final stages of the inspiral of a
-\gls{CBC} signal, the objects orbiting at much slower non-relativistic
-speeds.~\chris{these last 2 sentences need to be cleaned up/merged to make more
-sense. The second sentence isn't really a sentence} They therefore emit a
-\gls{GW} with a slowly varying frequency and can remain in this phase for
-millions of years~\chris{too basic and vague. Are you sure it's not hundreds of
-thousands? Do a calculation }.  This signal however, is at lower frequency than
-ground based detectors can detect, therefore space based detectors such as
-\gls{LISA} \citep{danzmann1996LISALaser} are expected to observe this type of
-\gls{CW}.~\chris{OK, yes, but why start the sectiuon talking about a source
-that isn't that important. Wouldn't it be better to discuss LISA CW sources at
-the end. Plus the main LISA CW soiurce is white dwarf binaries.}
+\glspl{CW} are long duration signals, where its duration greater than
+the length of an observation run of ground based detectors and in general has a
+a slowly varying and narrowband frequency. 
 
 The primary source for many \glspl{CW} searches is rapidly rotating neutron
 stars with spin periods ranging from $\sim 10^{-3} - 10$ s
-\citep{manchester2005AustraliaTelescope}.  Neutron stars originate when a
-massive star $\sim 11 - 20 M_{\odot}$ collapses and are the remnant of this
-collapse, they are objects with incredibly high density~\chris{you can't use
-phrases like this "incredibly high"? What does that mean? Be more specific and
-scientific} and are highly magnetised with field strengths of $10^8 - 10^{15}$
-G \citep{konar2017MagneticFields}.  They have masses around $1.4-2 \;
-M_{\odot}$ contained in a star with radius of $\sim 10$ km.  Despite many
-observations in the electromagnetic spectrum and a large amount of research,
+\citep{manchester2005AustraliaTelescope}, which in general have well modelled signals.  Neutron stars form when a
+massive star $\sim 11 - 20 M_{\odot}$ collapses, where around $1.4-2 \;
+M_{\odot}$ \citep{} \joe{reference} in the core of the star collapes to a radius of $\sim 10$ km and the outer layers are ejected \citep{} \joe{reference}. 
+This gives the objects high densities of $\sim 10^{17}$ kgm$^{-3}$ and they are also highly magnetised objects with field strengths of $10^8 - 10^{15}$ G \citep{konar2017MagneticFields}.  
+Despite many observations on neutron stars in the electromagnetic spectrum,
 these objects are not well understood.  A key part or neutron stars which is
 not understood is the \gls{EOS}. A review of the current understanding can be
 found in \cite{lattimer2016EquationState}.  The \gls{EOS} relates quantities
 such as the pressure and density of a neutron star and dictates how the neutron
-star matter behaves.  Observations of \glspl{GW} from neutron stars can place
+star matter behaves, where observations of \glspl{GW} from neutron stars can place
 limits on the \gls{EOS} of this type of matter.  These observations have
 already been made in the form of \gls{BNS} mergers
-\citep{abbott2017GW170817Observation}.  However, independent observations of
+\citep{abbott2017GW170817Observation}, however, independent observations of
 rapidly rotating neutron stars can add to this understanding by placing limits
-on the deformability of the star and therefore the \gls{EOS}.~\chris{OK, a bit
-stocato at the start of the paragraph. You could think about linking up some
-sentences and expanding on them. All quantitative statements should ave a
-reference e.g., the mass statement. The language could be more scientific in
-places, "a large amount of research" sounds a bit undergraduate. }
+on the deformability of the star and therefore the \gls{EOS}.
 
-For a neutron star to emit a gravitational wave~\chris{be more specific, a CW
-GW} it needs to have some asymmetry in its mass distribution around its
-rotation axis,~\chris{not appropriate use of a comma} this follows from
-Eq.~\ref{intro:gravwave:amp}.  There are a number of different mechanisms which
+For a neutron star to emit a \gls{CW}, Eq.~\ref{intro:gravwave:amp} tells us that it needs to have some asymmetry in its mass distribution around its rotation axis.  There are a number of different mechanisms which
 could cause this and emit \glspl{GW}, some of these are reviewed in
 \citep{glampedakis2017GravitationalWaves,riles2017RecentSearches,haskell2015DetectingGravitational,lasky2015GravitationalWaves}.
 Here I will summarise two main theories: Neutron star mountains and neutron
@@ -458,26 +409,22 @@ This is defined using the principal moments of inertial
 \epsilon = \frac{I_{xx}-I_{yy}}{I_{zz}},
 \end{equation}
 
-where $I_{zz},I_{xx},I_{yy}$ are the principal moment of inertia~\chris{but
-they're more like the different components of the inertia in each of the 3
-spatial axes. Also, didn't you already use $I$ to represent the second moment
-of the mass distribution in Sec 1.1. Are they the same thing?}.
-This is when the star is rotating around the $z$ axis so $I_{zz}$ is along the
-rotation axis.~\chris{clunky language} 
+where $I_{zz},I_{xx},I_{yy}$ are the components of the moment of inertia in each of the spatial axes~\chris{ Also, didn't you already use $I$ to represent the second moment
+of the mass distribution in Sec 1.1. Are they the same thing?} and the star is rotating around the $z$ axis, i.e. $I_{zz}$ is parallel with the $z$ axis.
 
 There are a number of theories which describe the origin of this axisymmetry.
 If the pulsar is in a binary system and accreting material from its companion
-star, the material can be funneled towards the magnetic poles by the magnetic
+star, the material can be funnelled towards the magnetic poles by the magnetic
 field, thereby causing a hot spot \citep{haskell2015DetectingGravitational}.
 This `hot spot' could cause a deformation on the surface of the star which is
 not axisymmetric.  The magnetic stresses from strong magnetic fields within the
 star, could potentially also cause non axisymmetric deformations to the star
-\citep{}~\chris{fix reference - I think Cutler had a paper on this}. Finally
+\citep{cutler2002GravitationalWaves}. Finally
 the spin down of the pulsar itself could cause stresses in the crust of the
-star until the point of breaking, its then after this break which could leave a
-distortion in the crust \citep{becker2009NeutronStars}~\chris{grammar is a bit
-dodgy here}.  More details on the signal waveform of this type of \gls{GW} and
-methods to search for it will be explained in Sec.~\ref{searchcw}.
+star until the point of breaking, after this break a
+distortion could remain in the crust \citep{becker2009NeutronStars} \joe{reread about this}.  
+%extra reference reread \citep{ruderman1976CrustbreakingNeutron}
+More details on the signal waveform of this type of \gls{GW} and methods to search for it will be explained in Sec.~\ref{searchcw}.
  
 %%%%%%%%%%%%%%
 \subsubsection{Neutron star oscillations}
@@ -489,14 +436,14 @@ between these modes is the restoring force bringing the perturbed state back to
 equilibrium.  For example, gravity is the restoring force for f-modes where the
 oscillations happen in the crust of the star.  The more promising of these for
 gravitational wave emission and detection is the r-mode
-\citep{lasky2015GravitationalWaves}~\chris{this reference is to a review bit
-there are potentially better dedicated r-mode references you could use.}.
+\citep{owen2000GravitationalWaves}.
 These are oscillations in the neutron superfluid part of the star, where the
-restoring force is the Coriolis effect from the rotation of the star.  These
-modes can become unstable to \gls{GW} emission in rapidly rotating neutron
-stars \citep{lasky2015GravitationalWaves}, making them most likely for a
+restoring force is the Coriolis effect from the rotation of the star.  
+These oscillations would be damped by \gls{GW} emission, however, due to the different frames of reference of the observer and rotating star, an instability can arise such that \gls{GW} emission drives the oscillation. 
+The modes then become unstable to \gls{GW} emission in rapidly rotating neutron
+stars \citep{owen2000GravitationalWaves}, making them most likely for a
 detection.  For more details on this mechanism see
-\citep{lasky2015GravitationalWaves,owen1998GravitationalWaves,jonesCFSInstability}.~\chris{You
+\citep{owen2000GravitationalWaves,lasky2015GravitationalWaves,owen1998GravitationalWaves,jonesCFSInstability}.~\chris{You
 have a bunch of text that you've removed that discusses r-modes. My initial
 feeling is that you should add more explanation to this existing paragraph.}
 
@@ -529,6 +476,26 @@ Therefore, a neutron star is unstable to \gls{GW} emission if it is rotating suf
 For a more detailed view on how r-modes generate \gls{GW} see \citep{owen1998GravitationalWaves,jonesCFSInstability}
 \fi
 
+%
+% REMOVED LISA CW SOURCE FOR NOW
+%
+\if
+\joe{either remove or rewrite the CBC LISA CWs}
+Another potential source of \glspl{CW} is \gls{CBC} signals
+early in the inspiral phase.  Before the final stages of the inspiral of a
+\gls{CBC} signal, the objects orbiting at much slower non-relativistic
+speeds.~\chris{these last 2 sentences need to be cleaned up/merged to make more
+sense. The second sentence isn't really a sentence} They therefore emit a
+\gls{GW} with a slowly varying frequency and can remain in this phase for
+millions of years~\chris{too basic and vague. Are you sure it's not hundreds of
+thousands? Do a calculation }.  This signal however, is at lower frequency than
+ground based detectors can detect, therefore space based detectors such as
+\gls{LISA} \citep{danzmann1996LISALaser} are expected to observe this type of
+\gls{CW}.~\chris{OK, yes, but why start the sectiuon talking about a source
+that isn't that important. Wouldn't it be better to discuss LISA CW sources at
+the end. Plus the main LISA CW soiurce is white dwarf binaries.}
+\fi
+
 %%
 %%  END OF REMOVED BIT
 %%
@@ -542,43 +509,25 @@ For a more detailed view on how r-modes generate \gls{GW} see \citep{owen1998Gra
 %%%%%%%%%%%%%%
 
 The indirect detection of gravitational waves from the Hulse-Taylor binary
-pulsar system~\chris{add ref} left little doubt that \gls{GW} existed.  The
-real challenge was to design an instrument which could directly detect
-gravitational waves.  There were~\chris{you use "were" but I think "are" is
-better since some of these don't yet exist} a number of different proposed
-methods for the design of the instrument, notably: resonant bar detectors, both
-ground based and space based interferometers, pulsar timing arrays~\chris{PTAs
-are not really a designed instrument} and cosmic microwave background (CMB)
+pulsar system \citep{weisberg1981GravitationalWaves} left little doubt that \gls{GW} existed.  The
+real challenge was to design an instrument or develop a technique which could directly detect
+gravitational waves, there were a number or proposed methods, notably: resonant bar detectors, both
+ground based and space based interferometers, pulsar timing arrays and cosmic microwave background (CMB)
 detectors. The first resonant bar detector was designed and built by Joseph
-Weber \citep{weber1966ObservationThermal}.  These are large cylinders of metal
-which should~\chris{I wouldn't use words like "should" in this context}
-resonate as a gravitational wave passes by.  There are a few different designs
+Weber \citep{weber1966ObservationThermal}, where they are large cylinders of metal
+which resonate as a gravitational wave passes by.  There are a few different designs
 of this type of detector, including an omni-directional design
-\citep{dewaard2003MiniGRAILFirst}~\chris{another series of short sharp
-sentences}. Pulsar timing arrays aim to use the accurate arrival time of pulses
+\citep{dewaard2003MiniGRAILFirst}. 
+Pulsar timing arrays aim to use the accurate arrival time of pulses
 from millisecond pulsars to measure \gls{GW}
 \citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and
-the observer, the arrival time of the pulses should~\chris{again, better to use
-"will"} change by $\mathcal{O}(10)$ ns
-\citep{hobbs2017GravitationalWave}~\chris{too vague a description - why 10ns?
-What is the GW source? What if it's further away? Do you still get 10ns?  The
-answer is the astrophsyical stochastic background at nanohertz frequencies from
-the universes population of super massive black hole binaries. }.  Whilst a
-detection has not been made using pulsar timing arrays, these methods are still
-in use~\chris{strange way to say that people are still searching}.  Cosmic
-microwave background detectors aimed to look~\chris{grammar - detectors don't
-look at anything, they detect. In this case they detect the CMB and scientists
-then analyse the data for evidence of B-mode polarisation} for evidence of
-gravitational waves in the polarisations of the CMB
-\citep{ade2018ConstraintsPrimordial}.  These use the a~\chris{grammar} range of
-detectors to look at the CMB~\chris{define the CMB acronym} however, are yet to
-confirm a detection of a \gls{GW} signal.  The most commonly known
-design~\chris{they're not really common are they. There are 5 in the world.
-Really, the thing to point out is that bar detectors are old technology and
-IFOs are the current best known experiment for ground and space based "direct"
-detection.} of a \gls{GW} detector is the ground based interferometer, these
+the observer, the arrival time of the pulses will change. The change in arrival time depends on the source and its parameters, however, for supermassive black hole binaries emitting at nanohertz frequencies at around 1 Gpc, the change in arrival time is by $\mathcal{O}(10)$ ns \citep{hobbs2017GravitationalWave}.  \gls{CMB} detectors can be used to find evidence of \gls{GW} by investigating the B-mode polarisations of the \gls{CMB}
+\citep{ade2018ConstraintsPrimordial}. \joe{could say more} A number of
+detectors are used to look at the \gls{CMB} however, are yet to
+confirm a detection of a \gls{GW} signal.  
+The current best known design of a \gls{GW} detector is the interferometer, the ground based detector \gls{LIGO}
 made the first detection of \gls{GW} in 2015
-\citep{abbott2016ObservationGravitational}.  These are the focus of this
+\citep{abbott2016ObservationGravitational} and interferometers are being used for space based detectors.  These are the focus of this
 section as the analysis that will follow uses data from the \gls{LIGO}
 detectors in the USA \citep{abbott2009LIGOLaser,aasi2015AdvancedLIGO} and Virgo
 detector in Italy
@@ -593,28 +542,26 @@ and CMB measurements.}
 %%%%%%%%%
 
 Laser interferometers use the interference of light to measure a
-length~\chris{change (IMPORTANT)} with high precision.  The majority of this
+length change with high precision.  The majority of this
 section will focus on ground based interferometers such as \gls{LIGO} and Virgo
 \citep{aasi2015AdvancedLIGO,acernese2015AdvancedVirgo}.  A simple design of an
-interferometer is shown in Fig.~\ref{detectors:interferometer:simple}.  A laser
+interferometer is shown in Fig.~\ref{detectors:interferometer:simple}, here a laser
 beam is fired at a beam splitter which splits the light equally down two
 perpendicular arms.  Each of these beams is reflected from a mirror at the end
-of either arm.  The light then returns to the beam splitter where the two beams
+of either arm, where the light then returns to the beam splitter where the two beams
 are combined and sent to a photo-detector.  At the output, there is an
 interference pattern between the two beams.  If the length of one of the arms
 is changed then the interference pattern will change as the phase of one beam
 changes with respect to the other.  The phase difference of the light can be
 related to the wavelength of the light, $\lambda_l$ and the length of the
-detectors arms $L$ by~\chris{OK, but still a lot of short sharp sentences here}
+detectors arms $L$ by
 %
 \begin{equation}
 \label{intro:detectors:phasechange}
-\Delta \phi \sim \frac{\Delta L}{\lambda_l},
+\Delta \phi \sim 2 \pi \frac{\Delta L}{\lambda_l},
 \end{equation}
 %
-~\chris{in this expression your phase change is a dimensionless fraction of a
-cycle where 1 equals a full cycle. Are you sure that you don't want to be
-talking about radians? In which case you need $2\pi$ on the RHS} where $\Delta
+where $\Delta
 \phi$ is the phase change and $\Delta L$ is the difference in the arm lengths.
 An interferometer can then measure small changes in the mirrors position.
 
@@ -630,14 +577,8 @@ An interferometer can then measure small changes in the mirrors position.
 		\caption{Fabry-Perot interferometer.}
 		\label{detectors:interferometer:fabry}
 	\end{subfigure}
-    \caption[Basic layout of the \gls{LIGO} detectors.]{\gls{LIGO} uses
-interferometry to make a detection. This has many additional features, one of
-which is shown above.~\chris{please change the 1st 2 sentences here - they are
-overly simplistci and don't actually make sense.} ETMY and ETMX refer to the
-end test masses, which are the mirrors at the end of the interferometer arms.
-The beam splitter splits the Laser beam equally to each arm, this them
-recombines the beams back to the detector~\chris{you already say this in the
-main text}.  ITMY and ITMX refer to the internal test masses, these create a
+    \caption[Basic layout of the \gls{LIGO} detectors.]{Fig.~\ref{detectors:interferometer:simple} shows a basic interferometer. \gls{LIGO} includes many additions to this interferometer to increase its sensitivity to \gls{GW}, one addition known as a Fabry-Perot cavity is shown in Fig.~\ref{detectors:interferometer:fabry}.  \gls{ETMY} and \gls{ETMX} refer to the mirrors at the end of the interferometer arms.
+\gls{ITMY} and \gls{ITMX} create a
 Fabry-Perot cavity in the interferometers arms which can build up laser
 power.~\chris{do you need both diagrams? You only talk about the second one?} }
 \label{detectors:interferometer}
@@ -646,8 +587,7 @@ power.~\chris{do you need both diagrams? You only talk about the second one?} }
 This can be used in gravitational wave detection as the mirrors at the end of
 each arm of the interferometer can be treated as `free' test masses.  Figure
 \ref{gw:polarisations} shows the effect of a \gls{GW} on free test masses.  One
-can see this by looking at the proper separation~\chris{best to use the
-standard terminology of "proper distance"} between two test masses.  If we
+can see this by looking at the proper distance between two test masses.  If we
 place two test masses along the $x$ axis with separation $L_c$ where a
 gravitational wave is travelling along the $z$ axis, the proper distance
 between them is given by
@@ -657,22 +597,19 @@ between them is given by
 \end{equation}
 %
 where $g_{xx} = 1 + h_{+}(t)$ is the combination of
-Eq.~\ref{intro:gravwave:metric} and Eq.~\ref{intro:gw:gravwave}.  As the metric
-perturbation is small~\chris{could use the standard mathemtaical notation to
-say that} is can be expanded to first order, i.e.  $\sqrt{g_{xx}} = \sqrt{1 +
+Eq.~\ref{intro:gravwave:metric} and Eq.~\ref{intro:gw:gravwave}.  As $h_{+}(t) << 1$, is can be expanded to first order, i.e.  $\sqrt{g_{xx}} = \sqrt{1 +
 h_{+}(t)} \approx 1 + \frac{1}{2}h_{+}(t)$.  The proper distance is then
 %
 \begin{equation}
     \label{intro:detectors:properdist}
     \begin{split}
      L &\approx \int_{0}^{L_c} 1 + \frac{1}{2}h_{+}(t) dx \\
-      &\approx L_c + L_c \frac{1}{2}h_{+}(t).
+      &\approx L_c + L_c \frac{1}{2}h_{+}(t),
     \end{split}
 \end{equation}
 %
-~\chris{state the approximation that the wave isn't actually changing as you
-integrate along the arm length - this is the long wavelength approximation -
-i.e. $h(t)$ is basically constant for the laser photon.} From
+where here we use the long wavelength approximation, where the wave $h(t)$ is not changing whilst the photon travels along the arm \joe{read the long wavelength approx}.
+ From
 Eq.~\ref{intro:detectors:properdist} on can see that in this configuration the
 plus polarisation of the gravitational wave causes the separation between the
 two test masses to oscillate \citep{flanagan2005BasicsGravitational}.  This
@@ -683,17 +620,16 @@ oscillation can then be expressed as a fractional length change
     \frac{\delta L}{L} \approx \frac{1}{2} h_{+}.
 \end{equation}
 %
-In the interferometer, this affect~\chris{effect} changes the lengths of the
+In the interferometer, this effect changes the lengths of the
 two arms, which therefore changes $\Delta L$ in
 Eq.~\ref{intro:detectors:phasechange}.  The change of the interference pattern
 with time is then related to the \gls{GW}.  In practice the position of the two
-mirrors are held in position such that the interference pattern does not
-change~\chris{perect opportunity to say that it is held on a dark fringe}.
-The \gls{GW} is then related to~\chris{"related to" is strangley vague} the
+mirrors are held in position such that the interference pattern is held on a dark fringe and does not change.
+The \gls{GW} is then proportional to the
 readout of the mirrors control system.
 
 If one looks at Eq.~\ref{intro:detectors:fraclength} then if the mirrors at the
-end of the arms (ETMX and ETMY~\chris{use the acronym package}) are are placed
+end of the arms (\gls{ETMX} and \gls{ETMY}) are are placed
 further from the beam splitter, i.e. $L$ is increased, then the length change
 of the arms due to the gravitational wave will be greater.  This means that
 increasing the length of the detectors arms increases the sensitivity of the
@@ -701,9 +637,9 @@ interferometer.  A method to achieve a similar affect without physically
 increasing the arm length is to use a Fabry-Perot cavity
 \citep{aasi2015AdvancedLIGO}, this is shown in
 Fig.~\ref{detectors:interferometer:fabry}.  This is where a semi-transparent
-mirror is placed between the beam splitter and end mirror in each arm (ITMX and
-ITMY~\chris{use the acronym package}).  Light enters this cavity and reflects
-back and forth between the two mirrors (ITMX and ETMX) a number of times before
+mirror is placed between the beam splitter and end mirror in each arm (\gls{ITMX} and
+\gls{ITMY}).  Light enters this cavity and reflects
+back and forth between the two mirrors (\gls{ITMX} and \gls{ETMX}) a number of times before
 returning to the beam splitter.  This increases the time the light spends in
 one arm and is equivalent to increasing the arm length~\chris{even more
 important to mention the long wavelength approximation now}.  Actual ground
@@ -713,7 +649,7 @@ described above.  They use many techniques to increase the sensitivity some of
 which are outlined in
 \citep{aasi2015AdvancedLIGO,abbott2009LIGOLaser}~\chris{are you sure you don't
 want to discuss signal and power recycling?}.  Many of these techniques are
-designed to reduce non-astrophysical affects~\chris{effects} on the detector,
+designed to reduce non-astrophysical effects on the detector,
 some of these effects and solutions are listed in
 Sec.~\ref{intro:detector:noise}.
 
@@ -723,38 +659,75 @@ Sec.~\ref{intro:detector:noise}.
 %%%%%%%%%%
 %%%%%%%%%
 
-An important factor to know when using detector data to search for
-astrophysical signals is the detectors antenna pattern~\chris{This is not the
-way to introduce fundamental aspects of GW physics. It reads like a safety
-training video "If you're going to work at this Argos then you need to know a
-few things about ladders..." You also need to do more than simply show a few
-plots. Please at least describe how they modify the detector output in terms of
-having plus and cross terms multiplying the plus and cross $h(t)$ components -
-use an equation or 2 (in other words, what is $R^{+,\times}$ in
-Fig.~\ref{intro:detectors:response}. Better still would be a simple derivation.
-Do you have Andersson and Creighton to hand?}. This measures how sensitive the
-detector is to different directions~\chris{and polarisations}. An example of
-the antenna response for \gls{LIGO} is in Fig.~\ref{intro:detectors:response}
-where the detectors arms lie on the x and y axis of the image.  This is clear
+The detectors are not equally sensitive to all polarisations to all locations on the sky, rather it has an antenna pattern which is dependent on the sky location and the polarisation of the \gls{GW}. 
+We can find this antenna response of the detector as in \citep{maggioreGravitationalWaves}, by thinking about the \gls{GW} in the frame of the detector.
+We can define the detector to be in the frame $(x,y,z)$ with the detector arms along the $x$ and $y$ axes, and the source to be in the frame $(x^{\prime},y^{\prime},z^{\prime})$, where the \gls{GW} is travelling along $z^{'}$ and is pointing towards the detector. 
+The axes $z^{\prime}$ then has polar coordinates $\theta$ and $\phi$ in the detector frame.
+We can determine the angular pattern functions by first looking at the spatial \gls{GW}, where the $h_{+}$ and $h+{\times}$ polarisations are defined with respect to the $(x^{\prime},y^{\prime},z^{\prime})$ frame
+\begin{equation}
+    \label{intro:gw:gravwave}
+    h^{\prime}_{i,j} = \left( 
+    \begin{matrix} 
+    h_{+} & h_{\times} & 0 \\
+    h_{\times} & -h_{+} & 0 \\
+    0 & 0 & 0  \\
+    \end{matrix}
+    \right).
+\end{equation}
+The frame of the source $(x^{\prime},y^{\prime},z^{\prime})$, can then be transformed into the detector frame using the rotation
+\begin{equation}
+    \label{intro:gw:gravwave}
+    \mathcal{R} = \left( 
+    \begin{matrix} 
+    \cos(\phi) & \sin(\phi) & 0 \\
+    -\sin(\phi) & \cos(\phi) & 0 \\
+    0 & 0 & 1  \\
+    \end{matrix}
+    \right)
+    \left( 
+    \begin{matrix} 
+    \cos(\theta) & 0 & \sin(\theta) \\
+    0 & 1 & 0 \\
+    -\sin(\theta) & 0 & \cos(\theta)  \\
+    \end{matrix}
+    \right).
+\end{equation}
+This rotation matrix is then applied to the \gls{GW} twice as it is a tensor, i.e. $h_{ij} = \mathcal{R}_{il} \mathcal{R}_{jk} h^{\prime}_{lk} $ or in matrix notation $\bm{h} = \bm{\mathcal{R}} \bm{h}^{\prime} \bm{\mathcal{R}}^{T}$.
+The relative phase shift in Eq.~\ref{intro:detectors:phasechange} is dependent on the difference in the arm lengths of the detector, and in this scenario the arms are lying on the $x$ and $y$ axis, therefore we are interested in the $h_{xx}$ and $h_{yy}$ components, where $\Delta L = \frac{1}{2}(h_{xx} - h_{yy})$ \citep{maggioreGravitationalWaves} \joe{say a little why this is the case simple derivation}.
+After applying this tensor, one can look at the $xx$ and $yy$ component of the signal,
+\begin{equation}
+    \begin{split}
+        h_{xx} &= \left( \cos^2(\theta) \cos^2 (\phi) - \sin^2 (\phi)\right)h_{+} + 2\cos (\theta) \sin (\phi) \cos (\phi) h_{\times}\\
+        h_{yy} &= \left( \cos^2(\theta) \cos^2 (\phi) - \cos^2 (\phi)\right)h_{+} - 2\cos(\theta) \sin (\phi) \cos(\phi) h_{\times} . \\
+    \end{split}
+\end{equation}
+Then we can write,
+\begin{equation}
+    \label{intro:detector:polarisations}
+    \frac{1}{2}(h_{xx} - h_{yy}) = \frac{1}{2} \left( 1 + \cos^2 \left(\theta\right) \right) \cos\left(2\phi\right) h_{+} + \cos \left(\theta\right) \cos \left(2\phi \right)h_{\times} = F_{+}(\theta,\phi)h_{+} + F_{\times}(\theta,\phi)h_{\times},
+\end{equation}
+where $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ are the antenna pattern functions of the detector.
+This is a a measure of how sensitive the detector is to different directions and polarisations. An example of
+the antenna response for \gls{LIGO} is shown in Fig.~\ref{intro:detectors:response},
+where the detectors arms lie on the x and y axis of the image. 
+%
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{C1_intro/antenna_pattern.pdf}
+    \caption[Antenna response of the \gls{LIGO} detectors.]{The antenna
+response is shown for the plus and cross polarisations $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ defined in Eq.~\ref{intro:detector:polarisations}. The detectors arms lie on the $x$ and
+$y$ axis in the above plots. } \label{intro:detectors:response}
+\end{figure}
+%
+The shape of the antenna pattern is clear
 when thinking about how a gravitational wave affects the test masses as in
-Fig.~\ref{gw:polarisations}~\chris{is the average pattern important? Do you
-discuss it?}.  As the \gls{GW} is transverse to its propagation,
+Fig.~\ref{gw:polarisations}, as the \gls{GW} is transverse to its propagation,
 when the detector is face on to the source, there will be a maximum change in
 the arm lengths and therefore a maximum sensitivity.  In the same way the
 sensitivity will be at a minimum when edge to the source.~\chris{this is a good
 start in explaining the plots but please expand. Why are their nulls in cetain
 directions?}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{C1_intro/LIGO_beam_patterns.png}
-    \caption[Antenna response of the \gls{LIGO} detectors.]{The antenna
-response is shown as in \citep{romano2019SearchesStochastic} for both the plus
-and cross~\chris{$+$ and $\times$?} polarisations and their average~\chris{why
-is the avergae relavent?}. The detectors arms lie on the x and
-y axis in the above plots~\chris{use mathmode $x$ and $y$ when referring to
-variables}. } \label{intro:detectors:response}
-\end{figure}
 
 %%%%%%%%%%%
 %%%%%%%%%%
@@ -765,9 +738,7 @@ variables}. } \label{intro:detectors:response}
 To increase the sensitivity of the \gls{LIGO} detectors, any effect on the
 output of the interferometer which is not astrophysical ideally needs to be
 reduced.  This involves understanding what causes certain noise features in the
-detector, and how the affect~\chris{OK, you really need to get the whole
-affect-effect thing sorted out. Affect is the verb "you can affect something"
-and effect is the noun "it had this effect" - get it sorted throughout} of
+detector, and how the effect of
 these can be limited.  Within the detector, there are many sources of noise.
 Some of these noise sources and how they limit the detectors strain sensitivity
 are all shown in Fig.~\ref{detectors:noisesensitivity} from
