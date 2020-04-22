@@ -128,7 +128,7 @@ Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE}
 The sharp peaks in the center of each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents simulations where the Viterbi track is close to the simulated pulsar track, and the broader distributions represent areas of the Viterbi track has not identified the pulsar track but is wandering randomly.
 The sub plots in Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases the distribution is more closely centred around 0, i.e. the Viterbi and pulsar tracks are similar, which is expected.
 %
-\begin{figure}[ht]
+\begin{figure}[hpt]
 
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/KDE_range_50_100.pdf}
@@ -155,21 +155,15 @@ The prior for $\rho$ is also flat in the range $[50,200]$.
 %%%%
 %%%%
 
-For the tests of this method, we generate a pulsar signal in a spectrogram and run the SOAP search as in Sec.~\ref{soap:results} and \ref{machine:results}.
-In each of these we record the Viterbi track and the pulsar signal parameters $\alpha, \delta, f, \dot{f} , \rho$ associated with the pulsars frequency track.
-This contains the information needed to run the bayesian analysis described in Sec.~\ref{par_est:bayes}.
-We generated signals with the parameters as described in Tab.~\ref{}, which had an \gls{SNR} range between 20 and 200\joe{check}, and frequency ranges between 40 and 500 Hz \joe{check}.
-However, as the \gls{SNR} is the simulations decreases, the probability of SOAP identifying the signal decreases. 
-As this analysis is intended to be the first stage of a follow up of those results, we use the detection statistics mentioned in Sec.~\ref{soap:results} to identify `detected' signals.
-In these sections, we set a 1\% false alarm rate to generate efficiency curves, therefore, for this analysis we use the top 1\% of Viterbi statistics from this search band for a follow up analysis.
-
-As an example of what is returned by the Bayesian analysis described in Sec.\ref{par_est:bayes}, Fig.~\ref{par_est:results:example_posterior} shows the returned marginal posterior distributions for each of the parameters in the search.
-
+The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and a pulsar frequency track and returns a posterior distribution on the parameters $\alpha, \delta, f, \dot{f}$ and $\rho$.
+An example of this can be seen in Fig.~\ref{par_est:results:example_posterior}, where marginal posterior distributions for each of the parameters is shown.
+In this example with \gls{SNR} 144, the posterior distributions are clearly located around the injected values for the parameters, where the sky position parameters have a bimodal distribution.
+%
 \begin{figure}[pt]
 
     \centering
-    \includegraphics[width=\linewidth]{C5_parameter/cornerplot.png}
-    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows an example of the posterior distribution of a signal with \gls{SNR} \joe{SNR}. Each panel shows the marginal distributions for each parameter, where the parameters used for the simulation are marked in red.}
+    \includegraphics[width=\linewidth]{C5_parameter/cornerplot.pdf}
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows an example of the posterior distribution of a signal with \gls{SNR} 144. Each panel shows the marginal distributions for each parameter, where the parameters used for the simulation are marked in orange. In this example each of the posteriors match well with the injected parameters, but the sky position is bimodal. }
     \label{par_est:results:example_posterier}
     
 \end{figure}
@@ -182,16 +176,25 @@ In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital p
 This then means that we would expect the posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{} and \ref{}.
 The sky position parameters of the pulsar are in the equatorial coordinate system, i.e. the earth as the reference frame, therefore have been transformed into the Ecliptic frame to make the sky position posteriors easier to read and understand.
 %
-\begin{figure}[ht]
+\begin{sidewaysfigure}[p]
     \centering
-    \includegraphics[width=\linewidth]{C5_parameter/skypos_ecliptic.png}
-    \caption[Example of posterior of sky position]{This figure shows an example of the marginal posterior distribution of the sky position of a signal with \gls{SNR} \joe{SNR}. The coordinates are in the ecliptic frame.}
+    \includegraphics[width=\linewidth]{C5_parameter/skypos_ecliptic.pdf}
+    \caption[Example of posterior of sky position]{This figure shows an example of the marginal posterior distribution of the sky position of a signal with \gls{SNR} 144. The coordinates are in the ecliptic frame.}
     \label{par_est:results:example_posterier}
     
-\end{figure}
+\end{sidewaysfigure}
 %
 
 \section{searching over many signals section \joe{need a name}}
+
+To test this method, we generate a set of simulations of the spectrograms of pulsar signals as in Sec.~\ref{soap:results} and Sec.~\ref{machine:results}.
+In each of these we record the Viterbi track and the pulsar signal parameters $\alpha, \delta, f, \dot{f} , \rho$ associated with each simulation, from which the pulsar track can be generated.
+The Viterbi track and the pulsar track is all the information needed to run the Bayesian analysis described in Sec.~\ref{par_est:bayes}.
+We generated signals in 50\% of the 0.1 Hz wide sub-bands between between 40 and 500 Hz, with the parameters as described in Tab.~\ref{}. 
+This meant that we have 2300 simulated signals which had an \gls{SNR} range between 20 and 200.
+However, as the \gls{SNR} of the simulations decreases, the probability of SOAP identifying the signal decreases, therefore, we only want to run the Bayesian parameter estimation on signals which are most likely to be astrophysical.
+Therefore, as in Sec.~\ref{soap:results}, we find the false alarm rate, which is the fraction of bands which contain no injection and has a Viterbi statistic which exceeds a given threshold, where this is set to 0\% for this test.
+We can then select all of the sub-bands which have a Viterbi statistic above this threshold for further investigation, where with a 0\% false alarm rate we have 2000 injections to investigate.
 
 To test this analysis, the Bayesian method in Sec.~\ref{par_est:bayes} is run on the simulation which had Viterbi statistics within the top 1\% of those in the search band between 40 and 500 Hz.
 For each of these simulations, the analysis returns a posterior distribution of the parameters.
