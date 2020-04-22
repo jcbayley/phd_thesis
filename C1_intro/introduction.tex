@@ -176,7 +176,7 @@ h_{\mu \nu} = \left(
 0 & 0 & 0 & 0 \\
 0 & h_{+} & h_{\times} & 0 \\
 0 & h_{\times} & -h_{+} & 0 \\
-0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 \\
 \end{matrix}
 \right) 
 e^{i(kt - wt)}.
@@ -450,6 +450,7 @@ feeling is that you should add more explanation to this existing paragraph.}
 %%
 %% IM REMOVING THIS AS PROBABLY CAN'T ANSWER MANY QUESTIONS ON IT
 %%
+
 \if
 Figure \ref{intro:source:cw:rmode} shows an highly exaggerated view of a neutron star with an oscillation mode travelling in each direction.
 \begin{figure}[h]
@@ -480,7 +481,7 @@ For a more detailed view on how r-modes generate \gls{GW} see \citep{owen1998Gra
 % REMOVED LISA CW SOURCE FOR NOW
 %
 \if
-\joe{either remove or rewrite the CBC LISA CWs}
+To me \joe{either remove or rewrite the CBC LISA CWs}
 Another potential source of \glspl{CW} is \gls{CBC} signals
 early in the inspiral phase.  Before the final stages of the inspiral of a
 \gls{CBC} signal, the objects orbiting at much slower non-relativistic
@@ -580,58 +581,95 @@ An interferometer can then measure small changes in the mirrors position.
     \caption[Basic layout of the \gls{LIGO} detectors.]{Fig.~\ref{detectors:interferometer:simple} shows a basic interferometer. \gls{LIGO} includes many additions to this interferometer to increase its sensitivity to \gls{GW}, one addition known as a Fabry-Perot cavity is shown in Fig.~\ref{detectors:interferometer:fabry}.  \gls{ETMY} and \gls{ETMX} refer to the mirrors at the end of the interferometer arms.
 \gls{ITMY} and \gls{ITMX} create a
 Fabry-Perot cavity in the interferometers arms which can build up laser
-power.~\chris{do you need both diagrams? You only talk about the second one?} }
+power.}
 \label{detectors:interferometer}
 \end{figure}
 
 This can be used in gravitational wave detection as the mirrors at the end of
 each arm of the interferometer can be treated as `free' test masses.  Figure
-\ref{gw:polarisations} shows the effect of a \gls{GW} on free test masses.  One
-can see this by looking at the proper distance between two test masses.  If we
-place two test masses along the $x$ axis with separation $L_c$ where a
-gravitational wave is travelling along the $z$ axis, the proper distance
+\ref{gw:polarisations} shows the effect of a \gls{GW} on free test masses, where this can be seen by looking at the proper distance between two test masses.  If we
+place two test masses along the $x$ axis ($\mu = 1$)with separation $L_0$ where a
+gravitational wave is travelling along the $z$ axis ($\mu = 3$), the proper distance
 between them is given by
 %
 \begin{equation}
-    L = \int_{0}^{L_c} \sqrt{g_{xx}} dx,
+    L = \int_{0}^{L_0} \sqrt{g_{\mu \nu} dx^{\mu} dx^{\nu}}= \int_{0}^{L_0} \sqrt{g_{11}} dx^1,
 \end{equation}
 %
-where $g_{xx} = 1 + h_{+}(t)$ is the combination of
-Eq.~\ref{intro:gravwave:metric} and Eq.~\ref{intro:gw:gravwave}.  As $h_{+}(t) << 1$, is can be expanded to first order, i.e.  $\sqrt{g_{xx}} = \sqrt{1 +
+where,
+\begin{equation}
+    \label{intro:detectors:metricpertubation}
+     g_{11} = g_{xx} = 1 + h_{11} = 1 + h_{+}(t),
+\end{equation}
+which is the combination of Eq.~\ref{intro:gravwave:metric} and Eq.~\ref{intro:gw:gravwave}.  As $h_{+}(t) << 1$, is can be expanded to first order, i.e.  $\sqrt{g_{11}} = \sqrt{1 +
 h_{+}(t)} \approx 1 + \frac{1}{2}h_{+}(t)$.  The proper distance is then
 %
 \begin{equation}
     \label{intro:detectors:properdist}
     \begin{split}
-     L &\approx \int_{0}^{L_c} 1 + \frac{1}{2}h_{+}(t) dx \\
-      &\approx L_c + L_c \frac{1}{2}h_{+}(t),
+     L &\approx \int_{0}^{L_0} 1 + \frac{1}{2}h_{+}(t) dx \\
+      &\approx L_0 + L_0 \frac{1}{2}h_{+}(t),
     \end{split}
 \end{equation}
 %
-where here we use the long wavelength approximation, where the wave $h(t)$ is not changing whilst the photon travels along the arm \joe{read the long wavelength approx}.
- From
-Eq.~\ref{intro:detectors:properdist} on can see that in this configuration the
+where here we use the long wavelength approximation, where we assume that the wave $h(t)$ does not change whilst the photon travels along the arm.
+From Eq.~\ref{intro:detectors:properdist} on can see that in this configuration the
 plus polarisation of the gravitational wave causes the separation between the
 two test masses to oscillate \citep{flanagan2005BasicsGravitational}.  This
 oscillation can then be expressed as a fractional length change
 %
 \begin{equation}
     \label{intro:detectors:fraclength}
-    \frac{\delta L}{L} \approx \frac{1}{2} h_{+}.
+    \frac{\delta L}{L_0} \approx \frac{1}{2} h_{+}.
 \end{equation}
 %
-In the interferometer, this effect changes the lengths of the
-two arms, which therefore changes $\Delta L$ in
-Eq.~\ref{intro:detectors:phasechange}.  The change of the interference pattern
-with time is then related to the \gls{GW}.  In practice the position of the two
-mirrors are held in position such that the interference pattern is held on a dark fringe and does not change.
-The \gls{GW} is then proportional to the
-readout of the mirrors control system.
+The fractional length change is then proportional to the \gls{GW}.
 
-If one looks at Eq.~\ref{intro:detectors:fraclength} then if the mirrors at the
+We can generalise Eq.~\ref{intro:detectors:properdist} slightly as in \citep{whelanGeometryGravitational} by defining the proper length measured along any axis defined by the vector $\bm{v} = v^i$, where in Eq.~\ref{intro:detectors:properdist} $v^i = (1,0,0)$, i.e. is along the $x$-axis.
+Using $v^i = (1,0,0)$, the metric perturbation component $h_{11}$ in Eq.~\ref{intro:detectors:metricpertubation} can be generally in terms of the metric perturbation Eq.~\ref{intro:gw:gravwave} 
+\begin{equation}
+    h_{11} = v^i h_{ij} v^j,
+\end{equation}
+where, $i,j$ are the spatial indices of the metric.
+From Eq.\ref{intro:detectors:properdist}, the length along some vector $\bm{v}$ can then be defined as 
+\begin{equation}
+    L_{\bm{v}} = L_0 + \frac{L_0}{2} h_{ij} v^i v^j.
+\end{equation}
+An interferometer measures the difference in length between two arms $\Delta L$, where we can define the arms along vector $\bm{v}$ and $\bm{u}$.
+We can then write the difference in arm length along these vectors aspect
+\begin{equation}
+    \label{intro:detector:lengthdifference}
+    \begin{split}
+        \Delta L &= L_{\bm{v}} - L_{\bm{u}} = \frac{L_0}{2} \left( h_{ij} v^i v^j - h_{ij}u^i u^j \right) \\
+                &= L_0\, h_{ij} \frac{ v^i v^j - u^i u^j }{2}\\
+                &= L_0\, h_{ij} D^{ij},\\
+    \end{split}
+\end{equation}
+where $D^{ij}$ is the detector tensor which depends on the detectors geometry \citep{whelanGeometryGravitational}.
+The \gls{GW} strain is then the fractional difference in length of the arms
+\begin{equation} 
+    \label{intro:detectors:strain:detectortensor}
+    h(t) = \frac{\Delta L(t)}{ L_0} = h_{ij}(t) D^{ij}.
+\end{equation}
+
+In practice, rather than measure the phase difference in Eq.~\ref{intro:detectors:phasechange} at the output of the detector, the position of the two mirrors are held in position such that the interference pattern is held on a dark fringe.
+%
+% Joe the laser is on a dark fringe because whilst half way up a fringe would give the biggest change in power for a change in length, 
+% the fluctuations in the power are much greater than the GW
+% Instead, the laser phase is modulated such that the carrier is on a dark fringe and the sidebands are not.
+% The GW is then encoded in the sidebands, therefore, the GW no longer competes with fluctuations at f_{GW} by at the frequency of modulation of the laser
+% this is a much higher frequency (MHz) where the laser power fluctuations are lower as they follow 1/f 
+%
+The \gls{GW} strain is then proportional to the readout of the control systems $d(f)$ which hold the mirrors at this position \cite{ligoscientificcollaboration2017CalibrationAdvanced} 
+\begin{equation}
+    \tilde{h}(f) = T(f) \frac{d(f)}{L_0},
+\end{equation}
+where $T(f)$ is a transfer function which describes how the control systems affect the signal, for more details on this see \cite{ligoscientificcollaboration2017CalibrationAdvanced}.
+
+If one looks at Eq.~\ref{intro:detectors:strain:detectortensor} then if the mirrors at the
 end of the arms (\gls{ETMX} and \gls{ETMY}) are are placed
-further from the beam splitter, i.e. $L$ is increased, then the length change
-of the arms due to the gravitational wave will be greater.  This means that
+further from the beam splitter, i.e. $L_0$ is increased, then in the long wavelength approximation the length change
+of the arms $\Delta L$ for the same \gls{GW} $h(t)$ will be greater.  Given that the interferometer measures $\Delta L$, this means that
 increasing the length of the detectors arms increases the sensitivity of the
 interferometer.  A method to achieve a similar affect without physically
 increasing the arm length is to use a Fabry-Perot cavity
@@ -641,9 +679,8 @@ mirror is placed between the beam splitter and end mirror in each arm (\gls{ITMX
 \gls{ITMY}).  Light enters this cavity and reflects
 back and forth between the two mirrors (\gls{ITMX} and \gls{ETMX}) a number of times before
 returning to the beam splitter.  This increases the time the light spends in
-one arm and is equivalent to increasing the arm length~\chris{even more
-important to mention the long wavelength approximation now}.  Actual ground
-based \gls{GW} detectors such as \gls{LIGO} \citep{abbott2009LIGOLaser} and
+one arm which is equivalent to increasing the arm length.  
+Actual ground based \gls{GW} detectors such as \gls{LIGO} \citep{abbott2009LIGOLaser} and
 Virgo \citep{acernese2015AdvancedVirgo} are much more complicated than
 described above.  They use many techniques to increase the sensitivity some of
 which are outlined in
@@ -665,7 +702,7 @@ We can define the detector to be in the frame $(x,y,z)$ with the detector arms a
 The axes $z^{\prime}$ then has polar coordinates $\theta$ and $\phi$ in the detector frame.
 We can determine the angular pattern functions by first looking at the spatial \gls{GW}, where the $h_{+}$ and $h+{\times}$ polarisations are defined with respect to the $(x^{\prime},y^{\prime},z^{\prime})$ frame
 \begin{equation}
-    \label{intro:gw:gravwave}
+    \label{intro:detector:response:gwwave}
     h^{\prime}_{i,j} = \left( 
     \begin{matrix} 
     h_{+} & h_{\times} & 0 \\
@@ -676,7 +713,7 @@ We can determine the angular pattern functions by first looking at the spatial \
 \end{equation}
 The frame of the source $(x^{\prime},y^{\prime},z^{\prime})$, can then be transformed into the detector frame using the rotation
 \begin{equation}
-    \label{intro:gw:gravwave}
+    \label{intro:detector:response:rotation}
     \mathcal{R} = \left( 
     \begin{matrix} 
     \cos(\phi) & \sin(\phi) & 0 \\
@@ -693,40 +730,49 @@ The frame of the source $(x^{\prime},y^{\prime},z^{\prime})$, can then be transf
     \right).
 \end{equation}
 This rotation matrix is then applied to the \gls{GW} twice as it is a tensor, i.e. $h_{ij} = \mathcal{R}_{il} \mathcal{R}_{jk} h^{\prime}_{lk} $ or in matrix notation $\bm{h} = \bm{\mathcal{R}} \bm{h}^{\prime} \bm{\mathcal{R}}^{T}$.
-The relative phase shift in Eq.~\ref{intro:detectors:phasechange} is dependent on the difference in the arm lengths of the detector, and in this scenario the arms are lying on the $x$ and $y$ axis, therefore we are interested in the $h_{xx}$ and $h_{yy}$ components, where $\Delta L = \frac{1}{2}(h_{xx} - h_{yy})$ \citep{maggioreGravitationalWaves} \joe{say a little why this is the case simple derivation}.
-After applying this tensor, one can look at the $xx$ and $yy$ component of the signal,
+
+From Eq.\ref{intro:detector:lengthdifference}, we can see that the \gls{GW} strain measured by the detector $h(t)$ depends on the detector tensor, where if we take $v^i = (1,0,0)$ and $u^i = (0,1,0)$, i.e. the detectors arms are along the $x$ and $y$ axes the \gls{GW} strain becomes 
+\begin{equation}
+    \label{intro:detectors:strain:ligo}
+    h(t) = \frac{1}{2} \left( h_{11} - h_{22} \right) = \frac{1}{2} \left( h_{xx} - h_{yy} \right),
+\end{equation}
+where we are then only interested in the $h_{xx}$ and $h_{yy}$ components of the \gls{GW} metric, \citep{maggioreGravitationalWaves}.
+After applying the rotation tensor $\mathcal{R}$ in Eq.\ref{intro:detector:response:rotation} to the \gls{GW} metric in Eq.\ref{intro:gravwave:metric} this tensor, one can look at the $xx$ and $yy$ component of the signal
 \begin{equation}
     \begin{split}
-        h_{xx} &= \left( \cos^2(\theta) \cos^2 (\phi) - \sin^2 (\phi)\right)h_{+} + 2\cos (\theta) \sin (\phi) \cos (\phi) h_{\times}\\
-        h_{yy} &= \left( \cos^2(\theta) \cos^2 (\phi) - \cos^2 (\phi)\right)h_{+} - 2\cos(\theta) \sin (\phi) \cos(\phi) h_{\times} . \\
+        h_{xx} &= \left[ \cos^2(\theta) \cos^2 (\phi) - \sin^2 (\phi)\right]h_{+} + 2\cos (\theta) \sin (\phi) \cos (\phi) h_{\times}\\
+        h_{yy} &= \left[ \cos^2(\theta) \cos^2 (\phi) - \cos^2 (\phi)\right]h_{+} - 2\cos(\theta) \sin (\phi) \cos(\phi) h_{\times} . \\
     \end{split}
 \end{equation}
-Then we can write,
+From Eq.~\ref{intro:detectors:strain:ligo} we can write the \gls{GW} strain as
 \begin{equation}
-    \label{intro:detector:polarisations}
-    \frac{1}{2}(h_{xx} - h_{yy}) = \frac{1}{2} \left( 1 + \cos^2 \left(\theta\right) \right) \cos\left(2\phi\right) h_{+} + \cos \left(\theta\right) \cos \left(2\phi \right)h_{\times} = F_{+}(\theta,\phi)h_{+} + F_{\times}(\theta,\phi)h_{\times},
+    \label{intro:detector:response:strain:polarisations}
+    \begin{split}
+        h(t) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) h_{+} + \cos \left(\theta\right) \cos \left(2\phi \right)h_{\times}\\
+        &= F_{+}(\theta,\phi)h_{+} + F_{\times}(\theta,\phi)h_{\times},
+    \end{split}
 \end{equation}
 where $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ are the antenna pattern functions of the detector.
-This is a a measure of how sensitive the detector is to different directions and polarisations. An example of
-the antenna response for \gls{LIGO} is shown in Fig.~\ref{intro:detectors:response},
-where the detectors arms lie on the x and y axis of the image. 
+This is a a measure of how sensitive the detector is to different directions and polarisations. 
+
+An example of the antenna response for a detector where the arms lie on the $x$ and $y$ axis is shown in Fig.~\ref{intro:detector:response:polarisations}.
 %
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{C1_intro/antenna_pattern.pdf}
     \caption[Antenna response of the \gls{LIGO} detectors.]{The antenna
-response is shown for the plus and cross polarisations $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ defined in Eq.~\ref{intro:detector:polarisations}. The detectors arms lie on the $x$ and
-$y$ axis in the above plots. } \label{intro:detectors:response}
+response is shown for the plus and cross polarisations $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ defined in Eq.~\ref{intro:detector:response:strain:polarisations}. The detectors arms lie on the $x$ and
+$y$ axis in the above plots. \joe{want to add a radial heatmap to make this clearerbut see if time}} \label{intro:detector:response:polarisations}
 \end{figure}
 %
-The shape of the antenna pattern is clear
-when thinking about how a gravitational wave affects the test masses as in
-Fig.~\ref{gw:polarisations}, as the \gls{GW} is transverse to its propagation,
+The shape of the antenna pattern is clear when thinking about how a gravitational wave affects the test masses as in
+Fig.~\ref{gw:polarisations}.
+ As the \gls{GW} acts on test masses transverse to its propagation,
 when the detector is face on to the source, there will be a maximum change in
 the arm lengths and therefore a maximum sensitivity.  In the same way the
-sensitivity will be at a minimum when edge to the source.~\chris{this is a good
-start in explaining the plots but please expand. Why are their nulls in cetain
-directions?}
+sensitivity will be at a minimum when edge to the source.
+From some directions the \gls{GW} will change the length of the arms by the same amount, in these cases $\Delta L = 0$, therefore the detector is not sensitive to any \gls{GW} from that direction and this shows as the null areas in Fig.~\ref{intro:detector:response:polarisations} 
+
 
 
 %%%%%%%%%%%
@@ -749,8 +795,7 @@ are all shown in Fig.~\ref{detectors:noisesensitivity} from
     \includegraphics[width=0.9\textwidth]{C1_intro/noise_sensitivity.jpg}
     \caption[Example strain sensitivity curves for different noise sources in
 \gls{LIGO}.]{The different noise sources affect the sensitivity of the
-\gls{LIGO} detectors~\chris{LIGO or advanced LIGO?} at different frequencies. This shows the various sources
-how the affect the noise curve~\chris{grammar} \citep{aasi2015AdvancedLIGO}.}
+advanced \gls{LIGO} detectors at different frequencies, this figure shows a subset of the noise sources and how they limit the strain sensitivity of the detector \citep{aasi2015AdvancedLIGO}.}
 \label{detectors:noisesensitivity} 
 \end{figure}
 
@@ -758,15 +803,12 @@ Here I will summarise some of the limiting sources and also sources which
 become useful for understanding later sections.
 
 \begin{description}
-\item[Seismic noise] This originates from vibrations in the earth~\chris{when
-referring to the planet Earth it should be capitalised - if talking about dirt
-then it shouldn't.} which can be from effects such as the earths seismic
-activity or anthropogenic sources. This affects lower~\chris{what is lower in
-this context?} frequencies of \glspl{LIGO} spectrum. This can be oscillations
-such as earthquakes or ocean waves. Seismic waves cause the mirrors to
-oscillate~\chris{you make it sound like earthquakes don't?} and induce a change
-in the length of the arm. This is reduced by having multi-stage suspensions in
-the detectors which filter out the seismic oscillations
+\item[Seismic noise] This originates from vibrations in the Earth which can be from effects such as the Earths seismic
+activity or anthropogenic sources, where this affects frequencies $\lesssim 20$ Hz in the \glspl{LIGO} spectrum. The oscillations originate
+from a range of sources including earthquakes, ocean waves and traffic on nearby roads. They cause the mirrors to
+oscillate and induce a change
+in the length of the arm and therefore a change in the \gls{GW} readout channel. This is reduced by having multi-stage suspensions in
+the detectors which both actively and passively filter out the majority of seismic oscillations
 \citep{matichard2015SeismicIsolation}.
 
 \item[Coating noise] This is in general due to two main factors, the thermal
@@ -783,10 +825,9 @@ this include squeezing of the light \citep{aasi2013EnhancedSensitivity}.
 
 \item[Electronics noise \joe{technical noise maybe}] Whilst this is not shown
 in Fig.~\ref{detectors:noisesensitivity}, this becomes important to searches
-described later. These have a different effect on the detector which is more
-narrowband frequency lines~\chris{grammar}. This is generated by the digital and analogue
-electronics that are used to measure the signal~\chris{and control the complex
-detcetor system}.  
+described later. These often appear in the detector spectrum as narrowband frequency lines. This is generated by the digital and analogue
+electronics that are used to measure the signal and control the complex
+detector system.  
 \end{description}
 
 There are also many other sources of noise in the detector which I have not
