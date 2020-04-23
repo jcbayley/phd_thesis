@@ -151,7 +151,7 @@ The prior for $\rho$ is also flat in the range $[50,200]$.
 
 %%%%
 %%%%
-\section{Results}
+\section{\label{par_est:results}Results}
 %%%%
 %%%%
 
@@ -173,45 +173,84 @@ As mentioned above \joe{mention above}, one of the largest issues with all-sky s
 Therefore, the marginal posterior for the sky position can be plotted for a \joe{words} of the position as shown in Fig.~\ref{}.
 The Viterbi tracks and pulsar frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
 In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital plane of the earth, for any ecliptic longitude, there are two sky positions at opposite ecliptic latitudes which will return the same frequency track. 
-This then means that we would expect the posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{} and \ref{}.
+This then means that we would expect the posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{par_est:results:example_posterier} and \ref{par_est:results:example_skypos}.
 The sky position parameters of the pulsar are in the equatorial coordinate system, i.e. the earth as the reference frame, therefore have been transformed into the Ecliptic frame to make the sky position posteriors easier to read and understand.
 %
 \begin{sidewaysfigure}[p]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/skypos_ecliptic.pdf}
     \caption[Example of posterior of sky position]{This figure shows an example of the marginal posterior distribution of the sky position of a signal with \gls{SNR} 144. The coordinates are in the ecliptic frame.}
-    \label{par_est:results:example_posterier}
+    \label{par_est:results:example_skypos}
     
 \end{sidewaysfigure}
 %
 
-\section{searching over many signals section \joe{need a name}}
+\subsection{searching over many signals section \joe{need a name}}
 
 To test this method, we generate a set of simulations of the spectrograms of pulsar signals as in Sec.~\ref{soap:results} and Sec.~\ref{machine:results}.
 In each of these we record the Viterbi track and the pulsar signal parameters $\alpha, \delta, f, \dot{f} , \rho$ associated with each simulation, from which the pulsar track can be generated.
-The Viterbi track and the pulsar track is all the information needed to run the Bayesian analysis described in Sec.~\ref{par_est:bayes}.
+The Viterbi track and the pulsars signal parameters $\alpha, \delta, f, \dot{f}$ is all the information needed to run the Bayesian analysis described in Sec.~\ref{par_est:bayes}.
 We generated signals in 50\% of the 0.1 Hz wide sub-bands between between 40 and 500 Hz, with the parameters as described in Tab.~\ref{}. 
 This meant that we have 2300 simulated signals which had an \gls{SNR} range between 20 and 200.
 However, as the \gls{SNR} of the simulations decreases, the probability of SOAP identifying the signal decreases, therefore, we only want to run the Bayesian parameter estimation on signals which are most likely to be astrophysical.
 Therefore, as in Sec.~\ref{soap:results}, we find the false alarm rate, which is the fraction of bands which contain no injection and has a Viterbi statistic which exceeds a given threshold, where this is set to 0\% for this test.
-We can then select all of the sub-bands which have a Viterbi statistic above this threshold for further investigation, where with a 0\% false alarm rate we have 2000 injections to investigate.
+We can then select all of the sub-bands which have a Viterbi statistic above this threshold for further investigation, where with a 0\% false alarm rate we have 2000 \joe{ecaxt number} injections to investigate.
+The Viterbi statistics for each of these injections can be seen in Fig.~\ref{par_est:results:all_viterbi}, where the 0\% false alarm value is marked.
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{testimg.png}
+    \caption[All Viterbi statistics]{This figure shows a histogram of the Viterbi statistics from each of the 0.1 Hz wide sub bands in this test. \joe{more}}
+    \label{par_est:results:all_viterbi}
+\end{figure}
 
-To test this analysis, the Bayesian method in Sec.~\ref{par_est:bayes} is run on the simulation which had Viterbi statistics within the top 1\% of those in the search band between 40 and 500 Hz.
-For each of these simulations, the analysis returns a posterior distribution of the parameters.
+For each of these injections, we estimate the posterior distribution using nested sampling package \textit{Dynesty} \citep{}. 
 
-One method to asses the ability of this to identify the correct parameters is the p-p plot.
-\joe{need better description of p-p plot}
+\subsubsection{p-p plot}
 
-This is calculated using the marginal distributions for each of the parameters.
-In Fig.~\ref{} we show the p-p plot which was generated from \joe{top 1\%} 200 simulated signals.
-If the plots lie along the diagonal line, this means that the posterior distributions agree with the simulated parameters, whereas line which are far away from this indicate that the parameters are not consistent with the injections.
+The p-p plot is a mechanism to compare two distributions, in this case we compare the marginal bayesian posterior distributions for each parameters with the distribution of the corresponding injected parameters.
+To do this we take the cumulative distribution of the marginal posterior up to the value of the injected parameter, which then gives us a fraction of the posterior which is less than the injected value.
+If we repeat this for all injections then the distribution of these \joe{confidence intervals} should follow a uniform distribution if the marginal posteriors agree with the injected parameters.
+To see if these distribution agree, one can then plot the cumulative distribution of the \joe{confidecne intervals} to get a p-p plot as shown in Fig.~\ref{}, this plot is read as what fraction of simulations fall within a given \joe{confidence interval}.
 
-Figure \ref{ppplot} shows that the simulated signals are not completely consistent with the injected parameters for the \joe{which parameters}
+If the marginal posterior distributions agree with the injected parameters then this plot should follow a straight diagonal line, indicated by the black line.
+If the marginal posterior distribution is shifted to right of the injected parameters, i.e. the true value lies in the lower tail of the posterior for each simulation, then the p-p plot will show a curve above the diagonal. 
+Similarly, if the marginal posterior distribution is shifted to left of the injected parameters, i.e. the true value lies in the upper tail of the posterior for each simulation, then the p-p plot will show a curve below the diagonal. 
+If the posterior is under constrained, i.e. the posterior is wider than the perfectly recovered posterior, then the curve will follow an S shape where the S is below the diagonal at \gls{CI} < 0.5 and above the diagonal at \gls{CI} > 0.5.
+Similarly, if the posterior is over constrained, i.e. the posterior is narrower than the perfectly recovered posterior, then the curve will follow an S shape where the S is above the diagonal at \gls{CI} < 0.5 and below the diagonal at \gls{CI}> 0.5.
 
+Using this information, we can look at the p-p plot for the 2000 \joe{check} simulations in this test, which is shown in Fig.~\ref{par_est:results:ppplot}.
+We can see that for the parameters $f$ and $\dot{f}$ we recover an under constrained posterior distribution, which implies that we are under confident about our estimation of the parameters.
+For the \gls{SNR} parameter $\rho$, the recovered posterior is shifted to the right, i.e. we assume higher \glspl{SNR} than perfectly recovered distribution.
+For the right ascension parameter $\alpha$, we can see that we are both shifted to the right and is over constrained, therefore, we are overconfident that the estimation of this parameter is correct.
+For the declination parameters $\delta$, the posterior distribution is both over constrained and shifted to the right, this is largely as the posterior is bi-modal. 
+%
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/ppplot.pdf}
+    \caption[p-p plot for the CW simulations]{This figure shows the p-p plot for the 2000 `detected' signals by SOAP in the test described in Sec.~\ref{par_est:results}. \joe{more}}
+    \label{par_est:results:ppplot}
+\end{figure}
 
-Another method to asses the power of this analysis in terms of locating the sky positions of the source is the measure the area on the sky which this can localise to.
-To do this 
+The over constrained posterior distributions are due to the assumption that the frequency track elements are independent in the likelihood described in Sec.~\ref{par_est:bayes:likelihood}.
+These elements are in fact dependent i.e. 
+\joe{say why this doesnt work and how it could be improved}
 
+\subsubsection{Sky area at given confidence interval}
+
+If we assume that the estimated posterior distribution is correct, i.e. it is not under constrained or shifted, then we can estimate the area of the sky which this method can localise the source to. 
+To do this we can use the posterior samples to draw a contour on the 2d sky map where the posterior contains 90\% of the probability.
+This area contained within this contour is then the sky area which this method can localise the source to at 90\% confidence.
+An example of this can be seen in Fig.~\ref{}.
+
+This sky area can be calculated for all of the simulations described in Sec.~\ref{par_est:results}, where Fig.~\ref{par_est:results:sky_area} shows a histograms of all of the sky areas at 90\% confidence in square degrees.
+%
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/sky_area_hist.pdf}
+    \caption[p-p plot for the CW simulations]{This figure shows the p-p plot for the 2000 `detected' signals by SOAP in the test described in Sec.~\ref{par_est:results}. \joe{more}}
+    \label{par_est:results:sky_Area}
+\end{figure}
 
 
 
