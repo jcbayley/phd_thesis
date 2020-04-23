@@ -349,9 +349,10 @@ This is one of the larger current issued in \gls{CW} searches as this is a slow 
 %%%%%%%%%%
 
 The searches described in Sec.~\ref{searchcw:search} are computationally expensive, where the fastest takes $\sim$1 million core-hours to search through 4 months of O1 data.
-Many of these searches use well-modelled signals to compare to the data. This leads to the parameter space having to be finely sampled such that it is sufficiently covered.  
+Many of these searches use well-modelled signals to compare to the data, which leads to the parameter space having to be finely sampled such that it is sufficiently covered.  
 The motivation for much of the work then follows from these points. 
 The aim was to develop searches which used minimal computational resources and could work outside of the \gls{CW} model in Sec.~\ref{searchcw:model}.
+
 This thesis then outlines algorithms which can reduce this computational time of searches for \gls{CW} whilst retaining as much sensitivity to \gls{CW} signals as possible.
 There are two main sections which follow, Sec.~\ref{soap} will outline an essentially un-modelled \gls{CW} search method which uses the Viterbi algorithm.
 Sec~\ref{machine} will then outline an method which used machine learning, specifically \glspl{CNN} as both its own \gls{CW} search and an extension to the search described in Sec.~\ref{soap}.
