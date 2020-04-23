@@ -4,22 +4,41 @@
 %--------------------
 % introduce problems in searching for CW
 %---------------------
-Continuous gravitational waves have particular challenges when it comes to their detection.
-\glspl{CW} are long duration, this means that they would be observed for the entirety of a detectors observing runs. 
-The signals also have an intrinsically small amplitude which is below the noise floor of current ground based detectors such as \gls{LIGO}.
-This means the for a detection, the entire observing runs data will be needed to accumulate enough \gls{SNR} for a signal to be observed.
-Given that \gls{LIGO} samples as $\sim 16$ kHz (generally downsampled to $\sim 4$ kHz) this leaves a huge amount of data which needs to be searched through.
-As will be described in Sec.~\ref{searchcw:search}, this requires a large amount of computational resources to perform these searches.
-For some types of search the parameter space can also be very large, this only adds to the computational time, which in some cases makes the search infeasible.
+Continuous gravitational waves~\chris{are you using acronymns or not?} have
+particular challenges when it comes to their detection.  \glspl{CW} are long
+duration, this means that they would be observed for the entirety of a
+detectors observing run.  The signals also have an intrinsically small
+amplitude which is below the noise floor of current ground based detectors such
+as \gls{LIGO}.  This means that for a detection, the entire observing
+runs~\chris{apostophe for belonging to the run} data will be needed to
+accumulate enough \gls{SNR} for a signal to be observed.  Given that \gls{LIGO}
+samples at $\sim 16$ kHz (generally downsampled to $\sim 4$ kHz) this leaves a
+huge amount of data which needs to be searched through~\chris{can you give a general
+number? in GBs?}.  As will be described in Sec.~\ref{searchcw:search}, this
+requires a large amount of computational resources to perform these searches.
+For some types of search the parameter space can also be very large, this only
+adds to the computational time, which in some cases makes the search
+infeasible.
 
 %---------------------
 % Describe this chapter 
 %--------------------------
-Whilst I have described the potential sources of the signal and its approximate signal type in Sec.~\ref{intro:sources:cw},to perform a search the wave-form of a signal and how it is observed is needed.
-In this section I will go into more detail on the `mountain' model in Sec.~\ref{intro:source:cw:mountain} and its wave-form description. 
-This model is then used in various search methods for \gls{CW} signals.
-In Sec.~\ref{searchcw:search} I will overview a subset of current searches for \gls{CW} signals.
-Sec.~\ref{searchcw:motivation} explains the motivation for the majority of the work in this thesis.
+Whilst I have described the potential sources of the signal and its approximate
+signal type in Sec.~\ref{intro:sources:cw}, to perform a search the
+wave-form~\chris{wave-form or waveform - be consistent throughout} of a signal
+and how it is observed is needed~\chris{clunky sentence}.  In this
+section~\chris{which section? this chapter - be specific} I will go into more
+detail on the `mountain' model in Sec.~\ref{intro:source:cw:mountain} and its
+wave-form description.  This model is then used in various search methods for
+\gls{CW} signals~\chris{but the signal model from the mountain model is the
+same signal model for all long duration CW signals - it just predicts a
+sinusoid but some models predict the frequency at different values. The point s
+that you are not only describing the waveform for one model}. In
+Sec.~\ref{searchcw:search} I will overview a subset of current searches for
+\gls{CW} signals.~\chris{and instead of fullstop?}
+Sec.~\ref{searchcw:motivation} explains the motivation~\chris{OK but it would
+be good if the thesis is motivated before page 29 and if that motivation spans
+more than 1 paragraph} for the majority of the work in this thesis.
 
 %%%%%
 %%%%%
@@ -27,14 +46,36 @@ Sec.~\ref{searchcw:motivation} explains the motivation for the majority of the w
 %%%%
 %%%%
 
-The model of a \gls{GW} signal from a pulsar is relatively simple, it is a quasi-sinusoidal signal. This means that the signal is a sinusoid with a slowly varying frequency. One reason for the slow variance in the frequency is due to the energy loss to \gls{GW} as the pulsar spins down.
-Here the signal is modelled to originate from an isolated triaxial neutron star rotating around a principal axis. 
-The parameters of each pulsar can be split into two sections: the Doppler components ($\alpha,\delta,{\bm f}$) and its amplitude components ($\psi,\phi_0, \iota, h_0, \theta$). This ignores any orbital parameters which would be present if the star was in a binary systems and higher order frequency derivatives.
-They are defined as follows: the sky positions $\alpha$ and $delta$ refer to the right ascension and declination. 
-${\bm f}$ refers to the source frequency and its derivatives. 
-$\psi$ and $\phi_0$ and $h_0 $ are the \gls{GW} polarisation, initial phase and amplitude respectively. 
-$\iota$ is the inclination angle which is how much the source is tilted relative to the observer. 
-$\theta$ is the `wobble angle' or the angle between the rotation axis and the symmetry axis of the neutron star.
+The model of a \gls{GW} signal from a pulsar~\chris{try to be careful with
+pulsar vs NS statements. Which one do you really mean? A pulsar is a NS but a
+NS is not required to be a pulsar} is relatively simple, it is a
+quasi-sinusoidal signal~\chris{do you mean at the source (intrinsic properties)
+or when detected?}. This means that the signal is a sinusoid with a slowly
+varying frequency. One reason for the slow variance~\chris{variance means
+something else so best use variation} in the frequency is due to the energy
+loss to \gls{GW} as the pulsar spins down~\chris{Yes, that is possible BUT such
+a spin-down would have a certain characteristic rate for GW emission - see
+something like https://arxiv.org/abs/1607.05315 for example. It is
+characterised by the "braking-index" which should be 5 for GWs and 3 for
+magnetic braking. The expression is defined as $n = f\ddot{f}/\dot{f}^2$ and
+for most pulsars it is measured to be below 3.}. Here the signal is modelled to
+originate from an isolated triaxial neutron star rotating around a principal
+axis.~\chris{new paragraph?} The parameters of each pulsar~\chris{again with
+the pulsar vs NS} can be split into two sections: the Doppler components
+($\alpha,\delta,{\bm f}$) and its amplitude components ($\psi,\phi_0, \iota,
+h_0, \theta$)~\chris{redefine thgese quantities even if already defined
+elsewhere}. This ignores any orbital parameters which would be present if the
+star was in a binary systems and higher order frequency derivatives~\chris{be
+clearer - what are higher order frequency derivatives?  You're talking about
+intrinsic spin derivatives}. They are defined as follows: the sky positions
+$\alpha$ and $\delta$ refer to the right ascension and declination~\chris{of
+the source?}. \chris{Don't start sentences with variables} ${\bm f}$ refers to
+the source frequency and its derivatives.  \chris{same here} $\psi$ and
+$\phi_0$ and $h_0 $ are the \gls{GW} polarisation, initial phase and amplitude
+respectively.  $\iota$ is the inclination angle which is how much the source is
+tilted relative to the observer~\chris{that is too vague! Be more specific}.
+$\theta$ is the `wobble angle' or the angle between the rotation axis and the
+symmetry axis of the neutron star.
 
 The definition of the \gls{GW} from a neutron star here follows that in \citep{riles2017RecentSearches,schutz1998DataAnalysis,dupuis2005BayesianEstimation}. The amplitude of the \gls{GW} can be defined as
 \begin{equation}
