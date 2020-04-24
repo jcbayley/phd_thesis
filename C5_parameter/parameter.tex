@@ -149,16 +149,44 @@ We set up a simple prior which does not assume much about the parameters, other 
 We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through and a flat prior in the frequency derivative in the range $[-1\cdot 10^{9},1\cdot 10^{9}]$.
 The prior for $\rho$ is also flat in the range $[50,200]$.
 
+
+\clearpage
+
 %%%%
 %%%%
 \section{\label{par_est:results}Results}
 %%%%
 %%%%
 
-The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and returns the five dimensional posterior distribution $p\left(\left\{ \alpha, \delta, f, \dot{f}, \rho \right\} \mid \bm{V}, I \right)$.
+The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and uses this to estimate the five dimensional posterior distribution $p\left(\left\{ \alpha, \delta, f, \dot{f}, \rho \right\} \mid \bm{V}, I \right)$.
 To calculate this posterior we use a technique known as nested sampling, specifically the package {\it Dynesty} \citep{speagle2019DynestyDynamic}.
-An example of this can be seen in Fig.~\ref{par_est:results:example_posterior}, where marginal posterior distributions for each of the parameters is shown.
-In this example with \gls{SNR} 144, the posterior distributions are clearly located around the injected values for the parameters, where the sky position parameters have a bimodal distribution.
+
+As an example, we can simulate a signal with pulsar parameters 
+\begin{equation}
+    \begin{split}
+        \alpha &= \\
+        \delta &= \\
+        f &= \\
+        \dot{f} &= \\
+        \rho &= ,\\
+    \end{split}
+\end{equation}
+where the neutron stars frequency track is shown with the Viterbi track returned from SOAP in Fig.~\ref{}.
+%
+\begin{figure}[pt]
+
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/viterbi_hist.pdf}
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{Example frequency and Viterbi track }
+    \label{par_est:results:freqtrack}
+    
+\end{figure}
+%
+In this case the Viterbi track closely follows the simulated neutrons star frequency track.
+The marginal posterior distributions for this Viterbi track is then shown in Fig.~\ref{par_est:results:example_posterior}, where the simulated parameters are marked in orange.
+In this example, the injected parameter values for the parameters are within the marginal posterior distributions for all of the parameters.
+The marginal posterior for both sky position parameters is bi-modal,
+\joe{more}
 %
 \begin{figure}[pt]
 
@@ -170,7 +198,7 @@ In this example with \gls{SNR} 144, the posterior distributions are clearly loca
 \end{figure}
 %
 
-As mentioned above \joe{mention above}, one of the largest issues with all-sky searches is the number of templates needed to sufficiently cover the parameter space in sky position. 
+As mentioned in Sec.~\ref{} \joe{mention above}, one of the largest issues with all-sky searches is the number of templates needed to sufficiently cover the parameter space in sky position. 
 Therefore, the marginal posterior for the sky position can be plotted for a \joe{words} of the position as shown in Fig.~\ref{}.
 The Viterbi tracks and pulsar frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
 In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital plane of the earth, for any ecliptic longitude, there are two sky positions at opposite ecliptic latitudes which will return the same frequency track. 
