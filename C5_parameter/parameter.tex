@@ -149,27 +149,56 @@ We set up a simple prior which does not assume much about the parameters, other 
 We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through and a flat prior in the frequency derivative in the range $[-1\cdot 10^{9},1\cdot 10^{9}]$.
 The prior for $\rho$ is also flat in the range $[50,200]$.
 
+
+\clearpage
+
 %%%%
 %%%%
 \section{\label{par_est:results}Results}
 %%%%
 %%%%
 
-The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and a pulsar frequency track and returns a posterior distribution on the parameters $\alpha, \delta, f, \dot{f}$ and $\rho$.
-An example of this can be seen in Fig.~\ref{par_est:results:example_posterior}, where marginal posterior distributions for each of the parameters is shown.
-In this example with \gls{SNR} 144, the posterior distributions are clearly located around the injected values for the parameters, where the sky position parameters have a bimodal distribution.
+The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and uses this to estimate the five dimensional posterior distribution $p\left(\left\{ \alpha, \delta, f, \dot{f}, \rho \right\} \mid \bm{V}, I \right)$.
+To calculate this posterior we use a technique known as nested sampling, specifically the package {\it Dynesty} \citep{speagle2019DynestyDynamic}.
+
+As an example, we can simulate a signal with pulsar parameters 
+\begin{equation}
+    \begin{split}
+        \alpha &= \\
+        \delta &= \\
+        f &= \\
+        \dot{f} &= \\
+        \rho &= ,\\
+    \end{split}
+\end{equation}
+where the neutron stars frequency track is shown with the Viterbi track returned from SOAP in Fig.~\ref{}.
+%
+\begin{figure}[pt]
+
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/viterbi_hist.pdf}
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{Example frequency and Viterbi track }
+    \label{par_est:results:freqtrack}
+    
+\end{figure}
+%
+In this case the Viterbi track closely follows the simulated neutrons star frequency track.
+The marginal posterior distributions for this Viterbi track is then shown in Fig.~\ref{par_est:results:example_posterior}, where the simulated parameters are marked in orange.
+In this example, the injected parameter values for the parameters are within the marginal posterior distributions for all of the parameters.
+The marginal posterior for both sky position parameters is bi-modal,
+\joe{more}
 %
 \begin{figure}[pt]
 
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/cornerplot.pdf}
     \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows an example of the posterior distribution of a signal with \gls{SNR} 144. Each panel shows the marginal distributions for each parameter, where the parameters used for the simulation are marked in orange. In this example each of the posteriors match well with the injected parameters, but the sky position is bimodal. }
-    \label{par_est:results:example_posterier}
+    \label{par_est:results:example_posterior}
     
 \end{figure}
 %
 
-As mentioned above \joe{mention above}, one of the largest issues with all-sky searches is the number of templates needed to sufficiently cover the parameter space in sky position. 
+As mentioned in Sec.~\ref{} \joe{mention above}, one of the largest issues with all-sky searches is the number of templates needed to sufficiently cover the parameter space in sky position. 
 Therefore, the marginal posterior for the sky position can be plotted for a \joe{words} of the position as shown in Fig.~\ref{}.
 The Viterbi tracks and pulsar frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
 In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital plane of the earth, for any ecliptic longitude, there are two sky positions at opposite ecliptic latitudes which will return the same frequency track. 
@@ -199,25 +228,41 @@ The Viterbi statistics for each of these injections can be seen in Fig.~\ref{par
 %
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{testimg.png}
+    \includegraphics[width=\linewidth]{C5_parameter/viterbi_hist.pdf}
     \caption[All Viterbi statistics]{This figure shows a histogram of the Viterbi statistics from each of the 0.1 Hz wide sub bands in this test. \joe{more}}
     \label{par_est:results:all_viterbi}
 \end{figure}
 
-For each of these injections, we estimate the posterior distribution using nested sampling package \textit{Dynesty} \citep{}. 
 
-\subsubsection{p-p plot}
+\subsubsection{P-P plot}
 
-The p-p plot is a mechanism to compare two distributions, in this case we compare the marginal bayesian posterior distributions for each parameters with the distribution of the corresponding injected parameters.
-To do this we take the cumulative distribution of the marginal posterior up to the value of the injected parameter, which then gives us a fraction of the posterior which is less than the injected value.
-If we repeat this for all injections then the distribution of these \joe{confidence intervals} should follow a uniform distribution if the marginal posteriors agree with the injected parameters.
-To see if these distribution agree, one can then plot the cumulative distribution of the \joe{confidecne intervals} to get a p-p plot as shown in Fig.~\ref{}, this plot is read as what fraction of simulations fall within a given \joe{confidence interval}.
+The p-p plot is a mechanism to validate the effectiveness of the Bayesian model and computation using many simulations.
+From Sec.~\ref{par_est:results} we have the output posterior distribution $p(\bm{\theta} \mid \bm{V}, I)$, or more correctly we have $N$ samples from this distribution $\bm{\theta}_i$, and we have the injected parameters $\bm{\theta}_{\rm{inj}}$.
+For each simulation, we can calculate the posterior quantile $q(\theta_{\rm{inj}})$ from the marginal posterior distribution
+\begin{equation}
+    q(\theta_{\rm{inj}}) = P(\theta_{\rm{inj}} > \theta) = \frac{1}{N} \sum_{i=1}^{N} H(\theta_{\rm{inj}} - \theta_i),
+\end{equation}
+where $H(x)$ is the Heaviside step function. 
+This calculates the fraction of the marginal posterior distribution which has a parameter $\theta$ less than the injected parameter $\theta_{\rm{inj}}$ \citep{cook2006ValidationSoftware}.
+If the model and computation of the posterior is valid, then as the number of samples approaches infinity ($N \rightarrow \infty$), the posterior quantile $q(\theta_{\rm{inj}})$ should follow a uniform distribution $[0,1]$ \citep{cook2006ValidationSoftware}.
+This then provides a method to check the validity of our analysis.
 
-If the marginal posterior distributions agree with the injected parameters then this plot should follow a straight diagonal line, indicated by the black line.
-If the marginal posterior distribution is shifted to right of the injected parameters, i.e. the true value lies in the lower tail of the posterior for each simulation, then the p-p plot will show a curve above the diagonal. 
-Similarly, if the marginal posterior distribution is shifted to left of the injected parameters, i.e. the true value lies in the upper tail of the posterior for each simulation, then the p-p plot will show a curve below the diagonal. 
-If the posterior is under constrained, i.e. the posterior is wider than the perfectly recovered posterior, then the curve will follow an S shape where the S is below the diagonal at \gls{CI} < 0.5 and above the diagonal at \gls{CI} > 0.5.
-Similarly, if the posterior is over constrained, i.e. the posterior is narrower than the perfectly recovered posterior, then the curve will follow an S shape where the S is above the diagonal at \gls{CI} < 0.5 and below the diagonal at \gls{CI}> 0.5.
+For each of our simulations we can calculate $q(\theta_{\rm{inj}})$, such that we have values $\bm{q}_{\theta}$, where the fraction of simulations which fall within a given \gls{CI} $C$ is the cumulative distribution of $\bm{q}_{\theta}$, i.e. $P(\bm{q}_{\theta} > C)$, where $C$ ranges between $[0,1]$.
+If $q(\theta_{\rm{inj}})$ and therefore $\bm{q}_{\theta}$ follows a normal distribution, then $P(\bm{q}_{\theta} > C) = C$ \citep{cook2006ValidationSoftware}.
+Plotting $P(\bm{q}_{\theta} > C)$ against $C$ for each parameter $\theta$, then shows the fraction of simulations which have a $q(\theta_{\rm{inj}})$ within some \gls{CI} $C$, this is known as a p-p plot.
+
+If the analysis is valid, i.e the marginal posterior distributions agree with the injected parameters, then this plot should follow a straight diagonal line, indicated by the black line in Fig.~\ref{par_est:results:ppplot_example}.
+If the marginal posterior distribution is shifted to right of the injected parameters, shown in the first panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the true value lies in the lower tail of the posterior for each simulation, then the p-p plot will show a curve above the diagonal.
+Similarly, if the marginal posterior distribution is shifted to left of the injected parameters, shown in the second panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the true value lies in the upper tail of the posterior for each simulation, then the p-p plot will show a curve below the diagonal. 
+If the posterior is under constrained, shown in the third panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the posterior is wider than the perfectly recovered posterior, then the curve will follow an S shape where the S is below the diagonal at $C < 0$.5 and above the diagonal at $C > 0.5$.
+Similarly, if the posterior is over constrained, shown in the fourth panel of Fig.~\ref{par_est:results:ppplot_example},i.e. the posterior is narrower than the perfectly recovered posterior, then the curve will follow an S shape where the S is above the diagonal at $C < 0.5$ and below the diagonal at $C> 0.5$.
+%
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/ppplot_examples.pdf}
+    \caption[p-p plot examples]{This figure shows examples of p-p plots for posterior distributions which are shifted to the right (larger values of the parameter), to the left (smaller values of the parameter) and over and under constrained posteriors. The black curve shows the p-p plot when the posterior distribution is perfectly recovered, i.e. the confidence intervals follow a uniform distribution.}
+    \label{par_est:results:ppplot_example}
+\end{figure}
 
 Using this information, we can look at the p-p plot for the 2000 \joe{check} simulations in this test, which is shown in Fig.~\ref{par_est:results:ppplot}.
 We can see that for the parameters $f$ and $\dot{f}$ we recover an under constrained posterior distribution, which implies that we are under confident about our estimation of the parameters.
@@ -228,7 +273,7 @@ For the declination parameters $\delta$, the posterior distribution is both over
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/ppplot.pdf}
-    \caption[p-p plot for the CW simulations]{This figure shows the p-p plot for the 2000 `detected' signals by SOAP in the test described in Sec.~\ref{par_est:results}. \joe{more}}
+    \caption[p-p plot for the CW simulations]{This figure shows the p-p plot for the 2000 `detected' signals by SOAP in the test described in Sec.~\ref{par_est:results}. \joe{need to figure out the confidece interval of the confidence interval}\joe{more}}
     \label{par_est:results:ppplot}
 \end{figure}
 
