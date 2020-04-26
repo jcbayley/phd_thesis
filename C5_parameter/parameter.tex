@@ -167,13 +167,14 @@ To calculate this posterior we use a technique known as nested sampling, specifi
 As an example, we can simulate a \gls{CW} signal with neutron star parameters 
 \begin{equation}
     \begin{split}
-        \alpha &= 4.95 \; \rm{rad}\\
-        \delta &= -0.18 \; \rm{rad} \\
-        f &= 154.04 \; \rm{Hz}\\
-        \dot{f} &= -1.22e-10 \; \rm{Hz s^{-1}}\\
-        \rho &= 144,\\
+        \alpha &= 4.2 \; \rm{rad}\\
+        \delta &= -0.06 \; \rm{rad} \\
+        f &= 148.23 \; \rm{Hz}\\
+        \dot{f} &= -3.55e-15 \; \rm{Hz/s}\\
+        \rho &= 151,\\
     \end{split}
 \end{equation}
+
 and generate the associated spectrograms for the \gls{LIGO} detectors H1 and L1.
 The SOAP search from Sec.~\ref{soap} is then run using the line-aware statistics the same parameters as in Sec.~\ref{soap:results}, the output Viterbi track is then plotted with the neutron stars frequency track in Fig.~\ref{par_est:results:freqtrack}.
 %
@@ -196,7 +197,7 @@ The frequency is has a width of N in band N \joe{mention all by sky params here}
 
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/cornerplot.pdf}
-    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows an example of the posterior distribution of a signal with \gls{SNR} 144. Each panel shows the marginal distributions for each parameter, where the parameters used for the simulation are marked in orange. In this example each of the posteriors match well with the injected parameters, but the sky position is bimodal. }
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows an example of the posterior distribution of a signal with \gls{SNR} 151. Each panel shows the marginal distributions for each parameter, where the parameters used for the simulation are marked in orange. In this example each of the posteriors match well with the injected parameters, but the sky position is bimodal. }
     \label{par_est:results:example_posterior}
     
 \end{figure}
@@ -281,7 +282,7 @@ For the declination parameters $\delta$, the posterior distribution is both over
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/ppplot.pdf}
-    \caption[p-p plot for the CW simulations]{This figure shows the p-p plot for the 2000 `detected' signals by SOAP in the test described in Sec.~\ref{par_est:results}. \joe{need to figure out the confidece interval of the confidence interval}\joe{more}}
+    \caption[p-p plot for the CW simulations]{The p-p plot is shown for the 200 signals described in Sec.~\ref{par_est:results}, which range between 40 and 200 in \gls{SNR}. This describes how well the \joe{need to figure out the error of the confidence interval}\joe{more}}
     \label{par_est:results:ppplot}
 \end{figure}
 
