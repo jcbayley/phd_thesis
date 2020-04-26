@@ -114,16 +114,15 @@ The following sections will describe how we set up the prior and likelihood for 
 %
 %
 
-The likelihood describes how the noise of the data is distributed, i.e. if we subtracted the model frequency track from our observed frequency track, what is the distribution of these values.
+The likelihood describes how the noise of the data is distributed, i.e. if we subtracted the model frequency track $\bm{M}(\bm{\theta})$ from our observed Viterbi track $\bm{V}$, what is the distribution of these values.
 If the simulated pulsar signal has an infinitely large \gls{SNR} then the Viterbi track would follow the pulsars frequency track exactly, which would leave a noise distribution of 0 with no variance. 
 If conversely, the \gls{SNR} was zero then the Viterbi track would wander randomly through the frequency band and the noise would have a large variance in frequency.
-The noise distribution of a Viterbi track, is then dependent on the \gls{SNR} if the signal within the band.
-As the distribution of the noise is unknown analytically, we calculate it empirically using many simulated signals.
+The noise distribution of our data, i.e. $\bm{M}(\bm{\theta}) - \bm{V}$, is then dependent on the \gls{SNR} $\rho$ of the signal. 
+Given that this is a difficult distribution to find analytically, we calculate it empirically using many simulated signals.
 
-In Sec.~\ref{soap:results} we generated $\mathcal{O}(10^{4})$ simulated signal which, amongst other quantities, saved the Viterbi track, the simulated pulsar frequency track and the signals \gls{SNR}, $\rho$.
-These simulations had \glspl{SNR} between 50 and 150, \joe{might update to 20-200}.
-We can estimate the noise distribution by taking the \gls{KDE} of the differences between the Viterbi and pulsar frequency tracks for all simulations in a given \gls{SNR} range.
-We split the likelihood into 90 discrete bins, each of which are \gls{SNR} 2 wide, where this ranges from \gls{SNR} 20 to 200.
+In Sec.~\ref{machine:results} we generated $\mathcal{O}(10^{4})$ simulated \gls{CW} signals in Gaussian noise between 40 and 500 Hz, which had \gls{SNR} $\rho$ uniformly between 20 and 200 and source parameters which follow that in Tab.~\ref{soap:results:parameters}. For each of these simulations, the SOAP search using the line-aware statistic with parameters from Sec.~\ref{soap:results} returns a Viterbi track associated with the simulated parameters.
+For each simulation we can calculate the difference between the Viterbi track and model frequency track $M_i(\bm{\theta}) - V_i$ for each element in the track, where the likelihood $\mathcal{L}$ can be estimated by taking the \gls{KDE} of all our values of $M_i - V_i$.
+In this case our likelihood is also dependent on \gls{SNR}, therefore, we split our simulations into bands of width \gls{SNR} 2 between 20 and 200, this gives $\sim 300$ simulated tracks within each \gls{SNR} bound.
 Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a subset of the likelihood bins. 
 The sharp peaks in the center of each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents simulations where the Viterbi track is close to the simulated pulsar track, and the broader distributions represent areas of the Viterbi track has not identified the pulsar track but is wandering randomly.
 The sub plots in Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases the distribution is more closely centred around 0, i.e. the Viterbi and pulsar tracks are similar, which is expected.
@@ -139,15 +138,19 @@ The sub plots in Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gl
 %
 
 This does introduce one more parameter to search over in out Bayesian model, which is the \gls{SNR} ($\rho$) of the signal.
-These \glspl{KDE} are the used as the likelihood function $p(\bm{V} \mid \bm{\theta}, I)$ in the Bayesian model in Eq.~\ref{par_est:bayes:eqn}, where we not have five parameters $\bm{\theta} = \left\{\alpha, \delta, f, \dot{f} , \rho \right\}$.
-
+These \glspl{KDE} $\mathcal{L}$ are the used in the likelihood function $p(\bm{V} \mid \bm{\theta}, \rho, I)$ in the Bayesian model in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model $\alpha, \delta, f, \dot{f}$ and $\rho$.
+Our likelihood for a given Viterbi track input is
+\begin{equation}
+    p(\bm{V} \mid \bm{\theta}, \rho, I) = \frac{1}{N}\prod_{i = 1}^{N} \mathcal{L}(M_i(\bm{\theta}) - V_i, \rho) ,
+\end{equation}
+where $N$ is the length of the Viterbi track $\bm{V}$. 
+As the likelihood $\mathcal{L}$ is binned in \gls{SNR} $\rho$, and $\rho$ is a continuous value, the likelihood is calculated as the weighted sum of the surrounding likelihood bins, where the weights are the fractional separation of $\rho$ from the bin centers. 
 
 %
 \subsection{Prior}
 %
 We set up a simple prior which does not assume much about the parameters, other than limits on their range. 
-We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through and a flat prior in the frequency derivative in the range $[-1\cdot 10^{9},1\cdot 10^{9}]$.
-The prior for $\rho$ is also flat in the range $[50,200]$.
+We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through, a flat prior in the frequency derivative in the range $[-1\cdot 10^{9},1\cdot 10^{9}]$ and a flat prior for the \gls{SNR} $\rho$ in the range $[50,200]$.
 
 
 \clearpage
@@ -159,7 +162,7 @@ The prior for $\rho$ is also flat in the range $[50,200]$.
 %%%%
 
 The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and uses this to estimate the five dimensional posterior distribution $p\left(\left\{ \alpha, \delta, f, \dot{f}, \rho \right\} \mid \bm{V}, I \right)$.
-To calculate this posterior we use a technique known as nested sampling, specifically the package {\it Dynesty} \citep{speagle2019DynestyDynamic}. \joe{explain more in the return of intro chapter}
+To calculate this posterior we use a technique known as nested sampling, specifically the package {\it Dynesty} \citep{speagle2019DynestyDynamic}, which is explained in Sec.~\ref{intro:prob:bayes}. \joe{explain more in the return of intro chapter}
 
 As an example, we can simulate a \gls{CW} signal with neutron star parameters 
 \begin{equation}
@@ -198,28 +201,33 @@ The frequency is has a width of N in band N \joe{mention all by sky params here}
     
 \end{figure}
 %
-It is easier to interpret the distribution of the sky parameters when it is projected onto a skymap, therefore, Fig.~\ref{par_est:results:example_skypos} the parameters $\alpha$ and $\delta$ are shown on a sky projection.
+The distribution of the sky parameters are easier to interpret when they are projected onto a skymap, therefore, Fig.~\ref{par_est:results:example_skypos} the parameters $\alpha$ and $\delta$ are shown on a sky projection.
 The Viterbi tracks and pulsar frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
 In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital plane of the earth, for any ecliptic longitude, there are two sky positions at opposite ecliptic latitudes which will return the same frequency track. 
-This then means that we would expect the marginal posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{par_est:results:example_posterier} and \ref{par_est:results:example_skypos}.
+This then means that we would expect the marginal posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{par_est:results:example_posterior} and \ref{par_est:results:example_skypos}.
 The sky position parameters of the neutron star are in the equatorial coordinate system, therefore these have been transformed into the ecliptic frame such that the sky position posteriors easier to interpret.
 %
-\begin{sidewaysfigure}[p]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/skypos_ecliptic.pdf}
-    \caption[Example of posterior of sky position]{This figure shows an example of the marginal posterior distribution of the sky position of a signal with \gls{SNR} 144. The coordinates are in the ecliptic frame.}
+    \caption[Example of posterior of sky position in ecliptic frame]{This figure shows an example of the marginal posterior distribution of the sky position in the ecliptic frame $\alpha^{\rm{ecliptic}},\delta^{\rm{ecliptic}}$ of a signal with \gls{SNR} 144. The overlayed panel is a zoomed area around the posterior distribution, where the orange marker shows the injected parameters.}
     \label{par_est:results:example_skypos}
     
-\end{sidewaysfigure}
+\end{figure}
 %
 
+%
+%
 \subsection{Simulations}
+%
+%
+To test this method, we generate a set of simulations of the Gaussian noise spectrograms of \gls{CW} signals as in Sec.~\ref{soap:results} and Sec.~\ref{machine:results}.
+This is the same simulated test set from Sec.~\ref{machine:results}, where \gls{CW} signals were injected into 50\% of the 0.1 Hz wide sub-bands between between 40 and 500 Hz, with the parameters as described in Tab.~\ref{soap:results:parameters}. 
+The SOAP search using the line aware statistic with parameters in Tab.~\ref{soap:res} \joe{table} is run on each sub-band, where the Viterbi track and \gls{CW} signal parameters $\alpha, \delta, f, \dot{f}$ associated with each simulation are recorded.
+The Viterbi track can then be used to run the Bayesian analysis described in Sec.~\ref{par_est:bayes}.
+In these simulations, we have 2300 simulated signals which have an \gls{SNR} range between 20 and 200, where for this test we randomly select 200 of these simulations.
 
-To test this method, we generate a set of simulations of the spectrograms of pulsar signals as in Sec.~\ref{soap:results} and Sec.~\ref{machine:results}.
-In each of these we record the Viterbi track and the pulsar signal parameters $\alpha, \delta, f, \dot{f} , \rho$ associated with each simulation, from which the pulsar track can be generated.
-The Viterbi track and the pulsars signal parameters $\alpha, \delta, f, \dot{f}$ is all the information needed to run the Bayesian analysis described in Sec.~\ref{par_est:bayes}.
-We generated signals in 50\% of the 0.1 Hz wide sub-bands between between 40 and 500 Hz, with the parameters as described in Tab.~\ref{}. 
-This meant that we have 2300 simulated signals which had an \gls{SNR} range between 20 and 200.
+\if
 However, as the \gls{SNR} of the simulations decreases, the probability of SOAP identifying the signal decreases, therefore, we only want to run the Bayesian parameter estimation on signals which are most likely to be astrophysical.
 Therefore, as in Sec.~\ref{soap:results}, we find the false alarm rate, which is the fraction of bands which contain no injection and has a Viterbi statistic which exceeds a given threshold, where this is set to 0\% for this test.
 We can then select all of the sub-bands which have a Viterbi statistic above this threshold for further investigation, where with a 0\% false alarm rate we have 2000 \joe{ecaxt number} injections to investigate.
@@ -231,6 +239,7 @@ The Viterbi statistics for each of these injections can be seen in Fig.~\ref{par
     \caption[All Viterbi statistics]{This figure shows a histogram of the Viterbi statistics from each of the 0.1 Hz wide sub bands in this test. \joe{more}}
     \label{par_est:results:all_viterbi}
 \end{figure}
+\fi
 
 
 \subsubsection{P-P plot}
@@ -292,10 +301,26 @@ This sky area can be calculated for all of the simulations described in Sec.~\re
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/sky_area_hist.pdf}
-    \caption[p-p plot for the CW simulations]{This figure shows the p-p plot for the 2000 `detected' signals by SOAP in the test described in Sec.~\ref{par_est:results}. \joe{more}}
+    \caption[p-p plot for the CW simulations]{A histogram of the sky area with 95\% confidence in square degrees. The entire sky has $\sim 41253$ square degrees, so assuming $\sim 2000$ square degrees \joe{motivate this} the sky area is limited to 1/20 th of the sky using this method. \joe{more}}
     \label{par_est:results:sky_Area}
 \end{figure}
 
 
 
 \joe{say what reduction in sky area is useful for passing on to future searches}
+
+
+%
+%
+\section{Discussion}
+%
+%
+
+In this chapter a Bayesian analysis to extract the doppler parameters $\alpha, \delta, f \dot{f}$ of a \gls{CW} source is presented.
+This aimed to limit the parameter space for more sensitive analysis such as \joe{are you sure its just this} Einstein@Home \citep{} to further analyse the signal. 
+
+In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described, where a likelihood is empirically calculated from a set of simulations and the prior is flat in all parameters.
+In Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations, where we asses the reliability and accuracy of the analysis.
+We find that \joe{...}
+
+

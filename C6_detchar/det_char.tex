@@ -408,15 +408,25 @@ you must explain in more detail what you mean by this.}
 
 
 The Viterbi statistic is used as an initial flag for a sub-band which could potentially contain an instrumental line.
-The equivalent plots for each sub-band can then be used to follow up on each of these sub-bands, where a list of potential lines is generated from this investigation. 
-This line list can then be compared to existing LIGO line lists which are generated using the searches described in Sec.~\ref{detchar:monitor}.
-These two such lists, one which contain lines where the source is known and one where the source is not known.
+The equivalent plots for each sub-band can then be used for further investigation, where a list of potential lines is generated. 
+This line list can then be compared to existing \gls{LIGO} line lists which are generated using the searches described in Sec.~\ref{detchar:monitor}.
+There are currently two line lists, one which contain lines where the source has been identified and one where the source is not known.
 Known lines can be accessed at {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/index.html}}
 and unknown lines at {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/Unidentified/index.html}} or are both stored in a git repository {\tt \url{https://git.ligo.org/CW/instrumental/aLIGO-lines-combs}}. 
 
-These line lists can be compared to the outputs of the SOAP search to see how many lines were detected.
+These line lists can be compared to the outputs of the SOAP search to compare its performance to existing techniques.
 SOAP detected 55\% of the lines of known origin and 45\% of the lines where the origin is not known.
-The lines which are not detected .....
+Of the lines of known origin, all of these were line from the ``Calibration line mixing'', which were short duration lines at the beginning of O3, some examples of these can be seen in Fig.~\ref{detchar:soap:calibrationlinemixing}.
+SOAP struggles to find short duration signals as is the signal is weak it cannot build up enough \gls{SNR} to pass the detection threshold.
+
+%
+\begin{figure}[hpt]
+	\centering
+	\includegraphics[width=\textwidth]{C6_detchar/track_F53_7_53_9_wander.png}
+	\caption[Example of calibration line mixing]{}
+	\label{detchar:soap:calibrationlinemixing}
+\end{figure}
+%
 
 
 When running this search SOAP identified lines which did not appear in other
