@@ -166,6 +166,7 @@ To calculate this posterior we use a technique known as nested sampling, specifi
 
 As an example, we can simulate a \gls{CW} signal with neutron star parameters 
 \begin{equation}
+    \label{par_est:results:examplepars}
     \begin{split}
         \alpha &= 4.2 \; \rm{rad}\\
         \delta &= -0.06 \; \rm{rad} \\
@@ -178,11 +179,11 @@ As an example, we can simulate a \gls{CW} signal with neutron star parameters
 and generate the associated spectrograms for the \gls{LIGO} detectors H1 and L1.
 The SOAP search from Sec.~\ref{soap} is then run using the line-aware statistics the same parameters as in Sec.~\ref{soap:results}, the output Viterbi track is then plotted with the neutron stars frequency track in Fig.~\ref{par_est:results:freqtrack}.
 %
-\begin{figure}[pt]
+\begin{figure}[ht]
 
     \centering
-    \includegraphics[width=\linewidth]{C5_parameter/viterbi_hist.pdf}
-    \caption[Frequency track of injected signal]{ Example frequency and Viterbi track }
+    \includegraphics[width=\linewidth]{C5_parameter/example_freqtrack.pdf}
+    \caption[Frequency track of injected signal]{ Example simulated \gls{CW} frequency using parameters in Eq.~\ref{par_est:results:examplepars} and the Viterbi track recovered from the simulation. The track is samples once per day, where the oscillation visible here is due to the Doppler modulation of the Earth's orbit.}
     \label{par_est:results:freqtrack}
     
 \end{figure}
@@ -273,11 +274,11 @@ Similarly, if the posterior is over constrained, shown in the fourth panel of Fi
     \label{par_est:results:ppplot_example}
 \end{figure}
 
-Using this information, we can look at the p-p plot for the 2000 \joe{check} simulations in this test, which is shown in Fig.~\ref{par_est:results:ppplot}.
-We can see that for the parameters $f$ and $\dot{f}$ we recover an under constrained posterior distribution, which implies that we are under confident about our estimation of the parameters.
-For the \gls{SNR} parameter $\rho$, the recovered posterior is shifted to the right, i.e. we assume higher \glspl{SNR} than perfectly recovered distribution.
-For the right ascension parameter $\alpha$, we can see that we are both shifted to the right and is over constrained, therefore, we are overconfident that the estimation of this parameter is correct.
-For the declination parameters $\delta$, the posterior distribution is both over constrained and shifted to the right, this is largely as the posterior is bi-modal. 
+Using this information, we can look at the p-p plot for the 200 simulations in this test, which is shown in Fig.~\ref{par_est:results:ppplot}.
+We can see that for the parameters $f$ and $\dot{f}$ we recover an under constrained posterior distribution.
+For the \gls{SNR} parameter $\rho$, the recovered posterior is shifted to the right and is over constrained, i.e. we assume higher \glspl{SNR} than perfectly recovered distribution.
+For both the right ascension parameter $\alpha$ and the declination parameter $\delta$, we can see that we recover over constrained posterior distributions, therefore, we are overconfident that the estimation of these parameters are correct.
+Each of these indicate that the current analysis does not correctly reproduce the true posterior distribution.
 %
 \begin{figure}[ht]
     \centering
@@ -286,29 +287,38 @@ For the declination parameters $\delta$, the posterior distribution is both over
     \label{par_est:results:ppplot}
 \end{figure}
 
-The over constrained posterior distributions are due to the assumption that the frequency track elements are independent in the likelihood described in Sec.~\ref{par_est:bayes:likelihood}.
-These elements are in fact dependent i.e. 
+In our definition of the likelihood in Sec.~\ref{par_est:bayes:likelihood}, to simplify the problem we assume that all track components are independent. 
+This is not necessarily true and could contribute to the over constrained posterior distributions, where in the future we aim to use a likelihood which is dependent on the track components.
 \joe{say why this doesnt work and how it could be improved}
 
 \subsubsection{Sky area at given confidence interval}
 
-If we assume that the estimated posterior distribution is correct, i.e. it is not under constrained or shifted, then we can estimate the area of the sky which this method can localise the source to. 
-To do this we can use the posterior samples to draw a contour on the 2d sky map where the posterior contains 90\% of the probability.
-This area contained within this contour is then the sky area which this method can localise the source to at 90\% confidence.
-An example of this can be seen in Fig.~\ref{}.
+If we assume that the estimated posterior distribution is correct recovered, i.e. it is not under constrained or shifted, then we can estimate the area of the sky which this method can localise the source to. 
+To do this we can use our estimation of the marginal posterior distribution on the sky, and draw a contour on the posterior which contains 95\% of the probability.
+The area contained within this contour is then the sky area which the source can be localised to at a 95\% confidence, this can be seen as the green contour in Fig.~\ref{par_est:results:sky_area_example}.
+Similarly, the sky area which contains the injected sky position parameters can be found, shown as the red contour in Fig.~\ref{par_est:results:sky_area_example}.
+This is another measure of the ability of this method to localise the sky position.
+%
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{C5_parameter/skyarea_example.pdf}
+    \caption[Area of sky at 95\% confidence]{For the injection in Sec.~\ref{par_est:results:example_posterior}, the contour in sky position is drawn for a 95\% confidence and the area which contains the injected sky position parameters.}
+    \label{par_est:results:sky_area_example}
+\end{figure}
 
-This sky area can be calculated for all of the simulations described in Sec.~\ref{par_est:results}, where Fig.~\ref{par_est:results:sky_area} shows a histograms of all of the sky areas at 90\% confidence in square degrees.
+The contours and therefore sky areas described above can be calculated for all of the simulations described in Sec.~\ref{par_est:results}, where Fig.~\ref{par_est:results:sky_area} shows the histograms of the sky areas at 95\% confidence and sky areas which contain the injected parameters.
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/sky_area_hist.pdf}
     \caption[p-p plot for the CW simulations]{A histogram of the sky area with 95\% confidence in square degrees. The entire sky has $\sim 41253$ square degrees, so assuming $\sim 2000$ square degrees \joe{motivate this} the sky area is limited to 1/20 th of the sky using this method. \joe{more}}
-    \label{par_est:results:sky_Area}
+    \label{par_est:results:sky_area}
 \end{figure}
 
+Figure \ref{par_est:results:sky_area} shows that \joe{some} percent of the time we can localise the source to a sky area of \joe{25} square degrees with a 90\% confidence.
+Given the full sky has $\sim 41253$ square degrees, this is $\sim \frac{1}{1750}$ of the whole sky.
+For an all sky search such as Einstein@Home \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome,singh2016ResultsAllsky}, which uses the Hough transform \citep{krishnan2004HoughTransform} to combine the coherently analysed segments, a grid is placed on the sky such that the parameter space if sufficiently covered whilst running the analysis at discrete points. Assuming that both the SOAP with parameter estimation method is valid and is used as the first stage in this search to reduce the size of the parameter space, Einstein@Home would only have to search over $\sim \frac{1}{1750}$ of the sky, reducing the computational cost of the first stage. 
 
-
-\joe{say what reduction in sky area is useful for passing on to future searches}
 
 
 %
@@ -317,11 +327,17 @@ This sky area can be calculated for all of the simulations described in Sec.~\re
 %
 %
 
-In this chapter a Bayesian analysis to extract the doppler parameters $\alpha, \delta, f \dot{f}$ of a \gls{CW} source is presented.
-This aimed to limit the parameter space for more sensitive analysis such as \joe{are you sure its just this} Einstein@Home \citep{} to further analyse the signal. 
+In this chapter I describe a Bayesian analysis to extract the doppler parameters $\alpha, \delta, f \dot{f}$ and \gls{SNR} $\rho$ of a potential \gls{CW} source from the Viterbi track which is output from the SOAP search in Sec.~\ref{soap}.
+The aim of this method is to provide estimates of the \gls{CW} parameters which would also reduce the size of the parameter space for a more sensitive analysis such as Einstein@Home \citep{singh2016ResultsAllsky}. 
 
-In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described, where a likelihood is empirically calculated from a set of simulations and the prior is flat in all parameters.
-In Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations, where we asses the reliability and accuracy of the analysis.
-We find that \joe{...}
+In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described, where the input is a Viterbi track described in Sec.~\ref{soap} and the output is a posterior distribution on a \gls{CW} signals doppler parameters.
+In this model, the likelihood is empirically calculated by simulating \gls{CW} signals and recording the difference between the Viterbi track and simulated track for multiple \gls{SNR} bands. 
+For each of the parameters in the search, we assume a flat prior.
+In Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations which had parameters drawn from the same prior as the Bayesian model.
+In this section we generate p-p plots to asses the validity of this model and find that the sky position parameters are over constrained by a large factor, the \gls{SNR} is also over constrained and overestimated and the frequency and frequency derivative are under constrained.
+When looking at the area contained within contours which pass through the simulated parameter, we find that ....
+
+In its current state, the search does not provide a valid way to estimate the parameters of the source from its Viterbi track, however, this is ongoing work and we aim to develop this into a reliable technique.
+
 
 
