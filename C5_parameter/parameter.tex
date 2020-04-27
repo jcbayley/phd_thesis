@@ -178,6 +178,8 @@ Our likelihood where we assume independent track elements for a given Viterbi tr
     p(\bm{V} \mid \bm{\theta}, \rho, I) = \frac{1}{N}\prod_{i = 1}^{N} \mathcal{L}(M_i(\bm{\theta}) - V_i, \rho) ,
 \end{equation}
 where $N$ is the length of the Viterbi track $\bm{V}$. 
+
+% Not currently doing this 
 \if
 As the likelihood $\mathcal{L}$ is binned in \gls{SNR} $\rho$, and $\rho$ is a continuous value, the likelihood is calculated as the weighted sum of the surrounding likelihood bins, where the weights are the fractional separation of $\rho$ from the bin centers. 
 \fi
@@ -186,7 +188,7 @@ As the likelihood $\mathcal{L}$ is binned in \gls{SNR} $\rho$, and $\rho$ is a c
 \subsection{Prior}
 %
 We set up a simple prior which does not assume much about the parameters, other than limits on their range. 
-We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through, a flat prior in the frequency derivative in the range $[-1\cdot 10^{9},1\cdot 10^{9}]$ and a flat prior for the \gls{SNR} $\rho$ in the range $[50,200]$.
+We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through, a flat prior in the frequency derivative in the range $[-1e^{9},1e^{9}]$ and a flat prior for the \gls{SNR} $\rho$ in the range $[50,200]$.
 
 
 \clearpage
@@ -200,7 +202,7 @@ We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delt
 The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and uses this to estimate the five dimensional posterior distribution $p\left(\left\{ \alpha, \delta, f, \dot{f}, \rho \right\} \mid \bm{V}, I \right)$.
 To calculate this posterior we use a technique known as nested sampling, specifically the package {\it Dynesty} \citep{speagle2019DynestyDynamic}, which is explained in Sec.~\ref{intro:prob:bayes}. \joe{will explain more in the return of intro chapter}
 
-As an example, we can simulate a \gls{CW} signal with neutron star parameters 
+As an example of what this returns, we can first simulate a \gls{CW} signal with parameters 
 \begin{equation}
     \label{par_est:results:examplepars}
     \begin{split}
@@ -213,7 +215,7 @@ As an example, we can simulate a \gls{CW} signal with neutron star parameters
 \end{equation}
 
 and generate the associated spectrograms for the \gls{LIGO} detectors H1 and L1.
-The SOAP search from Sec.~\ref{soap} is then run using the line-aware statistics the same parameters as in Sec.~\ref{soap:results}, the output Viterbi track is then plotted with the neutron stars frequency track in Fig.~\ref{par_est:results:freqtrack}.
+The SOAP search from chapter \ref{soap} is then run using the line-aware statistics the same parameters as in Tab.~\ref{soap:results:parameters}, the output Viterbi track is then plotted with the \gls{CW} frequency track in Fig.~\ref{par_est:results:freqtrack}. 
 %
 \begin{figure}[ht]
 
@@ -224,11 +226,11 @@ The SOAP search from Sec.~\ref{soap} is then run using the line-aware statistics
     
 \end{figure}
 %
-In this case the Viterbi track closely follows the simulated neutrons star frequency track.
+In this case the Viterbi track can be seen to closely follow the simulated \gls{CW} frequency track.
 
 The Bayesian analysis described in Sec.~\ref{par_est:bayes} is then run using this Viterbi track as input, where this returns the posterior distribution shown in Fig.~\ref{par_est:results:example_posterior}.
 In this example, the injected parameter values (marked in orange) are contained within the marginal posterior distributions for all of the parameters excluding the \gls{SNR}.
-I will describe this more in Sec.~\ref{par_est:results:simulations}, however, in this analysis we are mostly interested in the Doppler parameters.
+The distribution in \gls{SNR} appears to have hard edges at the edge of the binned likelihood function, which begins to demonstrate some problems with the definition of the likelihood, however,I will describe this more in Sec.~\ref{par_est:results:simulations}.
 %
 \begin{figure}[pt]
 
@@ -240,11 +242,12 @@ I will describe this more in Sec.~\ref{par_est:results:simulations}, however, in
 \end{figure}
 %
 
-The distribution of the sky parameters are easier to interpret when they are projected onto a sky map, therefore, Fig.~\ref{par_est:results:example_skypos} the parameters $\alpha$ and $\delta$ are shown on a sky projection.
+The marginal posterior distribution of the sky parameters is easier to interpret it is projected onto a sky map, therefore, Fig.~\ref{par_est:results:example_skypos} the parameters $\alpha$ and $\delta$ are shown on a sky projection in the ecliptic frame.
+The sky position parameters $\alpha,delta$ of the \gls{CW} signal are in the equatorial coordinate system, therefore these have been transformed into the ecliptic frame $\beta,\gamma$ such that the sky position posteriors easier to interpret.
 The Viterbi tracks and \gls{CW} frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
 In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital plane of the earth, for any ecliptic longitude, there are two sky positions at opposite ecliptic latitudes which will return the same frequency track. 
-This then means that we would expect the marginal posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{par_est:results:example_posterior} and \ref{par_est:results:example_skypos}.
-The sky position parameters of the neutron star are in the equatorial coordinate system, therefore these have been transformed into the ecliptic frame such that the sky position posteriors easier to interpret.
+This then means that we would expect the marginal posterior distribution to have two modes on the sky at these two locations, where this is seen in \ref{par_est:results:example_skypos}.
+
 %
 \begin{figure}[ht]
     \centering
@@ -260,9 +263,9 @@ The sky position parameters of the neutron star are in the equatorial coordinate
 \subsection{\label{par_est:results:simulations}Simulations}
 %
 %
-To test this method, we generate a set of simulations of the Gaussian noise spectrograms of \gls{CW} signals as in Sec.~\ref{soap:results} and Sec.~\ref{machine:results}.
+To test this method, we generate a set of simulations in Gaussian noise, where we generate spectrograms of \gls{CW} signals as in Sec.~\ref{soap:results} and Sec.~\ref{machine:results}.
 This is the same simulated test set from Sec.~\ref{machine:results}, where \gls{CW} signals were injected into 50\% of the 0.1 Hz wide sub-bands between between 40 and 500 Hz, with the parameters as described in Tab.~\ref{machine:data:injections:table}. 
-The SOAP search using the line aware statistic with parameters in Tab.~\ref{soap:results:parameters} \joe{table} is run on each sub-band, where the Viterbi track and \gls{CW} signal parameters $\alpha, \delta, f, \dot{f}$ associated with each simulation are recorded.
+The SOAP search using the line aware statistic with parameters in Tab.~\ref{soap:results:parameters} is run on each sub-band, where the Viterbi track and \gls{CW} signal parameters $\alpha, \delta, f, \dot{f}$ associated with each simulation are recorded.
 The Viterbi track can then be used to run the Bayesian analysis described in Sec.~\ref{par_est:bayes}.
 In these simulations, we have 2300 simulated signals which have an \gls{SNR} range between 20 and 200, where for this test we randomly select 200 of these simulations.
 
@@ -291,7 +294,7 @@ For each simulation, we can calculate the posterior quantile $q(\theta_{\rm{inj}
 \end{equation}
 where $H(x)$ is the Heaviside step function. 
 This calculates the fraction of the marginal posterior distribution which has a parameter $\theta$ less than the injected parameter $\theta_{\rm{inj}}$ \citep{cook2006ValidationSoftware}.
-If the model and computation of the posterior is valid, then as the number of samples approaches infinity ($N \rightarrow \infty$), the posterior quantile $q(\theta_{\rm{inj}})$ should follow a uniform distribution $[0,1]$ \citep{cook2006ValidationSoftware}.
+If the Bayesian model and computation of the posterior is valid, then as the number of samples approaches infinity ($N \rightarrow \infty$), the posterior quantile $q(\theta_{\rm{inj}})$ should follow a uniform distribution $[0,1]$ \citep{cook2006ValidationSoftware}.
 This then provides a method to check the validity of our analysis.
 
 For each of our simulations we can calculate $q(\theta_{\rm{inj}})$, such that we have values $\bm{q}_{\theta}$, where the fraction of simulations which fall within a given \gls{CI} $C$ is the cumulative distribution of $\bm{q}_{\theta}$, i.e. $P(\bm{q}_{\theta} > C)$, where $C$ ranges between $[0,1]$.
@@ -301,8 +304,8 @@ Plotting $P(\bm{q}_{\theta} > C)$ against $C$ for each parameter $\theta$, then 
 If the analysis is valid, i.e the marginal posterior distributions agree with the injected parameters, then this plot should follow a straight diagonal line, indicated by the black line in Fig.~\ref{par_est:results:ppplot_example}.
 If the marginal posterior distribution is shifted to right of the injected parameters, shown in the first panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the true value lies in the lower tail of the posterior for each simulation, then the p-p plot will show a curve above the diagonal.
 Similarly, if the marginal posterior distribution is shifted to left of the injected parameters, shown in the second panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the true value lies in the upper tail of the posterior for each simulation, then the p-p plot will show a curve below the diagonal. 
-If the posterior is under constrained, shown in the third panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the posterior is wider than the perfectly recovered posterior, then the curve will follow an S shape where the S is below the diagonal at $C < 0$.5 and above the diagonal at $C > 0.5$.
-Similarly, if the posterior is over constrained, shown in the fourth panel of Fig.~\ref{par_est:results:ppplot_example},i.e. the posterior is narrower than the perfectly recovered posterior, then the curve will follow an S shape where the S is above the diagonal at $C < 0.5$ and below the diagonal at $C> 0.5$.
+If the posterior is under constrained shown in the third panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the posterior is wider than the perfectly recovered posterior, then the curve will follow an S shape where the S is below the diagonal at $C < 0$.5 and above the diagonal at $C > 0.5$.
+Similarly, if the posterior is over constrained shown in the fourth panel of Fig.~\ref{par_est:results:ppplot_example},i.e. the posterior is narrower than the perfectly recovered posterior, then the curve will follow an S shape where the S is above the diagonal at $C < 0.5$ and below the diagonal at $C> 0.5$.
 %
 \begin{figure}[ht]
     \centering
@@ -313,10 +316,10 @@ Similarly, if the posterior is over constrained, shown in the fourth panel of Fi
 
 Using this information, we can look at the p-p plot for the 200 simulations in this test, which is shown in Fig.~\ref{par_est:results:ppplot}.
 We can see that for the parameters $f$ and $\dot{f}$ we recover an over constrained posterior distribution.
-For the \gls{SNR} parameter $\rho$, the recovered posterior is shifted to the right and is over constrained, i.e. we assume higher \glspl{SNR} than perfectly recovered distribution.
+For the \gls{SNR} parameter $\rho$, the recovered posterior is both shifted to the right and is over constrained, i.e. we assume higher \glspl{SNR} than perfectly recovered distribution.
 For both the right ascension parameter $\alpha$ and the declination parameter $\delta$, we can see that we recover under constrained posterior distribution.
 However, as the modes are widely separated, if the true parameter lies between the two modes then it would return a \gls{CI} of $\sim 0.5$, for many simulations this would produce a p-p plot which appears as an under constrained posterior when it is actually two widely separated over constrained posteriors.
-This becomes more clear when investigating the area contained within a contours of the posterior which is explained in Sec.~\ref{ar_est:results:simulations:skyarea}.
+This becomes more clear when investigating the area contained within a contours of the posterior which is explained in Sec.~\ref{par_est:results:simulations:skyarea}.
 %
 \begin{figure}[ht]
     \centering
@@ -334,10 +337,10 @@ One likely reason for this could be our definition of the likelihood in Sec.~\re
 %
 %
 
-If we assume that the estimated posterior distribution is correct recovered, i.e. it is not under constrained or shifted, then we can estimate the area of the sky which this method can localise the source to. 
+If we assume that the estimated posterior distribution is correctly recovered, i.e. it is not under constrained or shifted, then we can estimate the area of the sky which this method can localise the source to. 
 To do this we can use our estimation of the marginal posterior distribution on the sky, and draw a contour on the posterior which contains 95\% of the probability.
 The area contained within this contour is then the sky area which the source can be localised to at a 95\% confidence, this can be seen as the green contour in Fig.~\ref{par_est:results:sky_area_example}.
-Similarly, a contour can be drawn at the injected sky position parameters and the area within this can be found, this is shown as the red contour in Fig.~\ref{par_est:results:sky_area_example}.
+Similarly, a contour can be drawn at the values of the injected sky position parameters where the area within this contour can be found, this is shown as the red contour in Fig.~\ref{par_est:results:sky_area_example}.
 If the contour at the injected parameter is much larger than the contour at 95\% confidence, then this implies that the posterior distribution is over constrained.
 These two areas are another measure of the validity and ability of this method to extract the parameters. 
 %
@@ -348,13 +351,13 @@ These two areas are another measure of the validity and ability of this method t
     \label{par_est:results:sky_area_example}
 \end{figure}
 
-The contours and therefore their associated sky areas can be calculated for all of the simulations described in Sec.~\ref{par_est:results} as described above. 
+The contours and therefore their associated sky areas can be calculated for all of the simulations described in Sec.~\ref{par_est:results}. 
 Figure \ref{par_est:results:sky_area} shows the histograms of the sky areas at 95\% confidence and sky areas which contain the injected parameters.
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/sky_area_hist.pdf}
-    \caption[p-p plot for the CW simulations]{A histogram is shown of the sky area which this method can localise a source to with 95\% confidence in square degrees and the sky area associated a contour on the posterior that passes through the injected parameter. The entire sky has $\sim 41253$ square degrees, therefore the sky area at 95\% confidence where 90\% of the sky areas are less than this value is 45 [deg$^2$].  }
+    \caption[p-p plot for the CW simulations]{A histogram is shown of the sky area which this method can localise a source to with 95\% confidence in square degrees and the sky area associated a contour on the posterior that passes through the injected parameter. The entire sky has $\sim 41253$ square degrees, therefore the sky area at 95\% confidence where 90\% of the sky areas are less than this value is 45 deg$^2$.  }
     \label{par_est:results:sky_area}
 \end{figure}
 %
@@ -362,10 +365,10 @@ From the distributions in Fig.~\ref{par_est:results:sky_area} we can see that th
 From this we see that the injected parameters fall within the 95\% confidence contour only 40\% of the time.
 This implies that these posterior distributions are over constrained, and the first panel showing the sky areas at 95\% confidence is overly optimistic. \textbf{}
 
-However, if we assume that the 95\% confidence sky areas are correct, we can take the value of the sky area where 90\% of our simulations have a sky area less than this value, i.e. the 90\% confidence line in Fig.~\ref{par_est:results:sky_area}, this is an area of 45 [deg]$^2$.
-Given the full sky has $\sim 41253$ square degrees, this is factor of $\sim 1 \cdot 10^{-3}$ of the whole sky.
-For an all sky search such as Einstein@Home \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome,singh2016ResultsAllsky}, which uses the Hough transform \citep{krishnan2004HoughTransform} to combine the coherently analysed segments, the analysis is run at discrete points in parameter space. The initial stage of the search places these points on a coarse grid in sky positions to reduce the computational cost.
- If we assume that both the SOAP with parameter estimation method is valid and replaces the first stage in this search, Einstein@Home would only have to search over $\sim 1 \cdot 10^{-3}$ of the sky. 
+However, if we assume that the 95\% confidence sky areas are correct, we can take the value of the sky area where 90\% of our simulations have a sky area less than this value, i.e. the 90\% confidence line in Fig.~\ref{par_est:results:sky_area}, this is an area of 45 deg$^2$.
+Given the full sky has $\sim 41253$ square degrees, this is factor of $\sim 10^{-3}$ of the whole sky.
+For an all sky search such as Einstein@Home \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome,singh2016ResultsAllsky}, which uses the Hough transform \citep{krishnan2004HoughTransform} to combine the coherently analysed segments, the analysis is run at discrete points in parameter space. The initial stage of the search places these points on a coarse grid in sky positions, frequency and frequency derivative to reduce the computational cost.
+ If we assume that both the SOAP with parameter estimation method is valid and replaces the first stage in this search, Einstein@Home would only have to search over a factor of $\sim 10^{-3}$ of the sky. 
  Given that this method is $\mathcal{O}(10^4)$ faster than Einstein@home, this would drastically reduce the computational cost of the first stage of the search. 
 
 
@@ -379,7 +382,7 @@ For an all sky search such as Einstein@Home \citep{theligoscientificcollaboratio
 In this chapter I describe a Bayesian analysis to extract the Doppler parameters $\alpha, \delta, f \dot{f}$ and \gls{SNR} $\rho$ of a potential \gls{CW} source from the Viterbi track which is output from the SOAP search in chapter \ref{soap}.
 The aim of this method is to provide estimates of the \gls{CW} parameters, and then use these to reduce the size of the parameter space for a more sensitive analysis such as Einstein@Home \citep{singh2016ResultsAllsky}. 
 
-In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described, where the input is a Viterbi track which is described in chapter ~\ref{soap} and the output is a posterior distribution on a \gls{CW} signals Doppler parameters.
+In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described, where the input is a Viterbi track which is described in chapter \ref{soap}, and the output is a posterior distribution of the Doppler parameters of a \gls{CW} signal.
 In this model, the likelihood is empirically calculated by simulating $\mathcal{O}(10^4)$ \gls{CW} signals and then recording the difference between the Viterbi track and \gls{CW} frequency track for multiple \gls{SNR} bands. 
 The histogram of these values is then the likelihood of this method.
 For each of the parameters in the search, we assume a flat prior.
@@ -387,7 +390,7 @@ In Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations which h
 In this section we generate p-p plots to asses the validity of this model and find that the \gls{SNR}, frequency and frequency derivative all are over constrained distributions and the sky position parameters are under constrained.
 However, when looking at the sky position parameters more carefully, we find that the distribution is bi modal where each mode is over constrained.
 
-We investigated the area contained within contours on the marginal posterior for the sky position to gauge the ability of the search to localise a source, we found that with a 95\% confidence we can detect to a sky area within 45 deg$^2$ 90\% of the time. 
+We investigated the area contained within contours on the marginal posterior for the sky position to gauge the ability of the search to localise a source, where we found that with a 95\% confidence we can detect to a sky area within 45 deg$^2$ 90\% of the time. 
 However, due to the over constrained posterior, the true value of the parameter fell within this contour only 40\% of the time.
 
 These results imply that in its current state, the search does not provide a valid way to estimate the parameters of the source from its Viterbi track.
