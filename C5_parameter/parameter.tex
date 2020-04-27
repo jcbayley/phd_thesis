@@ -4,25 +4,23 @@
 %%%%%%%%%%%%
 %%%%%
 
-Throughout Sec.~\ref{soap} and \ref{machine} we developed techniques which could identify whether a potential signal is present within a small frequency band ($0.1 Hz$) and return the most likely frequency track if the signal in that band.
-This is useful information for all-sky searches as it can limit the parameter space for deeper searches such as those described in Sec.~\ref{searchcw:search:targeted}. 
-However, this only limits the parameters space to a smaller frequency band, and potentially the frequency and derivative if we used the Viterbi track information.
-This still leaves a large parameter space which a more sensitive method would have to search through.
-In particular the sky position of the source has to be sampled finely as \gls{LIGO} can accurately localise a \gls{CW} source.
-This is because the source is observed at multiple positions as the earth orbits sun, giving an effective aperture of the earth's orbital radius.
-The SOAP search would therefore benefit if it could provide more information on the astrophysical source.
+Throughout chapters \ref{soap} and \ref{machine} we developed techniques which could identify whether a potential \gls{CW} signal is present within a small frequency band of width $0.1$ Hz, and then return the frequency track that the signal is most likely to follow.
+This provides frequency bands in which a signal could be present, which is useful for all-sky searches as it can limit the parameter space and therefore computational time for deeper searches such as those described in Sec.~\ref{searchcw:search:targeted}. 
+However, this only limits the parameter space in frequency to a smaller frequency band, where there is still a large parameter space which needs to be searched.
+If the Viterbi track returned by SOAP in chapter \ref{soap} follows the frequency evolution of a \gls{CW} source, then this track contains information on the sky position and frequency evolution of the \gls{CW}.
+If one could extract this information then the size of the parameter space for more sensitive searches such as Einstein@Home could be reduced, decreasing their computational cost.
 
-In this chapter I will outline a Bayesian method which uses the output Viterbi tracks of the SOAP search in Sec.~\ref{soap} to return some astrophysical parameters of a source.
+In this chapter I will outline a Bayesian method which uses the output Viterbi tracks of the SOAP search in chapter ~\ref{soap} to return some astrophysical parameters of a source.
 Sec.~\ref{par_est:freq} will outline the model of the frequency evolution of a \gls{CW} from a source with a slowly varying frequency,
 Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and Sec.~\ref{par_est:results} will show the results from testing on simulated signals.
 
 %%%%
 %%%%
-\section{\label{par_est:freq}Pulsar frequency evolution}
+\section{\label{par_est:freq}\gls{CW} source frequency evolution}
 %%%%
 %%%%
 
-The SOAP search returns a Viterbi track, where if this track follows the frequency of a pulsar signal, frequency evolution contains information of the sky position ($\alpha, \delta$) and the frequency of the source $f$ and its derivative $\dot{f}$ where we ignore higher order frequency derivatives.
+The SOAP search returns a frequency track known as the Viterbi track, if this track follows the frequency of a \gls{CW} source, then the frequency evolution contains information of the sky position ($\alpha, \delta$), the frequency of the source $f$ and its derivative $\dot{f}$, where we ignore higher order frequency derivatives.
 From the Viterbi track, we should then be able to extract this information as we have a model for the phase evolution (and therefore frequency evolution) of the source described in Eq.~\ref{searchcw:model:phase} in Sec.~\ref{searchcw:model}.
 To relate this phase evolution to the sky position parameters, we can look closer at Eq.~\ref{searchcw:model:ssbtime}, where we describe the shift in arrival time due to the earths motion. 
 
@@ -47,24 +45,24 @@ In this frame the unit vector pointing towards the star can be written as
     \end{matrix} \right),
 \end{equation}
 where $\alpha$ and $\delta$ are the right ascension and declination (sky position) of the source and $\epsilon$ is the angle between the ecliptic and the earth's equator.
-The first matrix in Eq.~\ref{par_est:freq:unit} describes a rotation from the \joe{earths} frame where $\alpha$ and $\delta$ are measured to the \gls{SSB} frame. 
+The first matrix in Eq.~\ref{par_est:freq:unit} describes a rotation from the celestial frame where $\alpha$ and $\delta$ are measured to the ecliptic frame. 
 The second matrix transforms the sky position parameters to their component $x,y,z$ coordinates.
 
-The position vector of the earth at a time $t$, $\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, can split into the addition of two components, the position due to the orbit of the earth and position due to the rotation of the earth.
-The position of the earth in its orbit is described in cartesian coordinates as
+The position vector of the earth, $\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, at a time $t$ can be split into the addition of two components, the position due to the orbit of the earth and position due to the rotation of the earth.
+If we assume the orbit is circular, then the position of the earth in its orbit is described in Cartesian coordinates as
 \begin{equation}
-    \bm{r}_{orb} = R_{\mathrm{O}}
+    \bm{r}_{\rm{orb}} = R_{\mathrm{O}}
     \left(
     \begin{matrix}
-        \cos{\left( \Omega_{\mathrm{O}} t + \phi_{\omega){O}}  \right)}  \\
-        \sin{\left( \Omega_{\mathrm{O}} t + \phi_{\omega){O}}  \right)} \\
+        \cos{\left( \Omega_{\mathrm{O}} t + \phi_{O}  \right)}  \\
+        \sin{\left( \Omega_{\mathrm{O}} t + \phi_{O}  \right)} \\
         0 \\
     \end{matrix} \right),
 \end{equation}
-where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU), $\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit $2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{\omega){O}}$ is some phase which defines the position of the earth in its orbital motion.
+where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU), $\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit $2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{O}$ is some phase which defines the position of the earth in its orbital motion.
 The position due to the rotation of the earth can then be described by 
 \begin{equation}
-    \bm{r}_{rot} = R_{\mathrm{R}}
+    \bm{r}_{\rm{rot}} = R_{\mathrm{R}}
     \left(
     \begin{matrix}
         1 & 0 & 0  \\
@@ -73,40 +71,76 @@ The position due to the rotation of the earth can then be described by
     \end{matrix} \right)
     \left(
     \begin{matrix}
-        \cos{(\lambda)}\cos{\left( \Omega_{\mathrm{R}} t + \phi_{\omega){R}}  \right)}  \\
-        \cos{(\lambda)}\sin{\left( \Omega_{\mathrm{R}} t + \phi_{\omega){R}}  \right)} \\
+        \cos{(\lambda)}\cos{\left( \Omega_{\mathrm{R}} t + \phi_{R}  \right)}  \\
+        \cos{(\lambda)}\sin{\left( \Omega_{\mathrm{R}} t + \phi_{R}  \right)} \\
         \sin{(\lambda)} \\
     \end{matrix} \right),
 \end{equation}
-where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where $T_{\mathrm{R}}$ is one day, $\phi_{\omega){O}}$ is some phase which defines the position of the earth in its rotational motion and $\lambda$ is the latitude of the detectors site.
+where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where $T_{\mathrm{R}}$ is one day, $\phi_{O}$ is some phase which defines the position of the earth in its rotational motion and $\lambda$ is the latitude of the detectors site.
 These two components can then be added to find the location of the detector in the \gls{SSB} frame
 \begin{equation}
-    \bm{r} = \bm{r}_{orb} + \bm{r}_{rot}.
+    \bm{r} = \bm{r}_{\rm{orb}} + \bm{r}_{\rm{rot}}.
 \end{equation}
 
 We can now describe the phase evolution of the signal at the detectors site from just the sky position ($\alpha, \delta$) and frequency and its derivative $f,\dot{f}$. 
-The frequency of a pulsars signal at any point on the frequency track is then defined by the derivative of the phase with respect to time
+The frequency of a \gls{CW} signal at any point on the frequency track is then defined by the derivative of the phase with respect to time
 \begin{equation}
-    f = \frac{d\Phi}{dt}, 
+    f(t) = \frac{1}{2\pi}\frac{d\Phi(t)}{dt}, 
 \end{equation}
 where $\Phi$ is defined in Eq.~\ref{searchcw:model:phase}.
-\joe{maybe add the actual frequency evolution equation}
+From \citep{schutz1998DataAnalysis} we can write the phase evolution as,
+\begin{equation}
+    \label{par_est:freq:ph_evolution}
+    \begin{split}
+        \Phi(t) = 2\pi \left(  f_0 t + \frac{\dot{f} t^2}{2} \right) &+ \frac{2\pi}{c} \left(  f_0 + \dot{f}t  \right) \left\{ R_{\rm{O}} \left[ \cos \alpha \cos \delta \cos \left( \Omega_{\mathrm{O}} t + \phi_{O}  \right) \right. \right. \\ 
+        &+ \left. \left( \cos \epsilon \cos \alpha \cos \delta +  \sin \epsilon \sin \delta \right) \sin \left( \Omega_{\mathrm{O}} t + \phi_{O}  \right) \right] \\
+        &+ \left. R_{\rm{R}} \left[ \sin \lambda \sin \delta + \cos \lambda \cos \delta \cos \left( \alpha - \Omega_{\mathrm{R}} t - \phi_{R}  \right)     \right] \right\},
+    \end{split}
+\end{equation}
+where we ignore frequency derivative higher than first order.
 
+We can use Eq.~\ref{par_est:freq:ph_evolution} to make an estimate of the angular resolution which this method should be able to determine the sky position of the source \joe{I need to run through this part again to double check}.
+To do this we follow the derivation in \citep{astone2014MethodAllsky}, where two sources are taken with sky positions in the ecliptic frame with latitude $\beta$ and longitude $\gamma$, which have both have the same frequency $f_0 $ and latitude $\beta$ and a small deviation in the longitude $\delta \gamma << 1$.
+In the examples that follow, we sample the frequency once per day where we have a frequency bin width of $\delta f = \frac{1}{T_{\rm{SFT}}} \approx 5 \cdot 10^{-4}$ Hz, therefore we ignore the rotational component of Eq.~\ref{par_est:freq:ph_evolution}.
+Due to the motion of the detectors, the separation of the sources $\delta \gamma$ is seen as a time delay $\Delta t$, where as $\delta \gamma << 1$, $\Delta t \approx \frac{\gamma}{\Omega_{\rm{O}}}$.
+The frequency evolution of the signal can then be written as
+\begin{equation}
+    f(t) \approx f_0 \left( 1 + \Omega_{\rm{O}} R_{\rm{O}} \cos \beta \sin \left( \Omega_{\mathrm{O}} t + \phi_{\omega_{O}}  \right) \right).
+\end{equation}
+
+During some time interval $\Delta t$, the frequency variation is then
+\begin{equation}
+    \frac{df}{dt} \Delta t \approx \frac{1}{c} f_0 \Omega_{\rm{O}}^2 R_{\rm{O}} \cos{\beta} \cos \left( \Omega_{\mathrm{O}} t + \phi_{\omega_{O}}  \right) \Delta t, 
+\end{equation}
+where the maximum variation in frequency in $\Delta t$ is defined by
+\begin{equation}
+    \Delta f_{\rm{max}} \approx \frac{1}{c} f_0 \Omega_{\rm{O}}^2 R_{\rm{O}} \gamma \cos{\beta}. 
+\end{equation}
+If we assume that the maximum frequency variation that we can detect in a given \gls{SFT} is the frequency bin width $\delta f = 1/T_{\rm{SFT}}$, thn we can write the angular resolution in ecliptic longitude ascension
+\begin{equation}
+    \delta \gamma = \frac{c}{f_0 \Omega_{\rm{O}} R_{\rm{O}} T_{\rm{SFT}} \cos \beta}.
+\end{equation}
+Following similar arguments we can also find the angular resolution in ecliptic latitude as
+\begin{equation}
+    \delta \beta = \frac{c}{f_0 \Omega_{\rm{O}} R_{\rm{O}} T_{\rm{SFT}} \sin \beta}.
+\end{equation}
+
+Given that our frequency bin width is $\sim 5 \cdot 10^{-4}$ we can say that for a source at 100 Hz, the minimum angular resolution we could resolve to in ecliptic longitude $\delta \gamma \approx 2 \cdot 10^{-8} [\cos{\beta}]^{-1}$ and angular resolution in ecliptic latitude $\delta \beta \approx 2 \cdot 10^{-8} [\sin{\beta}]^{-1}$.
 %
 %
 \section{\label{par_est:bayes}Bayesian Model}
 %
 %
 
-As described in Sec.~\ref{par_est:freq} we have a model of a pulsars frequency evolution and we have our Viterbi track which is our observation of a frequency track.
-We would now like to estimate the parameters $\bm{\theta} = \left\{\alpha, \delta, f, \dot{f} \right\}$ of a pulsar given that we have observed the frequency track $\bm{V}$.
-To do this we use a Bayesian model, where the idea was introduced in Sec.~\ref{intro:prob:bayes}, where we rewrite Bayes formula in terms of this problem
+As described in Sec.~\ref{par_est:freq} we have a model of the frequency evolution of a \gls{CW} and we have a Viterbi track which is our observation of a frequency track.
+We would now like to estimate the parameters $\bm{\theta} = \left\{\alpha, \delta, f, \dot{f} \right\}$ of a \gls{CW} given that we have observed the frequency track $\bm{V}$.
+To do this we use a Bayesian model where the idea was introduced in Sec.~\ref{intro:prob:bayes}, where we rewrite Bayes formula in terms of this problem
 \begin{equation}
     \label{par_est:bayes:eqn}
     p(\bm{\theta} \mid \bm{V}, I) = \frac{p(\bm{\theta}) p(\bm{V} \mid \bm{\theta}, I)}{p(\bm{V} \mid I)}
 \end{equation}
-where $p(\bm{\theta} \mid \bm{V}, I)$ is the posterior which we are interested in, $p(\bm{\theta})$ is the prior, $p(\bm{V} \mid \bm{\theta}, I)$ is the likelihood and $\bm{V} \mid I)$ is the evidence.
-The following sections will describe how we set up the prior and likelihood for this problem.
+where $p(\bm{\theta} \mid \bm{V}, I)$ is the posterior which we are interested in, $p(\bm{\theta})$ is the prior, $p(\bm{V} \mid \bm{\theta}, I)$ is the likelihood and $p(\bm{V} \mid I)$ is the evidence.
+The following sections will describe how we define the prior and likelihood for this problem.
 
 %
 %
@@ -115,36 +149,38 @@ The following sections will describe how we set up the prior and likelihood for 
 %
 
 The likelihood describes how the noise of the data is distributed, i.e. if we subtracted the model frequency track $\bm{M}(\bm{\theta})$ from our observed Viterbi track $\bm{V}$, what is the distribution of these values.
-If the simulated pulsar signal has an infinitely large \gls{SNR} then the Viterbi track would follow the pulsars frequency track exactly, which would leave a noise distribution of 0 with no variance. 
+If the simulated \gls{CW} signal has an infinitely large \gls{SNR} then the Viterbi track would follow the \gls{CW} frequency track exactly, which would leave a noise distribution which is 0 with no variance. 
 If conversely, the \gls{SNR} was zero then the Viterbi track would wander randomly through the frequency band and the noise would have a large variance in frequency.
 The noise distribution of our data, i.e. $\bm{M}(\bm{\theta}) - \bm{V}$, is then dependent on the \gls{SNR} $\rho$ of the signal. 
 Given that this is a difficult distribution to find analytically, we calculate it empirically using many simulated signals.
 
-In Sec.~\ref{machine:results} we generated $\mathcal{O}(10^{4})$ simulated \gls{CW} signals in Gaussian noise between 40 and 500 Hz, which had \gls{SNR} $\rho$ uniformly between 20 and 200 and source parameters which follow that in Tab.~\ref{soap:results:parameters}. For each of these simulations, the SOAP search using the line-aware statistic with parameters from Sec.~\ref{soap:results} returns a Viterbi track associated with the simulated parameters.
-For each simulation we can calculate the difference between the Viterbi track and model frequency track $M_i(\bm{\theta}) - V_i$ for each element in the track, where the likelihood $\mathcal{L}$ can be estimated by taking the \gls{KDE} of all our values of $M_i - V_i$.
+In Sec.~\ref{machine:results} we generated $\mathcal{O}(10^{4})$ simulated \gls{CW} signals in Gaussian noise between 40 and 500 Hz, which had \gls{SNR} $\rho$ uniformly between 40 and 200 and source parameters which follow that in Tab.~\ref{machine:data:injections:table}. For each of these simulations, the SOAP search using the line-aware statistic with parameters from Sec.~\ref{soap:results} returns a Viterbi track associated with the simulated parameters.
+For each simulation we can calculate the difference between the Viterbi track and model frequency track $M_i(\bm{\theta}) - V_i$ for each element in the track, where we assume the likelihood $\mathcal{L}$ is independent of the track position and can be estimated by taking the \gls{KDE} of all our values of $M_i - V_i$.
 In this case our likelihood is also dependent on \gls{SNR}, therefore, we split our simulations into bands of width \gls{SNR} 2 between 20 and 200, this gives $\sim 300$ simulated tracks within each \gls{SNR} bound.
 Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a subset of the likelihood bins. 
-The sharp peaks in the center of each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents simulations where the Viterbi track is close to the simulated pulsar track, and the broader distributions represent areas of the Viterbi track has not identified the pulsar track but is wandering randomly.
-The sub plots in Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases the distribution is more closely centred around 0, i.e. the Viterbi and pulsar tracks are similar, which is expected.
+The sharp peaks in the center of each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents simulations where the Viterbi track is close to the simulated \gls{CW} track, and the broader distributions represent areas of the Viterbi track has not identified the \gls{CW} track but is wandering randomly.
+The sub plots in Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases the distribution is more closely centred around 0, i.e. the Viterbi and \gls{CW} tracks are similar, which is expected.
 %
 \begin{figure}[hpt]
 
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/KDE_range_50_100.pdf}
-    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows the \gls{KDE} estimates of the probability density of the differences between the simulated (injected) pulsar frequency track and the recovered Viterbi track for a number of \gls{SNR} ranges. The difference in the tracks is measured in discrete frequency bins. Each \gls{KDE} is generated from $\sim 300$ simulations which each have $\sim 400$ elements in their frequency tracks. This shows a subset of the binned likelihoods between the range of \gls{SNR} 50 and 150.}
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows the \gls{KDE} estimates of the probability density of the differences between the simulated (injected) \gls{CW} frequency track and the recovered Viterbi track for a number of \gls{SNR} ranges. The difference in the tracks is measured in discrete frequency bins. Each \gls{KDE} is generated from $\sim 300$ simulations which each have $\sim 400$ elements in their frequency tracks. This shows a subset of the binned likelihoods between the range of \gls{SNR} 50 and 150.}
     \label{par_est:bayes:likelihood:kde142}
     
     \end{figure}
 %
 
-This does introduce one more parameter to search over in out Bayesian model, which is the \gls{SNR} ($\rho$) of the signal.
-These \glspl{KDE} $\mathcal{L}$ are the used in the likelihood function $p(\bm{V} \mid \bm{\theta}, \rho, I)$ in the Bayesian model in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model $\alpha, \delta, f, \dot{f}$ and $\rho$.
-Our likelihood for a given Viterbi track input is
+This does introduce one more parameter to search over in out Bayesian model, which is the \gls{SNR} $\rho$ of the signal.
+The \glspl{KDE} $\mathcal{L}$ are then used in the likelihood function $p(\bm{V} \mid \bm{\theta}, \rho, I)$ in the Bayesian model in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model $\alpha, \delta, f, \dot{f}$ and $\rho$.
+Our likelihood where we assume independent track elements for a given Viterbi track is
 \begin{equation}
     p(\bm{V} \mid \bm{\theta}, \rho, I) = \frac{1}{N}\prod_{i = 1}^{N} \mathcal{L}(M_i(\bm{\theta}) - V_i, \rho) ,
 \end{equation}
 where $N$ is the length of the Viterbi track $\bm{V}$. 
+\if
 As the likelihood $\mathcal{L}$ is binned in \gls{SNR} $\rho$, and $\rho$ is a continuous value, the likelihood is calculated as the weighted sum of the surrounding likelihood bins, where the weights are the fractional separation of $\rho$ from the bin centers. 
+\fi
 
 %
 \subsection{Prior}
@@ -162,7 +198,7 @@ We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delt
 %%%%
 
 The method described in Sec.~\ref{par_est:bayes} takes in a Viterbi track and uses this to estimate the five dimensional posterior distribution $p\left(\left\{ \alpha, \delta, f, \dot{f}, \rho \right\} \mid \bm{V}, I \right)$.
-To calculate this posterior we use a technique known as nested sampling, specifically the package {\it Dynesty} \citep{speagle2019DynestyDynamic}, which is explained in Sec.~\ref{intro:prob:bayes}. \joe{explain more in the return of intro chapter}
+To calculate this posterior we use a technique known as nested sampling, specifically the package {\it Dynesty} \citep{speagle2019DynestyDynamic}, which is explained in Sec.~\ref{intro:prob:bayes}. \joe{will explain more in the return of intro chapter}
 
 As an example, we can simulate a \gls{CW} signal with neutron star parameters 
 \begin{equation}
@@ -190,9 +226,9 @@ The SOAP search from Sec.~\ref{soap} is then run using the line-aware statistics
 %
 In this case the Viterbi track closely follows the simulated neutrons star frequency track.
 
-The Bayesian analysis described in Sec.~\ref{par_est:bayes} is then run using this Viterbi track as input, this returns the marginal posterior distributions shown in Fig.~\ref{par_est:results:example_posterior}, where the simulated parameters are marked in orange.
-In this example, the injected parameter values are within the marginal posterior distributions for all of the parameters.
-The frequency is has a width of N in band N \joe{mention all by sky params here}
+The Bayesian analysis described in Sec.~\ref{par_est:bayes} is then run using this Viterbi track as input, where this returns the posterior distribution shown in Fig.~\ref{par_est:results:example_posterior}.
+In this example, the injected parameter values (marked in orange) are contained within the marginal posterior distributions for all of the parameters excluding the \gls{SNR}.
+I will describe this more in Sec.~\ref{par_est:results:simulations}, however, in this analysis we are mostly interested in the Doppler parameters.
 %
 \begin{figure}[pt]
 
@@ -203,8 +239,9 @@ The frequency is has a width of N in band N \joe{mention all by sky params here}
     
 \end{figure}
 %
-The distribution of the sky parameters are easier to interpret when they are projected onto a skymap, therefore, Fig.~\ref{par_est:results:example_skypos} the parameters $\alpha$ and $\delta$ are shown on a sky projection.
-The Viterbi tracks and pulsar frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
+
+The distribution of the sky parameters are easier to interpret when they are projected onto a sky map, therefore, Fig.~\ref{par_est:results:example_skypos} the parameters $\alpha$ and $\delta$ are shown on a sky projection.
+The Viterbi tracks and \gls{CW} frequency tracks used in this analysis are sampled once a day, therefore, we should only see the doppler modulation from the orbit of the earth around the sun.
 In the ecliptic frame, i.e. where the $z$ axis is perpendicular to the orbital plane of the earth, for any ecliptic longitude, there are two sky positions at opposite ecliptic latitudes which will return the same frequency track. 
 This then means that we would expect the marginal posterior distribution to have two modes on the sky at these two locations, where this can be seen in Fig.~\ref{par_est:results:example_posterior} and \ref{par_est:results:example_skypos}.
 The sky position parameters of the neutron star are in the equatorial coordinate system, therefore these have been transformed into the ecliptic frame such that the sky position posteriors easier to interpret.
@@ -212,7 +249,7 @@ The sky position parameters of the neutron star are in the equatorial coordinate
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/skypos_ecliptic.pdf}
-    \caption[Example of posterior of sky position in ecliptic frame]{This figure shows an example of the marginal posterior distribution of the sky position in the ecliptic frame $\alpha^{\rm{ecliptic}},\delta^{\rm{ecliptic}}$ of a signal with \gls{SNR} 144. The overlayed panel is a zoomed area around the posterior distribution, where the orange marker shows the injected parameters.}
+    \caption[Example of posterior of sky position in ecliptic frame]{This figure shows an example of the marginal posterior distribution of the sky position in the ecliptic frame $\alpha^{\rm{ecliptic}},\delta^{\rm{ecliptic}}$ of a signal with \gls{SNR} 144. The overlaid panel is a zoomed area around the posterior distribution, where the orange marker shows the injected parameters.}
     \label{par_est:results:example_skypos}
     
 \end{figure}
@@ -220,12 +257,12 @@ The sky position parameters of the neutron star are in the equatorial coordinate
 
 %
 %
-\subsection{Simulations}
+\subsection{\label{par_est:results:simulations}Simulations}
 %
 %
 To test this method, we generate a set of simulations of the Gaussian noise spectrograms of \gls{CW} signals as in Sec.~\ref{soap:results} and Sec.~\ref{machine:results}.
-This is the same simulated test set from Sec.~\ref{machine:results}, where \gls{CW} signals were injected into 50\% of the 0.1 Hz wide sub-bands between between 40 and 500 Hz, with the parameters as described in Tab.~\ref{soap:results:parameters}. 
-The SOAP search using the line aware statistic with parameters in Tab.~\ref{soap:res} \joe{table} is run on each sub-band, where the Viterbi track and \gls{CW} signal parameters $\alpha, \delta, f, \dot{f}$ associated with each simulation are recorded.
+This is the same simulated test set from Sec.~\ref{machine:results}, where \gls{CW} signals were injected into 50\% of the 0.1 Hz wide sub-bands between between 40 and 500 Hz, with the parameters as described in Tab.~\ref{machine:data:injections:table}. 
+The SOAP search using the line aware statistic with parameters in Tab.~\ref{soap:results:parameters} \joe{table} is run on each sub-band, where the Viterbi track and \gls{CW} signal parameters $\alpha, \delta, f, \dot{f}$ associated with each simulation are recorded.
 The Viterbi track can then be used to run the Bayesian analysis described in Sec.~\ref{par_est:bayes}.
 In these simulations, we have 2300 simulated signals which have an \gls{SNR} range between 20 and 200, where for this test we randomly select 200 of these simulations.
 
@@ -244,7 +281,7 @@ The Viterbi statistics for each of these injections can be seen in Fig.~\ref{par
 \fi
 
 
-\subsubsection{P-P plot}
+\subsubsection{\label{par_est:results:simulations:ppplot}P-P plot}
 
 The p-p plot is a mechanism to validate the effectiveness of the Bayesian model and computation using many simulations.
 From Sec.~\ref{par_est:results} we have the output posterior distribution $p(\bm{\theta} \mid \bm{V}, I)$, or more correctly we have $N$ samples from this distribution $\bm{\theta}_i$, and we have the injected parameters $\bm{\theta}_{\rm{inj}}$.
@@ -275,49 +312,61 @@ Similarly, if the posterior is over constrained, shown in the fourth panel of Fi
 \end{figure}
 
 Using this information, we can look at the p-p plot for the 200 simulations in this test, which is shown in Fig.~\ref{par_est:results:ppplot}.
-We can see that for the parameters $f$ and $\dot{f}$ we recover an under constrained posterior distribution.
+We can see that for the parameters $f$ and $\dot{f}$ we recover an over constrained posterior distribution.
 For the \gls{SNR} parameter $\rho$, the recovered posterior is shifted to the right and is over constrained, i.e. we assume higher \glspl{SNR} than perfectly recovered distribution.
-For both the right ascension parameter $\alpha$ and the declination parameter $\delta$, we can see that we recover over constrained posterior distributions, therefore, we are overconfident that the estimation of these parameters are correct.
-Each of these indicate that the current analysis does not correctly reproduce the true posterior distribution.
+For both the right ascension parameter $\alpha$ and the declination parameter $\delta$, we can see that we recover under constrained posterior distribution.
+However, as the modes are widely separated, if the true parameter lies between the two modes then it would return a \gls{CI} of $\sim 0.5$, for many simulations this would produce a p-p plot which appears as an under constrained posterior when it is actually two widely separated over constrained posteriors.
+This becomes more clear when investigating the area contained within a contours of the posterior which is explained in Sec.~\ref{ar_est:results:simulations:skyarea}.
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/ppplot.pdf}
-    \caption[p-p plot for the CW simulations]{The p-p plot is shown for the 200 signals described in Sec.~\ref{par_est:results}, which range between 40 and 200 in \gls{SNR}. This describes how well the \joe{need to figure out the error of the confidence interval}\joe{more}}
+    \caption[p-p plot for the CW simulations]{The p-p plot is shown for the 200 signals described in Sec.~\ref{par_est:results}, which range between 40 and 200 in \gls{SNR}. This describes how well the marginal posterior distributions for each parameter match the simulated parameter. The \gls{SNR}, frequency and frequency derivative are all over constrained distribution, i.e. narrower than the true distribution, and the sky position parameters $\alpha,\delta$ are under constrained.}
     \label{par_est:results:ppplot}
 \end{figure}
 
-In our definition of the likelihood in Sec.~\ref{par_est:bayes:likelihood}, to simplify the problem we assume that all track components are independent. 
-This is not necessarily true and could contribute to the over constrained posterior distributions, where in the future we aim to use a likelihood which is dependent on the track components.
-\joe{say why this doesnt work and how it could be improved}
+Each of the curves in Fig.~\ref{par_est:results:ppplot} indicate that the current analysis does not correctly reproduce the true posterior distribution. 
+One likely reason for this could be our definition of the likelihood in Sec.~\ref{par_est:bayes:likelihood}, here to simplify the problem we assume that all track components are independent, this is not necessarily true and could contribute to the over constrained posterior distributions. 
 
-\subsubsection{Sky area at given confidence interval}
+%
+%
+\subsubsection{\label{par_est:results:simulations:skyarea}Sky area at given confidence interval}
+%
+%
 
 If we assume that the estimated posterior distribution is correct recovered, i.e. it is not under constrained or shifted, then we can estimate the area of the sky which this method can localise the source to. 
 To do this we can use our estimation of the marginal posterior distribution on the sky, and draw a contour on the posterior which contains 95\% of the probability.
 The area contained within this contour is then the sky area which the source can be localised to at a 95\% confidence, this can be seen as the green contour in Fig.~\ref{par_est:results:sky_area_example}.
-Similarly, the sky area which contains the injected sky position parameters can be found, shown as the red contour in Fig.~\ref{par_est:results:sky_area_example}.
-This is another measure of the ability of this method to localise the sky position.
+Similarly, a contour can be drawn at the injected sky position parameters and the area within this can be found, this is shown as the red contour in Fig.~\ref{par_est:results:sky_area_example}.
+If the contour at the injected parameter is much larger than the contour at 95\% confidence, then this implies that the posterior distribution is over constrained.
+These two areas are another measure of the validity and ability of this method to extract the parameters. 
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/skyarea_example.pdf}
-    \caption[Area of sky at 95\% confidence]{For the injection in Sec.~\ref{par_est:results:example_posterior}, the contour in sky position is drawn for a 95\% confidence and the area which contains the injected sky position parameters.}
+    \caption[Area of sky at 95\% confidence]{For the injection in Sec.~\ref{par_est:results:example_posterior}, the contour in sky position posterior is drawn for a 95\% confidence and the area which contains the injected sky position parameters. In this example the two contours are similar.}
     \label{par_est:results:sky_area_example}
 \end{figure}
 
-The contours and therefore sky areas described above can be calculated for all of the simulations described in Sec.~\ref{par_est:results}, where Fig.~\ref{par_est:results:sky_area} shows the histograms of the sky areas at 95\% confidence and sky areas which contain the injected parameters.
+The contours and therefore their associated sky areas can be calculated for all of the simulations described in Sec.~\ref{par_est:results} as described above. 
+Figure \ref{par_est:results:sky_area} shows the histograms of the sky areas at 95\% confidence and sky areas which contain the injected parameters.
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/sky_area_hist.pdf}
-    \caption[p-p plot for the CW simulations]{A histogram of the sky area with 95\% confidence in square degrees. The entire sky has $\sim 41253$ square degrees, so assuming $\sim 2000$ square degrees \joe{motivate this} the sky area is limited to 1/20 th of the sky using this method. \joe{more}}
+    \caption[p-p plot for the CW simulations]{A histogram is shown of the sky area which this method can localise a source to with 95\% confidence in square degrees and the sky area associated a contour on the posterior that passes through the injected parameter. The entire sky has $\sim 41253$ square degrees, therefore the sky area at 95\% confidence where 90\% of the sky areas are less than this value is 45 [deg$^2$].  }
     \label{par_est:results:sky_area}
 \end{figure}
+%
+From the distributions in Fig.~\ref{par_est:results:sky_area} we can see that the sky areas which contain the injected parameters are larger by a factor of $\sim 10$ than those at 95\% confidence.
+From this we see that the injected parameters fall within the 95\% confidence contour only 40\% of the time.
+This implies that these posterior distributions are over constrained, and the first panel showing the sky areas at 95\% confidence is overly optimistic. \textbf{}
 
-Figure \ref{par_est:results:sky_area} shows that \joe{some} percent of the time we can localise the source to a sky area of \joe{25} square degrees with a 90\% confidence.
-Given the full sky has $\sim 41253$ square degrees, this is $\sim \frac{1}{1750}$ of the whole sky.
-For an all sky search such as Einstein@Home \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome,singh2016ResultsAllsky}, which uses the Hough transform \citep{krishnan2004HoughTransform} to combine the coherently analysed segments, a grid is placed on the sky such that the parameter space if sufficiently covered whilst running the analysis at discrete points. Assuming that both the SOAP with parameter estimation method is valid and is used as the first stage in this search to reduce the size of the parameter space, Einstein@Home would only have to search over $\sim \frac{1}{1750}$ of the sky, reducing the computational cost of the first stage. 
+However, if we assume that the 95\% confidence sky areas are correct, we can take the value of the sky area where 90\% of our simulations have a sky area less than this value, i.e. the 90\% confidence line in Fig.~\ref{par_est:results:sky_area}, this is an area of 45 [deg]$^2$.
+Given the full sky has $\sim 41253$ square degrees, this is factor of $\sim 1 \cdot 10^{-3}$ of the whole sky.
+For an all sky search such as Einstein@Home \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome,singh2016ResultsAllsky}, which uses the Hough transform \citep{krishnan2004HoughTransform} to combine the coherently analysed segments, the analysis is run at discrete points in parameter space. The initial stage of the search places these points on a coarse grid in sky positions to reduce the computational cost.
+ If we assume that both the SOAP with parameter estimation method is valid and replaces the first stage in this search, Einstein@Home would only have to search over $\sim 1 \cdot 10^{-3}$ of the sky. 
+ Given that this method is $\mathcal{O}(10^4)$ faster than Einstein@home, this would drastically reduce the computational cost of the first stage of the search. 
 
 
 
@@ -327,17 +376,38 @@ For an all sky search such as Einstein@Home \citep{theligoscientificcollaboratio
 %
 %
 
-In this chapter I describe a Bayesian analysis to extract the doppler parameters $\alpha, \delta, f \dot{f}$ and \gls{SNR} $\rho$ of a potential \gls{CW} source from the Viterbi track which is output from the SOAP search in Sec.~\ref{soap}.
-The aim of this method is to provide estimates of the \gls{CW} parameters which would also reduce the size of the parameter space for a more sensitive analysis such as Einstein@Home \citep{singh2016ResultsAllsky}. 
+In this chapter I describe a Bayesian analysis to extract the Doppler parameters $\alpha, \delta, f \dot{f}$ and \gls{SNR} $\rho$ of a potential \gls{CW} source from the Viterbi track which is output from the SOAP search in chapter \ref{soap}.
+The aim of this method is to provide estimates of the \gls{CW} parameters, and then use these to reduce the size of the parameter space for a more sensitive analysis such as Einstein@Home \citep{singh2016ResultsAllsky}. 
 
-In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described, where the input is a Viterbi track described in Sec.~\ref{soap} and the output is a posterior distribution on a \gls{CW} signals doppler parameters.
-In this model, the likelihood is empirically calculated by simulating \gls{CW} signals and recording the difference between the Viterbi track and simulated track for multiple \gls{SNR} bands. 
+In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described, where the input is a Viterbi track which is described in chapter ~\ref{soap} and the output is a posterior distribution on a \gls{CW} signals Doppler parameters.
+In this model, the likelihood is empirically calculated by simulating $\mathcal{O}(10^4)$ \gls{CW} signals and then recording the difference between the Viterbi track and \gls{CW} frequency track for multiple \gls{SNR} bands. 
+The histogram of these values is then the likelihood of this method.
 For each of the parameters in the search, we assume a flat prior.
 In Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations which had parameters drawn from the same prior as the Bayesian model.
-In this section we generate p-p plots to asses the validity of this model and find that the sky position parameters are over constrained by a large factor, the \gls{SNR} is also over constrained and overestimated and the frequency and frequency derivative are under constrained.
-When looking at the area contained within contours which pass through the simulated parameter, we find that ....
+In this section we generate p-p plots to asses the validity of this model and find that the \gls{SNR}, frequency and frequency derivative all are over constrained distributions and the sky position parameters are under constrained.
+However, when looking at the sky position parameters more carefully, we find that the distribution is bi modal where each mode is over constrained.
 
-In its current state, the search does not provide a valid way to estimate the parameters of the source from its Viterbi track, however, this is ongoing work and we aim to develop this into a reliable technique.
+We investigated the area contained within contours on the marginal posterior for the sky position to gauge the ability of the search to localise a source, we found that with a 95\% confidence we can detect to a sky area within 45 deg$^2$ 90\% of the time. 
+However, due to the over constrained posterior, the true value of the parameter fell within this contour only 40\% of the time.
+
+These results imply that in its current state, the search does not provide a valid way to estimate the parameters of the source from its Viterbi track.
+However, with the development of a more appropriate likelihood function and further investigation, we aim to develop this such that it can correctly estimate \gls{CW} parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
