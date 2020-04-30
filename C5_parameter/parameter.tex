@@ -4,15 +4,34 @@
 %%%%%%%%%%%%
 %%%%%
 
-Throughout chapters \ref{soap} and \ref{machine} we developed techniques which could identify whether a potential \gls{CW} signal is present within a small frequency band of width $0.1$ Hz, and then return the frequency track that the signal is most likely to follow.
-This provides frequency bands in which a signal could be present, which is useful for all-sky searches as it can limit the parameter space and therefore computational time for deeper searches such as those described in Sec.~\ref{searchcw:search:targeted}. 
-However, this only limits the parameter space in frequency to a smaller frequency band, where there is still a large parameter space which needs to be searched.
-If the Viterbi track returned by SOAP in chapter \ref{soap} follows the frequency evolution of a \gls{CW} source, then this track contains information on the sky position and frequency evolution of the \gls{CW}.
-If one could extract this information then the size of the parameter space for more sensitive searches such as Einstein@Home could be reduced, decreasing their computational cost.
+Throughout chapters \ref{soap} and \ref{machine} we~\chris{have} developed
+techniques which~\chris{that?} could identify whether a potential \gls{CW}
+signal is present within a small frequency band of width $0.1$ Hz, and then
+return the frequency track that the signal is most likely to follow.  This
+provides frequency bands in which a signal could be present, which is useful
+for all-sky searches as it can limit the parameter space and therefore
+computational time for deeper searches such as those described in
+Sec.~\ref{searchcw:search:targeted}.  However, this only limits the parameter
+space in frequency to a smaller frequency band, where there is still a large
+parameter space which needs to be searched.  If the Viterbi track returned by
+SOAP in chapter \ref{soap} follows the frequency evolution of a \gls{CW}
+source, then this track contains information on the sky position and frequency
+evolution of the \gls{CW}.  If one could extract this information then the size
+of the parameter space for more sensitive searches such as
+Einstein@Home~\chris{maybe list a LIGO follow-up rather than EatH?} could be
+reduced, decreasing their computational cost.
 
-In this chapter I will outline a Bayesian method which uses the output Viterbi tracks of the SOAP search in chapter ~\ref{soap} to return some astrophysical parameters of a source.
-Sec.~\ref{par_est:freq} will outline the model of the frequency evolution of a \gls{CW} from a source with a slowly varying frequency,
-Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and Sec.~\ref{par_est:results} will show the results from testing on simulated signals.
+In this chapter I will outline a Bayesian method which~\chris{the rule for
+using "which" rather than "that" is that when you use "which" the sentence
+should still make sense if you remove it. If it sounds wrong when you remove
+the word then "that" is the correct one to use. In this case, "that" is what
+you should use.} uses the output Viterbi tracks of the SOAP search in Chapter
+~\ref{soap} to return some~\chris{a subset of?} astrophysical parameters of a
+source.  Section~\ref{par_est:freq} will outline the model of the frequency
+evolution of a \gls{CW} from a source with a slowly varying frequency,
+Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and
+Sec.~\ref{par_est:results} will show the results from testing on simulated
+signals.
 
 %%%%
 %%%%
@@ -20,14 +39,26 @@ Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and S
 %%%%
 %%%%
 
-The SOAP search returns a frequency track known as the Viterbi track, if this track follows the frequency of a \gls{CW} source, then the frequency evolution contains information of the sky position ($\alpha, \delta$), the frequency of the source $f$ and its derivative $\dot{f}$, where we ignore higher order frequency derivatives.
-From the Viterbi track, we should then be able to extract this information as we have a model for the phase evolution (and therefore frequency evolution) of the source described in Eq.~\ref{searchcw:model:phase} in Sec.~\ref{searchcw:model}.
-To relate this phase evolution to the sky position parameters, we can look closer at Eq.~\ref{searchcw:model:ssbtime}, where we describe the shift in arrival time due to the earths motion. 
+The SOAP search returns a frequency track known as the Viterbi track, if this
+track follows the frequency of a \gls{CW} source, then the frequency evolution
+contains information of the sky position ($\alpha, \delta$), the frequency of
+the source $f$ and its derivative $\dot{f}$, where we ignore higher order
+frequency derivatives.  From the Viterbi track, we should then be able to
+extract this information as we have a model for the phase evolution (and
+therefore frequency evolution) of the source described in
+Eq.~\ref{searchcw:model:phase} in Sec.~\ref{searchcw:model}.  To relate this
+phase evolution to the sky position parameters, we can look closer at
+Eq.~\ref{searchcw:model:ssbtime}, where we describe the shift in arrival time
+due to the earths motion.~\chris{I have no comments on this paragraph!} 
 
-The second term in Eq.~\ref{searchcw:model:ssbtime} describes the Doppler shift due to the earth's orbit and rotation.
-Where the $\bm{r}$ is the position of the detector and $\bm{n}$ is a unit vector in the direction of the source. 
-As in \citep{schutz1998DataAnalysis}, we use the coordinate frame in the \gls{SSB} where the $z$ axis is perpendicular to the ecliptic and the $x$ axis is parallel to the celestial sphere.
-In this frame the unit vector pointing towards the star can be written as 
+The second term in Eq.~\ref{searchcw:model:ssbtime} describes the Doppler shift
+due to the earth's orbit and rotation.  Where the $\bm{r}$ is the position of
+the detector and $\bm{n}$ is a unit vector in the direction of the source.  As
+in \citep{schutz1998DataAnalysis}, we use the coordinate frame in the \gls{SSB}
+where the $z$ axis is perpendicular to the ecliptic and the $x$ axis is
+parallel to the celestial sphere.  In this frame the unit vector pointing
+towards the star~\chris{source?} can be written as
+%
 \begin{equation}
     \label{par_est:freq:unit}
     \bm{n} = 
@@ -44,12 +75,23 @@ In this frame the unit vector pointing towards the star can be written as
         \sin(\delta) \\
     \end{matrix} \right),
 \end{equation}
-where $\alpha$ and $\delta$ are the right ascension and declination (sky position) of the source and $\epsilon$ is the angle between the ecliptic and the earth's equator.
-The first matrix in Eq.~\ref{par_est:freq:unit} describes a rotation from the celestial frame where $\alpha$ and $\delta$ are measured to the ecliptic frame. 
-The second matrix transforms the sky position parameters to their component $x,y,z$ coordinates.
+%
+where $\alpha$ and $\delta$ are the right ascension and declination (sky
+position) of the source and $\epsilon$ is the angle between the ecliptic and
+the earth's equator.  The first matrix in Eq.~\ref{par_est:freq:unit} describes
+a rotation from the celestial frame where $\alpha$ and $\delta$ are measured to
+the ecliptic frame~\chris{grammar - reads funny}.  The second matrix~\chris{not
+a matric, a vector} transforms the sky position parameters to their component
+$x,y,z$ coordinates.
 
-The position vector of the earth, $\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, at a time $t$ can be split into the addition of two components, the position due to the orbit of the earth and position due to the rotation of the earth.
-If we assume the orbit is circular, then the position of the earth in its orbit is described in Cartesian coordinates as
+The position vector of the earth~\chris{I hope you mean detector not earth},
+$\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, at a time $t$ can be split into
+the addition of~\chris{into the addition of?  Just split into} two components,
+the position due to the orbit of the earth and position due to the rotation of
+the earth~\chris{of the detector - see comment at the start of the paragraph}.
+If we assume the orbit is circular, then the position of the earth in its orbit
+is described in Cartesian coordinates as
+%
 \begin{equation}
     \bm{r}_{\rm{orb}} = R_{\mathrm{O}}
     \left(
@@ -59,8 +101,13 @@ If we assume the orbit is circular, then the position of the earth in its orbit 
         0 \\
     \end{matrix} \right),
 \end{equation}
-where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU), $\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit $2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{O}$ is some phase which defines the position of the earth in its orbital motion.
-The position due to the rotation of the earth can then be described by 
+%
+where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU),
+$\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit
+$2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{O}$ is
+some phase which defines the position of the earth in its orbital motion.  The
+position due to the rotation of the earth can then be described by 
+%
 \begin{equation}
     \bm{r}_{\rm{rot}} = R_{\mathrm{R}}
     \left(
@@ -76,19 +123,37 @@ The position due to the rotation of the earth can then be described by
         \sin{(\lambda)} \\
     \end{matrix} \right),
 \end{equation}
-where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where $T_{\mathrm{R}}$ is one day, $\phi_{O}$ is some phase which defines the position of the earth in its rotational motion and $\lambda$ is the latitude of the detectors site.
-These two components can then be added to find the location of the detector in the \gls{SSB} frame
+%
+where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the
+angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where
+$T_{\mathrm{R}}$ is one day, $\phi_{O}$ is some phase which defines the
+position of the earth in its rotational motion and $\lambda$ is the latitude of
+the detectors site~\chris{I'm concerned that the arbitary undefined orbital
+phase and rotation phase are determined by the detector longitude and the start
+time of the observation. Do you address this further on?}. These two components
+can then be added to find~\chris{define?} the location of the detector in the
+\gls{SSB} frame
+%
 \begin{equation}
     \bm{r} = \bm{r}_{\rm{orb}} + \bm{r}_{\rm{rot}}.
 \end{equation}
 
-We can now describe the phase evolution of the signal at the detectors site from just the sky position ($\alpha, \delta$) and frequency and its derivative $f,\dot{f}$. 
-The frequency of a \gls{CW} signal at any point on the frequency track is then defined by the derivative of the phase with respect to time
+We can now describe the phase evolution of the signal at the detectors
+site~\chris{do you mean detector's site or detector sites?} from just the sky
+position ($\alpha, \delta$) and frequency and its derivative
+$f,\dot{f}$~\chris{what about those orbital and spin phases? You shouls say
+something about how they are defined/known.}. The frequency of a \gls{CW}
+signal at any point on the frequency track is then defined by the derivative of
+the phase with respect to time~\chris{which time? SSB or detector? be
+unambiguous}
+%
 \begin{equation}
     f(t) = \frac{1}{2\pi}\frac{d\Phi(t)}{dt}, 
 \end{equation}
-where $\Phi$ is defined in Eq.~\ref{searchcw:model:phase}.
-From \citep{schutz1998DataAnalysis} we can write the phase evolution as,
+%
+where $\Phi$ is defined in Eq.~\ref{searchcw:model:phase}.  From
+\citep{schutz1998DataAnalysis} we can write the phase evolution as,
+%
 \begin{equation}
     \label{par_est:freq:ph_evolution}
     \begin{split}
@@ -97,50 +162,102 @@ From \citep{schutz1998DataAnalysis} we can write the phase evolution as,
         &+ \left. R_{\rm{R}} \left[ \sin \lambda \sin \delta + \cos \lambda \cos \delta \cos \left( \alpha - \Omega_{\mathrm{R}} t - \phi_{R}  \right)     \right] \right\},
     \end{split}
 \end{equation}
-where we ignore frequency derivative higher than first order.
+%
+where we ignore frequency derivative higher than first order.~\chris{OK, but
+why say that this comes from ref 56. You already did the rotations in the
+previous equations in this section so you should also naturally arrive at this
+expression - take the credit yourself.}
 
-We can use Eq.~\ref{par_est:freq:ph_evolution} to make an estimate of the angular resolution which this method should be able to determine the sky position of the source \joe{I need to run through this part again to double check}.
-To do this we follow the derivation in \citep{astone2014MethodAllsky}, where two sources are taken with sky positions in the ecliptic frame with latitude $\beta$ and longitude $\gamma$, which have both have the same frequency $f_0 $ and latitude $\beta$ and a small deviation in the longitude $\delta \gamma << 1$.
-In the examples that follow, we sample the frequency once per day where we have a frequency bin width of $\delta f = \frac{1}{T_{\rm{SFT}}} \approx 5 \cdot 10^{-4}$ Hz, therefore we ignore the rotational component of Eq.~\ref{par_est:freq:ph_evolution}.
-Due to the motion of the detectors, the separation of the sources $\delta \gamma$ is seen as a time delay $\Delta t$, where as $\delta \gamma << 1$, $\Delta t \approx \frac{\gamma}{\Omega_{\rm{O}}}$.
-The frequency evolution of the signal can then be written as
+We can use Eq.~\ref{par_est:freq:ph_evolution} to make an estimate of the
+angular resolution which this method should be able to determine the sky
+position of the source \joe{I need to run through this part again to double
+check}.  To do this we follow the derivation in \citep{astone2014MethodAllsky},
+where two sources are taken with sky positions in the ecliptic frame with
+latitude $\beta$ and longitude $\gamma$, where both have the same frequency
+$f_0 $ and latitude $\beta$ and a small deviation in the longitude $\delta
+\gamma << 1$.  In the examples that follow, we sample the frequency once per
+day where we have a frequency bin width of $\delta f = \frac{1}{T_{\rm{SFT}}}
+\approx 5 \cdot 10^{-4}$ Hz, therefore we ignore the rotational component of
+Eq.~\ref{par_est:freq:ph_evolution}.  Due to the motion of the detectors, the
+separation of the sources $\delta \gamma$ is seen as a time delay $\Delta t$,
+where as $\delta \gamma << 1$~\chris{use $\ll$ instead of $<<$}, $\Delta t
+\approx \frac{\gamma}{\Omega_{\rm{O}}}$~\chris{how do you arrive at this
+expression - please expand and explain a bit. What time delay are we talking
+about? Isn't it time dependent. Are theses ources assumed to be at the same
+distance? I'm confused.}. The frequency evolution of the signal can then be
+written as
+%
 \begin{equation}
     f(t) \approx f_0 \left( 1 + \Omega_{\rm{O}} R_{\rm{O}} \cos \beta \sin \left( \Omega_{\mathrm{O}} t + \phi_{\omega_{O}}  \right) \right).
 \end{equation}
-
-During some time interval $\Delta t$, the frequency variation is then
+%
+\chris{where's the longitude $\gamma$? This should be dependent upon that
+right?} During some time interval $\Delta t$, the frequency variation is then
+%
 \begin{equation}
     \frac{df}{dt} \Delta t \approx \frac{1}{c} f_0 \Omega_{\rm{O}}^2 R_{\rm{O}} \cos{\beta} \cos \left( \Omega_{\mathrm{O}} t + \phi_{\omega_{O}}  \right) \Delta t, 
 \end{equation}
-where the maximum variation in frequency in $\Delta t$ is defined by
+%
+\chris{where did the speed of light come from?} where the maximum variation in
+frequency in $\Delta t$ is defined by
+%
 \begin{equation}
     \Delta f_{\rm{max}} \approx \frac{1}{c} f_0 \Omega_{\rm{O}}^2 R_{\rm{O}} \gamma \cos{\beta}. 
 \end{equation}
-If we assume that the maximum frequency variation that we can detect in a given \gls{SFT} is the frequency bin width $\delta f = 1/T_{\rm{SFT}}$, thn we can write the angular resolution in ecliptic longitude ascension
+%
+\chris{OK, I think I agree with this result BUT it's not very clear how you get
+here. What happened to these 2 closely separated sources?} If we assume that
+the maximum frequency variation that we can detect in a given \gls{SFT} is the
+frequency bin width $\delta f = 1/T_{\rm{SFT}}$, then we can write the angular
+resolution in ecliptic longitude ascension~\chris{drop ascension} as
+%
 \begin{equation}
     \delta \gamma = \frac{c}{f_0 \Omega_{\rm{O}} R_{\rm{O}} T_{\rm{SFT}} \cos \beta}.
 \end{equation}
-Following similar arguments we can also find the angular resolution in ecliptic latitude as
+%
+\chris{now $\delta\gamma$ reappears. Where was it before?} Following similar
+arguments we can also find the angular resolution in ecliptic latitude as
+%
 \begin{equation}
     \delta \beta = \frac{c}{f_0 \Omega_{\rm{O}} R_{\rm{O}} T_{\rm{SFT}} \sin \beta}.
 \end{equation}
+%
+\chris{I don't agree with this result because $\beta$ and $\gamma$ appear
+differently in the frequency evolution expression Eq 5.7. You should get
+different different resolutions for each.} Given that our frequency bin width
+is $\sim 5 \cdot 10^{-4}$ we can say that for a source at 100 Hz, the minimum
+angular resolution we could resolve to in ecliptic longitude $\delta \gamma
+\approx 2 \cdot 10^{-8} [\cos{\beta}]^{-1}$ and angular resolution in ecliptic
+latitude $\delta \beta \approx 2 \cdot 10^{-8} [\sin{\beta}]^{-1}$.~\chris{I'm
+doubtful of these results based on my concerns noted above. I would also add
+that the section lacks a main point. Why did you do this calculation? Please
+explain to the reader why knowing these rough estimates is useful.}
 
-Given that our frequency bin width is $\sim 5 \cdot 10^{-4}$ we can say that for a source at 100 Hz, the minimum angular resolution we could resolve to in ecliptic longitude $\delta \gamma \approx 2 \cdot 10^{-8} [\cos{\beta}]^{-1}$ and angular resolution in ecliptic latitude $\delta \beta \approx 2 \cdot 10^{-8} [\sin{\beta}]^{-1}$.
 %
 %
 \section{\label{par_est:bayes}Bayesian Model}
 %
 %
 
-As described in Sec.~\ref{par_est:freq} we have a model of the frequency evolution of a \gls{CW} and we have a Viterbi track which is our observation of a frequency track.
-We would now like to estimate the parameters $\bm{\theta} = \left\{\alpha, \delta, f, \dot{f} \right\}$ of a \gls{CW} given that we have observed the frequency track $\bm{V}$.
-To do this we use a Bayesian model where the idea was introduced in Sec.~\ref{intro:prob:bayes}, where we rewrite Bayes formula in terms of this problem
+As described in Sec.~\ref{par_est:freq} we have a model of the frequency
+evolution of a \gls{CW} and we have a Viterbi track which is our observation of
+a frequency track.  We would now like to estimate the parameters $\bm{\theta} =
+\left\{\alpha, \delta, f, \dot{f} \right\}$ of a \gls{CW} given that we have
+observed the frequency track $\bm{V}$.  To do this we use a Bayesian model
+where the idea was introduced in Sec.~\ref{intro:prob:bayes}, where we rewrite
+Bayes formula in terms of this problem~\chris{sloppy sentence}
+%
 \begin{equation}
     \label{par_est:bayes:eqn}
     p(\bm{\theta} \mid \bm{V}, I) = \frac{p(\bm{\theta}) p(\bm{V} \mid \bm{\theta}, I)}{p(\bm{V} \mid I)}
 \end{equation}
-where $p(\bm{\theta} \mid \bm{V}, I)$ is the posterior which we are interested in, $p(\bm{\theta})$ is the prior, $p(\bm{V} \mid \bm{\theta}, I)$ is the likelihood and $p(\bm{V} \mid I)$ is the evidence.
-The following sections will describe how we define the prior and likelihood for this problem.
+%
+~\chris{3 wheres in a row. Also you need an $I$ on the prior} where
+$p(\bm{\theta} \mid \bm{V}, I)$ is the posterior which we are interested in,
+$p(\bm{\theta})$ is the prior, $p(\bm{V} \mid \bm{\theta}, I)$ is the
+likelihood and $p(\bm{V} \mid I)$ is the \chris{Bayesian} evidence. The
+following sections will describe how we define the prior and likelihood for
+this problem.
 
 %
 %
@@ -148,47 +265,114 @@ The following sections will describe how we define the prior and likelihood for 
 %
 %
 
-The likelihood describes how the noise of the data is distributed, i.e. if we subtracted the model frequency track $\bm{M}(\bm{\theta})$ from our observed Viterbi track $\bm{V}$, what is the distribution of these values.
-If the simulated \gls{CW} signal has an infinitely large \gls{SNR} then the Viterbi track would follow the \gls{CW} frequency track exactly, which would leave a noise distribution which is 0 with no variance. 
-If conversely, the \gls{SNR} was zero then the Viterbi track would wander randomly through the frequency band and the noise would have a large variance in frequency.
-The noise distribution of our data, i.e. $\bm{M}(\bm{\theta}) - \bm{V}$, is then dependent on the \gls{SNR} $\rho$ of the signal. 
-Given that this is a difficult distribution to find analytically, we calculate it empirically using many simulated signals.
+The likelihood describes how the noise of the data is distributed, i.e. if we
+subtracted the model frequency track $\bm{M}(\bm{\theta})$ from our observed
+Viterbi track $\bm{V}$, what is the distribution of these values~\chris{OK, yes
+but noise doesn't have to additive in general so the likelihood really defines
+the probability of the data given the signal - it therefore does incorporate
+not only how the data is distributed but also how the signal and noise
+interact}. If the simulated \gls{CW} signal has an infinitely large \gls{SNR}
+then the Viterbi track would follow the \gls{CW} frequency track exactly, which
+would leave a noise distribution which is 0 with no
+variance~\chris{distributions can't simply "be 0". Be clerer with what you mean
+here.}. If conversely, the \gls{SNR} was zero then the Viterbi track would
+wander randomly through the frequency band and the noise would have a large
+variance in frequency~\chris{again, be clearer. This sentence is super
+ambiguous.}. The noise distribution of our data, i.e. $\bm{M}(\bm{\theta}) -
+\bm{V}$~\chris{this is not the noise distribution of your data. It is the
+quantity conditional on the parameters that represents the noise. Also be very
+clear what the "noise" is here. The reader doesn't really yet understand that
+the noise is the deviation in frequency from the model track.}, is then
+dependent on the \gls{SNR} $\rho$ of the signal.  Given that this is a
+difficult distribution to find analytically, we calculate it empirically using
+many simulated signals.
 
-In Sec.~\ref{machine:results} we generated $\mathcal{O}(10^{4})$ simulated \gls{CW} signals in Gaussian noise between 40 and 500 Hz, which had \gls{SNR} $\rho$ uniformly between 40 and 200 and source parameters which follow that in Tab.~\ref{machine:data:injections:table}. For each of these simulations, the SOAP search using the line-aware statistic with parameters from Sec.~\ref{soap:results} returns a Viterbi track associated with the simulated parameters.
-For each simulation we can calculate the difference between the Viterbi track and model frequency track $M_i(\bm{\theta}) - V_i$ for each element in the track, where we assume the likelihood $\mathcal{L}$ is independent of the track position and can be estimated by taking the \gls{KDE} of all our values of $M_i - V_i$.
-In this case our likelihood is also dependent on \gls{SNR}, therefore, we split our simulations into bands of width \gls{SNR} 2 between 20 and 200, this gives $\sim 300$ simulated tracks within each \gls{SNR} bound.
-Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a subset of the likelihood bins. 
-The sharp peaks in the center of each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents simulations where the Viterbi track is close to the simulated \gls{CW} track, and the broader distributions represent areas of the Viterbi track has not identified the \gls{CW} track but is wandering randomly.
-The sub plots in Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases the distribution is more closely centred around 0, i.e. the Viterbi and \gls{CW} tracks are similar, which is expected.
+In Sec.~\ref{machine:results} we generated $\mathcal{O}(10^{4})$ simulated
+\gls{CW} signals in Gaussian noise between 40 and 500 Hz, which had \gls{SNR}
+$\rho$ uniformly~\chris{uniformly what? distributed?} between 40 and 200 and
+source parameters which follow that~\chris{those} in
+Tab.~\ref{machine:data:injections:table}. For each of these simulations, the
+SOAP search using the line-aware statistic with parameters from
+Sec.~\ref{soap:results} returns a Viterbi track associated with the simulated
+parameters.  For each simulation we can calculate the difference between the
+Viterbi track and model frequency track $M_i(\bm{\theta}) - V_i$ for each
+element in the track, where we assume the likelihood $\mathcal{L}$ is
+independent of the track position and can be estimated by taking the \gls{KDE}
+of all our values of $M_i - V_i$~\chris{OK, but that came a bit fast. What is
+this KDE thing and how do we suddenly get the likelihood from it - more
+explanation!}.  In this case our likelihood is also dependent on \gls{SNR},
+therefore, we split our simulations into bands~\chris{bins} of width \gls{SNR}
+2 between 20 and 200,~\chris{not a place for a comma} this gives $\sim 300$
+simulated tracks within each \gls{SNR} bound~\chris{bin}.  Figure
+\ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a
+subset of the likelihood~\chris{SNR?} bins. The sharp peaks in the center of
+each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents
+simulations where the Viterbi track is close to the simulated \gls{CW} track,
+and the broader distributions represent areas of the Viterbi track has not
+identified the \gls{CW} track but is wandering randomly.  The sub plots in
+Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases
+the distribution is more closely centred around 0, i.e. the Viterbi and
+\gls{CW} tracks are similar, which is expected.~\chris{overall good but I think
+that the construction of the likelihood function needs more explanation. I am
+certainly not quite convinced that you're doing this right.}
 %
 \begin{figure}[hpt]
-
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/KDE_range_50_100.pdf}
-    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows the \gls{KDE} estimates of the probability density of the differences between the simulated (injected) \gls{CW} frequency track and the recovered Viterbi track for a number of \gls{SNR} ranges. The difference in the tracks is measured in discrete frequency bins. Each \gls{KDE} is generated from $\sim 300$ simulations which each have $\sim 400$ elements in their frequency tracks. This shows a subset of the binned likelihoods between the range of \gls{SNR} 50 and 150.}
-    \label{par_est:bayes:likelihood:kde142}
-    
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows
+the \gls{KDE} estimates of the probability density of the differences between
+the simulated (injected) \gls{CW} frequency track and the recovered Viterbi
+track for a number of \gls{SNR} ranges. The difference in the tracks is
+measured in discrete frequency bins. Each \gls{KDE} is generated from $\sim
+300$ simulations which each have $\sim 400$ elements in their frequency tracks.
+This shows a subset of the binned likelihoods between the range of \gls{SNR} 50
+and 150.~\chris{stylistically you could tidy up the x-axis labels and you
+should really replace "count" with the actual KDE value. If you used subplot
+you could indicate the SNR bins in subcaptions.}} \label{par_est:bayes:likelihood:kde142}
     \end{figure}
 %
 
-This does introduce one more parameter to search over in out Bayesian model, which is the \gls{SNR} $\rho$ of the signal.
-The \glspl{KDE} $\mathcal{L}$ are then used in the likelihood function $p(\bm{V} \mid \bm{\theta}, \rho, I)$ in the Bayesian model in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model $\alpha, \delta, f, \dot{f}$ and $\rho$.
-Our likelihood where we assume independent track elements for a given Viterbi track is
-\begin{equation}
-    p(\bm{V} \mid \bm{\theta}, \rho, I) = \frac{1}{N}\prod_{i = 1}^{N} \mathcal{L}(M_i(\bm{\theta}) - V_i, \rho) ,
-\end{equation}
-where $N$ is the length of the Viterbi track $\bm{V}$. 
+This does introduce~\chris{shouldn't start a paragrpah like this - assuming
+what you were last talking about} one more parameter to search over in our
+Bayesian model, which is the \gls{SNR} $\rho$ of the signal.  The \glspl{KDE}
+$\mathcal{L}$ are then used in the likelihood function $p(\bm{V} \mid
+\bm{\theta}, \rho, I)$ in the Bayesian model in~\chris{3 "in"s in a row}
+Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model
+$\alpha, \delta, f, \dot{f}$ and $\rho$.  Our likelihood where we assume
+independent track elements for a given Viterbi track is
+%
+\begin{equation} 
+p(\bm{V} \mid \bm{\theta}, \rho, I) = \frac{1}{N}\prod_{i =
+1}^{N} \mathcal{L}(M_i(\bm{\theta}) - V_i, \rho) , 
+\end{equation} 
+%
+\chris{why do  you divide by $N$. I'm pretty sure that you shouldn't be doing
+this} where $N$ is the length of the Viterbi track $\bm{V}$. \chris{It's not clear
+exactly how the SNR is dealt with here. You haven't mentioned any binning in
+which case you should index the KDE functions with an SNR dependent index.} 
 
 % Not currently doing this 
 \if
-As the likelihood $\mathcal{L}$ is binned in \gls{SNR} $\rho$, and $\rho$ is a continuous value, the likelihood is calculated as the weighted sum of the surrounding likelihood bins, where the weights are the fractional separation of $\rho$ from the bin centers. 
+As the likelihood $\mathcal{L}$ is binned in \gls{SNR} $\rho$, and $\rho$ is a
+continuous value, the likelihood is calculated as the weighted sum of the
+surrounding likelihood bins, where the weights are the fractional separation of
+$\rho$ from the bin centers.  
 \fi
 
 %
 \subsection{Prior}
 %
-We set up a simple prior which does not assume much about the parameters, other than limits on their range. 
-We use a flat prior for $\alpha$ between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through, a flat prior in the frequency derivative in the range $[-1e^{9},1e^{9}]$ and a flat prior for the \gls{SNR} $\rho$ in the range $[50,200]$.
+We set up a simple prior which does not assume much about the parameters, other
+than limits on their range~\chris{too relaxed sentence - be more scientific.
+Setting flat priors is NOT the same as being indifferent to the parameter
+priors - it's a specific simple choice}.  We use a flat prior for $\alpha$
+between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior
+in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through, a
+flat prior in the frequency derivative in the range
+$[-1e^{9},1e^{9}]$~\chris{units} and a flat prior for the \gls{SNR} $\rho$ in
+the range $[50,200]$~\chris{the sky prior is obvioulsy physically motivated as
+is the frequency prior over such a narrow band. It's only the SNR prior that
+you would need to defend.}.
 
 
 \clearpage
