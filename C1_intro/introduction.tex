@@ -3,33 +3,33 @@
 
 
 \Glspl{GW} were first predicted in 1915 as a consequence of Einstein's general
-theory of relativity \citep{einstein2005GrundlageAllgemeinen}.  They are
+theory of relativity \citep{einstein2005GrundlageAllgemeinen}, where they were
 theorised as ripples in the fabric of space-time.  The first observational
 evidence that \glspl{GW} exist came from observations of the Hulse-Taylor
-binary \citep{weisberg1981GravitationalWaves,weisberg2004RelativisticBinary}.
-This observation of a pulsar in a binary system showed that the periastron was
-reached slightly early after each orbit, implying that the pulsars orbit was
+binary \citep{weisberg1981GravitationalWaves,weisberg2004RelativisticBinary}, which subsequently won the Nobel prize in 1993.
+This observation, which was of a pulsar in a binary system showed that the periastron was
+reached slightly early after each orbit, implying that the pulsars orbital radius was
 decreasing with time.  If the separation of two orbiting objects is decreasing
 then the system must be losing energy.  The loss in energy matched the \gls{GR}
 prediction which assumed the energy was lost to \glspl{GW}.  This gave hope of
-the existence of \glspl{GW} and helped lead the way
-to~\chris{didn't really lead the way - more motivated} designing instruments
+the existence of \glspl{GW} and motivated designing instruments
 which could directly detect them.~\chris{up until about here you are simply
 writing a series of static statements which sound stilted and read as bullet
 points. This is the opening paragraph of the thesis so try to make this sound
-smoother.} ~\chris{new paragrpah?} The first direct detection of gravitational
+smoother.} 
+
+The first direct detection of gravitational
 waves was made in 2015 when the two \gls{LIGO} detectors in the US
 \citep{abbott2016ObservationGravitational} identified a signal from a \gls{BBH}
 system.  This was not only the first observation of a \gls{GW} but gave
 information on an as yet unobserved type of astrophysical
 system.  This has since been followed by many more detections of \gls{BBH}
-signals involving \gls{LIGO} and Virgo including
-\citep{abbott2017GW170814ThreeDetector,theligoscientificcollaboration2020GW190425Observation}~\chris{strange
-way to refer to citations}.  In 2017 the \gls{LIGO} detectors observed the
-first \gls{BNS} system \citep{abbott2017GW170817Observation} which had a
-corresponding electromagnetic counterpart~\chris{ambiguous, first system
-detected but that also had an EM counterpart OR first system with a counterpart
-detected?}.  This allowed verification~\chris{what does verification eman in
+signals, including those from a three detector network (the two \gls{LIGO} detectors and Virgo)
+\citep{abbott2017GW170814ThreeDetector,theligoscientificcollaboration2020GW190425Observation}, which allowed better localisation of the source on the sky.  
+In 2017 the \gls{LIGO} detectors observed the
+first \gls{BNS} system \citep{abbott2017GW170817Observation} where a
+corresponding electromagnetic counterpart was also observed.
+This allowed verification~\chris{what does verification eman in
 this sense?} of the source from optical counterparts and started the era of
 multi-messenger astronomy.  These detections opened up the field of
 \gls{GW} astronomy, where many more detections are expected to give more
@@ -206,11 +206,11 @@ To generate \gls{GW} we can follow the derivation in \citep{flanagan2005BasicsGr
 The result of this is that $h+{\mu \nu}$ is related to the second moment of the mass distribution by
 \begin{equation}
     \label{intro:gravwave:amp}
-        h_{\mu \nu} = \frac{2}{r}  \frac{d^2}{dt^2} I_{\mu \nu}(t-r),
+        h_{\mu \nu} = \frac{2}{r}  \frac{d^2}{dt^2} Q_{\mu \nu}(t-r),
 \end{equation}
-where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} and $I_{\mu \nu}$ is the second moment of the mass distribution defined by 
+where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} and $Q_{\mu \nu}$ is the second moment of the mass distribution defined by 
 \begin{equation}
-    I_{\mu \nu}(t) = \int \rho(t,{\bf x}) x^\mu x^\nu d^3x,
+    Q_{\mu \nu}(t) = \int \rho(t,{\bf x}) x^\mu x^\nu d^3x,
 \end{equation}
 where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational}.  
 This has a slight modification in the TT gauge, see
@@ -405,12 +405,11 @@ This deformation or asymmetry can be quantified by the ellipticity $\epsilon$ of
 This is defined using the principal moments of inertial
 
 \begin{equation}
-\label{ellipticity}
+\label{intro:source:cw:ellipticity}
 \epsilon = \frac{I_{xx}-I_{yy}}{I_{zz}},
 \end{equation}
 
-where $I_{zz},I_{xx},I_{yy}$ are the components of the moment of inertia in each of the spatial axes~\chris{ Also, didn't you already use $I$ to represent the second moment
-of the mass distribution in Sec 1.1. Are they the same thing?} and the star is rotating around the $z$ axis, i.e. $I_{zz}$ is parallel with the $z$ axis.
+where $I_{zz},I_{xx},I_{yy}$ are the components of the moment of inertia in each of the spatial axes and the star is rotating around the $z$ axis, i.e. $I_{zz}$ is parallel with the $z$ axis.
 
 There are a number of theories which describe the origin of this axisymmetry.
 If the pulsar is in a binary system and accreting material from its companion
@@ -700,7 +699,7 @@ The detectors are not equally sensitive to all polarisations to all locations on
 We can find this antenna response of the detector as in \citep{maggioreGravitationalWaves}, by thinking about the \gls{GW} in the frame of the detector.
 We can define the detector to be in the frame $(x,y,z)$ with the detector arms along the $x$ and $y$ axes, and the source to be in the frame $(x^{\prime},y^{\prime},z^{\prime})$, where the \gls{GW} is travelling along $z^{'}$ and is pointing towards the detector. 
 The axes $z^{\prime}$ then has polar coordinates $\theta$ and $\phi$ in the detector frame.
-We can determine the angular pattern functions by first looking at the spatial \gls{GW}, where the $h_{+}$ and $h+{\times}$ polarisations are defined with respect to the $(x^{\prime},y^{\prime},z^{\prime})$ frame
+We can determine the angular pattern functions by first looking at the spatial \gls{GW}, where the $h_{+}$ and $h_{\times}$ polarisations are defined with respect to the $(x^{\prime},y^{\prime},z^{\prime})$ frame
 \begin{equation}
     \label{intro:detector:response:gwwave}
     h^{\prime}_{i,j} = \left( 
@@ -754,6 +753,7 @@ From Eq.~\ref{intro:detectors:strain:ligo} we can write the \gls{GW} strain as
 \end{equation}
 where $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ are the antenna pattern functions of the detector.
 This is a a measure of how sensitive the detector is to different directions and polarisations. 
+If the definition of the axes if changed with respect to the polarisations $h_{+}$ and $h_{\times}$ then this corresponds to a rotation $\psi$ in the \gls{GW} frame $(x^{\prime}, y^{\prime})$, where $\psi$ is the polarisation angle.
 
 An example of the antenna response for a detector where the arms lie on the $x$ and $y$ axis is shown in Fig.~\ref{intro:detector:response:polarisations}.
 %

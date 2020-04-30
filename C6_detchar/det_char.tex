@@ -7,9 +7,8 @@
 When searching for \gls{GW} signals, it is important to understand the origins
 of noise artefacts in the detector data which do not originate from an
 astrophysical source.  A large fraction of \gls{GW} search algorithms,
-including SOAP in Sec.~\ref{soap}, assume that the detectors noise follows a Gaussian
-distribution~\chris{we don't totally assume that, e.g., the line aware stat you
-have already discussed}.  However, the detectors contain artefacts which do not follow
+including the basic SOAP search in chapter \ref{soap}, assume that the detectors noise follows a Gaussian
+distribution (although Sec.~\ref{soap:las} does assume non Gaussianities).  However, the detectors contain artefacts which do not follow
 this distribution.  These artefacts can negatively affect many searches for
 \glspl{GW} as they can be easily mistaken for a real \gls{GW} signal.  Some of
 the potential sources of these artefacts have been mentioned in
@@ -235,10 +234,9 @@ described below.
 
 These tools offer different methods to identify and mitigate instrumental lines, and more generally understand the noise of the detector. A summary of these efforts for
 the advanced \gls{LIGO} data can be found in
-\citep{covas2018IdentificationMitigation}, or the \gls{LIGO} wiki page {\tt
-\url{https://wiki.ligo.org/DetChar/O3LinesCombsInvestigations}}~\chris{this
-link is specific to O3 and not to the advanced detectors in general}. The following
-sections describe how the SOAP search described in Sec.~\ref{soap} can be used
+\citep{covas2018IdentificationMitigation}, or specifically for O3 on the \gls{LIGO} wiki page {\tt
+\url{https://wiki.ligo.org/DetChar/O3LinesCombsInvestigations}}. The following
+sections describe how the SOAP search described in chapter \ref{soap} can be used
 as an extra tool to aid in the identification and monitoring of instrumental
 lines.
 
@@ -246,14 +244,13 @@ lines.
 
 %%%%%%%%%%%
 %%%%%%%%%%%
-\section{\label{detchar:soap}Identifying and cleaning lines with SOAP}
+\section{\label{detchar:soap}Identifying instrumental lines with SOAP}
 %%%%%%%%%%%
 %%%%%%%%%%%%
 
 % Why SOAP may be good at finding instrumental lines
 % 
-~\chris{I love all the SOAP puns but are you actually "cleaning" lines with
-SOAP?} The SOAP search has been tested on a number of observing runs
+The SOAP search has been tested on a number of observing runs
 to search for \gls{CW}.  One of the major factors that limited the sensitivity
 of the search, is the presence of instrumental lines within the data.  Many of
 the potential candidates which SOAP returned could be identified as an
@@ -261,19 +258,10 @@ instrumental line.
 %
 \begin{figure}[hp]
 	\includegraphics[width=\textwidth]{C6_detchar/plot_F111_5_wandering_line.png}
-        \caption[Broad wandering line example.]{~\chris{Comment for all plots.
-			Start with a descriptive sentence of hwt is being plotted.} Broader
-			instrumental lines are generally weaker and can be mistaken for an
-			astrophysical signal by the SOAP astrophysical search. Above an example of two
-			broad lines in the H1 detector is shown, where SOAP has identified one of
-			the~\chris{sort out this sentence. It's got grammar problems and isn't
-			complete.}.
-			The top two panels show the summed spectrograms from the H1 and L1 panels with
-			the optimal Viterbi track overlaid. The third panel shows the normalised
-			spectrogram power along the Viterbi track for each of the detectors. The final
-			panel shows the Viterbi map for this frequency band.~\chris{I know that this is
-			an astrophysical result plot but the colour scheme is quite differnet to the
-			line search outputs from SOAP.}
+        \caption[Broad wandering line example.]{ The spectrograms generated from 1800s long \gls{SFT} which are summed over one day are shown for H1 and L1 in the top two panels, where two broad wandering lines can be seen in H1.
+        The Viterbi track returned by the SOAP astrophysical search described in chapter \ref{soap} is overlaid on each of these spectrograms.
+        The third panel shows the normalised spectrogram power along the Viterbi track for each of the detectors. The final
+        panel shows the Viterbi map for this frequency band.
 			}
 \label{detchar:soap:astrowander}
 
@@ -305,8 +293,8 @@ In the astrophysical search, the \glspl{SFT} were summed over one day to take av
 However, in the line search, there is not antenna pattern to average over and the majority of instrumental lines are expected to be stronger than astrophysical signals.
 Therefore the search is run over normalised 1800s long \glspl{SFT}, which reduces the preprocessing time of the search.
 The 1800s \glspl{SFT} are also generated as part of the Fscan search described in Sec.~\ref{detchar:monitor}, therefore, this reduces the computational cost of generating \glspl{SFT} as part of this search. 
-For this line search, we split the 1800 s \glspl{SFT} into 0.2 Hz \joe{changing to 0.1 Hz} wide sub-bands and run the single detector search on each sub-band. 
-A 0.2 Hz wide sub-band was chosen for this to reduce halve the number of output plots to save and further analyse, this however, could be reduced to 0.1 Hz if necessary \joe{remove this sentance when run finished}.  The search then returns the same outputs as described in
+For this line search, we split the 1800 s \glspl{SFT} into 0.1 Hz wide sub-bands and run the single detector search on each sub-band. 
+The search then returns the same outputs as described in
 Sec.~\ref{soap} and Sec.~\ref{machine}: the frequency track (Viterbi track), a
 Viterbi map and a Viterbi statistic.  Here the Viterbi statistic is just the
 sum of the \gls{SFT} power along the frequency track.  
@@ -317,7 +305,7 @@ Initially, one can look at the distribution of the Viterbi statistics for each s
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{C6_detchar/statistic_hists_O3_H1.pdf}
-	\caption[Viterbi statistics for H1 in O3, 40-500 Hz]{This shows a histogram of the Viterbi statistics between 40-500 Hz for the Hanford detector (H1) during the O3 observing run. }
+	\caption[Viterbi statistics for H1 in O3, 40-500 Hz]{This shows a histogram of the Viterbi statistics from the SOAP search from chapter \ref{soap}, where the statistic is the summed \gls{SFT}  power along the Viterbi track. These results are between 40-500 Hz for the Hanford detector (H1) during the O3 observing run. The red line indicated where 10\% of the Viterbi statistics are larger than this value. }
 	\label{detchar:soap:rankedstats}
 \end{figure}
 %
@@ -345,23 +333,16 @@ Each of these indicate that there is no line present within this sub-band.
 \begin{figure}[hpt]
 	\centering
 	\includegraphics[width=\textwidth]{C6_detchar/track_F58_5_58_7_noise.png}
-	\caption[Example SOAP output for Gaussian like noise.]{~\chris{the
-descriptions you have here regarding the main aspects of what you are plotting
-should be in the previous figure caption.}The SOAP search outputs three main
+	\caption[Example SOAP output for Gaussian like noise.]{The SOAP search outputs three main
 quantities, the Viterbi maps, the Viterbi track and the Viterbi statistic. The
 Viterbi track is shown above overlaid onto the 1800s \gls{SFT} power spectrum
 including the detector gaps for \glspl{LIGO} Hanford detector (H1) in its
-second observing run (O2) \citep{}. This track is an indicator as to what type
-of signal the track is following. The above track indicated that this is just
-noise. The returned Viterbi statistic is also consistent with that of noise.
+third observing run (O3) \citep{}. This track is an indicator as to what the SOAP search has identified within the band, where this track indicates that SOAP has identified noise and no signal. The returned Viterbi statistic is also consistent with that of noise.
 The Viterbi map is another visualisation of the sub-band, how to interpret this
-has been explained in previous sections. However, here there does no appear to
-be a clear signal. The final panel is a way to visualise how the \gls{SFT}
+has been explained in chapters \ref{soap} and \ref{machine}. The final panel is a way to visualise how the \gls{SFT}
 power changes along the Viterbi track. Also on this plot is an estimate of the
 mean noise floor for this band to visualise how the sensitivity of the detector
-changed over the course of the run.~\chris{be careful to stay descriptive in
-the captions and to leave any interpretation of the figures to the main text
-when you refer to the plot.}}
+changed over the course of the run.}
 
 	\label{detchar:soap:noiseplot}
 \end{figure}
@@ -379,7 +360,7 @@ Each of these features a strong indicators that there is an instrumental line pr
 \begin{figure}[hpt]
 	\centering
 	\includegraphics[width=\textwidth]{C6_detchar/track_F47_6_47_8_linenarrow.png}
-	\caption[Example SOAP output for string narrow instrumental line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a narrow spectral artefact in the band. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. In this there is a narrow spectral line at $\sim 47.69$ Hz. The Viterbi track then follows this line of high power. The Viterbi map has much higher values for the log-probability in this line case compared to the noise case, this is an indicator some real signal. The probability in the Viterbi maps drops to zero in some areas due to the strength of the instrumental line. }
+	\caption[Example SOAP output for string narrow instrumental line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a narrow spectral artefact in the band. The above is again results from \glspl{LIGO} Hanford detector (H1) in its third observing run (O3) using 1800s \gls{SFT} power spectrum. In this there is a narrow spectral line at $\sim 47.69$ Hz, where the Viterbi track follows this line of high power. The Viterbi map has much higher values for the log-probability in this line case compared to the noise case, this is an indicator some real signal. The probability in the Viterbi maps drops to zero in some areas due to the strength of the instrumental line, these are the white areas in the Viterbi map plot (second panel). }
 	\label{detchar:soap:lineplot}
 \end{figure}
 %
@@ -389,11 +370,11 @@ Each of these features a strong indicators that there is an instrumental line pr
 \begin{figure}[hpt]
 	\centering
 	\includegraphics[width=\textwidth]{C6_detchar/track_F53_7_53_9_wander.png}
-	\caption[Example SOAP output for wandering line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a wandering spectral line. The above is again results from \glspl{LIGO} Hanford detector (H1) in its second observing run (O2) using 1800s \gls{SFT} power spectrum. This shows how some spectral lines do not have a fixed frequency bin can wander through the band. These are especially hard to track and monitor. The Viterbi track here shows is clearly different from the noise case in Fig.~\ref{detchar:soap:noiseplot} as the track is more tightly concentrated around some areas of power. }
+	\caption[Example SOAP output for wandering line.]{The equivalent plot as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a wandering spectral line. The above is again results from \glspl{LIGO} Hanford detector (H1) in its third observing run (O3) using 1800s \gls{SFT} power spectrum. This shows how some spectral lines do not have a fixed frequency and can wander through the band. These are especially hard to track and monitor. The Viterbi track here shows is clearly different from the noise case in Fig.~\ref{detchar:soap:noiseplot} as the track is more tightly concentrated around some areas of power. }
 	\label{detchar:soap:wanderplot}
 \end{figure}
 %
-\joe{rewrite this when the plots are run}
+
 Figure \ref{detchar:soap:wanderplot} shows the equivalent plots to
 Fig.~\ref{detchar:soap:noiseplot} and \ref{detchar:soap:lineplot} but now
 contains a wandering spectral artefact.  This is
@@ -406,68 +387,130 @@ January.~\chris{you have to allow the reader to understand these concepts
 slowly. You are very abruptly introducing the concept of tracks switching but
 you must explain in more detail what you mean by this.} 
 
+\clearpage
 
 The Viterbi statistic is used as an initial flag for a sub-band which could potentially contain an instrumental line.
-The equivalent plots for each sub-band can then be used for further investigation, where a list of potential lines is generated. 
-This line list can then be compared to existing \gls{LIGO} line lists which are generated using the searches described in Sec.~\ref{detchar:monitor}.
-There are currently two line lists, one which contain lines where the source has been identified and one where the source is not known.
+The equivalent plots as in Fig.~\ref{detchar:soap:noiseplot}, \ref{detchar:soap:lineplot} and
+\ref{detchar:soap:wanderplot} for each sub-band can then be used for further investigation, where this investigation can provide a list of potential lines. 
+We generated a list of potential instrumental lines for \glspl{LIGO} third observing run O3 between 40 and 500 Hz.
+This line list can then be compared to existing O3 \gls{LIGO} line lists which are generated using the searches described in Sec.~\ref{detchar:monitor}.
+There are currently two line lists produced by \gls{LIGO} scientists, one which contain lines where the source has been identified and one where the source is not known.
 Known lines can be accessed at {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/index.html}}
 and unknown lines at {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/Unidentified/index.html}} or are both stored in a git repository {\tt \url{https://git.ligo.org/CW/instrumental/aLIGO-lines-combs}}. 
 
-These line lists can be compared to the outputs of the SOAP search to compare its performance to existing techniques.
-SOAP detected 55\% of the lines of known origin and 45\% of the lines where the origin is not known.
-Of the lines of known origin, all of these were line from the ``Calibration line mixing'', which were short duration lines at the beginning of O3, some examples of these can be seen in Fig.~\ref{detchar:soap:calibrationlinemixing}.
-SOAP struggles to find short duration signals as is the signal is weak it cannot build up enough \gls{SNR} to pass the detection threshold.
-
+These line lists can be compared to the list of lines generated by SOAP to compare its performance to existing techniques.
+SOAP detected 55\% of the lines of known origin and 30\% of the lines where the origin is not known.
+Of the lines of known origin, all of these were line from the ``Calibration line mixing'' or ``Calibration line non-linearity'', upon further investigation of these frequency bands, we found that these lines are short duration $< 1$ week, where some examples of these can be seen in Fig.~\ref{detchar:soap:calibrationlinemixing}.
+SOAP struggles to find short duration signals as is the signal is weak it cannot build up enough \gls{SNR} to pass the detection threshold, however, the line is still visible when investigating the Viterbi maps and Viterbi track. 
 %
 \begin{figure}[hpt]
 	\centering
-	\includegraphics[width=\textwidth]{C6_detchar/track_F53_7_53_9_wander.png}
-	\caption[Example of calibration line mixing]{}
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/linemixing/track_F72_55_72_65.pdf}
+		\caption{\label{detchar:soap:calibrationlinemixing:1}}
+	\end{subfigure}
+\begin{subfigure}[h]{0.49\textwidth}
+	\includegraphics[width=\textwidth]{C6_detchar/linemixing/track_F315_15_315_25.pdf}
+	\caption{\label{detchar:soap:calibrationlinemixing:2}}
+\end{subfigure}
+
+\begin{subfigure}[h]{0.49\textwidth}
+	\includegraphics[width=\textwidth]{C6_detchar/linemixing/track_F470_15_470_25.pdf}
+	\caption{\label{detchar:soap:calibrationlinemixing:3}}
+\end{subfigure}
+\begin{subfigure}[h]{0.49\textwidth}
+	\includegraphics[width=\textwidth]{C6_detchar/linemixing/track_F394_65_394_75.pdf}
+	\caption{\label{detchar:soap:calibrationlinemixing:4}}
+\end{subfigure}
+	\caption[Example of lines from ``calibration line mixing'' and ``calibration line non-linearity''.]{Example of lines from ``calibration line mixing'' and ``calibration line non-linearity''. Fig.~\ref{detchar:soap:calibrationlinemixing:3} and \ref{detchar:soap:calibrationlinemixing:4}  are examples of lines from ``calibration line mixing'', where these examples appear as short burst of \gls{SFT} power towards the end of the observing run. Fig.~\ref{detchar:soap:calibrationlinemixing:1} and \ref{detchar:soap:calibrationlinemixing:2} are examples of lines from `` calibration line non-linearity'', where these examples appear as short duration lines at the beginning of O3.  In each of these images I have highlighted the areas of interest with green squares. These are both short durations lines, therefore, SOAP will struggle to identify them in the Viterbi statistic if they do not have enough \gls{SFT} power, however is still visible in the Viterbi maps and Viterbi track.}
 	\label{detchar:soap:calibrationlinemixing}
 \end{figure}
 %
 
+Of the unknown line list, whilst we only detected 30\% of those on the \gls{LIGO} line list, similar to before, some of the Vitebri statistics fell below the detection threshold for this test but the Viterbi maps and Viterbi tracks indicate an instrumental line is present, an example of this can be seen in Fig.~\ref{detchar:soap:unknown:1} and \ref{detchar:soap:unknown:2} .
+For some other line on the unknown line list, such as in Fig.~\ref{detchar:soap:unknown:4}, there is no indication of an instrumental line in the SOAP outputs, however, in over 50\% of the undetected lines, there is some evidence of a line on the other outputs of SOAP.
+%
+\begin{figure}[hpt]
+	\centering
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F131_05_131_15.png}
+		\caption{\label{detchar:soap:unknown:1}}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F66_65_66_75.png}
+		\caption{\label{detchar:soap:unknown:2}}
+	\end{subfigure}
+	
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F101_85_101_95.png}
+		\caption{\label{detchar:soap:unknown:3}}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F70_15_70_25.png}
+		\caption{\label{detchar:soap:unknown:4}}
+	\end{subfigure}
+	\caption[lines from unknown sources]{Examples of unknown instrumental lines in H1 during the O3 run which were not identified by SOAP using the Viterbi statistic. }
+	\label{detchar:soap:unknown}
+\end{figure}
+%
+Therefore, one possible addition to this lines search could be a method similar to that in chapter \ref{machine}, where the Viterbi maps and Viterbi tracks are trained on examples of instrumental lines. 
+This could then be used a detection statistic, and I would expect it to out perform the Viterbi statistic.
 
-When running this search SOAP identified lines which did not appear in other
-line lists, therefore, offers a method to search for weaker lines.
-\joe{actually check this}~\chris{Yes, if you are able to compare line lists and
-identify lines that you have but that are not on the offical line list then you
-should make some plots of them and discuss.}
+Whilst SOAP did not identify all of the same lines as the methods in Sec.~\ref{detchar:monitor}, it did identify a large number of lines which did not appear in either the known of unknown line list.
+For example, in Fig.~\ref{detchar:soap:newlines:1}, SOAP identified a line at $\sim 64.0$ Hz which does not currently appear in the \gls{LIGO} line list.
+Further examples are at $\sim 299.7$ Hz in Fig.~\ref{detchar:soap:newlines:2} and $\sim 299.545$ Hz in Fig.~\ref{detchar:soap:newlines:3} which shows broader features of $\sim 0.005$ Hz wide. Finally Fig.~\ref{detchar:soap:newlines:4} shows that there may be multiple strong lines present within this sub-band, this is because the Viterbi track appears to have identified multiple features and `jumps' between these during the observing run.
+In total, SOAP identified $\sim 200$ sub-bands which potentially contain an instrumental line which did not appear on the \gls{LIGO} line list. 
+Whilst many of these will require further investigation, it demonstrates the ability of this search to identify new instrumental lines.
 
-\joe{need to mention why this is good as extra tool, i.e. searching for wandering lines, identifies track of very weak lines etc, things that other searches cannot do}
-
+%
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F63_95_64_05.png}
+		\caption{\label{detchar:soap:newlines:1}}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F299_65_299_75.png}
+		\caption{\label{detchar:soap:newlines:2}}
+	\end{subfigure}
+	
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F299_45_299_55.png}
+		\caption{\label{detchar:soap:newlines:3}}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{C6_detchar/track_F40_35_40_45.png}
+		\caption{\label{detchar:soap:newlines:4}}
+	\end{subfigure}
+	\caption[New lines identified by SOAP.]{ Examples of instrumental lines identified by the SOAP line search in H1 during the O3 run which did not appear in \gls{LIGO} line lists are shown. Fig.~\ref{detchar:soap:newlines:2} and \ref{detchar:soap:newlines:3} show strong broad lines which do not wander in frequency. Fig.\ref{detchar:soap:newlines:1} shows a narrow band line which increases in \gls{SNR} in the final month of this O3. Finally Fig.~\ref{detchar:soap:newlines:4} shows multiple features within the sub band, where the Viterbi track `jumps' between the different features during the run.}
+	\label{detchar:soap:newlines}
+\end{figure}
+%
 \clearpage 
+
 %%%%%%%%%%%
 %%%%%%%%%%%%
 \section{\label{detchar:summary}Summary pages}
 %%%%%%%%%%%
 %%%%%%%%%%%%%
 
-Summary pages are an important tool when searching for instrumental lines.
-There is such a large amount of data both in frequency and time space, and
-channels to search though when looking for instrumental lines~\chris{clunky
-grammar}. Summary pages
-distill this data such that only the important information is shown. This
-enables lines to be identified easily when looking through sub-bands. The
+Summary pages are an important tool when searching for both instrumental lines and astrophysical signals as there is a large amount of data in both frequency and time to search through, where for line searches there are also a large number of different channels. Summary pages
+distil this data such that only the important information is shown. This
+enables signals to be identified easily when looking through sub-bands. The
 criteria when designing summary pages is that they are easy to navigate and the
-important information is shown in a clear and concise way.  How we display this
-information will be explained later in this section.  These summary pages exist
-for the above searches~\chris{so you have summary pages for the astro searches
-too? This section seems to imply that summary pages are only useful for
-instrumnental line searches - please resolve.} in \citep{bayleyHome} where this is only accessible by
-\gls{LIGO}~\chris{and Virgo and KAGRA} members.
+important information is shown in a clear and concise way.  These summary pages exist
+for the line searches in this chapter and the astrophysical searches from chapters \ref{soap} and \ref{machine} in \citep{bayleyHome} where this is only accessible by
+\gls{LIGO}, Virgo and KAGRA members.
+In this section I will explain the line summary pages, however, the astrophysical pages have a similar design.
 
-For the SOAP search summary pages were generated~\chris{grammar} for each observing run and for
-the two \gls{LIGO} detectors~\chris{why not Virgo?}. This was done for various timescales: for the
+Summary pages have currently been generated from the results of the SOAP search for observing runs O2 and O3 for
+the two \gls{LIGO} detectors, where pages for other detectors and observing runs are planned. This was done for various timescales: for the
 entire observing run and separately for each month.  This allows the variation
-of a line to be observed for the entire length and also artefacts on shorter
-timescales~\chris{clunky grammar} to be observed. Once the detector, observing
+of a line to be observed for both the entire length of the run and shorter timescales. Once the detector, observing
 run, and timescale is
-set, the band~\chris{what band?} is split into 0.2 Hz wide sub-bands.  The Viterbi search with a
-flat transition matrix and using the summed \gls{SFT} power as the
-statistic~\chris{this sentence has no conclusion. It also mentions the summed
-SFTs but I thought you don't use that for the lines?}.
+set, we currently split the 40-500 Hz band into 0.1 Hz wide sub-bands.  
+The SOAP search is then run on each sub-band using a flat transition matrix and the sum of \gls{SFT} powers along the Viterbi track as the detection 
+statistic.
 A flow diagram of how the SOAP search works for instrumental line searches can
 be found in Fig.~\ref{detchar:summary:flow}.
 %
@@ -484,58 +527,44 @@ These stages are as follows:
 	\item[1. \glspl{SFT} from time series] The \glspl{SFT} are generated for the \gls{GW} output channel. This is done by the Fscan search, therefore we do not repeat this process. Currently the search only runs on the \gls{GW} channel, however, in the future could be made to run on others.
 	
 	\item[2. Divide \gls{SFT} by running median] In this stage each
-\gls{SFT} is divided by its running median~\chris{as discussed before, we don't
-only divide by the running median because that would leave our data with median
-= 1. We apply a correctiuon factor to make the mean=1 even though we divided by
-the mnedian. Alos, we don't devide the SFTs by the median, we divide the SFT
-power by the median - an important distinction.} which is 100 bins
-wide~\chris{why is choice made?}. The running median takes each \gls{SFT} and
-applies a window of 100 bins, where the median of these 100 frequency bins is
-taken~\chris{repeated use of 100 bins}. This window then slides over the
-\gls{SFT} producing an `filtered' \gls{SFT} which should exclude
-outliers.~\chris{No. The filtering by the running median is a essentially a
-high pass filter than cuts out broad (low frequency) bumps in the noise
-variation in the frequency dimension. Outliers are not removed.}
+\gls{SFT} power spectrum is divided by its running median, where a correction factor is applied such that the data has a mean of 1. 
+The running median has a window of width 100 bins, this was chosen such that broad features wide than this window are removed whilst outliers should remain. 
+The output of this stage is then a high pass filtered \gls{SFT} power spectrum.
 	
-        \item[3. Narrow-band \gls{SFT}] The \gls{SFT} is then split into 0.2 Hz
+        \item[3. Narrow-band \gls{SFT}] The \gls{SFT} is then split into 0.1 Hz
 wide sub-bands for the SOAP search to run on. These smaller bands are chosen as
-the SOAP search pull~\chris{pull?} information on the most likely track, therefore, smaller
-bands are not contaminated by areas of high power in neighboring frequency
+the SOAP search only returns information on the most likely track in a sub-band, therefore, smaller
+bands are not contaminated by areas of high power in neighbouring frequency
 bands. 
 	
         \item[4. Run SOAP and generate plots] This stage runs the SOAP search
 with a flat transition matrix probability and generates plots as shown in
 Fig.~\ref{detchar:soap:noiseplot}.
 	
-        \item[5. Generate summary page] Finally the summary pages~\chris{you
-are assuming that the reader knows that summary pages are actual pages and are
-stored and viewed online. It might seem obvious to you but think about the
-reader.} are built
-which take all of the bands and puts them in a table. This table can be ordered
+        \item[5. Generate summary page] Finally web pages known as `summary pages' are generated which summarise the SOAP outputs from each sub-band.
+        This puts all sub-bands into a table where it can be ordered
 by the value of the Viterbi statistic, or can be searched for particular
-frequency bands.  
+frequency bands.  Where selecting a frequency band will display the output plots shown throughout this chapter.
 \end{description}
 
 An example of a summary page is shown in Fig.~\ref{detchar:summary:plots}. This
 has been annotated showing how to navigate the page.  There are generally two
 separate parts to the page: selecting the observing run and frequencies, and
 viewing the outputs.  The observing run is selected at the top of the page,
-where currently this has only~\chris{no need to downplay, just say that it has
-been run on O2 and O3} been run on O2 and O3.  From this menu the
-detector can be selected, currently only \glspl{LIGO} H1 and L1 detectors are
-present. The selection of frequencies and viewing of outputs then happens on
-this page~\chris{strange sentence}. The key information of each page is the plots shown in
-Figs.~\ref{detchar:soap:linewander} - \ref{detchar:soap:wanderplot}.  These
-clearly show the data with a number of representations of the data~\chris{data
-and data}. They show
-the time frequency spectrograms of the data, the output Viterbi tracks which
+where currently this has been run on O2 and O3.  From this menu the
+detector can be selected, currently \glspl{LIGO} H1 and L1 detectors are
+present. On this page the desired frequency bands can be selected, where the output plots can be displayed. 
+The key information of each page is the plots shown in
+Figs.~\ref{detchar:soap:noiseplot} - \ref{detchar:soap:newlines}.
+They show the time frequency spectrograms of the data, the output Viterbi tracks which
 identify the most probable frequency track, the Viterbi maps which allow the
 probability of a signal as a function of the time and frequency bin to be
 viewed.  Finally they show the spectrogram power along the Viterbi track with
 the mean noise floor of the detector during the observing run.  This should
-provide enough information to determine whether an instrumental line in
-present.~\chris{Really? It shoud certinaly provide a useful set of information
-to assess the prsence of a line.} To navigate each page, the left panel contains a calendar where the
+provide useful information to asses whether an instrumental line in
+present within a given sub-band.
+
+To navigate each page, the left panel contains a calendar where the
 start and end times of a result can be selected.  Currently there are
 pre-defined times which can be selected from. This allows a line to be
 investigated for a shorter or longer time period.  This can be useful when a
@@ -559,22 +588,19 @@ frequency range.  For example, this is filled with other line list information
 which has been collected from other search methods.  The loud features such as
 Violin modes can then be marked. This means that these particular bands are
 likely to have been investigated already allowing this search to focus on any
-extra instrumental lines.~\chris{Nice descriptions. It's another monster
-paragrpah so please break it up.}
-
-
-
+extra instrumental lines.
+%
 \begin{sidewaysfigure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{C6_detchar/summary_annot.pdf}
 	\caption[Example summary page for SOAP search]{The summary pages are made for each observing run (in this case just O2 and O3). The range of times can then be selected from a set of start and end times. This is in general the entire observing run and monthly runs of this search. These pages can be found at \citep{bayleyHome}}
 	\label{detchar:summary:plots}
 \end{sidewaysfigure}
+%
 
-The summary pages are then hoped to be useful alongside the other tools for
-searching for instrumental lines. \joe{more}~\chris{yes, I agree, a bit more
-would be good. Also you need to beef up the references. You only have $\sim 6$
-on detchar at present.}
+The summary pages offer a way to easily view the outputs of the SOAP line search, where sub-bands which are identified by SOAP as containing a potential signal can be investigated further. 
+The aim of this tool is to be used alongside existing methods described in Sec.~\ref{detchar:monitor} to aid in the identification of potential instrumental lines.
+\joe{just a little more}
 
 
 \clearpage
