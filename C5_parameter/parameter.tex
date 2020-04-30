@@ -4,15 +4,34 @@
 %%%%%%%%%%%%
 %%%%%
 
-Throughout chapters \ref{soap} and \ref{machine} we developed techniques which could identify whether a potential \gls{CW} signal is present within a small frequency band of width $0.1$ Hz, and then return the frequency track that the signal is most likely to follow.
-This provides frequency bands in which a signal could be present, which is useful for all-sky searches as it can limit the parameter space and therefore computational time for deeper searches such as those described in Sec.~\ref{searchcw:search:targeted}. 
-However, this only limits the parameter space in frequency to a smaller frequency band, where there is still a large parameter space which needs to be searched.
-If the Viterbi track returned by SOAP in chapter \ref{soap} follows the frequency evolution of a \gls{CW} source, then this track contains information on the sky position and frequency evolution of the \gls{CW}.
-If one could extract this information then the size of the parameter space for more sensitive searches such as Einstein@Home could be reduced, decreasing their computational cost.
+Throughout chapters \ref{soap} and \ref{machine} we~\chris{have} developed
+techniques which~\chris{that?} could identify whether a potential \gls{CW}
+signal is present within a small frequency band of width $0.1$ Hz, and then
+return the frequency track that the signal is most likely to follow.  This
+provides frequency bands in which a signal could be present, which is useful
+for all-sky searches as it can limit the parameter space and therefore
+computational time for deeper searches such as those described in
+Sec.~\ref{searchcw:search:targeted}.  However, this only limits the parameter
+space in frequency to a smaller frequency band, where there is still a large
+parameter space which needs to be searched.  If the Viterbi track returned by
+SOAP in chapter \ref{soap} follows the frequency evolution of a \gls{CW}
+source, then this track contains information on the sky position and frequency
+evolution of the \gls{CW}.  If one could extract this information then the size
+of the parameter space for more sensitive searches such as
+Einstein@Home~\chris{maybe list a LIGO follow-up rather than EatH?} could be
+reduced, decreasing their computational cost.
 
-In this chapter I will outline a Bayesian method which uses the output Viterbi tracks of the SOAP search in chapter ~\ref{soap} to return some astrophysical parameters of a source.
-Sec.~\ref{par_est:freq} will outline the model of the frequency evolution of a \gls{CW} from a source with a slowly varying frequency,
-Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and Sec.~\ref{par_est:results} will show the results from testing on simulated signals.
+In this chapter I will outline a Bayesian method which~\chris{the rule for
+using "which" rather than "that" is that when you use "which" the sentence
+should still make sense if you remove it. If it sounds wrong when you remove
+the word then "that" is the correct one to use. In this case, "that" is what
+you should use.} uses the output Viterbi tracks of the SOAP search in Chapter
+~\ref{soap} to return some~\chris{a subset of?} astrophysical parameters of a
+source.  Section~\ref{par_est:freq} will outline the model of the frequency
+evolution of a \gls{CW} from a source with a slowly varying frequency,
+Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and
+Sec.~\ref{par_est:results} will show the results from testing on simulated
+signals.
 
 %%%%
 %%%%
@@ -20,14 +39,26 @@ Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and S
 %%%%
 %%%%
 
-The SOAP search returns a frequency track known as the Viterbi track, if this track follows the frequency of a \gls{CW} source, then the frequency evolution contains information of the sky position ($\alpha, \delta$), the frequency of the source $f$ and its derivative $\dot{f}$, where we ignore higher order frequency derivatives.
-From the Viterbi track, we should then be able to extract this information as we have a model for the phase evolution (and therefore frequency evolution) of the source described in Eq.~\ref{searchcw:model:phase} in Sec.~\ref{searchcw:model}.
-To relate this phase evolution to the sky position parameters, we can look closer at Eq.~\ref{searchcw:model:ssbtime}, where we describe the shift in arrival time due to the earths motion. 
+The SOAP search returns a frequency track known as the Viterbi track, if this
+track follows the frequency of a \gls{CW} source, then the frequency evolution
+contains information of the sky position ($\alpha, \delta$), the frequency of
+the source $f$ and its derivative $\dot{f}$, where we ignore higher order
+frequency derivatives.  From the Viterbi track, we should then be able to
+extract this information as we have a model for the phase evolution (and
+therefore frequency evolution) of the source described in
+Eq.~\ref{searchcw:model:phase} in Sec.~\ref{searchcw:model}.  To relate this
+phase evolution to the sky position parameters, we can look closer at
+Eq.~\ref{searchcw:model:ssbtime}, where we describe the shift in arrival time
+due to the earths motion.~\chris{I have no comments on this paragraph!} 
 
-The second term in Eq.~\ref{searchcw:model:ssbtime} describes the Doppler shift due to the earth's orbit and rotation.
-Where the $\bm{r}$ is the position of the detector and $\bm{n}$ is a unit vector in the direction of the source. 
-As in \citep{schutz1998DataAnalysis}, we use the coordinate frame in the \gls{SSB} where the $z$ axis is perpendicular to the ecliptic and the $x$ axis is parallel to the celestial sphere.
-In this frame the unit vector pointing towards the star can be written as 
+The second term in Eq.~\ref{searchcw:model:ssbtime} describes the Doppler shift
+due to the earth's orbit and rotation.  Where the $\bm{r}$ is the position of
+the detector and $\bm{n}$ is a unit vector in the direction of the source.  As
+in \citep{schutz1998DataAnalysis}, we use the coordinate frame in the \gls{SSB}
+where the $z$ axis is perpendicular to the ecliptic and the $x$ axis is
+parallel to the celestial sphere.  In this frame the unit vector pointing
+towards the star~\chris{source?} can be written as
+%
 \begin{equation}
     \label{par_est:freq:unit}
     \bm{n} = 
@@ -44,12 +75,23 @@ In this frame the unit vector pointing towards the star can be written as
         \sin(\delta) \\
     \end{matrix} \right),
 \end{equation}
-where $\alpha$ and $\delta$ are the right ascension and declination (sky position) of the source and $\epsilon$ is the angle between the ecliptic and the earth's equator.
-The first matrix in Eq.~\ref{par_est:freq:unit} describes a rotation from the celestial frame where $\alpha$ and $\delta$ are measured to the ecliptic frame. 
-The second matrix transforms the sky position parameters to their component $x,y,z$ coordinates.
+%
+where $\alpha$ and $\delta$ are the right ascension and declination (sky
+position) of the source and $\epsilon$ is the angle between the ecliptic and
+the earth's equator.  The first matrix in Eq.~\ref{par_est:freq:unit} describes
+a rotation from the celestial frame where $\alpha$ and $\delta$ are measured to
+the ecliptic frame~\chris{grammar - reads funny}.  The second matrix~\chris{not
+a matric, a vector} transforms the sky position parameters to their component
+$x,y,z$ coordinates.
 
-The position vector of the earth, $\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, at a time $t$ can be split into the addition of two components, the position due to the orbit of the earth and position due to the rotation of the earth.
-If we assume the orbit is circular, then the position of the earth in its orbit is described in Cartesian coordinates as
+The position vector of the earth~\chris{I hope you mean detector not earth},
+$\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, at a time $t$ can be split into
+the addition of~\chris{into the addition of?  Just split into} two components,
+the position due to the orbit of the earth and position due to the rotation of
+the earth~\chris{of the detector - see comment at the start of the paragraph}.
+If we assume the orbit is circular, then the position of the earth in its orbit
+is described in Cartesian coordinates as
+%
 \begin{equation}
     \bm{r}_{\rm{orb}} = R_{\mathrm{O}}
     \left(
@@ -59,8 +101,13 @@ If we assume the orbit is circular, then the position of the earth in its orbit 
         0 \\
     \end{matrix} \right),
 \end{equation}
-where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU), $\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit $2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{O}$ is some phase which defines the position of the earth in its orbital motion.
-The position due to the rotation of the earth can then be described by 
+%
+where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU),
+$\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit
+$2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{O}$ is
+some phase which defines the position of the earth in its orbital motion.  The
+position due to the rotation of the earth can then be described by 
+%
 \begin{equation}
     \bm{r}_{\rm{rot}} = R_{\mathrm{R}}
     \left(
@@ -76,19 +123,37 @@ The position due to the rotation of the earth can then be described by
         \sin{(\lambda)} \\
     \end{matrix} \right),
 \end{equation}
-where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where $T_{\mathrm{R}}$ is one day, $\phi_{O}$ is some phase which defines the position of the earth in its rotational motion and $\lambda$ is the latitude of the detectors site.
-These two components can then be added to find the location of the detector in the \gls{SSB} frame
+%
+where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the
+angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where
+$T_{\mathrm{R}}$ is one day, $\phi_{O}$ is some phase which defines the
+position of the earth in its rotational motion and $\lambda$ is the latitude of
+the detectors site~\chris{I'm concerned that the arbitary undefined orbital
+phase and rotation phase are determined by the detector longitude and the start
+time of the observation. Do you address this further on?}. These two components
+can then be added to find~\chris{define?} the location of the detector in the
+\gls{SSB} frame
+%
 \begin{equation}
     \bm{r} = \bm{r}_{\rm{orb}} + \bm{r}_{\rm{rot}}.
 \end{equation}
 
-We can now describe the phase evolution of the signal at the detectors site from just the sky position ($\alpha, \delta$) and frequency and its derivative $f,\dot{f}$. 
-The frequency of a \gls{CW} signal at any point on the frequency track is then defined by the derivative of the phase with respect to time
+We can now describe the phase evolution of the signal at the detectors
+site~\chris{do you mean detector's site or detector sites?} from just the sky
+position ($\alpha, \delta$) and frequency and its derivative
+$f,\dot{f}$~\chris{what about those orbital and spin phases? You shouls say
+something about how they are defined/known.}. The frequency of a \gls{CW}
+signal at any point on the frequency track is then defined by the derivative of
+the phase with respect to time~\chris{which time? SSB or detector? be
+unambiguous}
+%
 \begin{equation}
     f(t) = \frac{1}{2\pi}\frac{d\Phi(t)}{dt}, 
 \end{equation}
-where $\Phi$ is defined in Eq.~\ref{searchcw:model:phase}.
-From \citep{schutz1998DataAnalysis} we can write the phase evolution as,
+%
+where $\Phi$ is defined in Eq.~\ref{searchcw:model:phase}.  From
+\citep{schutz1998DataAnalysis} we can write the phase evolution as,
+%
 \begin{equation}
     \label{par_est:freq:ph_evolution}
     \begin{split}
@@ -97,35 +162,77 @@ From \citep{schutz1998DataAnalysis} we can write the phase evolution as,
         &+ \left. R_{\rm{R}} \left[ \sin \lambda \sin \delta + \cos \lambda \cos \delta \cos \left( \alpha - \Omega_{\mathrm{R}} t - \phi_{R}  \right)     \right] \right\},
     \end{split}
 \end{equation}
-where we ignore frequency derivative higher than first order.
+%
+where we ignore frequency derivative higher than first order.~\chris{OK, but
+why say that this comes from ref 56. You already did the rotations in the
+previous equations in this section so you should also naturally arrive at this
+expression - take the credit yourself.}
 
-We can use Eq.~\ref{par_est:freq:ph_evolution} to make an estimate of the angular resolution which this method should be able to determine the sky position of the source \joe{I need to run through this part again to double check}.
-To do this we follow the derivation in \citep{astone2014MethodAllsky}, where two sources are taken with sky positions in the ecliptic frame with latitude $\beta$ and longitude $\gamma$, which have both have the same frequency $f_0 $ and latitude $\beta$ and a small deviation in the longitude $\delta \gamma << 1$.
-In the examples that follow, we sample the frequency once per day where we have a frequency bin width of $\delta f = \frac{1}{T_{\rm{SFT}}} \approx 5 \cdot 10^{-4}$ Hz, therefore we ignore the rotational component of Eq.~\ref{par_est:freq:ph_evolution}.
-Due to the motion of the detectors, the separation of the sources $\delta \gamma$ is seen as a time delay $\Delta t$, where as $\delta \gamma << 1$, $\Delta t \approx \frac{\gamma}{\Omega_{\rm{O}}}$.
-The frequency evolution of the signal can then be written as
+We can use Eq.~\ref{par_est:freq:ph_evolution} to make an estimate of the
+angular resolution which this method should be able to determine the sky
+position of the source \joe{I need to run through this part again to double
+check}.  To do this we follow the derivation in \citep{astone2014MethodAllsky},
+where two sources are taken with sky positions in the ecliptic frame with
+latitude $\beta$ and longitude $\gamma$, where both have the same frequency
+$f_0 $ and latitude $\beta$ and a small deviation in the longitude $\delta
+\gamma << 1$.  In the examples that follow, we sample the frequency once per
+day where we have a frequency bin width of $\delta f = \frac{1}{T_{\rm{SFT}}}
+\approx 5 \cdot 10^{-4}$ Hz, therefore we ignore the rotational component of
+Eq.~\ref{par_est:freq:ph_evolution}.  Due to the motion of the detectors, the
+separation of the sources $\delta \gamma$ is seen as a time delay $\Delta t$,
+where as $\delta \gamma << 1$~\chris{use $\ll$ instead of $<<$}, $\Delta t
+\approx \frac{\gamma}{\Omega_{\rm{O}}}$~\chris{how do you arrive at this
+expression - please expand and explain a bit. What time delay are we talking
+about? Isn't it time dependent. Are theses ources assumed to be at the same
+distance? I'm confused.}. The frequency evolution of the signal can then be
+written as
+%
 \begin{equation}
     f(t) \approx f_0 \left( 1 + \Omega_{\rm{O}} R_{\rm{O}} \cos \beta \sin \left( \Omega_{\mathrm{O}} t + \phi_{\omega_{O}}  \right) \right).
 \end{equation}
-
-During some time interval $\Delta t$, the frequency variation is then
+%
+\chris{where's the longitude $\gamma$? This should be dependent upon that
+right?} During some time interval $\Delta t$, the frequency variation is then
+%
 \begin{equation}
     \frac{df}{dt} \Delta t \approx \frac{1}{c} f_0 \Omega_{\rm{O}}^2 R_{\rm{O}} \cos{\beta} \cos \left( \Omega_{\mathrm{O}} t + \phi_{\omega_{O}}  \right) \Delta t, 
 \end{equation}
-where the maximum variation in frequency in $\Delta t$ is defined by
+%
+\chris{where did the speed of light come from?} where the maximum variation in
+frequency in $\Delta t$ is defined by
+%
 \begin{equation}
     \Delta f_{\rm{max}} \approx \frac{1}{c} f_0 \Omega_{\rm{O}}^2 R_{\rm{O}} \gamma \cos{\beta}. 
 \end{equation}
-If we assume that the maximum frequency variation that we can detect in a given \gls{SFT} is the frequency bin width $\delta f = 1/T_{\rm{SFT}}$, thn we can write the angular resolution in ecliptic longitude ascension
+%
+\chris{OK, I think I agree with this result BUT it's not very clear how you get
+here. What happened to these 2 closely separated sources?} If we assume that
+the maximum frequency variation that we can detect in a given \gls{SFT} is the
+frequency bin width $\delta f = 1/T_{\rm{SFT}}$, then we can write the angular
+resolution in ecliptic longitude ascension~\chris{drop ascension} as
+%
 \begin{equation}
     \delta \gamma = \frac{c}{f_0 \Omega_{\rm{O}} R_{\rm{O}} T_{\rm{SFT}} \cos \beta}.
 \end{equation}
-Following similar arguments we can also find the angular resolution in ecliptic latitude as
+%
+\chris{now $\delta\gamma$ reappears. Where was it before?} Following similar
+arguments we can also find the angular resolution in ecliptic latitude as
+%
 \begin{equation}
     \delta \beta = \frac{c}{f_0 \Omega_{\rm{O}} R_{\rm{O}} T_{\rm{SFT}} \sin \beta}.
 \end{equation}
+%
+\chris{I don't agree with this result because $\beta$ and $\gamma$ appear
+differently in the frequency evolution expression Eq 5.7. You should get
+different different resolutions for each.} Given that our frequency bin width
+is $\sim 5 \cdot 10^{-4}$ we can say that for a source at 100 Hz, the minimum
+angular resolution we could resolve to in ecliptic longitude $\delta \gamma
+\approx 2 \cdot 10^{-8} [\cos{\beta}]^{-1}$ and angular resolution in ecliptic
+latitude $\delta \beta \approx 2 \cdot 10^{-8} [\sin{\beta}]^{-1}$.~\chris{I'm
+doubtful of these results based on my concerns noted above. I would also add
+that the section lacks a main point. Why did you do this calculation? Please
+explain to the reader why knowing these rough estimates is useful.}
 
-Given that our frequency bin width is $\sim 5 \cdot 10^{-4}$ we can say that for a source at 100 Hz, the minimum angular resolution we could resolve to in ecliptic longitude $\delta \gamma \approx 2 \cdot 10^{-8} [\cos{\beta}]^{-1}$ and angular resolution in ecliptic latitude $\delta \beta \approx 2 \cdot 10^{-8} [\sin{\beta}]^{-1}$.
 %
 %
 \section{\label{par_est:bayes}Bayesian Model}
