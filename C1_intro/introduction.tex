@@ -4,19 +4,16 @@
 
 \Glspl{GW} were first predicted in 1915 as a consequence of Einstein's general
 theory of relativity \citep{einstein2005GrundlageAllgemeinen}, where they were
-theorised as ripples in the fabric of space-time.  The first observational
-evidence that \glspl{GW} exist came from observations of the Hulse-Taylor
+theorised as ripples in the fabric of space-time.  this would open up a new window into the universe which is not accessible via electromagnetic observations. 
+The first observational evidence that \glspl{GW} exist came from observations of the Hulse-Taylor
 binary \citep{weisberg1981GravitationalWaves,weisberg2004RelativisticBinary}, which subsequently won the Nobel prize in 1993.
 This observation, which was of a pulsar in a binary system showed that the periastron was
 reached slightly early after each orbit, implying that the pulsars orbital radius was
 decreasing with time.  If the separation of two orbiting objects is decreasing
 then the system must be losing energy.  The loss in energy matched the \gls{GR}
-prediction which assumed the energy was lost to \glspl{GW}.  This gave hope of
-the existence of \glspl{GW} and motivated designing instruments
-which could directly detect them.~\chris{up until about here you are simply
-writing a series of static statements which sound stilted and read as bullet
-points. This is the opening paragraph of the thesis so try to make this sound
-smoother.} 
+prediction which assumed the energy was lost to \glspl{GW}, giving hope of
+the existence of \glspl{GW} and motivating the design of instruments
+which could directly detect them.
 
 The first direct detection of gravitational
 waves was made in 2015 when the two \gls{LIGO} detectors in the US
@@ -64,7 +61,7 @@ to the examiner that you are an expert in the general field of GW astrophysics.}
 In general relativity, gravity is thought of as the curvature of space-time, where
 matter moves according to this curvature. Matter also has
 an effect on the curvature itself, where larger masses will distort space-time more than smaller masses. 
-To describe space-time, one would want to link the curvature to the matter mathematically, this was done in 1915 \citep{einstein2005GrundlageAllgemeinen} \joe{douvle check the reference} where Einstein developed his field equations
+To describe space-time, one would want to link the curvature to the matter mathematically, this was done in 1915 \citep{einstein2005GrundlageAllgemeinen} where Einstein developed his field equations
 \begin{equation}
 \label{intro:gravwaves:efe}
     G_{\mu \nu} = \frac{8 \pi G}{c^4}T_{\mu \nu}.
@@ -115,8 +112,7 @@ there are enough steps missing between defining G from g that this last
 statement doesn't really explain how the interval gets us from Minkowski to
 space-time curvature.}
 
-A gravitational wave can be described as a ripple in this space time~\chris{you
-already said this, maybe expand upon "ripple" here}.  The simplest way to
+A \gls{GW} is then a wave which propagates through space-time, where the simplest way to
 visualise this is just a small time dependent change to the flat space-time
 metric $\eta_{\mu\nu}$.  In the linearised theory of gravity, the
 space-time metric $g_{\mu \nu}$ can be defined as
@@ -160,8 +156,7 @@ components~\chris{why is it symmetric? It is, but why?}. This can be greatly
 simplified by choosing a different gauge where the metric perturbation is both
 transverse and traceless (TT) \citep{flanagan2005BasicsGravitational}.  This is
 just a choice of coordinate system which does not change any current
-assumptions \joe{read more about gauges}~\chris{See Martin Hendry's GR notes
-section of GWs}. This gauge imposes two conditions: one
+assumptions. This gauge imposes two conditions: one
 is that $h_{\mu \nu}$ is traceless, i.e. that the sum of the diagonal elements
 are 0 and the other is that $h_{\mu \nu}$ is transverse.  The transverse
 element means that the oscillations of the wave happen perpendicular to the
@@ -212,29 +207,18 @@ where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} 
 \begin{equation}
     Q_{\mu \nu}(t) = \int \rho(t,{\bf x}) x^\mu x^\nu d^3x,
 \end{equation}
-where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational}.  
+where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational} \joe{double check here/reread}.  
 This has a slight modification in the TT gauge, see
 \citep{flanagan2005BasicsGravitational}, however, has the same relationship
 between the mass quadrupole and the \gls{GW} amplitude.  This shows that for
 \gls{GW} to be generated, the second derivative of the mass quadrupole moment
-is needed.  A mass quadrupole moment only exists when the mass distribution is
-not spherically symmetric.  Therefore, a mass which is asymmetric and
-accelerating will produce a \gls{GW}.~\chris{OK, a couple of things. You've
-simplified the TT guage aspect which is OK if you do it sensibly. Things like,
-why not the dipole moment? might come up. You could address that here. A
-non-sherically symmetric mass distribution doesn't have to emit GWs, it also
-has to be moving in such a way that 2nd moment is not zero. The accelerating
-statement is a bit misleading. Finally, you also get GWs at higher orders than
-quadrupole.}
+is needed. 
+Gravitational monopole and dipole radiation is not possible due to the conservation of energy and momentum respectively \citep{misner1973Gravitation} and radiation can be emitted from higher orders but is generally weaker than quadrupolar radiation. \joe{want to say a little more here}
 
-Systems which will produce detectable~\chris{what does detectible mean?}
-\glspl{GW} are generally rapidly rotating high~\chris{try not use words like
-this unless they're qualified. What is high? } mass systems which have some
-asymmetry around their rotation axis.  The sources of these \gls{GW} will be
-described in the following section.~\chris{just be careful. Things don't have
-to be rotating to emit GWs.  What about supernovae, or the big-bang, or a
-head-on collision between 2 objects. All you need is a non-zero quyadrupole
-momement (or higher order).}
+There are many types of system which could emit quadrupole \glspl{GW}, including supernovae, colliding objects and orbiting black holes. 
+Typically these are from high mass systems as large amount of energy are needed to overcome the stiffness of space-time which is defined by the $8 \pi G/c^4$ in Eq.~\ref{intro:gravwaves:efe}.
+Some of the primary sources of \gls{GW} that are currently searched for will be described in the following section.
+
 
 
 
@@ -277,7 +261,9 @@ the gravitational waves generated by the system can be detected by ground based
 detector such as \gls{LIGO} \citep{aasi2015AdvancedLIGO} and Virgo
 \citep{acernese2015AdvancedVirgo}.  In fact, the only detections to date have
 been of this type; these are summarised in
-\citep{ligoscientificcollaborationandvirgocollaboration2019GWTC1GravitationalWave}~\chris{these
+\citep{ligoscientificcollaborationandvirgocollaboration2019GWTC1GravitationalWave}
+These observations provided insight into the mass distribution of black holes, as none within this mass range had been previously observed.
+~\chris{these
 are opportunities to write your interpretation of the detections}.
 \joe{talk about masses and how none had been onserved in this range before}
 
@@ -286,7 +272,7 @@ stars.  There are generally three types of \gls{CBC} source: \gls{BBH},
 \gls{BNS} and \gls{NSBH}.  The general structure of the waveform is the same
 for each of these and follows a `chirp' where the \gls{GW} frequency increases until they reach the innermost stable circular orbit, whereafter they will merge.  the waveform becomes more complicated during the merger and ring down phase\joe{why is it more complicated}. An example of this is shown in Fig.~\ref{intro:sources:signaltypes}.  The maximum frequency of this inspiral
 is defined by the mass of the system, where higher mass systems will merge at lower frequencies.
-To find the relationship between mass and frequency, we can look at the final orbit of the inspiral at the innermost stable circular orbit, which is at $R_{\rm{ISCO}} = 6GM/c^2$ \citep{} \joe{find reference}.
+To find the relationship between mass and frequency, we can look at the final orbit of the inspiral at the innermost stable circular orbit, which is at $R_{\rm{ISCO}} = 6GM/c^2$ \citep{maggioreGravitationalWaves}.
 As we assume a circular orbit we can use Keplers law $T^2 \propto a^3$ where $T$ is the period of the orbit and $a$ is the radius, to estimate the orbital frequency $f_{\rm{ISCO}}$ at the end of the inspiral
 \begin{equation}
     f = \frac{1}{T} \lesssim \sqrt{\frac{GM}{4 \pi^2 R_{\rm{ISCO}}^3}} \sim 2200 \, \rm{Hz} \frac{M_{\odot}}{M},
@@ -438,7 +424,7 @@ gravitational wave emission and detection is the r-mode
 \citep{owen2000GravitationalWaves}.
 These are oscillations in the neutron superfluid part of the star, where the
 restoring force is the Coriolis effect from the rotation of the star.  
-These oscillations would be damped by \gls{GW} emission, however, due to the different frames of reference of the observer and rotating star, an instability can arise such that \gls{GW} emission drives the oscillation. 
+These oscillations would be damped by \gls{GW} emission, however, due to the different frames of reference of the observer and rotating star, an instability known as the \gls{CFS} instability \citep{chandrasekhar1970SolutionsTwo} can arise such that \gls{GW} emission drives the oscillation. 
 The modes then become unstable to \gls{GW} emission in rapidly rotating neutron
 stars \citep{owen2000GravitationalWaves}, making them most likely for a
 detection.  For more details on this mechanism see
@@ -635,7 +621,7 @@ From Eq.\ref{intro:detectors:properdist}, the length along some vector $\bm{v}$ 
     L_{\bm{v}} = L_0 + \frac{L_0}{2} h_{ij} v^i v^j.
 \end{equation}
 An interferometer measures the difference in length between two arms $\Delta L$, where we can define the arms along vector $\bm{v}$ and $\bm{u}$.
-We can then write the difference in arm length along these vectors aspect
+We can then write the difference in arm length along these vectors as
 \begin{equation}
     \label{intro:detector:lengthdifference}
     \begin{split}
@@ -818,12 +804,12 @@ dissipation. The Brownian noise is the dominant factor as shown in
 Fig.~\ref{detectors:noisesensitivity}. These effects are limited by using
 different coatings on the mirrors \citep{abernathy0OverviewResearch}.
 
-\item[Quantum noise] Quantum noise is a fundamental limit due to the
-statistical uncertainty of counting photons~\chris{when do we count photons?}.
+\item[Quantum noise] Quantum noise is a fundamental limit due to the shot noise associated with the
+statistical uncertainty of counting photons and the radiation pressure noise associated with the momentum that photons transfer to the test masses.
 This limits the sensitivity at many frequencies. There are methods to reduce
 this include squeezing of the light \citep{aasi2013EnhancedSensitivity}. 
 
-\item[Electronics noise \joe{technical noise maybe}] Whilst this is not shown
+\item[Technical noise noise] Whilst this is not shown
 in Fig.~\ref{detectors:noisesensitivity}, this becomes important to searches
 described later. These often appear in the detector spectrum as narrowband frequency lines. This is generated by the digital and analogue
 electronics that are used to measure the signal and control the complex

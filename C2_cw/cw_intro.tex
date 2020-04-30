@@ -391,7 +391,8 @@ This then requires the calculation of the
 Bayesian Evidence. \gls{MCMC} methods can estimate this, however are inefficient, therefore a method known as Nested
 sampling was developed to solve this problem \citep{skilling2006NestedSampling,speagle2019DynestyDynamic}.
 
-In nested sampling, rather than directly sampling from the posterior as in \gls{MCMC}, it is broke into `slices' where samples are generated from each, and then combines the samples to reconstruct the posterior using weights associated with the slice.
+In nested sampling, rather than directly sampling from the posterior as in \gls{MCMC}, the posterior is broken into `slices' where samples are generated from each slice.
+The posterior is reconstructed by combining the samples using weights associated with each slice.
 The idea is based around transforming the integral for the Bayesian evidence to and integral over `prior mass' $X$ as opposed to the parameters $\theta$
 \begin{equation}
 \label{searchcw:bayes:nested:evidence}
@@ -403,9 +404,9 @@ The prior mass is defined by
 \label{searchcw:bayes:nested:priormass}
 	X(\lambda) = \int_{\mathcal{L}(\theta) > \lambda} \pi(\theta) d\theta,
 \end{equation}
-where this is the prior mass, or the fraction of the prior where the likelihood is greater than some value $\lambda$ which must have a value between 0 and 1.
+which is the fraction of the prior where the likelihood is greater than some value $\lambda$, this then must have a value between 0 and 1.
 In Fig.~\ref{cwinto:bayes:nestedsampling:plots} the prior mass is shown for a given $\lambda$ as the blue shaded area in the first panel, where the limits are defined by the likelihood.
-One can then see that as $\lambda$ increases from 0 to $\infty$ the prior mass decreases from 1 to 0, the bottom right panel of Fig.~\ref{cwinto:bayes:nestedsampling:plots} shows the equivalent plot where as the prior mass decreases, the value of the likelihood at that prior mass increases.
+One can then see that when $\lambda= 0$ the prior mass must be 1 and as $\lambda \rightarrow \infty$ the prior mass must approach 0. The bottom right panel of Fig.~\ref{cwinto:bayes:nestedsampling:plots} shows the equivalent plot where as the prior mass decreases, the value of the likelihood at that prior mass increases.
 The two representations of the Bayesian Evidence defined in Eq.~\ref{searchcw:bayes:nested:evidence} can then be seen as the integral of the lower two panels in Fig.~\ref{cwinto:bayes:nestedsampling:plots} respectively, where the shaded regions represent $Z$.
 %
 \begin{figure}[ht]
@@ -416,9 +417,14 @@ The two representations of the Bayesian Evidence defined in Eq.~\ref{searchcw:ba
 \end{figure}
 %
 
-Using the integral over the prior mass $X$ instead of $\theta$ means the that independent of the number of dimensions of $\theta$ the integral is one dimensional.
-The difficulty now is to calculate $X$ and $dX$ as we need to calculate the the constrained integral over the prior.
-Nested sampling algorithms avoid having to calculate $X$ by drawing samples from the constrained prior mass, where using the algorithm in Alg.~\ref{searchcw:bayes:nested_alg} estimates of the change in prior mass can be made.
+Using the integral over the prior mass $X$ instead of $\theta$ means that it is independent of the number of dimensions of $\theta$ and the integral is one dimensional.
+If the form of $\mathcal{L}(X)$ is known, then the Evidence could be calculated numerically by evaluating $\mathcal{L}_i = \mathcal{L}(X_i)$ for a number of $X$ values $0 < X_M < ... < X_1 < X_0 = 1$ such that
+\begin{equation}
+Z \approx \hat{Z} = \sum_{i=1}^{M} \mathcal{L}_i \left[  X_{i-1} - X_{i}\right].
+\end{equation} 
+However, $\mathcal{L}(X)$  is typically unknown.
+\joe{need to rethink from here}
+Nested sampling algorithms calculate this by drawing samples from the constrained prior mass, where using the algorithm in Alg.~\ref{searchcw:bayes:nested_alg} estimates of the change in prior mass can be made.
 %
 \begin{algorithm}
 	\centering
@@ -449,6 +455,8 @@ Nested sampling algorithms avoid having to calculate $X$ by drawing samples from
 	\caption[Nested sampling algorithm]{ Nested sampling algorithm from \citep{speagle2019DynestyDynamic}. \label{searchcw:bayes:nested_alg}}
 \end{algorithm}
 %
+The values of $X_i$ at each iteration are a random variable distributed as $X_i = t X_{i-1}$ where $t$ follows the distribution of the largest of $K$ samples drawn uniformly between 0 and 1, where $K$ is the number of live points. 
+\joe{this point is important to understand and explain better}
 This means that on average the change in prior volume for each dead point is $-1/K$,
 \begin{equation}
 \label{searchcw:bayes:nested:exp}
@@ -465,7 +473,7 @@ This then gives an estimate of the Bayesian Evidence, for more details on this a
 
 Nested sampling also provides an estimate of the posterior distribution as well as the Bayesian Evidence, from the set of samples (dead points) 
 \begin{equation}
-	p(\theta \mid \bm{d}, I) = \frac{\sum_{i=1}^{M} p(\theta_i) \delta^{\theta}_{\theta_i}}{\sum_{i=1}^{M} p(\theta_i) }.
+	p(\theta \mid \bm{d}, I) \approx \frac{\sum_{i=1}^{M} p(\theta_i) \delta^{\theta}_{\theta_i}}{\sum_{i=1}^{M} p(\theta_i) }.
 \end{equation}
 where $\delta^{\theta}_{\theta_i}$ is the dirac delta function \citep{speagle2019DynestyDynamic}.
 
