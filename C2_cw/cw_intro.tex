@@ -29,10 +29,7 @@ Sec.~\ref{searchcw:model} I will go into more
 detail on the \gls{CW} signal model which Sec.~\ref{intro:source:cw:mountain} and its
 waveform description.  This model is then used in various search methods for
 \gls{CW} signals, where I will overview a subset of current searches in
-Sec.~\ref{searchcw:search} and In 
-Sec.~\ref{searchcw:motivation} I explain the motivation~\chris{OK but it would
-be good if the thesis is motivated before page 29 and if that motivation spans
-more than 1 paragraph} for the majority of the work in this thesis.
+Sec.~\ref{searchcw:search}.
 
 %%%%%
 %%%%%
@@ -393,21 +390,24 @@ sampling was developed to solve this problem \citep{skilling2006NestedSampling,s
 
 In nested sampling, rather than directly sampling from the posterior as in \gls{MCMC}, the posterior is broken into `slices' where samples are generated from each slice.
 The posterior is reconstructed by combining the samples using weights associated with each slice.
-The idea is based around transforming the integral for the Bayesian evidence to and integral over `prior mass' $X$ as opposed to the parameters $\theta$
-\begin{equation}
-\label{searchcw:bayes:nested:evidence}
-	Z = p(\bm{d} \mid I) = \int \mathcal{L}(\theta) \pi(\theta) d\theta = \int_0^1 \mathcal{L}(X) dX,
-\end{equation}
-where I have defined $\mathcal{L}(\theta) = p(\bm{d} \mid \theta, I)$ and $\pi(\theta) = p(\theta \mid I)$.
-The prior mass is defined by
+The idea is to transform the integral for the Bayesian Evidence such that it is no longer multidimensional.
+This is done by using the prior mass
 \begin{equation}
 \label{searchcw:bayes:nested:priormass}
-	X(\lambda) = \int_{\mathcal{L}(\theta) > \lambda} \pi(\theta) d\theta,
+X(\lambda) = \int_{\theta: \mathcal{L}(\theta) > \lambda} \pi(\theta) d\theta,
 \end{equation}
-which is the fraction of the prior where the likelihood is greater than some value $\lambda$, this then must have a value between 0 and 1.
-In Fig.~\ref{cwinto:bayes:nestedsampling:plots} the prior mass is shown for a given $\lambda$ as the blue shaded area in the first panel, where the limits are defined by the likelihood.
-One can then see that when $\lambda= 0$ the prior mass must be 1 and as $\lambda \rightarrow \infty$ the prior mass must approach 0. The bottom right panel of Fig.~\ref{cwinto:bayes:nestedsampling:plots} shows the equivalent plot where as the prior mass decreases, the value of the likelihood at that prior mass increases.
-The two representations of the Bayesian Evidence defined in Eq.~\ref{searchcw:bayes:nested:evidence} can then be seen as the integral of the lower two panels in Fig.~\ref{cwinto:bayes:nestedsampling:plots} respectively, where the shaded regions represent $Z$.
+where $\pi(\theta) = p(\theta \mid I)$ is the prior. This the amount of the prior where the likelihood $\mathcal{L}(\theta)$ is greater than some value $\lambda$.
+The Bayesian Evidence is then defined as 
+\begin{equation}
+\label{searchcw:bayes:nested:evidence}
+Z = p(\bm{d} \mid I) = \int \mathcal{L}(\theta) \pi(\theta) d\theta = \int_0^1 \mathcal{L}(X) dX,
+\end{equation}
+where $\mathcal{L}(X)$ is the likelihood where $P(\mathcal{L}(\theta) > \lambda) = X$. One can find how we can get to this integral in Appendix \ref{appb}.
+The integral for the Bayesian Evidence has then been transformed to a one dimensional integral between 0 and 1 over the priori mass rather than a potentially multidimensional integral over $\theta$.
+
+In Fig.~\ref{cwinto:bayes:nestedsampling:plots} the prior mass is shown for a given value of $\lambda$ as the blue shaded area in the first panel, where the limits are defined by the likelihood.
+One can then see that when $\lambda= 0$ the prior mass must be one and as $\lambda \rightarrow \infty$ the prior mass must approach zero. The bottom right panel of Fig.~\ref{cwinto:bayes:nestedsampling:plots} shows the equivalent plot where as the prior mass decreases, the value of the likelihood at that prior mass increases.
+The two representations of the Bayesian Evidence defined in Eq.~\ref{searchcw:bayes:nested:evidence} can then be seen as the integral of the lower two panels in Fig.~\ref{cwinto:bayes:nestedsampling:plots} respectively, where the shaded regions represent $Z$. 
 %
 \begin{figure}[ht]
 	\centering
@@ -417,14 +417,27 @@ The two representations of the Bayesian Evidence defined in Eq.~\ref{searchcw:ba
 \end{figure}
 %
 
-Using the integral over the prior mass $X$ instead of $\theta$ means that it is independent of the number of dimensions of $\theta$ and the integral is one dimensional.
 If the form of $\mathcal{L}(X)$ is known, then the Evidence could be calculated numerically by evaluating $\mathcal{L}_i = \mathcal{L}(X_i)$ for a number of $X$ values $0 < X_M < ... < X_1 < X_0 = 1$ such that
 \begin{equation}
+\label{intro:bayes:nested:evidence_trapz}
 Z \approx \hat{Z} = \sum_{i=1}^{M} \mathcal{L}_i \left[  X_{i-1} - X_{i}\right].
 \end{equation} 
-However, $\mathcal{L}(X)$  is typically unknown.
-\joe{need to rethink from here}
-Nested sampling algorithms calculate this by drawing samples from the constrained prior mass, where using the algorithm in Alg.~\ref{searchcw:bayes:nested_alg} estimates of the change in prior mass can be made.
+However, $\mathcal{L}(X)$  is typically not known.
+
+Nested sampling algorithms instead estimate $Z$ by drawing samples from the constrained prior mass as described in Alg.~\ref{searchcw:bayes:nested_alg}.
+One could take $K$ samples (or live points) of $\theta$ from the prior distribution $\pi(\theta)$, then calculate the minimum value of the likelihood for these values $\mathcal{L}_{\rm{min}}$ and save the values of the parameters $\theta_{\rm{min}}$ associated with this likelihood.
+Then replace the sample $\theta_{\rm{min}}$ with a new sample from the prior distribution with the constraint that $\mathcal{L}(\theta) > \mathcal{L}_{\rm{min}}$ and repeat the above steps $M$ times.
+This then records samples after each step such that the values of $\mathcal{L}_{\rm{min}}$ are increasing, and therefore $X$ is decreasing such that
+\begin{equation}
+	0 < X_M < ... < X_1 < X_0 = 1.
+\end{equation}
+We could then use the values of $\mathcal{L}_{\rm{min}}$ with Eq.~\ref{intro:bayes:nested:evidence_trapz} to find the evidence is ce calculated the prior mass for each step $X_i = P(\mathcal{L}(\theta) > \mathcal{L}_{\rm{min},i})$.
+However, rather than doing this calculation the value of $X_i$ can be approximated after each step by setting $X_i = E[X_i]$ where 
+\begin{equation}
+E[X_i] \approx \exp{\left(-\frac{i}{K}\right)}.
+\end{equation}
+This tells us that using this algorithm the log-prior mass shrinks by a factor $\sim -1/K$ after each iteration \citep{speagle2019DynestyDynamic}. 
+
 %
 \begin{algorithm}
 	\centering
@@ -434,7 +447,7 @@ Nested sampling algorithms calculate this by drawing samples from the constraine
 		\STATE{initialise: $D$}
 		
 		\WHILE{stopping criterion not met}
-		\STATE{ $\mathcal{L}^{\rm{min}} = min\left\{\mathcal{L}(\theta_1),...\mathcal{L}(\theta_{K})\right\}$} \COMMENT{find minimum likelihood values for all live points}
+		\STATE{ $\mathcal{L}^{\rm{min}} = \rm{min}\left\{\mathcal{L}(\theta_1),...\mathcal{L}(\theta_{K})\right\}$} \COMMENT{find minimum likelihood values for all live points}
 		\STATE{$D_i  = \theta_k$ } \COMMENT{add the live point $\theta_k$ associated with $\mathcal{L}^{\rm{min}}$ to list of `dead' points $D$.}
 		\STATE{draw $\theta_{\rm{new}}$ from constrained prior where $\mathcal{L}(\theta_{\rm{new}}) > \mathcal{L}^{\rm{min}}$}
 		\STATE{$\theta_k = \theta_{\rm{new}}$}
@@ -443,7 +456,7 @@ Nested sampling algorithms calculate this by drawing samples from the constraine
 		\ENDWHILE
 		
 		\WHILE{K > 0}
-			\STATE{$\mathcal{L}^{\rm{min}} = min\left\{\mathcal{L}(\theta_1),...\mathcal{L}(\theta_{K})\right\}$} \COMMENT{compute minimum likelihood of current live points}
+			\STATE{$\mathcal{L}^{\rm{min}} = \rm{min}\left\{\mathcal{L}(\theta_1),...\mathcal{L}(\theta_{K})\right\}$} \COMMENT{compute minimum likelihood of current live points}
 			\STATE{$D_i  = \theta_k$ } \COMMENT{add the live point $\theta_k$ associated with $\mathcal{L}^{\rm{min}}$ to list of `dead' points $D$.}
 			\STATE{remove $\theta_k$}
 			\STATE{$K = K - 1$}
@@ -455,35 +468,25 @@ Nested sampling algorithms calculate this by drawing samples from the constraine
 	\caption[Nested sampling algorithm]{ Nested sampling algorithm from \citep{speagle2019DynestyDynamic}. \label{searchcw:bayes:nested_alg}}
 \end{algorithm}
 %
-The values of $X_i$ at each iteration are a random variable distributed as $X_i = t X_{i-1}$ where $t$ follows the distribution of the largest of $K$ samples drawn uniformly between 0 and 1, where $K$ is the number of live points. 
-\joe{this point is important to understand and explain better}
-This means that on average the change in prior volume for each dead point is $-1/K$,
-\begin{equation}
-\label{searchcw:bayes:nested:exp}
-	E[ \Delta \log X] = - \frac{1}{K},
-\end{equation}
-where $K$ is the number of live points.
 
-The integral in Eq.~\ref{searchcw:bayes:nested:evidence} can then be approximated using, for example, the trapezoid rule
+The integral in Eq.~\ref{searchcw:bayes:nested:evidence} can then be approximated using Eq.~\ref{intro:bayes:nested:evidence_trapz},
 \begin{equation}
-	Z = \int_0^1 \mathcal{L}(X) dX = \sum_{i=1}^{i=M} \frac{1}{2} \left[ \mathcal{L}(\theta_{i-1}) + \mathcal{L}(\theta_i)\right] \left[ X_{i-1} - X_{i} \right] = \sum_{i=1}^{M} p(\theta_i),
+	Z = \int_0^1 \mathcal{L}(X) dX \approx \sum_{i=1}^{i=M}  \mathcal{L}(\theta_i)  \left[ X_{i-1} - X_{i} \right] = \sum_{i=1}^{M} p(\theta_i),
 \end{equation}
-where $M$ is the number of iterations in Alg.~\ref{searchcw:bayes:nested_alg}, $\mathcal{L}(\theta_i)$ is calculated for each dead point $D$ and the expectation value for $\Delta X = \left[ X_{i-1} - X_{i} \right]$ is known from Eq.~\ref{searchcw:bayes:nested:exp}. The importance weight $p(\theta_i) = \frac{1}{2} \left[ \mathcal{L}(\theta_{i-1}) + \mathcal{L}(\theta_i)\right] \left[ X_{i-1} - X_{i} \right]$.
-This then gives an estimate of the Bayesian Evidence, for more details on this and some simple examples see \citep{skilling2006NestedSampling}.
+where $M$ is the number of iterations in Alg.~\ref{searchcw:bayes:nested_alg}, $p(\theta_i)$ is the importance weight defined as $p(\theta_i) =  \mathcal{L}(\theta_i) \left[ X_{i-1} - X_{i} \right]$. The likelihood values $\mathcal{L}(\theta_i)$ is calculated for each dead point $D_i$ with its associated change in prior mass $\Delta X = \left[ X_{i-1} - X_{i} \right] \approx -i/K$. 
+This then gives an estimate of the Bayesian Evidence, for more details on this and some simple examples see \citep{skilling2006NestedSampling,speagle2019DynestyDynamic,feroz2019ImportanceNested}.
 
 Nested sampling also provides an estimate of the posterior distribution as well as the Bayesian Evidence, from the set of samples (dead points) 
 \begin{equation}
 	p(\theta \mid \bm{d}, I) \approx \frac{\sum_{i=1}^{M} p(\theta_i) \delta^{\theta}_{\theta_i}}{\sum_{i=1}^{M} p(\theta_i) }.
 \end{equation}
-where $\delta^{\theta}_{\theta_i}$ is the dirac delta function \citep{speagle2019DynestyDynamic}.
-
+where $\delta^{\theta}_{\theta_i}$ is the Dirac delta function \citep{speagle2019DynestyDynamic}.
 
 The methods described above then provide a way to estimate parameters of a
 model given some data.  Also this provides a way to compare different models
 given some observation.  In chapters \ref{soap}, \ref{machine} and \ref{par_est} the methods
 described above are used to estimate various parameters.
 
-\clearpage
 %%%%%%%%%%%
 %%%%%%%%%%%%%
 \section{\label{searchcw:search} Continuous wave searches}
@@ -686,41 +689,5 @@ Pipeline & Expected runtime of O1 search \\ \hline Powerflux & 6.8 MSU \\
 Even the fastest of these searches takes close to 1 million core-hours to
 search through four months of data. 
 This presents one of the larger issues when searching for sources of \gls{CW} as generating results from observing runs can be time consuming. 
-
-
-%%%%%%%%%5
-%%%%%%%%%%%
-\section{\label{searchcw:motivation}Motivation}
-%%%%%%%%%%
-%%%%%%%%%%
-
-
-The searches described in Sec.~\ref{searchcw:search} are computationally
-expensive, where the fastest takes $\sim$1 million core-hours to search through
-4 months of O1 data.  Many of these searches use well-modelled signals to
-compare to the data. This leads to the parameter space having to be finely
-sampled such that it is sufficiently covered.  The motivation for much of the
-work then follows from these points~\chris{which work? your work?}. The aim was
-to develop searches which used minimal computational resources and could work
-outside of the \gls{CW} model in Sec.~\ref{searchcw:model}~\chris{what does it
-mena to work outside a model? Be more specific.}.  This thesis then
-outlines~\chris{strange tense} algorithms which can reduce this computational
-time of searches for \gls{CW} whilst retaining as much sensitivity to \gls{CW}
-signals as possible~\chris{taken literally, this isn't true. You are knowingly
-sacrificing sensitivity for speed.}.  There are two main sections which follow,
-Sec.~\ref{soap} will outline an essentially un-modelled \gls{CW} search method
-which uses the Viterbi algorithm.  Sec~\ref{machine}~\chris{don't start
-sentences with abbreviations} will then outline a method which used~\chris{you
-are all over the place with your tenses - past, present and future.} machine
-learning, specifically \glspl{CNN} as both its own \gls{CW} search and an
-extension to the search described in Sec.~\ref{soap}.  ~\chris{The?} Following
-chapters then explain applications of these searches.~\chris{if this is where
-you want to motivate the main chapters then you should expand on this a bit
-more. One thing that you haven't mentioned is any benefit beyond simply using
-less computational resources. That might be all we have but why is it good to
-reduce the computational burden? To repeat myself, if you have only one section
-in the thesis called "motivation" then it should be longer than a single
-paragraph.}
-
 
 

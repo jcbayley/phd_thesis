@@ -198,7 +198,7 @@ described in more detail in Sec.~\ref{intro:detector}.}
 \subsubsection{Generating gravitational waves}
 
 To generate \gls{GW} we can follow the derivation in \citep{flanagan2005BasicsGravitational}, where one can solve Eq.~\ref{intro:lineinstein} to find the \gls{GW} perturbation $h_{\mu \nu}$.
-The result of this is that $h+{\mu \nu}$ is related to the second moment of the mass distribution by
+The result of this is that $h_{\mu \nu}$ is related to the second moment of the mass distribution by
 \begin{equation}
     \label{intro:gravwave:amp}
         h_{\mu \nu} = \frac{2}{r}  \frac{d^2}{dt^2} Q_{\mu \nu}(t-r),
@@ -508,7 +508,7 @@ Pulsar timing arrays aim to use the accurate arrival time of pulses
 from millisecond pulsars to measure \gls{GW}
 \citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and
 the observer, the arrival time of the pulses will change. The change in arrival time depends on the source and its parameters, however, for supermassive black hole binaries emitting at nanohertz frequencies at around 1 Gpc, the change in arrival time is by $\mathcal{O}(10)$ ns \citep{hobbs2017GravitationalWave}.  \gls{CMB} detectors can be used to find evidence of \gls{GW} by investigating the B-mode polarisations of the \gls{CMB}
-\citep{ade2018ConstraintsPrimordial}. \joe{could say more} A number of
+\citep{ade2018ConstraintsPrimordial}. A number of
 detectors are used to look at the \gls{CMB} however, are yet to
 confirm a detection of a \gls{GW} signal.  
 The current best known design of a \gls{GW} detector is the interferometer, the ground based detector \gls{LIGO}
@@ -523,7 +523,7 @@ and CMB measurements.}
 
 %%%%%%%%
 %%%%%%%%%
-\subsection{Laser Interferometers}
+\subsection{\label{intro:detector:ligo}Laser Interferometers}
 %%%%%%%%%%
 %%%%%%%%%
 
@@ -639,7 +639,7 @@ The \gls{GW} strain is then the fractional difference in length of the arms
 
 In practice, rather than measure the phase difference in Eq.~\ref{intro:detectors:phasechange} at the output of the detector, the position of the two mirrors are held in position such that the interference pattern is held on a dark fringe.
 %
-% Joe the laser is on a dark fringe because whilst half way up a fringe would give the biggest change in power for a change in length, 
+% The laser is on a dark fringe because whilst half way up a fringe would give the biggest change in power for a change in length, 
 % the fluctuations in the power are much greater than the GW
 % Instead, the laser phase is modulated such that the carrier is on a dark fringe and the sidebands are not.
 % The GW is then encoded in the sidebands, therefore, the GW no longer competes with fluctuations at f_{GW} by at the frequency of modulation of the laser
@@ -665,12 +665,16 @@ mirror is placed between the beam splitter and end mirror in each arm (\gls{ITMX
 back and forth between the two mirrors (\gls{ITMX} and \gls{ETMX}) a number of times before
 returning to the beam splitter.  This increases the time the light spends in
 one arm which is equivalent to increasing the arm length.  
+
+As mentioned above, the interference pattern of is held on a dark fringe, this means that when a \gls{GW} is not present, the laser light will be reflected back to the input to the interferometer.
+By placing a mirror between the beam splitter and the input laser, this light can be reflected back into the interferometer increasing the laser power in the arms \citep{pitkin2011GravitationalWave}, this is known as power recycling. The increase in power improves sensitivity of the detector by reducing the shot noise \citep{abbott2009LIGOLaser}, which is the statistical fluctuations associated with the discrete nature of photons. 
+A technique which can be used to tune the detectors sensitivity to a smaller bandwidth is known as signal recycling. 
+If a \gls{GW} is incident on the detector then it will cause sidebands in the laser light which will be visible at the output of the detector. By placing a mirror at this output, the sideband signal is`recycled' back into the arms increasing its \gls{SNR} \citep{pitkin2011GravitationalWave}. The bandwidth over which this signal can be recycled is governed by the reflectivity of the mirror, therefore, this can improve the sensitivity of the detector to specific bandwidths. 
+
 Actual ground based \gls{GW} detectors such as \gls{LIGO} \citep{abbott2009LIGOLaser} and
 Virgo \citep{acernese2015AdvancedVirgo} are much more complicated than
 described above.  They use many techniques to increase the sensitivity some of
-which are outlined in
-\citep{aasi2015AdvancedLIGO,abbott2009LIGOLaser}~\chris{are you sure you don't
-want to discuss signal and power recycling?}.  Many of these techniques are
+which are outlined in \citep{aasi2015AdvancedLIGO,abbott2009LIGOLaser}.  Many of these techniques are
 designed to reduce non-astrophysical effects on the detector,
 some of these effects and solutions are listed in
 Sec.~\ref{intro:detector:noise}.
@@ -688,7 +692,7 @@ The axes $z^{\prime}$ then has polar coordinates $\theta$ and $\phi$ in the dete
 We can determine the angular pattern functions by first looking at the spatial \gls{GW}, where the $h_{+}$ and $h_{\times}$ polarisations are defined with respect to the $(x^{\prime},y^{\prime},z^{\prime})$ frame
 \begin{equation}
     \label{intro:detector:response:gwwave}
-    h^{\prime}_{i,j} = \left( 
+    h^{\prime}_{ij} = \left( 
     \begin{matrix} 
     h_{+} & h_{\times} & 0 \\
     h_{\times} & -h_{+} & 0 \\
@@ -733,13 +737,12 @@ From Eq.~\ref{intro:detectors:strain:ligo} we can write the \gls{GW} strain as
 \begin{equation}
     \label{intro:detector:response:strain:polarisations}
     \begin{split}
-        h(t) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) h_{+} + \cos \left(\theta\right) \cos \left(2\phi \right)h_{\times}\\
-        &= F_{+}(\theta,\phi)h_{+} + F_{\times}(\theta,\phi)h_{\times},
+        h(t) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) h_{+}(t) + \cos \left(\theta\right) \cos \left(2\phi \right)h_{\times}(t)\\
+        &= F_{+}(\theta,\phi)h_{+}(t) + F_{\times}(\theta,\phi)h_{\times}(t),
     \end{split}
 \end{equation}
 where $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ are the antenna pattern functions of the detector.
 This is a a measure of how sensitive the detector is to different directions and polarisations. 
-If the definition of the axes if changed with respect to the polarisations $h_{+}$ and $h_{\times}$ then this corresponds to a rotation $\psi$ in the \gls{GW} frame $(x^{\prime}, y^{\prime})$, where $\psi$ is the polarisation angle.
 
 An example of the antenna response for a detector where the arms lie on the $x$ and $y$ axis is shown in Fig.~\ref{intro:detector:response:polarisations}.
 %
@@ -747,7 +750,7 @@ An example of the antenna response for a detector where the arms lie on the $x$ 
     \centering
     \includegraphics[width=\textwidth]{C1_intro/antenna_pattern.pdf}
     \caption[Antenna response of the \gls{LIGO} detectors.]{The antenna
-response is shown for the plus and cross polarisations $F_{+}(\theta,\phi)$ and $F_{\times}(\theta,\phi)$ defined in Eq.~\ref{intro:detector:response:strain:polarisations}. The detectors arms lie on the $x$ and
+response is shown for the plus and cross polarisations $F_{+}(\theta,\phi,\psi=0)$ and $F_{\times}(\theta,\phi,\psi=0)$ defined in Eq.~\ref{intro:detector:response:strain:polarisations} and Eq.~\ref{intro:detector:polarisationfuncs}. The detectors arms lie on the $x$ and
 $y$ axis in the above plots. \joe{want to add a radial heatmap to make this clearerbut see if time}} \label{intro:detector:response:polarisations}
 \end{figure}
 %
@@ -759,6 +762,22 @@ the arm lengths and therefore a maximum sensitivity.  In the same way the
 sensitivity will be at a minimum when edge to the source.
 From some directions the \gls{GW} will change the length of the arms by the same amount, in these cases $\Delta L = 0$, therefore the detector is not sensitive to any \gls{GW} from that direction and this shows as the null areas in Fig.~\ref{intro:detector:response:polarisations} 
 
+In the above example Eq.~\ref{intro:detector:response:strain:polarisations} we have defined the detectors frame (vectors $\bm{v}$ and $\bm{u}$) orthogonal to the propagation direction of the wave. 
+We can however, define this more arbitrarily by performing a rotation $\psi$, known as the polarisation angle, in the plane transverse to the direction of propagation.
+The \gls{GW} strain then becomes
+\begin{equation}
+	h(t) = F_{+}(\theta,\phi, \psi)h_{+}(t) + F_{\times}(\theta,\phi,\psi)h_{\times}(t),
+\end{equation}
+where the polarisation functions now depend on $\psi$ \citep{maggioreGravitationalWaves}
+\begin{equation}
+\label{intro:detector:polarisationfuncs}
+	\begin{split}
+	F_{+}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \cos{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi} \\
+	F_{\times}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \sin{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi}
+	\end{split}.
+\end{equation}
+
+
 
 
 %%%%%%%%%%%
@@ -767,14 +786,14 @@ From some directions the \gls{GW} will change the length of the arms by the same
 %%%%%%%%%%
 %%%%%%%%%%
 
-To increase the sensitivity of the \gls{LIGO} detectors, any effect on the
-output of the interferometer which is not astrophysical ideally needs to be
-reduced.  This involves understanding what causes certain noise features in the
-detector, and how the effect of
-these can be limited.  Within the detector, there are many sources of noise.
+To sensitivity of the \gls{LIGO} detectors is limited by the combination of noise sources within the detector, where noise sources are any effect on the
+output of the interferometer which is not from an astrophysical source.  
+To increase the sensitivity of a detector, one needs to understand what causes certain noise features in the
+detector, and how the effect of these can be limited.  
+There are many sources of noise which can be broadly categorised into: fundamental noise, which is what ultimately limits the design sensitivity of the detector, technical noise which originates from sources such as electronics in the control systems and environmental noise which originates from the surrounding environments such as seismic motion \citep{martynov2016SensitivityAdvanced}.
 Some of these noise sources and how they limit the detectors strain sensitivity
 are all shown in Fig.~\ref{detectors:noisesensitivity} from
-\citep{aasi2015AdvancedLIGO}.
+\citep{aasi2015AdvancedLIGO}, where in general different noise sources affect different areas of the frequency spectrum.
 
 \begin{figure}[h]
     \centering
@@ -793,40 +812,40 @@ become useful for understanding later sections.
 activity or anthropogenic sources, where this affects frequencies $\lesssim 20$ Hz in the \glspl{LIGO} spectrum. The oscillations originate
 from a range of sources including earthquakes, ocean waves and traffic on nearby roads. They cause the mirrors to
 oscillate and induce a change
-in the length of the arm and therefore a change in the \gls{GW} readout channel. This is reduced by having multi-stage suspensions in
-the detectors which both actively and passively filter out the majority of seismic oscillations
+in the length of the arm and therefore a change in the \gls{GW} readout channel. 
+At the \gls{LIGO} sites, this causes the ground to move by about $10^{-9}\; \rm{m}/\sqrt{\rm{Hz}}$ at 10 Hz \citep{martynov2016SensitivityAdvanced}, which is orders of magnitude above the detectors design sensitivity. 
+This is reduced by having multi-stage suspensions in the detectors which both actively and passively filter out the majority of seismic oscillations
 \citep{matichard2015SeismicIsolation}.
 
-\item[Coating noise] This is in general due to two main factors, the thermal
-noise of the coating and Brownian noise. The Brownian noise is from the
-mechanical dissipation in the coating and the thermal noise is due to thermal
-dissipation. The Brownian noise is the dominant factor as shown in
-Fig.~\ref{detectors:noisesensitivity}. These effects are limited by using
-different coatings on the mirrors \citep{abernathy0OverviewResearch}.
 
-\item[Quantum noise] Quantum noise is a fundamental limit due to the shot noise associated with the
-statistical uncertainty of counting photons and the radiation pressure noise associated with the momentum that photons transfer to the test masses.
-This limits the sensitivity at many frequencies. There are methods to reduce
-this include squeezing of the light \citep{aasi2013EnhancedSensitivity}. 
+\item[Thermal noise] This originates from mechanical systems where thermal motion can be transferred (coupled) into the measurement of the displacement of the test mass. There are a number of sources of this including the suspension thermal noise and the Brownian noise in the mirror coatings. 
+The suspension thermal noise causes the test masses to move due to the thermal vibrations of the fibres suspending the test masses \citep{gonzalez2007HandbookApproximation}.
+The coating Brownian noise is from thermal fluctuations in the layers of optical coating in the test masses \citep{martynov2016SensitivityAdvanced}. These effects are limited by using different coatings on the mirrors \citep{abernathy0OverviewResearch}.
 
-\item[Technical noise noise] Whilst this is not shown
-in Fig.~\ref{detectors:noisesensitivity}, this becomes important to searches
-described later. These often appear in the detector spectrum as narrowband frequency lines. This is generated by the digital and analogue
-electronics that are used to measure the signal and control the complex
-detector system.  
+\item[Quantum noise] Quantum noise originates from two main mechanisms: the shot noise associated with the
+statistical uncertainty of the arrival time of photons at detector output, and the fluctuation in the radiation pressure noise associated with the momentum that photons transfer to the test masses \citep{aasi2013EnhancedSensitivity}.
+The strain sensitivity limited by shot noise is defined in \citep{abbott2009LIGOLaser} as
+\begin{equation}
+	h(f) = \sqrt{\frac{\pi \hbar \lambda}{P c}} \frac{\sqrt{1 + (4 \pi f \tau_s)^2}}{4 \pi \tau_s},
+\end{equation}
+where $P$ is the power of the laser, $\lambda$ is the wavelength of the laser, $f$ is the \gls{GW} frequency, $\hbar$ is Planck's constant and $\tau_s$ is the arm cavity storage time. 
+One can see from this that the shot noise decreases as the laser power increases, which is a reasons for the power recycling cavity described in Sec.~\ref{intro:detector:ligo}. 
+This is a fundamental limit of the detectors sensitivity, however, there are methods which `cheat' this limit to reduce
+the noise, for example using squeezed states of light \citep{aasi2013EnhancedSensitivity}. 
+
+\item[Technical noise] Whilst this is not shown
+in Fig.~\ref{detectors:noisesensitivity}, particular types of technical noise becomes important to searches
+described later. An example of this is the noise generated by the digital and analogue electronics that are used to measure the signal and control the complex
+detector system \citep{martynov2016SensitivityAdvanced}. Any fluctuations in the control system electronics can be transferred (coupled) into the measurement of the displacement of the test masses. 
+
 \end{description}
 
-There are also many other sources of noise in the detector which I have not
-listed. However, these are often not the limiting cases of noise or are not
-relevant to this thesis.  In Sec.~\ref{detchar} I will go into more detail
-about specific noise sources in the detector known as instrumental lines and
-how they can be monitored and potentially removed.~\chris{my general feeling
-abou this detector section is that unlike a purely astrophsyically focussed
-thesis you have more of a responsibility to understand the detector and the
-noise sources. Since you have a dedicated chapter on detchar you are riding the
-line between data analysis and experiment. I would recommend some expansion on
-the topics that you mention in passing, e.g. boost the discussio nof noise
-sources} 
+There are also many other sources of noise including from fluctuations in the laser frequency and amplitude, jitter noise which is caused by motion of the mirrors that steer the laser, and Newtonian noise where variations in the density of matter surrounding the test mass changes the gravitational gradient \citep{martynov2016SensitivityAdvanced}.
+For more discussion and detail of these noise sources and others see \citep{martynov2016SensitivityAdvanced,aasi2015AdvancedLIGO,aasi2015CharacterizationLIGO}. 
+For the majority of this thesis there noise sources which cause narrowband spectral artefacts known as instrumental line provide the biggest challenge.  In Sec.~\ref{detchar} I will go into more detail
+about these noise sources and
+how they can be monitored and potentially removed.
+
 
 
 

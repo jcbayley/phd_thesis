@@ -1,0 +1,56 @@
+\chapter{\label{appb}Nested sampling derivation}
+
+From the definition of the expectation value of a function $g(X)$ we
+have
+\begin{equation}
+  \label{appb:bayes:nested:exectationg}
+  E[ g(X) ] = \int g(x) f_X(x) dx,
+\end{equation}
+where $f_X(x)$ is the probability distribution of a random variable
+$X$.
+From this we can see that the evidence can be defined as
+\begin{equation}
+  \label{appb:bayes:nested:evidence_expec}
+  Z = p(\bm{d} \mid I) = \int \mathcal{L}(\theta) \pi(\theta) d\theta
+  = E [ \mathcal{L}(\theta)],
+\end{equation}
+where the prior $p(\theta \mid I) = \pi(\theta)$ is the probability
+distribution of $\theta$ and the likelihood is $p(\bm{d} \mid \theta,
+I) = \mathcal{L}(\theta)$.
+From the definition of the expectation value of random variable $X$ we
+can write
+\begin{equation}
+  \label{appb:bayes:nested:exectationx}
+  E[X] = \int_0^{\infty} P(X > \lambda) d\lambda = \int_0^{\infty}
+  \int_{\lambda}^{\infty} f_X(x) dx d\lambda,
+\end{equation}
+This can then be applied to
+Eq.~\ref{appb:bayes:nested:evidence_expec} such that the Evidence
+can be written as
+\begin{equation}
+  \label{appb:bayes:nested:evidence_cumul}
+  Z = E[\mathcal{L}(\theta)] = \int_0^{\infty}  P(\mathcal{L}(\theta)
+  > \lambda) d\lambda = \int_0^{\infty}  X(\lambda) d\lambda ,
+\end{equation}
+where we can define $X = P(\mathcal{L}(\theta) > \lambda)$ as the
+prior mass
+\begin{equation}
+  \label{appb:bayes:nested:priormass}
+  X(\lambda) = \int_{\mathcal{L}(\theta) > \lambda} \pi(\theta)
+  d\theta,
+\end{equation}
+which is the amount of the prior where $\mathcal{L}(\theta) >
+\lambda$.
+As the prior mass is an integral of a probability distribution, we
+know that it has a minimum value of zero and a maximum value of 1,
+therefore, we can rewrite
+Eq.~\ref{appb:bayes:nested:evidence_cumul} as
+\begin{equation}
+  \label{appb:bayes:nested:evidence}
+  Z = p(\bm{d} \mid I) = \int \mathcal{L}(\theta) \pi(\theta) d\theta
+  = \int_0^1 \mathcal{L}(X) dX,
+\end{equation}
+where the function $\mathcal{L}(X)$ is the value of the likelihood
+such that $P(\mathcal{L}(X) > \lambda) = X$.
+This then mean that we have a one dimensional integral over the prior
+mass $X$ which has a range between zero and one.

@@ -7,19 +7,17 @@
 When searching for \gls{GW} signals, it is important to understand the origins
 of noise artefacts in the detector data which do not originate from an
 astrophysical source.  A large fraction of \gls{GW} search algorithms,
-including the basic SOAP search in chapter \ref{soap}, assume that the detectors noise follows a Gaussian
-distribution (although Sec.~\ref{soap:las} does assume non Gaussianities).  However, the detectors contain artefacts which do not follow
+including the basic SOAP search described in Chapter \ref{soap}, assume that the detectors noise follows a Gaussian
+distribution (although Sec.~\ref{soap:las} does account for non Gaussianities).  However, the detectors contain artefacts which do not follow
 this distribution.  These artefacts can negatively affect many searches for
 \glspl{GW} as they can be easily mistaken for a real \gls{GW} signal.  Some of
 the potential sources of these artefacts have been mentioned in
 Sec.~\ref{intro:detector:noise}.  There are many different classes of artefact,
-including: glitches, which are short duration broad band bursts in
+including: glitches \citep{} \joe{referecnes}, which are short duration broad band bursts in
 power, and
-instrumental lines, which are long duration narrow-band signals.  To conduct a
+instrumental lines \citep{covas2018IdentificationMitigation}, which are long duration narrow-band signals.  To conduct a
 reliable search there are two main tasks which are necessary for detector
-characterisation.  The first is identifying the artefact such that any search
-knows which frequency bands and time segments are contaminated.  The search can
-then address that section of data, this could mean removing that section of
+characterisation.  The first is identifying the artefact such that contaminated frequency bands and time segments can be passed on to a search.  These segments can then be addressed, this could mean removing that section of
 data or using more sophisticated techniques to deal with the artefact
 \citep{pankow2018MitigationInstrumental}.  The second task is to find the
 instrumental or environmental source of the artefact.  If the source of the artefact is found, it can
@@ -48,8 +46,8 @@ artefacts.  There are many classes of
 instrumental line spanning a range from narrow, fixed frequency spectral
 artefacts to broader ($<0.1$ Hz) features which have a time varying frequency
 known as wandering lines.  For many of these lines, it is difficult to
-distinguish them from an astrophysical signal.  They affect search methods in
-two main ways.  They can cause the search to produce outliers which are then
+distinguish them from an astrophysical signal, making it difficult for astrophysical searches. 
+They affect \gls{CW} search methods in three main ways.  They can cause the search to produce outliers which are then
 considered as \gls{GW} candidates.  Extra efforts then have to be made to
 analyse these outliers further.  If the line is close to or overlapping with the \gls{GW}
 frequency, then it can conceal the power of the \gls{GW}. 
@@ -58,12 +56,12 @@ In searches for the \gls{SGWB}, channel data from multiple detectors is cross-co
 If there is a noise source such as an instrumental line which is coherent between the detectors, this will show up as an excess in the cross-correlation statistic\citep{covas2018IdentificationMitigation}.
 Any noise source which is local to both the detectors could then be visible in this cross-correlation.
 It is therefore crucial to understand the structure and origin of these lines when performing a search for
-\gls{GW}, specifically \gls{CW} and stochastic searches.
+\gls{GW}, specifically for \gls{CW} and stochastic searches.
 
 %
 % What lines look like and how the appear in the GW channel
 
-Some instrumental lines are clearly visible when looking at a \gls{ASD} or
+Some instrumental lines are clearly visible when looking at an \gls{ASD} or
 \gls{PSD} of the \gls{LIGO} detectors. Figure \ref{detchar:line:psd} shows the
 \gls{ASD} for \glspl{LIGO} Hanford and Livingston detectors during their first
 observing run (O1) \citep{GWOpen}. This clearly shows peaks which are
@@ -127,7 +125,7 @@ listed below:
 	It is therefore important to understand and correct for this feedback loop.
 	The primary method for calibrating this is known as a photon calibrator \citep{karki2016AdvancedLIGO}.
 	This applies a power modulated laser to the test mass, where the periodic force from radiation pressure appears as a calibration line in the detectors spectrum.
-	This is then applied at a range of frequency from a few Hz to several kHz \citep{karki2016AdvancedLIGO}.
+	This is then applied at a range of frequencies from a few Hz to several kHz \citep{karki2016AdvancedLIGO}.
 	This can then be used along with other methods to calibrate the feedback loop \citep{ligoscientificcollaboration2017CalibrationAdvanced,coughlin2010NoiseLine,tuyenbayev2016ImprovingLIGO}.
  
 \end{description}
@@ -142,20 +140,20 @@ mitigation of these lines.
 %
 % How lines affect CW searches
 
-These lines have a large effect on all searches for \glspl{CW}, the lines can cause outliers in a search or can hide the \glspl{CW} power if the frequencies overlap or are close to the astrophysical frequency.
+Instrumental lines have a large effect on all searches for \glspl{CW}, the lines can cause outliers in a search or can hide the \glspl{CW} power if the frequencies overlap or are close to the astrophysical frequency.
 Searches for long duration \glspl{CW} are particularity sensitive to this type of artefact.  As described in
 Sec.~\ref{searchcw}, \glspl{CW} are long duration signals with a slowly varying
 frequency.  In the case of an isolated neutron star, the signal which is
 searched for is a narrow-band sinusoid with a slowly varying frequency, where the frequency can be Doppler modulated by
 the earth's rotation and orbit, and the amplitude is modulated by the antenna pattern of the detector as the earth rotates. For certain areas of parameter space, such as a sky position
 close to the poles of the earth's orbit, the astrophysical signal of an isolated neutron star can
-appear very similar to a narrow band fixed frequency instrumental line. The affect of many of these lines can be mitigated by using multiple detector data. If a signal
+appear very similar to a narrow band fixed frequency instrumental line. The affect of many of these lines can be mitigated by using multiple detectors data. If a signal
 appears in one detector and not the others, then it is likely that the signal
 is from an instrumental line and not an astrophysical source.  These
 contaminated frequency bands can either be removed or a statistic similar to
 that described in Sec.~\ref{soap:las} or \citep{keitel2014SearchContinuous} can
 be used to limit their effect.  However, there are many examples of
-instrumental line which appear at the same or similar frequencies in multiple
+instrumental lines which appear at the same or similar frequencies in multiple
 detectors.  These pose a real challenge to some \gls{CW} searches, and require
 a substantial investigation to limit their affect.
 
@@ -168,13 +166,13 @@ a substantial investigation to limit their affect.
 % into to why lines are monitored
 
 When a detector is running, it is very important to identify instrumental lines
-and monitor them.  The source of the line can potentially be located and its source can be found, or the line can be flagged such that astrophysical searches can avoid outliers near that frequency.  
-The astrophysical searches use data from the \gls{GW} channel, therefore, the aim in to limit the affect of instrumental lines in this channel.
+and monitor them.  The source of the line can potentially be located and its cause mitigated, or the line can be flagged such that astrophysical searches can avoid outliers near that frequency.  
+The astrophysical searches use data from the \gls{GW} channel, therefore, the aim is to limit the affect of instrumental lines in this channel.
 
 %
 % Auxiliary channels 
 In addition to the \gls{GW} channel, the detector
-records many different channels known as auxiliary channels.  These channels
+records many others known as auxiliary channels.  These channels
 monitor many components of the detector, and importantly are not sensitive to
 \glspl{GW}.  Many of the channels useful for line searches are the outputs of \glspl{PEM}.
 \glspl{PEM} include sensors such as seismometers, temperature sensors,
@@ -192,15 +190,14 @@ that piece of electronics further to identify how it couples in.
 %
 % tools to monitor all the channels
 
-There are a number of tools which a team of people use to monitor these spectral lines.
+There are a number of tools which teams of scientists use to monitor these spectral lines.
 A summary of the results from these investigations for the first two observing runs of \gls{LIGO} can be found in
 \citep{covas2018IdentificationMitigation}.  Some of the tools used to monitor these lines are
 described below.
 
 \begin{description}
 	\item[Fscan] \Glspl{FFT} are taken of the raw detector data, typically these are 1800s long, for all of the auxiliary channels as well as the \gls{GW} channel.
-	The \glspl{FFT} are then averaged over a day and time-frequency spectrograms
-	are generated. After known lines such as Violin modes and power lines are
+	The power in each \gls{FFT} frequency bin is then normalised to a running median and then averaged over the set of \glspl{FFT} \citep{coughlin2010NoiseLine}.  After known lines such as Violin modes and power lines are
 	subtracted, noise lines can be identified. A threshold can be set where spectrogram powers which exceed this threshold are flagged as a line. These
 	can then be compared across multiple different channels. More detail on how the
 	lines are identified can be found in \citep{coughlin2010NoiseLine}.
@@ -240,7 +237,6 @@ sections describe how the SOAP search described in chapter \ref{soap} can be use
 as an extra tool to aid in the identification and monitoring of instrumental
 lines.
 
-\clearpage
 
 %%%%%%%%%%%
 %%%%%%%%%%%
@@ -270,15 +266,15 @@ instrumental line.
 Figure \ref{detchar:soap:astrowander} shows a broad and wandering line during the O2 observing run, where the line in H1 is causing the SOAP search to mistake the track for an astrophysical signal.
 This is because the SOAP line-aware statistic from Sec.~\ref{soap:las} finds
 areas of higher power which are consistent between detectors. These types of line are difficult to mitigate in an astrophysical
-search as there is consistent higher \gls{SFT} power in both the broad line and the noise in the other detector.
+search as there is consistent high \gls{SFT} power in both the broad line and the noise in the other detector.
 However, this has a side effect of being useful to identify the
 instrumental lines themselves.
-In this section, I will explain the setup of the search to identify
+In this section, I will explain the setup of the SOAP search to identify
 instrumental lines.
 
 It is often useful to search through the auxiliary channels when trying to
 identify the source or a line. 
-This would involve using out multiple detector search in Sec.~\ref{soap:multidet} to identify lines which are coincident between channels. 
+This would involve using the multiple detector search described in Sec.~\ref{soap:multidet} to identify lines which are coincident between channels. 
 The aim of this section however, is to flag potential lines within the \gls{GW} channel in individual detectors.
 Whilst we have developed a statistic in Eq.~\ref{soap:las:stat} to penalise line like signals, we revert to using the
 `normalised' \gls{SFT} power as the statistic in the SOAP search. The single
@@ -289,9 +285,9 @@ Therefore, we allow an equal probability for the track to jump in any
 direction, but limit it to change by one frequency bin after each time
 segment.  
 
-In the astrophysical search, the \glspl{SFT} were summed over one day to take average over the antenna pattern and increase the \gls{SNR} in a given frequency bin.
-However, in the line search, there is not antenna pattern to average over and the majority of instrumental lines are expected to be stronger than astrophysical signals.
-Therefore the search is run over normalised 1800s long \glspl{SFT}, which reduces the preprocessing time of the search.
+In the astrophysical search, the \glspl{SFT} were summed over one day to take the average over the antenna pattern such that the \gls{SNR} in each detector is similar and to increase the \gls{SNR} in a given frequency bin.
+However, in the line search, there is not antenna pattern to average over and the majority of instrumental lines are expected to have a higher \gls{SNR} than astrophysical signals.
+Therefore the search is run over normalised 1800s long \glspl{SFT}, which also reduces the preprocessing time of the search.
 The 1800s \glspl{SFT} are also generated as part of the Fscan search described in Sec.~\ref{detchar:monitor}, therefore, this reduces the computational cost of generating \glspl{SFT} as part of this search. 
 For this line search, we split the 1800 s \glspl{SFT} into 0.1 Hz wide sub-bands and run the single detector search on each sub-band. 
 The search then returns the same outputs as described in
@@ -309,7 +305,7 @@ Initially, one can look at the distribution of the Viterbi statistics for each s
 	\label{detchar:soap:rankedstats}
 \end{figure}
 %
-This shows that the majority of band fall within a single distribution, where larger values of the Viterbi statistic are good indicators that there is an instrumental line present within the sub-band.
+This shows that the majority of sub-bands fall within a single distribution, where larger values of the Viterbi statistic are good indicators that there is an instrumental line present within the sub-band.
 One can the define a list of potential instrumental lines by taking the top 10\% of Viterbi statistics. 
 These can then be investigated further by looking into other outputs of the SOAP search, including the Viterbi map and the Viterbi track.
 
@@ -326,7 +322,7 @@ The aim is to use the information contained within these plots and the equivalen
 There are certain features in each of the panels in, for example, Fig.~\ref{detchar:soap:noiseplot} which indicate that SOAP has identified a potential line within a sub-band or not.
 The Viterbi track in Fig.~\ref{detchar:soap:noiseplot} appears to be randomly wandering around the full width of the sub-band, implying that there is no strong signal within the band which SOAP can identify.
 The Viterbi statistic also falls in the main distribution of statistics in Fig.~\ref{detchar:soap:rankedstats}, whilst this would not show up in the to 10\% of Viterbi statistics, I describe it here to show the differences in the outputs compared to when there is a line.
-The second panel of Fig.~\ref{detchar:soap:noiseplot} which shows the Viterbi map, contains no areas of high \joe{log?} probability and no clear long duration features. These features will become apparent in Fig.~\ref{detchar:soap:lineplot} and \ref{detchar:soap:wanderplot}.
+The second panel of Fig.~\ref{detchar:soap:noiseplot} which shows the Viterbi map, contains no areas of high log probability and no clear long duration features. These features will become apparent in Fig.~\ref{detchar:soap:lineplot} and \ref{detchar:soap:wanderplot}.
 The normalised \gls{SFT} power along the Viterbi track shows values which are consistent with a $\chi^2$ distribution with two degrees of freedom, which has a mean of two, implying that the \gls{SFT} power along the track follows the expected noise distribution.
 Each of these indicate that there is no line present within this sub-band.
 %
@@ -354,8 +350,8 @@ If we then look at the outputs of Fig.~\ref{detchar:soap:lineplot}, we see a Vit
 This indicates that there is areas of \gls{SFT} power around this frequency which is higher than other areas in the sub-band.
 In the Viterbi map in the second panel of Fig.~\ref{detchar:soap:lineplot}, the log-Viterbi probability is contained within a narrow frequency range around the Viterbi track.
 This again indicates that there is a narrow spectral line within this sub-band.
-Finally the third panel shows the \gls{SFT} power along the Viterbi track, which no longer follows a $\chi^2$ distribution by had a large excess of power.
-Each of these features a strong indicators that there is an instrumental line present within this sub-band.
+Finally the third panel shows the \gls{SFT} power along the Viterbi track, which no longer follows a $\chi^2$ distribution but had a large excess of power.
+Each of these features are strong indicators that there is an instrumental line present within this sub-band.
 %
 \begin{figure}[hpt]
 	\centering
@@ -382,25 +378,26 @@ a line which wanders in
 frequency as is moves though time.  This can be seen in the frequency
 track, which here does not have much spread, however, the frequency of the
 track changes with time.  There are also areas where the track switched to a separate spectral artefact within the same
-band. This is where there are, for example, two instrumental lines within the same frequency band. The Viterbi algorithm will identify both of these and try to find a single track through the time-frequency spectrogram which given the highest sum of \gls{SFT} power. This could involve the algorithm using power from both of the lines at different times to build more \gls{SFT} power, the optimal track would then lie on both lines at different times. Fig.~\ref{detchar:soap:wanderplot} shows this discrete jump around
-January.~\chris{you have to allow the reader to understand these concepts
-slowly. You are very abruptly introducing the concept of tracks switching but
-you must explain in more detail what you mean by this.} 
+band.  SOAP only returns a single track which follows that of the highest \gls{SFT} power, if there are multiple spectral artefacts within a sub-band, then SOAP will identify the areas of high power in each which correspond to the highest sum of \gls{SFT} power.
+This means that the track can, and does, switch between different spectral artefacts accumulating the highest \gls{SFT} power from each.
+Fig.~\ref{detchar:soap:wanderplot} shows this discrete jump around
+January.
 
 \clearpage
 
 The Viterbi statistic is used as an initial flag for a sub-band which could potentially contain an instrumental line.
 The equivalent plots as in Fig.~\ref{detchar:soap:noiseplot}, \ref{detchar:soap:lineplot} and
 \ref{detchar:soap:wanderplot} for each sub-band can then be used for further investigation, where this investigation can provide a list of potential lines. 
-We generated a list of potential instrumental lines for \glspl{LIGO} third observing run O3 between 40 and 500 Hz.
+We generated a list of potential instrumental lines for \glspl{LIGO} third observing run (O3) between 40 and 500 Hz.
 This line list can then be compared to existing O3 \gls{LIGO} line lists which are generated using the searches described in Sec.~\ref{detchar:monitor}.
 There are currently two line lists produced by \gls{LIGO} scientists, one which contain lines where the source has been identified and one where the source is not known.
 Known lines can be accessed at {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/index.html}}
 and unknown lines at {\tt \url{https://ldas-jobs.ligo-wa.caltech.edu/~evan.goetz/CW/O3aLines/H1/Unidentified/index.html}} or are both stored in a git repository {\tt \url{https://git.ligo.org/CW/instrumental/aLIGO-lines-combs}}. 
 
 These line lists can be compared to the list of lines generated by SOAP to compare its performance to existing techniques.
-SOAP detected 55\% of the lines of known origin and 30\% of the lines where the origin is not known.
-Of the lines of known origin, all of these were line from the ``Calibration line mixing'' or ``Calibration line non-linearity'', upon further investigation of these frequency bands, we found that these lines are short duration $< 1$ week, where some examples of these can be seen in Fig.~\ref{detchar:soap:calibrationlinemixing}.
+For the SOAP search we count the line as detected if the sub-band which contains the line has an associated Viterbi statistic which crosses the 10\% threshold from Fig.~\ref{detchar:soap:rankedstats}.
+SOAP then detected 55\% of the lines of known origin and 30\% of the lines where the origin is not known.
+Of the lines of known origin, all of those which SOAP did not identify were from ``Calibration line mixing'' or ``Calibration line non-linearity'' \joe{woudl be nice to have a reference, cant find much rn}, upon further investigation of these frequency bands, we found that these lines appear as short duration ($< 1$ week) signals in SOAP's output, where some examples of these can be seen in Fig.~\ref{detchar:soap:calibrationlinemixing}.
 SOAP struggles to find short duration signals as is the signal is weak it cannot build up enough \gls{SNR} to pass the detection threshold, however, the line is still visible when investigating the Viterbi maps and Viterbi track. 
 %
 \begin{figure}[hpt]
@@ -427,8 +424,8 @@ SOAP struggles to find short duration signals as is the signal is weak it cannot
 \end{figure}
 %
 
-Of the unknown line list, whilst we only detected 30\% of those on the \gls{LIGO} line list, similar to before, some of the Vitebri statistics fell below the detection threshold for this test but the Viterbi maps and Viterbi tracks indicate an instrumental line is present, an example of this can be seen in Fig.~\ref{detchar:soap:unknown:1} and \ref{detchar:soap:unknown:2} .
-For some other line on the unknown line list, such as in Fig.~\ref{detchar:soap:unknown:4}, there is no indication of an instrumental line in the SOAP outputs, however, in over 50\% of the undetected lines, there is some evidence of a line on the other outputs of SOAP.
+Of the unknown line list, we 30\% of those on the \gls{LIGO} line list were in a sub-band which had a Viterbi statistic which crossed our detection threshold.  However, Viterbi statistics from sub-bands which contained these unknown lines and fell below the detection threshold showed signs in the Viterbi maps and Viterbi tracks which indicate an instrumental line is present. An example of this can be seen in Fig.~\ref{detchar:soap:unknown:1} where the in the second half of the observing run, the width of the Viterbi track narrows indicating that a narrow signal could be present. In the Viterbi maps and increase in the concentration of the log-probability around this frequency can be seen, again indicating a signal is present. Similar features can be see in Fig.~\ref{detchar:soap:unknown:2} and \ref{detchar:soap:unknown:3}.
+For some other lines on \glspl{LIGO} unknown line list, such as in Fig.~\ref{detchar:soap:unknown:4}, there is no indication of an instrumental line in the SOAP outputs, however, in over 50\% of the undetected lines which have been investigated further, there is some evidence of a line in the other outputs of SOAP.
 %
 \begin{figure}[hpt]
 	\centering
@@ -453,8 +450,13 @@ For some other line on the unknown line list, such as in Fig.~\ref{detchar:soap:
 	\label{detchar:soap:unknown}
 \end{figure}
 %
-Therefore, one possible addition to this lines search could be a method similar to that in chapter \ref{machine}, where the Viterbi maps and Viterbi tracks are trained on examples of instrumental lines. 
-This could then be used a detection statistic, and I would expect it to out perform the Viterbi statistic.
+
+Therefore, one possible addition to the SOAP line search could be a method similar to that described in Chapter \ref{machine}, where here the Viterbi maps and Viterbi tracks associated with instrumental lines would be used as training data for a neural network. 
+The neural networks could then be used to classify sub-bands into containing an instrumental line or Gaussian noise.
+The difficulty with using these Viterbi maps as training examples is that we do have a set of training data with known labels. 
+We could generate these labels from each sub-band in real data which contains an instrumental line, but this would require a large effort investigating the many sub-bands. Another method could be simulating instrumental lines, however this can be difficult due to the large variation in the types of instrumental line. Each of these types would need some functional representation such that they be generated, which would also need investigation in to the many types of line.
+Methods such as in \citep{zevin2017GravitySpy} have had success using machine learning to classify short duration noise artefacts (glitches). This project uses time-frequency representations of the glitches that have been classified by volunteers from the public as training data for machine learning algorithms.
+A similar approach could be used to classify the outputs of the SOAP search, where labels can be applied to sub-bands such that a machine learning algorithm can be trained.
 
 Whilst SOAP did not identify all of the same lines as the methods in Sec.~\ref{detchar:monitor}, it did identify a large number of lines which did not appear in either the known of unknown line list.
 For example, in Fig.~\ref{detchar:soap:newlines:1}, SOAP identified a line at $\sim 64.0$ Hz which does not currently appear in the \gls{LIGO} line list.
