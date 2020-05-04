@@ -317,19 +317,16 @@ parameters
 \end{equation}
 %
 and generate the associated spectrograms for the \gls{LIGO} detectors H1 and
-L1~\chris{do you not want to show these?}. The SOAP search from
+L1 shown in Fig.~\ref{par_est:results:freqtrack}. The SOAP search from
 Chapter \ref{soap} is then run using the line-aware statistic with the same
 parameters as given in Tab.~\ref{soap:results:parameters}, where the multi detector search returns a single frequency track. The output Viterbi track is then plotted with the \gls{CW} frequency track in Fig.~\ref{par_est:results:freqtrack}. 
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/example_freqtrack.pdf}
-    \caption[Frequency track of injected signal]{ Example simulated \gls{CW}
-frequency track using parameters in Eq.~\ref{par_est:results:examplepars} and the
-Viterbi track recovered from the simulation. The track is sampled once per day,
-where the oscillation visible here is due to the Doppler modulation of the
-Earth's orbit.~\chris{For reproducibility what is the actual start time of this
-analysis (GPS).}} \label{par_est:results:freqtrack}    
+    \caption[Frequency track of injected signal]{ Example simulated \gls{CW} simulation in \gls{LIGO} detectors H1 and L1 using parameters in Eq.~\ref{par_est:results:examplepars}. The simulated frequency track of the signal is shown as the black line. The multi detector analysis returns a single frequency track (Viterbi track) which is the red line shown overlaid in both detectors.
+    Both the Viterbi track and the simulated frequency track are shifted up in frequency bu 0.01 Hz to make the signal visible in the spectrogram.
+    The track is sampled once per day, where the oscillation visible here is due to the Doppler modulation of the Earth's orbit.} \label{par_est:results:freqtrack}    
 \end{figure}
 %
 In this case the Viterbi track can be seen to closely follow the simulated
@@ -351,11 +348,8 @@ definition of the likelihood, this will described more in Sec.~\ref{par_est:resu
 an example of the posterior distribution of a signal with \gls{SNR} 151. Each
 panel shows the marginal distributions for each parameter, where the parameters
 used for the simulation are marked in orange. In this example each of the
-posteriors match well with the injected parameters, but the sky position is
-bimodal.~\chris{this isn't a "but" statement. Things can be bimodal and in this
-case the truth lies inside one of the modes so all is good. If you are to make
-any special statement is should be on the SNR. Also what are the confidence
-levels in your contours - please state these.}}
+posteriors match well with the injected parameters.
+The contours on each of the marginal distributions are at confidence levels of 10,50 and 90 \%.}
 \label{par_est:results:example_posterior}    
 \end{figure}
 %
@@ -382,12 +376,9 @@ at these two locations, where this is seen in
     \caption[Example of posterior of sky position in ecliptic frame]{This
 figure shows an example of the marginal posterior distribution of the sky
 position in the ecliptic frame
-$\alpha^{\rm{ecliptic}},\delta^{\rm{ecliptic}}$~\chris{be consistent - you used
-$\gamma,\beta$ in the plot and the text} of a signal with \gls{SNR} 144. The
+$\gamma, \beta$ of a signal with \gls{SNR} 151. The
 overlaid panel is a zoomed area around the posterior distribution, where the
-orange marker shows the injected parameters.~\chris{no need to have the legend
-in the plot. Also what are your contour definitions? You should state these in
-all posterior plots}} \label{par_est:results:example_skypos}   
+orange marker shows the injected parameters. The contours in are defined at 10, 50 and 90 \% confidence.} \label{par_est:results:example_skypos}   
 \end{figure}
 %
 
@@ -425,10 +416,9 @@ The Viterbi statistics for each of these injections can be seen in Fig.~\ref{par
 \fi
 
 
-\subsubsection{\label{par_est:results:simulations:ppplot}$p-p$ plot}
+\subsubsection{\label{par_est:results:simulations:ppplot}$p$--$p$ plot}
 
-The $p-p$ plot~\chris{You're using P-P and p-p when you write p-p plot - choose
-one. Also, since p is a probability you could use $p$--$p$ plot.} is a
+The $p$--$p$ plot is a
 mechanism to validate the effectiveness of the Bayesian model and computation
 using many simulations.  From Sec.~\ref{par_est:results} we have the output
 posterior distribution $p(\bm{\theta} \mid \bm{V}, I)$, or more correctly we
