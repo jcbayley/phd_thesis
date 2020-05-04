@@ -21,7 +21,7 @@ git-tag:
 	./git-tag.sh
 
 main.pdf: main.tex $(BIBLIO)
-	pdflatex $(@:.pdf=) && biber $(@:.pdf=) && pdflatex $(@:.pdf=) && makeglossaries $(@:.pdf=) &&pdflatex $(@:.pdf=) && pdflatex $(@:.pdf=)
+	lualatex $(@:.pdf=) && biber $(@:.pdf=) && lualatex $(@:.pdf=) && makeglossaries $(@:.pdf=) && lualatex $(@:.pdf=) && lualatex $(@:.pdf=)
 
 %.pdf: %.eps
 	epstopdf --outfile=$@ $(@:.pdf=.eps)

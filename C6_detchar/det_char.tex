@@ -13,9 +13,8 @@ this distribution.  These artefacts can negatively affect many searches for
 \glspl{GW} as they can be easily mistaken for a real \gls{GW} signal.  Some of
 the potential sources of these artefacts have been mentioned in
 Sec.~\ref{intro:detector:noise}.  There are many different classes of artefact,
-including: glitches \citep{} \joe{referecnes}, which are short duration broad band bursts in
-power, and
-instrumental lines \citep{covas2018IdentificationMitigation}, which are long duration narrow-band signals.  To conduct a
+including: glitches \citep{aasi2015CharacterizationLIGO,abbott2016CharacterizationTransienta}, which are short duration broad band bursts in
+power, and instrumental lines \citep{covas2018IdentificationMitigation}, which are long duration narrow-band signals.  To conduct a
 reliable search there are two main tasks which are necessary for detector
 characterisation.  The first is identifying the artefact such that contaminated frequency bands and time segments can be passed on to a search.  These segments can then be addressed, this could mean removing that section of
 data or using more sophisticated techniques to deal with the artefact
@@ -333,7 +332,7 @@ Each of these indicate that there is no line present within this sub-band.
 quantities, the Viterbi maps, the Viterbi track and the Viterbi statistic. The
 Viterbi track is shown above overlaid onto the 1800s \gls{SFT} power spectrum
 including the detector gaps for \glspl{LIGO} Hanford detector (H1) in its
-third observing run (O3) \citep{}. This track is an indicator as to what the SOAP search has identified within the band, where this track indicates that SOAP has identified noise and no signal. The returned Viterbi statistic is also consistent with that of noise.
+third observing run (O3). This track is an indicator as to what the SOAP search has identified within the band, where this track indicates that SOAP has identified noise and no signal. The returned Viterbi statistic is also consistent with that of noise.
 The Viterbi map is another visualisation of the sub-band, how to interpret this
 has been explained in chapters \ref{soap} and \ref{machine}. The final panel is a way to visualise how the \gls{SFT}
 power changes along the Viterbi track. Also on this plot is an estimate of the
@@ -446,7 +445,7 @@ For some other lines on \glspl{LIGO} unknown line list, such as in Fig.~\ref{det
 		\includegraphics[width=\textwidth]{C6_detchar/track_F70_15_70_25.png}
 		\caption{\label{detchar:soap:unknown:4}}
 	\end{subfigure}
-	\caption[lines from unknown sources]{Examples of unknown instrumental lines in H1 during the O3 run which were not identified by SOAP using the Viterbi statistic. }
+	\caption[lines from unknown sources]{Examples of unknown instrumental lines in H1 during the O3 run which were not identified by SOAP using the Viterbi statistic. These show the 1800s spectrograms for H1 in the top panel and the Viterbi maps in the second panel. The final panel shows the \gls{SFT} power along the Viterbi track and the mean noise floor in this band.  Fig.~\ref{detchar:soap:unknown:1},\ref{detchar:soap:unknown:1} and \ref{detchar:soap:unknown:1} have areas of the Viterbi track which are narrow and are not spread over the entire band, indicating a non Gaussian signal is present. In Fig.\ref{detchar:soap:unknown:1} and \ref{detchar:soap:unknown:1} the Viterbi maps show some areas of high log-probability which are difficult to see at this resolution, hence the uniform appearance. }
 	\label{detchar:soap:unknown}
 \end{figure}
 %
@@ -605,38 +604,3 @@ The aim of this tool is to be used alongside existing methods described in Sec.~
 \joe{just a little more}
 
 
-\clearpage
-
-%%%%%%%%%%%
-%%%%%%%%%%%
-\section{Armadillo}
-%%%%%%%%%%%
-%%%%%%%%%%%
-
-Armadillo was a project which aimed to develop a diagnostics tool to be used at the \gls{LIGO} detectors.
-
-\begin{itemize}
-	\item LIGO has large control systems
-	\item these can be generally split into two parts: Analogue and digital control systems
-	\item Armadillo was a tool that focusses on the digital control system
-	\item Having an understanging of what happens to a signal as it passes through the control system is important it can help identify source of glitches
-	\item one way to do this is to look at the transfer funtion of a possible signal path 
-	\item Armadillo aimed to find a simple way to return the transfer function between any two points in the control system.
-\end{itemize}
-
-
-To find the transfer function between any two points in the digital control system, one needs to know all the possible paths a signal could take between those two points and each of the component filters which lie along the paths.
-The models of the digital control system for \gls{LIGO} are stored in Simulink diagrams \citep{}.
-These generally 
-
-\begin{itemize}
-	\item May components are need to explain a transfer function
-	\item first step is to load all the models from simulink diagrams
-	\item these contain of many blocks and connections see Fig ....
-	\item each block can be a single filter or a submodel which contains many more filters
-	\item there is then a large number of filters and possible paths
-	\item for each filter, one needs to load the `FOTON' filter files which contain the coefficients 
-	\item there are also blocks which are matricies which only allow a signal to pass along a certain path at a given time
-	\item These are defined int EPICS by the user, and their values at any time are stored
-	\item 
-\end{itemize}
