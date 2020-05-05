@@ -186,17 +186,17 @@ this problem.
 The likelihood describes the probability of getting the data given a signal, where in this case our data is the Viterbi track $\bm{V}$ and our signal is the model frequency track $\bm{M}(\bm{\theta})$. 
 The aim is to find this probability distribution such that we can evaluate it for any model parameters $\bm{\theta}$.
 
-We look at the deviation in frequency of the Viterbi track from a model frequency track given some parameters $\bm{\theta}$, i.e. $\bm{M}(\bm{\theta}) - \bm{V}$.
+We define our likelihood from the deviation in frequency bins of the Viterbi track from a model frequency track given some parameters $\bm{\theta}$, i.e. $\bm{M}(\bm{\theta}) - \bm{V}$.
 If the simulated \gls{CW} signal has an infinitely large \gls{SNR}
 then the Viterbi track would follow the \gls{CW} frequency track exactly, giving a delta function with 0 variance for the deviation of the two frequency tracks. If conversely, the \gls{SNR} was zero then the Viterbi track would
 wander randomly through the frequency band independently of the \glspl{CW} frequency track,
 meaning that the deviation of the two frequency tracks would have a variance $\mathcal{O}(1)$ width of the frequency band.
 The distribution of these deviations is then dependent on the \gls{SNR} $\rho$ of the signal.  
 
-We can also think about how the Viterbi track will deviate from the model frequency for different values of the parameters $\bm{\theta}$.
+We can also think about how the Viterbi track will deviate from the model frequency track for different values of the parameters $\bm{\theta}$.
 For a fixed \gls{SNR} we assume that the deviation of the two tracks is independent of the parameters which define the frequency evolution of the signal. 
 For simplicity, we also assume that the deviation of the tracks is independent of the track position.
-Given that the distribution of the deviations is difficult to find analytically, we calculate it empirically using many simulations of \gls{CW} signals and their associated Viterbi tracks. 
+Given that the distribution of the deviations is difficult to find analytically, we calculate it empirically using the deviations of the two frequency tracks for many simulated of \gls{CW} signals. 
 
 In Sec.~\ref{machine:results} we generated $\mathcal{O}(10^{4})$ simulated
 \gls{CW} signals in Gaussian noise between 40 and 500 Hz, which had \gls{SNR}
@@ -207,19 +207,16 @@ SOAP search using the line-aware statistic with parameters from
 Sec.~\ref{soap:results} returns a Viterbi track associated with the simulated
 parameters.  As we have assumed the distribution of the deviations is independent of the position in the track, we can calculate the difference between the Viterbi track and model frequency track $M_i(\bm{\theta}) - V_i$ for each
 element in the track and each simulation.
-Where we can assume that the distribution of these deviations at a fixed \gls{SNR} is the likelihood. 
+At a fixed \gls{SNR}, the distribution of these deviations is the likelihood $\mathcal{L}$. 
 
 We can estimate the likelihood distribution using a \gls{KDE}
-of all our values of $M_i - V_i$. 
-The \gls{KDE} is a method to estimate a prpbability density function \joe{here}
-~\chris{OK, but that came a bit fast. What is
-this KDE thing and how do we suddenly get the likelihood from it - more
-explanation!}.  
+of all our deviations $M_i - V_i$, where \gls{KDE} is a method to estimate a probability density function of a random variable.
+As the track deviations are integer frequency bin widths, the \gls{KDE} estimates the density of deviations at $0, \pm 1, \pm 2 .... \pm W$, where $W$ is the width of the frequency band in bins.
 
 In this case our likelihood is also dependent on \gls{SNR},
 therefore, we split our simulations into bins of width \gls{SNR}
-2 between 20 and 200 giving $\sim 300$
-simulated tracks within each \gls{SNR} bin.  Figure
+2 between 20 and 200. This gives us $\sim 300$
+simulated tracks, each with $\sim 400$ segments, within each \gls{SNR} bin.  Figure
 \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a
 subset of the\gls{SNR} bins. The sharp peaks in the center of
 each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents
@@ -228,9 +225,8 @@ and the broader distributions represent areas of the Viterbi track has not
 identified the \gls{CW} track but is wandering randomly.  The sub plots in
 Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases
 the distribution is more closely centred around 0, i.e. the Viterbi and
-\gls{CW} tracks are similar, which is expected.~\chris{overall good but I think
-that the construction of the likelihood function needs more explanation. I am
-certainly not quite convinced that you're doing this right.}
+\gls{CW} tracks are similar, which is expected.
+
 %
 \begin{figure}[hpt]
     \centering
@@ -450,29 +446,24 @@ Plotting $P(\bm{q}_{\theta} > C)$ against $C$ for each parameter $\theta$, then
 shows the fraction of simulations which have a $q(\theta_{\rm{inj}})$ within
 some \gls{CI} $C$, this is known as a p-p plot.
 
-If the analysis is valid, i.e the marginal posterior distributions agree with
-the injected parameters~\chris{that's not the definition of a working analysis
-- the real argument is that if the p-p plot is diagonal then the Bayesian
-  probabilities can be trusted}, then this plot should follow a straight
+If the Bayesian posteriors can be trusted, then this plot should follow a straight
 diagonal line, indicated by the black line in
-Fig.~\ref{par_est:results:ppplot_example}.  If the marginal posterior
-distribution is shifted to right of the injected parameters, shown in the first
-panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the true value lies in
-the lower tail of the posterior for each~\chris{doesn't have to be for each
-simulation - could just be a random trend in one direction with most posteriors
-(not all) shifted up.} simulation, then the p-p plot will show a curve above
-the diagonal.  Similarly, if the marginal posterior distribution is shifted to
-left~\chris{same as previous comment} of the injected parameters, shown in the
-second panel of Fig.~\ref{par_est:results:ppplot_example}, i.e. the true value
-lies in the upper tail of the posterior for each~\chris{not each} simulation,
-then the p-p plot will show a curve below the diagonal.  If the posterior is
-under constrained shown in the third panel of
-Fig.~\ref{par_est:results:ppplot_example}, i.e. the posterior is wider than the
+Fig.~\ref{par_est:results:ppplot_example}.  If the the majority of the marginal posterior
+distributions are shifted to right of the injected parameters, i.e. the true value lies in
+the lower tail of the posterior for the majority of the simulations, then the p-p plot will show a curve above
+the diagonal, this is shown in the top left
+panel of Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the majority of the marginal posterior distributions are shifted to
+left of the injected parameters, i.e. the true value
+lies in the upper tail of the posterior for the majority of the simulations,
+then the p-p plot will show a curve below the diagonal, this is shown in the
+top right panel of Fig.~\ref{par_est:results:ppplot_example}.  If the posterior is
+under-constrained, i.e. the posterior is wider than the
 perfectly~\chris{again, not quite true - it can be wider then the perect
 posterior but to under constrain it's central value is not as scattered as the
 width would suggest} recovered posterior, then the curve will follow an S shape
 where the S is below the diagonal at $C < 0$.5 and above the diagonal at $C >
-0.5$.  Similarly, if the posterior is over constrained shown in the fourth
+0.5$. This is shown in the third panel of
+Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the posterior is over constrained shown in the fourth
 panel of Fig.~\ref{par_est:results:ppplot_example},i.e. the posterior is
 narrower than the perfectly recovered posterior~\chris{not quite true. It could
 be broader but it's central value would be scattered more broadly than it's
@@ -484,14 +475,13 @@ diagonal AND have the smallest credible intervals.}
 %
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{C5_parameter/ppplot_examples.pdf}
+    \includegraphics[width=0.9\linewidth]{C5_parameter/ppplot_examples.pdf}
     \caption[p-p plot examples]{This figure shows examples of p-p plots for
 posterior distributions which are shifted to the right (larger values of the
 parameter), to the left (smaller values of the parameter) and over and under
 constrained posteriors. The black curve shows the p-p plot when the posterior
 distribution is perfectly recovered, i.e. the confidence intervals follow a
-uniform distribution.~\chris{if possible you could make this a 2X2 plot since
-it looks a bit too compact compared to other plots in the thesis.}}
+uniform distribution.}
 \label{par_est:results:ppplot_example}
 \end{figure}
 
@@ -543,26 +533,25 @@ conservative results.}.
 %
 %
 
-If we assume that the estimated posterior distribution is correctly
-recovered~\chris{I would stop using language that compares to the "correct"
-posterior. Here all you want to say is that we assume the posterior contours or
-credible intervals are trustworthy}, i.e. it is not under constrained or
-shifted, then we can estimate the area of the sky which this method can
+If we assume that the posterior contours are trustworthy, i.e. we do not under constrain or
+shift out posterior, then we can estimate the area of the sky which this method can
 localise the source to.  To do this we can use our estimation of the marginal
 posterior distribution on the sky, and draw a contour on the posterior which
 contains 95\% of the probability.  The area contained within this contour is
 then the sky area which the source can be localised to at a 95\% confidence,
 this can be seen as the green contour in
 Fig.~\ref{par_est:results:sky_area_example}.  Similarly, a contour can be drawn
-at the values of the injected sky position parameters where the area within
-this contour can be found, this is shown as the red contour in
-Fig.~\ref{par_est:results:sky_area_example}~\chris{clunky language}. If the
+at the values of the injected sky position parameters, this is shown as the red contour in
+Fig.~\ref{par_est:results:sky_area_example}. 
+This contour defined the confidence which contains the injected parameter.
+
+If the
 contour at the injected parameter is much larger than the contour at 95\%
 confidence, then this implies that the posterior distribution is over
 constrained~\chris{well we already know from the p-p plot that the sky is
 under-constrained (which is good). This test is going to show you something
 else}.  These two areas are another measure of the validity and ability of this
-method to extract the ~\chris{sky?} parameters. 
+method to extract the sky parameters. 
 %
 \begin{figure}[ht]
     \centering
@@ -571,8 +560,7 @@ method to extract the ~\chris{sky?} parameters.
 Sec.~\ref{par_est:results:example_posterior}, the contour in sky position
 posterior is drawn for a 95\% confidence and the area which contains the
 injected sky position parameters. In this example the two contours are
-similar.~\chris{begs the question as to what are the black contours? I think
-they should be removed for clarity. To be fancy you could also plot the
+similar.~\chris{ To be fancy you could also plot the
 ecliptic curve on here to show the mirriring of the modes - just a
 suggestion.}} \label{par_est:results:sky_area_example}
 \end{figure}
@@ -586,8 +574,7 @@ more precise in your language describing this latter quantity.}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/sky_area_hist.pdf}
-    \caption[p-p plot for the CW simulations]{~\chris{fix short caption
-description here} A histogram is shown~\chris{strange language} of the sky area
+    \caption[histogram showing the area contained within 90\% confidence contours]{A histogram is shown~\chris{strange language} of the sky area
 which this method can localise a source to with 95\% confidence in square
 degrees and the sky area associated a contour on the posterior that passes
 through the injected parameter~\chris{super clunky description - tidy up}. The
@@ -642,25 +629,20 @@ and not EatH.}
 %
 %
 
-In this chapter I~\chris{fine to I but be consistent throughout the thesis. The
-papers actually set the precedent by using "we" I think.} describe a Bayesian
+In this chapter we describe a Bayesian
 analysis to extract the Doppler parameters $\alpha, \delta, f \dot{f}$ and
 \gls{SNR} $\rho$ of a potential \gls{CW} source from the Viterbi track which is
-output from the SOAP search in chapter \ref{soap}~\chris{your results are not
-output in a chapter. They are described in a chapter - be careful}. The aim of
+described in the SOAP search in Chapter \ref{soap}. The aim of
 this method is to provide estimates of the \gls{CW} parameters, and then use
-these to reduce the size of the parameter space for a more sensitive analysis
-such as Einstein@Home \citep{singh2016ResultsAllsky}~\chris{try another LVC
-example}. 
+these to reduce the size of the parameter space for a more sensitive fully coherent search. 
 
-In Sec.~\ref{par_est:bayes} the setup of the Bayesian network is described,
-where the input is a Viterbi track which is described~\chris{multiple
-described} in chapter \ref{soap}, and the output is a posterior distribution of
+In Sec.~\ref{par_est:bayes} we outline the setup of a Bayesian model,
+where the input is a Viterbi track which is described in Chapter \ref{soap}, and the output is a posterior distribution of
 the Doppler parameters of a \gls{CW} signal.  In this model, the likelihood is
 empirically calculated by simulating $\mathcal{O}(10^4)$ \gls{CW} signals and
 then recording the difference between the Viterbi track and \gls{CW} frequency
 track for multiple \gls{SNR} bands.  The histogram of these values is
-then~\chris{used to construct?} the likelihood of this method.  For each of the
+then used to construct the likelihood of this method.  For each of the
 parameters in the search, we assume a flat prior.  In
 Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations which had
 parameters drawn from the same prior as the Bayesian model.  In this section we
