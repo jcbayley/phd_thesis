@@ -215,51 +215,44 @@ As the track deviations are integer frequency bin widths, the \gls{KDE} estimate
 
 In this case our likelihood is also dependent on \gls{SNR},
 therefore, we split our simulations into bins of width \gls{SNR}
-2 between 40 and 200. This gives us $\sim 300$
-simulated tracks, each with $\sim 400$ segments, within each \gls{SNR} bin.  Figure
+2 between 40 and 200. Within each \gls{SNR} bin, this gives us $\sim 300$
+simulated tracks each with $\sim 400$ elements.  Figure
 \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a
 subset of the\gls{SNR} bins. The sharp peaks in the center of
-each sub plot in Fig.~\ref{par_est:bayes:likelihood:kde142} represents
+each \gls{KDE} in Fig.~\ref{par_est:bayes:likelihood:kde142} represents
 simulations where the Viterbi track is close to the simulated \gls{CW} track,
 and the broader distributions represent areas of the Viterbi track has not
-identified the \gls{CW} track but is wandering randomly.  The sub plots in
-Fig.~\ref{par_est:bayes:likelihood:kde142} show that as the \gls{SNR} increases
+identified the \gls{CW} track but is wandering randomly.  Figure \ref{par_est:bayes:likelihood:kde142} shows that as the \gls{SNR} increases
 the distribution is more closely centred around 0, i.e. the Viterbi and
 \gls{CW} tracks are similar, which is expected.
 
 %
-\begin{figure}[hpt]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/KDE_range_40_200.pdf}
     \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows
-the \gls{KDE} estimates of the probability density of the differences between
-the simulated (injected) \gls{CW} frequency track and the recovered Viterbi
-track for a number of \gls{SNR} ranges. The difference in the tracks is
+the \gls{KDE} estimates of the probability density of the deviation of the recovered Viterbi track from
+the simulated (injected) \gls{CW} frequency track for a number of \gls{SNR} ranges. The deviation of the track is
 measured in discrete frequency bins. Each \gls{KDE} is generated from $\sim
 300$ simulations which each have $\sim 400$ elements in their frequency tracks.
-This shows a subset of the binned likelihoods between the range of \gls{SNR} 50
-and 150.~\chris{stylistically you could tidy up the x-axis labels and you
-should really replace "count" with the actual KDE value. If you used subplot
-you could indicate the SNR bins in subcaptions.}} \label{par_est:bayes:likelihood:kde142}
+This shows a subset of the binned likelihoods between the range of \gls{SNR} 40
+and 200.} \label{par_est:bayes:likelihood:kde142}
     \end{figure}
 %
 
-This does introduce~\chris{shouldn't start a paragrpah like this - assuming
-what you were last talking about} one more parameter to search over in our
-Bayesian model, which is the \gls{SNR} $\rho$ of the signal.  The \glspl{KDE}
-$\mathcal{L}$ are then used to define the likelihood function $p(\bm{V} \mid
+The dependence of the likelihood on the \gls{SNR} introduces one more parameter to search over in our
+Bayesian model, which is the \gls{SNR} $\rho$ of the signal.  The likelihood is binned in \gls{SNR} with widths of $\rho_w = 2$ as described above, therefore any value of $\rho$ which lies in the range $\rho_c \pm \rho_w/2 $ uses the likelihood \gls{KDE} $\mathcal{L}_{\rho_c}$, where $\rho_c$ is the bin center.
+The \glspl{KDE} $\mathcal{L}_{\rho_c}$ are then used to define the likelihood function $p(\bm{V} \mid
 \bm{\theta}, \rho, I)$ in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model
 $\alpha, \delta, f, \dot{f}$ and $\rho$.  Our likelihood where we assume
 independent track elements for a given Viterbi track is
 %
 \begin{equation} 
 p(\bm{V} \mid \bm{\theta}, \rho, I) = \prod_{i =
-1}^{N} \mathcal{L}(M_i(\bm{\theta}) - V_i, \rho) , 
+1}^{N} \mathcal{L}_{\rho_c}(M_i(\bm{\theta}) - V_i) , 
 \end{equation} 
 %
-where $N$ is the length of the Viterbi track $\bm{V}$. \chris{It's not clear
-exactly how the SNR is dealt with here. You haven't mentioned any binning in
-which case you should index the KDE functions with an SNR dependent index.} 
+where $N$ is the length of the Viterbi track $\bm{V}$. 
 
 % Not currently doing this 
 \if
@@ -444,39 +437,32 @@ $[0,1]$.  If $q(\theta_{\rm{inj}})$ and therefore $\bm{q}_{\theta}$ follows a
 uniform distribution, then $P(\bm{q}_{\theta} > C) = C$ \citep{cook2006ValidationSoftware}.
 Plotting $P(\bm{q}_{\theta} > C)$ against $C$ for each parameter $\theta$, then
 shows the fraction of simulations which have a $q(\theta_{\rm{inj}})$ within
-some \gls{CI} $C$, this is known as a p-p plot.
+some \gls{CI} $C$, this is known as a $p$--$p$ plot.
 
 If the Bayesian posteriors can be trusted, then this plot should follow a straight
 diagonal line, indicated by the black line in
 Fig.~\ref{par_est:results:ppplot_example}.  If the the majority of the marginal posterior
 distributions are shifted to right of the injected parameters, i.e. the true value lies in
-the lower tail of the posterior for the majority of the simulations, then the p-p plot will show a curve above
+the lower tail of the posterior for the majority of the simulations, then the $p$--$p$ plot will show a curve above
 the diagonal, this is shown in the top left
 panel of Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the majority of the marginal posterior distributions are shifted to
 left of the injected parameters, i.e. the true value
 lies in the upper tail of the posterior for the majority of the simulations,
-then the p-p plot will show a curve below the diagonal, this is shown in the
+then the $p$--$p$ plot will show a curve below the diagonal, this is shown in the
 top right panel of Fig.~\ref{par_est:results:ppplot_example}.  If the posterior is
-under-constrained, i.e. the posterior is wider than the
-perfectly~\chris{again, not quite true - it can be wider then the perect
-posterior but to under constrain it's central value is not as scattered as the
-width would suggest} recovered posterior, then the curve will follow an S shape
+under-constrained, i.e. the injected parameters are scattered with a larger width than the posterior suggests, then the curve will follow an S shape
 where the S is below the diagonal at $C < 0$.5 and above the diagonal at $C >
 0.5$. This is shown in the third panel of
-Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the posterior is over constrained shown in the fourth
-panel of Fig.~\ref{par_est:results:ppplot_example},i.e. the posterior is
-narrower than the perfectly recovered posterior~\chris{not quite true. It could
-be broader but it's central value would be scattered more broadly than it's
-width would suggest}, then the curve will follow an S shape where the S is
+Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the posterior is over-constrained, i.e. the injected parameters have a narrower distribution than the posterior suggests,, then the curve will follow an S shape where the S is
 above the diagonal at $C < 0.5$ and below the diagonal at $C> 0.5$.~\chris{the
-p-p plot doesn't compare your results with the perfect posterior - it simply
+$p$--$p$ plot doesn't compare your results with the perfect posterior - it simply
 asks wherether your posteriors are consistent. The perfect posteriors would be
 diagonal AND have the smallest credible intervals.}
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\linewidth]{C5_parameter/ppplot_examples.pdf}
-    \caption[p-p plot examples]{This figure shows examples of p-p plots for
+    \caption[$p$--$p$ plot examples]{This figure shows examples of p-p plots for
 posterior distributions which are shifted to the right (larger values of the
 parameter), to the left (smaller values of the parameter) and over and under
 constrained posteriors. The black curve shows the p-p plot when the posterior
@@ -485,16 +471,16 @@ uniform distribution.}
 \label{par_est:results:ppplot_example}
 \end{figure}
 
-Using this information~\chris{which information - this is a new paragraph}, we
-can look at the p-p plot for the 200 simulations in this test, which is shown
-in Fig.~\ref{par_est:results:ppplot}.  We can see that for the parameters $f$
-and $\dot{f}$ we recover an over constrained~\chris{I would recommend
-hyphenating over and under-constrained throughout this section} posterior
+We can then generate the p-p plot for the 200 simulations in the test described in Sec.~\ref{par_est:results:simulations}, this shown
+in Fig.~\ref{par_est:results:ppplot}.  Using the information from Fig.~\ref{par_est:results:ppplot_example}, we can see that for the parameters $f$
+and $\dot{f}$ we recover an over-constrained posterior
 distribution.  For the \gls{SNR} parameter $\rho$, the recovered posterior is
 both shifted to the right and is over constrained, i.e. we assume higher
 \glspl{SNR} than perfectly recovered distribution.  For both the right
 ascension parameter $\alpha$ and the declination parameter $\delta$, we can see
-that we recover under constrained posterior distributions.  However, as the
+that we recover a mixture of an under-constrained and over-constrained posterior distribution.  
+
+However, as the
 modes are widely separated, if the true parameter lies between the two modes
 then it would return a \gls{CI} of $\sim 0.5$~\chris{I don't think you should
 focus on the bimodal aspect of the RA posterior. Being bimodal doesn't make it
@@ -512,15 +498,14 @@ explained in Sec.~\ref{par_est:results:simulations:skyarea}.
 signals described in Sec.~\ref{par_est:results}, which range between 40 and 200
 in \gls{SNR}. This describes how well the marginal posterior distributions for
 each parameter match the simulated parameter. The \gls{SNR}, frequency and
-frequency derivative are all over constrained distribution, i.e. narrower than
-the true distribution~\chris{not necessarily}, and the sky position parameters
-$\alpha,\delta$ are under constrained.} \label{par_est:results:ppplot}
+frequency derivative are over-constrained distributions and the sky position parameters
+$\alpha,\delta$ are under-constrained.} \label{par_est:results:ppplot}
 \end{figure}
 
 Each of the curves in Fig.~\ref{par_est:results:ppplot} indicate that the
 current analysis does not correctly reproduce the true posterior distribution.
 One likely reason for this could be our definition of the likelihood in
-Sec.~\ref{par_est:bayes:likelihood}, here to simplify the problem we assume
+Sec.~\ref{par_est:bayes:likelihood}, for example, to simplify the problem we assume
 that all track components are independent, this is not necessarily true and
 could contribute to the over constrained posterior
 distributions~\chris{possibly but it might just be that you're doing the
@@ -543,12 +528,10 @@ this can be seen as the green contour in
 Fig.~\ref{par_est:results:sky_area_example}.  Similarly, a contour can be drawn
 at the values of the injected sky position parameters, this is shown as the red contour in
 Fig.~\ref{par_est:results:sky_area_example}. 
-This contour defined the confidence which contains the injected parameter.
+This contour defines the confidence at which the injected parameter in contained.
 
-If the
-contour at the injected parameter is much larger than the contour at 95\%
-confidence, then this implies that the posterior distribution is over
-constrained~\chris{well we already know from the p-p plot that the sky is
+If the contour at the injected parameter is much larger than the contour at 95\%
+confidence, then this implies that the posterior distribution is over-constrained~\chris{well we already know from the p-p plot that the sky is
 under-constrained (which is good). This test is going to show you something
 else}.  These two areas are another measure of the validity and ability of this
 method to extract the sky parameters. 
@@ -568,59 +551,37 @@ suggestion.}} \label{par_est:results:sky_area_example}
 The contours and therefore their associated sky areas can be calculated for all
 of the simulations described in Sec.~\ref{par_est:results}. Figure
 \ref{par_est:results:sky_area} shows the histograms of the sky areas at 95\%
-confidence and sky areas which contain the injected parameters~\chris{could be
-more precise in your language describing this latter quantity.}.
+confidence and sky areas of the contour which contains the injected parameters.
 %
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/sky_area_hist.pdf}
-    \caption[histogram showing the area contained within 90\% confidence contours]{A histogram is shown~\chris{strange language} of the sky area
-which this method can localise a source to with 95\% confidence in square
-degrees and the sky area associated a contour on the posterior that passes
-through the injected parameter~\chris{super clunky description - tidy up}. The
-entire sky has $\sim 41253$ square degrees, therefore the sky area at 95\%
-confidence where 90\% of the sky areas are less than this value is 45
-deg$^2$.~\chris{again, super clunky. I don't know what you mean here. Also, the
-plots seem a bit squashed together vertically - maybe remove the x-axis label
-on the upper plot. It would be nice to share x-axis ranges but I see that that
-may be difficult.}}
+    \caption[histogram showing the area contained within 90\% confidence contours]{
+    	The top panel shows a histogram of the sky area which this method can localise a source to with 95\% confidence. This is the area of a contour which contains 95\% of the posterior distribution.
+    	The second panel shows the sky areas associated with a contour which is draw on the posterior through the injected parameter value. 
+    	From the first panel, we can say that 90\% of the time we can localise to a sky area less than 45 deg$^2$ with 95\% confidence, this is shown as the red 90\% confidence line in both panels.
+    	The true parameter however, is contained within the 95\% contour only 23\% of the time.}
 \label{par_est:results:sky_area} 
 \end{figure}
 %
 From the distributions in Fig.~\ref{par_est:results:sky_area} we can see that
 the sky areas which contain the injected parameters are larger by a factor of
 $\sim 10$ than those at 95\% confidence.  From this we see that the injected
-parameters fall within the 95\% confidence contour only 40\% of the time.  This
-implies that these posterior distributions are over constrained, and the first
+parameters fall within the 95\% confidence contour only 23\% of the time.  This
+implies that these posterior distributions are over-constrained, and the first
 panel showing the sky areas at 95\% confidence is overly optimistic.~\chris{but
 this contradicts what you said about the sky parameters based on the p-p plot.
 If I look at the p-p plot at 95\% on the x-axis then I see that RA is actually
 following the over-constrained behaviour based on Fig 5.5. This would fit with
 your histogram results.}
 
-However, if we assume that the 95\% confidence sky areas are correct, we can
-take the value of the sky area where 90\% of our simulations have a sky area
-less than this value, i.e. the 90\% confidence line in
-Fig.~\ref{par_est:results:sky_area}, this is an area of 45 deg$^2$.  Given the
+However, if we assume that the 95\% confidence sky areas are trustworthy, we can approximate the sky area which this method can localise to. 
+From the first panel in Fig.~\ref{par_est:results:sky_area}, we can say that 90\% of the time we can localise to a sky area
+less than 45 deg$^2$ with 95\% confidence. In this case the sky area only contains the true parameter 23\% of the time. 
+However, if we did trust the value of 45 deg$^2$, given the
 full sky has $\sim 41253$ square degrees, this is factor of $\sim 10^{-3}$ of
-the whole sky.  For an all sky search such as Einstein@Home
-\citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome,singh2016ResultsAllsky},
-which uses the Hough transform \citep{krishnan2004HoughTransform} to combine
-the coherently analysed segments, the analysis is run at discrete points in
-parameter space. The initial stage of the search places these points on a
-coarse grid in sky positions, frequency and frequency derivative to reduce the
-computational cost.  If we assume that both the SOAP with parameter estimation
-method is valid and replaces the first stage in this search, Einstein@Home
-would only have to search over a factor of $\sim 10^{-3}$ of the sky.  Given
-that this method is $\mathcal{O}(10^4)$ faster than Einstein@home, this would
-drastically reduce the computational cost of the first stage of the search.
-~\chris{OK, but I'm a bit lost. If you use your 95\% values then most of the
-time you report a region of <45 degrees which is 1/1000th of the sky. BUT how
-often does that actually contain the true location? Also for Einstein at home I
-don't think that you will be replacing the first stage of their search. You
-will simply be using their more powerful and computatioinally expensive
-analysis to follow up on your events. Finally, maybe refer to an LVC follow up
-and not EatH.}
+the whole sky.  For a fully coherent search for \gls{CW}, this reduction in sky area would
+drastically reduce the computational cost of the of the search.
 
 
 %
@@ -648,19 +609,16 @@ Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations which had
 parameters drawn from the same prior as the Bayesian model.  In this section we
 generate p-p plots to asses the validity of this model and find that the
 \gls{SNR}, frequency and frequency derivative all are over constrained
-distributions and the sky position parameters are under constrained~\chris{not
-true and it depends on the confidence you are asking for}. However, when
-looking at the sky position parameters more carefully, we find that the
-distribution is bi modal where each mode is over constrained~\chris{I don't
-think this is the cause of the problem.}.
+distributions and the sky position parameters are a mixture of over and under-constrained depending on the confidence. 
 
 We investigated the area contained within contours on the marginal posterior
 for the sky position to gauge the ability of the search to localise a source,
 where we found that with a 95\% confidence we can detect to a sky area within
-45 deg$^2$ 90\% of the time.  However, due to the over constrained posterior,
-the true value of the parameter fell within this contour only 40\% of the
-time.~\chris{By what factor (roughly) would you have to expand the the region
-in order to get the correct value 95\% of the time?}
+45 deg$^2$ 90\% of the time.  
+However, the true value of the parameter fell within this contour only 23\% of the
+time, implying that the posterior distributions are over-constrained.
+To contain the true value 95\% of the time, this sky area would have to be expanded by a factor of $\sim 30$.
+The sky area could be reduced by a half by using the antenna response of the detector, this would locate the source to one hemisphere removing one mode from the bi modal sky distribution.
 
 These results imply that in its current state, the search does not provide a
 valid way to estimate the parameters of the source from its Viterbi track.
