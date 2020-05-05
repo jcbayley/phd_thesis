@@ -215,7 +215,7 @@ As the track deviations are integer frequency bin widths, the \gls{KDE} estimate
 
 In this case our likelihood is also dependent on \gls{SNR},
 therefore, we split our simulations into bins of width \gls{SNR}
-2 between 20 and 200. This gives us $\sim 300$
+2 between 40 and 200. This gives us $\sim 300$
 simulated tracks, each with $\sim 400$ segments, within each \gls{SNR} bin.  Figure
 \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a
 subset of the\gls{SNR} bins. The sharp peaks in the center of
@@ -230,7 +230,7 @@ the distribution is more closely centred around 0, i.e. the Viterbi and
 %
 \begin{figure}[hpt]
     \centering
-    \includegraphics[width=\linewidth]{C5_parameter/KDE_range_50_100.pdf}
+    \includegraphics[width=\linewidth]{C5_parameter/KDE_range_40_200.pdf}
     \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows
 the \gls{KDE} estimates of the probability density of the differences between
 the simulated (injected) \gls{CW} frequency track and the recovered Viterbi
