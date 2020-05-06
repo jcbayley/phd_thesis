@@ -524,8 +524,8 @@ of the signal information.  This reduced dataset can then be used in a Bayesian
 approach to search over the parameters $h_0, \iota, \phi_0, \psi$, see
 \citep{dupuis2005BayesianEstimation} for further information.  
 
-The matched filter $\mathcal{F}$-statistic from \citep{schutz1998DataAnalysis} find the maximum likelihood of the neutron stars amplitude parameters such that it only searches over the Doppler parameters. 
-This method resamples the data over some time length $T_{\rm coh}$ based on the parameters $\alpha, \delta, f$ and $\dot{f}$ using the \gls{SSB} time in Eq.~\ref{searchcw:model:ssbtime}.
+The matched filter $\mathcal{F}$-statistic from \citep{schutz1998DataAnalysis} analytically maximises a likelihood ratio with respect to the neutron stars amplitude parameters $h_0, \iota, \phi_0, \psi$ such that it then only a function of the Doppler parameters $\alpha, \delta, f$ and $\dot{f}$. 
+This method resamples the data over some time length $T_{\rm coh}$ based on the parameters $\alpha, \delta, f$ and $\dot{f}$ using the \gls{SSB} time in Eq.~\ref{searchcw:model:ssbtime} \citep{schutz1998DataAnalysis}.
 If the \gls{GW} signal matches these parameters then resampling removes the Doppler modulation of the signal such that it appears at a fixed frequency.
 This means that the $\mathcal{F}$-statistic can be efficiently calculated using the \gls{FFT}. 
 Once the maximum of the $\mathcal{F}$-statistic with respect to parameters $\alpha, \delta, f$ and $\dot{f}$  is found, the amplitude parameters can be analytically calculated from these parameters.

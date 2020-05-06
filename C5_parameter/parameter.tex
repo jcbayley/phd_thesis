@@ -8,7 +8,7 @@ Throughout chapters \ref{soap} and \ref{machine} we have developed
 techniques that could identify whether a potential \gls{CW}
 signal is present within a small frequency band of width $0.1$ Hz, and then
 return the frequency track that the signal is most likely to follow.  This
-provides frequency bands in which a signal could be present, which is useful
+provides the frequency bands in which a signal could be present, which is useful
 for all-sky searches as it can limit the parameter space and therefore
 computational time for deeper searches such as those described in
 Sec.~\ref{searchcw:search:targeted}.  However, this only limits the parameter
@@ -43,14 +43,13 @@ therefore frequency evolution) of the source described in
 Eq.~\ref{searchcw:model:phase} in Sec.~\ref{searchcw:model}.  To relate this
 phase evolution to the sky position parameters, we can look closer at
 Eq.~\ref{searchcw:model:ssbtime}, where we describe the shift in arrival time
-due to the earths motion.
+due to the Earth's motion.
 
 The second term in Eq.~\ref{searchcw:model:ssbtime} describes the Doppler shift
 due to the earth's orbit and rotation.  Where the $\bm{r}$ is the position of
 the detector and $\bm{n}$ is a unit vector in the direction of the source.  As
 in \citep{schutz1998DataAnalysis}, we use the ecliptic coordinate frame in the \gls{SSB}
-where the $z$ axis is perpendicular to the ecliptic and the $x$ axis is
-parallel to the celestial sphere.  In this frame the unit vector pointing
+where the $z$ axis is perpendicular to the ecliptic and the $x$ axis points towards the first point of Aries.  In this frame the unit vector pointing
 towards the source can be written as
 %
 \begin{equation}
@@ -71,8 +70,7 @@ towards the source can be written as
 \end{equation}
 %
 where $\alpha$ and $\delta$ are the right ascension and declination (sky
-position) of the source and $\epsilon$ is the angle between the ecliptic and
-the earth's equator.  The first matrix in Eq.~\ref{par_est:freq:unit} describes
+position) of the source and $\epsilon$ is the obliquity of the ecliptic, which is the inclination angle of the earths equator with respect to the ecliptic.  The first matrix in Eq.~\ref{par_est:freq:unit} describes
 a rotation from the celestial frame to
 the ecliptic frame an the second vector transforms the sky position parameters to their component
 $x,y,z$ coordinates.
@@ -96,8 +94,7 @@ is described in Cartesian coordinates as
 %
 where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU),
 $\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit
-$2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year and $\phi_{O}$ is
-some phase which defines the position of the earth in its orbital motion at $t=0$.  The
+$2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year. The phase $\phi_{O}$ defines the position of the earth in its orbital motion at $t=0$, this is the angle between the Sun and the first point of Aires at $t=0$\joe{check this}.  The
 position due to the rotation of the earth can then be described by 
 %
 \begin{equation}
@@ -110,19 +107,16 @@ position due to the rotation of the earth can then be described by
     \end{matrix} \right)
     \left(
     \begin{matrix}
-        \cos{(\lambda)}\cos{\left( \Omega_{\mathrm{R}} t + \phi_{\mathrm{R}}  \right)}  \\
-        \cos{(\lambda)}\sin{\left( \Omega_{\mathrm{R}} t + \phi_{\mathrm{R}}  \right)} \\
-        \sin{(\lambda)} \\
+        \cos{(\beta)}\cos{\left( \Omega_{\mathrm{R}} t + \phi_{\mathrm{R}}  \right)}  \\
+        \cos{(\beta)}\sin{\left( \Omega_{\mathrm{R}} t + \phi_{\mathrm{R}}  \right)} \\
+        \sin{(\beta)} \\
     \end{matrix} \right),
 \end{equation}
 %
 where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the
 angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where
-$T_{\mathrm{R}}$ is one day, $\phi_{\mathrm{R}}$ is some phase which defines the
-position of the earth in its rotational motion at $t=0$ and $\lambda$ is the latitude of
-the detectors site~\chris{I'm concerned that the arbitary undefined orbital
-phase and rotation phase are determined by the detector longitude and the start
-time of the observation. Do you address this further on?}. The sum of these two components
+$T_{\mathrm{R}}$ is one day and $\beta$ is the detectors latitude. The phase $\phi_{\mathrm{R}}$ defines the position of the earth in its rotation at $t=0$ and is determined by $\phi_{\mathrm{R}} = \rm{LST}_{t=0} = \rm{GMST}_{t=0} - \lambda$, where $\lambda$  is the longitude of
+the detectors site, the \gls{GMST} is the angle between the first point of Aires and the Greenwich meridian and the LST is the local sidereal time \joe{ask}. The sum of these two components
 then define the location of the detector in the \gls{SSB} frame
 %
 \begin{equation}
@@ -130,24 +124,22 @@ then define the location of the detector in the \gls{SSB} frame
 \end{equation}
 
 We can now describe the phase evolution of the signal at the detector
-sites from just the sky
-position ($\alpha, \delta$) and frequency and its derivative
-$f,\dot{f}$~\chris{what about those orbital and spin phases? You shouls say
-something about how they are defined/known.}.  We can write the phase evolution from Eq.~\ref{searchcw:model:phase} as
+sites (latitude $\beta$ and longitude $\lambda$) starting at a time $t=0$ from the source sky
+position ($\alpha, \delta$), frequency$f$ and its derivative
+$\dot{f}$.  We can write the phase evolution from Eq.~\ref{searchcw:model:phase} as
 %
 \begin{equation}
     \label{par_est:freq:ph_evolution}
     \begin{split}
         \Phi(t) = 2\pi \left(  f_0 t + \frac{\dot{f} t^2}{2} \right) &+ \frac{2\pi}{c} \left(  f_0 + \dot{f}t  \right) \left\{ R_{\rm{O}} \left[ \cos \alpha \cos \delta \cos \left( \Omega_{\mathrm{O}} t + \phi_{O}  \right) \right. \right. \\ 
         &+ \left. \left( \cos \epsilon \cos \alpha \cos \delta +  \sin \epsilon \sin \delta \right) \sin \left( \Omega_{\mathrm{O}} t + \phi_{O}  \right) \right] \\
-        &+ \left. R_{\rm{R}} \left[ \sin \lambda \sin \delta + \cos \lambda \cos \delta \cos \left( \alpha - \Omega_{\mathrm{R}} t - \phi_{R}  \right)     \right] \right\},
+        &+ \left. R_{\rm{R}} \left[ \sin \beta \sin \delta + \cos \beta \cos \delta \cos \left( \alpha - \Omega_{\mathrm{R}} t - \phi_{R}  \right)     \right] \right\},
     \end{split}
 \end{equation}
 %
 where we ignore frequency derivative higher than first order.
 The frequency of a \gls{CW} signal at any point on the frequency track is then defined by the derivative of
-the phase with respect to time~\chris{which time? SSB or detector? be
-	unambiguous}
+the phase with respect to the detector time
 %
 \begin{equation}
 f(t) = \frac{1}{2\pi}\frac{d\Phi(t)}{dt}.
@@ -454,10 +446,7 @@ under-constrained, i.e. the injected parameters are scattered with a larger widt
 where the S is below the diagonal at $C < 0$.5 and above the diagonal at $C >
 0.5$. This is shown in the third panel of
 Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the posterior is over-constrained, i.e. the injected parameters have a narrower distribution than the posterior suggests,, then the curve will follow an S shape where the S is
-above the diagonal at $C < 0.5$ and below the diagonal at $C> 0.5$.~\chris{the
-$p$--$p$ plot doesn't compare your results with the perfect posterior - it simply
-asks wherether your posteriors are consistent. The perfect posteriors would be
-diagonal AND have the smallest credible intervals.}
+above the diagonal at $C < 0.5$ and below the diagonal at $C> 0.5$.
 %
 \begin{figure}[ht]
     \centering
@@ -471,7 +460,7 @@ uniform distribution.}
 \label{par_est:results:ppplot_example}
 \end{figure}
 
-We can then generate the p-p plot for the 200 simulations in the test described in Sec.~\ref{par_est:results:simulations}, this shown
+We can then generate the $p$--$p$ plot for the 200 simulations in the test described in Sec.~\ref{par_est:results:simulations}, this shown
 in Fig.~\ref{par_est:results:ppplot}.  Using the information from Fig.~\ref{par_est:results:ppplot_example}, we can see that for the parameters $f$
 and $\dot{f}$ we recover an over-constrained posterior
 distribution.  For the \gls{SNR} parameter $\rho$, the recovered posterior is
@@ -485,8 +474,8 @@ modes are widely separated, if the true parameter lies between the two modes
 then it would return a \gls{CI} of $\sim 0.5$~\chris{I don't think you should
 focus on the bimodal aspect of the RA posterior. Being bimodal doesn't make it
 wrong and it can still easily pass a p-p plot test.}, for many simulations this
-would produce a p-p plot which appears as an under constrained posterior when
-it is actually two widely separated over constrained posteriors~\chris{do you
+would produce a p-p plot which appears as an under-constrained posterior when
+it is actually two widely separated over-constrained posteriors~\chris{do you
 have any examples of this occuring?}. This becomes more clear when
 investigating the area contained within a contours of the posterior which is
 explained in Sec.~\ref{par_est:results:simulations:skyarea}.
@@ -543,9 +532,7 @@ method to extract the sky parameters.
 Sec.~\ref{par_est:results:example_posterior}, the contour in sky position
 posterior is drawn for a 95\% confidence and the area which contains the
 injected sky position parameters. In this example the two contours are
-similar.~\chris{ To be fancy you could also plot the
-ecliptic curve on here to show the mirriring of the modes - just a
-suggestion.}} \label{par_est:results:sky_area_example}
+similar.} \label{par_est:results:sky_area_example}
 \end{figure}
 
 The contours and therefore their associated sky areas can be calculated for all
@@ -618,11 +605,11 @@ where we found that with a 95\% confidence we can detect to a sky area within
 However, the true value of the parameter fell within this contour only 23\% of the
 time, implying that the posterior distributions are over-constrained.
 To contain the true value 95\% of the time, this sky area would have to be expanded by a factor of $\sim 30$.
-The sky area could be reduced by a half by using the antenna response of the detector, this would locate the source to one hemisphere removing one mode from the bi modal sky distribution.
+Other methods could be used to reduce this sky area such as using the antenna response of the detector, this would locate the source to one hemisphere removing one mode from the bi modal sky distribution.
 
 These results imply that in its current state, the search does not provide a
 valid way to estimate the parameters of the source from its Viterbi track.
-However, with the development of a more appropriate likelihood function and
+However, this is a toy case and with the development of a more appropriate likelihood function and
 further investigation, we aim to develop this such that it can correctly
 estimate \gls{CW} parameters.
 

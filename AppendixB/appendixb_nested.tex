@@ -1,5 +1,11 @@
 \chapter{\label{appb} Nested sampling derivation}
 
+Nested sampling is a method to estimate the Bayesian evidence defined by,
+\begin{equation}
+\label{appb:bayes:evidence}
+Z = p(\bm{d} \mid I) = \int \mathcal{L}(\theta) \pi(\theta) d\theta.
+\end{equation}
+This integral can be transformed such that one integrated only over one dimension and not over all dimensions of $\theta$, this is described below.
 From the definition of the expectation value of a function $g(X)$ we
 have
 \begin{equation}
@@ -8,10 +14,10 @@ have
 \end{equation}
 where $f_X(x)$ is the probability distribution of a random variable
 $X$.
-From this we can see that the evidence can be defined as
+From this we can see that the Bayesian Evidence can be defined as
 \begin{equation}
   \label{appb:bayes:nested:evidence_expec}
-  Z = p(\bm{d} \mid I) = \int \mathcal{L}(\theta) \pi(\theta) d\theta
+  Z = \int \mathcal{L}(\theta) \pi(\theta) d\theta
   = E [ \mathcal{L}(\theta)],
 \end{equation}
 where the prior $p(\theta \mid I) = \pi(\theta)$ is the probability

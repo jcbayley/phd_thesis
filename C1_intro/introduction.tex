@@ -23,12 +23,12 @@ information on an as yet unobserved type of astrophysical
 system.  This has since been followed by many more detections of \gls{BBH}
 signals, including those from a three detector network (the two \gls{LIGO} detectors and Virgo)
 \citep{abbott2017GW170814ThreeDetector,theligoscientificcollaboration2020GW190425Observation}, which allowed better localisation of the source on the sky.  
-In 2017 the \gls{LIGO} detectors observed the
-first \gls{BNS} system \citep{abbott2017GW170817Observation} where a
-corresponding electromagnetic counterpart was also observed.
-This allowed verification~\chris{what does verification eman in
-this sense?} of the source from optical counterparts and started the era of
-multi-messenger astronomy.  These detections opened up the field of
+In 2017 the \gls{LIGO} and Virgo detectors observed the
+first \gls{BNS} system \citep{abbott2017GW170817Observation}, this was shortly followed by an observation of a gamma ray burst event \citep{goldstein2017OrdinaryShort}.
+The combination of the \gls{LIGO} and Virgo observations allowed a precise localisation in sky position, which led to the identification the host galaxy of the \gls{BNS} \citep{coulter2017SwopeSupernova}.
+This was then followed up by observations across the electromagnetic spectrum, starting the era of multi-messenger astronomy.  
+
+These detections opened up the field of
 \gls{GW} astronomy, where many more detections are expected to give more
 information on the universe and objects within it.
 
@@ -45,12 +45,7 @@ methods used to detect them.  Chapters \ref{soap}, \ref{machine} and
 \ref{detchar} will go into detail about techniques developed by the author to
 search for \gls{CW} signals.  Finally I will summarise this work and discuss
 future developments in chapter \ref{summary}
-~\chris{This is a very short introduction to the thesis. This is your
-opportunity to lay the ground work (in a non-technical way) before you get into
-the details. You could really expand upon the ideas mentioned here. What else
-can you say about GWs? What else can you say about the Hulse-Taylor Pulsar
-(they won a Nobel Prize), what else can you say about 150914 and 170817? Prove
-to the examiner that you are an expert in the general field of GW astrophysics.}
+
 
 %%%%%%%%%%%
 %%%%%%%%%
@@ -105,12 +100,6 @@ space-time, $\eta_{\mu\nu}$, Eq.~\ref{intro:gw:minkowski} and \ref{intro:lineele
     ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2.
 \end{equation}
 %
-The Einstein equations defined in Eq.~\ref{intro:gravwaves:efe}
-then demonstrate how the curvature of space-time $G_{\mu\nu}$ depends on the
-matter and energy distribution $T_{\mu \nu}$ within it.~\chris{I think that
-there are enough steps missing between defining G from g that this last
-statement doesn't really explain how the interval gets us from Minkowski to
-space-time curvature.}
 
 A \gls{GW} is then a wave which propagates through space-time, where the simplest way to
 visualise this is just a small time dependent change to the flat space-time
@@ -166,7 +155,7 @@ TT gauge there are only two unique components to the metric such that the
 perturbation is
 \begin{equation}
 \label{intro:gw:gravwave}
-h_{\mu \nu} = \left( 
+h_{\mu \nu}^{\rm{TT}} = \left( 
 \begin{matrix}
 0 & 0 & 0 & 0 \\
 0 & h_{+} & h_{\times} & 0 \\
@@ -198,25 +187,23 @@ described in more detail in Sec.~\ref{intro:detector}.}
 \subsubsection{Generating gravitational waves}
 
 To generate \gls{GW} we can follow the derivation in \citep{flanagan2005BasicsGravitational}, where one can solve Eq.~\ref{intro:lineinstein} to find the \gls{GW} perturbation $h_{\mu \nu}$.
-The result of this is that $h_{\mu \nu}$ is related to the second moment of the mass distribution by
+The result of this is that the spatial part of the metric perturbation $h_{i j}$ is related to the second moment of the mass distribution by
 \begin{equation}
     \label{intro:gravwave:amp}
-        h_{ij} = \frac{2}{r}  \frac{d^2}{dt^2} Q_{ij}(t-r),
+        h_{ij} = \frac{2G}{c^4 r}  \frac{d^2}{dt^2} Q_{ij}(t-r/c),
 \end{equation}
-where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} and $Q_{\mu \nu}$ is the second moment of the mass distribution defined by 
+where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} and $Q_{i j}$ is the second moment of the mass distribution defined by 
 \begin{equation}
-    Q_{ij}(t) = \int \rho(t,{\bf x}) \left ( x^i x^j - \frac{1}{3} r \delta^{ij} \right)d^3x,
+    Q_{ij}(t) = \int \rho(t,{\bf x})  x^i x^j d^3x,
 \end{equation}
-where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational} \joe{double check here/reread}.  
+where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational}.  
 This has a slight modification in the TT gauge, see
-\citep{flanagan2005BasicsGravitational}, however, has the same relationship
-between the mass quadrupole and the \gls{GW} amplitude.  This shows that for
-\gls{GW} to be generated, the second derivative of the mass quadrupole moment
-is needed. 
-Gravitational monopole and dipole radiation is not possible due to the conservation of energy and momentum respectively \citep{misner1973Gravitation} and radiation can be emitted from higher orders but is generally weaker than quadrupolar radiation. \joe{want to say a little more here}
+\citep{flanagan2005BasicsGravitational}, where the trace of the second mass moment is subtracted defining the mass quadrupole moment. 
+However, this has the same relationship (the second time derivative) between the mass quadrupole moment and the \gls{GW} amplitude.  This shows that for \gls{GW} to be generated, we need the the second time derivative of the mass quadrupole moment to be non zero. 
+Gravitational monopole and dipole radiation is not possible due to the conservation of energy and momentum respectively \citep{misner1973Gravitation} and radiation can be emitted from higher orders but is generally weaker than quadrupole radiation. 
 
 There are many types of system which could emit quadrupole \glspl{GW}, including supernovae, colliding objects and orbiting black holes. 
-Typically these are from high mass systems as large amount of energy are needed to overcome the stiffness of space-time which is defined by the $8 \pi G/c^4$ in Eq.~\ref{intro:gravwaves:efe}.
+Typically these are from high mass systems as large amount of energy are needed to overcome the `stiffness' of space-time which is defined by the $8 \pi G/c^4$ in Eq.~\ref{intro:gravwaves:efe} \joe{think about this bit}.
 Some of the primary sources of \gls{GW} that are currently searched for will be described in the following section.
 
 
