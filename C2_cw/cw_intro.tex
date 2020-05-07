@@ -76,7 +76,7 @@ functions  defined in Eq.\ref{intro:detector:response:polarisations}. The plus a
     \end{split}
 \end{equation}
 %
-where $h0$ is the \gls{GW} amplitude, $\iota$ is the inclination angle of the source and $\Phi(t)$ is the phase of the \gls{GW}. 
+where $h_0$ is the \gls{GW} amplitude, $\iota$ is the inclination angle of the source and $\Phi(t)$ is the phase of the \gls{GW}. 
 Here we assume the wobble angle $\theta$ is assumed to be small,
 however this is included in the derivation in \citep{schutz1998DataAnalysis}.
 The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \gls{SSB} can be defined as
@@ -503,7 +503,7 @@ categories are based on the number of source parameters for which there is an es
 
 Targeted searches are used to search for specific
 pulsars which have parameters known from electromagnetic observations, i.e.
-X-ray, radio or $\gamma$-ray.  These can give accurate estimates of the sky position parameters
+X-ray, radio or $\gamma$-ray.  These observations can give accurate estimates of the sky position parameters
 $\alpha$ and $\delta$, and the source frequency parameters $f$ and its
 derivatives, where there could also be extra parameters if the pulsar is in a
 binary system.
@@ -521,10 +521,10 @@ evolving heterodyne which removes the phase evolution of the signal
 \citep{dupuis2005BayesianEstimation}.  This allows
 the signal to be low pass filtered and heavily downsampled without losing any
 of the signal information.  This reduced dataset can then be used in a Bayesian
-approach to search over the parameters $h_0, \iota, \phi_0, \psi$, see
+approach to generate posterior distributions on the parameters $h_0, \iota, \phi_0, \psi$, see
 \citep{dupuis2005BayesianEstimation} for further information.  
 
-The matched filter $\mathcal{F}$-statistic from \citep{schutz1998DataAnalysis} analytically maximises a likelihood ratio with respect to the neutron stars amplitude parameters $h_0, \iota, \phi_0, \psi$ such that it then only a function of the Doppler parameters $\alpha, \delta, f$ and $\dot{f}$. 
+The matched filter $\mathcal{F}$-statistic \citep{schutz1998DataAnalysis} analytically maximises a likelihood ratio with respect to the neutron stars amplitude parameters $h_0, \iota, \phi_0, \psi$ such that it then only a function of the Doppler parameters $\alpha, \delta, f$ and $\dot{f}$. 
 This method resamples the data over some time length $T_{\rm coh}$ based on the parameters $\alpha, \delta, f$ and $\dot{f}$ using the \gls{SSB} time in Eq.~\ref{searchcw:model:ssbtime} \citep{schutz1998DataAnalysis}.
 If the \gls{GW} signal matches these parameters then resampling removes the Doppler modulation of the signal such that it appears at a fixed frequency.
 This means that the $\mathcal{F}$-statistic can be efficiently calculated using the \gls{FFT}. 
@@ -534,14 +534,14 @@ aasi2014GRAVITATIONALWAVES}.
 
 The 5-Vector search is based in the frequency domain, where it makes
 use of the five frequency harmonics caused by the sidereal amplitude
-modulation which originate from the detectors antenna response as
+modulation which originates from the detectors antenna response as
 the earth rotates \citep{astone2010MethodDetection,aasi2014GRAVITATIONALWAVES}.
-A summary of the application of the searches for initial and advanced
+A summary of the application of these three searches for initial and advanced
 \gls{LIGO} can be found in
 \citep{aasi2014GRAVITATIONALWAVES,abbott2019SearchesGravitationala}.
 
 Due to the long observation times needed to accumulate the required \gls{SNR}
-for detection, most searches use data from an entire \gls{LIGO} observing run
+for detection, most searches use data from an entire or multiple \gls{LIGO} and Virgo observing runs
 which can last for $\mathcal{O}(1)$ year.  Given
 that the sampling rate for the \gls{GW} channel is $16$ kHz (often downsampled
 to $\sim 4$ kHz), the amount of data in a year can be $\mathcal{O}(2)$
@@ -551,7 +551,7 @@ computational time for known sources, in wide parameter space searches such as a
 type of search is not feasible. 
 This is due to the computational cost associated with running a fully coherent search over a wide parameter space.
 This problem led to the development of semi-coherent searches which will be introduced in the
-next section. 
+next sections. 
 
 %%%%%%
 %%%%%%
@@ -562,10 +562,9 @@ next section.
 In directed searches, the sky position parameters
 $(\alpha,\delta)$ are known but the rotation frequency and other parameters are not. 
 This includes searches for neutron stars in binary systems such as Sco-X1
-\citep{abbott2017UpperLimits,meadors2016TuningScorpius}, for young supernovae remnants \citep{abadie2010FIRSTSEARCH} and for neutron stars in the galactic center \citep{piccinni2019DirectedSearch}.These searches use
-the similar techniques as all-sky searches, which will be described in
+\citep{abbott2017UpperLimits,meadors2016TuningScorpius}, for young supernovae remnants \citep{abadie2010FIRSTSEARCH} and for neutron stars in the galactic center \citep{piccinni2019DirectedSearch}. These searches use similar techniques as all-sky searches, which will be described in
 Sec.~\ref{searchcw:search:allsky}, they differ in that they can limit the
-parameter space based on the known parameters.
+parameter space based on the known sky position.
 
 %%%%%%
 %%%%%%
@@ -574,20 +573,20 @@ parameter space based on the known parameters.
 %%%%%%
 
 All-sky searches have no prior knowledge of the pulsars parameters, therefore,
-they are used to search over all the parameters of the neutron star $h_0, \iota, \psi, \phi_0, f,
+they are used to search over all the neutron star parameters $h_0, \iota, \psi, \phi_0, f,
 \dot{f}, \alpha, \delta$. It would not be feasible to use the techniques described in
-Sec.~\ref{searchcw:search:targeted} for an all sky search, as to sufficiently
-cover the entire parameter space would require large computational cost.  Instead a type of search known as a
-semi-coherent search was developed.  These offered a solution to searching over
-the large parameters space and data size.  The general idea of a semi-coherent
+Sec.~\ref{searchcw:search:targeted} for an all sky search as to sufficiently
+cover the entire parameter space, it would require large computational cost.  Instead
+semi-coherent searches were developed.  These offered a solution to searching over
+the large parameter space and data size.  The general idea of a semi-coherent
 search is to break the dataset into smaller segments of length $T_{coh}$, which
-each can be analysed coherently. There are also searches such as \citep{messenger2007FastSearch}, which breaks the dataset into smaller frequency bands and combined them incoherently. 
+can each be analysed coherently. There are also searches such as \citep{messenger2007FastSearch}, which breaks the dataset into smaller frequency bands and combined them incoherently. 
 The results from each segment can the be combined incoherently using various methods which will be
 summarised below.  
-Whilst these methods will be less sensitive than a fully coherent search, they are much faster and are more sensitive at a fixed computational cost.
+Whilst these methods will be less sensitive than a fully coherent search, they are much faster and at a fixed computing cost are more sensitive.
 
 There are many different types of semi-coherent search which use various
-methods to incoherently combine the coherently analysed time segments.  Some of these methods are  summarised and compared in
+methods to incoherently combine the coherently analysed time segments.  Some of these methods are summarised and compared in
 \citep{walsh2016ComparisonMethods} and I will summarise these and others below.
 
 
@@ -604,17 +603,17 @@ power from each frequency bin can then be summed (stacked). More explanation of 
         \item[Hough] The Hough transform is similar to the stack-slide algorithm.
 The main difference is that the detection statistic for each segment is
 assigned a weight of 0 or 1 depending if it crossed a detection threshold. These weighted set of \glspl{SFT} are then used as input to the Hough transform.
-The Hough transform maps a pattern such as a straight line ($y=mx + c$) in an image to the parameters ($m,c$) which are consistent with that line.
+The Hough transform maps a pattern in an image such as a straight line ($y=mx + c$) to the parameters ($m,c$) which are consistent with that line.
 This approach is explained in greater detail in
 \citep{krishnan2004HoughTransform,antonucci2008DetectionPeriodic}.  This method
 has been applied in two main ways known as Sky Hough
 \citep{krishnan2004HoughTransform}, which generates Hough maps in sky position $(\alpha,\delta)$ for fixed spin down, and Frequency Hough
-\citep{antonucci2008DetectionPeriodic,astone2014MethodAllsky} which generates hough maps in $(f,\dot{f}$ for fixed sky position.
+\citep{antonucci2008DetectionPeriodic,astone2014MethodAllsky} which generates hough maps in $(f,\dot{f})$ for fixed sky position.
 	
         \item[Einstein@Home] \joe{reread this }This uses the
-$\mathcal{F}$-statistic mentioned in Sec.~\ref{searchcw:search:targeted}, where this statistic is calculated over a length of $T_{\rm{coh}}$, where in the initial stages of this search these segments are combined incoherently. This is is done using a Hough transform scheme \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} or by generating candidate events where the $\mathcal{F}$-statistic crosses some threshold and then finding events which are coincident in parameter space \citep{ligoscientificcollaboration2009EinsteinHome}.
+$\mathcal{F}$-statistic mentioned in Sec.~\ref{searchcw:search:targeted} calculated over a length of $T_{\rm{coh}}$, where in the initial stages of this search these segments are combined incoherently. This is is done using a Hough transform scheme \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} or by generating candidate events where the $\mathcal{F}$-statistic crosses some threshold and then finding events which are coincident in parameter space \citep{ligoscientificcollaboration2009EinsteinHome}.
 After the first stage, potential signals are returned (candidates) where post processing methods as in \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} select the most significant candidates.
-In \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} they use a three step procedure, which starts with the Hough transform with a more finely sampled parameters around the candidate, and then runs a semi and then finally fully coherent $\mathcal{F}$-statistic analysis.
+In \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} they use a three step procedure, which starts with the Hough transform with more finely sampled parameters around the candidate, and then runs a semi and then finally fully coherent $\mathcal{F}$-statistic analysis.
 Other methods for combining results and following up candidates can be found in \citep{singh2016ResultsAllsky,papa2016HierarchicalFollowup,walsh2016ComparisonMethods}.
 Einstein@Home is the most sensitive of the current all-sky \gls{CW} searches,
 however, uses a large amount of computing power. This is possible due to the use of a

@@ -4,13 +4,14 @@
 
 \Glspl{GW} were first predicted in 1915 as a consequence of Einstein's general
 theory of relativity \citep{einstein2005GrundlageAllgemeinen}, where they were
-theorised as ripples in the fabric of space-time.  this would open up a new window into the universe which is not accessible via electromagnetic observations. 
+theorised as ripples in the fabric of space-time.  Observations of these waves would would open up a new window into the universe which is not accessible via electromagnetic observations. \joe{should say why here} 
+
 The first observational evidence that \glspl{GW} exist came from observations of the Hulse-Taylor
 binary \citep{weisberg1981GravitationalWaves,weisberg2004RelativisticBinary}, which subsequently won the Nobel prize in 1993.
 This observation, which was of a pulsar in a binary system showed that the periastron was
 reached slightly early after each orbit, implying that the pulsars orbital radius was
 decreasing with time.  If the separation of two orbiting objects is decreasing
-then the system must be losing energy.  The loss in energy matched the \gls{GR}
+then the system must be losing energy.  The measurement of the loss in energy matched the \gls{GR}
 prediction which assumed the energy was lost to \glspl{GW}, giving hope of
 the existence of \glspl{GW} and motivating the design of instruments
 which could directly detect them.
@@ -24,10 +25,9 @@ system.  This has since been followed by many more detections of \gls{BBH}
 signals, including those from a three detector network (the two \gls{LIGO} detectors and Virgo)
 \citep{abbott2017GW170814ThreeDetector,theligoscientificcollaboration2020GW190425Observation}, which allowed better localisation of the source on the sky.  
 In 2017 the \gls{LIGO} and Virgo detectors observed the
-first \gls{BNS} system \citep{abbott2017GW170817Observation}, this was shortly followed by an observation of a gamma ray burst event \citep{goldstein2017OrdinaryShort}.
+first \gls{BNS} system \citep{abbott2017GW170817Observation} which was shortly ($\sim 1.7s$) followed by an observation of a gamma ray burst event \citep{goldstein2017OrdinaryShort}.
 The combination of the \gls{LIGO} and Virgo observations allowed a precise localisation in sky position, which led to the identification the host galaxy of the \gls{BNS} \citep{coulter2017SwopeSupernova}.
 This was then followed up by observations across the electromagnetic spectrum, starting the era of multi-messenger astronomy.  
-
 These detections opened up the field of
 \gls{GW} astronomy, where many more detections are expected to give more
 information on the universe and objects within it.
@@ -35,16 +35,16 @@ information on the universe and objects within it.
 As well as searching for \gls{BBH} and \gls{BNS} signals, there are many
 efforts to detect other types of \gls{GW} signals.  This thesis focuses on
 efforts to search for a particular type of \gls{GW} which are thought to
-originate from rapidly rotating neutron stars.  In chapters \ref{intro} and
+originate from rapidly rotating neutron stars.  In Chapters \ref{intro} and
 \ref{searchcw} I will review introductory material.  This includes a general
 introduction to the generation of \glspl{GW} in Sec.~\ref{intro:gravwaves} and
 their sources in Sec.~\ref{intro:sources}.  I will then introduce instruments
 used to detect \gls{GW} in Sec.~\ref{intro:detector}.  In Chapter
 \ref{searchcw} I will introduce the general model for \glspl{CW} and current
-methods used to detect them.  Chapters \ref{soap}, \ref{machine} and
+methods used to detect them.  Chapters \ref{soap}, \ref{machine}, \ref{par_est} and
 \ref{detchar} will go into detail about techniques developed by the author to
 search for \gls{CW} signals.  Finally I will summarise this work and discuss
-future developments in chapter \ref{summary}
+future developments in Chapter \ref{summary}
 
 
 %%%%%%%%%%%
@@ -64,8 +64,7 @@ To describe space-time, one would want to link the curvature to the matter mathe
 where $G_{\mu \nu}$ is the Einstein tensor, $G$ is the gravitational constant, $c$ is the speed of light and $T_{\mu \nu}$ is the
 stress-energy tensor.  The stress energy tensor contains information on the density and flux of energy and momentum at a given point in space-time.  
 The Einstein tensor contains information on the curvature of the
-universe, which can be derived directly from the metric tensor $g_{\mu \nu}$
-which describes the space-time geometry.
+universe, this can be derived directly from the metric tensor $g_{\mu \nu}$ which describes the space-time geometry.
 Einstein's equations then explain how the curvature of space-time changes with
 the mass-energy within it.  
 
@@ -85,7 +84,7 @@ Each index of this matrix refers to a space-time dimension, i.e. $x^0 = t$,
 $x^1=x$, $x^2=y$ and $x^3=z$.  Measuring a distance $dx$ in space-time can be
 different for different observers, therefore, one needs a measure which is
 invariant for every observer.  This is the space-time interval $ds$, also known
-as the line element, between two `events' in space-time, which is defined as
+as the line element, between two `events' in space-time, and is defined as
 \begin{equation}
 \label{intro:lineelement}
     ds^2 = g_{\mu \nu} dx^{\mu}dx^{\nu}.
@@ -199,7 +198,7 @@ where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} 
 where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational}.  
 This has a slight modification in the TT gauge, see
 \citep{flanagan2005BasicsGravitational}, where the trace of the second mass moment is subtracted defining the mass quadrupole moment. 
-However, this has the same relationship (the second time derivative) between the mass quadrupole moment and the \gls{GW} amplitude.  This shows that for \gls{GW} to be generated, we need the the second time derivative of the mass quadrupole moment to be non zero. 
+However, this has the same relationship between the mass quadrupole moment or second mass moment and the \gls{GW} amplitude.  This shows that for \gls{GW} to be generated, we need the the second time derivative of the mass quadrupole moment to be non zero. 
 Gravitational monopole and dipole radiation is not possible due to the conservation of energy and momentum respectively \citep{misner1973Gravitation} and radiation can be emitted from higher orders but is generally weaker than quadrupole radiation. 
 
 There are many types of system which could emit quadrupole \glspl{GW}, including supernovae, colliding objects and orbiting black holes. 
@@ -243,8 +242,8 @@ of each of these signal categories and their waveforms.
 \glspl{CBC} originate from the inspiral, merger and ring-down of
 two compact objects which are gravitationally bound.  The objects inspiral as
 they lose energy through the radiation of
-gravitational waves.  Dependent on the masses and distances of the two objects,
-the gravitational waves generated by the system can be detected by ground based
+\glspl{GW}.  Dependent on the masses and distances of the two objects,
+the \glspl{GW} generated by the system can be detected by ground based
 detector such as \gls{LIGO} \citep{aasi2015AdvancedLIGO} and Virgo
 \citep{acernese2015AdvancedVirgo}.  In fact, the only detections to date have
 been of this type; these are summarised in
@@ -255,7 +254,7 @@ The first of these detections, GW150914 \citep{abbott2016ObservationGravitationa
 The compact objects referred to here are either black holes or neutron
 stars, where combinations of these make up the three general types of \gls{CBC} source: \gls{BBH},
 \gls{BNS} and \gls{NSBH}.  The general structure of the waveform is the same
-for each of these and follows a `chirp' where the \gls{GW} frequency increases until they reach the innermost stable circular orbit, whereafter they will merge into a single black hole which will oscillate known as the ring-down.  A simple example of the waveform is shown in Fig.~\ref{intro:sources:signaltypes}.  The maximum frequency of this inspiral
+for each of these and follows a `chirp' where the \gls{GW} frequency increases until they reach the innermost stable circular orbit, whereafter they will merge into a single black hole which will oscillate, known as the ring-down.  A simple example of the waveform is shown in Fig.~\ref{intro:sources:signaltypes}.  The maximum frequency of this inspiral
 is defined by the mass of the system, where higher mass systems will merge at lower frequencies.
 To find the relationship between mass and frequency, we can look at the final stable orbit of the inspiral which is at the innermost stable circular orbit, $R_{\rm{ISCO}} = 6GM/c^2$ \citep{maggioreGravitationalWaves}.
 As we assume a circular orbit we can use Keplers law $T^2 \propto a^3$ where $T$ is the period of the orbit and $a$ is the radius, to estimate the orbital frequency $f_{\rm{ISCO}}$ at the end of the inspiral
@@ -325,14 +324,13 @@ As the stochastic background is noise-like it is very difficult to distinguish f
 %%%%%%%%%%%%%%%%%%%%
 
 \glspl{CW} are long duration signals, where its duration greater than
-the length of an observation run of ground based detectors and in general has a
-a slowly varying and narrowband frequency. 
+the length of an observation run of ground based detectors and in general has a slowly varying and narrowband frequency. 
 
 The primary source for many \glspl{CW} searches is rapidly rotating neutron
 stars with spin periods ranging from $\sim 10^{-3} - 10$ s
-\citep{manchester2005AustraliaTelescope}, which in general have well modelled signals.  Neutron stars form when a
-massive star $\sim 11 - 20 M_{\odot}$ collapses, where around $1.4-2 \;
-M_{\odot}$ \citep{} \joe{reference} in the core of the star collapses to a radius of $\sim 10$ km and the outer layers are ejected \citep{} \joe{reference}. 
+\citep{manchester2005AustraliaTelescope}, and in general have well modelled signals.  Neutron stars can form when a
+massive star $\sim 8 - 20 M_{\odot}$ collapses \citep{fryer2005NeutronStar}, leaving a remnant is around $1.4-2 \;
+M_{\odot}$ with a radius of $\sim 10$ km \citep{} \joe{referecnce}. 
 This gives the objects high densities of $\sim 10^{17}$ kgm$^{-3}$ and high magnetic field strengths of $10^8 - 10^{15}$ G \citep{konar2017MagneticFields}.  
 Despite many observations of neutron stars in the electromagnetic spectrum,
 these objects are not well understood.  A key part or neutron stars which is
@@ -390,7 +388,7 @@ More details on the signal waveform of this type of \gls{GW} and methods to sear
 %%%%%%%%%%%%%%%
 There are a number of oscillation modes within a star such as f-modes, p-modes
 and r-modes \citep{becker2009NeutronStars}.  These are similar to oscillations
-in the earth which are measured in terrestrial seismology.  The difference
+in the Earth which are measured in terrestrial seismology.  The difference
 between these modes is the restoring force bringing the perturbed state back to
 equilibrium.  For example, gravity is the restoring force for f-modes where the
 oscillations happen in the crust of the star.  The more promising of these for
@@ -446,10 +444,10 @@ For a more detailed view on how r-modes generate \gls{GW} see \citep{owen1998Gra
 %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
 
-The indirect detection of gravitational waves from the Hulse-Taylor binary
+The indirect detection of \glspl{GW} from the Hulse-Taylor binary
 pulsar system \citep{weisberg1981GravitationalWaves} left little doubt that \gls{GW} existed.  The
 real challenge was to design an instrument or develop a technique which could directly detect
-gravitational waves. There were a number or proposed methods, notably: resonant bar detectors, both
+\glspl{GW}. There were a number or proposed methods, notably: resonant bar detectors, both
 ground based and space based interferometers, pulsar timing arrays and cosmic microwave background (CMB)
 detectors. The first resonant bar detector was designed and built by Joseph
 Weber \citep{weber1966ObservationThermal}, this is a large cylinder of metal
@@ -459,7 +457,7 @@ of this type of detector, including an omni-directional design
 With pulsar timing arrays, the accurate arrival time of pulses
 from millisecond pulsars can be used to measure \gls{GW}
 \citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and
-the observer, the arrival time of the pulses will change. The change in arrival time depends on the source and its parameters, however, for supermassive black hole binaries emitting at nanohertz frequencies at around 1 Gpc, the change in arrival time is by $\mathcal{O}(10)$ ns \citep{hobbs2017GravitationalWave}.  \gls{CMB} detectors can be used to find evidence of \gls{GW} by investigating the B-mode polarisations of the \gls{CMB}
+the observer, the arrival time of the pulses will change. The change in arrival time depends on the source and its parameters, for supermassive black hole binaries emitting at nanohertz frequencies at around 1 Gpc, the change in arrival time is by $\mathcal{O}(10)$ ns \citep{hobbs2017GravitationalWave}.  \gls{CMB} detectors can be used to find evidence of \gls{GW} by investigating the B-mode polarisations of the \gls{CMB}
 \citep{ade2018ConstraintsPrimordial}. A number of
 detectors are used to look at the \gls{CMB} however, are yet to
 confirm a detection of a \gls{GW} signal.  
@@ -520,7 +518,7 @@ power.}
 \label{detectors:interferometer}
 \end{figure}
 
-This can be used in gravitational wave detection as the mirrors at the end of
+This can be used in \gls{GW} detection as the mirrors at the end of
 each arm of the interferometer can be treated as `free' test masses.  Figure
 \ref{gw:polarisations} shows the effect of a \gls{GW} on free test masses, where this can be seen by looking at the proper distance between two test masses.  If we
 place two test masses along the $x$ axis ($\mu = 1$) with separation $L_0$ where a

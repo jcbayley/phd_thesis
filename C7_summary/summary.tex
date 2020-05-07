@@ -6,79 +6,78 @@ This thesis outlines the current state of searches for \glspl{CW}, and describes
 Whilst \glspl{CW} have not yet been detected, they are expected to originate from rapidly rotating neutron stars which are not symmetric around their rotation axis.
 The expected signal is a quasi-sinusoidal signal which lasts for times longer than \glspl{LIGO} observing runs.
 The large observation times associated with this signal mean that methods that search for these signals need to run on large amounts of data.
-For many of these searches this large observations time along with the large parameter space, mean the computational time needed to complete a search is large. 
-Sec.~\ref{searchcw} outlines some of these methods and highlights the needed computing time.
-The new methods described in this thesis address the challenge of reducing the computational cost of searching for \glspl{CW}.
+For many of these searches the large observations times along with the large parameter space, mean that there is a large computational associated with each search. 
+Sec.~\ref{searchcw} outlines some \gls{CW} search methods and highlights the needed computing time.
+The new methods described in this thesis address the challenge of balancing the computational cost against the sensitivity when searching for \glspl{CW}.
 
 \bigskip
 
-Chapter \ref{soap} describes a search algorithm entitled SOAP which is un-modelled. 
+Chapter \ref{soap} describes a search algorithm entitled SOAP which is a mostly un-modelled \gls{CW} search. 
 This is based on the Viterbi algorithm which was designed to find the most likely set of states through a discrete Markov process.
-This has been utilised to search through time-frequency spectrograms for tracks in frequency which could originate from an astrophysical signal.
-Here the different states are the frequency bins in each given time segment.
-The algorithm can be constrained such that any track can only change by a given number of frequency bins at each time segment. 
-This is governed by a `transition matrix' described in Sec.~\ref{soap:viterbi:transition} and can focus the search on an expected astrophysical signal.
-The search then returns the frequency track which gives the highest value for the sum of some statistic.
-There are a number of statistics which were developed, the simplest being the \gls{FFT} power in a given frequency bin.
-This search though a single time-frequency spectrogram was then extended to search through multiple detectors, i.e. multiple time-frequency spectrograms.
+We utilised this algorithm to search through time-frequency spectrograms to identify frequency tracks which may be associated with a \gls{CW} signal.
+Some constraints can be places on the `model' of the frequency track here, where the track can be limited to change by a given number of frequency bins at each time segment. 
+This is governed by a `transition matrix' described in Sec.~\ref{soap:viterbi:transition} and can focus the search on an expected frequency evolution.
+The search then returns the frequency track which gives the highest value for the sum of a statistic at each time segment.
+There are a number of statistics which were developed, the simplest being the \gls{FFT} power in a given frequency bin and more complex Bayesian statistics were developed to be robust against instrumental artefacts.
+
+Initially this was a search though a single time-frequency spectrogram, in Sec.~\ref{soap:multidet} this was extended to search through multiple detectors, i.e. multiple time-frequency spectrograms.
 An astrophysical signal should have a similar high \gls{FFT} power in both detectors, therefore, the search was modified to look for consistent high powers.
 This simple statistic of the \gls{FFT} power encountered problems when frequency tracks of high \gls{FFT} power originated from instrumental affects as opposed to astrophysical ones.
 Specifically, the search is contaminated with instrumental lines which are long duration narrow band spectral artefacts. 
 In an attempt to mitigate the effect of these instrumental lines, a Bayesian statistic was developed in Sec.~\ref{soap:las}.
-This effectively down-weights \gls{FFT} powers which appear to be from instrumental lines, i.e. very high values or values which are high in only one detector, and rewards similar low values of the \gls{FFT} power.
-SOAP then searches for consistent \gls{SNR} between multiple detectors.
+This effectively down-weights normalised \gls{FFT} powers which appear to be from instrumental lines, e.g. power which are high in only one detector, and rewards similar low values of the normalised \gls{FFT} power.
+As the spectrograms SOAP searches through are normalised to their running median, this then searches for consistent \gls{SNR} between multiple detectors.
 However, these multiple detectors can have different sensitivities, therefore, the \gls{SNR} of the same astrophysical signal can be different in each detector.
-In Sec.~\ref{soap:lineawareamp}, the Bayesian statistic was modified to search for consistent signal amplitudes, i.e. consistent values of $h_0$, by incorporating the detector noise floor and fraction of observation data in each segment.
-These statistics had a set of parameters which were optimised to injections into each data-set. 
+In Sec.~\ref{soap:lineawareamp}, the Bayesian statistic was modified to search for consistent signal amplitudes, i.e. consistent values of $h_0$, by incorporating the detector noise floor and the fraction of the observation data in each segment.
+Each of these statistics had a set of parameters which were optimised based on \gls{CW} signals simulated in noise. 
 
 SOAP was then tested on three main data-sets containing simulations of \gls{CW} signals form isolated neutron stars.
-The data-sets include: Gaussian noise, Gaussian noise but with temporal gaps corresponding to time the detector was off in \glspl{LIGO} S6 data run, and in real S6 data, this was from a standard set generated to compare \gls{CW} searches sensitivity to isolated neutron stars.
-In this test we achieved a sensitivity similar to other \gls{CW} searches. \joe{more here}
-However, the computational cost of this search is orders of magnitude less than others. 
-SOAP is also not limited to search for isolated neutron stars, as it searches for track of high power, it is mostly un-modelled and can search for many signal types.
-Sec.~\ref{soap:sens:other} shows an example of the search identifying the first \gls{BNS} signal. 
-SOAP still has limitations however, the line aware statistic reduced the affect of instrumental lines, however, many contaminated frequency bands were still manually removed in the analysis.
-Sec.~\ref{machine} aims to address this problem.
+The data-sets include: Gaussian noise, Gaussian noise but with temporal gaps corresponding to time the detector was off in \glspl{LIGO} S6 data run, and in real \gls{LIGO} S6 data, which was from a standard set of simulations generated to compare \gls{CW} searches sensitivity to isolated neutron stars.
+In this test we achieved a sensitivity which is comparable to other \gls{CW} searches, achieving a sensitivity depth of $\sim 13 \, \rm{Hz}^{-1/2}$ at 95\% efficiency and 1\% false alarm. 
+However, the computational cost of this search is orders of magnitude less than those described in the S6 \gls{MDC} \citep{walsh2016ComparisonMethods}. 
+SOAP is also not limited to search for isolated neutron stars, as it searches for mostly un-modelled frequency tracks of high power, it can search for many signal types.
+Sec.~\ref{soap:sens:other} shows an example of this, where the search tested by searching for GW170817 which was first detected \gls{BNS} signal and GW150914 which was the first detected \gls{BBH} signal. 
+This test returned high values of the Viterbi statistic in areas of the time-frequency spectrum around the \gls{BNS} or \gls{BBH} signal, this would however require more investigation to determine a reliable detection statistic.
+SOAP still has limitations however, the line-aware statistic in Sec.~\ref{soap:las} reduced the affect of instrumental lines, however, many contaminated frequency bands were still manually removed in the analysis, where Chapter \ref{machine} aims to address this problem.
 
 There are a number of additions which we aim to add to this search in the future. 
 For example, there are additional statistics, such as using the Fourier transform of the detector power along the track in the \glspl{SFT}. 
-If an astrophysical signal is present then the effects of the antenna patters should be seen.
-Future work on this also includes using the output of the SOAP search to estimate parameters of the source. 
+If an astrophysical signal is present then the effects of the antenna pattern should be seen at a sidereal day.
+Future work on this also includes using the output of the SOAP search to estimate parameters of the source which will be discussed in Chapter \ref{par_est}. 
 
 \bigskip
 
-The next piece of work aimed to follow on from the SOAP algorithm using machine learning.
-One of the main challenges in the above search was the contamination of frequency bands with instrumental lines
-At this stage many bands were manually investigated and removed from the analysis if they were deemed to to be contaminated.
+The aim of Chapter \ref{machine} was to follow on from the SOAP algorithm in Chapter \ref{soap} using machine learning algorithms.
+One of the main challenges in the SOAP search was the contamination of frequency bands with instrumental lines.
+In Chapter \ref{soap}, we described how many bands were manually investigated and removed from the analysis if they were deemed to to be contaminated.
 This is a time consuming process and becomes impractical when searching over larger bandwidths.
-Therefore, we needed a way to classify these bands into containing a signal or not.
-A common tool in machine learning is deep neural networks. 
-These have been used extensively in image recognition and classification.
+Therefore, we needed a new way to classify these bands based on whether an instrumental line was present or not.
+
+A common tool in machine learning is deep neural networks which have been used extensively in image recognition and classification.
 Deep neural networks, specifically \glspl{CNN} are a tool well suited to the challenge above.
-Sec.~\ref{machine} contains details of how neural networks are structured and how they operate on a given input.
-This is followed by an explanation of how a \gls{CNN} operates.
-\glspl{CNN} are well suited to the task above as they were designed to take an image as input.
-The data we are trying to classify in this work is time-frequency spectrograms, these can be thought of as images.
-A \gls{CNN} can identify features within this image and extract useful information from them, such as whether an astrophysical signal is present in the data.
-An key part of using neural networks is training them this is described in detail in Sec.~\ref{machine:training}.
-Training a network involves showing it many examples of data which is labelled.
+Sec.~\ref{machine:nn} contains details of how neural networks are structured and how they operate on a given input, and is then followed by an explanation of how a \gls{CNN} operates in Sec.~\ref{machine:cnn}.
+\glspl{CNN} are well suited to the classification task described above as they were designed to identify features within an image, where the time-frequency spectrograms in our problem can be thought of as images.
+A \gls{CNN} can identify features within these images and extract useful information from them, for example it could classify whether an astrophysical signal is present in the data.
+
+In Sec.~\ref{machine:training} we describe a key part of using neural networks, which is training their many parameters.
+Training a network involves showing it many examples of data which is labelled based on the classes associated with the problem.
 This means in our examples, that a time-frequency spectrogram which contains an astrophysical signal is labelled to contain a signal and a spectrogram with noise or an instrumental line is labelled as noise.
 The many parameters of the network can then be updated such that given the set of training data, when any new example is shown to the network it returns a desired value.
-Training data-sets are generally very large, this allows the weights to be updated without over fitting. 
-We then designed \glspl{CNN} which took in three main types of data: down-sampled time-frequency spectrograms of \gls{LIGO} data, down-sampled output Viterbi maps and the output Viterbi statistic.
-The Viterbi maps and Viterbi statistic are different representations of the time-frequency spectrograms which are output from SOAP.
+Training data-sets are generally very large, this allows the weights to be updated without over fitting to a particular data-set. 
+
+We then designed \glspl{CNN} in Sec.~\ref{machine:cw:structure} which took in three main types of data: down-sampled time-frequency spectrograms of \gls{LIGO} data, down-sampled output Viterbi maps and the output Viterbi statistic.
+The Viterbi maps and Viterbi statistic are the SOAP outputs which are different representations of the time-frequency spectrograms.
 The time-frequency spectrograms and Viterbi maps were downsampled to reduce the amount of data passed through the \gls{CNN} and speed up the training time.
 There were then 6 main networks which took these data types and combinations of them as inputs. 
 The networks return a statistic which ranges between 0 and 1, and is used as a detection statistic. 
-Each of the 6 networks was tested on simulations into four data-sets: real \gls{LIGO} data observing runs O1, O2 ,and S6 and Gaussian noise.
-In each of these tests the \gls{CNN} which contributed most to the sensitivity was the network which took the Viterbi map as input.
-Therefore, for most results this is what was used. 
+Each of the 6 networks was tested on \gls{CW} simulations into four data-sets: Gaussian noise and real \gls{LIGO} data from the observing runs O1, O2 ,and S6
+In each of these tests the \gls{CNN} which contributed most to the sensitivity was the network which took the Viterbi map as input, therefore for most results in this Chapter we use the Viterbi \gls{CNN}. 
+
 This showed that applying a \gls{CNN} to the output Viterbi maps of the SOAP search eliminates the need to manually remove the contaminated bands.
-This method achieved the same sensitivity as the SOAP search alone, whilst reducing the time needed for the entire search.
-In this section a complete comparison the other all-sky \gls{CW} searches was conducted.
-A standard set of simulations is isolated neutron stars in \glspl{LIGO} S6 data-set was used.
-Where the signals which had frequencies in the range of 40-500 Hz were compared. 
-In this test we found that we sit amongst other all-sky searches, however, can run with a computational time orders of magnitude faster.
+This method achieved a similar sensitivity as the SOAP search alone in Chapter \ref{soap}, whilst fully automating the search and reducing the time needed to generate results.
+In this Chapter a complete comparison to some other all-sky \gls{CW} searches was conducted, where their sensitivities on a standard set of simulations of isolated neutron stars in \glspl{LIGO} S6 data-set was used.
+A comparison was made of the sensitivity to signal with frequencies in the range of 40-500 Hz, where we found that SOAP + \gls{CNN} has a sensitvity which is amongst that of other all-sky searches.
+This search however, can run with a computational time orders of magnitude faster. In Sec.~\ref{machine:results:timing} we compare the computational cost of the searches for the first four months of \gls{LIGO} O1 data, where the SOAP + \gls{CNN} search is $\sim 5 - 10$ thousand times faster than the next fastest all sky \gls{CW} search.
 
 \bigskip
 

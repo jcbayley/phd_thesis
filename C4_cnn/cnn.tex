@@ -7,7 +7,7 @@
 % Introduce machine learning
 %----------------------------
 
-Machine learning is a term which has been around since the 1950s, and is a subset of what is known as artificial intelligence.
+`Machine learning' is a term which has been around since the 1950s, and is a subset of what is known as `artificial intelligence'.
 This is a field which aims to use computers to learn information without being given explicit instructions.
 With the increase in available computing power in recent years along with the easier access to large data-sets, machine learning has become a much more accessible technique.
 One of the techniques in particular is a method known as deep learning which uses deep neural networks.
@@ -93,7 +93,7 @@ through all bands.
 
 We aim to automate how the search deals with instrumental lines by using \glspl{CNN}.
 These have been used extensively in image classification and we explain this in
-more detail in Sec.~\ref{cnn}. \glspl{CNN}
+more detail in Sec.~\ref{machine:cnn}. \glspl{CNN}
 have already been shown to detect gravitational wave signals from \glspl{CBC}
 in~\cite{gabbard2018MatchingMatched,george2018DeepLearning,gebhard2019ConvolutionalNeural}
 and other deep learning techniques have been used in searching for \gls{CW}
@@ -114,7 +114,8 @@ show the results from this search and compare to similar analyses.
 
 % introduce SOAP and show example of outputs
 %
-SOAP~\cite{bayley2019SOAPGeneralised} is an un-modelled search for long
+In Chapter \ref{soap} we introduced the SOAP algorithm. 
+To recap SOAP~\cite{bayley2019SOAPGeneralised} is an un-modelled search for long
 duration signals which is based on the Viterbi
 algorithm~\cite{viterbi1967ErrorBounds}. In its most simple form SOAP
 analyses a spectrogram to find the time-frequency track which gives the highest
@@ -187,7 +188,7 @@ A useful tool which can be used to classify this extra information is convolutio
 %%%%%%%%%%%
 %%%%%%%%%%%
 
-
+\joe{add some references in this section}
 Throughout this section I will summarise one machine learning technique known as a neural network. 
 Neural networks, as the name may suggest, were developed as a way for a computer to mimic neurons in the brain.
 To understand why this would be useful, one can try to design an algorithm to identify hand written digits.
@@ -918,7 +919,7 @@ Figs.~\ref{machine:results:o2},\ref{machine:results:s6gauss} and \ref{machine:re
 \subsubsection{O1}
 %%%%%%%%%%
 
-For the first test, injections were made into the O1 data-set as in Sec.~\ref{machine:data} between 100 Hz and 400 Hz. Then each of the 6 networks described in Sec.~\ref{machine:cnn:structure} were trained and tested on this data. 
+For the first test, injections were made into the O1 data-set as in Sec.~\ref{machine:data} between 100 Hz and 400 Hz. Then each of the 6 networks described in Sec.~\ref{machine:cw:structure} were trained and tested on this data. 
 Figure \ref{machine:results:o1} shows the sensitivity curves for this test for both \gls{SNR} and sensitivity depth for each of the 6 networks. Focusing on Fig.~\ref{machine:results:snr_o1}, the least sensitive, i.e. furthest to the right, of the \glspl{CNN} is the Viterbi statistic (vitstat), this is expected as we know that the Viterbi statistic is sensitive to instrumental lines. 
 The spectrogram \gls{CNN} has an improved sensitivity over the Viterbi statistic, this importantly does not involve the SOAP search but is run entirely on down-sampled and summed spectrograms. 
 Whilst this network is approaching the most sensitive of the examples in Fig.~\ref{machine:results:o1}, and with further efforts may reach it, this network takes $\sim10$ times the amount of training time. This will be explained in more detail in Sec.~\ref{machine:results:timing}.
@@ -1323,7 +1324,7 @@ After this point, the figures can be compared and it becomes obvious that differ
 
 % main summary - what the paper was about
 %
-In this paper we summarise an extension of the SOAP algorithm \citep{bayley2019SOAPGeneralised}.
+In this Chapter we summarise an extension of the SOAP algorithm \citep{bayley2019SOAPGeneralised}.
 The extension makes use of a \gls{CNN} to limit the effect of
 instrumental lines in a search for sources of \gls{CW}. 
 The SOAP search has a number of outputs for a given input

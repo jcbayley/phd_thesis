@@ -1,14 +1,12 @@
 \chapter[SOAP for CW searches.]{\label{soap} SOAP: A generalised application of the Viterbi algorithm to searches for continuous gravitational-wave signals.}
 %\epigraph{I've had it with these motherf****g snakes on this motherf****g plane}{ --- \textit{Samuel Jackson}, Snakes on a Plane}
 
-The SOAP search is a semi-coherent \gls{CW} search algorithm that aims to
-reduce the computational time needed to find a potential signal.  The algorithm
-looks though narrow-banded time-frequency spectrograms of data to find the
-`most probable track' in frequency through it.  This `most probable track' is
-then the most likely track which a pulsars frequency would follow.  The
-motivation of the search is simple, if we looked at a frequency band in a
-spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible
-randomly wandering track from a starting frequency bin to an end frequency bin.
+Searches for \glspl{CW} are notoriously computationally expensive, and it is important to investigate the trade off between computing power and sensitivity.
+In addition, these searches are generally highly tuned and are based around template matching methods. The SOAP algorithm described in this chapter aims to address both of these issues.
+
+SOAP searches though narrow-banded time-frequency spectrograms of data and identifies the `most probable track' in frequency through it.  This `most probable track' is then the most probable continuous track in what it otherwise noisy data.  
+The motivation of the search is simple, if we looked at a frequency band in a
+spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible track from a starting frequency bin to an end frequency bin.
 For each of these tracks the sum of the spectrogram power along the track can
 be found such that for each track there is a single value.
 Figure \ref{soap:motivation:plot} shows a histogram of a subset of these values, where the main distribution is from tracks which are through noise.
@@ -37,14 +35,14 @@ exceptions are work in Sec.~\ref{soap:lineawareamp},
 Sec.~\ref{soap:las:optimisation}, Sec.~\ref{soap:sensfreq} and
 Sec.~\ref{soap:sens:other} which is supplementary material.
 This was work done by the author
-under the supervision of Prof. Graham Woan and Dr. Chris Messenger.
+under the supervision of Prof. Graham Woan and Dr Chris Messenger.
 
 
 \begin{figure}[ht]
 
 \centering
 \includegraphics[width=\linewidth]{C3_soap/soap_spect_motivation.pdf}
-\caption[Example of frequency tracks through a spectrogram and their summed power.]{This figure shows an example of a time-frequency spectrogram which is typical of \gls{LIGO} data which is searched through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
+\caption[Example of frequency tracks through a spectrogram and their summed power.]{An example of a time-frequency spectrogram which is the typical \gls{LIGO} data SOAP searches through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
 \label{soap:motivation:plot}
 
 \end{figure}
@@ -645,7 +643,7 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 \includegraphics[width=0.9\linewidth]{C3_soap/lookup_noline.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 0$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0$. So the line part of the statistic is not operating.So the line part of the statistic is not
+\caption{The line-aware statistic is shown as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 0$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0$. So the line part of the statistic is not operating.So the line part of the statistic is not
 operating.}
 \label{soap:las:detp:noline}
 \end{minipage}
@@ -656,7 +654,7 @@ operating.}
 \includegraphics[width=0.9\columnwidth]{C3_soap/lookup_linesmall.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 5$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0.03$. Here we include the line part of the statistic.}
+\caption{The line-aware statistic is shown as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 5$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 0.03$. Here we include the line part of the statistic.}
 \label{soap:las:detp:linesmall}
 \end{minipage}
 \end{subfigure}
@@ -666,7 +664,7 @@ operating.}
 \includegraphics[width=0.9\columnwidth]{C3_soap/lookup_linebig.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the line-aware statistic as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 5$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 1$. Here the effect of lines is expected to be larger than the previous panel on the search. Therefore, the statistic forces the two detectors to have more similar power.}
+\caption{The line-aware statistic is shown as a function of it input from each detector. This example is for parameters $p(\lambda,w_{\rm{S}}) = 4$, $p(\lambda,w_{\rm{L}}) = 5$ and $p(M_{\rm{L}})/p(M_{\rm{G}}) = 1$. Here the effect of lines is expected to be larger than the previous panel on the search. Therefore, the statistic forces the two detectors to have more similar power.}
 \label{soap:las:detp:linebig}
 \end{minipage}
 \end{subfigure}
@@ -765,7 +763,7 @@ The asymmetry in Fig.~\ref{soap:lineawareamp:plot:linebig} demonstrates how as t
 \includegraphics[width=0.9\linewidth]{C3_soap/lookup_3d_2.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the line-aware statistic with consistent amplitude as a function of it input from each detector. This example is for an equal sensitivity and equal duty cycle for each of the detectors, i.e. $l=1$.}
+\caption{The line-aware statistic with consistent amplitude is shown as a function of it input from each detector. This example is for an equal sensitivity and equal duty cycle for each of the detectors, i.e. $l=1$.}
 \label{soap:lineawareamp:plot:noline}
 \end{minipage}
 \end{subfigure}
@@ -774,7 +772,7 @@ The asymmetry in Fig.~\ref{soap:lineawareamp:plot:linebig} demonstrates how as t
 \includegraphics[width=0.9\columnwidth]{C3_soap/lookup_3d_1.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the line-aware statistic with consistent amplitude as a function of it input from each detector. This example has L1 with a greater sensitivity and/or duty cycle than H1 where $l=0.55$. }
+\caption{The line-aware statistic with consistent amplitude is shown as a function of it input from each detector. This example has L1 with a greater sensitivity and/or duty cycle than H1 where $l=0.55$. }
 \label{soap:lineawareamp:plot:linesmall}
 \end{minipage}
 \end{subfigure}
@@ -784,7 +782,7 @@ The asymmetry in Fig.~\ref{soap:lineawareamp:plot:linebig} demonstrates how as t
 \includegraphics[width=0.9\columnwidth]{C3_soap/lookup_3d_0.pdf}
 \end{minipage}\hfill
 \begin{minipage}{0.35\linewidth}
-\caption{This shows the line-aware statistic with consistent amplitude as a function of it input from each detector. This example has L1 with a greater sensitivity and/or duty cycle than H1 where $l=0.1$.}
+\caption{The line-aware statistic with consistent amplitude is shown as a function of it input from each detector. This example has L1 with a greater sensitivity and/or duty cycle than H1 where $l=0.1$.}
 \label{soap:lineawareamp:plot:linebig}
 \end{minipage}
 \end{subfigure}
