@@ -175,15 +175,26 @@ this problem.
 %
 %
 
-The likelihood describes the probability of getting the data given a signal, where in this case our data is the Viterbi track $\bm{V}$ and our signal is the model frequency track $\bm{M}(\bm{\theta})$. 
-The aim is to find this probability distribution such that we can evaluate it for any model parameters $\bm{\theta}$.
+The likelihood describes the probability of getting~\chris{measuring} the data
+given a signal, where in this case our data is the Viterbi track $\bm{V}$ and
+our signal is the model frequency track $\bm{M}(\bm{\theta})$.  The aim is to
+find this probability distribution such that we can evaluate it for any model
+parameters $\bm{\theta}$~\chris{and any data?}.
 
-We define our likelihood from the deviation in frequency bins of the Viterbi track from a model frequency track given some parameters $\bm{\theta}$, i.e. $\bm{M}(\bm{\theta}) - \bm{V}$.
-If the simulated \gls{CW} signal has an infinitely large \gls{SNR}
-then the Viterbi track would follow the \gls{CW} frequency track exactly, giving a delta function with 0 variance for the deviation of the two frequency tracks. If conversely, the \gls{SNR} was zero then the Viterbi track would
-wander randomly through the frequency band independently of the \glspl{CW} frequency track,
-meaning that the deviation of the two frequency tracks would have a variance $\mathcal{O}(1)$ width of the frequency band.
-The distribution of these deviations is then dependent on the \gls{SNR} $\rho$ of the signal.  
+We define our likelihood from the deviation in frequency bins of the Viterbi
+track from a model frequency track given some parameters $\bm{\theta}$, i.e.
+$\bm{M}(\bm{\theta}) - \bm{V}$.  If the simulated \gls{CW} signal has an
+infinitely large \gls{SNR} then the Viterbi track would follow the \gls{CW}
+frequency track exactly, giving a delta function with 0 variance for the
+deviation of the two frequency tracks~\chris{which 2 tracks, the model and
+data? Remeber you have 2 detectors so it could be confusing unless you're super
+clear.}. If conversely, the \gls{SNR} was zero
+then the Viterbi track would wander randomly through the frequency band
+independently of the \glspl{CW} frequency track, meaning that the deviation of
+the two frequency tracks would have a variance $\mathcal{O}(1)$
+width~\chris{better to say $\mathcal{O}(\text{width})$} of the
+frequency band.  The distribution of these deviations is then dependent on the
+\gls{SNR} $\rho$ of the signal.  
 
 We can also think about how the Viterbi track will deviate from the model frequency track for different values of the parameters $\bm{\theta}$.
 For a fixed \gls{SNR} we assume that the deviation of the two tracks is independent of the parameters which define the frequency evolution of the signal. 
@@ -201,22 +212,27 @@ parameters.  As we have assumed the distribution of the deviations is independen
 element in the track and each simulation.
 At a fixed \gls{SNR}, the distribution of these deviations is the likelihood $\mathcal{L}$. 
 
-We can estimate the likelihood distribution using a \gls{KDE}
-of all our deviations $M_i - V_i$, where \gls{KDE} is a method to estimate a probability density function of a random variable.
-As the track deviations are integer frequency bin widths, the \gls{KDE} estimates the density of deviations at $0, \pm 1, \pm 2 .... \pm W$, where $W$ is the width of the frequency band in bins.
+We can estimate~\chris{model?} the likelihood distribution using a \gls{KDE} of
+all our deviations $M_i - V_i$, where \gls{KDE} is a method to estimate a
+probability density function of a random variable.  As the track deviations are
+integer frequency bin widths, the \gls{KDE} estimates the density of deviations
+at $0, \pm 1, \pm 2 .... \pm W$, where $W$ is the width of the frequency band
+in bins.~\chris{OK, but you don't actually enforce descreteness with the KDE.
+It thinks of the bin space as continuous. Is the descrteness important?}
 
-In this case our likelihood is also dependent on \gls{SNR},
-therefore, we split our simulations into bins of width \gls{SNR}
-2 between 40 and 200. Within each \gls{SNR} bin, this gives us $\sim 300$
-simulated tracks each with $\sim 400$ elements.  Figure
-\ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} of a
-subset of the\gls{SNR} bins. The sharp peaks in the center of
+In this case our likelihood is also dependent on \gls{SNR}, therefore, we split
+our simulations into bins of width \gls{SNR} 2 between 40 and 200~\chris{I
+ythought you were going to move to wider bins, maybe 10?}. Within each
+\gls{SNR} bin, this gives us $\sim 300$ simulated tracks each with $\sim 400$
+elements.  Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the
+\glspl{KDE} of a subset of the \gls{SNR} bins. The sharp peaks in the center of
 each \gls{KDE} in Fig.~\ref{par_est:bayes:likelihood:kde142} represents
 simulations where the Viterbi track is close to the simulated \gls{CW} track,
 and the broader distributions represent areas of the Viterbi track has not
-identified the \gls{CW} track but is wandering randomly.  Figure \ref{par_est:bayes:likelihood:kde142} shows that as the \gls{SNR} increases
-the distribution is more closely centred around 0, i.e. the Viterbi and
-\gls{CW} tracks are similar, which is expected.
+identified the \gls{CW} track but is wandering randomly~\chris{grammar}.
+Figure \ref{par_est:bayes:likelihood:kde142} shows that as the \gls{SNR}
+increases, the distribution is more closely centred around 0, i.e. the Viterbi
+and \gls{CW} tracks are similar, which is expected.
 
 %
 \begin{figure}[ht]
@@ -232,8 +248,11 @@ and 200.} \label{par_est:bayes:likelihood:kde142}
     \end{figure}
 %
 
-The dependence of the likelihood on the \gls{SNR} introduces one more parameter to search over in our
-Bayesian model, which is the \gls{SNR} $\rho$ of the signal.  The likelihood is binned in \gls{SNR} with widths of $\rho_w = 2$ as described above, therefore any value of $\rho$ which lies in the range $\rho_c \pm \rho_w/2 $ uses the likelihood \gls{KDE} $\mathcal{L}_{\rho_c}$, where $\rho_c$ is the bin center.
+The dependence of the likelihood on the \gls{SNR} introduces one more parameter
+to search over~\chris{or include?} in our
+Bayesian model, which is the \gls{SNR} $\rho$ of the signal~\chris{the
+likelig=hood depends on the SNR so we have to add one more parameter, the SNR
+to the model. Clunky sentence}.  The likelihood is binned in \gls{SNR} with widths of $\rho_w = 2$ as described above, therefore any value of $\rho$ which lies in the range $\rho_c \pm \rho_w/2 $ uses the likelihood \gls{KDE} $\mathcal{L}_{\rho_c}$, where $\rho_c$ is the bin center.
 The \glspl{KDE} $\mathcal{L}_{\rho_c}$ are then used to define the likelihood function $p(\bm{V} \mid
 \bm{\theta}, \rho, I)$ in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model
 $\alpha, \delta, f, \dot{f}$ and $\rho$.  Our likelihood where we assume
@@ -244,6 +263,7 @@ p(\bm{V} \mid \bm{\theta}, \rho, I) = \prod_{i =
 1}^{N} \mathcal{L}_{\rho_c}(M_i(\bm{\theta}) - V_i) , 
 \end{equation} 
 %
+~\chris{$\rho_{c}$ is a function of $\bm{\theta}$ or at least of $\rho$.}
 where $N$ is the length of the Viterbi track $\bm{V}$. 
 
 % Not currently doing this 
