@@ -228,7 +228,7 @@ p({\bm \theta} \mid {\bm d}, I) = \frac{p({\bm \theta}, I)p({\bm d} \mid {\bm \t
 %
 where each of the components are assigned names: $p({\bm \theta} \mid {\bm d})$
 is the posterior distribution, $p({\bm \theta})$ is the prior distribution,
-$p({\bm d} \mid {\bm \theta})$ is the likelihood and $p({\bm d})$ is the
+$p({\bm d} \mid {\bm \theta})$ is the likelihood, and $p({\bm d})$ is the
 Bayesian Evidence.
 
 \begin{description}
@@ -239,19 +239,20 @@ the distribution which is most useful as it informs you how likely any set of
 parameters from your model are given some observation.
 	
         \item [Prior] The Prior distribution is a key part of Bayesian
-statistics and is where some flexibility is allowed. However, this is a distribution of the parameters ${\bm \theta}$ of the model $I$ which should reflect any beliefs prior to the observations.
+statistics and is where some flexibility is allowed~\chris{I wouldn't word it
+this way - plus I wouldn't lead the description with it.}. However, this is a distribution of the parameters ${\bm \theta}$ of the model $I$ which should reflect any beliefs prior to the observations.
 	
         \item [Likelihood] The likelihood is where the observation is included
 in the calculation. This tells you how probable it is to get the observed data
 $d$ given the model $I$ with the set of parameters $\theta$. 
 	
-        \item [Bayeisan Evidence] This is the probability of the data itself
+        \item [Bayesian Evidence] This is the probability of the data itself
 given the choice of model. This is found by integrating the likelihood over all
 possible values of ${\bm \theta}$ weighting them by our prior belief of that
 value of ${\bm \theta}$. This is also known as the marginal
 likelihood and is defined by,
 	%
-        \begin{equation} \label{search:bayes:evidence} 
+        \begin{equation} \label{searchcw:bayes:evidence} 
             p({\bm d} \mid I) = \int p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I) d{\bm \theta}.
         \end{equation} 
 \end{description}
@@ -263,9 +264,10 @@ very few cases where this can be calculated analytically, therefore, numerical
 methods are often used to find the posterior.  This
 can be difficult to calculate numerically especially in problems where the
 parameter space has many dimensions.  The most difficult part to calculate is
-the Bayesian Evidence in Eq.~\ref{searchcw:bayes:evidence}, this involves calculating an
+the Bayesian Evidence in Eq.~\ref{searchcw:bayes:evidence},~\chris{not a comma
+location} this involves calculating an
 integral over all possible parameters.  There is however, a way around having
-to calculate this.  For any given model $I$, the Bayesian Evidence $p({\bm d}\mid I)$ is
+to calculate this~\chris{if you're only interested in the posterior}.  For any given model $I$, the Bayesian Evidence $p({\bm d}\mid I)$ is
 independent of any parameters ${\bm \theta}$ in
 Eq.~\ref{searchcw:bayes:bayes} and depends only on the model $I$.
 The Bayesian Evidence is then just a normalisation factor for the posterior
@@ -281,20 +283,47 @@ can then be found by a method known as `sampling'.
 
 \subsubsection{Sampling}
 
-Sampling a distribution, say the posterior $p(\bm{\theta} \mid \bm{d})$, means choosing a value (or sample) of the parameters $\bm{\theta}$ such that if we chose many independent samples of $\bm{\theta}$ the number within any range $\bm{\theta} \rightarrow \bm{\theta} + \delta \bm{\theta}$ is proportional to the height of the distribution $p(\bm{\theta} \mid \bm{d})$.
-One technique, known as rejection sampling, offers an intuitive way to understand what it means to generate samples from a distribution, where in this example I will assume a one dimensional distribution $p(\theta \mid \bm{d})$ for simplicity.
-One can, for example, uniformly generate random samples in a two dimensional space, where each sample has a value of $\theta_i$ and $p_i$ as the points in the first panel of Fig.~\ref{cwinto:bayes:sampling:rejection}.
-In this example we know the exact posterior distribution $p(\theta \mid \bm{d})$ and therefore can draw it over these points. 
-For each of these points, we can calculate the height of the distribution $p(\theta_i \mid \bm{d})$, where values of $\theta$ where $p_i > p(\theta_i, \mid \bm{d})$ are assumed to not be part of the distribution and ignored.
-The values of $\theta$ where $p_i < p(\theta_i \mid \bm{d})$ are then assumed to be sampled from the distribution $\theta$.
-One can see this is true from Fig.~\ref{cwinto:bayes:sampling:rejection}, in any range $\theta \rightarrow \theta + \delta \theta$ the density of accepted points (ones which fall below the $p(\theta \mid \bm{d})$ curve) is proportional to the height of $p(\theta \mid \bm{d})$.
-By taking the histogram of samples $\theta$, we find the density of the samples in a given $\theta \rightarrow \theta + \delta \theta$ and therefore a distribution which is proportional to $p(\theta \mid \bm{d})$ as shown in Fig.~\ref{cwinto:bayes:sampling:rejection} 
+Sampling a distribution, say the posterior $p(\bm{\theta} \mid \bm{d})$, means
+choosing a value (or sample) of the parameters $\bm{\theta}$ such that if we
+chose many independent samples of $\bm{\theta}$ the number within any range
+$\bm{\theta} \rightarrow \bm{\theta} + \delta \bm{\theta}$ is proportional to
+the height of the distribution $p(\bm{\theta} \mid \bm{d})$.  One technique,
+known as rejection sampling, offers an intuitive way to understand what it
+means to generate samples from a distribution, where in this example I will
+assume a one dimensional distribution $p(\theta \mid \bm{d})$ for simplicity.
+One can, for example, uniformly generate random samples in a two dimensional
+space, where each sample has a value of $\theta_i$ and $p_i$
+as~\chris{represented by?} the points in
+the first panel of Fig.~\ref{cwinto:bayes:sampling:rejection}.  In this example
+we know the exact posterior distribution $p(\theta \mid \bm{d})$ and therefore
+can draw it~\chris{don't use the word draw in this sense since "draw" also
+means to generate samples.} over these points.  For each of these points, we can calculate the
+height of the distribution $p(\theta_i \mid \bm{d})$, where values of $\theta$
+where $p_i > p(\theta_i, \mid \bm{d})$ are assumed to not be part of the
+distribution and ignored~\chris{you forgot to mention that the original 2D
+samples you make have to have a maximum at least as high as the target
+distribution maximum}. The values of $\theta$ where $p_i < p(\theta_i \mid
+\bm{d})$ are then assumed to be sampled from the distribution $\theta$.  One
+can see this is true from Fig.~\ref{cwinto:bayes:sampling:rejection}, in any
+range $\theta \rightarrow \theta + \delta \theta$ the density of accepted
+points (ones which fall below the $p(\theta \mid \bm{d})$ curve) is
+proportional to the height of $p(\theta \mid \bm{d})$.  By taking the histogram
+of samples $\theta$, we find the density of the samples in a given $\theta
+\rightarrow \theta + \delta \theta$ and therefore a distribution which is
+proportional to $p(\theta \mid \bm{d})$ as shown in
+Fig.~\ref{cwinto:bayes:sampling:rejection} 
+
 %
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\linewidth]{C2_cw/reject_sample.pdf}
-	\caption[Rejection sampling example]{Example of rejection sampling applied to a simple one dimensional Gaussian distribution. To top panel shows a number of samples $(\theta_i, p_i)$ with the true posterior $p(\theta)$ overlaid, where the green samples are accepted and red samples are rejected. The bottom panel shows a histogram of the accepted samples, where each bin contains the density of points in the range $\theta \rightarrow \theta + \delta \theta$.}
-	\label{cwinto:bayes:sampling:rejection}
+        \caption[Rejection sampling example]{Example of rejection sampling
+applied to a simple one dimensional Gaussian distribution. To top panel shows a
+number of samples $(\theta_i, p_i)$ with the true posterior $p(\theta)$
+overlaid, where the green samples are accepted and red samples are rejected.
+The bottom panel shows a histogram of the accepted samples, where each bin
+contains the density of points in the range $\theta \rightarrow \theta + \delta
+\theta$.} \label{cwinto:bayes:sampling:rejection}
 \end{figure}
 %
 
@@ -306,19 +335,28 @@ There are however other techniques which have been developed which can sample th
 \subsubsection{MCMC}
 %
 
-In practice we are interested in areas of high probability, i.e the larger values of the posterior, as this will correlate with the truth.
-Therefore, a method titled \gls{MCMC} can be used to concentrate the samples around areas of high probability, approximating the posterior distribution more efficiently, more information on this technique can be found in
+In practice we are interested in areas of high probability, i.e. the larger
+values of the posterior, as this will correlate with the truth~\chris{difficult
+to grasp the meaning of this sentence}.  Therefore, a method titled \gls{MCMC}
+can be used to concentrate the samples around areas of high probability,
+approximating the posterior distribution more efficiently,~\chris{you love
+misusing commas} more information on
+this technique can be found in
 \citep{metropolis1953EquationState,vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
-Rather than calculating the posterior for many independent locations in parameter space, an \gls{MCMC} algorithm randomly wanders around in parameter space such that the amount of time spent in any location is proportional to the height of the distribution.
-An example a simple \gls{MCMC} algorithm can be seen in Alg.~\ref{searchcw:bayes:mcmc_alg}.
+Rather than calculating the posterior for many independent locations in
+parameter space, an \gls{MCMC} algorithm randomly wanders around in parameter
+space such that the amount of time spent in any location is proportional to the
+height of the distribution.  An example of a simple \gls{MCMC} algorithm can be
+seen in Alg.~\ref{searchcw:bayes:mcmc_alg}.
 
-This builds up samples from posterior distribution by using a Markov chain, where each
+This~\chris{new paragraph so you can't refer to "This" - what is "This"?}
+builds up samples from the posterior distribution by using a Markov chain, where each
 step in the chain only depends on the previous step.  
 It starts by calculating the posterior value for a particular point in parameter space. Then it will
 randomly jump to another point parameter space, where a new value for the
 posterior can be calculated.  If the new posterior value is higher than the
 previous step then the jump is `accepted'. This just means that the parameter
-values of this point are stored.  If the posterior value is lower than the
+values of this point are stored~\chris{stored for what?}.  If the posterior value is lower than the
 previous step then the jump is accepted with a probability which is the ratio of the probabilities at the new and old locations.
 The probability of acceptance can be written as
 \begin{equation}
@@ -332,7 +370,11 @@ The probability of acceptance can be written as
 where $p(\theta_i \mid \bm{d})$ is the posterior value at the current parameter location and $p(\theta_{i-1} \mid \bm{d})$ is the posterior value at the previous parameter location. 
 This means that the accepted positions are located around areas of high
 posterior values, the \gls{MCMC} algorithm does not waste time calculating the
-posterior in uninteresting areas of parameter space.  
+posterior in uninteresting areas of parameter space~\chris{well this isn't the
+case unless you define a jump proposal
+distribution. In the text here you don't mention it but it is in the algorithm
+as a normal. The not wateing time part is only due to the fact that the juymp
+proposal makes it hard to jump very far from where you currently are}.  
 One can see this correctly samples the posterior distribution by thinking about the condition in Eq.~\ref{searchcw:bayes:mcmc:accept}. Say we only allow jumps between two locations in parameter space, one which corresponds to the maximum of the posterior and one at half of this value. 
 If we start at the maximum, the probability of accepting the jump to the parameter with half the value of the posterior is $0.5$. Repeating this many times would mean that the chain would jump to the lower value half the time, and therefore have half the samples at the parameter which is at half the maximum of the posterior. 
 The accepted samples then have a density proportional to the posterior distribution. 
@@ -361,7 +403,15 @@ The accepted samples then have a density proportional to the posterior distribut
 
 		%
 	\end{algorithmic}
-	\caption[Simple MCMC algorithm]{This is a basic pseudo MCMC algorithm, where we draw samples $\theta_i$ from the posterior distribution $p(\theta_i \mid \bm{d})$. Here $\mathcal{N}$ is some distribution which describes the jump to the new point in parameter space and $U(0,1)$ is a values drawn from a uniform distribution between 0 and 1. This algorithm returns a set of samples $S$ from the posterior distribution $p(\theta_i \mid \bm{d})$. \label{searchcw:bayes:mcmc_alg}}
+        \caption[Simple MCMC algorithm]{This is a basic pseudo MCMC algorithm,
+where we draw samples $\theta_i$ from the posterior distribution $p(\theta_i
+\mid \bm{d})$. Here $\mathcal{N}$ is some distribution~\chris{this is usually
+reserved to refer to a Normal distribution not an artibtrary one} which describes the jump
+to the new point in parameter space and $U(0,1)$ is a values drawn from a
+uniform distribution between 0 and 1. This algorithm returns a set of samples
+$S$ from the posterior distribution $p(\theta_i \mid \bm{d})$.
+\label{searchcw:bayes:mcmc_alg}}
+
 \end{algorithm}
 
 %
@@ -378,8 +428,13 @@ B = \frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)}.
 \end{equation}
 %
 This then requires the calculation of the
-Bayesian Evidence. \gls{MCMC} methods can estimate this, however are inefficient, therefore a method known as Nested
-sampling was developed to solve this problem \citep{skilling2006NestedSampling,speagle2019DynestyDynamic}.
+Bayesian Evidence. \gls{MCMC} methods can estimate this~\chris{can they? Not
+the masic versions. Give references?}, however they are inefficient, and therefore a method known as Nested
+sampling was developed to solve this problem
+\citep{skilling2006NestedSampling,speagle2019DynestyDynamic}.~\chris{bit clunky
+this paragraph. We need the evidence to make the bayes factor and therefore we
+need the evidence. Also, you don't actually say in words what the bayes factor
+literally is. You say compare models but then go no further.}
 
 In nested sampling, rather than directly sampling from the posterior as in \gls{MCMC}, the posterior is broken into `slices' where samples are generated from each `slice'.
 The posterior is reconstructed by combining the samples using weights associated with each slice.
@@ -396,17 +451,31 @@ The Bayesian Evidence is then defined as
 Z = p(\bm{d} \mid I) = \int \mathcal{L}(\theta) \pi(\theta) d\theta = \int_0^1 \mathcal{L}(X) dX,
 \end{equation}
 where $\mathcal{L}(X)$ is the value of the likelihood where $P(\mathcal{L}(\theta) > \lambda) = X$. One can find how we can get to this integral in Appendix \ref{appb}.
-The integral for the Bayesian Evidence has then been transformed to a one dimensional integral between 0 and 1 over the priori mass rather than a potentially multidimensional integral over $\theta$.
+The integral for the Bayesian Evidence has then been transformed to a one dimensional integral between 0 and 1 over the prior mass rather than a potentially multidimensional integral over $\theta$.
 
-In Fig.~\ref{cwinto:bayes:nestedsampling:plots} the prior mass is shown for a given value of $\lambda$ as the blue shaded area in the first panel, where the limits are defined by the likelihood.
+In Fig.~\ref{cwinto:bayes:nestedsampling:plots} the prior mass is shown for a
+given value of $\lambda$ as the blue shaded area in the first panel, where the
+limits are defined by the likelihood~\chris{what limits? I dont understand this
+statement}.
 One can then see that when $\lambda= 0$ the prior mass must be one, and as $\lambda \rightarrow \infty$ the prior mass must approach zero. The bottom right panel of Fig.~\ref{cwinto:bayes:nestedsampling:plots} shows the equivalent plot where as the prior mass decreases, the value of the likelihood at that prior mass increases.
 The two representations of the Bayesian Evidence defined in Eq.~\ref{searchcw:bayes:nested:evidence} can then be seen as the integral of the lower two panels in Fig.~\ref{cwinto:bayes:nestedsampling:plots} respectively, where the shaded regions represent $Z$. 
 %
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\linewidth]{C2_cw/nested_plots.pdf}
-	\caption[Nested sampling]{An example of a prior distribution and a likelihood are shown in the first panel for a 1D distribution, where the prior mass $X(\lambda)$ is the shaded region for a given $\lambda$ defined in Eq.~\ref{searchcw:bayes:nested:priormass}. The bottom left panel then shows $\pi(\theta)\mathcal{L}(\theta)$, where the integral of this defined in Eq.~\ref{searchcw:bayes:nested:evidence} is the Evidence $Z$. The bottom right panel shows the likelihood as a function of prior mass which or any number of parameters is a 1D integral, where again the integral of this is the Evidence in Eq.~\ref{searchcw:bayes:nested:evidence}.}
-	\label{cwinto:bayes:nestedsampling:plots}
+        \caption[Nested sampling]{An example of a prior distribution and a
+likelihood are shown in the first panel for a 1D distribution, where the prior
+mass $X(\lambda)$ is the shaded region for a given $\lambda$ defined in
+Eq.~\ref{searchcw:bayes:nested:priormass}. The bottom left panel then shows
+$\pi(\theta)\mathcal{L}(\theta)$, where the integral of this defined in
+Eq.~\ref{searchcw:bayes:nested:evidence} is the Evidence $Z$. The bottom right
+panel shows the likelihood as a function of prior mass which or any number of
+parameters is a 1D integral, where again the integral of this is the Evidence
+in Eq.~\ref{searchcw:bayes:nested:evidence}.~\chris{very nice but I would
+recommend using a higher value of lambda for this plot because it's hard to see
+the upper boundary of the blue area. 0.25 would be better.}}
+\label{cwinto:bayes:nestedsampling:plots}
+
 \end{figure}
 %
 
@@ -419,7 +488,7 @@ This would just be summing the area in columns under the curve in the bottom rig
 
 Nested sampling algorithms instead estimate $Z$ by drawing samples from the constrained prior mass as described in Alg.~\ref{searchcw:bayes:nested_alg}.
 One could take $N_{\rm{live}}$ samples (or live points) of $\theta$ from the prior distribution $\pi(\theta)$, then calculate the minimum value of the likelihood for these values $\mathcal{L}_{\rm{min}}$ and save the values of the parameters $\theta_{\rm{min}}$ associated with this likelihood.
-The sample $\theta_{\rm{min}}$ can the be replaced with a new sample from the prior distribution with the constraint that $\mathcal{L}(\theta) > \mathcal{L}_{\rm{min}}$. This process can then be repeated a number $M$ times.
+The sample $\theta_{\rm{min}}$ can then be replaced with a new sample from the prior distribution with the constraint that $\mathcal{L}(\theta) > \mathcal{L}_{\rm{min}}$. This process can then be repeated a number $M$ times.
 This then records samples $\theta_{\rm{min}}$ after each step such that the values of $\mathcal{L}_{\rm{min}}$ are increasing, and therefore $X$ is decreasing
 \begin{equation}
 	0 < X_M < ... < X_1 < X_0 = 1.
@@ -429,6 +498,9 @@ However, rather than doing this calculation, we can assume the prior mass is a r
 \begin{equation}
 E[X_i] \approx \exp{\left(-\frac{i}{N_{\rm{live}}}\right)},
 \end{equation}
+%
+~\chris{can you explain how you get this equation? It's based on the
+probability of the lowest value of X at each step}
 and after each step set $X_i = E[X_i]$ \citep{feroz2019ImportanceNested}.
 This tells us that using this algorithm the log-prior mass shrinks by a factor $\sim -1/N_{\rm{live}}$ after each iteration \citep{speagle2019DynestyDynamic}. 
 
@@ -462,7 +534,11 @@ This tells us that using this algorithm the log-prior mass shrinks by a factor $
 		
 		%
 	\end{algorithmic}
-	\caption[Nested sampling algorithm]{ Nested sampling algorithm from \citep{speagle2019DynestyDynamic}. This describes how the evidence integral in Eq.~\ref{searchcw:bayes:nested:evidence} can be approximated by sampling over increasingly smaller prior masses. \label{searchcw:bayes:nested_alg}}
+        \caption[Nested sampling algorithm]{ Nested sampling algorithm from
+\citep{speagle2019DynestyDynamic}. This describes how the evidence integral in
+Eq.~\ref{searchcw:bayes:nested:evidence} can be approximated by sampling over
+increasingly smaller prior masses.~\chris{I don't understand the second while
+loop. What is it supposed to be doing?} \label{searchcw:bayes:nested_alg}}
 \end{algorithm}
 %
 
@@ -478,12 +554,17 @@ Nested sampling also provides an estimate of the posterior distribution as well 
 \begin{equation}
 	p(\theta \mid \bm{d}, I) \approx \frac{\sum_{i=1}^{M} p(\theta_i) \delta^{\theta}_{\theta_i}}{\sum_{i=1}^{M} p(\theta_i) }.
 \end{equation}
-where $\delta^{\theta}_{\theta_i}$ is the Dirac delta function \citep{speagle2019DynestyDynamic}.
+where $\delta^{\theta}_{\theta_i}$ is the Dirac~\chris{well it looks llike the
+Kronecker to me. Best to use the notation $\delta(\theta-\theta_{i})$.} delta
+function \citep{speagle2019DynestyDynamic}.~\chris{this is correct and leaves
+you with a sea of delta functions. Are you able to say anything about what you
+then do with these, i.e., histgram them?}
 
 The methods described above then provide a way to estimate parameters of a
 model given some data.  Also this provides a way to compare different models
-given some observation.  In chapters \ref{soap}, \ref{machine} and \ref{par_est} the methods
-described above are used to estimate various parameters.
+given some observation.  In chapters \ref{soap}, \ref{machine} and
+\ref{par_est} the methods described above are used to estimate various
+parameters.
 
 %%%%%%%%%%%
 %%%%%%%%%%%%%
