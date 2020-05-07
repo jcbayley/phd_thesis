@@ -264,10 +264,9 @@ very few cases where this can be calculated analytically, therefore, numerical
 methods are often used to find the posterior.  This
 can be difficult to calculate numerically especially in problems where the
 parameter space has many dimensions.  The most difficult part to calculate is
-the Bayesian Evidence in Eq.~\ref{searchcw:bayes:evidence},~\chris{not a comma
-location} this involves calculating an
-integral over all possible parameters.  There is however, a way around having
-to calculate this~\chris{if you're only interested in the posterior}.  For any given model $I$, the Bayesian Evidence $p({\bm d}\mid I)$ is
+the Bayesian Evidence in Eq.~\ref{searchcw:bayes:evidence} which involves calculating an
+integral over all possible parameters.  However, if you are only interested in the posterior there is a way around having
+to calculate this.  For any given model $I$, the Bayesian Evidence $p({\bm d}\mid I)$ is
 independent of any parameters ${\bm \theta}$ in
 Eq.~\ref{searchcw:bayes:bayes} and depends only on the model $I$.
 The Bayesian Evidence is then just a normalisation factor for the posterior
@@ -293,11 +292,10 @@ means to generate samples from a distribution, where in this example I will
 assume a one dimensional distribution $p(\theta \mid \bm{d})$ for simplicity.
 One can, for example, uniformly generate random samples in a two dimensional
 space, where each sample has a value of $\theta_i$ and $p_i$
-as~\chris{represented by?} the points in
+as represented by the points in
 the first panel of Fig.~\ref{cwinto:bayes:sampling:rejection}.  In this example
 we know the exact posterior distribution $p(\theta \mid \bm{d})$ and therefore
-can draw it~\chris{don't use the word draw in this sense since "draw" also
-means to generate samples.} over these points.  For each of these points, we can calculate the
+can plot it over these points.  For each of these points, we can calculate the
 height of the distribution $p(\theta_i \mid \bm{d})$, where values of $\theta$
 where $p_i > p(\theta_i, \mid \bm{d})$ are assumed to not be part of the
 distribution and ignored~\chris{you forgot to mention that the original 2D
@@ -339,8 +337,7 @@ In practice we are interested in areas of high probability, i.e. the larger
 values of the posterior, as this will correlate with the truth~\chris{difficult
 to grasp the meaning of this sentence}.  Therefore, a method titled \gls{MCMC}
 can be used to concentrate the samples around areas of high probability,
-approximating the posterior distribution more efficiently,~\chris{you love
-misusing commas} more information on
+approximating the posterior distribution more efficiently. More information on
 this technique can be found in
 \citep{metropolis1953EquationState,vanravenzwaaij2018SimpleIntroduction,sharma2017MarkovChain}.
 Rather than calculating the posterior for many independent locations in
@@ -471,9 +468,7 @@ $\pi(\theta)\mathcal{L}(\theta)$, where the integral of this defined in
 Eq.~\ref{searchcw:bayes:nested:evidence} is the Evidence $Z$. The bottom right
 panel shows the likelihood as a function of prior mass which or any number of
 parameters is a 1D integral, where again the integral of this is the Evidence
-in Eq.~\ref{searchcw:bayes:nested:evidence}.~\chris{very nice but I would
-recommend using a higher value of lambda for this plot because it's hard to see
-the upper boundary of the blue area. 0.25 would be better.}}
+in Eq.~\ref{searchcw:bayes:nested:evidence}.}
 \label{cwinto:bayes:nestedsampling:plots}
 
 \end{figure}
@@ -523,7 +518,8 @@ This tells us that using this algorithm the log-prior mass shrinks by a factor $
 		\STATE{Evaluate stopping criterion}
 		\STATE{$i = i+1$}
 		\ENDWHILE
-		
+		\STATE
+		\STATE{Estimate the final prior volume for }
 		\WHILE{$N_{\rm{live}} > 0$}
 			\STATE{$\mathcal{L}^{\rm{min}} = \rm{min}\left\{\mathcal{L}(\theta_1),...\mathcal{L}(\theta_{N_{\rm{live}}})\right\}$} \COMMENT{compute minimum likelihood of current live points}
 			\STATE{$D_i  = \theta_n$ } \COMMENT{add the live point $\theta_n$ associated with $\mathcal{L}^{\rm{min}}$ to list of `dead' points $D$.}
@@ -552,10 +548,9 @@ This then gives an estimate of the Bayesian Evidence, for more details on this a
 
 Nested sampling also provides an estimate of the posterior distribution as well as the Bayesian Evidence, from the set of samples (dead points) 
 \begin{equation}
-	p(\theta \mid \bm{d}, I) \approx \frac{\sum_{i=1}^{M} p(\theta_i) \delta^{\theta}_{\theta_i}}{\sum_{i=1}^{M} p(\theta_i) }.
+	p(\theta \mid \bm{d}, I) \approx \frac{\sum_{i=1}^{M} p(\theta_i) \delta(\theta - \theta_i)}{\sum_{i=1}^{M} p(\theta_i) }.
 \end{equation}
-where $\delta^{\theta}_{\theta_i}$ is the Dirac~\chris{well it looks llike the
-Kronecker to me. Best to use the notation $\delta(\theta-\theta_{i})$.} delta
+where $\delta( \theta - \theta_i)$ is the Dirac delta
 function \citep{speagle2019DynestyDynamic}.~\chris{this is correct and leaves
 you with a sea of delta functions. Are you able to say anything about what you
 then do with these, i.e., histgram them?}
