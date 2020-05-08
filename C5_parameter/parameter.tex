@@ -81,22 +81,22 @@ If we assume the orbit is circular, then the position of the earth in its orbit
 is described in Cartesian coordinates as
 %
 \begin{equation}
-    \bm{r}_{\rm{orb}} = R_{\mathrm{O}}
+    \bm{r}_{\rm{orb}} = R_{\mathrm{orb}}
     \left(
     \begin{matrix}
-        \cos{\left( \Omega_{\mathrm{O}} t + \phi_{\mathrm{O}}  \right)}  \\
-        \sin{\left( \Omega_{\mathrm{O}} t + \phi_{\mathrm{O}}  \right)} \\
+        \cos{\left( \Omega_{\mathrm{orb}} t   \right)}  \\
+        \sin{\left( \Omega_{\mathrm{orb}} t   \right)} \\
         0 \\
     \end{matrix} \right),
 \end{equation}
 %
-where $R_{\mathrm{O}}$ is the radius of the earth's orbit (1 AU),
-$\Omega_{\mathrm{O}}$ is the angular frequency of the earth's orbit
-$2\pi/T_{\mathrm{O}}$, where $T_{\mathrm{O}}$ is one year. The phase $\phi_{O}$ defines the position of the earth in its orbital motion at $t=0$, this is the angle between the Sun and the first point of Aires at $t=0$\joe{check this}.  The
+where $R_{\mathrm{orb}}$ is the radius of the earth's orbit (1 AU),
+$\Omega_{\mathrm{orb}}$ is the angular frequency of the earth's orbit
+$2\pi/T_{\mathrm{orb}}$, where $T_{\mathrm{orb}}$ is one year and the time $t=0$ is when the earth is at the spring equinox.  The
 position due to the rotation of the earth can then be described by 
 %
 \begin{equation}
-    \bm{r}_{\rm{rot}} = R_{\mathrm{R}}
+    \bm{r}_{\rm{rot}} = R_{\mathrm{rot}}
     \left(
     \begin{matrix}
         1 & 0 & 0  \\
@@ -105,16 +105,16 @@ position due to the rotation of the earth can then be described by
     \end{matrix} \right)
     \left(
     \begin{matrix}
-        \cos{(\beta)}\cos{\left( \Omega_{\mathrm{R}} t + \phi_{\mathrm{R}}  \right)}  \\
-        \cos{(\beta)}\sin{\left( \Omega_{\mathrm{R}} t + \phi_{\mathrm{R}}  \right)} \\
+        \cos{(\beta)}\cos{\left( \Omega_{\mathrm{rot}} t + \phi_{\mathrm{rot}}  \right)}  \\
+        \cos{(\beta)}\sin{\left( \Omega_{\mathrm{rot}} t + \phi_{\mathrm{rot}}  \right)} \\
         \sin{(\beta)} \\
     \end{matrix} \right),
 \end{equation}
 %
-where $R_{\mathrm{R}}$ is the radius of the earth, $\Omega_{\mathrm{R}}$ is the
+where $R_{\mathrm{rot}}$ is the radius of the earth, $\Omega_{\mathrm{rot}}$ is the
 angular frequency of the earth's rotation $2\pi/T_{\mathrm{R}}$, where
-$T_{\mathrm{R}}$ is one day and $\beta$ is the detectors latitude. The phase $\phi_{\mathrm{R}}$ defines the position of the earth in its rotation at $t=0$ and is determined by $\phi_{\mathrm{R}} = \rm{LST}_{t=0} = \rm{GMST}_{t=0} - \lambda$, where $\lambda$  is the longitude of
-the detectors site, the \gls{GMST} is the angle between the first point of Aires and the Greenwich meridian and the LST is the local sidereal time. The sum of these two components
+$T_{\mathrm{rot}}$ is one day and $\beta$ is the detectors latitude. The phase $\phi_{\mathrm{rot}}$ defines the position of the earth in its rotation at $t=0$ and is determined by $\phi_{\mathrm{rot}} = \rm{LST}_{t=0} = \rm{GMST}_{t=0} - \lambda$, where $\lambda$  is the longitude of
+the detectors site, the \gls{GMST} is the angle between the first point of Aries and the Greenwich meridian and the LST is the local sidereal time. The sum of these two components
 then define the location of the detector in the \gls{SSB} frame
 %
 \begin{equation}
@@ -129,9 +129,9 @@ $\dot{f}$.  We can write the phase evolution from Eq.~\ref{searchcw:model:phase}
 \begin{equation}
     \label{par_est:freq:ph_evolution}
     \begin{split}
-        \Phi(t) = 2\pi \left(  f_0 t + \frac{\dot{f} t^2}{2} \right) &+ \frac{2\pi}{c} \left(  f_0 + \dot{f}t  \right) \left\{ R_{\rm{O}} \left[ \cos \alpha \cos \delta \cos \left( \Omega_{\mathrm{O}} t + \phi_{O}  \right) \right. \right. \\ 
-        &+ \left. \left( \cos \epsilon \cos \alpha \cos \delta +  \sin \epsilon \sin \delta \right) \sin \left( \Omega_{\mathrm{O}} t + \phi_{O}  \right) \right] \\
-        &+ \left. R_{\rm{R}} \left[ \sin \beta \sin \delta + \cos \beta \cos \delta \cos \left( \alpha - \Omega_{\mathrm{R}} t - \phi_{R}  \right)     \right] \right\},
+        \Phi(t) = 2\pi \left(  f_0 t + \frac{\dot{f} t^2}{2} \right) &+ \frac{2\pi}{c} \left(  f_0 + \dot{f}t  \right) \left\{ R_{\rm{orb}} \left[ \cos \alpha \cos \delta \cos \left( \Omega_{\mathrm{orb}} t \right) \right. \right. \\ 
+        &+ \left. \left( \cos \epsilon \cos \alpha \cos \delta +  \sin \epsilon \sin \delta \right) \sin \left( \Omega_{\mathrm{orb}} t  \right) \right] \\
+        &+ \left. R_{\rm{rot}} \left[ \sin \beta \sin \delta + \cos \beta \cos \delta \cos \left( \alpha - \Omega_{\mathrm{rot}} t - \phi_{rot}  \right)     \right] \right\},
     \end{split}
 \end{equation}
 %
@@ -173,24 +173,22 @@ this problem.
 %
 %
 
-The likelihood describes the probability of getting~\chris{measuring} the data
+The likelihood describes the probability of measuring the data
 given a signal, where in this case our data is the Viterbi track $\bm{V}$ and
 our signal is the model frequency track $\bm{M}(\bm{\theta})$.  The aim is to
 find this probability distribution such that we can evaluate it for any model
-parameters $\bm{\theta}$~\chris{and any data?}.
+parameters $\bm{\theta}$ and any data $\bm{V}$.
 
 We define our likelihood from the deviation in frequency bins of the Viterbi
 track from a model frequency track given some parameters $\bm{\theta}$, i.e.
 $\bm{M}(\bm{\theta}) - \bm{V}$.  If the simulated \gls{CW} signal has an
 infinitely large \gls{SNR} then the Viterbi track would follow the \gls{CW}
 frequency track exactly, giving a delta function with 0 variance for the
-deviation of the two frequency tracks~\chris{which 2 tracks, the model and
-data? Remeber you have 2 detectors so it could be confusing unless you're super
-clear.}. If conversely, the \gls{SNR} was zero
+deviation of the Viterbi and \gls{CW} frequency tracks. If conversely, the \gls{SNR} was zero
 then the Viterbi track would wander randomly through the frequency band
 independently of the \glspl{CW} frequency track, meaning that the deviation of
-the two frequency tracks would have a variance $\mathcal{O}(1)$
-width~\chris{better to say $\mathcal{O}(\text{width})$} of the
+the two frequency tracks would have a variance $\mathcal{O}(\text{width})$
+width of the
 frequency band.  The distribution of these deviations is then dependent on the
 \gls{SNR} $\rho$ of the signal.  
 
@@ -209,22 +207,14 @@ Sec.~\ref{soap:results} returns a Viterbi track associated with the simulated
 parameters.  As we have assumed the distribution of the deviations is independent of the position in the track, we can calculate the difference between the Viterbi track and simulated \gls{CW} frequency track $M_i(\bm{\theta}^{\rm{sim}}) - V_i$ for each
 element in the track and each simulation .
 At a fixed \gls{SNR}, the density of these at a given deviation is the likelihood $\mathcal{L}$. 
-
-
-We can estimate~\chris{model?} the likelihood distribution using a \gls{KDE} of
-all our deviations $M_i - V_i$, where \gls{KDE} is a method to estimate a
-probability density function of a random variable.  As the track deviations are
-integer frequency bin widths, the \gls{KDE} estimates the density of deviations
-at $0, \pm 1, \pm 2 .... \pm W$, where $W$ is the width of the frequency band
-in bins.~\chris{OK, but you don't actually enforce descreteness with the KDE.
-It thinks of the bin space as continuous. Is the descrteness important?}
+We can model the likelihood distribution by finding the histogram of the track deviations.  As the track deviations are
+integer frequency bin widths, the histogram bins centers are at $0, \pm 1, \pm 2 .... \pm W$, where $W$ is the width of the frequency band
+in bins.
 
 In this case our likelihood is also dependent on \gls{SNR}, therefore, we split
-our simulations into bins of width \gls{SNR} 2 between 40 and 200~\chris{I
-ythought you were going to move to wider bins, maybe 10?}. Within each
+our simulations into bins of width \gls{SNR} 2 between 40 and 200. Within each
 \gls{SNR} bin, this gives us $\sim 300$ simulated tracks each with $\sim 400$
-elements.  Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the
-\glspl{KDE} of a subset of the \gls{SNR} bins. The sharp peaks in the center of
+elements.  In Fig.~\ref{par_est:bayes:likelihood:kde142}, rather than using a histogram we use a \gls{KDE}, which is a different method to estimate the probability density, this is the same result but makes the likelihood easier to interpret in a plot. Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} for a subset of the \gls{SNR} bins. The sharp peaks in the center of
 each \gls{KDE} in Fig.~\ref{par_est:bayes:likelihood:kde142} represents
 simulations where the Viterbi track is close to the simulated \gls{CW} track,
 and the broader distributions represent areas of the Viterbi track has not
@@ -237,8 +227,7 @@ and \gls{CW} tracks are similar, which is expected.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/KDE_range_40_200.pdf}
-    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows
-the \gls{KDE} estimates of the probability density of the deviation of the recovered Viterbi track from
+    \caption[KDE of likelihood in different \gls{SNR} ranges]{The likelihood can be modelled by using an \gls{KDE} or a histogram. Here we show the \gls{KDE} of the deviation of the recovered Viterbi track from
 the simulated (injected) \gls{CW} frequency track for a number of \gls{SNR} ranges. The deviation of the track is
 measured in discrete frequency bins. Each \gls{KDE} is generated from $\sim
 300$ simulations which each have $\sim 400$ elements in their frequency tracks.
@@ -247,11 +236,9 @@ and 200.} \label{par_est:bayes:likelihood:kde142}
     \end{figure}
 %
 
-The dependence of the likelihood on the \gls{SNR} introduces one more parameter
-to search over~\chris{or include?} in our
-Bayesian model, which is the \gls{SNR} $\rho$ of the signal~\chris{the
-likelig=hood depends on the SNR so we have to add one more parameter, the SNR
-to the model. Clunky sentence}.  The likelihood is binned in \gls{SNR} with widths of $\rho_w = 2$ as described above, therefore any value of $\rho$ which lies in the range $\rho_c \pm \rho_w/2 $ uses the likelihood \gls{KDE} $\mathcal{L}_{\rho_c}$, where $\rho_c$ is the bin center.
+The dependence of the likelihood on the \gls{SNR} $\rho$ introduces one more parameter
+to include in our Bayesian model.  
+The likelihood is binned in \gls{SNR} with widths of $\rho_w = 2$ as described above, therefore any value of $\rho$ which lies in the range $\rho_c \pm \rho_w/2 $ uses the likelihood \gls{KDE} $\mathcal{L}_{\rho_c}$, where $\rho_c$ is the bin center.
 The \glspl{KDE} $\mathcal{L}_{\rho_c}$ are then used to define the likelihood function $p(\bm{V} \mid
 \bm{\theta}, \rho, I)$ in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model
 $\alpha, \delta, f, \dot{f}$ and $\rho$.  As we assume
@@ -259,10 +246,9 @@ independent track elements for a given Viterbi track, the likelihood is then the
 %
 \begin{equation} 
 p(\bm{V} \mid \bm{\theta}, \rho, I) = \prod_{i =
-1}^{N} \mathcal{L}_{\rho_c}(M_i(\bm{\theta}) - V_i) , 
+1}^{N} \mathcal{L}_{\rho_c(\rho)}(M_i(\bm{\theta}) - V_i) , 
 \end{equation} 
 %
-~\chris{$\rho_{c}$ is a function of $\bm{\theta}$ or at least of $\rho$.}
 where $N$ is the length of the Viterbi track $\bm{V}$. 
 
 % Not currently doing this 
@@ -482,17 +468,8 @@ distribution.  For the \gls{SNR} parameter $\rho$, the recovered posterior is
 both shifted to the right and is over constrained, i.e. we assume higher
 \glspl{SNR} than perfectly recovered distribution.  For both the right
 ascension parameter $\alpha$ and the declination parameter $\delta$, we can see
-that we recover a mixture of an under-constrained and over-constrained posterior distribution.  
+that we recover an over-constrained posterior distribution at 95\% confidence.  
 
-However, as the modes are widely separated, if the true parameter lies between the two modes
-then it would return a \gls{CI} of $\sim 0.5$~\chris{I don't think you should
-focus on the bimodal aspect of the RA posterior. Being bimodal doesn't make it
-wrong and it can still easily pass a p-p plot test.}, for many simulations this
-would produce a p-p plot which appears as an under-constrained posterior when
-it is actually two widely separated over-constrained posteriors~\chris{do you
-have any examples of this occuring?}. This becomes more clear when
-investigating the area contained within a contours of the posterior which is
-explained in Sec.~\ref{par_est:results:simulations:skyarea}.
 %
 \begin{figure}[ht]
     \centering
@@ -531,9 +508,7 @@ Fig.~\ref{par_est:results:sky_area_example}.
 This contour defines the confidence at which the injected parameter in contained.
 
 If the contour at the injected parameter is much larger than the contour at 95\%
-confidence, then this implies that the posterior distribution is over-constrained~\chris{well we already know from the p-p plot that the sky is
-under-constrained (which is good). This test is going to show you something
-else}.  These two areas are another measure of the validity and ability of this
+confidence, then this implies that the posterior distribution is over-constrained.  These two areas are another measure of the validity and ability of this
 method to extract the sky parameters. 
 %
 \begin{figure}[ht]
