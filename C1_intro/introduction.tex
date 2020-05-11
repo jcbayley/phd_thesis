@@ -4,7 +4,7 @@
 
 \Glspl{GW} were first predicted in 1915 as a consequence of Einstein's general
 theory of relativity \citep{einstein2005GrundlageAllgemeinen}, where they were
-theorised as ripples in the fabric of space-time.  Observations of these waves would would open up a new window into the universe which is not accessible via electromagnetic observations. \joe{should say why here} 
+theorised as ripples in the fabric of space-time.  Observations of these waves would would open up a new window into the universe which is not accessible via electromagnetic observations.
 
 The first observational evidence that \glspl{GW} exist came from observations of the Hulse-Taylor
 binary \citep{weisberg1981GravitationalWaves,weisberg2004RelativisticBinary}, which subsequently won the Nobel prize in 1993.
@@ -186,7 +186,7 @@ described in more detail in Sec.~\ref{intro:detector}.}
 
 \subsubsection{Generating gravitational waves}
 
-To generate \gls{GW} we can follow the derivation in \citep{flanagan2005BasicsGravitational}, where one can solve Eq.~\ref{intro:lineinstein} to find the \gls{GW} perturbation $h_{\mu \nu}$.
+To generate \gls{GW} we can follow the derivation in \citep{flanagan2005BasicsGravitational} and \citep{letiec2016TheoryGravitational}, where one can solve Eq.~\ref{intro:lineinstein} to find the \gls{GW} perturbation $h_{\mu \nu}$.
 The result of this is that the spatial part of the metric perturbation $h_{i j}$ is related to the second moment of the mass distribution by
 \begin{equation}
     \label{intro:gravwave:amp}
@@ -196,14 +196,13 @@ where $r$ is the distance from the source \citep{letiec2016TheoryGravitational} 
 \begin{equation}
     Q_{ij}(t) = \int \rho(t,{\bf x})  x^i x^j d^3x,
 \end{equation}
-where $\rho$ is the mass density ~\citep{flanagan2005BasicsGravitational}.  
-This has a slight modification in the TT gauge, see
+where $\rho$ is the mass density ~\citep{letiec2016TheoryGravitational}.  
+This second moment has a slight modification in the TT gauge, see
 \citep{flanagan2005BasicsGravitational}, where the trace of the second mass moment is subtracted defining the mass quadrupole moment. 
 However, this has the same relationship between the mass quadrupole moment or second mass moment and the \gls{GW} amplitude.  This shows that for \gls{GW} to be generated, we need the the second time derivative of the mass quadrupole moment to be non zero. 
 Gravitational monopole and dipole radiation is not possible due to the conservation of energy and momentum respectively \citep{misner1973Gravitation} and radiation can be emitted from higher orders but is generally weaker than quadrupole radiation. 
 
 There are many types of system which could emit quadrupole \glspl{GW}, including supernovae, colliding objects and orbiting black holes. 
-Typically these are from high mass systems as large amount of energy are needed to overcome the `stiffness' of space-time which is defined by the $8 \pi G/c^4$ in Eq.~\ref{intro:gravwaves:efe} \joe{think about this bit}.
 Some of the primary sources of \gls{GW} that are currently searched for will be described in the following section.
 
 
@@ -360,8 +359,8 @@ the length of an observation run of ground based detectors and in general has a 
 The primary source for many \glspl{CW} searches is rapidly rotating neutron
 stars with spin periods ranging from $\sim 10^{-3} - 10$ s
 \citep{manchester2005AustraliaTelescope}, and in general have well modelled signals.  Neutron stars can form when a
-massive star $\sim 8 - 20 M_{\odot}$ collapses \citep{fryer2005NeutronStar}, leaving a remnant is around $1.4-2 \;
-M_{\odot}$ with a radius of $\sim 10$ km \citep{} \joe{referecnce}. 
+massive star $\sim 8 - 20 M_{\odot}$ collapses \citep{fryer2005NeutronStar}, leaving a remnant is around $1.2-2 \;
+M_{\odot}$ with a radius of $\sim 10$ km \citep{ozel2016MassesRadii}. 
 This gives the objects high densities of $\sim 10^{17}$ kgm$^{-3}$ and high magnetic field strengths of $10^8 - 10^{15}$ G \citep{konar2017MagneticFields}.  
 Despite many observations of neutron stars in the electromagnetic spectrum,
 these objects are not well understood.  A key part or neutron stars which is
@@ -404,13 +403,13 @@ There are a number of theories which describe the origin of this axisymmetry.
 If the pulsar is in a binary system and accreting material from its companion
 star, the material can be funnelled towards the magnetic poles by the magnetic
 field, thereby causing a hot spot \citep{haskell2015DetectingGravitational}.
-This `hot spot' could cause a deformation on the surface of the star which is
-not axisymmetric.  The magnetic stresses from strong magnetic fields within the
+This `hot spot' could cause a deformation on the surface of the star which if the rotational and magnetic axes are not aligned would not be axisymmetric.  
+The magnetic stresses from strong magnetic fields within the
 star, could potentially also cause non axisymmetric deformations to the star
 \citep{cutler2002GravitationalWaves}. Finally
 the spin down of the pulsar itself could cause stresses in the crust of the
 star until the point of breaking, after this break a
-distortion could remain in the crust \citep{becker2009NeutronStars} \joe{reread about this}.  
+distortion could remain in the crust \citep{becker2009NeutronStars,ruderman1976CrustbreakingNeutron}.  
 %extra reference reread \citep{ruderman1976CrustbreakingNeutron}
 More details on the signal waveform of this type of \gls{GW} and methods to search for it will be explained in Sec.~\ref{searchcw}.
  
@@ -518,16 +517,15 @@ of each arm, where the light then returns to the beam splitter and the two beams
 are combined and sent to a photo-detector.  At the output there is an
 interference pattern between the two beams and if the length of one of the arms
 is changed then the phase of one beam will be different to the other, causing the interference pattern to change.  The phase difference of the light can be
-related to its wavelength $\lambda_l$, and the length of the
-detectors arms $L$ by
+related to its wavelength $\lambda_l$, and the path length of the light $L_{\text{light}}$ by
 %
 \begin{equation}
 \label{intro:detectors:phasechange}
-\Delta \phi \sim 2 \pi \frac{\Delta L}{\lambda_l},
+\Delta \phi \sim \frac{\Delta L_{\text{light}}}{\lambda_l},
 \end{equation}
 %
-where $\Delta \phi$ is the phase change and $\Delta L$ is the difference in the
-arm lengths.  By measuring this phase difference and interferometer can then
+where $\Delta \phi$ is the phase change and $\Delta L_{\text{light}}$ is the difference in the
+light path lengths along each arm.  By measuring this phase difference and interferometer can then
 measure small changes in the mirror positions.
 
 \begin{figure}[hp]
@@ -628,6 +626,7 @@ Eq.~\ref{intro:detectors:phasechange} at the output of the detector, the two mir
 % the fluctuations in the power are much greater than the GW
 % Instead, the laser phase is modulated such that the carrier is on a dark fringe and the sidebands are not.
 % The GW is then encoded in the sidebands, therefore, the GW no longer competes with fluctuations at f_{GW} but at the frequency of modulation of the laser
+% the recored signal is the beat between the signal sidebands and the laser RF sidebands
 % this is a much higher frequency (MHz) where the laser power fluctuations are lower as they follow 1/f 
 %
 The \gls{GW} strain is then proportional to the readout of the control systems $d(f)$ which hold the mirrors at this position \cite{ligoscientificcollaboration2017CalibrationAdvanced} 
@@ -662,9 +661,8 @@ noise \citep{abbott2009LIGOLaser}, which is the statistical fluctuations
 associated with the discrete nature of photons.  A technique which can be used
 to tune the detectors sensitivity to a smaller bandwidth is known as signal
 recycling.  If a \gls{GW} is incident on the detector then it will cause
-sidebands in the laser light which will be visible at the output of the
-detector~\chris{this paragrpah is really nice - make sure to be able to answer
-a question on this sideband business or maybe add extra clarification here.}.
+sidebands in the laser light by modulating its phase which will be visible at the output of the
+detector.
 By placing a mirror at this output, the sideband signal is `recycled' back into
 the arms increasing its \gls{SNR} \citep{pitkin2011GravitationalWave}. The
 bandwidth over which this signal can be recycled is governed by the
@@ -774,25 +772,30 @@ sensitivity will be at a minimum when edge on to the source.
 From some directions the \gls{GW} will change the length of the arms by the same amount, in these cases $\Delta L = 0$, therefore the detector is not sensitive to any \gls{GW} from that direction and this shows as the null areas in Fig.~\ref{intro:detector:response:polarisations} 
 
 In the above example Eq.~\ref{intro:detector:response:strain:polarisations} we
-have defined the detector's frame (vectors $\bm{v}$ and $\bm{u}$) orthogonal to the propagation direction of the wave. 
-We can however, define this more arbitrarily by performing a rotation $\psi$, known as the polarisation angle, in the plane transverse to the direction of propagation.
+have defined the detector's frame (vectors $\bm{v}$ and $\bm{u}$) orthogonal to the propagation direction of the wave where $h_{+}$ and $h_{\times}$ are defined. 
+We can however, define this more arbitrarily by performing a rotation $\psi$, known as the polarisation angle, in the plane transverse to the direction of propagation. 
+With respect to this rotated axes, the \gls{GW} amplitudes are then defined as
+\begin{equation}
+	\begin{split}
+		h^{\prime}_{+}(t) &= h_{+}\cos{2\psi} - h_{\times}\sin{2\psi} \\
+		h^{\prime}_{\times}(t) &= h_{+}\sin{2\psi} + h_{\times}\cos{2\psi},
+	\end{split}
+\end{equation}
+and the polarisation functions are
+\begin{equation}
+\label{intro:detector:polarisationfuncs}
+\begin{split}
+F^{\prime}_{+}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \cos{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi} \\
+F^{\prime}{\times}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \sin{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi}
+\end{split}.
+\end{equation}
 The \gls{GW} strain then becomes
 \begin{equation}
 	\label{intro:detector:strain_2}
-	h(t) = F_{+}(\theta,\phi, \psi)h_{+}(t) + F_{\times}(\theta,\phi,\psi)h_{\times}(t),
+	h(t) = F^{\prime}_{+}(\theta,\phi, \psi)h^{\prime}_{+}(t) + F^{\prime}_{\times}(\theta,\phi,\psi)h^{\prime}_{\times}(t),
 \end{equation}
-where the polarisation functions now depend on $\psi$ \citep{maggioreGravitationalWaves}
-\begin{equation}
-\label{intro:detector:polarisationfuncs}
-	\begin{split}
-	F_{+}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \cos{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi} \\
-	F_{\times}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \sin{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi}
-	\end{split}.
-\end{equation}
-~\chris{this is great. However, mathematically your notation is flawed here
-since Eq 1.29 and 1.30 must be equal. If the antenna functions changed
-definition then so should the $h_+$ and $h_{\times}$ functions. Can you clarify
-this?}
+which is the equivalent of Eq~\ref{intro:detector:response:strain:polarisations} where the source has bee rotated around the direction of propagation by angle $\psi$ \citep{maggioreGravitationalWaves}.
+
 
 %%%%%%%%%%%
 %%%%%%%%%%
@@ -839,18 +842,21 @@ This is reduced by having multi-stage suspensions in the detectors which both ac
 \citep{matichard2015SeismicIsolation}.
 
 
-\item[Thermal noise] This originates from mechanical systems where thermal
+\item[Thermal noise] \joe{reread this carfully}This originates from mechanical systems where thermal
 motion can be transferred (coupled) into the measurement of the displacement of
 the test mass. There are a number of sources of this including the suspension
 thermal noise and the Brownian noise in the mirror coatings.  The suspension
 thermal noise causes the test masses to move due to the thermal vibrations of
-the fibres suspending the test masses
-\citep{gonzalez2007HandbookApproximation}.  The coating Brownian noise is from
-thermal fluctuations in the layers of optical coating in the test masses
+the fibres suspending the test masses \citep{gonzalez2007HandbookApproximation}.  
+The spectral density of the thermal motion of the mass can be written as in \citep{pitkin2011GravitationalWave}
+\begin{equation}
+	x^2(\omega) = \frac{4k_{\text{B}}T}{m \omega }\frac{\omega_0^2 \phi(\omega)}{(\omega_0^2 - \omega^2)^2 + \omega_0^4 \phi^2(\omega)},
+\end{equation}
+where $k_{\text{B}}$ is the Boltzmann constant, $T$ is the temperature, $m$ is the mass and $\phi(\omega)$ is the loss angle of the oscillator.
+The is generally reduced by using low loss materials such that the displacement noise reduced off the resonance frequency of the suspension \citep{hammond2012ReducingSuspension}.
+The coating Brownian noise is from thermal fluctuations in the layers of optical coating in the test masses
 \citep{martynov2016SensitivityAdvanced}. These effects are limited by using
-different coatings on the mirrors
-\citep{abernathy0OverviewResearch}~\chris{what about the suspensions? Lots of
-Glasgow work on this.}.
+different coatings on the mirrors \citep{abernathy0OverviewResearch,martin2008MeasurementsLowtemperature}.
 
 \item[Quantum noise] Quantum noise originates from two main mechanisms: the shot noise associated with the
 statistical uncertainty of the arrival time of photons at detector output, and the fluctuation in the radiation pressure noise associated with the momentum that photons transfer to the test masses \citep{aasi2013EnhancedSensitivity}.
@@ -859,14 +865,16 @@ The strain sensitivity limited by shot noise is defined in \citep{abbott2009LIGO
 	h(f) = \sqrt{\frac{\pi \hbar \lambda}{P c}} \frac{\sqrt{1 + (4 \pi f \tau_s)^2}}{4 \pi \tau_s},
 \end{equation}
 where $P$ is the power of the laser, $\lambda$ is the wavelength of the laser, $f$ is the \gls{GW} frequency, $\hbar$ is Planck's constant and $\tau_s$ is the arm cavity storage time. 
-One can see from this that the shot noise decreases as the laser power
-increases, which is a reasons for the power recycling cavity described in
-Sec.~\ref{intro:detector:ligo}~\chris{begs the question, is there a similar
-equation for radiation pressure noise? Why not include it here? Also, makes me
-wonder why there are no equations for the other 3 main noise sources? Just
-suggestions}. 
-This is a fundamental limit of the detectors sensitivity, however, there are methods which `cheat' this limit to reduce
-the noise, for example using squeezed states of light \citep{aasi2013EnhancedSensitivity}. 
+One can see from this that the shot noise decreases as the laser power increases, which is a reasons for the power recycling cavity described in
+Sec.~\ref{intro:detector:ligo}.
+In \citep{pitkin2011GravitationalWave} the fluctuation in the radiation pressure noise cause a displacement
+\begin{equation}
+	\delta x^2(\omega) = \frac{4 P h}{m^2 \omega^4 c \lambda},
+\end{equation}
+where $\omega$ is the angular frequency and $m$ is the test mass. 
+One can see from this that by using larger test masses the radiation pressure noise is reduced.
+Radiation pressure noise and shot noise are then a fundamental limit of the detectors sensitivity, as shot noise decreases with laser power and radiation pressure noise decreases.
+However, there are methods which `cheat' this limit to reduce the noise, for example using squeezed states of light \citep{aasi2013EnhancedSensitivity}. 
 
 \item[Technical noise] Whilst this is not shown
 in Fig.~\ref{detectors:noisesensitivity}, particular types of technical noise

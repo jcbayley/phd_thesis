@@ -208,7 +208,6 @@ described below.
 	Many of the instrumental lines identified in the spectrum are then not from separate sources but are part of `combs' which originate from a single source. 
 	These combs are characterised by their start frequency and the spacing of the harmonics (tooth spacing).
 	Finetooth is a tool which identifies and monitors these combs \citep{neunzertDailyComb}.
-	\joe{say what this actually does}
 
 	
 	\item[\Gls{NoEMi}] This tool uses various methods to identify peaks in an \gls{SFT}, analyse these peaks, find coincidences between \glspl{SFT} and tracks lines. 
@@ -290,10 +289,9 @@ The 1800s \glspl{SFT} are also generated as part of the Fscan search described i
 For this line search, we split the 1800 s \glspl{SFT} into 0.1 Hz wide sub-bands and run the single detector search on each sub-band. 
 The search then returns the same outputs as described in
 Sec.~\ref{soap} and Sec.~\ref{machine}: the frequency track (Viterbi track), a
-Viterbi map and a Viterbi statistic.  Here the Viterbi statistic is just the
-sum of the \gls{SFT} power along the frequency track.~\chris{is this the only
-mention of the actual statistic used? If so I recommend defining it
-mathematically or referring to a previous relevent expression from Chapter 3.}  
+Viterbi map and a Viterbi statistic.  Here the Viterbi statistic is just the maximum
+sum of the \gls{SFT} power along a track through the spectrogram.
+This is defined in Sec.~\ref{soap:single} as $\max_k(V_{N-1,k})$ where $V$ is the un-normalised Viterbi map defined in Eq.~\ref{soap:single:vitsum}.
 
 These three outputs can then indicate whether an instrumental line is present within any given sub-band.
 Initially, one can look at the distribution of the Viterbi statistics for each sub-band, Fig.~\ref{detchar:soap:rankedstats} shows a histogram of the Viterbi statistics from the H1 detector between 40-500 Hz for the O3 observing run.
@@ -305,26 +303,22 @@ Initially, one can look at the distribution of the Viterbi statistics for each s
 histogram of the Viterbi statistics from the SOAP search from chapter
 \ref{soap}, where the statistic is the summed \gls{SFT}  power along the
 Viterbi track. These results are between 40-500 Hz for the Hanford detector
-(H1) during the O3 observing run. The red line indicated where 10\% of the
-Viterbi statistics are larger than this value.~\chris{the legend isn't quite
-right. the red line itself doesn't represent the top 10\% - just the threshold} }
+(H1) during the O3 observing run. The red line indicates the value of $2 \sigma$ from the mean of a Gaussian fit, which is used as the detection threshold. }
 \label{detchar:soap:rankedstats}
 
 \end{figure}
 %
-This shows that the majority of sub-bands~\chris{sub-band results} fall within
-a single~\chris{be careful here - what is a single distribution? You're trying
-to say that there is long tail to this distribution caused by the presence of intrumental lines} distribution,
-where larger values of the Viterbi statistic are good indicators that there is
-an instrumental line present within the sub-band.  One can then define a list of
-potential instrumental lines by taking the top 10\%~\chris{why 10\%?} of Viterbi statistics.
-These can then be investigated further by looking into other outputs of the
-SOAP search, including the Viterbi map and the Viterbi track.
+This shows that the distribution of Viterbi statistics has a long tail,
+where larger values of the Viterbi statistic in this tail are good indicators that there is
+an instrumental line present within the sub-band.  We assume that statistics which are from Gaussian noise spectrograms follow a Gaussian distribution.
+We can therefore fit a Gaussian as in Fig.~\ref{detchar:soap:rankedstats} and set the detection threshold as values of the statistic $> 2 \sigma$ of the mean of this fit.
+Statistics which cross this threshold can then be investigated further by looking into other outputs of the SOAP search, including the Viterbi map and the Viterbi track.
+Whilst the Gaussian fit will not be perfect due to the long tail in the distribution, each of the events that cross the threshold are investigated further, so this just serves as a method to reduce the number of sub-bands which need to be investigated.
 
 %
 % Introduce the plots
-The line search then~\chris{also rather than then?} outputs
-plots~\chris{similar to those?} as shown in Fig.~\ref{detchar:soap:noiseplot},
+The line search also outputs
+plots similar to those shown in Fig.~\ref{detchar:soap:noiseplot},
 \ref{detchar:soap:lineplot} and \ref{detchar:soap:wanderplot}.  There are three
 panels to each plot: the first shows the normalised \gls{SFT} power searched
 through by SOAP with the Viterbi track overlaid, and the second panel shows the
@@ -343,7 +337,7 @@ Fig.~\ref{detchar:soap:noiseplot} appears to be randomly wandering around the
 full width of the sub-band, implying that there is no strong signal within the
 band which SOAP can identify.  The Viterbi statistic also falls within the main
 distribution of statistics in Fig.~\ref{detchar:soap:rankedstats}, whilst this
-would not~\chris{does not?} show up in the top 10\% of Viterbi statistics, I
+does not cross the detection threshold, I
 describe it here to show the differences in the outputs compared to when there
 is a line.  The second panel of Fig.~\ref{detchar:soap:noiseplot} which shows
 the Viterbi map, contains no areas of high log probability and no clear long
@@ -379,10 +373,9 @@ If we then look at the outputs of Fig.~\ref{detchar:soap:lineplot}, we see a Vit
 This indicates that there is an area of \gls{SFT} power around this frequency which is higher than other areas in the sub-band.
 In the Viterbi map in the second panel of Fig.~\ref{detchar:soap:lineplot}, the log-Viterbi probability is contained within a narrow frequency range around the Viterbi track.
 This again indicates that there is a narrow spectral line within this sub-band.
-Finally the third panel shows the \gls{SFT} power along the Viterbi track, which no longer follows a $\chi^2$ distribution but had a large excess of power.
+Finally the third panel shows the \gls{SFT} power along the Viterbi track, which no longer follows a $\chi^2$ distribution but instead is variable with time and has a large excess of power.
 Each of these features are strong indicators that there is an instrumental line
-present within this sub-band.~\chris{as well as not being chi-squared it is
-also variable in time which is another indicator that something is afoot.}
+present within this sub-band.
 %
 \begin{figure}[hpt]
 	\centering
@@ -412,7 +405,7 @@ of the instrumental line, these are the white areas in the Viterbi map plot
 as in Fig.~\ref{detchar:soap:noiseplot} can be made when there is a wandering
 spectral line. The above again shows results from the \glspl{LIGO} Hanford detector
 (H1) in its third observing run (O3) using an 1800s \gls{SFT} power spectrum. This
-shows how some spectral lines do not have a fixed frequency and can wande r
+shows how some spectral lines do not have a fixed frequency and can wander
 through the band. These are especially hard to track and monitor. The Viterbi
 track here shows is clearly different from the noise case in
 Fig.~\ref{detchar:soap:noiseplot} as the track is more tightly concentrated
@@ -436,14 +429,9 @@ January.
 \clearpage
 
 The Viterbi statistic is used as an initial flag for a sub-band which could
-potentially contain an instrumental line.  The equivalent plots as
-in~\chris{bad grammar} Fig.~\ref{detchar:soap:noiseplot},
-\ref{detchar:soap:lineplot} and \ref{detchar:soap:wanderplot} for each sub-band
-can then be used for further investigation, where this investigation can
-provide a list of potential lines.  We~\chris{have} generated a list of
-potential instrumental lines for \glspl{LIGO} third observing run (O3) between
-40 and 500 Hz~\chris{clunky sentence coming out of nowhere}.  This line-list
-can then be compared to existing O3 \gls{LIGO} line-lists which are generated
+potentially contain an instrumental line.  One can then use the equivalent plots as Fig.~\ref{detchar:soap:noiseplot},
+\ref{detchar:soap:lineplot} and \ref{detchar:soap:wanderplot} to investigate each sub-band and return a list of potential line. 
+This line-list can then be compared to existing O3 \gls{LIGO} line-lists which are generated
 using the searches described in Sec.~\ref{detchar:monitor}.  There are
 currently two line-lists produced by \gls{LIGO} scientists, one which contain
 lines where the source has been identified and one where the source is not
@@ -500,10 +488,8 @@ log-probability around this frequency can be seen, again indicating a signal is
 present. Similar features can be see in Fig.~\ref{detchar:soap:unknown:2} and
 \ref{detchar:soap:unknown:3}.  For some other lines in the \glspl{LIGO} unknown
 line-list, such as in Fig.~\ref{detchar:soap:unknown:4}, there is no indication
-of an instrumental line in the SOAP outputs, however, in over 50\% of the
-undetected lines which have been investigated further, there is some evidence
-of a line in the other outputs of SOAP.~\chris{I don't understand this last
-sentence. Can you clarify it?}
+of an instrumental line in the SOAP outputs. However, for over 50\% of the lines in the unknown line-list which we did not detect and have investigated further, there is some evidence of a line in the other outputs of SOAP. 
+
 %
 \begin{figure}[hpt]
 	\centering
@@ -532,19 +518,18 @@ sentence. Can you clarify it?}
 Therefore, one possible addition to the SOAP line search could be a method similar to that described in Chapter \ref{machine}, where here the Viterbi maps and Viterbi tracks associated with instrumental lines would be used as training data for a neural network. 
 The neural networks could then be used to classify sub-bands into containing an instrumental line or Gaussian noise.
 The difficulty with using these Viterbi maps as training examples is that we
-do~\chris{not?} have a set of training data with known labels. 
+do not have a set of training data with known labels. 
 We could generate these labels from each sub-band in real data which contains an instrumental line, but this would require a large effort investigating the many sub-bands. Another method could be simulating instrumental lines, however this can be difficult due to the large variation in the types of instrumental line. Each of these types would need some functional representation such that they be generated, which would also need investigation in to the many types of line.
 Methods such as in \citep{zevin2017GravitySpy} have had success using machine learning to classify short duration noise artefacts (glitches). This project uses time-frequency representations of the glitches that have been classified by volunteers from the public as training data for machine learning algorithms.
 A similar approach could be used to classify the outputs of the SOAP search, where labels can be applied to sub-bands such that a machine learning algorithm can be trained.
-~\chris{the problem you are discribing is perfect for un-supervised machine
-learning approaches where you don't have labesl but are asking the algorithm to
-classify the data based on its inherent variation. You might want to mention that.}
+Alternatively this may be better suited to an un-supervised machine learning approach, which would group the data into line or noise categories without using labels.
 
-Whilst SOAP did not identify all of the same lines as the methods in Sec.~\ref{detchar:monitor}, it did identify a large number \joe{put the number}of lines which did not appear in either the known of unknown line-list.
+
+Whilst SOAP did not identify all of the same lines as the methods in Sec.~\ref{detchar:monitor}, it did identify a $\sim 150$ lines which did not appear in either the known of unknown line-list.
 For example, in Fig.~\ref{detchar:soap:newlines:1}, SOAP identified a line at $\sim 64.0$ Hz which does not currently appear in the \gls{LIGO} line-list.
 Further examples are at $\sim 299.7$ Hz in Fig.~\ref{detchar:soap:newlines:2} and $\sim 299.545$ Hz in Fig.~\ref{detchar:soap:newlines:3} which shows broader features of $\sim 0.005$ Hz wide. Finally Fig.~\ref{detchar:soap:newlines:4} shows that there may be multiple strong lines present within this sub-band, this is because the Viterbi track appears to have identified multiple features and `jumps' between these during the observing run.
 In total, SOAP identified $\sim 200$ sub-bands which potentially contain an instrumental line which did not appear on the \gls{LIGO} line-list. 
-Whilst many of these will require further investigation, it demonstrates the ability of this search to identify new instrumental lines.
+Whilst many of these will require further investigation to determine if they are a line and what their source is, it demonstrates the ability of this search to identify new instrumental lines.
 
 %
 \begin{figure}[ht]

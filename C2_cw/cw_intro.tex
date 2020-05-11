@@ -101,7 +101,7 @@ where $c$ is the speed of light, $\mathbf{r}_d$ is the position of the detector 
 signal due to the movement of the detector, i.e. as the earth rotates on its axis and
 orbits the sun. The factor $\delta_t$ take into account extra
 corrections from the Einstein and Shapiro delay
-\citep{taylor1992PulsarTiming}. Einstein delay accounts for the time dilation and and gravitational redshift due to the Sun. Shapiro delay originates from the extra time a signal takes to pass through the gravitational potential of the Sun. \joe{need to properly understadn difference nbetween these two}The amplitude
+\citep{taylor1992PulsarTiming}.  Shapiro delay originates from the extra time a signal takes to pass through the gravitational potential of the Sun. Einstein delay accounts for the time dilation and and gravitational redshift due to the Sun. The amplitude
 $h_0$ in Eq.~\ref{intro:cw:amplitudes} is defined by
 %
 \begin{equation}
@@ -530,9 +530,8 @@ Nested sampling also provides an estimate of the posterior distribution as well 
 	p(\theta \mid \bm{d}, I) \approx \frac{\sum_{i=1}^{M} p(\theta_i) \delta(\theta - \theta_i)}{\sum_{i=1}^{M} p(\theta_i) }.
 \end{equation}
 where $\delta( \theta - \theta_i)$ is the Dirac delta
-function \citep{speagle2019DynestyDynamic}.~\chris{this is correct and leaves
-you with a sea of delta functions. Are you able to say anything about what you
-then do with these, i.e., histgram them?}
+function \citep{speagle2019DynestyDynamic}. This leaves us with a set of delta functions at values of $\theta$, where the posterior \gls{PDF} can be found by taking the histogram of these delta functions.
+Alternatively one can think of this as resampling the points $\theta_i$ based on their importance weight $p(\theta_i)$, which leaves a set of samples from the posterior \gls{PDF}.
 
 The methods described above then provide a way to estimate parameters of a
 model given some data.  Also this provides a way to compare different models
