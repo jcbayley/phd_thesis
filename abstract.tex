@@ -1,7 +1,38 @@
 \chapter{Abstract}
 
-The field of gravitational waves is still in its early stages, with detections of binary black holes numbering less that \joe{number}.
-With th \joe{introdice CWs}
-This thesis gives an overview of the current state of research in \gls{GW} astronomy with a focus on methods to search for long duration gravitational waves from neutron stars. In the main content of this thesis we present a new non-parametric search method for continuous gravitational waves entitled SOAP which is orders of magnitude faster than current continuous wave search algorithms with a comparable sensitivity.
-We also describe developments of this algorithm which use machine learning to improve the searches robustness to instrumental artefacts within the data and also . 
+The field of gravitational wave astronomy is still in its early stages, with detections of compact binary coalescences numbering $\sim 60$.
+Another possible source of gravitational waves is rapidly rotating neutron stars which have some asymmetry around their rotation axis. These are predicted to emit long duration quasi-sinusoidal signals known as continuous gravitational waves.
+
+% SOAP chapter
+All-sky and wide parameter space searches for continuous gravitational waves are generally template-matching schemes which test a bank of signal waveforms against data from a gravitational wave detector.  
+Such searches can offer optimal sensitivity for a given computing cost and signal model, but are highly-tuned to specific signal types and are computationally expensive, even for semi-coherent searches. We have developed a search method based on the Viterbi algorithm which is model-agnostic and has a computational cost several orders of magnitude lower than template methods, with a modest reduction in sensitivity. In particular, this method can search for signals which have an unknown frequency evolution. We test the algorithm on three simulated and real data sets: gapless Gaussian noise, Gaussian noise with gaps and real data from the final run of initial LIGO (S6). We show that at 95\% efficiency, with a 1\% false alarm rate, the algorithm has a depth sensitivity of $\sim 33$, $10$ and $13$\,Hz$^{-1/2}$ with corresponding SNRs of $\sim 60$, $72$ and $74$ in these datasets. We discuss the use of this algorithm for detecting a wide range of quasi-monochromatic gravitational wave signals and instrumental lines, and demonstrate that it can also highlight shorter duration signals such as compact binary coalescences.
+
+
+% Machine learning chapter
+Many continuous gravitational wave searches are affected by instrumental lines as the long duration narrowband nature of a line can appear to be very similar to a real continuous wave signal. 
+This has led to techniques to try and limit the effect of instrumental
+lines, which mostly involve developing a statistic to penalise signals that
+appear in only a single detector.  We have developed a method using
+convolutional neural networks to reduce the impact of instrumental artefacts on
+the SOAP search.  This has the ability to identify features in each detectors spectrograms such that a frequency band can be classified into a signal or
+noise class.  Using this method we achieve a similar sensitivity to the SOAP search alone, however, this allows SOAP to be a fully automated search which will return candidates to be followed up.
+
+
+% Parameter est chapter 
+Once a continuous gravitational wave is detected, we would want to extract some parameters associated with the source to help understand more about its structure and evolution.
+We describe a Bayesian method which extracts the sky location, frequency and frequency derivative of a source associated with the frequency evolution returned by the SOAP algorithm.
+This has the aim of limiting the size of the parameter space for a more sensitive fully coherent follow up search.
+We demonstrate a model which currently does not provide valid estimates of the source parameters, however, with further investigation we aim to develop this into a reliable analysis.
+
+
+% Lines chapter
+As mentioned above, we limit the effect of instrumental lines on the SOAP search using machine learning, however we can also identify and mitigate these lines separately before a search is run.
+We demonstrate how we can use SOAP in a simple configuration to identify instrumental lines.
+We compare this method to existing line identification tools used in the \gls{LIGO} collaboration, and find that SOAP identifies many of the same lines as these methods as well as some which do not appear on their line lists.
+
+
+
+
+
+
 

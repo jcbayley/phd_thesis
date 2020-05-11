@@ -215,10 +215,10 @@ In this case our likelihood is also dependent on \gls{SNR}, therefore, we split
 our simulations into bins of width \gls{SNR} 2 between 40 and 200. Within each
 \gls{SNR} bin, this gives us $\sim 300$ simulated tracks each with $\sim 400$
 elements.  In Fig.~\ref{par_est:bayes:likelihood:kde142}, rather than using a histogram we use a \gls{KDE}, which is a different method to estimate the probability density, this is the same result but makes the likelihood easier to interpret in a plot. Figure \ref{par_est:bayes:likelihood:kde142} shows an example of the \glspl{KDE} for a subset of the \gls{SNR} bins. The sharp peaks in the center of
-each \gls{KDE} in Fig.~\ref{par_est:bayes:likelihood:kde142} represents
+each \gls{KDE} in Fig.~\ref{par_est:bayes:likelihood:kde142} represent
 simulations where the Viterbi track is close to the simulated \gls{CW} track,
-and the broader distributions represent areas of the Viterbi track has not
-identified the \gls{CW} track but is wandering randomly~\chris{grammar}.
+and the broader distributions represent areas where the Viterbi track has not
+identified the \gls{CW} track but is wandering randomly.
 Figure \ref{par_est:bayes:likelihood:kde142} shows that as the \gls{SNR}
 increases, the distribution is more closely centred around 0, i.e. the Viterbi
 and \gls{CW} tracks are similar, which is expected.
