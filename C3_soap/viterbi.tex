@@ -4,17 +4,17 @@
 Searches for \glspl{CW} are notoriously computationally expensive, and it is important to investigate the trade off between computing power and sensitivity.
 In addition, these searches are generally highly tuned and are based around template matching methods. The SOAP algorithm described in this chapter aims to address both of these issues.
 
-SOAP searches though narrow-banded time-frequency spectrograms of data and identifies the `most probable track' in frequency through it.  This `most probable track' is then the most probable continuous track in what it otherwise noisy data.  
+SOAP searches though narrow-banded time-frequency spectrograms of data and identifies the `most probable track' in frequency through it.  The `most probable track' is the most probable continuous narrowband signal in what it otherwise noisy data.  
 The motivation of the search is simple, if we looked at a frequency band in a
 spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible track from a starting frequency bin to an end frequency bin.
 For each of these tracks the sum of the spectrogram power along the track can
 be found such that for each track there is a single value.
 Figure \ref{soap:motivation:plot} shows a histogram of a subset of these values, where the main distribution is from tracks which are through noise.
-Signals which lie outside this are then tracks which follow features which are not noise like.
+Signals which are in the upper tail of this distribution are then tracks which follow features which are not noise like.
 The track which gives the maximum sum of spectrogram power is the least noise-like and therefore, can be taken as most likely to be from some signal.
 In Fig.~\ref{soap:motivation:plot} the optimum track in red shows a
-statistic value of $\sim 1700$ which is far outside the main distribution of
-summed powers.  The red track follows that  an injected signal.  This
+statistic value of $\sim 1780$ which is far outside the main distribution of
+summed powers.  The red track follows that of an injected monochromatic signal.  This
 demonstrates that the sum of the spectrogram power along a track which follows
 a signal is outside the distribution of tracks which randomly walk through noise.
 Therefore, it can be assumed that if the frequency track with the highest sum
@@ -22,9 +22,9 @@ of spectrogram power is found, then the corresponding track is most likely
 to follow a signal.  Given that in the example in Fig.~\ref{soap:motivation:plot}, the
 spectrogram has 180 frequency bins $M$ and 400 time segments $N$.
 After each segment the track has $T$ possible options to jump to (in this case
-it is 180 options), The total number of possible tracks is $MT^{N}$.
-For this spectrogram this value is $\sim 2.3 \times 10^{904}$, this is an unreasonable
-number of tracks to possibly calculate. This is where the Viterbi algorithm
+we only allowed 3 options, up, down and center). The total number of possible tracks is $MT^{N}$.
+For this spectrogram this value is $\sim 10^{904}$ tracks, this is an unreasonable
+number of tracks and statistics to possibly calculate. This is where the Viterbi algorithm
 \citep{viterbi1967ErrorBounds} is useful as it can efficiently find the track
 which gives the maximum sum of power. For an equivalent search the Viterbi
 algorithm would have to do $TMN$ calculations for find the optimum track. A description of this method is in the following sections.
@@ -42,7 +42,7 @@ under the supervision of Prof. Graham Woan and Dr Chris Messenger.
 
 \centering
 \includegraphics[width=\linewidth]{C3_soap/soap_spect_motivation.pdf}
-\caption[Example of frequency tracks through a spectrogram and their summed power.]{An example of a time-frequency spectrogram which is the typical \gls{LIGO} data SOAP searches through. Here an instrumental line has been injected at 100.006 Hz. The white track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of a subset of all paths which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1700$. This is much larger than any of the random tracks in our subset and much larger than the mean of all tracks. }
+\caption[Example of frequency tracks through a spectrogram and their summed power.]{An example of a time-frequency spectrogram which is the typical \gls{LIGO} data that SOAP searches through. Here a monochromatic signal has been injected at 100.006 Hz. The blue track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of the summed power of a subset of all tracks which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1780$. This is much larger than any of the random tracks in our subset and much larger than the mean statistic of all tracks. }
 \label{soap:motivation:plot}
 
 \end{figure}
@@ -63,7 +63,7 @@ These types of \glspl{GW} are expected to give strain amplitudes that are signif
 %
 % introduce SOAP
 %
-The analysis that we present here is known as SOAP \citep{ellis2006SnakesPlanea} and is based on the Viterbi algorithm~\citep{viterbi1967ErrorBounds}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \gls{GW} data. Another variant of the algorithm \citep{suvorova2016HiddenMarkova} has recently been used, amongst other applications, as part of a \gls{CW} search to track a pulsar with randomly wandering spin frequency~\citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \glspl{SFT}.
+The analysis that we present here is known as SOAP \citep{ellis2006SnakesPlanea} and is based on the Viterbi algorithm~\citep{viterbi1967ErrorBounds}. The algorithm models a process that has a discrete number of states at discrete time steps, and computes the set of states which gives the highest probability (suitably defined) given the data. Our implementation of SOAP is intended as a stand-alone search which is naturally non-parametric and has broad applications to both searches for known signal types and signals which have an unknown frequency evolution. The algorithm works in the time-frequency plane, where our `states' are represented by the time and frequency coordinates of a potential signal. We can then find the most probable set of frequencies a possible signal could have, i.e., we can find the most probable track in frequency as a function of time. This is not the first application of the Viterbi algorithm to \gls{GW} data. Another variant of the algorithm \citep{suvorova2016HiddenMarkova} has recently been used, amongst other applications, as part of a \gls{CW} search to track a pulsar with randomly wandering spin frequency~\citep{sun2018HiddenMarkov, suvorova2017HiddenMarkov,abbott2017SearchGravitational, abbott2018SearchGravitational, sun2018ApplicationHidden}. We develop an alternative version which is aimed to be applied more generally to search for any long duration signals using just \glspl{SFT}.
 
 %
 % describe the paper structure
@@ -128,7 +128,7 @@ p(D \mid {\bm \nu}) = \prod_{j=0}^{N-1}p({\bm x_j} \mid \nu_j),
  where $p({\bm x_j} \mid \nu_j)$ is the likelihood of our
 signal having a frequency $\nu_j$ in the $j$th segment.
 
-Using Eq.~\ref{soap:viterbi:bayes},\ref{soap:viterbi:prior} and
+Using Eq.~\ref{soap:viterbi:bayes}, \ref{soap:viterbi:prior} and
 \ref{soap:viterbi:likelihood}, the posterior probability is then
 %
 \begin{equation}
@@ -162,7 +162,7 @@ This track also maximises the log of the probability and can be written as,
   \end{split}
 \end{equation}
 %
-The Viterbi algorithm finds the most probable track $\hat{\bm \nu}$ by calculating the quantities in Eq,~\ref{soap:viterbi:maxtracklog} for each frequency at each time step. In the following sections we explain how this is achieved in practice.
+The Viterbi algorithm finds the most probable track $\hat{\bm \nu}$ by calculating the quantities in Eq.~\ref{soap:viterbi:maxtracklog} for each frequency at each time step. In the following sections we explain how this is achieved in practice.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -171,7 +171,7 @@ The Viterbi algorithm finds the most probable track $\hat{\bm \nu}$ by calculati
 %
 % define the transition matrix
 %
-An important concept when using the Viterbi algorithm is the`transition matrix' $T$, which is defined as the matrix that stores the prior log-probabilities $\log p(\nu_j \mid \nu_{j-1})$. These transition probabilities depend only on the size and direction of the transition, and in our case correspond to a jump in frequency when moving from the $(j-1)$th to the $j$th state. It is within the transition matrix that we impose some loose model constraints. For example it is usual in the time-frequency plane for frequencies to only have discrete values (frequency bins) and a track might only be allowed to move by one bin in each time step, restricting it to a \gls{UCD} transition or `jump' or equivalently setting the size of the first dimension of the transition matrix $n_1 = 3$. We can also impose that the transition probabilities are independent of the current track location in frequency, i.e. $p(\nu_j \mid \nu_{j-1})=p(\nu_{j+k} \mid \nu_{j+k-1})$. This leads to the transition matrix containing only three numbers, corresponding to the three prior log-probabilities that the track was in the corresponding \gls{UCD} frequency bin at the previous time step. These numbers are chosen to reflect the prior probability of a frequency deviation in the track and depend on the class of signals that one wishes to detect.
+An important concept when using the Viterbi algorithm is the `transition matrix' $T$, which is defined as the matrix that stores the prior log-probabilities $\log p(\nu_j \mid \nu_{j-1})$. These transition probabilities depend only on the size and direction of the transition, and in our case correspond to a jump in frequency when moving from the $(j-1)$th to the $j$th state. It is within the transition matrix that we impose some loose model constraints. For example it is usual in the time-frequency plane for frequencies to only have discrete values (frequency bins) and a track might only be allowed to move by one bin in each time step, restricting it to a \gls{UCD} transition or `jump' or equivalently setting the size of the first dimension of the transition matrix $n_1 = 3$. We can also impose that the transition probabilities are independent of the current track location in frequency, i.e. $p(\nu_j \mid \nu_{j-1})=p(\nu_{j+k} \mid \nu_{j+k-1})$. This leads to the transition matrix containing only three numbers, corresponding to the three prior log-probabilities that the track was in the corresponding \gls{UCD} frequency bin at the previous time step. These numbers are chosen to reflect the prior probability of a frequency deviation in the track and depend on the class of signals that one wishes to detect.
 For the majority of examples that follow, a symmetric transition matrix is used, i.e. the probability of a transition up a frequency bin is equal to the probability of a transition down a frequency bin. This allows us to parameterise the one dimensional transition matrix with a single value, this value is the ratio of the probability of a transition to the same frequency bin, to either up or down a frequency bin. 
 
 In later sections we will consider more complex situations in which the transition matrix describes the prior probability associated with sequences of even earlier transitions (`memory') and the case where there are multiple detectors. In these cases the number of dimensions of the transition matrix can grow substantially to account for the extra complexity of the problem.
@@ -183,7 +183,9 @@ In later sections we will consider more complex situations in which the transiti
 %
 % single detector algorithm,
 %
-We will first consider the simple case of a single dataset $D$, generated by a single gravitational wave detector, and consider only a one-dimensional transition matrix. We will make use of discrete Fourier transforms so that frequencies, and hence the track frequencies, are also discrete. These frequencies will be indexed by $k$ and therefore $\nu_j \rightarrow \nu_{j,k}=k(j)\Delta f$ where $\Delta f=1/T$ is the frequency bin width for a segment of duration $T$.
+
+\joe{you were up to here}
+We will first consider the simple case of a single dataset $D$, generated by a single gravitational wave detector, and consider only a one-dimensional transition matrix. We will make use of discrete Fourier transforms so that frequencies, and hence the track frequencies, are also discrete. These frequencies will be indexed by $k$ and therefore $\nu_j \rightarrow \nu_{j,k}=k(j)\Delta f$ where $\Delta f=1/T_{\text{time}}$ is the frequency bin width for a segment of duration $T_{\text{time}}$.
 
  The Viterbi algorithm determines the most probable track on the time-frequency plane by calculating the value of Eq.~\ref{soap:viterbi:maxtracklog} for every discrete Fourier frequency, incrementally in time. In other words, at each time segment it finds the most probable earlier track which ends at each particular frequency. On reaching the final segment it can look back to identify the most probable track connecting segment 1 to segment $N$.
 
@@ -207,7 +209,7 @@ s}-1}x_{j,r} {\rm
 e}^{i\nu_{j,k} t_r}\right|^2,
 \end{equation}
 %
-where $N_{\rm s}$ is the number of data points in each segment and $t_{r}$ is the time corresponding to $x_{j,r}$, the $r$th sample in the $j$th data segment. $\sigma_{j,k}^2$ is the noise variance and is calculated as an estimate of the noise \gls{PSD} in the $k$th sample and the $j$th data segment. It is worth noting at this point that it is also possible to write this as a likelihood ratio, and therefore write out detection statistic as a log-odds ratio, however, we will discuss this in more depth in Sec.~\ref{soap:las}. The log-likelihoods of each segment can be calculated at discrete frequencies before running the algorithm by computing the power spectra for each segment from discrete Fourier transforms of the data. In the \gls{GW} field these standard data forms are known as \glspl{SFT}.
+where $N_{\rm s}$ is the number of data points in each segment and $t_{r}$ is the time corresponding to $x_{j,r}$, the $r$th sample in the $j$th data segment. The noise variance $\sigma_{j,k}^2$ is calculated as an estimate of the noise \gls{PSD} in the $k$th sample and the $j$th data segment. It is worth noting at this point that it is also possible to write this as a likelihood ratio, and therefore write out detection statistic as a log-odds ratio, however, we will discuss this in more depth in Sec.~\ref{soap:las}. The log-likelihoods of each segment can be calculated at discrete frequencies before running the algorithm by computing the power spectra for each segment from discrete Fourier transforms of the data. In the \gls{GW} field these standard data forms are known as \glspl{SFT}.
 
 The Viterbi algorithm records two quantities for each frequency and time bin: The first, $V_{j,k}$, contains the value defined by Eq.~\ref{soap:viterbi:maxtracklog}, which is the log-probability of the most probable path ending in position $j,k$. The second, $A_{j,k}$, is the transition, or `jump', used to achieve the most probable path. The algorithm can be divided into three main sections: initialisation, iteration and identification. These three sections are described in pseudo-code in Alg.~\ref{soap:single:algorithm} and a simple demonstration of the algorithm at work is shown in Fig.~\ref{soap:plots}.
 %
@@ -1203,7 +1205,7 @@ The search is then not particularly sensitive to choice of parameters in Gaussia
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\linewidth]{C3_soap/gauss_optimised.pdf}
-    \caption[Optimisation of line aware statistic in Gaussian noise.]{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_{\rm{S}}$ were optimised. The key part to remember when reading this plot is that the lower the value of \gls{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section.\joe{label on colorbar} }
+    \caption[Optimisation of line aware statistic in Gaussian noise.]{In Gaussian noise the transition matrix parameter $\tau$ and the width of the prior on the signal case $w_{\rm{S}}$ were optimised. The key part to remember when reading this plot is that the lower the value of \gls{SNR} the better the search has performed. Therefore darker blue areas are when the search performed better. This map shows that there is a line in parameter space where the search performed best. Also in Gaussian noise, the search is not that sensitive to the choice of parameter. The red lines on here shows the parameters used in the searches in this section.}
     \label{soap:las:optimisation:gaussplot}
 \end{figure}
 
