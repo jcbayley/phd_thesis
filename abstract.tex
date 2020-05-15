@@ -32,12 +32,12 @@ to a real continuous gravitational wave signal.  This has led
 to the development of techniques to try and limit the effect of
 instrumental lines, which mostly involve developing a statistic to penalise
 signals that appear in only a single detector.  
-Whilst these statistics limit the effect of instrumental lines, in the SOAP search described above, many lines still contaminated the statistics and had to be manually removed by investigating other search outputs.
+Whilst these statistics limit the effect of instrumental lines, in the SOAP search described above, many lines still contaminate the statistics and have to be manually removed by investigating other search outputs.
 We have developed a method using convolutional neural networks to reduce the impact of instrumental
 artefacts on the SOAP search described above.  This has the
-ability to identify features in each detectors spectrograms such that a
+ability to identify features in each of the detectors spectrograms such that a
 frequency band can be classified into a signal or noise class.  
-This limits the amount of manual investigation of bands and allowed the SOAP search to be fully automated without a reduction in the sensitivity.
+This limits the amount of manual investigation of frequency bands and allowed the SOAP search to be fully automated without a reduction in the sensitivity.
 
 
 
@@ -49,17 +49,11 @@ location, frequency, frequency derivative and signal to noise ratio of a source 
 frequency evolution returned by the SOAP algorithm.  This has the aim of
 limiting the size of the parameter space for a more sensitive fully coherent
 follow up search.  
-We tested this approach on 200 simulations in Gaussian noise, and in 90\% of these simulations we limit the sky area to 45 deg$^2$ with a 95\% confidence contour.
+We tested this approach on 200 simulations in Gaussian noise, generating posterior distributions for the parameters described above. 
+In 90\% of these simulations we limit the sky area to 45 deg$^2$ with a 95\% confidence contour.
 However, find that this contour contains the true parameter only 42\% of the time.
 We present these results and describe the features and shortcomings of our approach.
 
-~\chris{You maybe don't need to
-be as bluntly negative and honest as you are here. I would advise slightly
-expanding the description but also say that we present results and describe the
-features and shortcomings of our approach. Or something like that. While we are
-talimng about the PE, I would expect the results to be more presentable if you
-take the 50\% confindence interval as opposed to the 95\%. Have you been bale
-to do this yet?}
 
 % Lines chapter
 As mentioned above, we limit the effect of instrumental lines on the SOAP
@@ -67,7 +61,7 @@ search using machine learning, however we can also identify and mitigate these
 lines separately before a search is run.  We demonstrate how we can use SOAP in
 a simple configuration to identify instrumental lines.  We compare this method
 to existing line identification tools used in the \gls{LIGO} collaboration, and
-find that using the Viterbi statistic SOAP identifies $\sim 37$\% of the same lines as these methods, where of the lines which were not identified, other SOAP outputs do show evidence of a line.
+find that using the Viterbi statistic SOAP identifies $\sim 37$\% of the same lines as these methods, where for many of the lines which were not identified, other SOAP outputs do show evidence of a line.
 With further investigation, we expect to identify many more lines in common with existing methods.
 As well as these common lines, the SOAP algorithm returned $\sim 150$ more bands which potentially contain an instrumental line, which did not appear on \gls{LIGO} line-lists.
 
