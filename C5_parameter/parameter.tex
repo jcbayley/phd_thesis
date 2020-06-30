@@ -3,6 +3,7 @@
 %%%%%%%%%%%%
 %%%%%%%%%%%%
 %%%%%
+%\epigraph{\textit{``Everyone Knows That When You Make An Assumption, You Make An A** Out Of 'U' And 'Umption.``}}{ --- \textit{Samuel Jackson (Mitch Henessey)}, The Long Kiss Goodnight}
 
 Throughout Chapters \ref{soap} and \ref{machine} we have developed
 techniques that could identify whether a potential \gls{CW}
@@ -19,7 +20,7 @@ source, then this track contains information on the sky position and frequency
 evolution of the \gls{CW}.  If one could extract this information then the size
 of the parameter space could be reduced for more sensitive coherent searches, decreasing their computational cost.
 
-In this chapter I will outline a Bayesian method that uses the output Viterbi tracks of the SOAP search in Chapter~\ref{soap} to return a subset of astrophysical parameters of a
+In this Chapter we will outline a Bayesian method that uses the output Viterbi tracks of the SOAP search in Chapter~\ref{soap} to return a subset of astrophysical parameters of a
 source.  Section~\ref{par_est:freq} will outline the model of the frequency
 evolution of a \gls{CW} from a source with a slowly varying frequency,
 Sec.~\ref{par_est:bayes} will outline the Bayesian model for this analysis and
@@ -75,8 +76,8 @@ the ecliptic frame an the second vector transforms the sky position parameters t
 
 The position vector of the detector,
 $\bm{r}$ in Eq.~\ref{searchcw:model:ssbtime}, at a time $t$ can be split into two components,
-the position due to the orbit of the earth and position due to the rotation of
-the detector.
+the position due to the orbit of the earth and position of the detector due to the rotation of
+the Earth.
 If we assume the orbit is circular, then the position of the earth in its orbit
 is described in Cartesian coordinates as
 %
@@ -123,7 +124,7 @@ then define the location of the detector in the \gls{SSB} frame
 
 We can now describe the phase evolution of the signal at the detector
 sites (latitude $\beta$ and longitude $\lambda$) starting at a time $t=0$ from the source sky
-position ($\alpha, \delta$), frequency$f$ and its derivative
+position ($\alpha, \delta$), frequency $f$ and its derivative
 $\dot{f}$.  We can write the phase evolution from Eq.~\ref{searchcw:model:phase} as
 %
 \begin{equation}
@@ -137,7 +138,7 @@ $\dot{f}$.  We can write the phase evolution from Eq.~\ref{searchcw:model:phase}
 %
 where we ignore frequency derivatives higher than first order.
 The frequency of a \gls{CW} signal at any point on the frequency track is then defined by the derivative of
-the phase with respect to the detector time
+the phase with respect to time
 %
 \begin{equation}
 f(t) = \frac{1}{2\pi}\frac{d\Phi(t)}{dt}.
@@ -162,7 +163,7 @@ observed the frequency track $\bm{V}$.  To do this we use a Bayesian model
 \end{equation}
 %
 where $p(\bm{\theta} \mid \bm{V}, I)$ is the posterior which we are interested in,
-$p(\bm{\theta})$ is the prior, $p(\bm{V} \mid \bm{\theta}, I)$ is the
+$p(\bm{\theta} \mid I)$ is the prior, $p(\bm{V} \mid \bm{\theta}, I)$ is the
 likelihood and $p(\bm{V} \mid I)$ is the Bayesian Evidence. The
 following sections will describe how we define the prior and likelihood for
 this problem.
@@ -187,8 +188,7 @@ frequency track exactly, giving a delta function with 0 variance for the
 deviation of the Viterbi and \gls{CW} frequency tracks. If conversely, the \gls{SNR} was zero
 then the Viterbi track would wander randomly through the frequency band
 independently of the \glspl{CW} frequency track, meaning that the deviation of
-the two frequency tracks would have a variance $\mathcal{O}(\text{width})$
-width of the
+the two frequency tracks would have a variance $\mathcal{O}(\text{width})$ of the
 frequency band.  The distribution of these deviations is then dependent on the
 \gls{SNR} $\rho$ of the signal.  
 
@@ -238,8 +238,8 @@ and 200.} \label{par_est:bayes:likelihood:kde142}
 
 The dependence of the likelihood on the \gls{SNR} $\rho$ introduces one more parameter
 to include in our Bayesian model.  
-The likelihood is binned in \gls{SNR} with widths of $\rho_w = 2$ as described above, therefore any value of $\rho$ which lies in the range $\rho_c \pm \rho_w/2 $ uses the likelihood \gls{KDE} $\mathcal{L}_{\rho_c}$, where $\rho_c$ is the bin center.
-The \glspl{KDE} $\mathcal{L}_{\rho_c}$ are then used to define the likelihood function $p(\bm{V} \mid
+The likelihood is binned in \gls{SNR} with widths of $\rho_w = 2$ as described above, therefore any value of $\rho$ which lies in the range $\rho_c \pm \rho_w/2 $ uses the likelihood histogram $\mathcal{L}_{\rho_c}$, where $\rho_c$ is the bin center.
+The histograms $\mathcal{L}_{\rho_c}$ are then used to define the likelihood function $p(\bm{V} \mid
 \bm{\theta}, \rho, I)$ in Eq.~\ref{par_est:bayes:eqn}, where we now have five parameters in our model
 $\alpha, \delta, f, \dot{f}$ and $\rho$.  As we assume
 independent track elements for a given Viterbi track, the likelihood is then the product of the likelihoods at each track element
@@ -264,7 +264,7 @@ $\rho$ from the bin centers.
 %
 For this analysis we choose to use a simple prior which is flat in parameter space in some range.  We use a flat prior for $\alpha$
 between $[0,2\pi]$, a flat prior in $\sin{\delta}$ between [-1,1], a flat prior
-in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searched through, a
+in $f$ in the range of the 0.1 Hz wide sub-band which SOAP searches through, a
 flat prior in the frequency derivative in the range
 $[-10^{-9},10^{-9}]$ Hz/s and a flat prior for the \gls{SNR} $\rho$ in
 the range $[40,200]$.
@@ -326,12 +326,12 @@ definition of the likelihood, this will described more in Sec.~\ref{par_est:resu
 \begin{figure}[pt]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/cornerplot.pdf}
-    \caption[KDE of likelihood in different \gls{SNR} ranges]{This figure shows
+    \caption[Posterior distribution of an example Viterbi track]{This figure shows
 an example of the posterior distribution of a signal with \gls{SNR} 151. Each
 panel shows the marginal distributions for each parameter, where the parameters
 used for the simulation are marked in orange. In this example each of the
 posteriors match well with the injected parameters.
-The contours on each of the marginal distributions are at confidence levels of 10,50 and 90 \%.}
+The contours on each of the marginal distributions are at confidence levels of 10, 50 and 90 \%.}
 \label{par_est:results:example_posterior}    
 \end{figure}
 %
@@ -443,11 +443,11 @@ left of the injected parameters, i.e. the true value
 lies in the upper tail of the posterior for the majority of the simulations,
 then the $p$--$p$ plot will show a curve below the diagonal, this is shown in the
 top right panel of Fig.~\ref{par_est:results:ppplot_example}.  If the posterior is
-under-constrained, i.e. the injected parameters are scattered with a larger width than the posterior suggests, then the curve will follow an S shape
-where the S is below the diagonal at $C < 0$.5 and above the diagonal at $C >
+under-constrained, i.e. the injected parameters are scattered with a narrower distribution than the posterior suggests, then the curve will follow an S shape
+where the S is below the diagonal when $C < 0$.5 and above the diagonal when $C >
 0.5$. This is shown in the third panel of
-Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the posterior is over-constrained, i.e. the injected parameters have a narrower distribution than the posterior suggests,, then the curve will follow an S shape where the S is
-above the diagonal at $C < 0.5$ and below the diagonal at $C> 0.5$.
+Fig.~\ref{par_est:results:ppplot_example}.  Similarly, if the posterior is over-constrained, i.e. the injected parameters are scattered with a larger width than the posterior suggests, then the curve will follow an S shape where the S is
+above the diagonal when $C < 0.5$ and below the diagonal when $C> 0.5$.
 %
 \begin{figure}[ht]
     \centering
@@ -474,7 +474,7 @@ that we recover an over-constrained posterior distribution at 95\% confidence.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/ppplot.pdf}
-    \caption[p-p plot for the CW simulations]{The p-p plot is shown for the 200
+    \caption[$p$--$p$ plot for the CW simulations]{The $p$--$p$ plot is shown for the 200
 signals described in Sec.~\ref{par_est:results}, which range between 40 and 200
 in \gls{SNR}. This describes how well the marginal posterior distributions for
 each parameter match the simulated parameter. The \gls{SNR}, frequency and
@@ -489,6 +489,7 @@ that all track components are independent, this is not necessarily true and
 could contribute to the over constrained posterior
 distributions.
 
+\clearpage
 %
 %
 \subsubsection{\label{par_est:results:simulations:skyarea}Sky area at given confidence interval}
@@ -496,7 +497,7 @@ distributions.
 %
 
 If we assume that the posterior contours are trustworthy, i.e. we do not under constrain or
-shift out posterior, then we can estimate the area of the sky which this method can
+shift our posterior, then we can estimate the area of the sky which this method can
 localise the source to.  To do this we can use our estimation of the marginal
 posterior distribution on the sky, and draw a contour on the posterior which
 contains 95\% of the probability.  The area contained within this contour is
@@ -515,10 +516,10 @@ method to extract the sky parameters.
     \centering
     \includegraphics[width=\linewidth]{C5_parameter/skyarea_example.pdf}
     \caption[Area of sky at 95\% confidence]{For the injection in
-Sec.~\ref{par_est:results:example_posterior}, the contour in sky position
-posterior is drawn for a 95\% confidence and the area which contains the
-injected sky position parameters. In this example the two contours are
-similar.} \label{par_est:results:sky_area_example}
+Sec.~\ref{par_est:results:example_posterior}, we plot the the contour in sky position
+posterior which contains 95\% of the probability and the contour at which
+injected sky position parameter values fall. In this example the two contours are
+similar. The black lines refer to the ecliptic coordinates, showing that the posterior is symmetric around the ecliptic equator.} \label{par_est:results:sky_area_example}
 \end{figure}
 
 The contours and therefore their associated sky areas can be calculated for all
@@ -531,22 +532,22 @@ of the simulations described in Sec.~\ref{par_est:results}. The first panel of F
     	The top panel shows a histogram of the sky area which this method can localise a source to with 95\% confidence. This is the area of a contour which contains 95\% of the posterior distribution.
     	The second panel shows the sky areas associated with a contour which is draw on the posterior through the injected parameter value. 
     	From the first panel, we can say that 90\% of the time we can localise to a sky area less than 45 deg$^2$ with 95\% confidence, this is shown as the red 90\% confidence line in both panels.
-    	The true parameter however, is contained within the 95\% contour only 23\% of the time.}
+    	The true parameter however, is contained within the 95\% contour only 42\% of the time.}
 \label{par_est:results:sky_area} 
 \end{figure}
 %
 From the distributions in Fig.~\ref{par_est:results:sky_area} we can see that
 the sky areas which contain the injected parameters are larger by a factor of
-$\sim 10$ than those at 95\% confidence.  We can also determine from this that the injected
-parameters fall within the 95\% confidence contour only 23\% of the time.  This
-implies that these posterior distributions are over-constrained, and that the sky areas at 95\% confidence is overly optimistic.
+$\sim 20$ than those at 95\% confidence.  We can also determine from this that the injected
+parameters fall within the 95\% confidence contour only 42\% of the time.  This
+implies that these posterior distributions are over-constrained, and that the sky areas at 95\% confidence are overly optimistic.
 
 However, if we assume that the 95\% confidence sky areas are trustworthy, we can approximate the sky area which this method can localise to. 
 From the first panel in Fig.~\ref{par_est:results:sky_area}, we can say that 90\% of the time we can localise to a sky area
-less than 45 deg$^2$ with 95\% confidence. In this case the sky area only contains the true parameter 23\% of the time. 
+less than 45 deg$^2$ with 95\% confidence. In this case the sky area only contains the true parameter 42\% of the time. 
 However, if we did trust the value of 45 deg$^2$, given the
 full sky has $\sim 41253$ square degrees, this is factor of $\sim 10^{-3}$ of
-the whole sky.  For a fully coherent search for \gls{CW}, this reduction in sky area would
+the whole sky.  For a fully coherent search for \glspl{CW}, this reduction in sky area would
 drastically reduce the computational cost of the of the search.
 
 
@@ -573,7 +574,7 @@ then used to construct the likelihood of this method.  For each of the
 parameters in the search, we assume a flat prior.  In
 Sec.~\ref{par_est:results}, the analysis is tested on 200 simulations which had
 parameters drawn from the same prior as the Bayesian model.  In this section we
-generate p-p plots to asses the validity of this model and find that the
+generate $p$--$p$ plots to asses the validity of this model and find that the
 \gls{SNR}, frequency and frequency derivative all are over constrained
 distributions and the sky position parameters are a mixture of over and under-constrained depending on the confidence. 
 
@@ -581,7 +582,7 @@ We investigated the area contained within contours on the marginal posterior
 for the sky position to gauge the ability of the search to localise a source,
 where we found that with a 95\% confidence we can detect to a sky area within
 45 deg$^2$ 90\% of the time.  
-However, the true value of the parameter fell within this contour only 23\% of the
+However, the true value of the parameter fell within this confidence contour only 42\% of the
 time, implying that the posterior distributions are over-constrained.
 To contain the true value 95\% of the time, this sky area would have to be expanded by a factor of $\sim 30$.
 Other methods could be used to reduce this sky area such as using the antenna response of the detector, this would locate the source to one hemisphere removing one mode from the bi modal sky distribution.

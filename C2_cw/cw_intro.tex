@@ -25,7 +25,7 @@ Whilst I have described the potential sources a \gls{CW} signal and its approxim
 signal type in Sec.~\ref{intro:sources:cw}, to perform a search the we need to understand the
 intrinsic waveform of the signal and the observed waveform at a detector.  In 
 Sec.~\ref{searchcw:model} we will go into more
-detail on the \gls{CW} signal model. In Sec.~\ref{searchcw:bayes} we introduce Bayesian techniques which can be used in many analyses. The \gls{CW} signal model and Bayesian techniques is then used in various search methods for
+detail on the \gls{CW} signal model. In Sec.~\ref{searchcw:bayes} we introduce Bayesian techniques which is used in many analyses. The \gls{CW} signal model and Bayesian techniques is then used in various search methods for
 \gls{CW} signals, where I will overview a subset of current searches in
 Sec.~\ref{searchcw:search}.
 
@@ -42,7 +42,7 @@ varying frequency. This indicates that as the neutron stars rotational frequency
 	n = \frac{f_{\rm{rot}} \ddot{f_{\rm{rot}}}}{\dot{f_{\rm{rot}}}^2},
 \end{equation}
 where $f_{\rm{rot}}$ is the rotational frequency of the neutron star \citep{dearaujo2016GravitationalWaves}.
-There are a number of potential reasons for the spin down, including: the energy loss to \gls{GW}, which should have a braking index of 5 \citep{dearaujo2016GravitationalWaves} and magnetic braking which gives a braking index of 3 \citep{dearaujo2016GravitationalWaves}.
+There are a number of potential reasons for the spin down, including: the energy loss to \glspl{GW}, which should have a braking index of 5 \citep{dearaujo2016GravitationalWaves} and magnetic braking which gives a braking index of 3 \citep{dearaujo2016GravitationalWaves}.
 
 The parameters of each neutron star can be split into two sections: the Doppler components
 ($\alpha,\delta,{\bm f}$) and its amplitude components ($\psi,\phi_0, \iota,
@@ -77,7 +77,7 @@ functions  defined in Eq.\ref{intro:detector:response:polarisations}. The plus a
 \end{equation}
 %
 where $h_0$ is the \gls{GW} amplitude, $\iota$ is the inclination angle of the source and $\Phi(t)$ is the phase of the \gls{GW}. 
-Here we assume the wobble angle $\theta$ is assumed to be small,
+Here we assume that the wobble angle $\theta$ is small,
 however this is included in the derivation in \citep{schutz1998DataAnalysis}.
 The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \gls{SSB} can be defined as
 %
@@ -101,7 +101,7 @@ where $c$ is the speed of light, $\mathbf{r}_d$ is the position of the detector 
 signal due to the movement of the detector, i.e. as the earth rotates on its axis and
 orbits the sun. The factor $\delta_t$ take into account extra
 corrections from the Einstein and Shapiro delay
-\citep{taylor1992PulsarTiming}. Einstein delay accounts for the time dilation and and gravitational redshift due to the Sun. Shapiro delay originates from the extra time a signal takes to pass through the gravitational potential of the Sun. \joe{need to properly understadn difference nbetween these two}The amplitude
+\citep{taylor1992PulsarTiming}.  Shapiro delay originates from the extra time a signal takes to pass through a gravitational potential, for example the Sun's. Einstein delay accounts for the time dilation of the moving observer or pulsar and the gravitational redshift due to the Sun or a companion star. The amplitude
 $h_0$ in Eq.~\ref{intro:cw:amplitudes} is defined by
 %
 \begin{equation}
@@ -120,7 +120,7 @@ where $I_{xx}, I_{yy}$ and $I_{zz}$ are the moments of inertia for each axis.
 
 In Eq.~\ref{searchcw:model:amplitude}, $F_+(t)$ and $F_{\times}(t)$ are the antenna pattern
 functions of the detector.  These describe how sensitive a detector is to a
-particular location on the sky and are described in Sec.~\ref{intro:detector:response} where the response to
+particular location on the sky and are derived in Sec.~\ref{intro:detector:response} where the response to
 sky location is shown in Fig.~\ref{intro:detector:response:polarisations}.  In \citep{schutz1998DataAnalysis} these are defined more completely
 %
 \begin{equation}
@@ -150,7 +150,7 @@ signal at a given detector location and orientation.
 %%%%%%%%%%%%%%%%%
 
 A key part in understanding the different methods used to search for
-\gls{GW} or many other data analysis problems, is understanding probability
+\glspl{GW} or many other data analysis problems, is understanding probability
 and statistics.  This gives us understanding of the random processes
 underlying all measured quantities.  Whilst there are generally two approaches
 to statistics: Frequentist and Bayesian, here I will focus on the Bayesian
@@ -234,16 +234,16 @@ Bayesian Evidence.
 \begin{description}
 	\item [Posterior]
         The posterior distribution describes the probability of a parameter
-${\bm \theta}$ in some model $I$ given some data $d$. For many problems this is
+${\bm \theta}$ in some model $I$ given some data $\bm{d}$. For many problems this is
 the distribution which is most useful as it informs you how likely any set of
 parameters from your model are given some observation.
 	
         \item [Prior] The Prior distribution is a key part of Bayesian
-statistics which describes the distribution of the parameters ${\bm \theta}$ given the model $I$. This should reflect any beliefs about the parameters $\theta$ prior to the observations.
+statistics which describes the distribution of the parameters ${\bm \theta}$ given the model $I$. This should reflect any beliefs about the parameters $\bm{\theta}$ prior to the observations.
 	
         \item [Likelihood] The likelihood is where the observation is included
 in the calculation. This tells you how probable it is to get the observed data
-$d$ given the model $I$ with the set of parameters $\theta$. 
+$\bm{d}$ given the model $I$ with the set of parameters $\bm{\theta}$. 
 	
         \item [Bayesian Evidence] This is the probability of the data itself
 given the choice of model. This is found by integrating the likelihood over all
@@ -292,13 +292,13 @@ assume a one dimensional distribution $p(\theta \mid \bm{d})$ for simplicity.
 One can, for example, uniformly generate random samples in a two dimensional
 space, where each sample has a value of $\theta_i$ and $p_i$
 as represented by the points in
-the first panel of Fig.~\ref{cwinto:bayes:sampling:rejection}. For this method the values of $p_i$ here need to have a value at least the maximum of $p(\theta \mid \bm{d})$. In this example
+the first panel of Fig.~\ref{cwinto:bayes:sampling:rejection}. For this method the values of $p_i$ here need to have a maximum value at least the maximum of $p(\theta \mid \bm{d})$. In this example
 we know the exact posterior distribution $p(\theta \mid \bm{d})$ and therefore
 can plot it over these points.  For each of these points, we can calculate the
 height of the distribution $p(\theta_i \mid \bm{d})$, where values of $\theta$
-where $p_i > p(\theta_i, \mid \bm{d})$ are assumed to not be part of the
+which give $p_i > p(\theta_i, \mid \bm{d})$ are assumed to not be part of the
 distribution and ignored. The values of $\theta$ where $p_i < p(\theta_i \mid
-\bm{d})$ are then assumed to be sampled from the distribution $\theta$.  One
+\bm{d})$ are then assumed to be sampled from the distribution $p(\theta \mid \bm{d})$.  One
 can see this is true from Fig.~\ref{cwinto:bayes:sampling:rejection}, in any
 range $\theta \rightarrow \theta + \delta \theta$ the density of accepted
 points (ones which fall below the $p(\theta \mid \bm{d})$ curve) is
@@ -361,7 +361,7 @@ The probability of acceptance can be written as
 \end{equation}
 where $p(\theta_i \mid \bm{d})$ is the posterior value at the current parameter location and $p(\theta_{i-1} \mid \bm{d})$ is the posterior value at the previous parameter location. 
 This means that the accepted positions are located around areas of high
-posterior values, the \gls{MCMC} algorithm does not waste time calculating the
+posterior values; the \gls{MCMC} algorithm does not waste time calculating the
 posterior in uninteresting areas of parameter space.  
 One can see this correctly samples the posterior distribution by thinking about the condition in Eq.~\ref{searchcw:bayes:mcmc:accept}. Say we only allow jumps between two locations in parameter space, one which corresponds to the maximum of the posterior and one at half of this value. 
 If we start at the maximum, the probability of accepting the jump to the parameter with half the value of the posterior is $0.5$. Repeating this many times would mean that the chain would jump to the lower value half the time, and therefore have half the samples at the parameter which is at half the maximum of the posterior. 
@@ -447,7 +447,7 @@ mass $X(\lambda)$ is the shaded region for a given $\lambda$ defined in
 Eq.~\ref{searchcw:bayes:nested:priormass}. The bottom left panel then shows
 $\pi(\theta)\mathcal{L}(\theta)$, where the integral of this defined in
 Eq.~\ref{searchcw:bayes:nested:evidence} is the Evidence $Z$. The bottom right
-panel shows the likelihood as a function of prior mass which or any number of
+panel shows the likelihood as a function of prior mass which for any number of
 parameters is a 1D integral, where again the integral of this is the Evidence
 in Eq.~\ref{searchcw:bayes:nested:evidence}.}
 \label{cwinto:bayes:nestedsampling:plots}
@@ -469,8 +469,8 @@ This then records samples $\theta_{\rm{min}}$ after each step such that the valu
 \begin{equation}
 	0 < X_M < ... < X_1 < X_0 = 1.
 \end{equation}
-The values of $\mathcal{L}_{\rm{min}}$ can then be used with Eq.~\ref{searchcw:bayes:nested:evidence_trapz} to approximate the evidence , where the prior mass would be calculated for each step $X_i = P(\mathcal{L}(\theta) > \mathcal{L}_{\rm{min},i})$.
-However, we can notice that the value of the prior mass shrinks at each step following $X_i = t_i X_{i-1}$, where $t_i$ follows the distribution of the maximum value of $N_{\text{live}}$ samples from $U(0,1)$, i.e. $f(t) = N_{\text{live}} t^{N_{\text{live}} - 1}$.
+The values of $\mathcal{L}_{\rm{min}}$ can then be used with Eq.~\ref{searchcw:bayes:nested:evidence_trapz} to approximate the evidence, where the prior mass would be calculated for each step $X_i = P(\mathcal{L}(\theta) > \mathcal{L}_{\rm{min},i})$.
+However, we can notice that the value of the prior mass shrinks at each step following $X_i = t_i X_{i-1}$, where $t_i$ follows the probability distribution of the maximum value of $N_{\text{live}}$ samples from $U(0,1)$, i.e. $p(t) = N_{\text{live}} t^{N_{\text{live}} - 1}$.
 Therefore, rather than calculating the prior pass at each stage, we can assume the prior mass is a random variable, where after each iteration it shrinks by the expectation value of $t_i$
 \begin{equation}
 E[t_i] \approx \exp{\left(-\frac{i}{N_{\rm{live}}}\right)},
@@ -487,14 +487,14 @@ This tells us that using this algorithm the log-prior mass shrinks by a factor $
 		
 		\STATE{initialise: $D$} \COMMENT{initialise a list to store samples}
 		\STATE{initialise: $Z = 0$} \COMMENT{Initialise the Evidence calculation}
-		\STATE{initialise: $i=0$} \COMMENT{initialise a list to store samples}
-		
+		\STATE{initialise: $i=0$} 
+		\STATE
 		\WHILE{stopping criterion not met}
 		\STATE{ $\mathcal{L}^{\rm{min}} = \rm{min}\left\{\mathcal{L}(\theta_1),...\mathcal{L}(\theta_{N_{\rm{live}}})\right\}$} \COMMENT{find minimum likelihood values for all live points}
-		\STATE{$D_i  = \theta_n$ } \COMMENT{add the live point $\theta_n$ associated with $\mathcal{L}^{\rm{min}}$ to list of `dead' points $D$.}
+		\STATE{$D_i  = \theta_n$ } \COMMENT{add the nth live point $\theta_n$ associated with $\mathcal{L}^{\rm{min}}$ to list of `dead' points $D$.}
 		\STATE{draw $\theta_{\rm{new}}$ from constrained prior where $\mathcal{L}(\theta_{\rm{new}}) > \mathcal{L}^{\rm{min}}$}
 		\STATE{$\theta_n = \theta_{\rm{new}}$}
-		\STATE{$Z = Z +\mathcal{L}^{\rm{min}} \Delta X = Z + 1/N_{\rm{live}}$} \COMMENT{add point to the sum of the Evidence as Eq.~\ref{searchcw:bayes:nested:approx_evidence}}
+		\STATE{$Z = Z +\mathcal{L}^{\rm{min}} \Delta X $} \COMMENT{add point to the sum of the Evidence as Eq.~\ref{searchcw:bayes:nested:approx_evidence}}
 		\STATE{Evaluate stopping criterion}
 		\STATE{$i = i+1$}
 		\ENDWHILE
@@ -520,23 +520,22 @@ increasingly smaller prior masses.  \label{searchcw:bayes:nested_alg}}
 The integral in Eq.~\ref{searchcw:bayes:nested:evidence} can then be approximated using Eq.~\ref{searchcw:bayes:nested:evidence_trapz},
 \begin{equation}
 \label{searchcw:bayes:nested:approx_evidence}
-	Z = \int_0^1 \mathcal{L}(X) dX \approx \sum_{i=1}^{i=M}  \mathcal{L}(\theta_i)  \left[ X_{i-1} - X_{i} \right] = \sum_{i=1}^{M} p(\theta_i),
+	Z = \int_0^1 \mathcal{L}(X) dX \approx \sum_{i=1}^{M}  \mathcal{L}(\theta_i)  \left[ X_{i-1} - X_{i} \right] = \sum_{i=1}^{M} p(\theta_i),
 \end{equation}
-where $M$ is the number of iterations in Alg.~\ref{searchcw:bayes:nested_alg}, $p(\theta_i)$ is the importance weight defined as $p(\theta_i) =  \mathcal{L}(\theta_i) \left[ X_{i-1} - X_{i} \right]$. The likelihood value $\mathcal{L}(\theta_i)$ is calculated for each dead point $D_i$ with its associated change in prior mass $\Delta X = \left[ X_{i-1} - X_{i} \right] \approx -1/K$. 
+where $M$ is the number of iterations in Alg.~\ref{searchcw:bayes:nested_alg}, $p(\theta_i)$ is the importance weight defined as $p(\theta_i) =  \mathcal{L}(\theta_i) \left[ X_{i-1} - X_{i} \right]$. The likelihood value $\mathcal{L}(\theta_i)$ is calculated for each dead point $D_i$ with its associated change in prior mass $\Delta X = \left[ X_{i-1} - X_{i} \right] \approx -1/N_{\text{live}}$. 
 This then gives an estimate of the Bayesian Evidence, for more details on this and some simple examples see \citep{skilling2006NestedSampling,speagle2019DynestyDynamic,feroz2019ImportanceNested}.
 
-Nested sampling also provides an estimate of the posterior distribution as well as the Bayesian Evidence, from the set of samples (dead points) 
+Nested sampling also provides an estimate of the posterior distribution as well as the Bayesian Evidence from the set of samples (dead points) 
 \begin{equation}
 	p(\theta \mid \bm{d}, I) \approx \frac{\sum_{i=1}^{M} p(\theta_i) \delta(\theta - \theta_i)}{\sum_{i=1}^{M} p(\theta_i) }.
 \end{equation}
 where $\delta( \theta - \theta_i)$ is the Dirac delta
-function \citep{speagle2019DynestyDynamic}.~\chris{this is correct and leaves
-you with a sea of delta functions. Are you able to say anything about what you
-then do with these, i.e., histgram them?}
+function \citep{speagle2019DynestyDynamic}. This leaves us with a set of delta functions at values of $\theta$, where the posterior \gls{PDF} can be found by taking the histogram of these delta functions.
+Alternatively one can think of this as resampling the points $\theta_i$ based on their importance weight $p(\theta_i)$, which leaves a set of samples from the posterior \gls{PDF}.
 
 The methods described above then provide a way to estimate parameters of a
 model given some data.  Also this provides a way to compare different models
-given some observation.  In chapters \ref{soap}, \ref{machine} and
+given some observation.  In Chapters \ref{soap}, \ref{machine} and
 \ref{par_est} the methods described above are used to estimate various
 parameters.
 
@@ -635,9 +634,10 @@ cover the entire parameter space, it would require large computational cost.  In
 semi-coherent searches were developed.  These offered a solution to searching over
 the large parameter space and data size.  The general idea of a semi-coherent
 search is to break the dataset into smaller segments of length $T_{coh}$, which
-can each be analysed coherently. There are also searches such as \citep{messenger2007FastSearch}, which breaks the dataset into smaller frequency bands and combined them incoherently. 
+can each be analysed coherently. 
 The results from each segment can the be combined incoherently using various methods which will be
 summarised below.  
+There are also searches such as \citep{messenger2007FastSearch}, which breaks the dataset into smaller frequency bands and combine them incoherently. 
 Whilst these methods will be less sensitive than a fully coherent search, they are much faster and at a fixed computing cost are more sensitive.
 
 There are many different types of semi-coherent search which use various
@@ -665,7 +665,7 @@ has been applied in two main ways known as Sky Hough
 \citep{krishnan2004HoughTransform}, which generates Hough maps in sky position $(\alpha,\delta)$ for fixed spin down, and Frequency Hough
 \citep{antonucci2008DetectionPeriodic,astone2014MethodAllsky} which generates hough maps in $(f,\dot{f})$ for fixed sky position.
 	
-        \item[Einstein@Home] \joe{reread this }This uses the
+        \item[Einstein@Home] This uses the
 $\mathcal{F}$-statistic mentioned in Sec.~\ref{searchcw:search:targeted} calculated over a length of $T_{\rm{coh}}$, where in the initial stages of this search these segments are combined incoherently. This is is done using a Hough transform scheme \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} or by generating candidate events where the $\mathcal{F}$-statistic crosses some threshold and then finding events which are coincident in parameter space \citep{ligoscientificcollaboration2009EinsteinHome}.
 After the first stage, potential signals are returned (candidates) where post processing methods as in \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} select the most significant candidates.
 In \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} they use a three step procedure, which starts with the Hough transform with more finely sampled parameters around the candidate, and then runs a semi and then finally fully coherent $\mathcal{F}$-statistic analysis.
@@ -680,7 +680,7 @@ $\mathcal{F}$-statistic splits the data into narrowband segments of length
 $\sim$ 2 days \citep{walsh2016ComparisonMethods}. Then a coherent search using
 the $\mathcal{F}$-statistic is applied to each of these segments. Values of
 this statistic above a threshold are stored. Coincidences are then found in
-each segment, where candidates are selected best based on a given
+each segment, where candidates are selected based on a given
 threshold. This is explained in greater detail in
 \citep{aasi2014ImplementationTextdollar,walsh2016ComparisonMethods}.
 	
@@ -740,6 +740,6 @@ Pipeline & Expected runtime of O1 search \\ \hline Powerflux & 6.8 MSU \\
 %
 Even the fastest of these searches takes close to 1 million core-hours to
 search through four months of data. 
-This presents one of the larger issues when searching for sources of \gls{CW} as generating results from observing runs can be time consuming. 
+This presents one of the larger issues when searching for sources of \glspl{CW} as generating results from observing runs can be time consuming. 
 
 
