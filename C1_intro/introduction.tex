@@ -228,7 +228,7 @@ signals which are short duration in the ground based detector band, include
 both well modelled \gls{CBC} signals and unknown Burst signals. Long duration
 signals include well modelled \gls{CW} signals and Stochastic
 signals, where whilst the sources may be well modelled, the signal at the detector is unknown.
-Whilst there is no scale in the diagram above, shorter duration signals typically have much larger strain amplitudes than long duration signals.}
+Whilst there is no scale in the diagram above, shorter duration signals typically have much larger strain amplitudes than long duration signals, however, this does also depend on the distance to the source.}
 \label{intro:sources:signaltypes}
 \end{figure}
 
@@ -487,7 +487,7 @@ from millisecond pulsars can be used to measure \glspl{GW}
 \citep{hobbs2017GravitationalWave}. As a \gls{GW} passes between the pulsar and
 the observer, the arrival time of the pulses will change. The change in arrival time depends on the source and its parameters, for supermassive black hole binaries emitting at nanohertz frequencies at around 1 Gpc, the change in arrival time is $\mathcal{O}(10)$ ns \citep{hobbs2017GravitationalWave}.  \gls{CMB} detectors can be used to find evidence of \glspl{GW} by investigating the B-mode polarisations of the \gls{CMB}
 \citep{ade2018ConstraintsPrimordial}. A number of
-detectors are used to look at the \gls{CMB} however, are yet to
+detectors are used to look at the \gls{CMB} however, they are yet to
 confirm a detection of a \gls{GW} signal.  
 The current best known design of a \gls{GW} detector is the interferometer, this includes the ground based detector \gls{LIGO} \citep{aasi2015AdvancedLIGO}
 which made the first detection of \gls{GW} in 2015
@@ -610,7 +610,7 @@ We can then write the difference in arm length along these vectors as
                 &= L_0\, h_{ij} D^{ij},\\
     \end{split}
 \end{equation}
-where $D^{ij}$ is the detector tensor which depends on the detectors geometry \citep{whelanGeometryGravitational}.
+where $D^{ij}$ is the detector tensor which depends on the detector's geometry \citep{whelanGeometryGravitational}.
 The \gls{GW} strain is then the fractional difference in length of the arms
 \begin{equation} 
     \label{intro:detectors:strain:detectortensor}
@@ -631,7 +631,7 @@ The \gls{GW} strain is then proportional to the readout of the control systems $
 \begin{equation}
     \tilde{h}(f) = T(f) \frac{d(f)}{L_0},
 \end{equation}
-where $T(f)$ is a transfer function which describes how the control systems affect the signal where $\Delta L = T(f) d(f)$, for more details on this see \cite{ligoscientificcollaboration2017CalibrationAdvanced}.
+where $T(f)$ is a transfer function which describes how the control systems affect the signal where $\Delta L = T(f) d(f)$. For more details on this see \cite{ligoscientificcollaboration2017CalibrationAdvanced}.
 
 If one looks at Eq.~\ref{intro:detectors:strain:detectortensor} then if the mirrors at the
 end of the arms (\gls{ETMX} and \gls{ETMY}) are are placed
@@ -671,7 +671,7 @@ Actual ground based \gls{GW} detectors such as \gls{LIGO} \citep{abbott2009LIGOL
 Virgo \citep{acernese2015AdvancedVirgo} are much more complicated than
 described above.  They use many techniques to increase the sensitivity, some of
 which are outlined in \citep{aasi2015AdvancedLIGO,abbott2009LIGOLaser}.  Many of these techniques are
-designed to reduce non-astrophysical effects on the detector,
+designed to reduce non-astrophysical effects on the detector and
 some of these effects and solutions are listed in
 Sec.~\ref{intro:detector:noise}.
 
@@ -688,7 +688,7 @@ location and the polarisation of the \gls{GW}. We can find the antenna response 
 of the detector.  We can define the detector to be in the frame $(x,y,z)$ with
 the detector arms along the $x$ and $y$ axes, and the source to be in the frame
 $(x^{\prime},y^{\prime},z^{\prime})$, where the \gls{GW} is travelling along
-$z^{'}$ and is pointing towards the detector.  The axes $z^{\prime}$ then has
+$z^{'}$ and is pointing towards the detector.  The axis $z^{\prime}$ then has
 polar coordinates $\theta$ and $\phi$ in the detector frame.  We can determine
 the antenna pattern functions by first looking at the spatial components of the
 \gls{GW},
@@ -812,7 +812,7 @@ of the detector, technical noise which originates from sources such as
 electronics in the control systems, and environmental noise which originates
 from the surrounding environment such as seismic motion
 \citep{martynov2016SensitivityAdvanced}.  Some of these noise sources and how
-they limit the detectors strain sensitivity are shown in
+they limit the detectors' strain sensitivity are shown in
 Fig.~\ref{detectors:noisesensitivity} from \citep{aasi2015AdvancedLIGO}, where
 in general, different noise sources affect different areas of the frequency
 spectrum.
@@ -830,7 +830,7 @@ Here I will summarise some of the limiting sources and also sources which
 become useful for understanding later sections.
 
 \begin{description}
-\item[Seismic noise] This originates from vibrations in the Earth which can be from effects such as the Earths seismic
+\item[Seismic noise] This originates from vibrations in the Earth which can be from effects such as the Earth's seismic
 activity or anthropogenic sources, where this affects frequencies $\lesssim 20$ Hz in the \glspl{LIGO} spectrum. The oscillations originate
 from a range of sources including earthquakes, ocean waves and traffic on nearby roads. They cause the mirrors to
 oscillate and induce a change
@@ -871,7 +871,7 @@ In \citep{pitkin2011GravitationalWave} the fluctuation in the radiation pressure
 \end{equation}
 where $\omega$ is the angular frequency and $m$ is the test mass. 
 One can see from this that by using larger test masses the radiation pressure noise is reduced.
-Radiation pressure noise and shot noise are then a fundamental limit of the detectors sensitivity, as shot noise decreases with laser power the radiation pressure noise increases.
+Radiation pressure noise and shot noise are then a fundamental limit of the detectors sensitivity; as shot noise decreases with laser power the radiation pressure noise increases.
 However, there are methods which `cheat' this limit to reduce the noise, for example using squeezed states of light \citep{aasi2013EnhancedSensitivity}. 
 
 \item[Technical noise] Whilst this is not shown

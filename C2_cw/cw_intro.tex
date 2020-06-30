@@ -7,7 +7,7 @@
 \glspl{CW} have
 particular challenges when it comes to their detection.  \glspl{CW} are long
 duration, this means that they would be observed for the entirety of a
-detectors observing run.  The signals also have an intrinsically small
+detector's observing run.  The signals also have an intrinsically small
 amplitude which is below the noise floor of current ground based detectors such
 as \gls{LIGO}.  This means that for a detection, the entire observing
 run's data will be needed to
@@ -22,10 +22,10 @@ infeasible.
 % Describe this chapter 
 %--------------------------
 Whilst I have described the potential sources a \gls{CW} signal and its approximate
-signal type in Sec.~\ref{intro:sources:cw}, to perform a search the we need to understand the
+signal type in Sec.~\ref{intro:sources:cw}, to perform a search we need to understand the
 intrinsic waveform of the signal and the observed waveform at a detector.  In 
 Sec.~\ref{searchcw:model} we will go into more
-detail on the \gls{CW} signal model. In Sec.~\ref{searchcw:bayes} we introduce Bayesian techniques which is used in many analyses. The \gls{CW} signal model and Bayesian techniques is then used in various search methods for
+detail on the \gls{CW} signal model. In Sec.~\ref{searchcw:bayes} we introduce Bayesian techniques which are used in many analyses. The \gls{CW} signal model and Bayesian techniques are then used in various search methods for
 \gls{CW} signals, where I will overview a subset of current searches in
 Sec.~\ref{searchcw:search}.
 
@@ -37,7 +37,7 @@ Sec.~\ref{searchcw:search}.
 
 The model of a \gls{GW} signal from a rapidly rotating neutron star is relatively simple, it is intrinsically a
 quasi-sinusoidal signal, meaning that it is a sinusoid with a slowly
-varying frequency. This indicates that as the neutron stars rotational frequency decreases (spins down) it is losing energy. The rate at which the star loses energy is generally characterised by the braking index defined by
+varying frequency. This indicates that as the neutron star's rotational frequency decreases (spins down) it is losing energy. The rate at which the star loses energy is generally characterised by the braking index defined by
 \begin{equation}
 	n = \frac{f_{\rm{rot}} \ddot{f_{\rm{rot}}}}{\dot{f_{\rm{rot}}}^2},
 \end{equation}
@@ -47,7 +47,7 @@ There are a number of potential reasons for the spin down, including: the energy
 The parameters of each neutron star can be split into two sections: the Doppler components
 ($\alpha,\delta,{\bm f}$) and its amplitude components ($\psi,\phi_0, \iota,
 h_0, \theta$). This ignores any orbital parameters which would be present if the
-star was in a binary systems. The Doppler parameters are defined as follows: the sky positions
+star was in a binary system. The Doppler parameters are defined as follows: the sky positions
 $\alpha$ and $\delta$ refer to the right ascension and declination of the source. The frequency ${\bm f}$ refers to
 the \gls{GW} source frequency and its spin derivatives.  The parameters $\psi$,
 $\phi_0$ and $h_0 $ are the \gls{GW} polarisation, initial phase and amplitude
@@ -66,7 +66,7 @@ h(t) = F_{+}h_{+}(t) + F_{\times}h_{\times}(t),
 %
 where $h_{+},h_{\times}$ are the plus and cross polarisation functions as defined in
 Eq.\ref{intro:gw:gravwave}, and $F_{+},F_{\times}$ are the antenna pattern
-functions  defined in Eq.\ref{intro:detector:response:polarisations}. The plus a cross polarisation functions are defined by
+functions  defined in Eq.\ref{intro:detector:response:polarisations}. The plus and cross polarisation functions are defined by
 %
 \begin{equation}
 \label{intro:cw:amplitudes}
@@ -78,7 +78,7 @@ functions  defined in Eq.\ref{intro:detector:response:polarisations}. The plus a
 %
 where $h_0$ is the \gls{GW} amplitude, $\iota$ is the inclination angle of the source and $\Phi(t)$ is the phase of the \gls{GW}. 
 Here we assume that the wobble angle $\theta$ is small,
-however this is included in the derivation in \citep{schutz1998DataAnalysis}.
+however this assumption is accounted for in the derivation in \citep{schutz1998DataAnalysis}.
 The phase of the wave $\Phi(t_{{\rm SSB}})$ at the \gls{SSB} can be defined as
 %
 \begin{equation}
@@ -134,8 +134,8 @@ F_{\times}(t) &= \sin{\zeta}[b(t) \cos{(2\psi)} - a(t)\sin{(2\psi)}],
 where $\zeta$ is the angle between the arms of the detectors, $\psi$ is the
 polarisation angle of the \gls{GW} and $a(t)$ and $b(t)$ are defined in
 \citep{schutz1998DataAnalysis} and relate the sky location to the orientation
-of the detector at a given time.  A full derivation of this can be found in
-\citep{schutz1998DataAnalysis} where each of these terms are expanded.
+of the detector at a given time.  A full derivation of the terms $a(t)$ and $b(t)$ in Eq.~\ref{intro:cw:antenna} can be found in
+\citep{schutz1998DataAnalysis}.
 Equations \ref{searchcw:model:amplitude} - \ref{intro:cw:antenna} then describe the amplitude and phase evolution of a
 signal at a given detector location and orientation.
 
@@ -172,19 +172,20 @@ which lies in the range $0 \leq p(B) \leq 1$.
 	A union is the probability of either event $A$ happening or event $B$ happening. This is written as, $p(A \cup B)$.
 	
 	\item [Intersection]
-	An intersection is then the probability that both and event $A$ and an event $B$ happens. This is written as $p(A \cap B)$.
+	An intersection is then the probability that both an event $A$ and an event $B$ happens. This is written as $p(A \cap B)$.
 	
 	\item [Independent and dependent Events]
-	If the events $A$ and $B$ are independent, i.e. the event $A$ does not affect the outcome of event $B$, then
-	\begin{equation}
-	p(A \cap B) = p(A)p(B).
-	\end{equation}
-	However, if the event $A$ is dependent on event $B$, i.e. the event $A$ affects event $B$ or vice versa, then the joint probability of both events is
+	If the event $A$ is dependent on event $B$, i.e. the event $A$ affects event $B$ or vice versa, then the joint probability of both events is
 	\begin{equation}
 	\label{searchcw:prob:dependentevent}
 	p(A \cap B) = p(A)p(B \mid A) = p(B)p(A \mid B).
 	\end{equation}
 	Here $p(B \mid A)$ means the probability of event $B$ given an event $A$.
+	However, if the events $A$ and $B$ are independent, i.e. the event $A$ does not affect the outcome of event $B$, then
+	\begin{equation}
+	p(A \cap B) = p(A)p(B).
+	\end{equation}
+	
 	
 	\item [Conditional probability]
 	Conditional probability arises from situations where one event $A$ affects the event $B$.
@@ -274,6 +275,7 @@ model $I$ to be true, we no longer need to calculate the Bayesian Evidence.  The
 un-normalised posterior distribution
 %
 \begin{equation}
+\label{searchcw:bayes:propposterior}
 p({\bm \theta} \mid {\bm d}, I) \propto p({\bm \theta}, I)p({\bm d} \mid {\bm \theta}, I)
 \end{equation}
 can then be found by a method known as `sampling'.
@@ -292,7 +294,7 @@ assume a one dimensional distribution $p(\theta \mid \bm{d})$ for simplicity.
 One can, for example, uniformly generate random samples in a two dimensional
 space, where each sample has a value of $\theta_i$ and $p_i$
 as represented by the points in
-the first panel of Fig.~\ref{cwinto:bayes:sampling:rejection}. For this method the values of $p_i$ here need to have a maximum value at least the maximum of $p(\theta \mid \bm{d})$. In this example
+the first panel of Fig.~\ref{cwinto:bayes:sampling:rejection}. For this method the values of $p_i$ here need to have a maximum value at least equal to the maximum of $p(\theta \mid \bm{d})$. In this example
 we know the exact posterior distribution $p(\theta \mid \bm{d})$ and therefore
 can plot it over these points.  For each of these points, we can calculate the
 height of the distribution $p(\theta_i \mid \bm{d})$, where values of $\theta$
@@ -314,8 +316,8 @@ Fig.~\ref{cwinto:bayes:sampling:rejection}
 	\includegraphics[width=0.8\linewidth]{C2_cw/reject_sample.pdf}
         \caption[Rejection sampling example]{Example of rejection sampling
 applied to a simple one dimensional Gaussian distribution. To top panel shows a
-number of samples $(\theta_i, p_i)$ with the true posterior $p(\theta)$
-overlaid, where the green samples are accepted and red samples are rejected.
+number of samples $(\theta_i, p_i)$ with the distribution $p( \theta)p({\bm d} \mid \theta)$ which is proportional to the true posterior $p(\theta \mid \bm{d})$
+overlaid. The green samples are accepted and red samples are rejected.
 The bottom panel shows a histogram of the accepted samples, where each bin
 contains the density of points in the range $\theta \rightarrow \theta + \delta
 \theta$.} \label{cwinto:bayes:sampling:rejection}
@@ -338,7 +340,7 @@ this technique can be found in
 Rather than calculating the posterior for many independent locations in
 parameter space, an \gls{MCMC} algorithm randomly wanders around in parameter
 space such that the amount of time spent in any location is proportional to the
-height of the distribution.  An example of a simple \gls{MCMC} algorithm can be
+height of the posterior distribution.  An example of a simple \gls{MCMC} algorithm can be
 seen in Alg.~\ref{searchcw:bayes:mcmc_alg}.
 
 An \gls{MCMC} algorithm
@@ -406,14 +408,13 @@ $S$ from the posterior distribution $p(\theta_i \mid \bm{d})$.
 %
 
 
-In Bayesian inference it is often useful to compare different models or hypotheses to gain insight into which is more likely. One can do this by using the Bayes
-factor
+In Bayesian inference it is often useful to compare different models or hypotheses to gain insight into which is more likely. One can do this by using the Odds ratio
 %
 \begin{equation}
-B = \frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)},
+O = \frac{ p(I_1 \mid {\bm d})}{p(I_2 \mid {\bm d})} = \frac{p(I_1)}{p(I_2)}\frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)} = \text{prior odds} \times \text{bayes factor},
 \end{equation}
 %
-which compares the marginal likelihood of one model $p({\bm d} \mid I_1)$ to the marginal likelihood of another $p({\bm d} \mid I_2)$ and describes the evidence in favour of one model over the other.
+where the bayes factor compares the marginal likelihood of one model $p({\bm d} \mid I_1)$ to the marginal likelihood of another $p({\bm d} \mid I_2)$ and describes the evidence in favour of one model over the other and the prior odds reflects the relative belief of $I_1$ over $I_2$ prior to any observation \joe{reread this}.
 This requires the calculation of the Bayesian Evidence in Eq.~\ref{searchcw:bayes:evidence}, which traditionally is very difficult to calculate as it is an integral over the entire parameter space. To calculate this, a method known as nested sampling was developed
 \citep{skilling2006NestedSampling,speagle2019DynestyDynamic}.
 In nested sampling, rather than directly sampling from the posterior as in \gls{MCMC}, the posterior is broken into `slices' where samples are generated from each `slice'.
@@ -442,9 +443,9 @@ The two representations of the Bayesian Evidence defined in Eq.~\ref{searchcw:ba
 	\centering
 	\includegraphics[width=0.8\linewidth]{C2_cw/nested_plots.pdf}
         \caption[Nested sampling]{An example of a prior distribution and a
-likelihood are shown in the first panel for a 1D distribution, where the prior
+likelihood are shown in the top panel for a 1D distribution, where the prior
 mass $X(\lambda)$ is the shaded region for a given $\lambda$ defined in
-Eq.~\ref{searchcw:bayes:nested:priormass}. The bottom left panel then shows
+Eq.~\ref{searchcw:bayes:nested:priormass}. The black horizontal line in the top panel represents the value of $\lambda$ which increases from zero to the maximum of the likelihood, where corresponding values of the likelihood $\mathcal{L}$ and prior mass $X(\lambda)$ for each $\lambda$ are used to calculate the evidence in Eq.~ \ref{searchcw:bayes:nested:evidence}. The bottom left panel then shows
 $\pi(\theta)\mathcal{L}(\theta)$, where the integral of this defined in
 Eq.~\ref{searchcw:bayes:nested:evidence} is the Evidence $Z$. The bottom right
 panel shows the likelihood as a function of prior mass which for any number of
@@ -568,7 +569,7 @@ main targeted searches are the Bayesian time-domain search
 $\mathcal{F}$-statistic \citep{schutz1998DataAnalysis} and the 5-Vector
 approach \citep{astone2010MethodDetection}.
 
-The Bayesian time-domain takes advantage ot the narrow-band nature of the signal and reduces the dataset to a manageable size such that Bayesian parameter
+The Bayesian time-domain search takes advantage of the narrow-band nature of the signal and reduces the size of the dataset such that Bayesian parameter
 estimation can be applied with a reasonable computational cost.  This search
 uses sky position and frequency parameters of the source to perform a slowly
 evolving heterodyne which removes the phase evolution of the signal
@@ -578,7 +579,7 @@ of the signal information.  This reduced dataset can then be used in a Bayesian
 approach to generate posterior distributions on the parameters $h_0, \iota, \phi_0, \psi$, see
 \citep{dupuis2005BayesianEstimation} for further information.  
 
-The matched filter $\mathcal{F}$-statistic \citep{schutz1998DataAnalysis} analytically maximises a likelihood ratio with respect to the neutron stars amplitude parameters $h_0, \iota, \phi_0, \psi$ such that it then only a function of the Doppler parameters $\alpha, \delta, f$ and $\dot{f}$. 
+The matched filter $\mathcal{F}$-statistic \citep{schutz1998DataAnalysis} analytically maximises the likelihood ratio of a signal model over a noise model with respect to the neutron star's amplitude parameters $h_0, \iota, \phi_0, \psi$ such that it is then only a function of the Doppler parameters $\alpha, \delta, f$ and $\dot{f}$. 
 This method resamples the data over some time length $T_{\rm coh}$ based on the parameters $\alpha, \delta, f$ and $\dot{f}$ using the \gls{SSB} time in Eq.~\ref{searchcw:model:ssbtime} \citep{schutz1998DataAnalysis}.
 If the \gls{GW} signal matches these parameters then resampling removes the Doppler modulation of the signal such that it appears at a fixed frequency.
 This means that the $\mathcal{F}$-statistic can be efficiently calculated using the \gls{FFT}. 
@@ -588,7 +589,7 @@ aasi2014GRAVITATIONALWAVES}.
 
 The 5-Vector search is based in the frequency domain, where it makes
 use of the five frequency harmonics caused by the sidereal amplitude
-modulation which originates from the detectors antenna response as
+modulation which originates from the detector's antenna response as
 the earth rotates \citep{astone2010MethodDetection,aasi2014GRAVITATIONALWAVES}.
 A summary of the application of these three searches for initial and advanced
 \gls{LIGO} can be found in
@@ -596,8 +597,7 @@ A summary of the application of these three searches for initial and advanced
 
 Due to the long observation times needed to accumulate the required \gls{SNR}
 for detection, most searches use data from an entire or multiple \gls{LIGO} and Virgo observing runs
-which can last for $\mathcal{O}(1)$ year.  Given
-that the sampling rate for the \gls{GW} channel is $16$ kHz (often downsampled
+which can last for $\mathcal{O}(1)$ year.  Given the sampling rate for the \gls{GW} channel is $16$ kHz (often downsampled
 to $\sim 4$ kHz), the amount of data in a year can be $\mathcal{O}(2)$
 terabytes, therefore these types of search can be computationally costly.
 Whilst the fully coherent matched filter searches have methods to reduce the
@@ -626,7 +626,7 @@ parameter space based on the known sky position.
 %%%%%%
 %%%%%%
 
-All-sky searches have no prior knowledge of the pulsars parameters, therefore,
+All-sky searches have no prior knowledge of the pulsar's parameters, therefore,
 they are used to search over all the neutron star parameters $h_0, \iota, \psi, \phi_0, f,
 \dot{f}, \alpha, \delta$. It would not be feasible to use the techniques described in
 Sec.~\ref{searchcw:search:targeted} for an all sky search as to sufficiently
@@ -637,7 +637,7 @@ search is to break the dataset into smaller segments of length $T_{coh}$, which
 can each be analysed coherently. 
 The results from each segment can the be combined incoherently using various methods which will be
 summarised below.  
-There are also searches such as \citep{messenger2007FastSearch}, which breaks the dataset into smaller frequency bands and combine them incoherently. 
+There are also searches such as \citep{messenger2007FastSearch}, which breaks the dataset into smaller frequency bands and combines them incoherently. 
 Whilst these methods will be less sensitive than a fully coherent search, they are much faster and at a fixed computing cost are more sensitive.
 
 There are many different types of semi-coherent search which use various
@@ -657,7 +657,7 @@ power from each frequency bin can then be summed (stacked). More explanation of 
 	
         \item[Hough] The Hough transform is similar to the stack-slide algorithm.
 The main difference is that the detection statistic for each segment is
-assigned a weight of 0 or 1 depending if it crossed a detection threshold. These weighted set of \glspl{SFT} are then used as input to the Hough transform.
+assigned a weight of 0 or 1 depending if it crossed a detection threshold. This weighted set of \glspl{SFT} are then used as input to the Hough transform.
 The Hough transform maps a pattern in an image such as a straight line ($y=mx + c$) to the parameters ($m,c$) which are consistent with that line.
 This approach is explained in greater detail in
 \citep{krishnan2004HoughTransform,antonucci2008DetectionPeriodic}.  This method
@@ -696,11 +696,11 @@ is explained in more detail and tested in
         \item[Viterbi] The Viterbi algorithm \citep{viterbi1967ErrorBounds} has
 been used in \citep{sun2018HiddenMarkov,
 suvorova2017HiddenMarkov,abbott2017SearchGravitational,
-abbott2018SearchGravitational, sun2018ApplicationHidden} to search for a
+abbott2018SearchGravitational, sun2018ApplicationHidden} to search for
 \glspl{CW} with unknown randomly wandering spin frequency. This
 algorithm was applied to specific sources, where the $\mathcal{F}$-statistic is
 used on short duration segments which are then incoherently combined using the
-Viterbi algorithm.
+Viterbi algorithm which will be described in Chapter \ref{soap}.
 	
 \end{description}
 
@@ -714,7 +714,7 @@ The results from O1 for some of these searches can be found in \citep{ligoscient
 	%
         \caption[Computational cost of \gls{CW} searches.]{From
 \citep{walsh2016ComparisonMethods}, shows the expected computational cost for the first
-four months of the first observing run of advanced \gls{LIGO} (O1) for each search. This is measured in \glspl{MSU}, where one
+four months of the first observing run of advanced \gls{LIGO} (O1) for each search. This is measured in \gls{MSU}, where one
 standard unit is equal to one core-hour on a standard core.
 The Einstein@Home searches uses the computing resources
 of the Einstein@Home project and is designed to run for 6 - 10 months in the

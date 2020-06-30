@@ -4,8 +4,8 @@
 Searches for \glspl{CW} are notoriously computationally expensive, and it is important to investigate the trade off between computing power and sensitivity.
 In addition, these searches are generally highly tuned and are based around template matching methods. The SOAP \citep{ellis2006SnakesPlanea} algorithm described in this chapter aims to address both of these issues.
 
-SOAP searches though narrow-banded time-frequency spectrograms of data and identifies the `most probable track' in frequency through it.  The `most probable track' is the most probable continuous narrowband signal in what it otherwise noisy data.  
-The motivation of the search is simple, if we looked at a frequency band in a
+SOAP searches though narrow-banded time-frequency spectrograms of data and identifies the `most probable track' in frequency through it.  The `most probable track' is the most probable continuous narrowband signal in what is otherwise noisy data.  
+The motivation of the search is simple: if we looked at a frequency band in a
 spectrogram as in Fig.~\ref{soap:motivation:plot}, we could find every possible track from a starting frequency bin to an end frequency bin.
 For each of these tracks the sum of the spectrogram power along the track can
 be found such that for each track there is a single value.
@@ -42,7 +42,7 @@ under the supervision of Prof. Graham Woan and Dr Chris Messenger.
 
 \centering
 \includegraphics[width=\linewidth]{C3_soap/soap_spect_motivation.pdf}
-\caption[Example of frequency tracks through a spectrogram and their summed power.]{An example of a time-frequency spectrogram which is the typical \gls{LIGO} data that SOAP searches through. Here a monochromatic signal has been injected at 100.006 Hz. The blue track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of the summed power of a subset of all tracks which can be found through the given spectrogram from start to finish. This is a subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1780$. This is much larger than any of the random tracks in our subset and much larger than the mean statistic of all tracks. }
+\caption[Example of frequency tracks through a spectrogram and their summed power.]{An example of a time-frequency spectrogram which is the typical \gls{LIGO} data that SOAP searches through. Here a monochromatic signal has been injected at 100.006 Hz. The blue track shows a random walk track though this spectrogram whereas the red line shows the track which gives the highest sum of detector power. The second panel shows a histogram of the summed power of a subset of all tracks which can be found through the given spectrogram from start to finish. This is a randomly sampled subset as the total number of paths is too large to calculate. The value of the statistic which comes from the optimal path is $\sim1780$. This is much larger than any of the random tracks in our subset and much larger than the mean statistic of all tracks. }
 \label{soap:motivation:plot}
 
 \end{figure}
@@ -52,7 +52,7 @@ under the supervision of Prof. Graham Woan and Dr Chris Messenger.
 %
 % introduce the signal
 %
-One of the main targets for current ground based \gls{GW} detectors, including \gls{LIGO}~\citep{abbott2009LIGOLaser, aasi2015AdvancedLIGO} and Virgo~\citep{acernese2008StatusVirgo, acernese2015AdvancedVirgo}, are sources of continuous gravitational waves. These are long-duration, quasi-monochromatic  sinusoidal signals that are well-modelled by a Taylor series expansion in the signal phase. A likely source of such signals are rapidly spinning non axisymmetric neutron stars.  A number of possible emission mechanisms are outlined in~\citep{prix2009GravitationalWaves,owen2009ProbingNeutron}.
+One of the main targets for current ground based \gls{GW} detectors, including \gls{LIGO}~\citep{abbott2009LIGOLaser, aasi2015AdvancedLIGO} and Virgo~\citep{acernese2008StatusVirgo, acernese2015AdvancedVirgo}, are sources of continuous gravitational waves. These are long-duration, quasi-monochromatic  sinusoidal signals that are well-modelled by a Taylor series expansion in the signal phase. A likely source of such signals is rapidly spinning non axisymmetric neutron stars.  A number of possible emission mechanisms are outlined in~\citep{prix2009GravitationalWaves,owen2009ProbingNeutron}.
 
 %
 % introduce semi-coherent search algorithms
@@ -172,7 +172,7 @@ The Viterbi algorithm finds the most probable track $\hat{\bm \nu}$ by calculati
 % define the transition matrix
 %
 An important concept when using the Viterbi algorithm is the `transition matrix' $T$, which is defined as the matrix that stores the prior log-probabilities $\log p(\nu_j \mid \nu_{j-1})$. These transition probabilities depend only on the size and direction of the transition, and in our case correspond to a jump in frequency when moving from the $(j-1)$th to the $j$th state. It is within the transition matrix that we impose some loose model constraints. For example it is usual in the time-frequency plane for frequencies to only have discrete values (frequency bins) and a track might only be allowed to move by one bin in each time step, restricting it to a \gls{UCD} transition or `jump' or equivalently setting the size of the first dimension of the transition matrix $n_1 = 3$. We can also impose that the transition probabilities are independent of the current track location in frequency, i.e. $p(\nu_j \mid \nu_{j-1})=p(\nu_{j+k} \mid \nu_{j+k-1})$. This leads to the transition matrix containing only three numbers, corresponding to the three prior log-probabilities that the track was in the corresponding \gls{UCD} frequency bin at the previous time step. These numbers are chosen to reflect the prior probability of a frequency deviation in the track and depend on the class of signals that one wishes to detect.
-For the majority of examples that follow, a symmetric transition matrix is used, i.e. the probability of a transition up a frequency bin is equal to the probability of a transition down a frequency bin. This allows us to parameterise the one dimensional transition matrix with a single value, this value is the ratio of the probability of a transition to the same frequency bin, to either up or down a frequency bin. 
+For the majority of examples that follow, a symmetric transition matrix is used, i.e. the probability of a transition up a frequency bin is equal to the probability of a transition down a frequency bin. This allows us to parametrise the one dimensional transition matrix with a single value, this value is the ratio of the probability of a transition from the same frequency bin, to the probability of a transition from either up or down a frequency bin. 
 
 In later sections we will consider more complex situations in which the transition matrix describes the prior probability associated with sequences of even earlier transitions (`memory') and the case where there are multiple detectors. In these cases the number of dimensions of the transition matrix can grow substantially to account for the extra complexity of the problem.
 
@@ -250,13 +250,13 @@ The Viterbi algorithm records two quantities for each frequency and time bin: Th
 %
 \begin{figure}
 \centering
-\begin{subfigure}[h]{0.8\columnwidth}
+\begin{subfigure}[h]{0.7\columnwidth}
 \includegraphics[width=0.8\columnwidth]{C3_soap/vit_data.pdf}
 \caption{The input data}
 \label{soap:plot:data}
 \end{subfigure}
 
-\begin{subfigure}[h]{0.8\columnwidth}
+\begin{subfigure}[h]{0.7\columnwidth}
 \includegraphics[width=0.8\columnwidth]{C3_soap/vit_prob.pdf}
 \caption{The log-probabilities, jumps, and most probable path}
 \label{soap:plot:likelihood}
@@ -267,7 +267,7 @@ the observed data, i.e the log-likelihood values $C_{j,k}$. Fig.~\ref{soap:plot:
 log-probabilities $V_{j,k}$. $A_{j,k}$ is shown in parentheses, where the \gls{UCD}
 components correspond to $i= [-1,0,1]$ respectively. The red line shows the
 path that gives the maximum probability. The transition matrix for the \gls{UCD} jumps is $[0,1,0]$ and corresponds to the un-normalised prior
-log-probabilities of these jumps occurring.}
+log-probabilities of these jumps occurring, i.e. the track is more likely to stay at the same frequency. The jump in frequency of the track between times 2 and 3 is due to the likelihood $C_{3,2} = 5$, which gives a larger increase in the overall probability than continuing (straight) to $C_{3,2} = 2$ even with the extra value of $1$ from the transition matrix, i.e. the extra likelihood one can accumulate by changing frequency overcomes the prior transition probability which prefers to go straight.}
 \label{soap:plots}
 \end{figure}
 
@@ -507,7 +507,7 @@ If a signal is present we therefore expect the \gls{SFT} powers in the detector 
 \begin{equation}
 \label{soap:las:signal:single}
 \begin{split}
-p(F^{(1)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,w) 
+p(F^{(1)}_{j} \mid \nu_j, M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda \mid M_{\rm{S}}) 
 p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I) d\lambda.
 \end{split}
 \end{equation}
@@ -515,7 +515,7 @@ p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I) d\lambda.
 Here we set the prior on $\lambda$ to be an exponential distribution of width $w$, this is done somewhat arbitrarily as we expect the majority of signals to have a low \gls{SNR}. This distribution follows,
 \begin{equation}
 \label{soap:las:prior}
-p(\lambda,w) = \exp\left( \frac{-\lambda}{w}\right).
+p(\lambda \mid M_{\rm{S}}) = \exp\left( \frac{-\lambda}{w_s}\right).
 \end{equation}
 
 In this single-detector case, we expect an astrophysical signal to look very similar to that of a line other than its amplitude (or SNR). Therefore, we set the evidence for an astrophysical signal and an instrumental signal to follow Eq.~\ref{soap:las:signal:single}, where the width $w$ different between the two models.
@@ -584,7 +584,7 @@ In a similar way to the single-detector case, we can write out the evidence for 
 \begin{equation}
 \label{soap:las:signal}
 \begin{split}
-p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_S}) \\
+p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda \mid M_{\rm{S}}) \\
 p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I)p(F^{(2)}_{j}|\nu_j,\lambda,M_{\text{S}},I) d\lambda.
 \end{split}
 \end{equation}
@@ -595,13 +595,13 @@ In this case, if an instrumental line is present in one of the detectors we expe
 \begin{equation}
 \label{soap:las:line}
 \begin{split}
-p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_L}) \\
+p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda \mid M_{\rm{L}}) \\
 \left[ p(F^{(1)}_{j}|\nu_j,M_{\rm{N}},I)p(F^{(2)}_{j}|\nu_j,\lambda,M_{\rm{S}},I) \right. \\
 \left. + p(F^{(1)}_{j}|\nu_j,\lambda,M_{\rm{S}},I)p(F^{(2)}_{j}|\nu_j,M_{\rm{N}},I)\right]d\lambda ,
 \end{split}
 \end{equation}
 %
-The third option is the simple case of approximately Gaussian noise in both of the detectors,
+The third option is the simple case of approximately independent Gaussian noise in both of the detectors,
 %
 \begin{equation}
 \label{soap:las:noise}
@@ -668,7 +668,7 @@ Fig.~\ref{soap:las:osgl_plots} shows an example of the output of the statistic i
 \label{soap:las:detp:linebig}
 \end{minipage}
 \end{subfigure}
-\caption[Lookup table for line aware statistic.]{Lookup tables using the line aware statistic in Eq.~\ref{soap:las:stat:multi}. The \gls{PSD} mean is the expected mean of a $\chi^2$ distribution with 48 degrees of freedom, i.e. the expected power from out summed spectrograms $F_j$.}
+\caption[Lookup table for line aware statistic.]{Lookup tables using the line aware statistic in Eq.~\ref{soap:las:stat:multi}. The \gls{PSD} mean is the expected mean of a $\chi^2$ distribution with 48 degrees of freedom, i.e. the expected power from our summed spectrograms $F_j$.}
 \label{soap:las:osgl_plots}
 \end{figure}
 
@@ -729,14 +729,14 @@ This then gives a factor $l = S_H T_L/S_L T_H$ which relates the \gls{SNR} of ea
 This ratio of \glspl{SNR} can be included in the integral over \gls{SNR} for the signal model in Eq.~\ref{soap:las:signal} as follows
 \begin{equation}
 \label{lineawareamp:signal}
-p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_S}) 
+p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{S}},I) = \int_0^{\infty}  p(\lambda \mid M_{\rm{S}}) 
 p(F^{(1)}_{j}|\nu_j,\lambda,M_{\text{S}},I)p(F^{(2)}_{j}|\nu_j,l\lambda,M_{\text{S}},I) d\lambda.
 \end{equation}
 Similarly, the line model in Eq.~\ref{soap:las:line} can be modified as
 \begin{equation}
 \label{lineawareamp:line}
 \begin{split}
-p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda,w_{\rm_L}) 
+p(F^{(1)}_{j},F^{(2)}_{j} \mid \nu_j,M_{\rm{L}},I) = \int_0^{\infty}  p(\lambda \mid M_{\rm{L}}) 
 \left[ p(F^{(1)}_{j}|\nu_j,M_{\rm{N}},I)p(F^{(2)}_{j}|\nu_j,l\lambda,M_{\rm{S}},I) \right. \\
 \left. + p(F^{(1)}_{j}|\nu_j,\lambda,M_{\rm{S}},I)p(F^{(2)}_{j}|\nu_j,M_{\rm{N}},I)\right]d\lambda .
 \end{split}
@@ -857,7 +857,7 @@ To investigate the spin-down of the pulsar, we look at the length of data, $T=4.
 \begin{equation}
 \frac{df}{dt} > \left|\frac{-0.1}{4.05 \times 10^7}\right| = 2.4 \times 10^{-9} \rm{Hz/s}.
 \end{equation}
-The majority of the injections that follow satisfy this condition, signals which are greater than this, and therefore drift over multiple bands, are vetoed from the search.
+The majority of the injections that follow satisfy this condition, signals which are greater than this, and therefore drift over multiple bands, are vetoed from the search by excluding the frequency bands they cover.
 %
 \item The two detector Viterbi algorithm is then run using the line aware
 statistic (see Sec.~\ref{soap:las}). There are 4 parameters which we optimise in this search. The transition probabilities, where we have one parameter $\tau$ which is the ratio of the probability
@@ -969,7 +969,7 @@ p(\bar{x} \mid x_0, k) = \prod_{j=0}\frac{n!}{k!(n-k)!}s(x_j \mid x_0, k)^{k} \\
 \end{split}
 \end{equation}
 To plot the efficiency curves and lower and upper error bounds, we sample Eq.~\ref{soap:results:binomialbayes} using \gls{MCMC} and then take the mean and the 5th and 95th percentiles respectively for each point in SNR or depth and plot these.
-Figure \ref{soap:results:gausss6:eff_snr} and \ref{soap:results:gausss6:eff_depth} then show the efficiency curves for the analyses plotted against the signals optimal \gls{SNR} and depth respectively.
+Figures \ref{soap:results:gausss6:eff_snr} and \ref{soap:results:gausss6:eff_depth} then show the efficiency curves for the analyses plotted against the signals optimal \gls{SNR} and depth respectively.
 The parameters of the search and their optimised values are shown in Tab.~\ref{soap:results:parameters}. Where we set the prior on the line model to 0 as this part is irrelevant to this search due to the lack of lines in the data.
 
 %
@@ -1433,7 +1433,7 @@ This representation could then be used with other algorithms to identify the \gl
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{C3_soap/GW150914_soap.pdf}
-        \caption[SOAP search run on GW150914]{The Q-transform is taken around GW150914 \citep{abbott2016ObservationGravitational}. The top two panels who the Q-transform for H1 and L1 respectively, where the red track is the Viterbi track identified in each of the transforms. The final panel then shows the output Viterbi map for this data. The two tracks follow the frequency evolution of the \gls{BBH} signal as is sweeps through the band and the Vitebri map shows areas of large log-odds where the \gls{BBH} signal has high Q-transform power.}
+        \caption[SOAP search run on GW150914]{The Q-transform is taken around GW150914 \citep{abbott2016ObservationGravitational}. The top two panels show the Q-transform for H1 and L1 respectively, where the red track is the Viterbi track identified in each of the transforms. The final panel then shows the output Viterbi map for this data. The two tracks follow the frequency evolution of the \gls{BBH} signal as is sweeps through the band and the Vitebri map shows areas of large log-odds where the \gls{BBH} signal has high Q-transform power.}
 \label{soap:sens:other:gw150914}
 
 \end{figure}
@@ -1509,14 +1509,14 @@ sensitivity for the SOAP algorithm on three separate datasets.
 
 In this chapter a statistic is derived to limit the effect of instrumental lines on SOAP by searching for consistent \gls{SNR} between multiple detectors.
 This is then extended to search for consistent \gls{GW} amplitude in Sec.~\ref{soap:lineawareamp}.
-Searching for consistent amplitude mean that the each detectors sensitivity can differ with minimal impact on the search.
+Searching for consistent amplitude mean that the each detector's sensitivity can differ with minimal impact on the search.
 
 %
 % overview of results from tests
 %
 We tested SOAP on a set of fake isolated pulsar signals in the
 100\;--\;200\,Hz range, based on 1800s \glspl{SFT} summed over one day.
-The three datasets that included these signals comprised of continuous Gaussian noise, Gaussian noise but with temporal gaps corresponding to \gls{LIGO} dead times in the S6 data run, and real data, i.e., the
+The three datasets that included these signals consisted of continuous Gaussian noise, Gaussian noise but with temporal gaps corresponding to \gls{LIGO} dead times in the S6 data run, and real data, i.e., the
 S6 \gls{MDC}. Although a major attraction of SOAP is its sensitivity to a wide
 range of signal types, in the tests above it was optimised to detect isolated pulsar signals below 200\,Hz with low spin-down to offer a comparison with other \gls{CW} searches. From these tests, by setting a
 95\% efficiency and a false alarm of 1\%, we found that in the case of  continuous Gaussian data we could detect a signal with an optimal \gls{SNR} of $\sim 60$ and a
