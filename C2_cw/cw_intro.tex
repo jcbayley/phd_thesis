@@ -13,7 +13,7 @@ as \gls{LIGO}.  This means that for a detection, the entire observing
 run's data will be needed to
 accumulate enough \gls{SNR} for a signal to be observed.  Given that \gls{LIGO}
 samples at $\sim 16$ kHz (generally downsampled to $\sim 4$ kHz) this leaves a
-huge amount of data ($\mathcal{O}(2)$ TB for one year at 16kHz) which needs to be searched through.  As will be described in Sec.~\ref{searchcw:search}, this means that a large amount of computational resources is required to perform a search for \gls{CW}.
+huge amount of data ($\mathcal{O}(2)$ TB for one year at 16kHz) which needs to be searched through.  As will be described in Sec.~\ref{searchcw:search}, this means that a large amount of computational resources is required to perform a search for \glspl{CW}.
 For some types of search the parameter space can also be very large, this only
 adds to the computational time and in some cases makes the search
 infeasible.
@@ -97,8 +97,7 @@ t_{{\rm SSB}} = t + \frac{\mathbf{r}_d \cdot \mathbf{n}}{c} + \delta_t,
 \end{equation}
 %
 where $c$ is the speed of light, $\mathbf{r}_d$ is the position of the detector with reference to the
-\gls{SSB}, $\mathbf{n}$ is a unit vector in the direction of the source. The factor $\mathbf{r}_d \cdot \mathbf{n}/c$ takes into account the Doppler shift of the
-signal due to the movement of the detector, i.e. as the earth rotates on its axis and
+\gls{SSB}, $\mathbf{n}$ is a unit vector in the direction of the source. The factor $\mathbf{r}_d \cdot \mathbf{n}/c$ is the Roemer delay, where its derivative accounts for the Doppler shift of the signal due to the movement of the detector, i.e. as the earth rotates on its axis and
 orbits the sun. The factor $\delta_t$ take into account extra
 corrections from the Einstein and Shapiro delay
 \citep{taylor1992PulsarTiming}.  Shapiro delay originates from the extra time a signal takes to pass through a gravitational potential, for example the Sun's. Einstein delay accounts for the time dilation of the moving observer or pulsar and the gravitational redshift due to the Sun or a companion star. The amplitude
@@ -189,7 +188,7 @@ which lies in the range $0 \leq p(B) \leq 1$.
 	
 	\item [Conditional probability]
 	Conditional probability arises from situations where one event $A$ affects the event $B$.
-	The definition of this arises from the the dependent events defined above in Eq.~\ref{searchcw:prob:dependentevent}
+	The definition of this arises from the dependent events defined above in Eq.~\ref{searchcw:prob:dependentevent}
 	\begin{equation}
 	p(A \mid B) = \frac{p(A \cap B)}{p(B)}.
 	\end{equation}
@@ -408,13 +407,13 @@ $S$ from the posterior distribution $p(\theta_i \mid \bm{d})$.
 %
 
 
-In Bayesian inference it is often useful to compare different models or hypotheses to gain insight into which is more likely. One can do this by using the Odds ratio
+In Bayesian inference it is often useful to compare different models or hypotheses to gain insight into which is more likely. One can do this by using the odds ratio
 %
 \begin{equation}
 O = \frac{ p(I_1 \mid {\bm d})}{p(I_2 \mid {\bm d})} = \frac{p(I_1)}{p(I_2)}\frac{p({\bm d} \mid I_1)}{p({\bm d} \mid I_2)} = \text{prior odds} \times \text{bayes factor},
 \end{equation}
 %
-where the bayes factor compares the marginal likelihood of one model $p({\bm d} \mid I_1)$ to the marginal likelihood of another $p({\bm d} \mid I_2)$ and describes the evidence in favour of one model over the other and the prior odds reflects the relative belief of $I_1$ over $I_2$ prior to any observation \joe{reread this}.
+where the bayes factor compares the marginal likelihood of one model $p({\bm d} \mid I_1)$ to the marginal likelihood of another $p({\bm d} \mid I_2)$ and describes the evidence in favour of one model over the other and the prior odds reflects the relative belief of model $I_1$ over $I_2$ prior to any observation.
 This requires the calculation of the Bayesian Evidence in Eq.~\ref{searchcw:bayes:evidence}, which traditionally is very difficult to calculate as it is an integral over the entire parameter space. To calculate this, a method known as nested sampling was developed
 \citep{skilling2006NestedSampling,speagle2019DynestyDynamic}.
 In nested sampling, rather than directly sampling from the posterior as in \gls{MCMC}, the posterior is broken into `slices' where samples are generated from each `slice'.
@@ -666,7 +665,7 @@ has been applied in two main ways known as Sky Hough
 \citep{antonucci2008DetectionPeriodic,astone2014MethodAllsky} which generates hough maps in $(f,\dot{f})$ for fixed sky position.
 	
         \item[Einstein@Home] This uses the
-$\mathcal{F}$-statistic mentioned in Sec.~\ref{searchcw:search:targeted} calculated over a length of $T_{\rm{coh}}$, where in the initial stages of this search these segments are combined incoherently. This is is done using a Hough transform scheme \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} or by generating candidate events where the $\mathcal{F}$-statistic crosses some threshold and then finding events which are coincident in parameter space \citep{ligoscientificcollaboration2009EinsteinHome}.
+$\mathcal{F}$-statistic mentioned in Sec.~\ref{searchcw:search:targeted} calculated over a length of $T_{\rm{coh}}$, where in the initial stages of this search these segments are combined incoherently. This is done using a Hough transform scheme \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} or by generating candidate events where the $\mathcal{F}$-statistic crosses some threshold and then finding events which are coincident in parameter space \citep{ligoscientificcollaboration2009EinsteinHome}.
 After the first stage, potential signals are returned (candidates) where post processing methods as in \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} select the most significant candidates.
 In \citep{theligoscientificcollaborationandthevirgocollaboration2013EinsteinHome} they use a three step procedure, which starts with the Hough transform with more finely sampled parameters around the candidate, and then runs a semi and then finally fully coherent $\mathcal{F}$-statistic analysis.
 Other methods for combining results and following up candidates can be found in \citep{singh2016ResultsAllsky,papa2016HierarchicalFollowup,walsh2016ComparisonMethods}.
@@ -684,7 +683,7 @@ each segment, where candidates are selected based on a given
 threshold. This is explained in greater detail in
 \citep{aasi2014ImplementationTextdollar,walsh2016ComparisonMethods}.
 	
-        \item[Powerflux] Powerflux uses a standard set of 1800s \glspl{SFT}.
+        \item[Powerflux] Powerflux uses a set of \glspl{SFT} with coherence time varying between 1800s and 7200s.
 For each point in parameter space, the frequency of a signal with those parameters is found and the power in each \gls{SFT} at that frequency is recorded. This power is then weighted depending on the antenna pattern and
 noise of the detector. In longer stretches of $\sim$ 1 month, the weighted
 power is summed. Any point in parameter space which produces high power in each

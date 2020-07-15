@@ -2,7 +2,7 @@
 
 %%%%%%%%%%%%%%%%
 In this section I outline how we inject a \gls{CW} signal into data. This can generally be done in two different ways: simulating a signal in the time domain and injecting into time domain noise or simulating the signal in the frequency domain. 
-The searches described in Sec.~\ref{soap} and Sec.~\ref{machine} only use output power spectra] 
+The searches described in Sec.~\ref{soap} and Sec.~\ref{machine} only use output power spectra. 
 Generating the time series and performing a Fourier transform or generating the signal in the frequency domain is time consuming. 
 In this section I will outline how I simulate the power spectrum of \gls{CW} signals and inject them into a \gls{PSD}.
 This should greatly improve the speed of data generation.
@@ -125,7 +125,7 @@ The Fourier transform can then be written as
 The integral can then be written as
 \begin{equation}
 \begin{split}
-I &= \int_{-T/2}^{T/2} \exp{\left\{i 2 \pi \left(\frac{\dot{f}}{2} t^2 + f_{0}t - f \right) \right\}} dt \\
+I &= \int_{-T/2}^{T/2} \exp{\left\{i 2 \pi \left(\frac{\dot{f}}{2} t^2 + f_{0}t - ft \right) \right\}} dt \\
 &= \int_{-T/2}^{T/2} \exp{\left\{ i 2 \pi\left(\frac{\dot{f}}{2} t^2 + (f - f_{0})t \right) \right\}} dt \\
 & = \int_{-T/2}^{T/2} \exp{\left\{i \frac{\pi}{2} 2 \dot{f} \left(t^2 + 2\frac{(f - f_0)}{\dot{f}}t \right)\right\}} dt \\
 & = \int_{-T/2}^{T/2} \exp{\left\{i \frac{\pi}{2} 2 \dot{f} \left[\left(t + \frac{(f - f_0)}{\dot{f}} \right)^2 - \left(\frac{(f - f_0)}{\dot{f}}\right)^2 \right]\right\}} dt \\

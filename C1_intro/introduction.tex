@@ -64,7 +64,7 @@ To describe space-time, one would want to link the curvature to the matter mathe
 where $G_{\mu \nu}$ is the Einstein tensor, $G$ is the gravitational constant, $c$ is the speed of light and $T_{\mu \nu}$ is the
 stress-energy tensor.  The stress energy tensor contains information on the density and flux of energy and momentum at a given point in space-time.  
 The Einstein tensor contains information on the curvature of the
-universe, this can be derived directly from the metric tensor $g_{\mu \nu}$ which describes the space-time geometry.
+universe, and can be derived directly from the metric tensor $g_{\mu \nu}$ which describes the space-time geometry.
 Einstein's equations then explain how the curvature of space-time changes with
 the mass-energy within it.  
 
@@ -213,7 +213,7 @@ Some of the primary sources of \glspl{GW} that are currently searched for will b
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%
 
-There are many potential sources for \glspl{GW}, which can be split into 3
+There are many potential sources for \glspl{GW}, which can be split into 4
 general categories based on their signal type: \gls{CBC}, Burst, Stochastic and
 \glspl{CW}.  These categories are chosen based on the length of the signal and
 how well modelled the signal is.  Figure \ref{intro:sources:signaltypes} shows
@@ -386,15 +386,12 @@ One of the more likely mechanisms for detectable \gls{GW} emission from neutron
 stars is from `mountains' on the surface of the star.  These are permanent
 deformations of the crust which are non axisymmetric, i.e. the deformation is
 not symmetric around the rotation axis.
-
 This deformation or asymmetry can be quantified by the ellipticity $\epsilon$ of the neutron star.
 This is defined using the principal moments of inertia
-
 \begin{equation}
 \label{intro:source:cw:ellipticity}
 \epsilon = \frac{I_{xx}-I_{yy}}{I_{zz}},
 \end{equation}
-
 where $I_{zz},I_{xx},I_{yy}$ are the components of the moment of inertia in each of the spatial axes and the star is rotating around the $z$ axis, i.e. $I_{zz}$ is parallel with the $z$ axis.
 
 There are a number of theories which describe the origin of this asymmetry.
@@ -634,7 +631,7 @@ The \gls{GW} strain is then proportional to the readout of the control systems $
 where $T(f)$ is a transfer function which describes how the control systems affect the signal where $\Delta L = T(f) d(f)$. For more details on this see \cite{ligoscientificcollaboration2017CalibrationAdvanced}.
 
 If one looks at Eq.~\ref{intro:detectors:strain:detectortensor} then if the mirrors at the
-end of the arms (\gls{ETMX} and \gls{ETMY}) are are placed
+end of the arms (\gls{ETMX} and \gls{ETMY}) are placed
 further from the beam splitter, i.e. $L_0$ is increased, then in the long wavelength approximation the length change
 of the arms $\Delta L$ for the same \gls{GW} $h(t)$ will be greater.  Given that the interferometer measures $\Delta L$, this means that
 increasing the length of the detectors arms increases the sensitivity of the
@@ -783,8 +780,8 @@ and the polarisation functions are
 \begin{equation}
 \label{intro:detector:polarisationfuncs}
 \begin{split}
-F^{\prime}_{+}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \cos{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi} \\
-F^{\prime}{\times}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \sin{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi}
+F^{\prime}_{+}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \cos{2\psi} - \cos \left(\theta\right) \cos \left(2\phi \right) \sin{2\psi} \\
+F^{\prime}_{\times}(\theta,\phi,\psi) &= \frac{1}{2} \left[ 1 + \cos^2 \left(\theta\right) \right] \cos\left(2\phi\right) \sin{2\psi} + \cos \left(\theta\right) \cos \left(2\phi \right) \cos{2\psi}
 \end{split}.
 \end{equation}
 The \gls{GW} strain then becomes
@@ -845,7 +842,7 @@ motion can be transferred (coupled) into the measurement of the displacement of
 the test mass. There are a number of sources of this including the suspension
 thermal noise and the Brownian noise in the mirror coatings.  The suspension
 thermal noise causes the test masses to move due to the thermal vibrations of
-the fibres suspending the test masses \citep{gonzalez2007HandbookApproximation}.  
+the fibres suspending the test masses \citep{gonzalez2000SuspensionsThermal}.  
 The spectral density of the thermal motion of the mass can be written as in \citep{pitkin2011GravitationalWave}
 \begin{equation}
 	x^2(\omega) = \frac{4k_{\text{B}}T}{m \omega }\frac{\omega_0^2 \phi(\omega)}{(\omega_0^2 - \omega^2)^2 + \omega_0^4 \phi^2(\omega)},
@@ -877,7 +874,7 @@ However, there are methods which `cheat' this limit to reduce the noise, for exa
 \item[Technical noise] Whilst this is not shown
 in Fig.~\ref{detectors:noisesensitivity}, particular types of technical noise
 become important to searches
-described Chapter \ref{soap}, \ref{machine} and \ref{detchar}. An example of this is the noise generated by the digital and analogue electronics that are used to measure the \gls{GW} signal and control the complex
+described in Chapter \ref{soap}, \ref{machine} and \ref{detchar}. An example of this is the noise generated by the digital and analogue electronics that are used to measure the \gls{GW} signal and control the complex
 detector system \citep{martynov2016SensitivityAdvanced}. Any fluctuations in the control system electronics can be transferred (coupled) into the measurement of the displacement of the test masses. 
 If some electronics have a periodic fluctuation which affects the displacement
 measurement, then this will show up as a narrow peak in the frequency spectrum. These narrow spectral lines are the topic of discussion in Chapter \ref{detchar}.

@@ -71,7 +71,7 @@ This is a fast and largely un-modelled search which finds tracks of
 high \gls{FFT} power in time-frequency spectrograms. 
 When applied to multiple detectors using a `line-aware' statistic, SOAP looks for frequency bins which have both a high power and are similar in each detector. 
 This means that  at a given frequency at a given time, SOAP will penalise frequencies where the \gls{FFT} power is largely different in each detector.  
-The algorithmic details summarised in Chapter \ref{soap}. 
+The algorithmic details are summarised in Chapter \ref{soap}. 
 
 % instumental lines and how the affect SOAP
 %
@@ -102,7 +102,7 @@ signals in~\cite{dreissigacker2019DeeplearningContinuous}.
 % structure of the paper
 %
 In Sec.\ref{cnn:soap} we will summarise the basics of how the SOAP search works. In
-Sec.~\ref{machine:nn}, \ref{machine:cnn} and \ref{machine:training} we explain how \glspl{CNN} operate and how they are trained. Sec.~\ref{machine:cw} will describe how this is applied to an \gls{CW} search. 
+Sec.~\ref{machine:nn}, \ref{machine:cnn} and \ref{machine:training} we explain how \glspl{CNN} operate and how they are trained. Sec.~\ref{machine:cw} will describe how this is applied to a \gls{CW} search. 
 This includes the structure of the \gls{CNN} in Sec.~\ref{machine:cw:structure} and the entire search from raw data to results in Sec.~\ref{machine:pipeline}. Finally in Sec.~\ref{machine:results} we
 show the results from this search and compare to similar analyses. 
 
@@ -169,7 +169,7 @@ the frequency track, the Viterbi statistic and the Viterbi map.
 %
 To determine whether an simulated astrophysical signal has been detected,
 in~\cite{bayley2019SOAPGeneralised} we used the Viterbi `line aware' statistic alone described above.  
-The `line-aware' statistic reduced the affect of instrumental lines on the analysis, however is still contaminated by certain types of line.
+The `line-aware' statistic reduced the effect of instrumental lines on the analysis, however is still contaminated by certain types of line.
 For example, the statistic is affected by broad wandering lines as they offer high power tracks in both detectors.
 To reduce the effect of these instrumental lines, we looked through the spectrograms and
 Viterbi maps of individual bands by eye as in Fig.~\ref{soap:viterbiplot}.
@@ -294,7 +294,7 @@ The sigmoid function is used on the output such that values are constrained betw
 
 \glspl{CNN} are a different type of deep neural network than in Sec.~\ref{machine:nn}, they are primarily used in image processing and recognition
 \cite{lecun2015DeepLearning,lecun1998GradientbasedLearning,waibel1989PhonemeRecognition,krizhevsky2012ImageNetClassificationa}.
-A \gls{CNN} has a similar goal to a full connected neural network; it is designed to take in data, identify different features within that data and classify what those features or combinations of those features mean.
+A \gls{CNN} has a similar goal to a fully connected neural network; it is designed to take in data, identify different features within that data and classify what those features or combinations of those features mean.
 In the context of this work the input data is a time-frequency spectrogram which may contain a simulated \gls{CW} signal.
 The output is then a single number which gives a probability that a signal is present.
 A \gls{CNN} can learn how to identify features by being trained on many
@@ -458,7 +458,7 @@ This means that the weights can be updated to minimise the loss function and the
 
 The training procedure entails passing a set of training examples through the network a number of times. 
 Once the entire training data set has been passed through the network (forward pass) and the weights have been updated accordingly (back propagation), the training has completed one epoch.
-If the data was passed and the weights were updated a single time, the loss may decrease by is likely not at a minimum.
+If the data was passed and the weights were updated a single time, the loss may decrease but is likely not at a minimum.
 Passing the data through again may move the weights to a lower loss.
 This process is repeated a number of times to try and find the minimum loss.
 When training, the value of the loss at each epoch is monitored, where the trend of the loss of the training set should always decrease. 
@@ -778,7 +778,7 @@ running a search on real data.
 	%
 	\item[5b. Test data generation] For test data, signals following the parameters in
 	Tab.~\ref{machine:data:injections:table} are injected in to 50\% of the $0.1$ Hz
-	sub-bands. These signal have and \gls{SNR} in the range 20-200. The \gls{SNR} range here is wider than the training set as a method to test how the trained networks perform s on a wider range od \glspl{SNR}. Here we again have a
+	sub-bands. These signal have an \gls{SNR} in the range 20-200. The \gls{SNR} range here is wider than the training set as a method to test how the trained networks performs on a wider range of \glspl{SNR}. Here we again have a
 	set for `odd' and a set for `even'.
 	%    
 	\item[5c. Search data] This data is generated such that we can search for a
@@ -1070,7 +1070,7 @@ we use a standard set of injections in the S6
 search pipelines. In Fig.~\ref{machine:results:s6mdc} we show the results of the
 sensitivity curves from these injections. 
 In both Fig.~\ref{machine:results:snr_s6mdc} and \ref{machine:results:depth_s6mdc} the sensitivity curves are substantially more noisy than in Fig.~\ref{machine:results:o2} or \ref{machine:results:s6gauss}, this is mainly due to the size of the testing set.
-The standard set of simulations in Fig.~\ref{machine:results:s6mdc} contained $\sim 900$ signal simulations between 100 and 400 Hz where the majority of these signals are distributed between an \gls{SNR} of 0 and 150. 
+The standard set of simulations in Fig.~\ref{machine:results:s6mdc} contained $\sim 900$ signal simulations between 40 and 500 Hz where the majority of these signals are distributed between an \gls{SNR} of 0 and 150. 
 Figures \ref{machine:results:o2} and \ref{machine:results:s6gauss} are generated using $2300$ simulations between 40 and 500 Hz and \glspl{SNR} of 20 and 200 as described in Sec.~\ref{machine:pipeline}.
 Figure \ref{machine:results:depth_s6mdc} shows the direct comparison in depth of the
 results in~\citep{walsh2016ComparisonMethods} with the results from the SOAP
@@ -1086,8 +1086,8 @@ on the model as the training set for the \gls{CNN} contained simulations of isol
 However, this is not a limitation of the method but of the training set as, for example, a new training set using a different signal model could be generated. 
 There may be some more computational cost to the \gls{CNN} for a different signal model, for example, a more complex frequency evolution may require more training. However, this is not expected to make large differences to the computational cost, and is still expected to be orders of magnitude faster than other semi-coherent searches. 
 For tests in the S6 \gls{MDC} we show that with a false alarm of 1\% the Viterbi map
-\gls{CNN} achieves a sensitivity in SNR of $\sim 90$ and sensitivity depth of
-$\sim 16\;{\rm Hz}^{-1/2}$ with 95\% efficiency.
+\gls{CNN} achieves a sensitivity in SNR of $\sim 102$ and sensitivity depth of
+$\sim 11\;{\rm Hz}^{-1/2}$ with 95\% efficiency.
 
 
 \begin{figure}
@@ -1119,7 +1119,7 @@ time taken for the search to run.
 Table \ref{timing:table} shows the timings for different sections of the search when run on the S6 dataset. 
 This can be split into three main sections: data generation, \gls{CNN} training and \gls{CNN} testing.
 To get from raw \glspl{SFT} to results with this search, the majority of the computational time taken is in the data generation step.
-The timings shown Tab.~\ref{timing:table} are for the S6 observing run where each section is run on a single \gls{CPU} or \gls{GPU}, however, in practice the generation of the data is generally run on multiple \glspl{CPU} on a computing cluster.
+The timings shown in Tab.~\ref{timing:table} are for the S6 observing run where each section is run on a single \gls{CPU} or \gls{GPU}, however, in practice the generation of the data is generally run on multiple \glspl{CPU} on a computing cluster.
 The training and testing of a \gls{CNN} is done on a single \gls{GPU}, this substantially decreases the training time compared to a \gls{CPU} due to the parallel nature of neural networks. 
 
 
@@ -1235,7 +1235,7 @@ Therefore, one would expect this to be an easier problem for the network to solv
 		\caption{}
 		\label{machine:results:sens_size:gauss_sens:train}
 	\end{subfigure}
-	\caption[Sensitivity with size of data set for Gaussian noise simulations.]{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here we show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Figure \ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shows in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark.}
+	\caption[Sensitivity with size of data set for Gaussian noise simulations.]{The amount of training data needed for an \gls{CNN} to perform well depends on the problem. Here we show how the sensitivity changes as a function of the number of training examples for simulations in Gaussian noise. Figure \ref{machine:results:sens_size:gauss_sens:eff} shows the efficiency curves for each of the different data-set sizes and Fig.~\ref{machine:results:sens_size:gauss_sens:train} shows the values of \gls{SNR} at 90\% efficiency as the data size increases. This shows that the increase in data size causes a slight increase in the sensitivity of the search. The efficiency curve for 100 training examples is not shown in Fig.~\ref{machine:results:sens_size:gauss_sens:train} as it does not reach the 90\% efficiency mark.}
 	\label{machine:results:sens_size:gauss_sens}
 \end{figure}
 
@@ -1330,7 +1330,7 @@ spectrogram, these however give a value related to the probability that a signal
 The aim of the \gls{CNN} approach is to use
 both the Viterbi maps and spectrograms as input images to more effectively classify each
 frequency band to either having an astrophysical signal or
-not. This would then remove then need to manually look through frequency bands
+not. This would then remove the need to manually look through frequency bands
 and remove those which are contaminated with non-astrophysical (instrumental)
 features. 
 
@@ -1361,8 +1361,8 @@ due to the presence of many instrumental lines.
 These tests were once again repeated using a standard set of injections into S6
 data such that a direct comparison can be made with other \gls{CW} search
 pipelines. At a 95\% efficiency and a 1\% false alarm rate the Viterbi map
-\gls{CNN} achieved a sensitivity of \gls{SNR} $ \sim 90$ and sensitivity depth
-$\sim 14 \; \rm{Hz}^{-1/2}$ . We have shown that the SOAP + \gls{CNN} approach
+\gls{CNN} achieved a sensitivity of \gls{SNR} $ \sim 102$ and sensitivity depth
+$\sim 11 \; \rm{Hz}^{-1/2}$ . We have shown that the SOAP + \gls{CNN} approach
 can achieve a similar sensitivity to other semi-coherent \gls{CW} search
 algorithms but with a greatly reduced computational cost.
 

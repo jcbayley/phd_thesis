@@ -275,7 +275,7 @@ log-probabilities of these jumps occurring, i.e. the track is more likely to sta
 %
 % Initialisation
 %
-\item[Initialisation] The two parts of Eq.~\ref{soap:viterbi:maxtracklog},  $\log p(\nu_0)$ and $\log p({\bm x_0} \mid \nu_0)$, must be computed before the main recursive part of the algorithm can start. Therefore, the initialisation section (lines 5--8) in Alg.~\ref{soap:single:algorithm} calculates the first column in the lower panel of Fig.~\ref{soap:plots}. A priori, there is no preferred initial frequency, so we take the log-prior $\log p(\nu_{0,k})$ to be uniform over the complete frequency range. As a result, this is does not affect the maximisation for any jump, therefore, can be omitted from the calculation. We then use the pre-calculated log-likelihood values $C_{0,k}$ to fill the track probabilities $V_{0,k}$.  There is no previous position to jump from in this case, so the transition probabilities are irrelevant and $A_{0,k}$ are set to zero.
+\item[Initialisation] The two parts of Eq.~\ref{soap:viterbi:maxtracklog},  $\log p(\nu_0)$ and $\log p({\bm x_0} \mid \nu_0)$, must be computed before the main recursive part of the algorithm can start. Therefore, the initialisation section (lines 5--8) in Alg.~\ref{soap:single:algorithm} calculates the first column in the lower panel of Fig.~\ref{soap:plots}. A priori, there is no preferred initial frequency, so we take the log-prior $\log p(\nu_{0,k})$ to be uniform over the complete frequency range. As a result, this does not affect the maximisation for any jump, therefore, can be omitted from the calculation. We then use the pre-calculated log-likelihood values $C_{0,k}$ to fill the track probabilities $V_{0,k}$.  There is no previous position to jump from in this case, so the transition probabilities are irrelevant and $A_{0,k}$ are set to zero.
 %
 % Iteration
 %
@@ -1101,7 +1101,7 @@ For this search we have four parameters which we optimise, the ranges and optimi
 % Process of vetoing lines
 %
 As in Sec.~\ref{soap:results:gausss6}, only the sub-bands which contained the entire frequency evolution of the signal were selected.
-Out of the 2000 sub-bands, 238 were removed due the sub-band only containing part of the signals frequency evolution.
+Out of the 2000 sub-bands, 238 were removed due to the sub-band only containing part of the signals frequency evolution.
 The main difference between the analysis for Gaussian noise and real data is that
 the real data is contaminated with instrumental lines. This means that whilst the techniques described in Sec.~\ref{soap:las} reduce the number of contaminated bands with a high statistic value, there are still
 instrumental lines which are coincident between the detectors and which could not be removed
@@ -1123,7 +1123,7 @@ in Sec.~\ref{soap:results:gausss6} and \ref{soap:results:gaplessgauss}.
 %
 
 Fig.~\ref{soap:results:gausss6:eff_depth} and Fig.~\ref{soap:results:gausss6:eff_snr} show the efficiency curves
-for \gls{SNR} and depth respectively.  These show that we can detect and
+for \gls{SNR} and depth respectively.  These show that we can detect an
 \gls{SNR} of $\sim 74$ and a sensitivity depth of $\sim 13$\,Hz$^{-1/2}$ with
 an efficiency of 95\% at a false alarm of 1\%. These results can then be compared to other searches in the S6 MDC comparison paper~\citep{walsh2016ComparisonMethods}. Whilst we only search in the 100 - 200 Hz range, the closest comparison in \citep{walsh2016ComparisonMethods} is the test in the 40 - 500 Hz range, such as in Fig.~4 in \citep{walsh2016ComparisonMethods}. Here our algorithm sits roughly in the middle of all other searches in terms of sensitivity.
 
@@ -1229,7 +1229,7 @@ The projections are made by taking the mean across the other parameters.
 In Fig.~\ref{soap:las:optimisation:s6mdcplot}, the \gls{SNR} does not change much at all for the transition matrix parameter $\tau$.
 A small range was used for $\tau$ around lower values ($1.0 - 1.1$) based on the test in Gaussian noise in Sec.~\ref{soap:las:optimisation:s6mdc}. 
 The parameter $w_{\rm{S}}$, which is the width of the prior of a signal, also does not show much variation over the parameter range. 
-The parameters which had the largest affect on the sensitivity of the search are the with of the prior of an instrumental line $w_{\rm{L}}$ and the ratio of the probabilities of a line and Gaussian noise $p(M_{\rm{L}})/p(M_{\rm{G}})$.
+The parameters which had the largest affect on the sensitivity of the search are the width of the prior of an instrumental line $w_{\rm{L}}$ and the ratio of the probabilities of a line and Gaussian noise $p(M_{\rm{L}})/p(M_{\rm{G}})$.
 Lower values of $w_{\rm{L}}$ are disfavoured in this range, this is to be expected as many instrumental lines have a large \gls{SNR}.
 Also larger values of $p(M_{\rm{L}})/p(M_{\rm{G}})$ are preferred, which implies that there are a large fraction of instrumental lines within this dataset.
 There are then large areas of the parameter space which can give a reasonable sensitivity for the SOAP search.
@@ -1509,7 +1509,7 @@ sensitivity for the SOAP algorithm on three separate datasets.
 
 In this chapter a statistic is derived to limit the effect of instrumental lines on SOAP by searching for consistent \gls{SNR} between multiple detectors.
 This is then extended to search for consistent \gls{GW} amplitude in Sec.~\ref{soap:lineawareamp}.
-Searching for consistent amplitude mean that the each detector's sensitivity can differ with minimal impact on the search.
+Searching for consistent amplitude mean that each detector's sensitivity can differ with minimal impact on the search.
 
 %
 % overview of results from tests
